@@ -11,11 +11,17 @@
 	<c:import url="views/common/header.jsp"/>
 </head>
 <body>
-	<div id="container">
-		<c:import url="views/common/menubar.jsp"/>
+	<c:import url="views/common/menubar.jsp"/>
+	<div id="container" class="col-md-8 col-xs-12">
 		<section id="content">
-			<a href="test/select.do">select test</a>
-			<h1>body</h1>
+			<div class="section-left">
+				<a href="test/select.do">select test</a>
+				<h1>section-left</h1>
+			</div>
+			<div class="section-right">
+				<h1>section-right</h1>
+			</div>
+			
 		</section>
 		<c:import url="views/common/footer.jsp"/>
 	</div>

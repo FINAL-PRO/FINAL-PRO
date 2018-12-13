@@ -11,6 +11,7 @@
 <!-- 사용자작성 css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/test-style.css" />
 <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/images/spring_icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 	header {
 	
@@ -23,7 +24,6 @@
 	
 	header{
 		width : 100%;
-		height : 200px;
 		background-color: yellow;
 	}
 	
@@ -34,5 +34,10 @@
 		width : 100%;
 		height : 200px;
 		background-color: lightgreen;
+	}
+	
+	#container{
+		margin-left:auto;
+		margin-right:auto;
 	}
 </style>
