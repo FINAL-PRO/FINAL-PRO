@@ -7,17 +7,16 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Hello Spring</title>
-	<c:import url="views/common/header.jsp"/>
+	<title>동커</title>
+	<c:import url="../../common/header.jsp"/>
 </head>
 <body>
 	<div id="container">
-		<c:import url="views/common/menubar.jsp"/>
+		<c:import url="../../common/menubar.jsp"/>
 		<section id="content">
-			<a href="test/select.do">select test</a>
-			<h1>body</h1>
+			<h1>info / region / list</h1>
 		</section>
-		<c:import url="views/common/footer.jsp"/>
+		<c:import url="../../common/footer.jsp"/>
 	</div>
 </body>
 </html>
