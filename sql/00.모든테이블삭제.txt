@@ -1,0 +1,13 @@
+﻿-- 모든 테이블 삭제
+-- 쿼리 수행후 복사해서 실행
+
+SELECT  'DROP TABLE ' || object_name || ' CASCADE CONSTRAINTS;'
+  FROM    user_objects
+WHERE   object_type = 'TABLE';
+
+
+-- 모든 뷰 삭제
+-- 쿼리 수행후 복사해서 실행
+SELECT  'DROP VIEW ' || object_name ||';'
+  FROM    user_objects
+WHERE   object_type = 'VIEW';
