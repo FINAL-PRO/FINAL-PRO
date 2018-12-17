@@ -12,14 +12,29 @@
 </head>
 <body>
 	<c:import url="views/common/menubar.jsp"/>
-	<div id="container" class="col-md-8 col-xs-12">
+	<div id="container" class="" style="width:2000px">
 		<section id="content">
 			<div class="section-left">
 				<a href="test/select.do">select test</a>
 				<h1>section-left</h1>
 			</div>
+			<div class="section-center">
+				section-center
+			</div>
 			<div class="section-right">
 				<h1>section-right</h1>
+				<div class="section-item">
+					item1
+				</div>
+				<div class="section-item">
+					item2
+				</div>
+				<div class="section-item">
+					item3
+				</div>
+				<div class="section-item">
+					item4
+				</div>
 			</div>
 			
 		</section>

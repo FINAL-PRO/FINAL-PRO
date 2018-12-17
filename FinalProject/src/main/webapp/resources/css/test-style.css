@@ -1,12 +1,27 @@
 @CHARSET "UTF-8";
-.section-left{
-	background-color: blue;
+.section-center{
+	background-color: yellow;
 	float:left;
-	width : 80%;
+	height:100%;
+	width:80%;
+	
+}
+.section-left{
+	background-color: gray;
+	float:left;
+	height:100%;
+	width:10%;
 }
 
 .section-right{
 	background-color: red;
 	float: right;
-	width : 20%;
+	height:100%;
+	width:10%;
+}
+
+.section-right > .section-item{
+	background-color: blue;
+	height : 200px;
+	border : 3px solid black;
 }
