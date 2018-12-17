@@ -419,11 +419,13 @@ DROP TABLE "DC_CODE_TB";
 
 CREATE TABLE "DC_CODE_TB" (
 	"id"	varchar2(50)		NOT NULL,
-	"value"	varchar2(100)		NOT NULL
+	"value"	varchar2(100)		NOT NULL,
+    "att" varchar2(50) NOT NULL
 );
 
 COMMENT ON COLUMN "DC_CODE_TB"."id" IS '코드아이디';
 COMMENT ON COLUMN "DC_CODE_TB"."value" IS '코드값';
+COMMENT ON COLUMN "DC_CODE_TB"."att" IS '코드속성';
 
 DROP TABLE "DC_POINT_CONTENT_TB";
 
