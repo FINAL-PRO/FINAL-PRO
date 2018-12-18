@@ -9,6 +9,15 @@
 	<meta charset="UTF-8">
 	<title>동커</title>
 	<c:import url="../../common/header.jsp"/>
+
+	<style>
+		
+		.write_detail{
+			background-color: white;
+		}
+		
+	</style>
+
 </head>
 <body>
 	<div id="container">
@@ -19,7 +28,11 @@
 				<h1>section-left</h1>
 			</div>
 			<div class="section-center">
-				<h1>community / food / list</h1>
+				
+				<div class="write_detail">
+					dfdfd
+				</div>
+				
 			</div>
 			<div class="section-right">
 				<h1>section-right</h1>
