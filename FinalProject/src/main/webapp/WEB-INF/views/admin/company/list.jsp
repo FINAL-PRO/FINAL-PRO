@@ -14,19 +14,19 @@
 	<div id="container">
 		<c:import url="../../common/menubar.jsp"/>
 		<section id="content">
-			<h1>어드민 멤버 리스트</h1>
+			<h1>어드민 업체 리스트</h1>
 			<div>
 				<div class="row table-row">
 					<div class="col column">번호</div>
-					<div class="col column">이름</div>
-					<div class="col column">가입일</div>
+					<div class="col column">업체명</div>
+					<div class="col column">등록일</div>
 				</div>
 			
-				<c:forEach var="member" items="${memberList}">
+				<c:forEach var="company" items="${companyList}">
 					<div class="row table-row">
-						<div class="col column">${member.no}</div>
-						<div class="col column">${member.name}</div>
-						<div class="col column">${member.enrollDate}</div>
+						<div class="col column">${company.no}</div>
+						<div class="col column">${company.name}</div>
+						<div class="col column">${company.enrollDate}</div>
 					</div>
 				</c:forEach>
 				<div class="table" style="background:red">

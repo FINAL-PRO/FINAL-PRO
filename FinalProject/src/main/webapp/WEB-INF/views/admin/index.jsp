@@ -15,6 +15,18 @@
 		<c:import url="../common/menubar.jsp"/>
 		<section id="content">
 			<h1>어드민 인덱스</h1>
+			
+			<h2>
+				<a href="${pageContext.request.contextPath}/admin/member/list.do">멤버 리스트</a>
+			</h2>
+			<br />
+			<h2>
+				<a href="${pageContext.request.contextPath}/admin/board/list.do">게시글 리스트</a>
+			</h2>
+			<br />
+			<h2>
+				<a href="${pageContext.request.contextPath}/admin/company/list.do">업체 리스트</a>
+			</h2>
 		</section>
 		<c:import url="../common/footer.jsp"/>
 	</div>
