@@ -11,9 +11,14 @@ public class FreeController {
 		return "community/free/list";
 	}
 	
-	@RequestMapping("community/free/freeWrite.do")
-	public String freeWrite() {
-		return "community/free/freeWrite";
+	@RequestMapping("community/free/freeInsertForm.do")
+	public String freeInsertForm() {
+		return "community/free/freeInsertForm";
+	}
+	
+	@RequestMapping("community/free/freeDetail.do")
+	public String freeDetail() {
+		return "community/free/freeDetail";
 	}
 	
 }

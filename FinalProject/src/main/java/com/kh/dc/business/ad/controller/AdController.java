@@ -10,3 +10,5 @@ public class AdController {
 		return "business/ad/list";
 	}
 }
+
+
