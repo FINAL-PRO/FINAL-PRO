@@ -102,12 +102,12 @@
 			          </select>
 					  </div>
 					  <div class="free_btn">
-					  	<input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/free/freeWrite.do'"/>
+					  	<input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/free/freeInsertForm.do'"/>
 					  </div>
 			        </div>
 			        <div class="articlelist">
 			            <ol class="group">
-			                <li class="groupin"><a class="article" href="#">
+			                <li class="groupin"><a class="article" href="${pageContext.request.contextPath}/community/free/freeDetail.do">
 			                    <p class="profile">
 			                        <img class="picture" src="https://cf-epi.campuspick.com/0.png">
 			                        <span class="nickname">닉네임</span>
