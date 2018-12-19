@@ -45,10 +45,10 @@
                 <th style="width:150px;">추천</th>
                 <th style="width:150px;">평점</th>
             </tr>    
-            <c:forEach items="${hlist}"  var="" varStatus="vs">
+            <c:forEach begin="1" end="10">
             <tr style="background-color:#FFFFFF; color:gray;">
-                <th style="width:130px;"> ${vs.count }</th>
-                <th style="width:200px;">${dev. }</th>
+                <th style="width:130px;"> #</th>
+                <th style="width:200px;">#</th>
                 <th style="width:300px;">제목 </th>
                 <th style="width:150px;">이름</th>
                 <th style="width:150px;">작성일</th>

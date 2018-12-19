@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="Region">
+<mapper namespace="region">
 	
 	
 	<!--  typehandler 적용이 안돼요  -->
@@ -9,11 +9,11 @@
 	</resultMap>  -->
 	
 	
-	<select id="selectList" resultMap="resultRegion">
+	<select id="selectList" resultType="Region">
 		SELECT * FROM DC_BOARD_TB ORDER BY 1 DESC
 	</select>
 	
-	<select id="selectOne" parameterType="_int" resultMap="resultRegion">
+	<select id="selectOne" parameterType="_int" resultType="Region">
 		SELECT*FROM DC_BOARD_TB WHERE = #{no}
 	</select>
 	

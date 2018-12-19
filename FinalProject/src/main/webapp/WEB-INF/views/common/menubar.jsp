@@ -69,7 +69,11 @@
 					<a class="dropdown-item" href="${pageContext.request.contextPath}/business/partnership/list.do">제휴 신청</a>
 					<a class="dropdown-item" href="${pageContext.request.contextPath}/business/ad/list.do">광고 신청</a>
 				</div>
-		      
+		      </li>
+		      <li class="nav-item">
+		      	<a class="nav-link" href="${pageContext.request.contextPath}/admin/index.do">
+		      	관리자 페이지
+		      	</a>
 		      </li>
 		    </ul>
 		   

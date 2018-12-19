@@ -45,13 +45,12 @@
             <tr style="background-color:#FFFFFF; color:gray;">
                 <th style="width:130px;"> ${vs.count }</th>
                 <th style="width:300px;">${region.title } </th>
-                <th style="width:150px;">${region.Name }</th>
-                <th style="width:150px;">${region.rwriteDate}</th>
+                <th style="width:150px;">${region.userName }</th>
+                <th style="width:150px;">${region.writeDate}</th>
                 <th style="width:150px;">${region.viewcount }</th>
-
-               </tr>
+            </tr>
                <c:forEach items="${Region.regionLang}" var="lang" varStatus="vs">${vs.index!=0?",":""} ${lang}</c:forEach>
-               </c:forEach>
+            </c:forEach>
                <c:if test="${list  == null}"> 작성된 게시물이 없습니다</c:if>
             </thead>
         </table>
