@@ -5,15 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class FreeController {
-	
 	@RequestMapping("community/free/list.do")
 	public String freeList() {
 		return "community/free/list";
 	}
-	
-	@RequestMapping("community/free/freeWrite.do")
-	public String freeWrite() {
-		return "community/free/freeWrite";
-	}
-	
 }
