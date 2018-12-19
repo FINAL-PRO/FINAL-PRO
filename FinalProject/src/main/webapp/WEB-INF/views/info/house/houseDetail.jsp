@@ -48,7 +48,7 @@
                         <dt class="lb-dm-info lb-list-i">조회수</dt>
                             <dd class="lb-dm-info">00</dd>
                         <dt class="lb-dm-info lb-list-i">추천 수</dt>
-                            <dd class="lb-dm-info">0</dd>
+                            <dd class="lb-dm-info">00</dd>
                     </dl>
                 </div>
             </div>								
