@@ -13,7 +13,14 @@
 	<typeAliases>
 	<!-- VO 객체를 위한 별칭 선언부-->
 		<typeAlias type="com.kh.dc.test.model.vo.TestDc" alias="testdc"/>
+		<typeAlias type="com.kh.dc.info.region.model.vo.Region" alias="Region"/>
+		
+		
+		<!-- 연동 안 되어서 우선 빼놨음 -->
+		<!-- <typeAlias type="com.kh.common.StringArrayTypeHandler" alias="strArrTypeHandler"/>  -->
 	</typeAliases>
+	
+
 	
 </configuration>
 
