@@ -11,16 +11,35 @@
 	</settings>
 	
 	<typeAliases>
-	<!-- VO 객체를 위한 별칭 선언부-->
+		<!-- 테스트용 -->
 		<typeAlias type="com.kh.dc.test.model.vo.TestDc" alias="testdc"/>
-		<typeAlias type="com.kh.dc.admin.company.model.vo.Company" alias="company"/>
-		<typeAlias type="com.kh.dc.common.vo.Board" alias="board"/>
-		<typeAlias type="com.kh.dc.info.region.model.vo.Region" alias="Region"/>
-		<typeAlias type="com.kh.dc.info.region.model.vo.RegionRe" alias="RegionRe"/>
+	
+		<!-- VO 객체를 위한 별칭 선언부-->	
+		<!-- alias 소문자로통일 단어 연결시 카멜표기법 ex) boardComment -->
+		<typeAlias type="com.kh.dc.info.region.model.vo.Region" alias="region"/>
 		<typeAlias type="com.kh.dc.member.model.vo.Member" alias="member"/>
-		<typeAlias type="com.kh.dc.common.vo.Authority" alias="authority"/>
 		<typeAlias type="com.kh.dc.member.model.vo.Location" alias="location"/>
+
+		<!-- 공통 VO -->
+		<typeAlias type="com.kh.dc.common.vo.Company" alias="company"/>
+		<typeAlias type="com.kh.dc.common.vo.Board" alias="board"/>		
+		<typeAlias type="com.kh.dc.common.vo.Authority" alias="authority"/>
 		<typeAlias type="com.kh.dc.common.vo.Code" alias="code"/>
+		<typeAlias type="com.kh.dc.common.vo.Comment" alias="comment"/>
+		<typeAlias type="com.kh.dc.common.vo.AdLocation" alias="adLocation"/>
+		<typeAlias type="com.kh.dc.common.vo.AdPage" alias="adPage"/>
+		<typeAlias type="com.kh.dc.common.vo.AdSection" alias="adSection"/>
+		<typeAlias type="com.kh.dc.common.vo.Ad" alias="ad"/>
+		<typeAlias type="com.kh.dc.common.vo.Like" alias="like"/>
+		<typeAlias type="com.kh.dc.common.vo.Message" alias="message"/>
+		<typeAlias type="com.kh.dc.common.vo.PointContent" alias="pointContent"/>
+		<typeAlias type="com.kh.dc.common.vo.Point" alias="point"/>
+		<typeAlias type="com.kh.dc.common.vo.ReportCategory" alias="reportCategory"/>
+		<typeAlias type="com.kh.dc.common.vo.Report" alias="report"/>
+		
+		<!-- 삭제하기 -->
+		<typeAlias type="com.kh.dc.info.region.model.vo.RegionRe" alias="RegionRe"/>
+		
 	</typeAliases>
 	
 
