@@ -8,8 +8,8 @@
 	</select>
 	
 	<!-- 게시물 전체 가져오기 -->
-	<select id="selectBoardList" resultType="board">
-		SELECT * FROM DC_BOARD_TB
+	<select id="selectBoardList" resultType="board" parameterType="String">
+		SELECT * FROM DC_BOARD_TB WHERE TYPE = #{boardType}
 	</select>
 	
 	<!-- 업체 전체 가져오기 -->
@@ -36,5 +36,12 @@
 	<select id="selectMemberAuthList" resultType="authority">
 		SELECT * FROM DC_AUTHORITY_TB
 	</select>
+	
+	<!-- 게시판 타입 가져오기 -->
+	<select id="selectBoardTypeList" resultType="code">
+		SELECT * FROM DC_CODE_TB WHERE ATT = '게시판타입' 
+	</select>
+	
+	
 	
 </mapper>

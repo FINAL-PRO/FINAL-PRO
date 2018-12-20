@@ -19,6 +19,7 @@
 		<typeAlias type="com.kh.dc.member.model.vo.Member" alias="member"/>
 		<typeAlias type="com.kh.dc.common.vo.Authority" alias="authority"/>
 		<typeAlias type="com.kh.dc.member.model.vo.Location" alias="location"/>
+		<typeAlias type="com.kh.dc.common.vo.Code" alias="code"/>
 	</typeAliases>
 	
 

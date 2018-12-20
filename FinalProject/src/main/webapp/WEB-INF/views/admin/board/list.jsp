@@ -15,12 +15,18 @@
 		<c:import url="../../common/menubar.jsp"/>
 		<section id="content">
 			<h1>어드민 보드 리스트</h1>
+				<select id="boardTypeNo">
+					<c:forEach items="${boardTypeList}" var="type">
+						<option value="${type.id}" <c:if test="${type.id eq boardType}">selected</c:if>>${type.value}</option>
+					</c:forEach>					
+				</select>
 			<div>
 				<div class="row table-row">
 					<div class="col column">번호</div>
 					<div class="col column">이름</div>
 					<div class="col column">작성일</div>
 				</div>
+
 			
 				<c:forEach var="board" items="${boardList}">
 					<div class="row table-row">
@@ -37,5 +43,10 @@
 		</section>
 		<c:import url="../../common/footer.jsp"/>
 	</div>
+	<script>
+		$("#boardTypeNo").on('change', function(){
+			location.href= "${pageContext.request.contextPath}/admin/board/list.do?boardType="+ $("#boardTypeNo").val();
+		});
+	</script>
 </body>
 </html>

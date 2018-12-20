@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.dc.admin.board.model.service.AdminBoardService;
 import com.kh.dc.common.vo.Board;
+import com.kh.dc.common.vo.Code;
 
 @Controller
 public class AdminBoardController {
@@ -18,11 +19,18 @@ public class AdminBoardController {
 	AdminBoardService boardService;
 	
 	@RequestMapping("admin/board/list.do")
-	public String boardList(Model model) {
-		List<Board> boardList = boardService.selectBoardList();
+	public String boardList(
+			@RequestParam(value="boardType", defaultValue="BOARD001", required=false) String boardType,
+			Model model) {
+		
+		List<Board> boardList = boardService.selectBoardList(boardType);
+		
+		List<Code> boardTypeList = boardService.selectBoardTypeList();
 		
 		System.out.println("어드민 보드 리스트 : " + boardList);
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardType", boardType);
+		model.addAttribute("boardTypeList", boardTypeList);
 		
 		return "admin/board/list";
 	}
