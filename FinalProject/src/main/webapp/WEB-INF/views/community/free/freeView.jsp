@@ -22,10 +22,14 @@
         display: inline-block; width: 20px; height: 20px; vertical-align: top;
     }
     .nickname {
-        display: inline-block; line-height: 20px; color: #292929; font-size: 12px; font-weight: bold; white-space: nowrap; overflow: hidden;
+        display: inline-block; line-height: 20px; color: #292929; font-size: 12px; font-weight: bold; white-space: nowrap; overflow: hidden; float:left;
+    }
+    
+    .title{
+    	display: inline-block; line-height: 20px; color: #292929; font-size: 15px; font-weight: bold; white-space: nowrap; overflow: hidden;
     }
 
-    time {
+    .time {
         float: right; display: inline-block; line-height: 20px; color: #a6a6a6; font-size: 12px;
     }
 
@@ -116,13 +120,14 @@
 				<div id="container2">
                 <div class="articlelist" style="border: solid 0.5px red">
                     <div class="group" style="border: solid 0.5px blue">                     
+                       	<p class="title">${board.title}</p>
+                        <div style="border: solid 0.5px gray"></div>
                         <p class="profile">
                             <img class="picture" src="https://cf-epi.campuspick.com/0.png">
-                            <span class="nickname">글쓴닉네임</span>
-                            <time>12/13 12:51</time>
+	                        <span class="nickname">${member.nickName}</span>
+                            <p class="time">${board.writeDate}</p>
                         </p>
-                        <div style="border: solid 0.5px gray"></div>
-                        <p class="text">글내용입니다.</p>
+                        <p class="text">${board.content}</p>
                         <div style="border: solid 0.5px lightgray"></div>
                         <div class="status" style="border: solid 0.5px orange">
                             <button class="btn_report">신고하기</button>

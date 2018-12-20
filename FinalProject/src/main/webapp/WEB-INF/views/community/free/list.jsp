@@ -107,35 +107,25 @@
 			        </div>
 			        <div class="articlelist">
 			            <ol class="group">
-			                <li class="groupin"><a class="article" href="${pageContext.request.contextPath}/community/free/freeDetail.do">
+			            <p>총 ${totalContents}건의 게시물이 있습니다.</p>
+			            	<c:forEach items="${list}" var="b">
+			                <li class="groupin" id="${b.no}"><a class="article" href="${pageContext.request.contextPath}/community/free/freeView.do?no=${b.no}">
 			                    <p class="profile">
 			                        <img class="picture" src="https://cf-epi.campuspick.com/0.png">
-			                        <span class="nickname">닉네임</span>
-			                        <time>12/13 12:51</time>
+			                        <span class="nickname">${b.no}</span>
+			                        <time>${b.writeDate}</time>
 			                    </p>
 			                    <hr>
-			                    <p class="text short">글내용입니다.</p>
+			                    <p class="text short">${b.content}</p>
 			                    <p class="status">
 			                        <span class="votecount">좋아요: 1</span>
 			                        <span class="commentcount">댓글: 0</span>
 			                    </p>
 			                    <p class="attach"><span class="attachcount">이미지</span></p>
 			                </a></li>
-			                <li class="groupin"><a class="article" href="#">
-			                    <p class="profile">
-			                        <img class="picture" src="https://cf-epi.campuspick.com/0.png">
-			                        <span class="nickname">닉네임</span>
-			                        <time>12/13 12:51</time>
-			                    </p>
-			                    <hr>
-			                    <p class="text short">글내용입니다.</p>
-			                    <p class="status">
-			                        <span class="votecount">좋아요: 1</span>
-			                        <span class="commentcount">댓글: 0</span>
-			                    </p>
-			                    <p class="attach"><span class="attachcount">이미지</span></p>
-			                </a></li>
+			                </c:forEach>
 			            </ol>
+			            <c:out value="${pageBar}" escapeXml="false"/>
 			        </div>
 			    </div>
 			</div>

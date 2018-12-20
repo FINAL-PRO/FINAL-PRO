@@ -58,7 +58,7 @@
 	                <br>
 	                <div class="tr-div">
 	                    <div class="td-div">제목</div>
-	                    <div class="td-div"><textarea name="title" rows="1" cols="105" style="resize: none;">${board.title}</textarea></div>
+	                    <div class="td-div"><textarea name="title" rows="1" cols="105" style="resize: none;"></textarea></div>
 	                </div>
 	                <div class="tr-div">
 	                    <div class="td-div">내용</div>
@@ -85,8 +85,10 @@
 	            </div>
 	            <script>
 	                function save(){
-	                	location.href="${pageContext.request.contextPath}/community/free/freeInsertFormEnd.do";
-	                } 
+	                    $('#writeForm').attr('action', '${pageContext.request.contextPath}/community/free/list.do');
+	                    
+	                    $('#writeForm').submit();
+	                }
 	                
 	                function back(){
 	                    location.href="${pageContext.request.contextPath}/community/free/list.do";
