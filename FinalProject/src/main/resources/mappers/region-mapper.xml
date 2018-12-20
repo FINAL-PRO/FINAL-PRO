@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="region">
-	
+<mapper namespace="region_mapper">
 
-	
-	
-	<select id="selectList" resultType="Region">
+	<select id="selectList" resultType="region">
 		SELECT * FROM DC_BOARD_TB WHERE TYPE='BOARD007' ORDER BY 1 DESC
 	</select>
 	
-	<select id="selectOne" parameterType="_int" resultType="Region">
+	<select id="selectOne" parameterType="_int" resultType="region">
 		SELECT*FROM DC_BOARD_TB WHERE NO = #{no}
 	</select>
 	
-	<insert id="insertRegion" parameterType="Region">
+	<insert id="insertRegion" parameterType="region">
 		INSERT INTO DC_BOARD_TB VALUES(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 1, 'BOARD007','STATUS001', #{memberNo},NULL)
 	</insert>
 	
-	<update id="updateRegion" parameterType="Region">
+	<update id="updateRegion" parameterType="region">
 	 	UPDATE DC_BOARD_TB SET TITLE= #{title}, CONTENT = #{content}, WRITEDATE = SYSDATE WHERE NO= #{no}
 	</update>
 	

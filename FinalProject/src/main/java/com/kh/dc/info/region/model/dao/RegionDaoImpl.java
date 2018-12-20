@@ -17,28 +17,28 @@ public class RegionDaoImpl implements RegionDao {
 	
 	@Override
 	public List<Region> regionList(){
-		return sqlSession.selectList("region.selectList");
+		return sqlSession.selectList("region_mapper.selectList");
 	}
 	
 	@Override
 	public int insertRegion(Region rg) {
-		return sqlSession.insert("region.insertRegion", rg);
+		return sqlSession.insert("region_mapper.insertRegion", rg);
 	}
 
 	@Override
 	public Region selectRegion(int no) {
 		System.out.println("Dao No : " + no);
-		return sqlSession.selectOne("region.selectOne", no);
+		return sqlSession.selectOne("region_mapper.selectOne", no);
 	}
 
 	@Override
 	public int updateRegion(Region rg) {
-		return sqlSession.update("region.updateRegion", rg);
+		return sqlSession.update("region_mapper.updateRegion", rg);
 	}
 
 	@Override
 	public int deleteRegion(int no) {
-		return sqlSession.update("region.deleteRegion", no);
+		return sqlSession.update("region_mapper.deleteRegion", no);
 	}
 
 	@Override

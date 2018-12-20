@@ -6,8 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.dc.admin.company.model.vo.Company;
-import com.kh.dc.common.vo.Board;
+import com.kh.dc.common.vo.Company;
 
 @Repository
 public class AdminCompanyDaoImpl implements AdminCompanyDao {

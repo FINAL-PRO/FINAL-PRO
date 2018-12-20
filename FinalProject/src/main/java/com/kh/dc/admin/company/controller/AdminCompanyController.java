@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.dc.admin.company.model.service.AdminCompanyService;
-import com.kh.dc.admin.company.model.vo.Company;
+import com.kh.dc.common.vo.Company;
 
 @Controller
 public class AdminCompanyController {
