@@ -16,6 +16,7 @@
 		<typeAlias type="com.kh.dc.admin.company.model.vo.Company" alias="company"/>
 		<typeAlias type="com.kh.dc.common.vo.Board" alias="board"/>
 		<typeAlias type="com.kh.dc.info.region.model.vo.Region" alias="Region"/>
+		<typeAlias type="com.kh.dc.info.region.model.vo.RegionRe" alias="RegionRe"/>
 		<typeAlias type="com.kh.dc.member.model.vo.Member" alias="member"/>
 		<typeAlias type="com.kh.dc.common.vo.Authority" alias="authority"/>
 		<typeAlias type="com.kh.dc.member.model.vo.Location" alias="location"/>
