@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dc.info.region.model.vo.Region;
+import com.kh.dc.info.region.model.vo.RegionRe;
 
 @Repository
 public class RegionDaoImpl implements RegionDao {
@@ -26,6 +27,7 @@ public class RegionDaoImpl implements RegionDao {
 
 	@Override
 	public Region selectRegion(int no) {
+		System.out.println("Dao No : " + no);
 		return sqlSession.selectOne("region.selectOne", no);
 	}
 
@@ -37,6 +39,11 @@ public class RegionDaoImpl implements RegionDao {
 	@Override
 	public int deleteRegion(int no) {
 		return sqlSession.update("region.deleteRegion", no);
+	}
+
+	@Override
+	public int reInsertRegion(RegionRe rre) {
+		return sqlSession.insert("regionRe.insertRegionRe", rre);
 	}
 }
 

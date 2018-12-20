@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.dc.info.region.model.dao.RegionDao;
 import com.kh.dc.info.region.model.vo.Region;
+import com.kh.dc.info.region.model.vo.RegionRe;
 
 @Repository
 public class RegionserviceImpl implements RegionService {
@@ -26,6 +27,7 @@ public class RegionserviceImpl implements RegionService {
 
 	@Override
 	public Region selectRegion(int no) {
+		System.out.println("service No : " + no);
 		return rd.selectRegion(no);
 		
 	}
@@ -40,6 +42,12 @@ public class RegionserviceImpl implements RegionService {
 	public int deleteRegion(int no) {
 		return rd.deleteRegion(no); 
 		
+	}
+
+	@Override
+	public int reInsertRegion(RegionRe rre) {
+		System.out.println("service rre : " + rre);
+		return rd.reInsertRegion(rre);
 	}
 
 }
