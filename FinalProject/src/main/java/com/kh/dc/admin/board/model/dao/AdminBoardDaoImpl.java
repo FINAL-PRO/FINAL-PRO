@@ -18,6 +18,11 @@ public class AdminBoardDaoImpl implements AdminBoardDao {
 	public List<Board> selectBoardList() {
 		return sqlSession.selectList("admin_mapper.selectBoardList");
 	}
+
+	@Override
+	public Board selectBoardOne(int boardNo) {
+		return sqlSession.selectOne("admin_mapper.selectBoardOne", boardNo);
+	}
 	
 	
 
