@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="region">
+	
+	
+	<!--  typehandler 적용이 안돼요  -->
+	<!-- <resultMap type="Region" id="resultRegion">
+		<result property="regionLang" column="regionlang" typeHandler="strArrTypeHandler"/>
+	</resultMap>  -->
+	
+	
+	<select id="selectList" resultType="Region">
+		SELECT * FROM DC_BOARD_TB ORDER BY 1 DESC
+	</select>
+	
+	<select id="selectOne" parameterType="_int" resultType="Region">
+		SELECT*FROM DC_BOARD_TB WHERE = #{no}
+	</select>
+	
+	<insert id="insertRegion" parameterType="Region">
+		INSERT INTO DC_BOARD_TB VALUES(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 1, 'BOARD007','STATUS001', #{memberNo},NULL)
+	</insert>
+	
+	<update id="updateRegion" parameterType="Region">
+	 	UPDATE DC_BOARD_TB SET TITLE= #{title}, CONTENT = #{content}, WRITEDATE = SYSDATE WHERE NO= #{no}
+	</update>
+	
+	<delete id="deleteRegion" parameterType="_int">
+		DELETE FROM DC_BOARD_TB WHERE NO = #{no}
+	</delete>
+	
+</mapper>

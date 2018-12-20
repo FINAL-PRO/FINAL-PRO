@@ -14,7 +14,28 @@
 	<div id="container">
 		<c:import url="../../common/menubar.jsp"/>
 		<section id="content">
-			<h1>community / food / list</h1>
+			<div class="section-left">
+				<a href="test/select.do">select test</a>
+				<h1>section-left</h1>
+			</div>
+			<div class="section-center">
+				<h1>community / food / list</h1>
+			</div>
+			<div class="section-right">
+				<h1>section-right</h1>
+			<div class="section-item">
+				item1
+			</div>
+			<div class="section-item">
+				item2
+			</div>
+			<div class="section-item">
+				item3
+			</div>
+			<div class="section-item">
+				item4
+			</div>
+		</div>
 		</section>
 		<c:import url="../../common/footer.jsp"/>
 	</div>

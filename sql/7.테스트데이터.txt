@@ -1,0 +1,10 @@
+﻿-- 멤버 테스트 데이터
+INSERT INTO DC_MEMBER_TB VALUES (SEQ_MEMBER.NEXTVAL, 'admin@admin.com', 'admin', 1234, sysdate, 0, 1, 1, 'STATUS001', '영등포구', '관리자');
+INSERT INTO DC_MEMBER_TB VALUES (SEQ_MEMBER.NEXTVAL, 'test@test.com', 'testNick', 1234, sysdate, 0, 1, 1, 'STATUS001', '택배주소입니다', '테스트이름');
+
+commit;
+
+
+-- 잡테이블 데이터 타입 수정
+ALTER TABLE DC_BOARD_JOB_TB MODIFY (STARTTIME VARCHAR2(5));
+ALTER TABLE DC_BOARD_JOB_TB MODIFY (ENDTIME VARCHAR2(5));

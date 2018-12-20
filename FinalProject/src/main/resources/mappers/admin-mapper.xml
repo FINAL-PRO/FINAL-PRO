@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="admin_mapper">
+	
+	<select id="selectMemberList" resultType="member">
+		SELECT * FROM DC_MEMBER_TB
+	</select>
+	
+	<select id="selectBoardList" resultType="board">
+		SELECT * FROM DC_BOARD_TB
+	</select>
+	
+	<select id="selectCompanyList" resultType="company">
+		SELECT * FROM DC_COMPANY_TB
+	</select>
+	
+	<select id="selectCompanyOne" parameterType="_int" resultType="company">
+		SELECT * FROM DC_COMPANY_TB WHERE NO = #{no}
+	</select>
+	
+</mapper>
