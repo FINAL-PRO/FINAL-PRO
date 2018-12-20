@@ -16,13 +16,18 @@ public class AdminMemberDaoImpl implements AdminMemberDao{
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<Member> selectMemberList() {
-		return sqlSession.selectList("admin_mapper.selectMemberList");
+	public List<Member> selectMemberList(int authNo) {
+		return sqlSession.selectList("admin_mapper.selectMemberList", authNo);
 	}
 
 	@Override
 	public Member selectMemberOne(int memberNo) {
 		return sqlSession.selectOne("admin_mapper.selectMemberOne", memberNo);
+	}
+
+	@Override
+	public List<String> selectMemberAuthList() {
+		return sqlSession.selectList("admin_mapper.selectMemberAuthList");
 	}
 
 }

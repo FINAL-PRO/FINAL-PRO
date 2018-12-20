@@ -15,6 +15,11 @@
 		<c:import url="../../common/menubar.jsp"/>
 		<section id="content">
 			<h1>어드민 멤버 리스트</h1>
+			<select id="authNo">
+				<c:forEach items="${memberAuthList}" var="auth">
+					<option value="${auth.no}" <c:if test="${auth.no eq authNo}">selected</c:if>>${auth.content}</option>
+				</c:forEach>
+			</select>
 			<div>
 				<div class="row table-row">
 					<div class="col column">번호</div>
@@ -37,5 +42,10 @@
 		</section>
 		<c:import url="../../common/footer.jsp"/>
 	</div>
+	<script>
+		$("#authNo").on('change', function(){
+			location.href= "${pageContext.request.contextPath}/admin/member/list.do?authNo="+ $("#authNo").val();
+		});
+	</script>
 </body>
 </html>
