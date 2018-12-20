@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.dc.admin.board.model.service.AdminBoardService;
-import com.kh.dc.admin.company.model.vo.Company;
 import com.kh.dc.common.vo.Board;
 
 @Controller
@@ -29,7 +28,7 @@ public class AdminBoardController {
 	}
 	
 	@RequestMapping("admin/board/detailView.do")
-	public String companyDetailView(@RequestParam int boardNo, Model model) {
+	public String boardDetailView(@RequestParam int boardNo, Model model) {
 		Board board = boardService.selectBoardOne(boardNo);
 		
 		System.out.println("어드민 보드 확인 [ 게시글 번호 : " + boardNo + ", 게시글 : " + board);

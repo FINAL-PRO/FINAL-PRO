@@ -22,4 +22,8 @@
 		SELECT * FROM DC_BOARD_TB WHERE NO = #{no}
 	</select>
 	
+	<select id="selectMemberOne" parameterType="_int" resultType="member">
+		SELECT * FROM DC_MEMBER_TB WHERE NO = #{no}
+	</select>
+	
 </mapper>
