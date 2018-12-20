@@ -14,4 +14,8 @@
 		SELECT * FROM DC_COMPANY_TB
 	</select>
 	
+	<select id="selectCompanyOne" parameterType="_int" resultType="company">
+		SELECT * FROM DC_COMPANY_TB WHERE NO = #{no}
+	</select>
+	
 </mapper>

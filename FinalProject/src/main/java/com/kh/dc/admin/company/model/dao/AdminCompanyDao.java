@@ -2,9 +2,11 @@ package com.kh.dc.admin.company.model.dao;
 
 import java.util.List;
 
-import com.kh.dc.common.vo.Board;
+import com.kh.dc.admin.company.model.vo.Company;
 
 public interface AdminCompanyDao {
 	
-	public List<Board> selectCompanyList();
+	public List<Company> selectCompanyList();
+
+	public Company selectCompanyOne(int companyNo);
 }
