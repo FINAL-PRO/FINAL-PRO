@@ -1,5 +1,6 @@
 package com.kh.dc.admin.company.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.dc.admin.company.model.service.AdminCompanyService;
+import com.kh.dc.common.vo.Code;
 import com.kh.dc.common.vo.Company;
 
 @Controller
@@ -18,11 +20,17 @@ public class AdminCompanyController {
 	AdminCompanyService companyService;
 	
 	@RequestMapping("admin/company/list.do")
-	public String companyList(Model model) {
-		List<Company> companyList = companyService.selectCompanyList();
+	public String companyList(
+			@RequestParam(value="companyType", defaultValue="STATUS020") String companyType,
+			Model model) {
+		List<Company> companyList = companyService.selectCompanyList(companyType);
+		
+		List<Code> compayTypeList = companyService.selectCompanyTypeList();
 		
 		System.out.println("어드민 컴퍼니  리스트 : " + companyList);
 		model.addAttribute("companyList", companyList);
+		model.addAttribute("companyTypeList", compayTypeList);
+		model.addAttribute("companyType", companyType);
 		
 		return "admin/company/list";
 	}

@@ -13,8 +13,8 @@
 	</select>
 	
 	<!-- 업체 전체 가져오기 -->
-	<select id="selectCompanyList" resultType="company">
-		SELECT * FROM DC_COMPANY_TB
+	<select id="selectCompanyList" resultType="company" parameterType="String">
+		SELECT * FROM DC_COMPANY_TB WHERE STATUS = #{companyType}
 	</select>
 	
 	<!-- 업체 하나 가져오기 -->
@@ -42,6 +42,9 @@
 		SELECT * FROM DC_CODE_TB WHERE ATT = '게시판타입' 
 	</select>
 	
-	
+	<!-- 업체 타입 가져오기 -->
+	<select id="selectCompanyTypeList" resultType="code">
+		SELECT * FROM DC_CODE_TB WHERE ATT = '업체구분'
+	</select>
 	
 </mapper>
