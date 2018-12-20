@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.dc.admin.member.model.dao.AdminMemberDao;
-import com.kh.dc.admin.member.model.vo.Member;
+import com.kh.dc.member.model.vo.Member;
 
 @Service
 public class AdminMemberServiceImpl implements AdminMemberService{
@@ -17,6 +17,11 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 	@Override
 	public List<Member> selectMemberList() {
 		return memberDao.selectMemberList();
+	}
+
+	@Override
+	public Member selectMemberOne(int memberNo) {
+		return memberDao.selectMemberOne(memberNo);
 	}
 
 }
