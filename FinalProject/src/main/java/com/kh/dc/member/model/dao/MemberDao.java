@@ -1,7 +1,9 @@
 package com.kh.dc.member.model.dao;
 
+import java.util.List;
+
+import com.kh.dc.member.model.vo.Location;
 import com.kh.dc.member.model.vo.Member;
-import java.util.*;
 
 public interface MemberDao {
 
@@ -16,4 +18,6 @@ public interface MemberDao {
 	int checkEmailDuplicate(String email);
 	
 	int checkNickNameDuplicate(String nickName);
+	
+	List<Location> selectLocationList();
 }

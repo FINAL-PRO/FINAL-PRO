@@ -1,11 +1,12 @@
 package com.kh.dc.member.model.service;
 
-import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.dc.member.model.dao.MemberDao;
+import com.kh.dc.member.model.vo.Location;
 import com.kh.dc.member.model.vo.Member;
 
 @Service
@@ -46,6 +47,11 @@ public class MemberServiceImpl implements MemberService {
 	public int checkNickNameDuplicate(String nickName) {
 		
 		return memberDao.checkNickNameDuplicate(nickName);
+	}
+
+	@Override
+	public List<Location> selectLocationList() {
+		return memberDao.selectLocationList();
 	}
 
 }
