@@ -18,12 +18,21 @@ public class AdminMemberController {
 	AdminMemberService memberService;
 
 	@RequestMapping("admin/member/list.do")
-	public String memberList(Model model) {
+	public String memberList(
+			@RequestParam(value="authNo", defaultValue="1", required=false) int authNo, 
+			Model model) {
 		
-		List<Member> memberList = memberService.selectMemberList();
+		System.out.println("선택한 권한 번호 : " + authNo);
+		
+		List<Member> memberList = memberService.selectMemberList(authNo);
+		
+		// 멤버 권한 리스트
+		List<String> memberAuthList = memberService.selectMemberAuthList();
 		
 		System.out.println("어드민 멤버 리스트" + memberList);
 		model.addAttribute("memberList", memberList);
+		model.addAttribute("authNo", authNo);
+		model.addAttribute("memberAuthList", memberAuthList);
 		
 		return "admin/member/list";
 	}

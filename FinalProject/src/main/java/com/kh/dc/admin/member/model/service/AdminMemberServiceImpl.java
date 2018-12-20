@@ -13,15 +13,20 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 
 	@Autowired
 	AdminMemberDao memberDao;
-	
-	@Override
-	public List<Member> selectMemberList() {
-		return memberDao.selectMemberList();
-	}
 
 	@Override
 	public Member selectMemberOne(int memberNo) {
 		return memberDao.selectMemberOne(memberNo);
+	}
+
+	@Override
+	public List<String> selectMemberAuthList() {
+		return memberDao.selectMemberAuthList();
+	}
+
+	@Override
+	public List<Member> selectMemberList(int authNo) {
+		return memberDao.selectMemberList(authNo);
 	}
 
 }
