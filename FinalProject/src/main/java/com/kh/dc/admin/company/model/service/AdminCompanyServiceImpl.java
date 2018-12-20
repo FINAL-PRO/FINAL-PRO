@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.dc.admin.company.model.dao.AdminCompanyDao;
-import com.kh.dc.admin.company.model.vo.Company;
+import com.kh.dc.common.vo.Company;
 
 @Service
 public class AdminCompanyServiceImpl implements AdminCompanyService {
