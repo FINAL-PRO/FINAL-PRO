@@ -18,4 +18,9 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	public List<Board> selectBoardList() {
 		return boardDao.selectBoardList();
 	}
+
+	@Override
+	public Board selectBoardOne(int boardNo) {
+		return boardDao.selectBoardOne(boardNo);
+	}
 }
