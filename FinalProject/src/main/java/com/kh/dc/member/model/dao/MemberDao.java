@@ -9,11 +9,11 @@ public interface MemberDao {
 
 	int insertMember(Member member);
 	
-	Member selectOne(String userId);
+	Member selectOne(String email);
 	
 	int updateMember(Member member);
 	
-	int deleteMember(String userId);
+	int deleteMember(String email);
 	
 	int checkEmailDuplicate(String email);
 	
