@@ -17,4 +17,12 @@ public interface RegionService {
 	// 댓글
 	public int reInsertRegion(RegionRe rre);
 	
+	// 조회수 증가
+	public int updateCountRegion(int no);
+	
+	// 좋아요
+	public int regionLikeCount(int no);
+	public int regionLikeCountView(int no);
+
+	
 }

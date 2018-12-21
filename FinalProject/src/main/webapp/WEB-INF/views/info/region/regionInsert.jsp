@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.util.*, com.kh.dc.info.region.model.vo.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<% Region region = (Region)request.getAttribute("region"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,15 +27,26 @@
     	<c:import url="../../common/menubar.jsp"/>
         <div style="width: 800px; margin: auto; padding-top:20px;">
 			
+			
+			<form id="insertFrm" method="post" 
+			action="<c:if test="${region.no!=null}">${pageContext.request.contextPath}/info/region/updateRegionEnd.do</c:if>
+							 <c:if test="${region.no==null}">${pageContext.request.contextPath}/info/region/insertRegion.do</c:if>">
+			
 			<c:if test="${region.no != null }"> <h2> 글 수정 </h2></c:if>
             <c:if test="${region.no == null }" ><h2>글쓰기</h2></c:if>
-            <input type="text" style="width: 800px; height: 30px;" value='<c:if test="${region.title != null }">${region.title }</c:if>'><br><br>
-            <div id="summernote">
+            <input type="text"  id="title" name="title" style="width: 800px; height: 30px;" value='<c:if test="${region.title != null }">${region.title }</c:if>' required> <br><br>
+            <textarea id="summernote"  name="content"  required >
             <c:if test="${region.content != null }"> ${region.content}</c:if>
-            </div>
-
+            </textarea>
+            
+            <c:if test="${region.no != null }"> <input type="hidden" name="no" value="${region.no}" required/> </c:if>
+            
             <button type="submit">확인</button>
-            <button type="reset">취소</button>
+            <button type="reset">취소</button>			
+			
+			</form>
+            
+
         </div>
 
 
