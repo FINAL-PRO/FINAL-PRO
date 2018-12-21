@@ -16,15 +16,13 @@ public class MemberDaoImpl implements MemberDao {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public int insertMember(Member member) {
-		
-		return sqlSession.insert("member_mapper.insertMember", member);
-		
+	public int insertMember(Member member) {		
+		return sqlSession.insert("member_mapper.insertMember", member);		
 	}
 
 	@Override
-	public Member selectOne(String userId) {
-		return sqlSession.selectOne("member_mapper.loginMember", userId);
+	public Member selectOne(String email) {
+		return sqlSession.selectOne("member_mapper.selectOneMember", email);
 	}
 
 	@Override
@@ -33,8 +31,8 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public int deleteMember(String userId) {
-		return  sqlSession.delete("member_mapper.deleteMember", userId);
+	public int deleteMember(String email) {
+		return  sqlSession.delete("member_mapper.deleteMember", email);
 	}
 
 	@Override

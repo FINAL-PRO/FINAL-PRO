@@ -2,6 +2,8 @@ package com.kh.dc.member.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -9,11 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.kh.dc.member.model.service.MemberService;
 import com.kh.dc.member.model.vo.Location;
 import com.kh.dc.member.model.vo.Member;
 
+@SessionAttributes(value= {"member"})
 @Controller
 public class MemberController {
 	
@@ -55,7 +60,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("member/memberEnrollEnd.do")
-	public String memberEnrollEnd(Member member, Model model) {
+	public String memberEnrollEnd(HttpSession session, Member member, Model model) {
 		
 		System.out.println("member : " + member);
 
@@ -70,13 +75,57 @@ public class MemberController {
 		
 		int result = memberService.insertMember(member);
 		
-		if(result > 0) return "redirect:/";
+		if(result > 0) {
+			session.invalidate();
+			return "redirect:/";
+		}
 		else return "common/error";
 
 	}
 	
+	@RequestMapping("member/memberLogin.do")
+	public String memberLogin(@RequestParam String email, @RequestParam String password, 
+			Model model, HttpSession session) {
+		
+		Member m = memberService.selectOne(email);
+		System.out.println("member : " +  m);
+		
+		String msg = "";
+		
+		if( m == null) {
+			msg = "존재하지 않는 회원입니다.";
+		} else {
+			
+			if(bcryptPasswordEncoder.matches(password, m.getPassword())) {
+				
+				msg = m.getNickName() + "님 환영합니다.";
+				model.addAttribute("member", m);
+				
+			} else {
+				msg = "비밀번호가 틀렸습니다!";
+			}
+		}
+		
+		System.out.println("msg : " + msg);
+		session.setAttribute("msg", msg);
+		
+		return "redirect:/";
+		
+	}
 	
-	
-	
+	@RequestMapping("/member/memberLogout.do")
+	public String memberLogout(SessionStatus sessionStatus,
+			HttpSession session, Model model) {
+		
+		if( !sessionStatus.isComplete()) sessionStatus.setComplete();
+		// session.invalidate();
+		
+		String msg= "로그아웃 성공";
+		
+		model.addAttribute("msg", msg);
+		
+		return "redirect:/";
+	}
+
 
 }

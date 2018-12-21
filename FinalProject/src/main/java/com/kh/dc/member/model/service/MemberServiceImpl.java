@@ -16,15 +16,13 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDao memberDao;
 
 	@Override
-	public int insertMember(Member member) {
-		
-		return memberDao.insertMember(member);
-		
+	public int insertMember(Member member) {		
+		return memberDao.insertMember(member);		
 	}
 
 	@Override
-	public Member selectOne(String userId) {
-		return memberDao.selectOne(userId);
+	public Member selectOne(String email) {
+		return memberDao.selectOne(email);
 	}
 
 	@Override
@@ -33,8 +31,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int deleteMember(String userId) {
-		return memberDao.deleteMember(userId);
+	public int deleteMember(String email) {
+		return memberDao.deleteMember(email);
 	}
 
 	@Override
