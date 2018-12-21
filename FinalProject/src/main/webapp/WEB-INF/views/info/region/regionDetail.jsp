@@ -54,9 +54,9 @@
                     <span class="" style="margin-right: 30px;">${region.userName}</span>${region.writeDate }
                     <dl class="" style="float:right; display: table; margin:0px;">
                         <dt class="" style="float: left; margin-left:30px;">조회 수</dt>
-                            <dd class="" style="float:right; margin-inline-start: 15px;">${region.viewcount}</dd>
-                        <dt class="" style="float: right; margin-left:30px;">추천 수</dt>
                             <dd class="" style="float:right; margin-inline-start: 15px;">00</dd>
+                        <dt class="" style="float: right; margin-left:30px;">추천 수</dt>
+                            <dd class="" style="float:right; margin-inline-start: 15px;">${region.viewcount}</dd>
                     </dl>
                 </div>
                    
@@ -73,15 +73,17 @@
                 <ul class="" style="list-style-type:none; padding-left:0px; display: block;">
                     <li class="" style="display: block; float: left; padding-right: 15px;"><a class="" href="${pageContext.request.contextPath}/info/region/list.do" title="목록">목록</a> </li>
                     <li class="" style="display: block; float: left; padding-right: 15px; "><a class="" href="#" accesskey="t" title="상단이동">맨 위로</a></li>
-                    <li class="" style="display: block; float: left;"><a onclick="updateRegion()"  title="수정">수정하기</a></li>		
+                    <li class="" style="display: block; float: left;"><a onclick="updateRegion()"  title="수정">수정하기</a></li>
+                    <li class="" style="display: block; float: left;"><a onclick="deleteRegion()"  title="수정">작제하기</a></li>
+                    		
                 </ul>
             </div>
             <br>
             <div class="" >
                 <ul class="" style="list-style-type:none; padding-left:0px; display: block;">
                     <li class="" style="display: block; float: left; padding-right: 15px;">
-                    <button class="" title="추천" onclick="alert('로그인을 하지 않았습니다.');">
-                        <span class="">추천 (0)</span>
+                    <button class="" title="추천" onclick="regionLike();">
+                        <span class="">추천 ()</span>
                     </button>
                     </li>				
                     
@@ -133,8 +135,8 @@
                     </tr>
              
                 	 <c:forEach items="${list}" var="regionList" varStatus="vs">
-                    <tr>								
-                        <td class=""><span class="">${regionList.no}</span></td>
+                    <tr>							
+                       <td class=""><span class="">${regionList.no}</span></td>
                         <td class=""><a onclick="selectRegion(${regionList.no})"><span>${regionList.title }</span></a></td>
                         <td class=""><span class="">${regionList.userName }</span></td>
                         <td class="">${regionList.writeDate }</td>
@@ -172,9 +174,17 @@
         		location.href="${pageContext.request.contextPath}/info/region/updateRegion.do?no="+${region.no};
         	}
         	
+        	function deleteRegion(){
+        		location.href="${pageContext.request.contextPath}/info/region/deleteRegion.do?no="+${region.no};
+        	}
+        	
 			function selectRegion(no){
 				location.href="${pageContext.request.contextPath}/info/region/rgSelectOne.do?no="+no;
 				}
+			
+			function regionLike(){
+				location.href="${pageContext.request.contextPath}/info/region/regionLikeCount.do?no="+${region.no};
+			}
 			
 			function reComInsert(){
 				$("#reComInsert").attr("action","${pageContext.request.contextPath}/info/region/reInsertRegion.do");
