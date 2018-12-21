@@ -34,5 +34,15 @@ public class FreeServiceImpl implements FreeService{
 	public int insertFree(Board board) {
 		return freeDao.insertBoard(board);
 	}
+
+	@Override
+	public int freeDelete(int no) {
+		return freeDao.freeDelete(no);
+	}
+
+	@Override
+	public int freeUpdate(Board board) {
+		return freeDao.freeUpdate(board);
+	}
 	
 }

@@ -14,5 +14,11 @@ public interface FreeDao {
 	Board selectOneFree(int no);
 
 	int insertBoard(Board board);
+
+	int freeDelete(int no);
+
+	int freeUpdate(Board board);
+	
+
 	
 }

@@ -14,5 +14,9 @@ public interface FreeService {
 	Board selectOneFree(int no);
 	
 	int insertFree(Board board);
+
+	int freeDelete(int no);
+
+	int freeUpdate(Board board);
 	
 }

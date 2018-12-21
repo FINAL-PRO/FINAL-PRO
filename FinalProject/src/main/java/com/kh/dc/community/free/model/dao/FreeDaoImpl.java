@@ -38,4 +38,15 @@ public class FreeDaoImpl implements FreeDao{
 		return sqlSession.insert("free_mapper.insertFree", board);
 	}
 
+	@Override
+	public int freeDelete(int no) {
+		return sqlSession.delete("free_mapper.freeDelete", no);
+	}
+
+	@Override
+	public int freeUpdate(Board board) {
+		return sqlSession.insert("free_mapper.updateFree", board);
+	}
+
+
 }

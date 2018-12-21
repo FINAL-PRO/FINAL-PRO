@@ -49,37 +49,46 @@ public class FreeController {
 		return "community/free/list";
 	}
 	
+	// freeInsertForm.jsp 매핑
 	@RequestMapping("community/free/freeInsertForm.do")
 	public void freeInsertForm() {
 		
 	}
 	
 	
-	@RequestMapping(value="community/free/freeInsertFormEnd.do")
-	public String insertFree(Board board, Model model, HttpSession session) {
+	@RequestMapping("community/free/freeInsertFormEnd.do")
+	public String insertFree(Board board) {
 		
 		System.out.println("받아온 정보 : " + board);
 		
 		int result = freeService.insertFree(board);
 		System.out.println("insert 결과 : " + result);
 		
-		String loc = "community/free/list";
+		return "redirect:/community/free/list.do";
+	}
+	
+	/*@RequestMapping("community/free/freeInsertFormEnd.do")
+	public String insertFree(Board board, Model model) {
+
+		int result = freeService.insertFree(board);
+		System.out.println("insert 결과 : " + result);
+		
+		String loc = "community/free/list.do";
 		String msg = "";
 		
 		if(result>0) {
+			System.out.println("등록 성공!");
 			msg = "게시글 등록 성공!";
-			loc = "community/free/list";
+			loc = "community/free/freeView.do?no="+board.getNo();
 		} else {
 			msg = "게시물 등록 실패!";
 		}
 		
-		return "community/free/list";
-	}
-	
-	private Object result(int i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		model.addAttribute("loc", loc)
+		.addAttribute("msg", msg);
+		
+		return "community/free/list.do";
+	}*/
 
 	@RequestMapping("community/free/freeView.do")
 	public String selectOneFree(@RequestParam int no, Model model) {
@@ -87,20 +96,33 @@ public class FreeController {
 		
 		return "community/free/freeView";
 	}
-	/*
+	
 	@RequestMapping("community/free/freeUpdateForm.do")
-	public String freeUpdateForm() {
+	public String freeUpdateView(Model model, @RequestParam int no) {
+		
+		System.out.println("수정할 no:" + no);
+		
+		model.addAttribute("board", freeService.selectOneFree(no));
+		
 		return "community/free/freeUpdateForm";
 	}
 	
-	@RequestMapping("community/free/freeUpdate.do")
-	public String freeUpdate() {
-		return "community/free/freeUpdate";
+	@RequestMapping("community/free/freeUpdateFormEnd.do")
+	public String freeUpdate(Board board) {
+		
+		freeService.freeUpdate(board);
+		System.out.println("수정완료");
+		
+		return "redirect:/community/free/list.do";
 	}
 	
 	@RequestMapping("community/free/freeDelete.do")
-	public String freeDelete() {
-		return "community/ree/freeDelete";
-	}*/
+	public String freeDelete(@RequestParam int no) {
+		
+		System.out.println("삭제:" +no);
+		freeService.freeDelete(no);
+		
+		return "redirect:/community/free/list.do";
+	}
 	
 }

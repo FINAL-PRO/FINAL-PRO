@@ -24,16 +24,17 @@
     #container2 .article > p.profile > span.nickname {
         display: inline-block; max-width: 60%; line-height: 20px; color: #292929; font-size: 14px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-    #container2 .article > p.profile > span.nickname.disabled {
-        color: #a6a6a6;
-    }
-
-    #container2 .article > p.profile > time {
+    
+    .time {
         float: right; display: inline-block; line-height: 20px; color: #a6a6a6; font-size: 12px;
     }
 
     #container2 .article > p.text {
-        margin-top: 8px; line-height: 18px; color: #292929; font-size: 14px; word-wrap: break-word; 
+        margin-top: 8px; line-height: 18px; color: #292929; font-size: 14px; 
+    }
+    
+    .content{
+    	margin-top: 8px; line-height: 18px; color: #292929; font-size: 14px;
     }
 
     #container2 .article > p.status {
@@ -107,22 +108,25 @@
 			        </div>
 			        <div class="articlelist">
 			            <ol class="group">
-			            <p>총 ${totalContents}건의 게시물이 있습니다.</p>
+			            	<p>총 ${totalContents}건의 게시물이 있습니다.</p>
 			            	<c:forEach items="${list}" var="b">
-			                <li class="groupin" id="${b.no}"><a class="article" href="${pageContext.request.contextPath}/community/free/freeView.do?no=${b.no}">
-			                    <p class="profile">
-			                        <img class="picture" src="https://cf-epi.campuspick.com/0.png">
-			                        <span class="nickname">${b.no}</span>
-			                        <time>${b.writeDate}</time>
-			                    </p>
-			                    <hr>
-			                    <p class="text short">${b.content}</p>
-			                    <p class="status">
-			                        <span class="votecount">좋아요: 1</span>
-			                        <span class="commentcount">댓글: 0</span>
-			                    </p>
-			                    <p class="attach"><span class="attachcount">이미지</span></p>
-			                </a></li>
+			                <li class="groupin" id="${b.no}">
+				                <a class="article" href="${pageContext.request.contextPath}/community/free/freeView.do?no=${b.no}">
+					                <p class="time">
+					                	<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+					                </p>
+				                    <p class="profile">
+				                        <img class="picture" src="https://cf-epi.campuspick.com/0.png"/>
+				                        <span class="nickname">${b.title}</span>
+				                    </p>
+				                    <span class="content">${b.content}</span>				              
+				                    <p class="status">
+				                        <span class="votecount">좋아요: 1</span>
+				                        <span class="commentcount">댓글: 0</span>
+				                    </p>
+				                    <p class="attach"><span class="attachcount">이미지</span></p>
+				                </a>
+			                </li>
 			                </c:forEach>
 			            </ol>
 			            <c:out value="${pageBar}" escapeXml="false"/>

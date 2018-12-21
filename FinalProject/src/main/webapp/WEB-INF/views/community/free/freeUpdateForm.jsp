@@ -51,25 +51,27 @@
 			</div>
 			<div class="section-center">
 				<div class="board_area">
+				<form name="boardFrm" action="${pageContext.request.contextPath}/community/free/freeUpdateFormEnd.do?no=${board.no}" method="post">
 	            <div>
 	                <b>글쓰기</b>
+	                <input type="text" id="bno" name="bno" value="${board.no}" readonly="readonly"/>
 	            </div>
 	            <div class="table-div">
 	                <br>
 	                <div class="tr-div">
 	                    <div class="td-div">제목</div>
-	                    <div class="td-div"><textarea name="title" rows="1" cols="105" style="resize: none;"></textarea></div>
+	                    <div class="td-div"><textarea name="title" rows="1" cols="105" style="resize: none;">${board.title}</textarea></div>
 	                </div>
 	                <div class="tr-div">
 	                    <div class="td-div">내용</div>
 	                    <div class="td-div">
-                            <div id="summernote" style="resize: none;"></div>
+	                    	<%-- <div id="summernote">${board.content}</div> --%>
+                            <%-- <div id="summernote" style="resize: none;" value="${board.content}"></div> --%>
+                            <textarea name="content" id="summernote" class="form-control" rows="20" cols="70" required>${board.content}</textarea>
                             <script>
                                 $(document).ready(function() {
                                     $('#summernote').summernote({
-                                        placeholder: 'Hello bootstrap 4',
-                                        tabsize: 2,
-                                        height: 500
+                                        height: 300
                                     }); 
                                 });
                             </script>	                        
@@ -78,22 +80,23 @@
 	                <div class="tr-div">
 	                    <div class="td-div"></div>
 	                    <div class="td-div">
-	                        <button class="btn btn-primary" onclick="save();">Save</button>
-	                        <button class="btn btn-primary" onclick="back();">Back</button> 
+	                        <button class="btn_board_save" id="btn_board_edit">Save</button>
+	                        <button class="btn_board_back" id="btn_board_back">Back</button> 
 	                    </div>
 	                </div>
 	            </div>
 	            <script>
-	                function save(){
-	                    $('#writeForm').attr('action', '${pageContext.request.contextPath}/community/free/list.do');
-	                    
-	                    $('#writeForm').submit();
-	                }
-	                
-	                function back(){
-	                    location.href="${pageContext.request.contextPath}/community/free/list.do";
-	                }
+		            $("#btn_board_save").click(function(){
+	           			boardFrm.action="${pageContext.request.contextPath}/community/free/freeUpdateFormEnd.do?no=${board.no}"
+	           			boardFrm.submit();
+	           		});
+	           		
+	           		$("#btn_board_back").click(function(){
+	           			boardFrm.action="${pageContext.request.contextPath}/community/free/list.do"
+	            		boardFrm.submit();
+	           		});
 	            </script>
+	            </form>
 	            </div>
 	        </div>
 			<div class="section-right">

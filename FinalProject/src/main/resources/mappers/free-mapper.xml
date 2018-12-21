@@ -19,31 +19,18 @@
 	
 	<insert id="insertFree" parameterType="Board">
 		INSERT INTO DC_BOARD_TB VALUES
-		(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, 'BOARD001', 'STATUS001', #{memberNo}, NULL)
+		<!-- (SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, 'BOARD001', 'STATUS001', 5, NULL) -->
+		(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, 'BOARD001', 'STATUS001', 5, NULL)
 		<!-- INSERT INTO DC_BOARD_TB VALUES
 		(SEQ_BOARD.NEXTVAL, '제목', SYSDATE, '내용', 0, 'BOARD001', 'STATUS001', 5, NULL) -->
 	</insert>
 	
-	<!--
-	<select id="selectAttachmentList" parameterType="_int"
-		resultMap="attachment">
-		SELECT * FROM ATTACHMENT WHERE BOARDNO = #{boardNo}
-	</select>
-	<update id="updateBoard" parameterType="Board">
-		UPDATE BOARD SET BOARDTITLE = #{boardTitle}, BOARDCONTENT = #{boardContent}
-		WHERE BOARDNO = #{boardNo}
+	<update id="updateFree" parameterType="Board">
+		UPDATE DC_BOARD_TB SET TITLE = #{title}, CONTENT = #{content} WHERE NO = #{no}
 	</update>
-	<insert id="updateAttachment" parameterType="Attachment">
-		INSERT INTO ATTACHMENT(ATTACHMENTNO, BOARDNO, ORIGINALFILENAME,
-		RENAMEDFILENAME) VALUES (SEQ_ATTACHMENTNO.NEXTVAL, #{boardNo},
-		#{originalFileName}, #{renamedFileName})
-	</insert>
-	<delete id="deleteBoard" parameterType="_int"> DELETE FROM BOARD WHERE
-		BOARDNO = #{boardNo} </delete>
-	<delete id="deleteAttachment" parameterType="_int"> DELETE FROM
-		ATTACHMENT WHERE BOARDNO = #{boardNo} </delete>
-	<delete id="deleteAttachmentOne" parameterType="_int">
-		DELETE FROM ATTACHMENT WHERE ATTACHMENTNO = #{attNo}
-	</delete> -->
+	
+	<delete id="freeDelete" parameterType="_int"> 
+		DELETE FROM DC_BOARD_TB WHERE NO = #{no} 
+	</delete>
 	
 </mapper>
