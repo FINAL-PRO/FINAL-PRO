@@ -207,15 +207,9 @@
 					$("#pwdChkComment2").text('OK!');
 				}
 			
-			});
-			
+			});			
 		});
-			
-			
-			
-			
-			
-		
+
 		</script>
 		</section>
 		<c:import url="../common/footer.jsp"/>
