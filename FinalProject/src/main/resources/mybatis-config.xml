@@ -21,6 +21,10 @@
 		<typeAlias type="com.kh.dc.member.model.vo.Member" alias="member"/>
 		<typeAlias type="com.kh.dc.member.model.vo.Location" alias="location"/>
 		
+		<typeAlias type="com.kh.dc.sale.group.model.vo.Group" alias="group"/>
+		<typeAlias type="com.kh.dc.sale.used.model.vo.Used" alias="used"/>
+		<typeAlias type="com.kh.dc.sale.group.model.vo.GroupHistory" alias="groupHistory"/>
+		<typeAlias type="com.kh.dc.sale.used.model.vo.UsedHistory" alias="usedHistory"/>
 
 		<!-- 공통 VO -->
 		<typeAlias type="com.kh.dc.common.vo.Company" alias="company"/>
