@@ -12,4 +12,7 @@ public interface RegionDao {
 	public int updateRegion(Region rg);
 	public int deleteRegion(int no);
 	public int reInsertRegion(RegionRe rre);
+	public int updateCountRegion(int no);
+	public int regionLikeCount(int no);
+	public int regionLikeCountView(int no);
 }

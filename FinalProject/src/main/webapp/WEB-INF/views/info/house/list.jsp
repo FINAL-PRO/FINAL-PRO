@@ -7,66 +7,60 @@
 <html>
 
         <head>
-            <title>house list</title>
-
+            <title>부동산 list</title>
+			<c:import url="../../common/header.jsp"/>
             <style>
            
             </style>
         </head>
         <body >
 
-        <!-- header -->
-        <header>
-
-        </header>
-        
-        <br><br><br>
-        
         <!-- 게시판 list -->
+        <c:import url="../../common/menubar.jsp"/>
+        
         <div class="titleArea"  style="width: 800px; margin: auto;">
-                <h2><font color="#555555">부동산게시판</font> </h2>
-                <p>게시판list</p>
+                <h2><font color="#555555">게시판</font> </h2>
+                <p>list</p>
             </div>
         <p class="imgArea"><img src=""></p>
-        </div>
+       
       
         <div class="list" style="width: 800px; margin: auto;">
             <table border="1" style="border-spacing:0; border-collapse:collapse; color: #fff; line-height:1.5; border:none;">
-        <caption>게시판 목록</caption>
+        <caption>목록</caption>
             <thead class="listcol" style="border-color: white;  color: gray;">   
                     
             <tr style="color:gray;">
                 <th style="width:130px;"> 번호</th>
-                <th style="width:200px;">카테고리</th>
                 <th style="width:300px;">제목</th>
                 <th style="width:150px;">작성자</th>
                 <th style="width:150px;">작성일</th>
-                <th style="width:150px;">조회</th>
-                <th style="width:150px;">추천</th>
-                <th style="width:150px;">평점</th>
-            </tr>    
-            <c:forEach begin="1" end="10">
-            <tr style="background-color:#FFFFFF; color:gray;">
-                <th style="width:130px;"> #</th>
-                <th style="width:200px;">#</th>
-                <th style="width:300px;">제목 </th>
-                <th style="width:150px;">이름</th>
-                <th style="width:150px;">작성일</th>
                 <th style="width:150px;">조회수</th>
-                <th style="width:150px;">추천</th>
-                <th style="width:150px;">평점</th>
-               </tr>
-               </c:forEach>
+
+            </tr>    
+            
+            <c:forEach items="${list}" var="house" varStatus="vs">
+            <tr style="background-color:#FFFFFF; color:gray;">
+                <th style="width:130px;" > ${house.no}</th>
+                <th style="width:300px;" ><a onclick="selectHouse(${house.no})">${house.title }</a></th>
+                <th style="width:150px;" >${house.userName }</th>
+                <th style="width:150px;">${house.writeDate}</th>
+                <th style="width:150px;">${house.viewcount }</th>
+            </tr>
+  
+            </c:forEach>
+               <c:if test="${list  == null}"> 작성된 게시물이 없습니다</c:if>
             </thead>
         </table>
         </div>
+        
 
-        <!-- 글쓰기 영역 -->
+        <!-- 글쓰기 영역 / 추후 회원 넘버 들어가도록 수정-->
         <br><br>
         <div class="upbt" style="width: 800px; margin: auto;">
-                <a href="/글쓰기 주소" class="displaynone btn btnStrong"> 글쓰기</a>
+                <a href="${pageContext.request.contextPath}/info/region/insertRegionView.do" class="displaynone btn btnStrong"> 글쓰기</a>
         </div>
-        </div>
+        
         
         <!-- 게시물 검색 -->
         <br><br><br><br>
@@ -99,10 +93,13 @@
         </form>
 
          <!-- footer -->
-        <footer>
-
-        </footer>
-
+		<c:import url="../../common/footer.jsp"/>
+		
+		<script>
+		function selectHouse(no){
+			location.href="${pageContext.request.contextPath}/info/house/selectOne.do?no="+no;
+			}
+		</script>
         </body>
 
 

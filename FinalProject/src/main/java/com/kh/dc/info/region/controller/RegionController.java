@@ -57,8 +57,15 @@ public class RegionController {
 	public String selectRegion( Model model, Model lModel, @RequestParam int no) {
 		System.out.println("con : " + no);
 		Region region = rs.selectRegion(no);
+		int likeCount = rs.regionLikeCountView(no);
+		
+		rs.updateCountRegion(no);
 		
 		model.addAttribute("region", region);
+		model.addAttribute("likeCount", likeCount);
+		
+		
+		System.out.println("likeCount : "  + likeCount);
 		
 		System.out.println("model" + model);
 		
@@ -88,9 +95,13 @@ public class RegionController {
 	public String updateRegionEnd(Region rg) {
 		rs.updateRegion(rg);
 		
-		return "info/region/lregionDetail.do";
+		System.out.println("수정con region :  " + rg );
+		
+		return "redirect:/";
 	}
 	
+	
+	// 삭제
 	@RequestMapping("info/region/deleteRegion.do")
 	public String deleteRegion(@RequestParam int no) {
 		rs.deleteRegion(no);
@@ -109,6 +120,21 @@ public class RegionController {
 		
 		return "info/region/regionDetail";
 	}
+	
+	
+	// 좋아요 
+	// 추후 member No 에 @RequestParam 추가 현재는 임의로 1 넣었음
+
+	@RequestMapping("info/region/regionLikeCount.do")
+	public String regionLikeCount(@RequestParam int no) {
+		
+		rs.regionLikeCount(no);
+		
+		return "info/region/regionDetail";
+	}
+	
+	
+
 }
 
 

@@ -22,10 +22,14 @@
         display: inline-block; width: 20px; height: 20px; vertical-align: top;
     }
     .nickname {
-        display: inline-block; line-height: 20px; color: #292929; font-size: 12px; font-weight: bold; white-space: nowrap; overflow: hidden;
+        display: inline-block; line-height: 20px; color: #292929; font-size: 12px; font-weight: bold; white-space: nowrap; overflow: hidden; float:left;
+    }
+    
+    .title{
+    	display: inline-block; line-height: 20px; color: #292929; font-size: 15px; font-weight: bold; white-space: nowrap; overflow: hidden;
     }
 
-    time {
+    .time {
         float: right; display: inline-block; line-height: 20px; color: #a6a6a6; font-size: 12px;
     }
 
@@ -115,21 +119,40 @@
 			<div class="section-center">
 				<div id="container2">
                 <div class="articlelist" style="border: solid 0.5px red">
+				<form name="boardFrm" method="post">
+					<input type="text" id="bno" name="bno" value="${board.no}" readonly="readonly"/>
+				</form>	
                     <div class="group" style="border: solid 0.5px blue">                     
+                       	<p class="title">${board.title}</p>
+                        <div style="border: solid 0.5px gray"></div>
                         <p class="profile">
                             <img class="picture" src="https://cf-epi.campuspick.com/0.png">
-                            <span class="nickname">글쓴닉네임</span>
-                            <time>12/13 12:51</time>
+	                        <span class="nickname">${member.nickName}</span>
+                            <p class="time">${board.writeDate}</p>
                         </p>
-                        <div style="border: solid 0.5px gray"></div>
-                        <p class="text">글내용입니다.</p>
+                        <p class="text">${board.content}</p>
                         <div style="border: solid 0.5px lightgray"></div>
                         <div class="status" style="border: solid 0.5px orange">
+                        	<button class="btn_board_edit" id="btn_board_edit">수정</button>
+                            <button class="btn_board_delete" id="btn_board_delete">삭제</button>
                             <button class="btn_report">신고하기</button>
                             <button class="btn_like">좋아요</button>
                             <span class="likecount">: 1</span>
                             <span class="commentcount">댓글: 0</span>
                         </div>
+                        <script>
+                           	
+                       		$("#btn_board_edit").click(function(){
+                       			boardFrm.action="${pageContext.request.contextPath}/community/free/freeUpdateForm.do?no=${board.no}"
+                       			boardFrm.submit();
+                       		});
+                       		
+                       		$("#btn_board_delete").click(function(){
+                       			boardFrm.action="${pageContext.request.contextPath}/community/free/freeDelete.do?no=${board.no}"
+                        		boardFrm.submit();
+                       		});
+                           	
+                        </script>
                         <p class="both" style="clear:both;">&nbsp;</p>
                     </div>
                     <div style="border: solid 0.5px gray"></div>
@@ -153,10 +176,19 @@
                             </p>
                             <p class="comment">댓글내용입니다.</p>
                             <div class="btn_comment">
-                                <button class="btn_comment_edit">수정</button>
+                                <button class="btn_comment_edit" id="btn_comment_edit">수정</button>
                                 <button class="btn_comment_delete">삭제</button>
                                 <button class="btn_comment_wirte">답글쓰기</button>
                             </div>
+                            <script>
+                            	$(document).ready(function(){
+                            		$("#btn_comment_edit").click(function(){
+                            			alert("수정");
+                            			document.boardFrm.action="${pageContext.request.contextPath}/community/free/freeUpdateForm.do"
+                            			document.boardFrm.submit();
+                            		});
+                            	});
+                            </script>
                             <p class="both" style="clear:both;">&nbsp;</p>
                             <br>
                             <div style="border: solid 0.5px lightgray"></div>
@@ -176,6 +208,7 @@
                             <br>
                         </div>
                     </div>
+                    
                 </div>
             </div>
 			</div>

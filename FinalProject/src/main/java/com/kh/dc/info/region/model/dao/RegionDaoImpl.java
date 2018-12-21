@@ -33,6 +33,7 @@ public class RegionDaoImpl implements RegionDao {
 
 	@Override
 	public int updateRegion(Region rg) {
+		System.out.println("수정 dao rg : " + rg);
 		return sqlSession.update("region_mapper.updateRegion", rg);
 	}
 
@@ -44,6 +45,21 @@ public class RegionDaoImpl implements RegionDao {
 	@Override
 	public int reInsertRegion(RegionRe rre) {
 		return sqlSession.insert("regionRe.insertRegionRe", rre);
+	}
+
+	@Override
+	public int updateCountRegion(int no) {
+		return sqlSession.update("region_mapper.updateCountRegion", no);
+	}
+
+	@Override
+	public int regionLikeCount(int no) {
+		return sqlSession.insert("region_mapper.regionLikeCount", no);
+	}
+
+	@Override
+	public int regionLikeCountView(int no) {
+		return sqlSession.selectOne("region_mapper.regionLikeCountView", no);
 	}
 }
 
