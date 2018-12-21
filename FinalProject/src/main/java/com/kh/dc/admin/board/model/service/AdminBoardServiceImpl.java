@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.dc.admin.board.model.dao.AdminBoardDao;
 import com.kh.dc.common.vo.Board;
+import com.kh.dc.common.vo.Code;
 
 @Service
 public class AdminBoardServiceImpl implements AdminBoardService {
@@ -15,7 +16,17 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	AdminBoardDao boardDao;
 	
 	@Override
-	public List<Board> selectBoardList() {
-		return boardDao.selectBoardList();
+	public Board selectBoardOne(int boardNo) {
+		return boardDao.selectBoardOne(boardNo);
+	}
+
+	@Override
+	public List<Board> selectBoardList(String boardType) {
+		return boardDao.selectBoardList(boardType);
+	}
+
+	@Override
+	public List<Code> selectBoardTypeList() {
+		return boardDao.selectBoardTypeList();
 	}
 }

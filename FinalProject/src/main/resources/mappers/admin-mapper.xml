@@ -2,16 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="admin_mapper">
 	
-	<select id="selectMemberList" resultType="member">
-		SELECT * FROM DC_MEMBER_TB
+	<!-- 멤버 전체 가져오기 -->
+	<select id="selectMemberList" resultType="member" parameterType="_int">
+		SELECT * FROM DC_MEMBER_TB WHERE AUTHNO = #{authNo}
 	</select>
 	
-	<select id="selectBoardList" resultType="board">
-		SELECT * FROM DC_BOARD_TB
+	<!-- 게시물 전체 가져오기 -->
+	<select id="selectBoardList" resultType="board" parameterType="String">
+		SELECT * FROM DC_BOARD_TB WHERE TYPE = #{boardType}
 	</select>
 	
-	<select id="selectCompanyList" resultType="company">
-		SELECT * FROM DC_COMPANY_TB
+	<!-- 업체 전체 가져오기 -->
+	<select id="selectCompanyList" resultType="company" parameterType="String">
+		SELECT * FROM DC_COMPANY_TB WHERE STATUS = #{companyType}
+	</select>
+	
+	<!-- 업체 하나 가져오기 -->
+	<select id="selectCompanyOne" parameterType="_int" resultType="company">
+		SELECT * FROM DC_COMPANY_TB WHERE NO = #{no}
+	</select>
+	
+	<!-- 게시물 하나 가져오기 -->
+	<select id="selectBoardOne" parameterType="_int" resultType="board">
+		SELECT * FROM DC_BOARD_TB WHERE NO = #{no}
+	</select>
+	
+	<!-- 멤버 한명 가져오기 -->
+	<select id="selectMemberOne" parameterType="_int" resultType="member">
+		SELECT * FROM DC_MEMBER_TB WHERE NO = #{no}
+	</select>
+	
+	<!-- 멤버 권한 리스트 가져오기 -->
+	<select id="selectMemberAuthList" resultType="authority">
+		SELECT * FROM DC_AUTHORITY_TB
+	</select>
+	
+	<!-- 게시판 타입 가져오기 -->
+	<select id="selectBoardTypeList" resultType="code">
+		SELECT * FROM DC_CODE_TB WHERE ATT = '게시판타입' 
+	</select>
+	
+	<!-- 업체 타입 가져오기 -->
+	<select id="selectCompanyTypeList" resultType="code">
+		SELECT * FROM DC_CODE_TB WHERE ATT = '업체구분'
 	</select>
 	
 </mapper>

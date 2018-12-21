@@ -14,12 +14,7 @@
 	<div id="container">
 		<c:import url="../../common/menubar.jsp"/>
 		<section id="content">
-			<h1>어드민 업체 리스트</h1>
-				<select id="companyTypeNo">
-					<c:forEach items="${companyTypeList}" var="company">
-						<option value="${company.id}" <c:if test="${company.id eq companyType}">selected</c:if>>${company.value}</option>
-					</c:forEach>					
-				</select>
+			<h1>어드민 업체 상세보기</h1>
 			<div>
 				<div class="row table-row">
 					<div class="col column">번호</div>
@@ -27,13 +22,11 @@
 					<div class="col column">등록일</div>
 				</div>
 			
-				<c:forEach var="company" items="${companyList}">
-					<div class="row table-row">
-						<div class="col column">${company.no}</div>
-						<div class="col column"><a href="${pageContext.request.contextPath}/admin/company/detailView.do?companyNo=${company.no}">${company.name}</a></div>
-						<div class="col column">${company.enrollDate}</div>
-					</div>
-				</c:forEach>
+				<div class="row table-row">
+					<div class="col column">${company.no}</div>
+					<div class="col column">${company.name}</div>
+					<div class="col column">${company.enrollDate}</div>
+				</div>
 				<div class="table" style="background:red">
 					
 					
@@ -42,10 +35,5 @@
 		</section>
 		<c:import url="../../common/footer.jsp"/>
 	</div>
-	<script>
-		$("#companyTypeNo").on('change', function(){
-			location.href= "${pageContext.request.contextPath}/admin/company/list.do?companyType="+ $("#companyTypeNo").val();
-		});
-	</script>
 </body>
 </html>

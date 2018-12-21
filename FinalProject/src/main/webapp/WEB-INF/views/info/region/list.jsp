@@ -15,8 +15,6 @@
         </head>
         <body >
 
-        <br><br><br>
-        
         <!-- 게시판 list -->
         <c:import url="../../common/menubar.jsp"/>
         
@@ -25,7 +23,7 @@
                 <p>list</p>
             </div>
         <p class="imgArea"><img src=""></p>
-        </div>
+       
       
         <div class="list" style="width: 800px; margin: auto;">
             <table border="1" style="border-spacing:0; border-collapse:collapse; color: #fff; line-height:1.5; border:none;">
@@ -43,9 +41,9 @@
             
             <c:forEach items="${list}" var="region" varStatus="vs">
             <tr style="background-color:#FFFFFF; color:gray;">
-                <th style="width:130px;"> ${vs.count }</th>
-                <th style="width:300px;">${region.title } </th>
-                <th style="width:150px;">${region.userName }</th>
+                <th style="width:130px;" > ${region.no}</th>
+                <th style="width:300px;" ><a onclick="selectRegion(${region.no})">${region.title }</a></th>
+                <th style="width:150px;" >${region.userName }</th>
                 <th style="width:150px;">${region.writeDate}</th>
                 <th style="width:150px;">${region.viewcount }</th>
             </tr>
@@ -57,12 +55,12 @@
         </div>
         
 
-        <!-- 글쓰기 영역 -->
+        <!-- 글쓰기 영역 / 추후 회원 넘버 들어가도록 수정-->
         <br><br>
         <div class="upbt" style="width: 800px; margin: auto;">
-                <a href="info/region/lregionInsert" class="displaynone btn btnStrong"> 글쓰기</a>
+                <a href="${pageContext.request.contextPath}/info/region/insertRegionView.do" class="displaynone btn btnStrong"> 글쓰기</a>
         </div>
-        </div>
+        
         
         <!-- 게시물 검색 -->
         <br><br><br><br>
@@ -96,6 +94,12 @@
 
          <!-- footer -->
 		<c:import url="../../common/footer.jsp"/>
+		
+		<script>
+			function selectRegion(no){
+			location.href="${pageContext.request.contextPath}/info/region/rgSelectOne.do?no="+no;
+			}
+		</script>
         </body>
 
 
