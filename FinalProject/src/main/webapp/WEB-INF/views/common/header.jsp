@@ -12,6 +12,7 @@
 
 <!-- 사용자작성 css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/test-style.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dc-basic-style.css" />
 <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/images/spring_icon.png">
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
@@ -19,7 +20,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-	header {
+/* 	header {
 	
 	}
 	section {
@@ -45,5 +46,5 @@
 	#container{
 		margin-left:auto;
 		margin-right:auto;
-	}
+	} */
 </style>
