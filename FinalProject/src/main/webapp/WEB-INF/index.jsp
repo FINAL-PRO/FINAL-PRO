@@ -41,14 +41,6 @@
 		</section>
 		<c:import url="views/common/footer.jsp"/>
 	</div>
-	<c:if test="${!empty msg}">
-		<script>
-			$(function(){
-				alert("${msg}");
-			});
-		</script>
-		<c:remove var="msg"/>
-	</c:if>
 	
 </body>
 </html>

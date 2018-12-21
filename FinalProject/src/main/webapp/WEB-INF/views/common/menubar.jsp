@@ -104,14 +104,15 @@
 	      </div>
           <!--로그인폼 -->
           <!-- https://getbootstrap.com/docs/4.1/components/forms/#overview -->
-          <form action="${pageContext.request.contextPath}/member/memberLogin.do" method="post">
+          <form action="" method="post">
 	      <div class="modal-body">
 			  <input type="email" class="form-control" id="loginEmail" name="email" placeholder="아이디" required>
 			    <br />
 			    <input type="password" class="form-control" id="loginPassword"  name="password" placeholder="비밀번호" required>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="submit" class="btn btn-outline-success" id="submit" >로그인</button>
+	      	<a href="${pageContext.request.contextPath}/member/memberSearch.do" class="search">아이디/비밀번호 찾기</a>
+	        <button type="button" class="btn btn-outline-success" id="submit" >로그인</button>
 	        <button type="button" class="btn btn-outline-success" data-dismiss="modal">취소</button>
 	      </div>
 		</form>
@@ -120,7 +121,7 @@
 	</div>
 	<!-- Modal 끝-->
 	<script>
-/* 		
+	
 		$("#submit").on("click", function(){
 			
 			var email = $("#loginEmail").val();
@@ -134,7 +135,8 @@
 						password: password},
 				dataType: "json",
 				success : function(data){
-					alert("test");			
+						alert(data.msg);
+						location.reload();			
 				}, error : function(jqxhr, textStatus, errorThrown){
 	                console.log("ajax 처리 실패");
 	                //에러로그
@@ -145,9 +147,5 @@
 			});
 		});
 			
- */
-
-	 
-
 	</script>
 </header>
