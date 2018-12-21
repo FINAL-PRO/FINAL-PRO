@@ -1,6 +1,8 @@
 package com.kh.dc.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -84,9 +86,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("member/memberLogin.do")
-	public String memberLogin(@RequestParam String email, @RequestParam String password, 
-			Model model, HttpSession session) {
-		
+	@ResponseBody
+	public Map<String,Object> memberLogin(@RequestParam String email, @RequestParam String password, 
+			Model model) {
+		Map<String, Object> hmap = new HashMap<>();
 		Member m = memberService.selectOne(email);
 		System.out.println("member : " +  m);
 		
@@ -106,11 +109,9 @@ public class MemberController {
 			}
 		}
 		
-		System.out.println("msg : " + msg);
-		session.setAttribute("msg", msg);
+		hmap.put("msg", msg);
 		
-		return "redirect:/";
-		
+		return hmap;
 	}
 	
 	@RequestMapping("/member/memberLogout.do")
@@ -118,7 +119,6 @@ public class MemberController {
 			HttpSession session, Model model) {
 		
 		if( !sessionStatus.isComplete()) sessionStatus.setComplete();
-		// session.invalidate();
 		
 		String msg= "로그아웃 성공";
 		
@@ -126,6 +126,15 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/member/memberSearch.do")
+	public void memberSearch() {}
+	
+
+	
+	
+	
+	
 
 
 }
