@@ -36,23 +36,27 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public int checkEmailDuplicate(String email) {
-		
-		
+	public int checkEmailDuplicate(String email) {				
 		return sqlSession.selectOne("member_mapper.checkEmailDuplicate", email);
 	}
 
 	@Override
-	public int checkNickNameDuplicate(String nickName) {	
-		
+	public int checkNickNameDuplicate(String nickName) {			
 		return sqlSession.selectOne("member_mapper.checkNickNameDuplicate", nickName);
 	}
 
 	@Override
-	public List<Location> selectLocationList() {
-		
+	public List<Location> selectLocationList() {		
 		return sqlSession.selectList("member_mapper.selectLocationList");
 	}
+
+	@Override
+	public Member selectOneNickName(String nickName) {
+		return sqlSession.selectOne("member_mapper.selectOneNickName", nickName);
+	}
+
+
+	
 
 
 

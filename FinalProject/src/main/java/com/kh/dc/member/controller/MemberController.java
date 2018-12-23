@@ -130,7 +130,66 @@ public class MemberController {
 	@RequestMapping("/member/memberSearch.do")
 	public void memberSearch() {}
 	
+	@RequestMapping("/member/chkEmail.do")
+	@ResponseBody
+	public Map<String, Object> chkNickName(@RequestParam String nickName, @RequestParam String name) {
+				
+		Map<String, Object> hmap = new HashMap<>();
+		
+		String result = "";	// 닉네임도 틀리면서 이름도 틀린 경우
+		
+		Member m = memberService.selectOneNickName(nickName);
+		System.out.println("m : " + m);
+		
+		if(m != null) {		
+			if(name.equals(m.getName())) result = m.getEmail();										
+			else result = "fail2";
+						
+		} else result = "fail1";
+		
+		hmap.put("result", result);
 
+		return hmap;
+	}
+	
+	@RequestMapping("/member/chkNickName.do")
+	@ResponseBody
+	public Map<String, Object> chkNickName(@RequestParam String email){
+		Map<String, Object> hmap = new HashMap<>();
+		
+		String result = "";	// 닉네임도 틀리면서 이름도 틀린 경우
+		
+		Member m = memberService.selectOne(email);
+		System.out.println("m : " + m);
+		
+		if(m != null) result = m.getName();
+
+		hmap.put("result", result);
+
+		return hmap;
+				
+	}
+	
+	@RequestMapping("/member/chkPwd.do")
+	@ResponseBody
+	public int chkPwd(@RequestParam String name, @RequestParam String email){
+		int result = 0;	
+		
+		Member m = memberService.selectOne(email);
+		System.out.println("m : " + m);
+		
+		if(name.equals(m.getName())) {
+			result = 1;
+		}	
+		
+		System.out.println("result : " + result);
+		
+		return result;				
+	}
+	
+	//@RequestMapping("/member/sendPwd.do")
+	
+	
 	
 	
 	
