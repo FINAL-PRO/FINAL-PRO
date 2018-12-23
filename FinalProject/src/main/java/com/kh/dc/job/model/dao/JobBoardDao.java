@@ -13,13 +13,10 @@ public interface JobBoardDao {
 	
 	int insertJobBoard(JobBoard jobBoard);
 	
-	JobBoard selectOneJobBoard(int boardNo);
-	
-	String selectAttachedFile(int boardNo);
+	JobBoard selectOneJobBoard(int no);
 	
 	int updateJobBoard(JobBoard jobBoard);
 	
-	int deleteJobBoard(int boardNo);
+	int deleteJobBoard(int no);
 	
-	int deleteJobFile();
 }

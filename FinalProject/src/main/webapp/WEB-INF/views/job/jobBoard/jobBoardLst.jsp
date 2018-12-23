@@ -15,8 +15,8 @@
 		<c:import url="../../common/menubar.jsp"/>
 		<section id="content">
 			<h1>구인구직 게시판</h1>
-			<p>총 ${jb.}건의 게시물이 있습니다.</p>
-			<input type="button" value="글쓰기" id="btn-add" class="btn" onclick="addJobBoard"/>
+			<p>총 0건의 게시물이 있습니다.</p>
+			<input type="button" value="글쓰기" id="btn-add" class="btn" onclick="addJobBoard();"/>
 			<div id="job-board" class="job-table">
 				<div>
 					<div>번호</div>
@@ -29,7 +29,8 @@
 					<div>마감여부</div>
 					<div>조회수</div>
 				</div>
-				<c:forEach items="${list} }" var="jb">
+			
+				<c:forEach items="${list}" var="jb">
 				<div id="${jb.boardNo}"> 
 					<div>${jb.boardNo}</div>
 					<div>${jb.title}</div>
@@ -38,13 +39,14 @@
 					<div>${jb.startDate} - ${jb.endDate}</div>
 					<div>${jb.startJob} - ${jb.endJob}</div>
 					<div>${jb.salary} / ${salType}</div>
-					<c:if test="${jb.status ='완료'}">
+					<c:if test="${jb.status ='일반'}">
 						<div>${jb.status}</div>
 					</c:if>
 					<div>${jb.viewCount}</div>
 					
 				</div>
 				</c:forEach>
+
 			</div>
 			
 			

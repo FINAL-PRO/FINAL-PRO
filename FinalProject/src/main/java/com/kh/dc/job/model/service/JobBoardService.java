@@ -3,8 +3,9 @@ package com.kh.dc.job.model.service;
 import java.util.List;
 import java.util.Map;
 
-import com.kh.dc.job.model.vo.JobBoard;
+import org.springframework.stereotype.Service;
 
+import com.kh.dc.job.model.vo.JobBoard;
 
 public interface JobBoardService {
 	static int Board_SERVICE_ERROR = 0;
@@ -14,15 +15,12 @@ public interface JobBoardService {
 
 	int selectJobBoardTotalContents();
 	
-	int insertJobBoard(JobBoard jobBoard, String attachedFile);
+	int insertJobBoard(JobBoard jobBoard);
 	
-	JobBoard selectOneJobBoard(int boardNo);
+	JobBoard selectOneJobBoard(int no);
 	
-	String selectAttachedFile(int boardNo);
+	int updateJobBoard(JobBoard jobBoard);
 	
-	int updateJobBoard(JobBoard jobBoard, String attachedFile);
+	int deleteJobBoard(int no);
 	
-	int deleteJobBoard(int boardNo);
-	
-	int deleteJobFile();
 }

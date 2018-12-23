@@ -36,15 +36,9 @@ public class JobBoardDaoImpl implements JobBoardDao {
 	}
 
 	@Override
-	public JobBoard selectOneJobBoard(int boardNo) {
+	public JobBoard selectOneJobBoard(int no) {
 		// 
-		return sqlSession.selectOne("jobBoard.selectOneJobBoard", boardNo);
-	}
-
-	@Override
-	public String selectAttachedFile(int boardNo) {
-		// 
-		return sqlSession.selectOne("jobBoard.selectAttachedFile");
+		return sqlSession.selectOne("jobBoard.selectOneJobBoard", no);
 	}
 
 	@Override
@@ -52,18 +46,11 @@ public class JobBoardDaoImpl implements JobBoardDao {
 		// 
 		return sqlSession.update("jobBoard.updateJobBoard", jobBoard);
 	}
-	
 
 	@Override
-	public int deleteJobBoard(int boardNo) {
+	public int deleteJobBoard(int no) {
 		// 
-		return sqlSession.update("jobBoard.deleteJobBoard", boardNo);
-	}
-
-	@Override
-	public int deleteJobFile() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("jobBoard.deleteJobBoard", no);
 	}
 
 }

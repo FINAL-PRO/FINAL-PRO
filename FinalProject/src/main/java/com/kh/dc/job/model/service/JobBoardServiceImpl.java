@@ -33,7 +33,7 @@ public class JobBoardServiceImpl implements JobBoardService {
 	}
 
 	@Override
-	public int insertJobBoard(JobBoard jobBoard, String attachedFile) {
+	public int insertJobBoard(JobBoard jobBoard) {
 		// 
 		int result = 0;
 		int boardNo = 0;
@@ -48,9 +48,6 @@ public class JobBoardServiceImpl implements JobBoardService {
 			result = jobBoardDao.insertJobBoard(jobBoard);
 			if(result == Board_SERVICE_ERROR) throw new BoardException();
 			
-			
-			
-			
 		} catch(Exception e) {
 			logger.info("게시물등록 불가");
 		}
@@ -59,23 +56,15 @@ public class JobBoardServiceImpl implements JobBoardService {
 	}
 
 	@Override
-	public JobBoard selectOneJobBoard(int boardNo) {
+	public JobBoard selectOneJobBoard(int no) {
 		// 
-		return jobBoardDao.selectOneJobBoard(boardNo);
+		return jobBoardDao.selectOneJobBoard(no);
 	}
 
 	@Override
-	public String selectAttachedFile(int boardNo) {
-		// 
-		return jobBoardDao.selectAttachedFile(boardNo);
-	}
-
-	@Override
-	public int updateJobBoard(JobBoard jobBoard, String attachedFile) {
+	public int updateJobBoard(JobBoard jobBoard) {
 		// 
 		int result = 0;
-	
-		String originFile = jobBoardDao.selectAttachedFile(jobBoard.getBoardNo());
 		
 		try {
 			result = jobBoardDao.updateJobBoard(jobBoard);
@@ -88,24 +77,13 @@ public class JobBoardServiceImpl implements JobBoardService {
 	}
 
 	@Override
-	public int deleteJobBoard(int boardNo) {
+	public int deleteJobBoard(int no) {
 		// 
-		int result = jobBoardDao.deleteJobBoard(boardNo);
-		
-		if(result > Board_SERVICE_ERROR && jobBoardDao.selectAttachedFile(boardNo) != null)
-			result = jobBoardDao.deleteJobFile(boardNo);
-		else if(result > Board_SERVICE_ERROR) result = Board_SERVICE_COMPLETE;
-		else throw new BoardException("게시글 삭제 실패!");
+		int result = jobBoardDao.deleteJobBoard(no);
 		
 		if(result < Board_SERVICE_COMPLETE) throw new BoardException("게시글 삭제 실패!");
 		
 		return result;
-	}
-
-	@Override
-	public int deleteJobFile() {
-		// TODO Auto-generated method stub
-		return jobBoardDao.deleteJobFile();
 	}
 
 }

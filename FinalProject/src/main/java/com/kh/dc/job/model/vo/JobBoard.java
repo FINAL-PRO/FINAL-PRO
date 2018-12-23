@@ -1,6 +1,6 @@
 package com.kh.dc.job.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 import com.kh.dc.common.vo.Board;
 
@@ -21,14 +21,14 @@ public class JobBoard extends Board {
 	private int boardNo;
 	private int companyNo;
 	private String jobType;
-	private String salaryType;
+	private String salType;
 	private String status;
 	
 	public JobBoard() {}
 
 	public JobBoard(int no, String type, int salary, Date startdate, Date enddate, Date startJob, Date endJob,
-			Date startTime, Date endTime, String location, int boardNo, int companyNo, String jobType,
-			String salaryType, String status) {
+			Date startTime, Date endTime, String location, int boardNo, int companyNo, String jobType, String salType,
+			String status) {
 		super();
 		this.no = no;
 		this.type = type;
@@ -43,7 +43,7 @@ public class JobBoard extends Board {
 		this.boardNo = boardNo;
 		this.companyNo = companyNo;
 		this.jobType = jobType;
-		this.salaryType = salaryType;
+		this.salType = salType;
 		this.status = status;
 	}
 
@@ -151,12 +151,12 @@ public class JobBoard extends Board {
 		this.jobType = jobType;
 	}
 
-	public String getSalaryType() {
-		return salaryType;
+	public String getSalType() {
+		return salType;
 	}
 
-	public void setSalaryType(String salaryType) {
-		this.salaryType = salaryType;
+	public void setSalType(String salType) {
+		this.salType = salType;
 	}
 
 	public String getStatus() {
@@ -176,7 +176,7 @@ public class JobBoard extends Board {
 		return "JobBoard [no=" + no + ", type=" + type + ", salary=" + salary + ", startdate=" + startdate
 				+ ", enddate=" + enddate + ", startJob=" + startJob + ", endJob=" + endJob + ", startTime=" + startTime
 				+ ", endTime=" + endTime + ", location=" + location + ", boardNo=" + boardNo + ", companyNo="
-				+ companyNo + ", jobType=" + jobType + ", salaryType=" + salaryType + ", status=" + status + super.toString() +"]";
+				+ companyNo + ", jobType=" + jobType + ", salType=" + salType + ", status=" + status + super.toString() +"]";
 	}
 
 	
