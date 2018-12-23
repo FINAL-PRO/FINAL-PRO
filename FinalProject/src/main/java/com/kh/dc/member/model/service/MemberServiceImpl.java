@@ -52,4 +52,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectLocationList();
 	}
 
+	@Override
+	public Member selectOneNickName(String nickName) {
+		return memberDao.selectOneNickName(nickName);
+	}
+
+	
+
 }

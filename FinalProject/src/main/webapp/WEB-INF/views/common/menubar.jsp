@@ -136,7 +136,7 @@
 				dataType: "json",
 				success : function(data){
 						alert(data.msg);
-						location.reload();			
+						location.reload();	
 				}, error : function(jqxhr, textStatus, errorThrown){
 	                console.log("ajax 처리 실패");
 	                //에러로그
