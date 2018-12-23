@@ -8,8 +8,8 @@
 	
 	<select id="selectOne" parameterType="_int" resultType="region">
 		SELECT *
-		FROM DC_BOARD_TB, DC_LIKE_TB 
-		WHERE DC_BOARD_TB.NO = DC_LIKE_TB.BOARDNO AND NO = #{no}
+		FROM DC_BOARD_TB 
+		WHERE NO = #{no}
 	</select>
 	
 	<insert id="insertRegion" parameterType="region">
@@ -24,15 +24,13 @@
 		DELETE FROM DC_BOARD_TB WHERE NO = #{no}
 	</delete>
 	
-	
 	<insert id="regionLikeCount" parameterType="like">
 		INSERT INTO DC_LIKE_TB VALUES(SEQ_LIKE.NEXTVAL, SYSDATE, #{no}, 1)
 	</insert>
 	
-	<select id="regionLikecountView" parameterType="like">
+	<select id="regionLikeCountView" resultType="_int">
 		SELECT COUNT(*)
-		FROM DC_BOARD_TB , DC_LIKE_TB 
-		WHERE DC_BOARD_TB.NO = DC_LIKE_TB.BOARDNO AND DC_BOARD_TB.NO = #{no}
+        FROM DC_LIKE_TB WHERE BOARDNO = #{no}
 	</select>
 	
 	
