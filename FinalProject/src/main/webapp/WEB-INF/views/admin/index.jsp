@@ -13,9 +13,10 @@
 <body>
 	<div id="container">
 		<c:import url="../common/menubar.jsp"/>
-		<section id="content">
-			<h1>어드민 인덱스</h1>
-			
+		<div class="wrap_inner">
+			<main id="container">
+				<section>
+				<h1>어드민 인덱스</h1>
 			<h2>
 				<a href="${pageContext.request.contextPath}/admin/member/list.do">멤버 리스트</a>
 			</h2>
@@ -27,7 +28,9 @@
 			<h2>
 				<a href="${pageContext.request.contextPath}/admin/company/list.do">업체 리스트</a>
 			</h2>
-		</section>
+				</section>
+			</main>
+		</div>
 		<c:import url="../common/footer.jsp"/>
 	</div>
 </body>

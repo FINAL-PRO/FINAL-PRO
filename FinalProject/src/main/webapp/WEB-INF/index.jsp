@@ -13,14 +13,21 @@
 <body>
 	<%-- <input type="text" name="msg" value="${model.msg}"/> --%>
 	<c:import url="views/common/menubar.jsp"/>
-	<div id="container" class="" style="width:2000px">
-		<section id="content">
-			<div class="section-left">
+	<div class="wrap_inner">
+		<main id="container">
+			<section>
+				<div class="section-left">
 				<a href="test/select.do">select test</a>
 				<h1>section-left</h1>
 			</div>
 			<div class="section-center">
-				section-center
+				<table>
+					<c:forEach begin="1" end="10">
+						<tr>
+							<td>dtdt</td>
+						</tr>
+					</c:forEach>
+				</table>
 			</div>
 			<div class="section-right">
 				<h1>section-right</h1>
@@ -37,10 +44,10 @@
 					item4
 				</div>
 			</div>
-			
-		</section>
-		<c:import url="views/common/footer.jsp"/>
+			</section>
+		</main>
 	</div>
+	<c:import url="views/common/footer.jsp"/>
 	
 </body>
 </html>
