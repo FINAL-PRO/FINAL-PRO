@@ -20,12 +20,12 @@ public class Member implements java.io.Serializable{
 		super();
 	}
 
-	public Member(String email, String nickName, String password, String address, String name) {
+	public Member(String email, String nickName, String password, int locationNo, String name) {
 		super();
 		this.email = email;
 		this.nickName = nickName;
 		this.password = password;
-		this.address = address;
+		this.locationNo = locationNo;
 		this.name = name;
 	}
 

@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.dc.admin.company.model.dao.AdminCompanyDao;
-import com.kh.dc.admin.company.model.vo.Company;
+import com.kh.dc.common.vo.Code;
+import com.kh.dc.common.vo.Company;
 
 @Service
 public class AdminCompanyServiceImpl implements AdminCompanyService {
@@ -15,12 +16,17 @@ public class AdminCompanyServiceImpl implements AdminCompanyService {
 	AdminCompanyDao companyDao;
 
 	@Override
-	public List<Company> selectCompanyList() {
-		return companyDao.selectCompanyList();
+	public List<Company> selectCompanyList(String companyType) {
+		return companyDao.selectCompanyList(companyType);
 	}
 
 	@Override
 	public Company selectCompanyOne(int companyNo) {
 		return companyDao.selectCompanyOne(companyNo);
+	}
+
+	@Override
+	public List<Code> selectCompanyTypeList() {
+		return companyDao.selectCompanyTypeList();
 	}
 }

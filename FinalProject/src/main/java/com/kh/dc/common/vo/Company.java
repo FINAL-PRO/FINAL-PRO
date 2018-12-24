@@ -1,4 +1,4 @@
-package com.kh.dc.admin.company.model.vo;
+package com.kh.dc.common.vo;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -81,12 +81,12 @@
 		        <!-- 로그인,회원가입 버튼 -->
 		        <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal">로그인</button>
 		        &nbsp;
-		        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='${pageContext.request.contextPath}/'">회원가입</button>
+		        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberEnroll.do'">회원가입</button>
 		    </c:if>
 		    <c:if test="${!empty member}">
-		        <span><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}" title="내정보보기">${member.userName}</a> 님, 안녕하세요</span>
+		        <span><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.no}" title="내정보보기">${member.nickName}</a> 님, 안녕하세요</span>
 		        &nbsp;
-		        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='${pageContext.request.contextPath}/'">로그아웃</button>
+		        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">로그아웃</button>
 		    </c:if>
 		 </div>
 	</nav>
@@ -103,14 +103,15 @@
 	      </div>
           <!--로그인폼 -->
           <!-- https://getbootstrap.com/docs/4.1/components/forms/#overview -->
-          <form action="${pageContext.request.contextPath}/" method="post">
+          <form action="" method="post">
 	      <div class="modal-body">
-			  <input type="text" class="form-control" name="userId" placeholder="아이디" required>
+			  <input type="email" class="form-control" id="loginEmail" name="email" placeholder="아이디" required>
 			    <br />
-			    <input type="password" class="form-control" name="password" placeholder="비밀번호" required>
+			    <input type="password" class="form-control" id="loginPassword"  name="password" placeholder="비밀번호" required>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="submit" class="btn btn-outline-success">로그인</button>
+	      	<a href="${pageContext.request.contextPath}/member/memberSearch.do" class="search">아이디/비밀번호 찾기</a>
+	        <button type="button" class="btn btn-outline-success" id="submit" >로그인</button>
 	        <button type="button" class="btn btn-outline-success" data-dismiss="modal">취소</button>
 	      </div>
 		</form>
@@ -118,4 +119,32 @@
 	  </div>
 	</div>
 	<!-- Modal 끝-->
+	<script>
+	
+		$("#submit").on("click", function(){
+			
+			var email = $("#loginEmail").val();
+			var password = $("#loginPassword").val();
+			console.log(email);
+			
+			$.ajax({
+				type: "POST",
+				url : "${pageContext.request.contextPath}/member/memberLogin.do",
+				data: {email : email,
+						password: password},
+				dataType: "json",
+				success : function(data){
+						alert(data.msg);
+						location.reload();	
+				}, error : function(jqxhr, textStatus, errorThrown){
+	                console.log("ajax 처리 실패");
+	                //에러로그
+	                console.log(jqxhr);
+	                console.log(textStatus);
+	                console.log(errorThrown);
+	            }		
+			});
+		});
+			
+	</script>
 </header>

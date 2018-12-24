@@ -11,6 +11,7 @@
 	<c:import url="views/common/header.jsp"/>
 </head>
 <body>
+	<%-- <input type="text" name="msg" value="${model.msg}"/> --%>
 	<c:import url="views/common/menubar.jsp"/>
 	<div id="container" class="" style="width:2000px">
 		<section id="content">
@@ -40,5 +41,6 @@
 		</section>
 		<c:import url="views/common/footer.jsp"/>
 	</div>
+	
 </body>
 </html>

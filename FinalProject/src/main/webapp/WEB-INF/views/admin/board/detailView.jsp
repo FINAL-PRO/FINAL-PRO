@@ -14,7 +14,24 @@
 	<div id="container">
 		<c:import url="../../common/menubar.jsp"/>
 		<section id="content">
-			<h1>sale / group / list</h1>
+			<h1>어드민 게시글 상세보기</h1>
+			<div>
+				<div class="row table-row">
+					<div class="col column">번호</div>
+					<div class="col column">제목</div>
+					<div class="col column">내용</div>
+				</div>
+			
+				<div class="row table-row">
+					<div class="col column">${board.no}</div>
+					<div class="col column">${board.title}</div>
+					<div class="col column">${board.content}</div>
+				</div>
+				<div class="table" style="background:red">
+					
+					
+				</div>
+			</div>
 		</section>
 		<c:import url="../../common/footer.jsp"/>
 	</div>

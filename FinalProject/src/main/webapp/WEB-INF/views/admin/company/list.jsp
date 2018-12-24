@@ -15,6 +15,11 @@
 		<c:import url="../../common/menubar.jsp"/>
 		<section id="content">
 			<h1>어드민 업체 리스트</h1>
+				<select id="companyTypeNo">
+					<c:forEach items="${companyTypeList}" var="company">
+						<option value="${company.id}" <c:if test="${company.id eq companyType}">selected</c:if>>${company.value}</option>
+					</c:forEach>					
+				</select>
 			<div>
 				<div class="row table-row">
 					<div class="col column">번호</div>
@@ -37,5 +42,10 @@
 		</section>
 		<c:import url="../../common/footer.jsp"/>
 	</div>
+	<script>
+		$("#companyTypeNo").on('change', function(){
+			location.href= "${pageContext.request.contextPath}/admin/company/list.do?companyType="+ $("#companyTypeNo").val();
+		});
+	</script>
 </body>
 </html>

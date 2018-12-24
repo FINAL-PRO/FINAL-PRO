@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="group_mapper">
+	
+	<resultMap id="resultGroup" type="group">
+		<id property="no" column="no" />
+		<result property="boardNo" column="boardno" />
+		<result property="goodsName" column="goodsname" />
+		<result property="price" column="price" />
+		<result property="endDate" column="enddate" />
+		<result property="deposit" column="deposit" />
+		<result property="maxCount" column="maxcount" />
+		<result property="currentCount" column="currentcount" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="goodsCategory" column="goodscategory" />
+		<result property="memberName"  column="member" />
+		<result property="status" column="gstatus" />
+		<result property="dealType" column="dealtype" />
+		<result property="writeDate" column="writedate" />
+		<result property="viewCount" column="viewcount" />
+		<result property="thumbnail" column="thumbnail"/>
+	</resultMap>
+	
+	<select id="selectGroupList" resultMap="resultGroup">
+		SELECT * FROM DC_BOARD_GROUP_VIEW WHERE STATUS='STATUS001'
+	</select>
+	
+	<select id="selectGroupTotalContents" resultType="_int">
+		SELECT COUNT(*) FROM DC_BOARD_GROUP_VIEW WHERE STATUS='STATUS001'
+	</select>
+	
+	<select id="selectOneGroup" parameterType="_int" resultMap="resultGroup">
+		SELECT * FROM DC_BOARD_GROUP_VIEW WHERE STATUS='STATUS001' AND BOARDNO = #{boardNo}
+	</select>
+
+
+
+
+	
+	
+</mapper>
