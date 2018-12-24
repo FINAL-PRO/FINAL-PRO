@@ -120,15 +120,18 @@
 				<div id="container2">
                 <div class="articlelist" style="border: solid 0.5px red">
 				<form name="boardFrm" method="post">
-					<input type="text" id="bno" name="bno" value="${board.no}" readonly="readonly"/>
+					<input type="hidden" id="bno" name="bno" value="${board.no}" readonly="readonly"/>
 				</form>	
                     <div class="group" style="border: solid 0.5px blue">                     
                        	<p class="title">${board.title}</p>
                         <div style="border: solid 0.5px gray"></div>
                         <p class="profile">
                             <img class="picture" src="https://cf-epi.campuspick.com/0.png">
-	                        <span class="nickname">${member.nickName}</span>
-                            <p class="time">${board.writeDate}</p>
+	                        <span class="nickname">${board.memberName}</span>
+	                        <span class="count">조회수: ${board.viewCount}</span>
+                            <p class="time">
+			                	<fmt:formatDate value="${board.writeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+			                </p>
                         </p>
                         <p class="text">${board.content}</p>
                         <div style="border: solid 0.5px lightgray"></div>
@@ -138,10 +141,9 @@
                             <button class="btn_report">신고하기</button>
                             <button class="btn_like">좋아요</button>
                             <span class="likecount">: 1</span>
-                            <span class="commentcount">댓글: 0</span>
+                            <span class="commentcount">댓글: ${totalComment}</span>
                         </div>
                         <script>
-                           	
                        		$("#btn_board_edit").click(function(){
                        			boardFrm.action="${pageContext.request.contextPath}/community/free/freeUpdateForm.do?no=${board.no}"
                        			boardFrm.submit();
@@ -158,57 +160,74 @@
                     <div style="border: solid 0.5px gray"></div>
                     <div class="commentlist" style="border: solid 0.5px green">
                         <div class="commentwriteboard">
-                            <span class="nickname">접속한닉네임</span><br />
+                            <span class="nickname">${board.memberName}</span><br />
                             <div class="comment_textarea" style="border: solid 0.5px pink">
-	                            <textarea class="commentwrite"></textarea><br />                            
+                            	<form id="commentFrm" action="${pageContext.request.contextPath}/community/free/commentwrite.do?no=${board.no}" method="post">
+	                            <textarea name="content" class="commentwrite"></textarea><br />
+	                            <input type="text" id="mno" name="mno" value="${member.no}" readonly="readonly"/>
+	                            <input type="text" id="bno" name="bno" value="${board.no}" readonly="readonly"/>
+	                            </form>                            
                             </div>
                             <div class="btn_comment">
-                                <button class="btn_comment_wirte">댓글쓰기</button>
+                                <button class="btn_comment_wirte" id="btn_comment_wirte">댓글쓰기</button>
                             </div>
+                            <script>
+	                            $("#btn_comment_wirte").click(function(){
+	                      			alert("작성");
+	                      			var c = $("commentwrite").val();
+	                      			commentFrm.action="${pageContext.request.contextPath}/comment/commentWrite.do?no=${comment.no}"
+	                      			/* boardFrm.action="${pageContext.request.contextPath}/community/free/freeView?no=${no}" */
+	                      			commentFrm.submit();
+	                      		});
+                            </script>
                         <p class="both" style="clear:both;">&nbsp;</p>
                         </div>
                         <div style="border: solid 0.5px gray"></div>
-                        <div class="commentgroup">
+                       	<c:forEach items="${clist}" var="c">
+                        <div class="commentgroup" style="border: 1px solid blue">
                             <p class="profile">
                                 <img class="picture" src="https://cf-epi.campuspick.com/0.png">
-                                <span class="nickname">댓글닉네임</span>
-                                <time>12/13 12:51</time>
+                                <span class="nickname">${c.memberName}</span>
+                                <p class="time">
+				                	<fmt:formatDate value="${c.writeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+				                </p>
                             </p>
-                            <p class="comment">댓글내용입니다.</p>
+                            <p class="comment">${c.content}</p>
                             <div class="btn_comment">
                                 <button class="btn_comment_edit" id="btn_comment_edit">수정</button>
-                                <button class="btn_comment_delete">삭제</button>
-                                <button class="btn_comment_wirte">답글쓰기</button>
-                            </div>
-                            <script>
-                            	$(document).ready(function(){
-                            		$("#btn_comment_edit").click(function(){
-                            			alert("수정");
-                            			document.boardFrm.action="${pageContext.request.contextPath}/community/free/freeUpdateForm.do"
-                            			document.boardFrm.submit();
-                            		});
-                            	});
-                            </script>
-                            <p class="both" style="clear:both;">&nbsp;</p>
-                            <br>
-                            <div style="border: solid 0.5px lightgray"></div>
-                            <br />
-                            <p class="profile">
-                                <img class="picture" src="https://cf-epi.campuspick.com/0.png">
-                                <span class="nickname">댓글닉네임</span>
-                                <time>12/13 12:51</time>
-                            </p>
-                            <p class="comment">댓글내용입니다.</p>
-                            <div class="btn_comment">
-                                <button class="btn_comment_edit">수정</button>
-                                <button class="btn_comment_delete">삭제</button>
-                                <button class="btn_comment_wirte">답글쓰기</button>
+                                <button class="btn_comment_delete" id="btn_comment_delete">삭제</button>
+                                <button class="btn_comment_rewirte" id="btn_comment_wirte">답글쓰기</button>
                             </div>
                             <p class="both" style="clear:both;">&nbsp;</p>
-                            <br>
                         </div>
+                           </c:forEach>
+                            <script>
+                          		$("#btn_comment_edit").click(function(){
+                          			alert("수정");
+                          			boardFrm.action="${pageContext.request.contextPath}/comment/commentUpdateComment.do"
+                          			boardFrm.submit();
+                          		});
+                          		
+                          		$("#btn_comment_delete").click(function(){
+                          			alert("삭제");
+                          			boardFrm.action="${pageContext.request.contextPath}/comment/commentDelete.do?no=${comment.no}"
+                          			boardFrm.submit();
+                          		});
+                          		
+                          		$("#btn_comment_rewirte").click(function(){
+                          			alert("답글쓰기");
+                          			boardFrm.action="${pageContext.request.contextPath}/community/free/freeReWriteComment.do"
+                          			boardFrm.submit();
+                          		});
+                            </script>
                     </div>
-                    
+                    <button class="btn_back" id="btn_back">Back</button>
+                    <script>
+	                    $("#btn_back").click(function(){
+	                    	boardFrm.action="${pageContext.request.contextPath}/community/free/list.do"
+	                    	boardFrm.submit();
+	                    });
+                    </script>
                 </div>
             </div>
 			</div>

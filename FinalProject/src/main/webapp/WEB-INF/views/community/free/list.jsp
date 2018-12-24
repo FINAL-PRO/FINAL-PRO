@@ -24,6 +24,12 @@
     #container2 .article > p.profile > span.nickname {
         display: inline-block; max-width: 60%; line-height: 20px; color: #292929; font-size: 14px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
+    #container2 .article > p.profile > span.title {
+        display: inline-block; max-width: 60%; line-height: 20px; color: #292929; font-size: 14px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    #container2 .article > p.profile > span.count {
+        display: inline-block; max-width: 60%; line-height: 20px; color: #292929; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
     
     .time {
         float: right; display: inline-block; line-height: 20px; color: #a6a6a6; font-size: 12px;
@@ -116,13 +122,15 @@
 					                	<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 					                </p>
 				                    <p class="profile">
+				                        <span class="title">${b.title}</span>
 				                        <img class="picture" src="https://cf-epi.campuspick.com/0.png"/>
-				                        <span class="nickname">${b.title}</span>
+				                        <span class="nickname">${b.memberName}</span>
+				                        <span class="count">조회수: ${b.viewCount}</span>
 				                    </p>
 				                    <span class="content">${b.content}</span>				              
 				                    <p class="status">
 				                        <span class="votecount">좋아요: 1</span>
-				                        <span class="commentcount">댓글: 0</span>
+				                        <span class="commentcount">댓글: ${totalComment}</span>
 				                    </p>
 				                    <p class="attach"><span class="attachcount">이미지</span></p>
 				                </a>
