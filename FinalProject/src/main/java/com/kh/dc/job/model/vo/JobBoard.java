@@ -24,11 +24,15 @@ public class JobBoard extends Board {
 	private String salType;
 	private String status;
 	
+	
+	private String nickName;
+	private int dday;
+	
 	public JobBoard() {}
 
 	public JobBoard(int no, String type, int salary, Date startdate, Date enddate, Date startJob, Date endJob,
 			Date startTime, Date endTime, String location, int boardNo, int companyNo, String jobType, String salType,
-			String status) {
+			String status, String nickName, int dday) {
 		super();
 		this.no = no;
 		this.type = type;
@@ -45,6 +49,24 @@ public class JobBoard extends Board {
 		this.jobType = jobType;
 		this.salType = salType;
 		this.status = status;
+		this.nickName = nickName;
+		this.dday = dday;
+	}
+
+	public int getDday() {
+		return dday;
+	}
+
+	public void setDday(int dday) {
+		this.dday = dday;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	public int getNo() {
@@ -176,7 +198,7 @@ public class JobBoard extends Board {
 		return "JobBoard [no=" + no + ", type=" + type + ", salary=" + salary + ", startdate=" + startdate
 				+ ", enddate=" + enddate + ", startJob=" + startJob + ", endJob=" + endJob + ", startTime=" + startTime
 				+ ", endTime=" + endTime + ", location=" + location + ", boardNo=" + boardNo + ", companyNo="
-				+ companyNo + ", jobType=" + jobType + ", salType=" + salType + ", status=" + status + super.toString() +"]";
+				+ companyNo + ", jobType=" + jobType + ", salType=" + salType + ", status=" + status + ", nickName" + nickName + ", dday" + dday  +super.toString() +"]";
 	}
 
 	

@@ -20,37 +20,37 @@ public class JobBoardDaoImpl implements JobBoardDao {
 	public List<Map<String, String>> selectJobBoardList(int cPage, int numPerPage) {
 		// 
 		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
-		return sqlSession.selectList("jobBoard.selectJobBoardList", null, rowBounds);
+		return sqlSession.selectList("jobBoard_mapper.selectJobBoardList", null, rowBounds);
 	}
 
 	@Override
 	public int selectJobBoardTotalContents() {
 		// 
-		return sqlSession.selectOne("jobBoard.selectJobBoardTotalContents");
+		return sqlSession.selectOne("jobBoard_mapper.selectJobBoardTotalContents");
 	}
 
 	@Override
 	public int insertJobBoard(JobBoard jobBoard) {
 		// 
-		return sqlSession.insert("jobBoard.insertJobBoard", jobBoard);
+		return sqlSession.insert("jobBoard_mapper.insertJobBoard", jobBoard);
 	}
 
 	@Override
 	public JobBoard selectOneJobBoard(int no) {
 		// 
-		return sqlSession.selectOne("jobBoard.selectOneJobBoard", no);
+		return sqlSession.selectOne("jobBoard_mapper.selectOneJobBoard", no);
 	}
 
 	@Override
 	public int updateJobBoard(JobBoard jobBoard) {
 		// 
-		return sqlSession.update("jobBoard.updateJobBoard", jobBoard);
+		return sqlSession.update("jobBoard_mapper.updateJobBoard", jobBoard);
 	}
 
 	@Override
 	public int deleteJobBoard(int no) {
 		// 
-		return sqlSession.update("jobBoard.deleteJobBoard", no);
+		return sqlSession.update("jobBoard_mapper.deleteJobBoard", no);
 	}
 
 }

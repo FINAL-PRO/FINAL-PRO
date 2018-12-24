@@ -18,5 +18,5 @@ public interface JobBoardDao {
 	int updateJobBoard(JobBoard jobBoard);
 	
 	int deleteJobBoard(int no);
-	
+
 }

@@ -21,9 +21,12 @@ public class JobBoardController {
 	@RequestMapping("/job/jobBoard/jobBoardList.do")
 	public String jobBoardList(
 			@RequestParam(value="cPage", required=false, defaultValue="1")
-			int cPage, Model model) {
+			int cPage, 
+			//@RequestParam(value="nickName", required=false)
+			Model model) {
 		
-		int numPerPage = 20;
+		int numPerPage = 10;
+		
 		
 		ArrayList<Map<String, String>> list = 
 				new  ArrayList<Map<String, String>>(jobBoardService.selectJobBoardList(cPage, numPerPage));
@@ -37,6 +40,18 @@ public class JobBoardController {
 		.addAttribute("numPerPage", numPerPage)
 		.addAttribute("pageBar", pageBar);
 		
-		return "job/jobBoard/jobBoardlist";
+		return "job/jobBoard/jobBoardList";
+	}
+	
+	
+	@RequestMapping("job/jobBoard/jobBoardForm.do")
+	public void boardForm() {
+		
+	}
+	@RequestMapping("job/jobBoard/jobBoardDetail.do")
+	public String selectOneBoard(@RequestParam int no, Model model) {
+		model.addAttribute("jobBoard", jobBoardService.selectOneJobBoard(no));
+		
+		return "job/jobBoard/jobBoardDetail";
 	}
 }
