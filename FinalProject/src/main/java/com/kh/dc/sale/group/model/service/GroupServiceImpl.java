@@ -32,6 +32,12 @@ public class GroupServiceImpl implements GroupService {
 		
 		return groupDao.selectOneGroup(boardNo);
 	}
+
+	@Override
+	public int insertGroup(Group group) {
+		
+		return groupDao.insertGroup(group);
+	}
 	
 	
 

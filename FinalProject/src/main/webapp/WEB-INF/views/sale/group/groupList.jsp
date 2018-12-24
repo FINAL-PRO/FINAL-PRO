@@ -29,6 +29,12 @@
 			background-color: orange;
 		}
 	</style>
+	
+	<script>
+		function goGroupForm(){
+			location.href = "${pageContext.request.contextPath}/sale/group/groupForm.do";
+		}	
+	</script>
 </head>
 <body>
 
@@ -53,6 +59,8 @@
 			</c:forEach>
 
 			<c:out value="${pageBar}" escapeXml="false" />
+
+			<input type="button" value="글쓰기" onclick="goGroupForm();"/>
 
 		</section>
 		<c:import url="../../common/footer.jsp" />

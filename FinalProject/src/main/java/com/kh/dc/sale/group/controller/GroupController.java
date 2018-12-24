@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.dc.common.util.Utils;
 import com.kh.dc.sale.group.model.service.GroupService;
+import com.kh.dc.sale.group.model.vo.Group;
 
 @Controller
 public class GroupController {
@@ -48,6 +49,24 @@ public class GroupController {
 		model.addAttribute("group", groupService.selectOneGroup(boardNo));
 	
 		return "sale/group/groupView";
+	}
+	
+	@RequestMapping("sale/group/groupForm.do")
+	public String changeGroupForm() {
+	
+		return "sale/group/groupInsert";
+	}
+	
+	@RequestMapping("sale/group/groupFormEnd.do")
+	public String insertGroup(Group group,  Model model) {
+		
+		String loc = "";
+	
+		if(groupService.insertGroup(group) > 0) {
+			loc = "sale/group/groupView?boardNo="+group.getBoardNo();
+		}
+		
+		return loc;
 	}
 	
 	
