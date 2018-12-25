@@ -85,7 +85,7 @@
 		        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberEnroll.do'">회원가입</button>
 		    </c:if>
 		    <c:if test="${!empty member}">
-		        <span><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.no}" title="내정보보기">${member.nickName}</a> 님, 안녕하세요</span>
+		        <span><a href="${pageContext.request.contextPath}/member/memberView.do?no=${member.no}" title="내정보보기">${member.nickName}</a> 님, 안녕하세요</span>
 		        &nbsp;
 		        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">로그아웃</button>
 		    </c:if>
