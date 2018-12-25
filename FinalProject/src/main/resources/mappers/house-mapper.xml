@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="house_mapper">
+
+	<select id="selectList" resultType="house">
+	SELECT *
+	FROM DC_BOARD_TB, DC_BOARD_HOUSE_TB
+	WHERE DC_BOARD_TB.NO=DC_BOARD_HOUSE_TB.BOARDNO
+	ORDER BY 1 DESC
+	</select>
+	
+	<select id="selectOne" parameterType="_int" resultType="house">		
+	SELECT *
+	FROM DC_BOARD_TB, DC_BOARD_HOUSE_TB
+	WHERE DC_BOARD_TB.NO=DC_BOARD_HOUSE_TB.BOARDNO AND DC_BOARD_TB.NO = #{no}
+	</select>
+	
+	<insert id="inserthouse" parameterType="house">	
+		INSERT INTO DC_BOARD_TB VALUES(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, 'BOARD005', 'STATUS001', #{memberNo}, NULL)
+		INSERT INTO DC_BOARD_HOUSE_TB VALUES(SEQ_BOARD_HOUSE.NEXTVAL, #{minprice}, #{maxprice}, #{area}, #{no}, #{hType}, #{delType})
+	</insert>
+	
+	<update id="updatehouse" parameterType="house">
+	 	UPDATE DC_BOARD_TB SET TITLE= #{title}, CONTENT = #{content}, WRITEDATE = SYSDATE WHERE NO= #{no}
+	</update>
+	
+	<delete id="deletehouse" parameterType="_int">
+		DELETE FROM DC_BOARD_TB WHERE NO = #{no}
+	</delete>
+	
+</mapper>

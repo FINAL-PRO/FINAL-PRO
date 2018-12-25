@@ -51,6 +51,7 @@
 			</div>
 			<div class="section-center">
 				<div class="board_area">
+				<form name="boardFrm" action="${pageContext.request.contextPath}/community/free/freeInsertFormEnd.do" method="post">
 	            <div>
 	                <b>글쓰기</b>
 	            </div>
@@ -58,42 +59,43 @@
 	                <br>
 	                <div class="tr-div">
 	                    <div class="td-div">제목</div>
-	                    <div class="td-div"><textarea name="title" rows="1" cols="105" style="resize: none;"></textarea></div>
+	                    <div class="td-div"><input type="text" class="form-control" name="title" id="title" required></div>
+	                    <input type="text" class="form-control" name="memberNo" required>
 	                </div>
 	                <div class="tr-div">
 	                    <div class="td-div">내용</div>
 	                    <div class="td-div">
-                            <div id="summernote" style="resize: none;"></div>
+                           <!--  <div id="summernote" style="resize: none;" name="content"></div> -->
+                            <textarea name="content" id="summernote" class="form-control" rows="20" cols="70" required></textarea>
                             <script>
                                 $(document).ready(function() {
                                     $('#summernote').summernote({
-                                        placeholder: 'Hello bootstrap 4',
-                                        tabsize: 2,
-                                        height: 500
+                                        height: 300,
+                                        lang: 'ko-KR'
                                     }); 
                                 });
                             </script>	                        
 	                    </div>
 	                </div>
 	                <div class="tr-div">
-	                    <div class="td-div"></div>
+	                <input type="submit" class="btn btn-outline-success" value="Save" >
+<!-- 	                    <div class="td-div"></div>
 	                    <div class="td-div">
 	                        <button class="btn btn-primary" onclick="save();">Save</button>
 	                        <button class="btn btn-primary" onclick="back();">Back</button> 
-	                    </div>
+	                    </div> -->
 	                </div>
 	            </div>
 	            <script>
 	                function save(){
-	                    $('#writeForm').attr('action', '${pageContext.request.contextPath}/community/free/list.do');
-	                    
-	                    $('#writeForm').submit();
-	                }
+	                	location.href="${pageContext.request.contextPath}/community/free/freeInsertFormEnd.do";
+	                } 
 	                
 	                function back(){
 	                    location.href="${pageContext.request.contextPath}/community/free/list.do";
 	                }
 	            </script>
+	            </form>
 	            </div>
 	        </div>
 			<div class="section-right">

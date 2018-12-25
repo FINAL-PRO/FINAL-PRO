@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 	<title> 부동산 글쓰기</title>
+	<c:import url="../../common/header.jsp"/>
+	
     <!-- include libraries(jQuery, bootstrap) -->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
@@ -15,19 +20,30 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 </head>
 <body>
-        <header></header>
-    
-        <div style="width: 800px; margin: auto; padding-top:200px;">
+        
+        
+    	<c:import url="../../common/menubar.jsp"/>
+    	<form id="insertFrm" method="post" action="${pageContext.request.contextPath}/info/house/insertHouse.do">
+        <div style="width: 800px; margin: auto; padding-top:20px;">
+			
+			<c:if test="${house.no != null }"> <h2> 글 수정 </h2></c:if>
+            <c:if test="${house.no == null }" ><h2>글쓰기</h2></c:if>
+            
+         
+            <input type="text" style="width: 800px; height: 30px;" value='<c:if test="${house.title != null }">${house.title }</c:if>'><br><br>
+            <div id="summernote">
+            <c:if test="${house.content != null }"> ${house.content}</c:if>
+            </div>
 
-            <h2>글쓰기</h2>
-            <div id="summernote"></div>
-
-            <button type="submit">확인</button>
+			
+            <button type="submit" id="<c:if test="${house.no !=null }">updateBt()</c:if><c:if test="${house.no == null }">insertBt();</c:if>">확인</button>
+            
+            
             <button type="reset">취소</button>
         </div>
+		</form>
 
-
-        <footer></footer>
+        <c:import url="../../common/footer.jsp"/>
 
 
 

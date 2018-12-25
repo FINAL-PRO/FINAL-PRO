@@ -91,7 +91,7 @@ public class MemberController {
 	@ResponseBody
 	public Map<String,Object> memberLogin(@RequestParam String email, @RequestParam String password, 
 			Model model) {
-		Map<String, Object> hmap = new HashMap<>();
+		Map<String, Object> hmap = new HashMap<String, Object>();
 		Member m = memberService.selectOne(email);
 		System.out.println("member : " +  m);
 		

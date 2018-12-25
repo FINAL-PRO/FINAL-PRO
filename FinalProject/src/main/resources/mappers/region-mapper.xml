@@ -7,11 +7,13 @@
 	</select>
 	
 	<select id="selectOne" parameterType="_int" resultType="region">
-		SELECT*FROM DC_BOARD_TB WHERE NO = #{no}
+		SELECT *
+		FROM DC_BOARD_TB 
+		WHERE NO = #{no}
 	</select>
 	
 	<insert id="insertRegion" parameterType="region">
-		INSERT INTO DC_BOARD_TB VALUES(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 1, 'BOARD007','STATUS001', #{memberNo},NULL)
+		INSERT INTO DC_BOARD_TB VALUES(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 1, 'BOARD007','STATUS001', 1,NULL)
 	</insert>
 	
 	<update id="updateRegion" parameterType="region">
@@ -21,5 +23,19 @@
 	<delete id="deleteRegion" parameterType="_int">
 		DELETE FROM DC_BOARD_TB WHERE NO = #{no}
 	</delete>
+	
+	<insert id="regionLikeCount" parameterType="like">
+		INSERT INTO DC_LIKE_TB VALUES(SEQ_LIKE.NEXTVAL, SYSDATE, #{no}, 1)
+	</insert>
+	
+	<select id="regionLikeCountView" resultType="_int">
+		SELECT COUNT(*)
+        FROM DC_LIKE_TB WHERE BOARDNO = #{no}
+	</select>
+	
+	
+	<update id="updateCountRegion" parameterType="region">
+		UPDATE DC_BOARD_TB SET VIEWCOUNT = VIEWCOUNT + 1 WHERE NO = #{no}
+	</update>
 	
 </mapper>

@@ -50,4 +50,22 @@ public class RegionserviceImpl implements RegionService {
 		return rd.reInsertRegion(rre);
 	}
 
+	@Override
+	public int updateCountRegion(int no) {
+		System.out.println("조회수 증가 svs : " + no);
+		return rd.updateCountRegion(no);
+	}
+
+	@Override
+	public int regionLikeCount(int no) {
+		System.out.println("좋아요한 글번호 : " + no );
+	
+		return rd.regionLikeCount(no);
+	}
+
+	@Override
+	public int regionLikeCountView(int no) {
+		return rd.regionLikeCountView(no);
+	}
+
 }

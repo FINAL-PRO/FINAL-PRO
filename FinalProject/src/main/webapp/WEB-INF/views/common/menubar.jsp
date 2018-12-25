@@ -53,11 +53,10 @@
 		      </li>
 		      <li class="nav-item dropdown">
 		      	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		      	구인 / 구직
+		      	구인구직
 		      	</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/job/offer/list.do">구인</a>
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/job/hunt/list.do">구직</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/job/jobBoard/jobBoardList.do">구인구직</a>
 				</div>
 		      
 		      </li>
