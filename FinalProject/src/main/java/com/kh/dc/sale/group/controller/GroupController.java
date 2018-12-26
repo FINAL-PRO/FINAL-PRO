@@ -1,7 +1,10 @@
 package com.kh.dc.sale.group.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.dc.common.util.Utils;
 import com.kh.dc.sale.group.model.service.GroupService;
+import com.kh.dc.sale.group.model.vo.Group;
 
 @Controller
 public class GroupController {
@@ -48,6 +52,24 @@ public class GroupController {
 		model.addAttribute("group", groupService.selectOneGroup(boardNo));
 	
 		return "sale/group/groupView";
+	}
+	
+	@RequestMapping("sale/group/groupForm.do")
+	public String changeGroupForm() {
+	
+		return "sale/group/groupInsert";
+	}
+	
+	@RequestMapping("sale/group/groupFormEnd.do")
+	public String insertGroup(Group group,  Model model) {
+		
+		String loc = "sale/group/groupView";
+	
+		if(groupService.insertGroup(group) > 0) {
+			model.addAttribute("group", groupService.selectOneGroup(group.getBoardNo()));
+		}
+				
+		return loc;
 	}
 	
 	

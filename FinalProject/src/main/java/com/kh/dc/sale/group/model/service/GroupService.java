@@ -13,4 +13,6 @@ public interface GroupService {
 	
 	Group selectOneGroup(int boardNo);
 	
+	int insertGroup(Group group);
+	
 }
