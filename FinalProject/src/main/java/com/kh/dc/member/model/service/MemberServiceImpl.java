@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.dc.common.vo.Code;
+import com.kh.dc.common.vo.Location;
 import com.kh.dc.member.model.dao.MemberDao;
-import com.kh.dc.member.model.vo.Location;
 import com.kh.dc.member.model.vo.Member;
 
 @Service
@@ -31,8 +32,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int deleteMember(String email) {
-		return memberDao.deleteMember(email);
+	public int deleteMember(int no) {
+		return memberDao.deleteMember(no);
 	}
 
 	@Override
@@ -55,6 +56,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member selectOneNickName(String nickName) {
 		return memberDao.selectOneNickName(nickName);
+	}
+
+	@Override
+	public List<Code> selectBankList() {
+		return memberDao.selectBankList();
 	}
 
 	

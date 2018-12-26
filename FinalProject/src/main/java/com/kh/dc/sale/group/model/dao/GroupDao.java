@@ -17,5 +17,14 @@ public interface GroupDao {
 	
 	int insertBoard(Group group);
 	
+	int updateGroup(Group group);
 	
+	int updateBoard(Group group);
+	
+	int deleteGroup(int boardNo);
+	
+	int updateViewCount(int boardNo);
+	
+	List<Map<String, String>> selectBankList();
+		
 }

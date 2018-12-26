@@ -36,10 +36,37 @@
 			<p>${group.writeDate }</p>
 			<p>${group.viewCount }</p>
 			<p>${group.thumbnail }</p>
+			
+			
+			<input type="button" value="목록" class="" onclick="goGroupList();"/>
+			<c:if test="${!empty member and member.no eq group.memberNo}">
+				<input type="button" value="수정하기" class="" onclick="updateGroup();"/>
+				<input type="button" value="삭제하기" class="" onclick="deleteGroup();"/>
+			</c:if>
 
 		</section>
 		<c:import url="../../common/footer.jsp" />
 	</div>
 
+
+
+
+
+	<!-------------------- Script -------------------->
+	<script>
+	
+	function goGroupList() {
+		location.href = "${pageContext.request.contextPath}/sale/group/list.do";
+	}
+	
+	function updateGroup() {
+		location.href = "${pageContext.request.contextPath}/sale/group/groupUpdateForm.do?boardNo="+${group.boardNo};
+	}
+	
+	function deleteGroup() {
+		location.href = "${pageContext.request.contextPath}/sale/group/groupDelete.do?boardNo="+${group.boardNo};
+	}
+	
+	</script>
 </body>
 </html>

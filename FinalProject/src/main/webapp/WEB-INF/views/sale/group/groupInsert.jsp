@@ -25,8 +25,13 @@
 				물품명 : <input type="text" name="goodsName" /> <br />
 				가격 : <input type="text" name="price" /> <br />
 				모집인원 : <input type="text" name="maxCount" /> <br />
-				거래방법 : 택배<input type="radio" name="dealType" value="delivery"/> 
-						직거래<input type="radio" name="dealType" value="direct"/> <br />
+				거래방법 : 직거래<input type="radio" name="dealType" value="DEAL001"/> 
+						택배<input type="radio" name="dealType" value="DEAL002"/> <br />
+				<select class="form-control" name="bank" id="bank" style="padding:0;">                        
+					<c:forEach items="${bankList}" var="bank" >                              
+					   <option value="${bank.id}"> ${bank.value}</option>
+					</c:forEach>
+				</select>                   
 				계좌번호 : <input type="text" name="deposit"/> <br />
 				마감일 : <input type="date" name="endDate"/> <br />
 				내용 : <textarea id="summernote" name="content"></textarea> <br />
