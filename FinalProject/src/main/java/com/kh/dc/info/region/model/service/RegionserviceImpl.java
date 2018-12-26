@@ -68,4 +68,9 @@ public class RegionserviceImpl implements RegionService {
 		return rd.regionLikeCountView(no);
 	}
 
+	@Override
+	public int deleteRegionLike(int no) {
+		return rd.deleteRegionLike(no);
+	}
+
 }
