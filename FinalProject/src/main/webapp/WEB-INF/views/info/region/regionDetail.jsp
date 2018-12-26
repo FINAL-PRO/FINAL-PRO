@@ -54,7 +54,7 @@
                     <span class="" style="margin-right: 30px;">${region.userName}</span>${region.writeDate }
                     <dl class="" style="float:right; display: table; margin:0px;">
                         <dt class="" style="float: left; margin-left:30px;">조회 수</dt>
-                            <dd class="" style="float:right; margin-inline-start: 15px;">00</dd>
+                            <dd class="" style="float:right; margin-inline-start: 15px;">${likeCount}</dd>
                         <dt class="" style="float: right; margin-left:30px;">추천 수</dt>
                             <dd class="" style="float:right; margin-inline-start: 15px;">${region.viewcount}</dd>
                     </dl>
@@ -82,8 +82,8 @@
             <div class="" >
                 <ul class="" style="list-style-type:none; padding-left:0px; display: block;">
                     <li class="" style="display: block; float: left; padding-right: 15px;">
-                    <button class="" title="추천" onclick="regionLike();">
-                        <span class="">추천 ()</span>
+                    <button class="" title="추천" onclick="regionLike(${likeCount})">
+                        <span class="">추천 (${likeCount})</span>
                     </button>
                     </li>				
                     
@@ -136,7 +136,7 @@
              
                 	 <c:forEach items="${list}" var="regionList" varStatus="vs">
                     <tr>							
-                       <td class=""><span class="">${regionList.no}</span></td>
+                       <td class=""><span class="">${vs.count}</span></td>
                         <td class=""><a onclick="selectRegion(${regionList.no})"><span>${regionList.title }</span></a></td>
                         <td class=""><span class="">${regionList.userName }</span></td>
                         <td class="">${regionList.writeDate }</td>
@@ -166,6 +166,8 @@
         </div>
         </div>
         
+            
+            
         <br><br><br>
         <c:import url="../../common/footer.jsp"/>
         
@@ -181,16 +183,29 @@
 			function selectRegion(no){
 				location.href="${pageContext.request.contextPath}/info/region/rgSelectOne.do?no="+no;
 				}
+
+
 			
-			function regionLike(){
-				location.href="${pageContext.request.contextPath}/info/region/regionLikeCount.do?no="+${region.no};
+			
+			function regionLike(no){  
+				var lc = no + 1;
+				var no = ${region.no}
+				console.log(lc);
+				console.log(no);
+				
+				$.ajax({
+					url:'${pageContext.request.contextPath}/info/region/regionLikeCount.do',
+					data :{'lc' : no},
+					
+					type : "POST",
+					success : function(response){
+						alert("좋아요 완료");
+						location.href="${pageContext.request.contextPath}/info/region/rgSelectOne.do?no="+no;
+						
+					}
+				})
 			}
 			
-			function reComInsert(){
-				$("#reComInsert").attr("action","${pageContext.request.contextPath}/info/region/reInsertRegion.do");
-				$("#reComInsert").attr("method","post");
-				$("#reCominsert").submit();
-			}
 			
 
 		

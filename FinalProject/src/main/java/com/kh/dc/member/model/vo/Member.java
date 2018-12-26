@@ -15,6 +15,8 @@ public class Member implements java.io.Serializable{
 	private String codeId;
 	private String address;
 	private String name;
+	private String deposit;
+	private String bank;
 	
 	public Member() {
 		super();
@@ -30,7 +32,7 @@ public class Member implements java.io.Serializable{
 	}
 
 	public Member(int no, String email, String nickName, String password, Date enrollDate, int point, int locationNo,
-			int authNo, String codeId, String address, String name) {
+			int authNo, String codeId, String address, String name, String deposit, String bank) {
 		super();
 		this.no = no;
 		this.email = email;
@@ -43,6 +45,8 @@ public class Member implements java.io.Serializable{
 		this.codeId = codeId;
 		this.address = address;
 		this.name = name;
+		this.deposit = deposit;
+		this.bank = bank;
 	}
 
 	public int getNo() {
@@ -132,14 +136,30 @@ public class Member implements java.io.Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String getDeposit() {
+		return deposit;
+	}
+
+	public void setDeposit(String deposit) {
+		this.deposit = deposit;
+	}
+
+	public String getBank() {
+		return bank;
+	}
+
+	public void setBank(String bank) {
+		this.bank = bank;
+	}
 
 	@Override
 	public String toString() {
 		return "Member [no=" + no + ", email=" + email + ", nickName=" + nickName + ", password=" + password
 				+ ", enrollDate=" + enrollDate + ", point=" + point + ", locationNo=" + locationNo + ", authNo="
-				+ authNo + ", codeId=" + codeId + ", address=" + address + ", name=" + name + "]";
+				+ authNo + ", codeId=" + codeId + ", address=" + address + ", name=" + name + ", deposit=" + deposit
+				+ ", bank=" + bank + "]";
 	}
-	
-	
+
 
 }

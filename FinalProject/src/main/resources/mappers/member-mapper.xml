@@ -9,6 +9,11 @@
 		SELECT * FROM DC_LOCATION_TB WHERE LOCATION LIKE '%구' ORDER BY 3
 	</select>
 	
+	<!-- 회원정보 페이지의 은행 리스트 뿌리기 -->
+	<select id="selectBankList" resultType="code">
+		SELECT * FROM DC_CODE_TB WHERE ID LIKE 'BANK%'
+	</select>
+	
 	<!-- 닉네임 중복 체크 -->
 	<select id="checkNickNameDuplicate" parameterType="String" resultType="_int">
 		SELECT COUNT(*)
@@ -27,7 +32,7 @@
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO DC_MEMBER_TB VALUES(
 			SEQ_MEMBER.NEXTVAL, #{email}, #{nickName}, 
-			#{password}, SYSDATE, 0, #{locationNo}, 1, 'STATUS001', null, #{name}
+			#{password}, SYSDATE, 0, #{locationNo}, 1, 'STATUS001', null, #{name}, null, null
 		)
 	</insert>
 	
@@ -45,13 +50,13 @@
 	<update id="updateMember" parameterType="Member">
 		UPDATE DC_MEMBER_TB SET
 		NICKNAME = #{nickName}, PASSWORD = #{password}, 
-		LOCATIONNO = #{locationNo}
+		LOCATIONNO = #{locationNo}, ADDRESS=#{address}, DEPOSIT=#{deposit}, BANK=#{bank}
 		WHERE NO = #{no}
 	</update>
 	
-	<!-- <delete id="deleteMember" parameterType="int">
-		DELETE FROM MEMBER WHERE no = #{no}
-	</delete> -->
+	<delete id="deleteMember" parameterType="int">
+		DELETE FROM DC_MEMBER_TB WHERE no = #{no}
+	</delete>
 	
 
 </mapper>

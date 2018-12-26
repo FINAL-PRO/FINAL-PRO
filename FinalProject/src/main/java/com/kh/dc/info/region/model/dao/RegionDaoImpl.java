@@ -36,9 +36,16 @@ public class RegionDaoImpl implements RegionDao {
 		System.out.println("수정 dao rg : " + rg);
 		return sqlSession.update("region_mapper.updateRegion", rg);
 	}
+	
+	@Override
+	public int deleteRegionLike(int no) {
+		System.out.println("deleteLike : " + no);
+		return sqlSession.update("region_mapper.deleteRegionLike", no);
+	}
 
 	@Override
 	public int deleteRegion(int no) {
+		System.out.println("deleteRegion : " + no);
 		return sqlSession.update("region_mapper.deleteRegion", no);
 	}
 
@@ -56,10 +63,13 @@ public class RegionDaoImpl implements RegionDao {
 	public int regionLikeCount(int no) {
 		return sqlSession.insert("region_mapper.regionLikeCount", no);
 	}
+	
 
 	@Override
 	public int regionLikeCountView(int no) {
 		return sqlSession.selectOne("region_mapper.regionLikeCountView", no);
 	}
+
+
 }
 

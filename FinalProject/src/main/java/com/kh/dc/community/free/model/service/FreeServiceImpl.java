@@ -70,5 +70,10 @@ public class FreeServiceImpl implements FreeService{
 	public int commentDelete(int no) {
 		return freeDao.commentDelete(no);
 	}
+
+	@Override
+	public List<Board> selectFreeListData() {
+		return freeDao.selectFreeListData();
+	}
 	
 }

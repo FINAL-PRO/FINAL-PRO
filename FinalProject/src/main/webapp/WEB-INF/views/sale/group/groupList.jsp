@@ -60,8 +60,7 @@
 			<c:forEach items="${list}" var="g">
 				<div class="content-box" onclick="selectOne(this);">
 					<input type="hidden" name=boardNo value="${g.boardNo}" />
-					<div class="content image">
-						<img src="${g.thumbnail}" class="image"/></div>
+					<div class="content image"><img src="${g.thumbnail}" class="image"/></div>
 					<div class="content right">
 						<p>${g.title}</p>
 						<span>${g.goodsName}</span> <span>${g.price}원</span>

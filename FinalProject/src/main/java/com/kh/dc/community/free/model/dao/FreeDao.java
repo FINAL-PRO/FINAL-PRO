@@ -23,5 +23,15 @@ public interface FreeDao {
 	int freeUpdate(Board board);
 	
 	int freeViewCount(int no);
+
+	int commentInsert(Comment comment);
+	
+	int totalComment(int no);
+
+	List<Comment> commentList(int no);
+
+	int commentDelete(int no);
+
+	List<Board> selectFreeListData();
 	
 }

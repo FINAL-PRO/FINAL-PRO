@@ -30,13 +30,35 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public Group selectOneGroup(int boardNo) {
 		
-		return groupDao.selectOneGroup(boardNo);
+		Group group = groupDao.selectOneGroup(boardNo);
+		
+		if(group != null) groupDao.updateViewCount(boardNo);
+		
+		return group;
 	}
 
 	@Override
 	public int insertGroup(Group group) {
 		
 		return groupDao.insertBoard(group) * groupDao.insertGroup(group);
+	}
+
+	@Override
+	public int updateGroup(Group group) {
+		
+		return groupDao.updateBoard(group) * groupDao.updateGroup(group);
+	}
+
+	@Override
+	public int deleteGroup(int boardNo) {
+
+		return groupDao.deleteGroup(boardNo);
+	}
+
+	@Override
+	public List<Map<String, String>> selectBankList() {
+		
+		return groupDao.selectBankList();
 	}
 	
 	

@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.dc.common.vo.Code;
+import com.kh.dc.common.vo.Location;
 import com.kh.dc.member.model.service.MemberService;
-import com.kh.dc.member.model.vo.Location;
 import com.kh.dc.member.model.vo.Member;
 
 @SessionAttributes(value= {"member"})
@@ -181,10 +181,12 @@ public class MemberController {
 		Member m = memberService.selectOne(email);
 		System.out.println("m : " + m);
 		
-		if(name.equals(m.getName())) {
-			result = 1;
-		}	
-		
+		if(m != null) {		
+			if(name.equals(m.getName())) {
+				result = 1;
+			}				
+		}
+				
 		System.out.println("result : " + result);
 		
 		return result;
@@ -219,21 +221,35 @@ public class MemberController {
 		if(memberService.updateMember(m) > 0) {
 		
 			try {
-				HtmlEmail mail = new HtmlEmail(); //pom.xml에 commons-email 추가
+				HtmlEmail sendEmail = new HtmlEmail();
 				
-				mail.setDebug(true);
-				mail.setCharset("UTF-8"); //한글 인코딩 
-				mail.setSSLOnConnect(true);	// SSL 사용
-				mail.setHostName("smtp.naver.com"); //host name 
-				mail.setSmtpPort(465); // SMTP port number 
-				mail.setAuthentication("kimsorwa@naver.com", "Qwer1208@");
-				mail.setStartTLSEnabled(true);
+				sendEmail.setHostName("smtp.gmail.com"); //SMTP서버 설정
+				sendEmail.setSmtpPort(465);  //포트번호
 				
-				mail.addTo(email,m.getNickName()); //받는 사람 
-				mail.setFrom("kimsorwa@naver.com","동커"); //보내는 사람 
-				mail.setSubject("동커 임시 비밀번호 발송"); //제목 
-				mail.setHtmlMsg(m.getNickName() + "님의 임시 비밀번호는 " + temporaryPwd + "입니다. 로그인 후 비밀번호를 변경해주세요. "); //내용 
-				mail.send();	
+				sendEmail.setDebug(true);
+				sendEmail.setCharset("euc-kr"); // 한글 인코딩 
+				
+				sendEmail.setAuthentication("dcPwdMan@gmail.com", "Qwer1234@"); //메일인증 
+				sendEmail.setSSLOnConnect(true);			
+				
+				sendEmail.setFrom("dcPwdMan@gmail.com", "동커");
+				
+				sendEmail.setSubject("동커 임시 비밀번호 발급"); // 메일 제목
+				
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("<html><body> ");
+				sb.append("<p> 임시 비밀번호는 ");
+				sb.append(temporaryPwd);
+				sb.append("입니다. <br>  로그인 후 반드시 비밀번호를 변경해주세요!</p>");
+				sb.append("</body></html>");
+				
+
+				sendEmail.setHtmlMsg(sb.toString());
+				
+				
+				sendEmail.addTo(m.getEmail(), m.getNickName()); // 수신자 추가
+				sendEmail.send();
 				
 			} catch(EmailException e) {
 				e.printStackTrace();
@@ -249,11 +265,31 @@ public class MemberController {
 	public String memberView(Model model) {
 		
 		List<Location> locationList = memberService.selectLocationList();
+		List<Code> bankList = memberService.selectBankList();
 		
 		System.out.println("로케이션 리스트 : " + locationList);
+		System.out.println("은행 리스트 : " + bankList);
+		
 		model.addAttribute("locationList", locationList);
+		model.addAttribute("bankList", bankList);
 		
 		return "member/memberView";
+		
+	}
+
+	@RequestMapping("/member/memberUpdateView.do")
+	public String memberUpdateView(Model model) {
+		
+		List<Location> locationList = memberService.selectLocationList();
+		List<Code> bankList = memberService.selectBankList();
+		
+		System.out.println("로케이션 리스트 : " + locationList);
+		System.out.println("은행 리스트 : " + bankList);
+		
+		model.addAttribute("locationList", locationList);
+		model.addAttribute("bankList", bankList);
+		
+		return "member/membeUpdate";
 		
 	}
 	
@@ -273,6 +309,47 @@ public class MemberController {
 			
 		return "redirect:/member/memberView.do";
 	}
+
+	@RequestMapping("/member/checkPassword.do")
+	@ResponseBody
+	public int checkPassword(HttpSession session, @RequestParam String email, @RequestParam String password) {
+		
+		Member m = memberService.selectOne(email);
+		
+		System.out.println("m : " + m);
+			
+		if(bcryptPasswordEncoder.matches(password, m.getPassword())) {
+			session.invalidate();
+			return 1;
+		}
+		
+		else return 0;
+	}
+
+	@RequestMapping("/member/memberDelete.do")
+	@ResponseBody
+	public Map<String, Object> memberDelete(@RequestParam int no) {		
+		
+		Map<String, Object> hmap = new HashMap<>();
+		
+		int result = memberService.deleteMember(no);
+		
+		String msg = "";
+		
+		if(result > 0) {
+			msg = "회원 탈퇴가 성공하였습니다.";			
+		} else {
+			System.out.println("회원 삭제 실패!");
+		}
+		
+		hmap.put("msg", msg);
+		
+		return hmap;
+		
+	}
+	
+
+	
 	
 	
 	

@@ -77,25 +77,23 @@
 		JOIN DC_CODE_TB CD4 ON(CD4.ID = B.STATUS)
 		WHERE JB.NO = #{no}
 	</select>
-
-	<select id="workTime" resultType="int">
-		<!-- 근무시간 -->
-		SELECT MIN,
-		CASE WHEN MIN > 0 THEN HOUR - 1 end "HOUR"
-		FROM (
-		SELECT SUBSTR(ENDTIME, 1, 2) - SUBSTR(STARTTIME, 1, 2) HOUR, SUBSTR(ENDTIME, 4, 2) - SUBSTR(STARTTIME, 4, 2) MIN
-		FROM DC_BOARD_JOB_TB     
-		WHERE BOARDNO = #{no}
-		) A
+<!-- 왜 이거 활성화하면 오류뜨나요
+	<select id="selectWorkTime" resultType="int">
+		근무시간
+		SELECT CASE WHEN MIN < 0 THEN ABS(MIN) ELSE MIN end "MIN",
+			   CASE WHEN MIN > 0 THEN HOUR - 1 ELSE HOUR end "HOUR"
+		FROM (SELECT SUBSTR(ENDTIME, 1, 2) - SUBSTR(STARTTIME, 1, 2) HOUR, SUBSTR(ENDTIME, 4, 2) - SUBSTR(STARTTIME, 4, 2) MIN
+			  FROM DC_BOARD_JOB_TB JB  
+			  WHERE JB.NO = #{no}) A
 	</select>
-	
+-->
 	<insert id="insertJobBoard">
 		<!--
 		BOARD 추가
-	 	게시글번호 / 게시글제목 / 작성 / 게시글내용 / 조회수 / 게시판유형 / 게시글상태 / 회원번호 / 자유게시판 카테고리 
+	 	게시글번호 / 게시글제목 / 작성일 / 게시글내용 / 조회수 / 게시판유형 / 게시글상태 / 회원번호 / 자유게시판 카테고리 
 		-->
 		INSERT INTO DC_BOARD_TB VALUES(
-			SEQ_MEMBER.NEXTVAL, #{title}, #{writeDate}, #{content}, 0, 1, 1, #{memberNo}, NULL
+			SEQ_MEMBER.NEXTVAL, #{title}, SYSDATE, #{content}, 0, BOARD006, STATUS001, #{memberNo}, NULL
 		)
 		<!-- 
 			BOARD 구인구직테이블 추가
@@ -105,7 +103,7 @@
 			업체번호 / 고용타입 / 봉급타입 / 구인구직상태
 		 -->
 	 	INSERT INTO DC_BOARD_JOB_TB VALUES(
-	 		{no}, #{type}, #{salary}, 
+	 		SEQ_BOARD_JOB.NEXTVAL, #{type}, #{salary}, 
 	 		#{startDate}, #{endDate}, #{startJob}, #{endJob},
 	 		#{startTime}, #{endTime}, #{location}, #{boardNo},
 	 		#{companyNo}, #{jobType}, #{salType}, #{status}

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>동커 회원가입</title>
+<title>회원 정보 페이지</title>
 <c:import url="../common/header.jsp"/>
 	<style>
 		section {background-color: white;}
@@ -17,6 +17,10 @@
 		
 		.btn-container>.btn{width:100%}
 		.row label{width: 100%; text-align:left; font-size: 8px;}
+		
+		#modalBtn>button {width: 40%; text-align:center; margin-bottom: 10px;}
+		
+		#modalPassword {width: 80%;}
 				
 	</style>
 </head>
@@ -25,12 +29,12 @@
 		<c:import url="../common/menubar.jsp"/>
 		<section id="content">
 			<div id="enroll-container">
-				<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" >								 
+				<form name="memberEnrollFrm" action="memberUpdate.do" method="post" onsubmit="return fn_enroll_validate();" >								 
 					<div class="row email-container" id="email-container">
 						<div class="col-md-3">이메일</div>
-						<div class="col-md-6"><input type="email" class="form-control" name="email" id="email" required></div>
+						<div class="col-md-6"><input type="email" class="form-control" name="email" id="email" value="${member.email}" readonly></div>
 						<div class="col-md-3 comment" id="duplicateCheck">
-							<label class="guide1">이메일을 입력하세요.</label>
+							<label class="guide1"></label>
 				    	</div>
 					</div>				
 				   
@@ -40,7 +44,7 @@
 				   			<input type="password" class="form-control" name="password" id="password_" required>
 				   		</div>	
 				   		<div class="col-md-3 comment" id="">
-				        	<label class="pwdChkComment" id="pwdChkComment">비밀번호을 입력하세요.</label>
+				        	<label class="pwdChkComment" id="pwdChkComment"></label>
 				    	</div>
 				   </div>
    
@@ -50,7 +54,7 @@
 				   			<input type="password" class="form-control" id="password2" required>
 				   		</div>
 				   		<div class="col-md-3 comment" id="pwd2ChkComment">
-				        	<label class="pwdChkComment" id="pwdChkComment2">비밀번호을 입력하세요.</label>
+				        	<label class="pwdChkComment" id="pwdChkComment2"></label>
 				    	</div>
 				   </div>
 
@@ -58,11 +62,11 @@
 				   		<!-- 닉네임 2~10 글자 허용 -->
 				   		<div class="col-md-3">닉네임</div>
 				   		<div class="col-md-6">
-				   			<input type="text" class="form-control" name="nickName" id="nickName">
+				   			<input type="text" class="form-control" name="nickName" id="nickName" value="${member.nickName}" required>
 				   		</div>			   		
 				   		<div class="col-md-3 duplicateCheck" id="duplicateCheck2">
 				   		<!-- 닉네임 중복 검사 -->
-				   			<label class="guide">닉네임을 입력하세요.</label>			            
+				   			<label class="guide"></label>			            
 				   		</div>
 				   </div>
 				   
@@ -70,7 +74,7 @@
 				   <div class="row userName-container" id="userName-container">
 				   		<div class="col-md-3">이름</div>
 				   		<div class="col-md-6">
-				   		<input type="text" class="form-control" name="name" id="userName" required>	
+				   		<input type="text" class="form-control" name="name" id="userName" value="${member.name}" required>	
 				   		</div>	
 				   		<div class="col-md-3" id="">
 				   			<label class=""></label>			            
@@ -87,22 +91,86 @@
 				   <div class="row address-container" id ="address-container2">
 				   		<div class="col-md-3"></div>
 				   		<div class="col-md-6">
-					   		<select class="form-control" name="locationNo" id="address">
-					   		<c:forEach items="${locationList}" var="location" >
-					   			<option value="${location.no}">${location.location}</option>  		
+				   			<c:set var="selectedLocationNo" value="${member.locationNo}"></c:set>
+					   		<select class="form-control" name="locationNo" id="locationNo">					   		
+					   		<c:forEach items="${locationList}" var="location" >						   			
+					   			<option value="${location.no}" ${ (location.no == selectedLocationNo) ? "selected"  :  "" }> ${location.location}</option>
 					   		</c:forEach>
 					   		</select>
 				   		</div>
 				   	<div class="col-md-3" id=""></div>				   		
 				   </div>
 				   
+				    <div class="row address-container" id="address-container">
+				   		<div class="col-md-3">상세 주소</div>
+				   		<div class="col-md-6">
+				   		<input type="text" class="form-control" name="address" id="address" value="${member.address}">	
+				   		</div>	
+				   		<div class="col-md-3" id="">
+				   			<label class=""></label>			            
+				   		</div>		   		
+				   </div>
+				   
+				    <div class="row deposit-container" id="deposit-container">
+				   		<div class="col-md-3">계좌번호</div>
+				   		<div class="col-md-2" style="padding-right:0;">
+				   			<c:set var="selectedBank" value="${member.bank}"></c:set>
+					   		<select class="form-control" name="bank" id="bank" style="padding:0;">					   		
+					   		<c:forEach items="${bankList}" var="bank" >						   			
+					   			<option value="${bank.id}" ${ (bank.value == selectedBank) ? "selected"  :  "" }> ${bank.value}</option>
+					   		</c:forEach>
+					   		</select>				   			
+				   		</div>	
+				   		<div class="col-md-4" style="padding-left:0;">
+				   		<input type="text" class="form-control" name="deposit" id="deposit" value="${member.deposit}" placeholder="-없이 숫자만 입력">	
+				   		</div>	
+				   		<div class="col-md-3" id="">
+				   			<label class=""></label>			            
+				   		</div>		   		
+				   </div>
+				   
+				   
 				   <div class="row btn-container">
 				   <div class="col-md-3"></div>
-				   <div class="col-md-3 btn-container"><input type="submit" class="btn btn-outline-success" value="가입" ></div>
-				   <div class="col-md-3 btn-container"><input type="reset"  class="btn btn-outline-danger" value="취소"></div>
+				   <div class="col-md-3 btn-container"><input type="submit" class="btn btn-outline-success" value="수정" ></div>
+				   <div class="col-md-3 btn-container">
+				   	<input type="button"  class="btn btn-outline-danger" 
+				   			data-toggle="modal" data-target="#modalDeleteMember" value="삭제"></div>
 				   <div class="col-md-3" id=""></div>
 				   </div>	
 				</form>
+				
+				<!-- Modal시작 -->
+				<!-- https://getbootstrap.com/docs/4.1/components/modal/#live-demo -->
+				<div class="modal fade" id="modalDeleteMember" tabindex="-1" role="dialog" aria-labelledby="memberDeleteModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="memberDeleteModalLabel">회원 탈퇴 확인</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+			          <!--로그인폼 -->
+			          <!-- https://getbootstrap.com/docs/4.1/components/forms/#overview -->
+			          <form action="" method="post" style="height: auto;">
+				      <div class="modal-body" style="padding-bottom:0;">
+						  <label> 정말로 탈퇴하실건가요? T_T </label>
+						  <div class="row passwordDiv" style=" display:inline;">
+						  <input type="password" class="form-control" name="password" id="modalPassword" 
+						  		placeholder="비밀번호를 입력하세요." style="display: block; margin: 0 auto;" required>
+						  </div>
+				      </div>
+				      <div class="modal-footer" id="modalBtn" style=" display:inline; margin-bottom: 10px;">
+				        <button type="button" class="btn btn-outline-success" id="deleteBtn">회원 탈퇴</button>
+				        <button type="button" class="btn btn-outline-success" data-dismiss="modal">취소</button>
+				      </div>
+					</form>
+				    </div>
+				  </div>
+				</div>
+				<!-- Modal 끝-->			
+				
 			</div>
 			<script>
 			$(function(){
@@ -144,8 +212,8 @@
 				$("#nickName").on("keyup", function(){
 			        var nickName = $(this).val().trim();
 			        
-			        if(nickName == ""){
-			        	$(".guide").text("닉네임을 입력해주세요.");
+			        if(nickName == "${member.nickName}"){
+			        	$(".guide").text("");
 			        	
 			        } else if(nickName != null && nickName.length<2) {
 			        	$(".guide").text("2자 이상 입력해주세요.");
@@ -176,10 +244,7 @@
 			        	});
 			     	}
 				});
-				
-			
-			
-			
+
 			
 			$("#password_").on("keyup", function checkedPassword() {
 				var pwd = $("#password_").val().trim();
@@ -207,7 +272,48 @@
 					$("#pwdChkComment2").text('OK!');
 				}
 			
+			});	
+			
+			$("#deleteBtn").on("click", function(){
+				var no = "${member.no}";
+				var email = "${member.email}";
+				var password = $("#modalPassword").val();
+				
+				console.log(password);
+				console.log(no);
+				
+				$.ajax({
+					type: "GET",
+					url : "${pageContext.request.contextPath}/member/checkPassword.do",
+					data: { email: email, password : password},
+					dataType: "json",
+					success : function(data){
+						if(data > 0){
+							$.ajax({
+								type: "POST",
+								url : "${pageContext.request.contextPath}/member/memberDelete.do",
+								data: {no : no},
+								dataType: "json",
+								success : function(data){
+										alert(data.msg);
+										location.href= "${pageContext.request.contextPath}/";
+								}, error : function(jqxhr, textStatus, errorThrown){
+					                console.log("ajax 처리 실패");
+					                //에러로그
+					                console.log(jqxhr);
+					                console.log(textStatus);
+					                console.log(errorThrown);
+					            }		
+							});		
+						} else{
+							alert("비밀번호가 틀립니다. 다시 한번 확인해주세요.")
+						}
+					}, error : function(jqxhr, textStatus, errorThrown){
+		                console.log("checkPassword ajax 처리 실패");
+		            }							
+				});			
 			});			
+			
 		});
 
 		</script>
