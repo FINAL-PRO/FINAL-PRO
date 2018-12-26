@@ -21,8 +21,10 @@
 
 			<div class="section-center">
 				<div class="dc-content">
-					<div class="dc-content-box">
+					<div class="dc-content-title">
 						<h1>어드민 인덱스</h1>
+					</div>
+					<div class="dc-content-box">
 						<h2>
 							<a href="${pageContext.request.contextPath}/admin/member/list.do">멤버
 								리스트</a>
