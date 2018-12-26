@@ -1,10 +1,7 @@
 package com.kh.dc.sale.group.controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,9 +36,9 @@ public class GroupController {
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "sale/group/list.do");
 		
 		model.addAttribute("list", list)
-		.addAttribute("totalContents", totalContents)
-		.addAttribute("numPerPage", numPerPage)
-		.addAttribute("pageBar", pageBar);
+			.addAttribute("totalContents", totalContents)
+			.addAttribute("numPerPage", numPerPage)
+			.addAttribute("pageBar", pageBar);
 		
 		return "sale/group/groupList";
 	}
@@ -55,8 +52,13 @@ public class GroupController {
 	}
 	
 	@RequestMapping("sale/group/groupForm.do")
-	public String changeGroupForm() {
-	
+	public String insertGroupForm(Model model) {
+		
+		ArrayList<Map<String, String>> bankList = 
+				new ArrayList<Map<String, String>>(groupService.selectBankList());
+		
+		model.addAttribute("bankList", bankList);
+		
 		return "sale/group/groupInsert";
 	}
 	
@@ -72,6 +74,40 @@ public class GroupController {
 		return loc;
 	}
 	
+	@RequestMapping("sale/group/groupUpdateForm.do")
+	public String updateGroupForm(@RequestParam int boardNo, Model model) {
+		
+		model.addAttribute("group", groupService.selectOneGroup(boardNo));
+	
+		return "sale/group/groupUpdate";
+	}
+	
+	@RequestMapping("sale/group/groupUpdateFormEnd.do")
+	public String updateGroup(Group group, Model model) {
+		
+		int result = groupService.updateGroup(group);
+		
+		ArrayList<Map<String, String>> bankList = 
+				new ArrayList<Map<String, String>>(groupService.selectBankList());
+		
+		
+		model.addAttribute("group", groupService.selectOneGroup(group.getBoardNo()))
+			.addAttribute("bankList", bankList);;
+	
+		return "sale/group/groupView";
+	}
+	
+	@RequestMapping("sale/group/groupDelete.do")
+	public String deleteGroup(@RequestParam int boardNo, Model model) {
+
+		String loc = "/sale/group/list.do";
+		System.out.println("boardNo : "+boardNo);
+		String msg = (groupService.deleteGroup(boardNo)>0) ? "게시글을 삭제하였습니다." : "게시글 삭제에 실패하였습니다.";
+
+		model.addAttribute("loc", loc).addAttribute("msg", msg);
+		
+		return "common/msg";
+	}
 	
 	
 	
