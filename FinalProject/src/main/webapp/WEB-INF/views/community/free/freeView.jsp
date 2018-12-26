@@ -162,46 +162,119 @@
                         <div class="commentwriteboard">
                             <span class="nickname">${board.memberName}</span><br />
                             <div class="comment_textarea" style="border: solid 0.5px pink">
-                            	<form id="commentFrm" action="${pageContext.request.contextPath}/community/free/commentwrite.do?no=${board.no}" method="post">
-	                            <textarea name="content" class="commentwrite"></textarea><br />
-	                            <input type="text" id="mno" name="mno" value="${member.no}" readonly="readonly"/>
-	                            <input type="text" id="bno" name="bno" value="${board.no}" readonly="readonly"/>
-	                            </form>                            
+	                            <form id="commentFrm" method="post">
+	                            <textarea name="commentwrite" id="commentwrite" class="commentwrite" placeholder="댓글을 입력하세요."></textarea><br />                           
+                            	<input type="text" id="mno" name="mno" value="${member.no}">
+	                            <input type="text" id="bno" name="bno" value="${board.no}" readonly="readonly"/> 
+	                        </form>
                             </div>
                             <div class="btn_comment">
-                                <button class="btn_comment_wirte" id="btn_comment_wirte">댓글쓰기</button>
+                                <a href="#" id="btn_comment_wirte" class="btn pull-right btn-success">댓글쓰기</a>
                             </div>
                             <script>
-	                            $("#btn_comment_wirte").click(function(){
+                           
+                           		$("#btn_comment_wirte").on("click",function(){	
+                            		
+                           			alert("댓글");
+                            		var bno = $("#bno").val();
+                            		var mno = $("#mno").val(); 
+                            		var commentwrite = $("#commentwrite").val();
+                            	
+                            		$.ajax({
+                            			url: "${pageContext.request.contextPath}/comment/commentWrite.do",
+                            			type:"post",
+                            			data: JSON.stringify({
+                            				content: commentwrite,
+                            				memberNo: mno,
+                            				boardNo: bno
+                            			}),
+                            			contentType: 'application/json; charset=utf-8',
+                            			success: function(data){
+                            				console.log(data);
+                            				if(data=="SUCCESS"){
+                            					$("#commentContent").val("");
+                            					commentList(bno);
+                            					alert("저장완료");
+                            					console.log("성공 bno:"+bno);
+                            				} else{
+                            					alert("등록 실패!");
+                            				}
+                            			}
+                            		});
+   	
+                            	});
+                            
+/* 	                            $("#btn_comment_wirte").click(function(){
 	                      			alert("작성");
 	                      			var c = $("commentwrite").val();
-	                      			commentFrm.action="${pageContext.request.contextPath}/comment/commentWrite.do?no=${comment.no}"
+	                      			commentFrm.action="( method = RequestMethod.GET, produces = "application/json")
+
+	                      			출처: http://tadakichi.tistory.com/70 [라자루스의 개발 이야기]/comment/commentWrite.do?no=${comment.no}"
 	                      			/* boardFrm.action="${pageContext.request.contextPath}/community/free/freeView?no=${no}" */
-	                      			commentFrm.submit();
-	                      		});
+	                      			/* commentFrm.submit();
+	                      		}); */
+	                      		
                             </script>
                         <p class="both" style="clear:both;">&nbsp;</p>
                         </div>
                         <div style="border: solid 0.5px gray"></div>
-                       	<c:forEach items="${clist}" var="c">
-                        <div class="commentgroup" style="border: 1px solid blue">
-                            <p class="profile">
-                                <img class="picture" src="https://cf-epi.campuspick.com/0.png">
-                                <span class="nickname">${c.memberName}</span>
-                                <p class="time">
-				                	<fmt:formatDate value="${c.writeDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-				                </p>
-                            </p>
-                            <p class="comment">${c.content}</p>
-                            <div class="btn_comment">
-                                <button class="btn_comment_edit" id="btn_comment_edit">수정</button>
-                                <button class="btn_comment_delete" id="btn_comment_delete">삭제</button>
-                                <button class="btn_comment_rewirte" id="btn_comment_wirte">답글쓰기</button>
-                            </div>
+                        <form id="commentListFrm" name="commentListFrm" method="post"> 
+                        <div class="commentList" id="commentList" style="border: 1px solid blue">
+	                        <input type="text" id="bno" name="bno" value="${board.no}" readonly="readonly"/>
                             <p class="both" style="clear:both;">&nbsp;</p>
                         </div>
-                           </c:forEach>
+                        </form>
                             <script>
+                            
+	                            $(function(){	                                
+	                            	commentList(); 
+	                            });
+	                            
+                            	function commentList(){
+                            		
+                            		var bno = $("#bno").val();
+                            		
+                            		
+                            		$.ajax({
+                            			type: "get",
+                            			url: "${pageContext.request.contextPath}/comment/commentList.do",
+                            			data:$("#commentListFrm").serialize(),
+                            			dateType:"json",
+                            			success: function(data){
+                            				
+                            				console.log(bno);
+                            				console.log(data);
+			
+                            				var html = "";
+                            				var cCnt = data.length;
+              
+                            				if(data.length>0){
+                            					for(i=0; i<data.length; i++){
+                            						html += "<p class='profile'>";
+                            						html += "<img class='picture' src='https://cf-epi.campuspick.com/0.png'>";
+                            						html += "<span class='nickname'>"+data[i].memberName+"</span>";
+                            						html += "</p></p>";
+                            						html += "<p class='comment'>"+data[i].content+"</p>";
+                            						html += "<div class='btn_comment'>";
+                            						html += "<button class='btn_comment_edit' id='btn_comment_edit'>수정</button>";
+                            						html += "<button class='btn_comment_delete' id='btn_comment_delete'>삭제</button>";
+                            						html += "<button class='btn_comment_rewirte' id='btn_comment_wirte'>답글쓰기</button>";
+                            						html += "</div>";                        						
+                            					}
+                            				} else{
+                            	                html += "<div>";
+                            	                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+                            	                html += "</table></div>";
+                            	                html += "</div>";
+                            				}
+                            				
+                            				$("#cCnt").html(cCnt);
+                            	            $("#commentList").html(html);
+                            	            	
+                            			}
+                            		});
+                            	}
+                            
                           		$("#btn_comment_edit").click(function(){
                           			alert("수정");
                           			boardFrm.action="${pageContext.request.contextPath}/comment/commentUpdateComment.do"
