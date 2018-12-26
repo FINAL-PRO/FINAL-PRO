@@ -1,0 +1,6 @@
+﻿INSERT INTO DCDB.DC_CODE_TB (id, value, att) VALUES ('BOARD007', '지역정보', '게시판타입');
+
+
+INSERT INTO DC_BOARD_TB VALUES(SEQ_BOARD.NEXTVAL, '지역게시판 게시물2 제목입니다.', SYSDATE, '지역게시판 게시물2 내용입니다.', 0, 'BOARD007', 'STATUS001', 1, NULL);
+
+commit;
