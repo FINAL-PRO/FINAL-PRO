@@ -53,7 +53,7 @@
 						<div class="dc-content-box">
 							<h1>공지 게시판</h1>
 							<hr />
-							<table>
+							<table class="table table-striped">
 								<tbody id="noticeTable">
 									<div id="loadingNotice" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
 								</tbody>
@@ -66,7 +66,7 @@
 						<div class="dc-content-box">
 							<h1>자유 게시판</h1>
 							<hr />
-							<table>
+							<table class="table table-striped">
 								<tbody id="freeTable">
 									<div id="loadingFree" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>							
 								</tbody>
@@ -76,7 +76,7 @@
 						<div class="dc-content-box">
 							<h1>거래 게시판</h1>
 							<hr />
-							<table>
+							<table class="">
 								<tbody id="saleTable">
 									<div id="loadingSale" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
 								</tbody>
