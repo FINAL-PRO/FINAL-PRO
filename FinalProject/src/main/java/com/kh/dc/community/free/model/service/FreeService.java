@@ -29,5 +29,7 @@ public interface FreeService {
 	List<Comment> commentList(int no);
 
 	int commentDelete(int no);
+
+	List<Board> selectFreeListData();
 	
 }
