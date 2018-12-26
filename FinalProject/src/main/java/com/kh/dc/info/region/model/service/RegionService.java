@@ -23,6 +23,9 @@ public interface RegionService {
 	// 좋아요
 	public int regionLikeCount(int no);
 	public int regionLikeCountView(int no);
+	
+	// 좋아요 삭제
+	public int deleteRegionLike(int no);
 
 	
 }
