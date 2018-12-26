@@ -21,7 +21,7 @@ public class AdminCompanyController {
 	
 	@RequestMapping("admin/company/list.do")
 	public String companyList(
-			@RequestParam(value="companyType", defaultValue="STATUS020") String companyType,
+			@RequestParam(value="companyType", defaultValue="COMTYPE001") String companyType,
 			Model model) {
 		List<Company> companyList = companyService.selectCompanyList(companyType);
 		
