@@ -25,7 +25,7 @@
 		<c:import url="../common/menubar.jsp"/>
 		<section id="content">
 			<div id="enroll-container">
-				<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" onsubmit="return fn_enroll_validate();" >								 
+				<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" >								 
 					<div class="row email-container" id="email-container">
 						<div class="col-md-3">이메일</div>
 						<div class="col-md-6"><input type="email" class="form-control" name="email" id="email" required></div>
