@@ -22,6 +22,11 @@
 		<result property="thumbnail" column="thumbnail"/>
 	</resultMap>
 	
+	<resultMap type="java.util.HashMap" id="bankList" >
+		<result property="id" column="id"/>
+		<result property="value" column="value"/>
+	</resultMap>
+	
 	<select id="selectGroupList" resultMap="resultGroup">
 		SELECT * FROM DC_BOARD_GROUP_VIEW WHERE STATUS='STATUS001'
 	</select>
@@ -48,9 +53,30 @@
 		</selectKey>
 		INSERT INTO DC_BOARD_GROUP_TB VALUES(SEQ_BOARD_GROUP.NEXTVAL, #{price}, #{maxCount}, 0,
 			#{boardNo}, 'STATUS007', 'DEAL002', 1, #{deposit}, #{endDate}, #{goodsName})
-		
 	</insert>
+	
+	<update id="updateBoard" parameterType="group">
+		UPDATE DC_BOARD_TB SET TITLE = #{title}, CONTENT = #{content}
+		WHERE NO = #{boardNo}
+	</update>
 
+	<update id="updateGroup" parameterType="group">
+		UPDATE DC_BOARD_GROUP_TB SET DEALTYPE = #{dealType}, GOODSNO = #{goodsNo}, DEPOSIT = #{deposit},
+			ENDDATE = #{endDate}, GOODSNAME = #{goodsName}
+		WHERE BOARDNO = #{boardNo}
+	</update>
+	
+	<update id="updateViewCount" parameterType="_int">
+		UPDATE DC_BOARD_TB SET VIEWCOUNT = VIEWCOUNT + 1 WHERE NO = #{boardNo}
+	</update>
+	
+	<update id="deleteGroup" parameterType="_int">
+		UPDATE DC_BOARD_TB SET STATUS='STATUS002' WHERE NO = #{boardNo}
+	</update>
+	
+	<select id="selectBankList" resultMap="bankList">
+		SELECT * FROM DC_CODE_TB WHERE ID LIKE 'BANK%'
+	</select>
 
 	
 	

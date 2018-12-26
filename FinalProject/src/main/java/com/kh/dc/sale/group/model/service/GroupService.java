@@ -15,4 +15,9 @@ public interface GroupService {
 	
 	int insertGroup(Group group);
 	
+	int updateGroup(Group group);
+	
+	int deleteGroup(int boardNo);
+	
+	List<Map<String, String>> selectBankList();
 }

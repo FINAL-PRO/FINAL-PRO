@@ -47,5 +47,35 @@ public class GroupDaoImpl implements GroupDao {
 		return sqlSession.insert("group_mapper.insertBoard", group);
 	}
 
+	@Override
+	public int updateGroup(Group group) {
+
+		return sqlSession.update("group_mapper.updateGroup", group);
+	}
+
+	@Override
+	public int updateBoard(Group group) {
+
+		return sqlSession.update("group_mapper.updateBoard", group);
+	}
+
+	@Override
+	public int deleteGroup(int boardNo) {
+
+		return sqlSession.update("group_mapper.deleteGroup", boardNo);
+	}
+
+	@Override
+	public int updateViewCount(int boardNo) {
+
+		return sqlSession.update("group_mapper.updateViewCount", boardNo);
+	}
+
+	@Override
+	public List<Map<String, String>> selectBankList() {
+		
+		return sqlSession.selectList("group_mapper.selectBankList");
+	}
+
 	
 }
