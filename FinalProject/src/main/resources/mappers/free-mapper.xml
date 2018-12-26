@@ -49,4 +49,8 @@
 		UPDATE DC_BOARD_TB SET VIEWCOUNT = VIEWCOUNT + 1 WHERE NO = #{no}
 	</select>
 	
+	<select id="selectFreeListData" resultType="board">
+		SELECT * FROM DC_BOARD_TB WHERE TYPE = 'BOARD001'
+	</select>
+	
 </mapper>
