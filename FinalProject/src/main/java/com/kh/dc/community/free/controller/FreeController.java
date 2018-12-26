@@ -1,6 +1,7 @@
 package com.kh.dc.community.free.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.dc.community.free.model.service.FreeService;
@@ -66,42 +66,22 @@ public class FreeController {
 		
 		return "redirect:/community/free/list.do";
 	}
-	
-	/*@RequestMapping("community/free/freeInsertFormEnd.do")
-	public String insertFree(Board board, Model model) {
-
-		int result = freeService.insertFree(board);
-		System.out.println("insert 결과 : " + result);
-		
-		String loc = "community/free/list.do";
-		String msg = "";
-		
-		if(result>0) {
-			System.out.println("등록 성공!");
-			msg = "게시글 등록 성공!";
-			loc = "community/free/freeView.do?no="+board.getNo();
-		} else {
-			msg = "게시물 등록 실패!";
-		}
-		
-		model.addAttribute("loc", loc)
-		.addAttribute("msg", msg);
-		
-		return "community/free/list.do";
-	}*/
 
 	@RequestMapping("community/free/freeView.do")
 	public String selectOneFree(@RequestParam int no, Model model) {
-		model.addAttribute("board", freeService.selectOneFree(no));
+		
+		// 조회수 증가
+		int freeViewCount = freeService.freeViewCount(no);
+		
+		model.addAttribute("board", freeService.selectOneFree(no))
+		.addAttribute("freeViewCount", freeViewCount);
 		
 		return "community/free/freeView";
 	}
 	
 	@RequestMapping("community/free/freeUpdateForm.do")
 	public String freeUpdateView(Model model, @RequestParam int no) {
-		
-		System.out.println("수정할 no:" + no);
-		
+
 		model.addAttribute("board", freeService.selectOneFree(no));
 		
 		return "community/free/freeUpdateForm";

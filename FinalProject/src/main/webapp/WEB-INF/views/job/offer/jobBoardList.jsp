@@ -14,7 +14,7 @@
 	<div id="container">
 		<c:import url="../../common/menubar.jsp"/>
 		<section id="content">
-			<h1>job / hunt / list</h1>
+			<h1>job / offer / list</h1>
 		</section>
 		<c:import url="../../common/footer.jsp"/>
 	</div>

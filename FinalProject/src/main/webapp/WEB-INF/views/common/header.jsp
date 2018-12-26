@@ -27,7 +27,7 @@
 	section {
 		width : 100%;
 		height : 800px;
-		background-color: lime;
+		background-color: white;
 	}
 	
 	header{
