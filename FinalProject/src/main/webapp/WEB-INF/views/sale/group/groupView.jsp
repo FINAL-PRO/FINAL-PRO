@@ -52,8 +52,8 @@
 
 
 
-	<!-------------------- Script -------------------->
-	<script>
+<!-------------------- Script -------------------->
+<script>
 	
 	function goGroupList() {
 		location.href = "${pageContext.request.contextPath}/sale/group/list.do";
@@ -67,6 +67,7 @@
 		location.href = "${pageContext.request.contextPath}/sale/group/groupDelete.do?boardNo="+${group.boardNo};
 	}
 	
-	</script>
+</script>
+
 </body>
 </html>

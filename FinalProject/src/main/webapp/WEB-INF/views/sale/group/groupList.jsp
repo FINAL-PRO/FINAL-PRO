@@ -34,19 +34,7 @@
 			display: inline-block;
 		}
 	</style>
-	
-	<script>
-		function goGroupForm(){
-			location.href = "${pageContext.request.contextPath}/sale/group/groupForm.do";
-		}	
-		
-		$(function(){
-			$('.right').on("click",function(){
-				var boardNo = $(this).siblings('input[name="boardNo"]').val();
-				location.href = "${pageContext.request.contextPath}/sale/group/groupView.do?boardNo="+boardNo;
-			});
-		});
-	</script>
+
 </head>
 <body>
 
@@ -77,6 +65,24 @@
 		</section>
 		<c:import url="../../common/footer.jsp" />
 	</div>
+
+
+
+<!-------------------- Script -------------------->
+<script>
+
+	function goGroupForm(){
+		location.href = "${pageContext.request.contextPath}/sale/group/groupForm.do";
+	}	
+	
+	$(function(){
+		$('.right').on("click",function(){
+			var boardNo = $(this).siblings('input[name="boardNo"]').val();
+			location.href = "${pageContext.request.contextPath}/sale/group/groupView.do?boardNo="+boardNo;
+		});
+	});
+	
+</script>
 
 </body>
 </html>

@@ -45,6 +45,8 @@
 	</div>
 
 
+
+<!-------------------- Script -------------------->
 <script>
 	
 	$('#summernote').summernote({
@@ -80,7 +82,6 @@
 	}
 
 </script>
-
 	
 </body>
 </html>
