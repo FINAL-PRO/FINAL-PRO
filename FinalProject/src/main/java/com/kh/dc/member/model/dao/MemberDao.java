@@ -13,7 +13,7 @@ public interface MemberDao {
 	
 	int updateMember(Member member);
 	
-	int deleteMember(String email);
+	int deleteMember(int no);
 	
 	int checkEmailDuplicate(String email);
 	
