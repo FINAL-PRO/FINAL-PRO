@@ -31,22 +31,25 @@
 		)
 	</insert>
 	
-	<!-- SelectOneMember -->
+	<!-- 로그인 시 이메일(아이디)로 멤버 가져오기 -->
 	<select id="selectOneMember" parameterType="string" resultType="member">
 		SELECT * FROM DC_MEMBER_TB WHERE email = #{email}
 	</select>
 	
-<!-- 	<update id="updateMember" parameterType="Member">
-		UPDATE MEMBER 
-		SET PASSWORD = #{password},
-		EMAIL = #{email}, 
-		AGE = #{age}, 
-		PHONE = #{phone}, 
-		ADDRESS = #{address}, 
-		WHERE USERID = #{userId}
+	<!-- 닉네임 찾기 -->
+	<select id="selectOneNickName" parameterType="string" resultType="member">
+		SELECT * FROM DC_MEMBER_TB WHERE NICKNAME = #{nickName}
+	</select>
+	
+	<!-- 회원정보 수정 -->
+	<update id="updateMember" parameterType="Member">
+		UPDATE DC_MEMBER_TB SET
+		NICKNAME = #{nickName}, PASSWORD = #{password}, 
+		LOCATIONNO = #{locationNo}
+		WHERE NO = #{no}
 	</update>
 	
-	<delete id="deleteMember" parameterType="int">
+	<!-- <delete id="deleteMember" parameterType="int">
 		DELETE FROM MEMBER WHERE no = #{no}
 	</delete> -->
 	

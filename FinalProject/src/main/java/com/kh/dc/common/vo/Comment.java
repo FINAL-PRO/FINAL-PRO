@@ -17,6 +17,9 @@ public class Comment implements Serializable{
 	private int boardNo;
 	private String status;
 	
+	// DB join용 변수
+	private String memberName;
+	
 	public Comment() {
 		super();
 	}
@@ -79,9 +82,18 @@ public class Comment implements Serializable{
 		this.status = status;
 	}
 
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
 	@Override
 	public String toString() {
 		return "Comment [no=" + no + ", content=" + content + ", writeDate=" + writeDate + ", memberNo=" + memberNo
-				+ ", boardNo=" + boardNo + ", status=" + status + "]";
+				+ ", boardNo=" + boardNo + ", status=" + status + ", memberName=" + memberName + "]";
 	}
+	
 }

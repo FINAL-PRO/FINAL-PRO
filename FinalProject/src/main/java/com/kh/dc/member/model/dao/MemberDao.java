@@ -20,4 +20,8 @@ public interface MemberDao {
 	int checkNickNameDuplicate(String nickName);
 	
 	List<Location> selectLocationList();
+	
+	Member selectOneNickName(String nickName);
+	
+
 }
