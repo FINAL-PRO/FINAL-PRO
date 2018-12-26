@@ -92,7 +92,7 @@
 				   		<div class="col-md-3"></div>
 				   		<div class="col-md-6">
 				   			<c:set var="selectedLocationNo" value="${member.locationNo}"></c:set>
-					   		<select class="form-control" name="locationNo" id="address">					   		
+					   		<select class="form-control" name="locationNo" id="locationNo">					   		
 					   		<c:forEach items="${locationList}" var="location" >						   			
 					   			<option value="${location.no}" ${ (location.no == selectedLocationNo) ? "selected"  :  "" }> ${location.location}</option>
 					   		</c:forEach>
@@ -100,6 +100,35 @@
 				   		</div>
 				   	<div class="col-md-3" id=""></div>				   		
 				   </div>
+				   
+				    <div class="row address-container" id="address-container">
+				   		<div class="col-md-3">상세 주소</div>
+				   		<div class="col-md-6">
+				   		<input type="text" class="form-control" name="address" id="address" value="${member.address}">	
+				   		</div>	
+				   		<div class="col-md-3" id="">
+				   			<label class=""></label>			            
+				   		</div>		   		
+				   </div>
+				   
+				    <div class="row deposit-container" id="deposit-container">
+				   		<div class="col-md-3">계좌번호</div>
+				   		<div class="col-md-2" style="padding-right:0;">
+				   			<c:set var="selectedBank" value="${member.bank}"></c:set>
+					   		<select class="form-control" name="bank" id="bank" style="padding:0;">					   		
+					   		<c:forEach items="${bankList}" var="bank" >						   			
+					   			<option value="${bank.id}" ${ (bank.value == selectedBank) ? "selected"  :  "" }> ${bank.value}</option>
+					   		</c:forEach>
+					   		</select>				   			
+				   		</div>	
+				   		<div class="col-md-4" style="padding-left:0;">
+				   		<input type="text" class="form-control" name="deposit" id="deposit" value="${member.deposit}" placeholder="-없이 숫자만 입력">	
+				   		</div>	
+				   		<div class="col-md-3" id="">
+				   			<label class=""></label>			            
+				   		</div>		   		
+				   </div>
+				   
 				   
 				   <div class="row btn-container">
 				   <div class="col-md-3"></div>
