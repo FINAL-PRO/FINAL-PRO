@@ -15,5 +15,7 @@ public interface GroupDao {
 	
 	int insertGroup(Group group);
 	
+	int insertBoard(Group group);
+	
 	
 }

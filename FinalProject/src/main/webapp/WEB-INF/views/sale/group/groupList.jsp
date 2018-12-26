@@ -15,18 +15,23 @@
 			width : 800px;
 			height : 300px;
 			background-color: lightblue;
+			position: relative;
 		}
 		
 		.image {
 			width: 150px;
 			height: 150px;
 			background-color: yellow;
+			position: relative;
+			display: inline-block;
 		}
 		
 		.right {
 			width: 650px;
 			height: 150px;
 			background-color: orange;
+			position: relative;
+			display: inline-block;
 		}
 	</style>
 	
@@ -34,6 +39,13 @@
 		function goGroupForm(){
 			location.href = "${pageContext.request.contextPath}/sale/group/groupForm.do";
 		}	
+		
+		$(function(){
+			$('.right').on("click",function(){
+				var boardNo = $(this).siblings('input[name="boardNo"]').val();
+				location.href = "${pageContext.request.contextPath}/sale/group/groupView.do?boardNo="+boardNo;
+			});
+		});
 	</script>
 </head>
 <body>
@@ -42,11 +54,14 @@
 		<c:import url="../../common/menubar.jsp" />
 		<section id="content">
 			<h1>공동구매</h1>
-
+			
+			<input type="button" value="글쓰기" onclick="goGroupForm();" /> <br />
+			
 			<c:forEach items="${list}" var="g">
 				<div class="content-box" onclick="selectOne(this);">
-					<input type="hidden" value="${g.boardNo}" />
-					<div class="content image">왼쪽(사진)</div>
+					<input type="hidden" name=boardNo value="${g.boardNo}" />
+					<div class="content image">
+						<img src="${g.thumbnail}" class="image"/></div>
 					<div class="content right">
 						<p>${g.title}</p>
 						<span>${g.goodsName}</span> <span>${g.price}원</span>
@@ -59,9 +74,7 @@
 			</c:forEach>
 
 			<c:out value="${pageBar}" escapeXml="false" />
-
-			<input type="button" value="글쓰기" onclick="goGroupForm();"/>
-
+			
 		</section>
 		<c:import url="../../common/footer.jsp" />
 	</div>

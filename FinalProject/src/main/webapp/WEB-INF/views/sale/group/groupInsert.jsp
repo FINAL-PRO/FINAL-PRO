@@ -20,15 +20,15 @@
 			
 			<div class="content-form">
 			<form name="boardForm" action="${pageContext.request.contextPath}/sale/group/groupFormEnd.do" method="post">
-				<input type="hidden" name="memberno" value="${member.no}"/> 
+				<input type="hidden" name="memberNo" value="${member.no}" required/>
 				제목 : <input type="text" name="title" /> <br />
-				물품명 : <input type="text" name="goodsname" /> <br />
+				물품명 : <input type="text" name="goodsName" /> <br />
 				가격 : <input type="text" name="price" /> <br />
-				모집인원 : <input type="text" name="maxcount" /> <br />
-				거래방법 : 택배<input type="radio" name="dealtype" value="delivery"/> 
-						직거래<input type="radio" name="dealtype" value="direct"/> <br />
+				모집인원 : <input type="text" name="maxCount" /> <br />
+				거래방법 : 택배<input type="radio" name="dealType" value="delivery"/> 
+						직거래<input type="radio" name="dealType" value="direct"/> <br />
 				계좌번호 : <input type="text" name="deposit"/> <br />
-				마감일 : <input type="text" name="enddate"/> <br />
+				마감일 : <input type="date" name="endDate"/> <br />
 				내용 : <textarea id="summernote" name="content"></textarea> <br />
 				
 				<input type="submit" class="a" value="글쓰기" />

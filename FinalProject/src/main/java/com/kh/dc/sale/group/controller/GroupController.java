@@ -1,7 +1,10 @@
 package com.kh.dc.sale.group.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,12 +63,12 @@ public class GroupController {
 	@RequestMapping("sale/group/groupFormEnd.do")
 	public String insertGroup(Group group,  Model model) {
 		
-		String loc = "";
+		String loc = "sale/group/groupView";
 	
 		if(groupService.insertGroup(group) > 0) {
-			loc = "sale/group/groupView?boardNo="+group.getBoardNo();
+			model.addAttribute("group", groupService.selectOneGroup(group.getBoardNo()));
 		}
-		
+				
 		return loc;
 	}
 	

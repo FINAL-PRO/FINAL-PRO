@@ -33,21 +33,22 @@
 	<select id="selectOneGroup" parameterType="_int" resultMap="resultGroup">
 		SELECT * FROM DC_BOARD_GROUP_VIEW WHERE STATUS='STATUS001' AND BOARDNO = #{boardNo}
 	</select>
-
-	<insert id="insertGroup" parameterType="group">
-		<selectKey keyProperty="boardNo" resultType="_int" order="BEFORE">
-			SELECT SEQ_BOARD.CURRVAL FROM DUAL
-		</selectKey>
-		INSERT INTO DC_BOARD_GROUP_TB VALUES(SEQ_BOARD_GROUP.NEXTVAL, #{price}, #{maxCount}, 0,
-			#{boardNo}, 'STATUS007', 'DEAL002', #{goodsNo}, #{deposit}, #{endDate}, #{goodsName})
-		
-	</insert>
+	
 	<insert id="insertBoard" parameterType="group">
 		INSERT INTO DC_BOARD_TB VALUES(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE,
 			#{content}, 0, 'BOARD003', 'STATUS001', #{memberNo}, NULL)
 		<selectKey keyProperty="boardNo" resultType="_int" order="AFTER">
 			SELECT SEQ_BOARD.CURRVAL FROM DUAL
 		</selectKey>
+	</insert>
+	
+	<insert id="insertGroup" parameterType="group">
+		<selectKey keyProperty="boardNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_BOARD.CURRVAL FROM DUAL
+		</selectKey>
+		INSERT INTO DC_BOARD_GROUP_TB VALUES(SEQ_BOARD_GROUP.NEXTVAL, #{price}, #{maxCount}, 0,
+			#{boardNo}, 'STATUS007', 'DEAL002', 1, #{deposit}, #{endDate}, #{goodsName})
+		
 	</insert>
 
 
