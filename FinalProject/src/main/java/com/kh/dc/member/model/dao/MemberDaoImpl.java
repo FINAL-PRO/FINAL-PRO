@@ -31,8 +31,8 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public int deleteMember(String email) {
-		return  sqlSession.delete("member_mapper.deleteMember", email);
+	public int deleteMember(int no) {
+		return  sqlSession.delete("member_mapper.deleteMember", no);
 	}
 
 	@Override

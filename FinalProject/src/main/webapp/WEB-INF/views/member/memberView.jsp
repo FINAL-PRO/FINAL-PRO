@@ -17,6 +17,10 @@
 		
 		.btn-container>.btn{width:100%}
 		.row label{width: 100%; text-align:left; font-size: 8px;}
+		
+		#modalBtn>button {width: 40%; text-align:center; margin-bottom: 10px;}
+		
+		#modalPassword {width: 80%;}
 				
 	</style>
 </head>
@@ -100,10 +104,44 @@
 				   <div class="row btn-container">
 				   <div class="col-md-3"></div>
 				   <div class="col-md-3 btn-container"><input type="submit" class="btn btn-outline-success" value="수정" ></div>
-				   <div class="col-md-3 btn-container"><input type="button"  class="btn btn-outline-danger" value="삭제"></div>
+				   <div class="col-md-3 btn-container">
+				   	<input type="button"  class="btn btn-outline-danger" 
+				   			data-toggle="modal" data-target="#modalDeleteMember" value="삭제"></div>
 				   <div class="col-md-3" id=""></div>
 				   </div>	
 				</form>
+				
+				<!-- Modal시작 -->
+				<!-- https://getbootstrap.com/docs/4.1/components/modal/#live-demo -->
+				<div class="modal fade" id="modalDeleteMember" tabindex="-1" role="dialog" aria-labelledby="memberDeleteModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="memberDeleteModalLabel">회원 탈퇴 확인</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+			          <!--로그인폼 -->
+			          <!-- https://getbootstrap.com/docs/4.1/components/forms/#overview -->
+			          <form action="" method="post" style="height: auto;">
+				      <div class="modal-body" style="padding-bottom:0;">
+						  <label> 정말로 탈퇴하실건가요? T_T </label>
+						  <div class="row passwordDiv" style=" display:inline;">
+						  <input type="password" class="form-control" name="password" id="modalPassword" 
+						  		placeholder="비밀번호를 입력하세요." style="display: block; margin: 0 auto;" required>
+						  </div>
+				      </div>
+				      <div class="modal-footer" id="modalBtn" style=" display:inline; margin-bottom: 10px;">
+				        <button type="button" class="btn btn-outline-success" id="deleteBtn">회원 탈퇴</button>
+				        <button type="button" class="btn btn-outline-success" data-dismiss="modal">취소</button>
+				      </div>
+					</form>
+				    </div>
+				  </div>
+				</div>
+				<!-- Modal 끝-->			
+				
 			</div>
 			<script>
 			$(function(){
@@ -177,10 +215,7 @@
 			        	});
 			     	}
 				});
-				
-			
-			
-			
+
 			
 			$("#password_").on("keyup", function checkedPassword() {
 				var pwd = $("#password_").val().trim();
@@ -208,7 +243,48 @@
 					$("#pwdChkComment2").text('OK!');
 				}
 			
+			});	
+			
+			$("#deleteBtn").on("click", function(){
+				var no = "${member.no}";
+				var email = "${member.email}";
+				var password = $("#modalPassword").val();
+				
+				console.log(password);
+				console.log(no);
+				
+				$.ajax({
+					type: "GET",
+					url : "${pageContext.request.contextPath}/member/checkPassword.do",
+					data: { email: email, password : password},
+					dataType: "json",
+					success : function(data){
+						if(data > 0){
+							$.ajax({
+								type: "POST",
+								url : "${pageContext.request.contextPath}/member/memberDelete.do",
+								data: {no : no},
+								dataType: "json",
+								success : function(data){
+										alert(data.msg);
+										location.href= "${pageContext.request.contextPath}/";
+								}, error : function(jqxhr, textStatus, errorThrown){
+					                console.log("ajax 처리 실패");
+					                //에러로그
+					                console.log(jqxhr);
+					                console.log(textStatus);
+					                console.log(errorThrown);
+					            }		
+							});		
+						} else{
+							alert("비밀번호가 틀립니다. 다시 한번 확인해주세요.")
+						}
+					}, error : function(jqxhr, textStatus, errorThrown){
+		                console.log("checkPassword ajax 처리 실패");
+		            }							
+				});			
 			});			
+			
 		});
 
 		</script>
