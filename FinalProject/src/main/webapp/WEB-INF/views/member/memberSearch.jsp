@@ -70,11 +70,11 @@
 			
 				<div class="block">
 					<label>비밀번호 찾기</label>
-					<form action="${pageContext.request.contextPath}/sendPwd.do" id="sendPwd">
-					<input type="email" class="form-control" id="email_pwdArea" name="email" placeholder="이메일을 입력하세요.">
-					<input type="text" class="form-control" id="name_pwdArea" name="name" placeholder="이름을 입력하세요.">	
-					<input type="hidden" class="form-control" id="password" name="password" >						
-					<input type="button" class="btn btn-outline-success passwordSearchBtn" onclick="searchPwd();" value="Go!">
+					<form action="sendPwd.do" method="post" id="sendPwd" name="sendPwd">
+						<input type="email" class="form-control" id="email_pwdArea" name="email" placeholder="이메일을 입력하세요.">
+						<input type="text" class="form-control" id="name_pwdArea" name="name" placeholder="이름을 입력하세요.">	
+						<input type="hidden" class="form-control" id="password" name="password" >						
+						<input type="button" class="btn btn-outline-success passwordSearchBtn" onclick="searchPwd();" value="임시 비밀번호 발급받기!">
 					</form>					
 				</div>
 			</div>
@@ -180,8 +180,8 @@
 					dataType: "json",
 					success : function(data) {
 						if(data > 0 ){
-							alert("임시 비밀번호를 가입하신 이메일 " + email + " 로 보내드렸습니다.");
-							//$("#sendPwd").submit();
+							$("#sendPwd").submit();
+							alert("임시 비밀번호를 가입하신 이메일 " + email + " 로 보내드렸습니다.");							
 							location.reload();
 						} else {
 							alert("정보가 일치하지 않습니다. 다시 확인해주세요.");
