@@ -41,7 +41,7 @@
             
             <c:if test="${region.no != null }"> <input type="hidden" name="no" value="${region.no}" required/> </c:if>
             
-            <button type="submit">확인</button>
+            <button type="submit"  onclick="insertRegion()">확인</button>
             <button type="reset">취소</button>			
 			
 			</form>
@@ -55,14 +55,43 @@
 
 
     <script>
-    $(document).ready(function() {
-     $('#summernote').summernote({
-             height: 500,                 // set editor height
-             minHeight: null,             // set minimum height of editor
-             maxHeight: 500,             // set maximum height of editor
-             focus: true                  // set focus to editable area after initializing summernote
-         });
-    });
+    
+	$('#summernote').summernote({
+		height : 500,
+		minHeight : 500,
+		maxHeight : 500,
+		focus : true,
+		callbacks : {
+			onImageUpload : function(files) {
+				for (var i = files.length - 1; i >= 0; i--) {
+					sendFile(files[i]);
+		}}}
+	});
+    	
+    	function sendFile(file) {
+    		var form_data = new FormData();
+    		form_data.append('file', file);
+    		
+    		$.ajax({
+    			url: '${pageContext.request.contextPath}/common/summernote/convertImage.do',
+    			data: form_data,
+    			type: "POST",
+    			cache: false,
+    			contentType: false,
+    			enctype: 'multipart/form-data',
+    			processData: false,
+    			success : function(url) {
+    				$('#summernote').summernote('editor.insertImage', url);
+    			}, error : function(){						
+    				console.log("이미지 업로드 실패");						
+    			}
+    		});
+    	}
+    
+    
+   
+    
+
 
     </script>
 </body>

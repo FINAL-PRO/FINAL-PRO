@@ -15,4 +15,5 @@ public interface RegionDao {
 	public int updateCountRegion(int no);
 	public int regionLikeCount(int no);
 	public int regionLikeCountView(int no);
+	public int deleteRegionLike(int no);
 }

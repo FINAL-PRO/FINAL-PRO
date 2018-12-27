@@ -6,7 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.dc.member.model.vo.Location;
+import com.kh.dc.common.vo.Code;
+import com.kh.dc.common.vo.Location;
 import com.kh.dc.member.model.vo.Member;
 
 @Repository
@@ -53,6 +54,11 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public Member selectOneNickName(String nickName) {
 		return sqlSession.selectOne("member_mapper.selectOneNickName", nickName);
+	}
+
+	@Override
+	public List<Code> selectBankList() {
+		return sqlSession.selectList("member_mapper.selectBankList");
 	}
 
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.dc.community.free.model.service.FreeService;
 import com.kh.dc.common.util.Utils;
@@ -103,6 +104,24 @@ public class FreeController {
 		freeService.freeDelete(no);
 		
 		return "redirect:/community/free/list.do";
+	}
+	
+	@RequestMapping(value="community/free/getListData.do",produces ="application/text; charset=utf8")
+	@ResponseBody
+	public String getListData() {
+		String result = "";
+		
+		List<Board> freeList = freeService.selectFreeListData();
+		
+		System.out.println(freeList);
+		
+		for (Board board : freeList) {
+			result += "<tr><td>";
+			result += "<a href='/dc/community/free/freeView.do?no=" + board.getNo() + "'>" + board.getTitle() + "</a>";
+			result += "</td></tr>";
+		}
+		
+		return result;
 	}
 	
 }

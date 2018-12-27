@@ -12,13 +12,27 @@
 	<script>
 		$(function(){
 			$.ajax({
-				url : "community/free/getList.do",
+				url : "community/free/getListData.do",
 				success:function(data){
 					console.log("ajax 성공");
 					console.log(data);
-					alert(data);
+					
+					$("#noticeTable").append(data);
 				},error : function(data){
 					console.log("ajax error");	
+				},complete : function(){
+					$("#loadingNotice").hide();
+				}
+			});
+			
+			$.ajax({
+				url : "community/free/getListData.do",
+				success:function(data){
+					$("#freeTable").append(data);
+				},error : function(data){
+					console.log("ajax error");	
+				},complete : function(){
+					$("#loadingFree").hide();
 				}
 			});
 		});
@@ -32,66 +46,29 @@
 			<section>
 				<div class="section-left">
 				<!-- <a href="test/select.do">select test</a> -->
-					<img class="adimg" src="${pageContext.request.contextPath}/resources/images/adimg1.jpg" 
-					alt="메인_좌측_세로배너" width="140" height="800"
-					style="margin-left: 1px;margin-right: 1px; margin-top:60px; margin-bottom:60px;
-					border:1px solid red"/>
 				</div>
 				
 				<div class="section-center">
 					<div class="dc-content">
-						<%-- <div class="dc-table table-striped">
-							<div class="dc-table-row dc-table-header">
-								<div class="dc-table-col">#</div>
-								<div class="dc-table-col">First</div>
-								<div class="dc-table-col">Last</div>
-								<div class="dc-table-col">Handle</div>
-							</div>
-							<c:forEach begin="1" end="20">
-							<div class="dc-table-row">
-								<div class="dc-table-col">
-									<h3>첫번째열</h3>
-								</div>
-								<div class="dc-table-col">
-									<h3>두번쨰열</h3>
-								</div>
-								<div class="dc-table-col">
-									<h3>세번째열</h3>
-								</div>
-								<div class="col">
-									<h3>네번째열</h3>
-								</div>
-							</div>
-							</c:forEach>
-						</div> --%>
 						<div class="dc-content-box">
-							<h1>공지 게시판${serverTime}</h1>
+							<h1>공지 게시판</h1>
 							<hr />
-							<table>
-								<tbody>
-								<c:forEach begin="1" end="10">
-									<tr>
-										<td>첫번째열</td>
-										<td>두번째열</td>
-										<td>세번째열</td>
-										<td>네번째열</td>
-									</tr>								
-								</c:forEach>
+							<table class="table table-striped">
+								<tbody id="noticeTable">
+									<div id="loadingNotice" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
 								</tbody>
 							</table>
+						</div>
+						<div class="dc-ad-box" style="border:1px solid black;height:100px;margin:10px">
+							<h1>메인 광고(AD)</h1>
 						</div>
 						
 						<div class="dc-content-box">
 							<h1>자유 게시판</h1>
 							<hr />
-							<table>
-								<tbody>
-									<tr>
-										<td>첫번째열</td>
-										<td>두번째열</td>
-										<td>세번째열</td>
-										<td>네번째열</td>
-									</tr>								
+							<table class="table table-striped">
+								<tbody id="freeTable">
+									<div id="loadingFree" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>							
 								</tbody>
 							</table>
 						</div>
@@ -99,54 +76,17 @@
 						<div class="dc-content-box">
 							<h1>거래 게시판</h1>
 							<hr />
-							<table>
-								<tbody>
-									<tr>
-										<td>첫번째열</td>
-										<td>두번째열</td>
-										<td>세번째열</td>
-										<td>네번째열</td>
-									</tr>								
+							<table class="">
+								<tbody id="saleTable">
+									<div id="loadingSale" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
 								</tbody>
 							</table>
 						</div>
-						
-						<div class="dc-content-box">
-							<h1>정보 게시판</h1>
-							<hr />
-							<table>
-								<tbody>
-									<tr>
-										<td>첫번째열</td>
-										<td>두번째열</td>
-										<td>세번째열</td>
-										<td>네번째열</td>
-									</tr>								
-								</tbody>
-							</table>
-						</div>
-						
-						
 					</div>
 				</div>
 				
 				<div class="section-right">
-						<img class="adimg" src="${pageContext.request.contextPath}/resources/images/adimg1.jpg" 
-						alt="메인_우측_세로배너" width="140" height="800"
-						style="margin-left: 1px;margin-right: 1px; margin-top:60px; margin-bottom:60px;
-						border:1px solid red"/>
-	<!-- 				<div class="section-item">
-						item1
-					</div>
-					<div class="section-item">
-						item2
-					</div>
-					<div class="section-item">
-						item3
-					</div>
-					<div class="section-item">
-						item4
-					</div> -->
+					<c:import url="views/common/rightSection.jsp"/>
 				</div>
 			</section>
 		</main>

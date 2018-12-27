@@ -1,4 +1,4 @@
-package com.kh.dc.member.model.vo;
+package com.kh.dc.common.vo;
 
 import java.io.Serializable;
 

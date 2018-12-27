@@ -75,5 +75,10 @@ public class FreeDaoImpl implements FreeDao{
 		return sqlSession.delete("comment_mapper.deleteComment", no);
 	}
 
+	@Override
+	public List<Board> selectFreeListData() {
+		return sqlSession.selectList("free_mapper.selectFreeListData");
+	}
+
 
 }

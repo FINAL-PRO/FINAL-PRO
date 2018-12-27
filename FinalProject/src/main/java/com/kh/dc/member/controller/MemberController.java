@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.kh.dc.common.vo.Code;
+import com.kh.dc.common.vo.Location;
 import com.kh.dc.member.model.service.MemberService;
-import com.kh.dc.member.model.vo.Location;
 import com.kh.dc.member.model.vo.Member;
 
 @SessionAttributes(value= {"member"})
@@ -265,11 +265,31 @@ public class MemberController {
 	public String memberView(Model model) {
 		
 		List<Location> locationList = memberService.selectLocationList();
+		List<Code> bankList = memberService.selectBankList();
 		
 		System.out.println("로케이션 리스트 : " + locationList);
+		System.out.println("은행 리스트 : " + bankList);
+		
 		model.addAttribute("locationList", locationList);
+		model.addAttribute("bankList", bankList);
 		
 		return "member/memberView";
+		
+	}
+
+	@RequestMapping("/member/memberUpdateView.do")
+	public String memberUpdateView(Model model) {
+		
+		List<Location> locationList = memberService.selectLocationList();
+		List<Code> bankList = memberService.selectBankList();
+		
+		System.out.println("로케이션 리스트 : " + locationList);
+		System.out.println("은행 리스트 : " + bankList);
+		
+		model.addAttribute("locationList", locationList);
+		model.addAttribute("bankList", bankList);
+		
+		return "member/membeUpdate";
 		
 	}
 	

@@ -36,14 +36,14 @@ public class JobBoardServiceImpl implements JobBoardService {
 	public int insertJobBoard(JobBoard jobBoard) {
 		// 
 		int result = 0;
-		int boardNo = 0;
+		int no = 0;
 		
 		try {
 			result = jobBoardDao.insertJobBoard(jobBoard);
 			if(result == Board_SERVICE_ERROR) throw new BoardException();
 			
-			boardNo = jobBoard.getBoardNo();
-			logger.info("baordNo = "+ boardNo);
+			no = jobBoard.getNo();
+			logger.info("no = "+ no);
 			
 			result = jobBoardDao.insertJobBoard(jobBoard);
 			if(result == Board_SERVICE_ERROR) throw new BoardException();

@@ -17,27 +17,28 @@ public class CommentDaoImpl implements CommentDao{
 
 	@Autowired
 	SqlSessionTemplate sqlSession;
-
-	@Override
-	public int commentInsert(Comment comment) {
-		return sqlSession.insert("comment_mapper.insertComment", comment);
-	}
 	
 	@Override
-	public int totalComment(int no) {
-		return sqlSession.selectOne("comment_mapper.totalComment", no);
+	public int totalComment(int cno) {
+		return sqlSession.selectOne("comment_mapper.totalComment", cno);
 	}
 
 	@Override
-	public List<Comment> commentList(int no) {
+	public List<Comment> commentList(int bno) {
 
-		return sqlSession.selectList("comment_mapper.selectCommentList", no);
+		return sqlSession.selectList("comment_mapper.selectCommentList", bno);
 	}
 
 	@Override
-	public int commentDelete(int no) {
-		return sqlSession.delete("comment_mapper.deleteComment", no);
+	public int commentDelete(int cno) {
+		return sqlSession.delete("comment_mapper.deleteComment", cno);
 	}
+
+	@Override
+	public void commentInsert(Comment comment) {
+		sqlSession.insert("comment_mapper.insertComment", comment);
+	}
+
 
 
 }
