@@ -35,6 +35,7 @@ public class AdminBoardController {
 		System.out.println("어드민 보드 리스트 : " + boardList);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardType", boardType);
+		model.addAttribute("boardStatus", boardStatus);
 		model.addAttribute("boardTypeList", boardTypeList);
 		model.addAttribute("boardStatusList", boardStatusList);
 		
