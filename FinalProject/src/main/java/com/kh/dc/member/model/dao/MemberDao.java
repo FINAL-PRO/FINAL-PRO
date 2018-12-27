@@ -2,7 +2,9 @@ package com.kh.dc.member.model.dao;
 
 import java.util.List;
 
+import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.Code;
+import com.kh.dc.common.vo.Comment;
 import com.kh.dc.common.vo.Location;
 import com.kh.dc.member.model.vo.Member;
 
@@ -25,6 +27,10 @@ public interface MemberDao {
 	Member selectOneNickName(String nickName);
 	
 	List<Code> selectBankList();
+	
+	List<Board> selectMyBoardList(int no);
+	
+	List<Comment> selectMyCommentList(int no);
 	
 
 }
