@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.dc.common.vo.Board;
 import com.kh.dc.info.region.model.service.RegionService;
 import com.kh.dc.info.region.model.vo.Region;
 import com.kh.dc.info.region.model.vo.RegionRe;
@@ -138,6 +140,27 @@ public class RegionController {
 		rs.regionLikeCount(no);
 		
 		return "info/region/regionDetail";
+	}
+	
+	
+	
+	@RequestMapping(value="info/region/getRegionListData.do",produces ="application/text; charset=utf8")
+	@ResponseBody
+	public String getRegionListData() {
+		String result = "";
+		
+		List<Region> regionList = rs.regionList();
+
+		
+		for (Region region : regionList) {
+			result += "<tr><td>";
+			result += "<a href='/dc/info/region/rgSelectOne.do?no=" + region.getNo() + "'>" + region.getTitle() + "</a>";
+			result += "</td></tr>";
+			
+			System.out.println("result : " + result);
+		}
+		
+		return result;
 	}
 	
 	
