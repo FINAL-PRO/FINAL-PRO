@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.Code;
+import com.kh.dc.common.vo.Comment;
 import com.kh.dc.common.vo.Location;
 import com.kh.dc.member.model.service.MemberService;
 import com.kh.dc.member.model.vo.Member;
@@ -289,7 +291,7 @@ public class MemberController {
 		model.addAttribute("locationList", locationList);
 		model.addAttribute("bankList", bankList);
 		
-		return "member/membeUpdate";
+		return "member/memberUpdate";
 		
 	}
 	
@@ -346,6 +348,22 @@ public class MemberController {
 		
 		return hmap;
 		
+	}
+	
+	@RequestMapping("/member/myContentList.do")
+	public String myContentList(Member member, Model model) {
+		
+		int mNo = member.getNo();
+		
+		System.out.println("mNo : " + mNo);
+		
+		List<Board> boardList = memberService.selectMyBoardList(mNo);
+		List<Comment> commentList = memberService.selectMyCommentList(mNo);	
+		
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("commentList", commentList);
+		
+		return "mypage/myContentList";
 	}
 	
 

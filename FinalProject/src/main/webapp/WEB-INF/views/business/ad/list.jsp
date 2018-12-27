@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>동커</title>
+	<title>동커</title>	
 	<c:import url="../../common/header.jsp"/>
 </head>
 <body>

@@ -15,20 +15,31 @@
 		div#enroll-container input, div#enroll-container select {margin-bottom:10px;}
 		div#enroll-container .col-md-3{text-align: right; padding-right:10px;}
 		
+		.dc-content-box{padding: 40px;}
 		.btn-container>.btn{width:100%}
 		.row label{width: 100%; text-align:left; font-size: 8px;}
 		
-		#modalBtn>button {width: 40%; text-align:center; margin-bottom: 10px;}
-		
+		#modalBtn>button {width: 40%; text-align:center; margin-bottom: 10px;}		
 		#modalPassword {width: 80%;}
 				
 	</style>
 </head>
 <body>
-	<div id="container">
-		<c:import url="../common/menubar.jsp"/>
-		<section id="content">
-			<div id="enroll-container">
+	<c:import url="../common/menubar.jsp"/>
+	<div class="wrap_inner">
+		<main id="container">
+			<section>
+				<div class="section-left">
+					<!-- 내용없음 -->
+				</div>
+				
+				<div class="section-center">
+					<div class="dc-content">
+						<div class="dc-content-title">
+							<h1>제목</h1>
+						</div>
+						<div class="dc-content-box">
+							<div id="enroll-container">
 				<form name="memberEnrollFrm" action="memberUpdate.do" method="post" onsubmit="return fn_enroll_validate();" >								 
 					<div class="row email-container" id="email-container">
 						<div class="col-md-3">이메일</div>
@@ -125,7 +136,7 @@
 				   		<input type="text" class="form-control" name="deposit" id="deposit" value="${member.deposit}" placeholder="-없이 숫자만 입력">	
 				   		</div>	
 				   		<div class="col-md-3" id="">
-				   			<label class=""></label>			            
+				   			<label class="guide" id="depositLabel"></label>			            
 				   		</div>		   		
 				   </div>
 				   
@@ -172,7 +183,19 @@
 				<!-- Modal 끝-->			
 				
 			</div>
-			<script>
+						</div>
+					</div>
+				</div>
+				
+				<div class="section-right">
+					<c:import url="../common/rightSection.jsp"/>
+				</div>
+			</section>
+		</main>
+	</div>
+	<c:import url="../common/footer.jsp"/>
+	
+	<script>
 			$(function(){
 				
 				/* 이메일 중복검사 이벤트 추가 */
@@ -312,13 +335,15 @@
 		                console.log("checkPassword ajax 처리 실패");
 		            }							
 				});			
-			});			
+			});	
+			
+			/* 계좌번호에 숫자가 아닌 문자가 들어갔을 때 라벨 띄움*/
+			$("#deposit").on("keyup", function(){				
+				this.value = this.value.replace(/[^0-9\.]/g,'');				
+			});
 			
 		});
 
 		</script>
-		</section>
-		<c:import url="../common/footer.jsp"/>
-	</div>
 </body>
 </html>

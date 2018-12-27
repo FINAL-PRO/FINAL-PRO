@@ -22,6 +22,7 @@ public class Board implements Serializable {
 	// DB join용 변수
 	private String memberName;
 	private String thumbnail;
+	private String boardType;
 	
 	public Board() {
 		super();
@@ -110,11 +111,22 @@ public class Board implements Serializable {
 		this.thumbnail = thumbnail;
 	}
 
+	public String getBoardType() {
+		return boardType;
+	}
+
+	public void setBoardType(String boardType) {
+		this.boardType = boardType;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [no=" + no + ", title=" + title + ", writeDate=" + writeDate + ", content=" + content
 				+ ", viewCount=" + viewCount + ", type=" + type + ", status=" + status + ", memberNo=" + memberNo
-				+ ", category=" + category + ", memberName=" + memberName + ", thumbnail=" + thumbnail + "]";
+				+ ", category=" + category + ", memberName=" + memberName + ", thumbnail=" + thumbnail + ", boardType="
+				+ boardType + "]";
 	}
+
+
 
 }

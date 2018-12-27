@@ -4,6 +4,18 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="member_mapper">
+
+	<resultMap type="board" id="resultBoard">
+		<id property="no" column="no" />
+		<result property="boardType"  column="value" />
+	</resultMap>
+	
+	<resultMap type="comment" id="resultComment">
+		<id property="no" column="no" />
+		<result property="boardType"  column="value" />
+		<result property="boardTitle"  column="title" />
+	</resultMap>
+	
 	<!-- 회원가입 페이지의 주소리스트 띄우기 -->
 	<select id="selectLocationList" resultType="location">
 		SELECT * FROM DC_LOCATION_TB WHERE LOCATION LIKE '%구' ORDER BY 3
@@ -13,6 +25,24 @@
 	<select id="selectBankList" resultType="code">
 		SELECT * FROM DC_CODE_TB WHERE ID LIKE 'BANK%'
 	</select>
+	
+	<!-- 내가 쓴 게시물 리스트 가져오기 -->
+	<select id="selectMyBoardList" parameterType="_int" resultMap="resultBoard">
+		SELECT NO, C.VALUE, TITLE, WRITEDATE, VIEWCOUNT
+		FROM DC_BOARD_TB B
+		JOIN DC_CODE_TB C ON (B.TYPE = C.ID)
+		WHERE MEMBERNO = #{no}
+	</select>
+	
+	<!-- 내가 쓴 댓글 리스트 가져오기 -->
+	<select id="selectMyCommentList" parameterType="_int" resultMap="resultComment">
+		SELECT C.VALUE, B.TITLE, CO.CONTENT, CO.WRITEDATE
+		FROM DC_COMMENT_TB CO
+		JOIN DC_BOARD_TB B ON CO.BOARDNO = B.NO
+		JOIN DC_CODE_TB C ON  c.id = B.TYPE
+		WHERE CO.MEMBERNO = #{no}
+	</select>	
+
 	
 	<!-- 닉네임 중복 체크 -->
 	<select id="checkNickNameDuplicate" parameterType="String" resultType="_int">
@@ -27,7 +57,8 @@
      	FROM DC_MEMBER_TB
     	WHERE EMAIL = #{email}
 	</select>
-
+	
+	
 	<!-- 회원가입 -->
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO DC_MEMBER_TB VALUES(
@@ -54,10 +85,12 @@
 		WHERE NO = #{no}
 	</update>
 	
-	<delete id="deleteMember" parameterType="int">
+	<!-- 회원 삭제 -->
+	<delete id="deleteMember" parameterType="_int">
 		DELETE FROM DC_MEMBER_TB WHERE no = #{no}
 	</delete>
 	
+		
 
 </mapper>
 

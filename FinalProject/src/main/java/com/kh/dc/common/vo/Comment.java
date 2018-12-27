@@ -19,6 +19,8 @@ public class Comment implements Serializable{
 	
 	// DB join용 변수
 	private String memberName;
+	private String boardType;
+	private String boardTitle;
 	
 	public Comment() {
 		super();
@@ -88,6 +90,22 @@ public class Comment implements Serializable{
 
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
+	}
+
+	public String getBoardType() {
+		return boardType;
+	}
+
+	public void setBoardType(String boardType) {
+		this.boardType = boardType;
+	}
+
+	public String getBoardTitle() {
+		return boardTitle;
+	}
+
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
 	}
 
 	@Override
