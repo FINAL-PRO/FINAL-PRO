@@ -31,6 +31,7 @@
 	
 	<insert id="regionLikeCount" parameterType="like">
 		INSERT INTO DC_LIKE_TB VALUES(SEQ_LIKE.NEXTVAL, SYSDATE, #{no}, 1)
+
 	</insert>
 	
 	<select id="regionLikeCountView" resultType="_int">
