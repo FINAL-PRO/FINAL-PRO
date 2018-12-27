@@ -23,21 +23,33 @@
 				<div class="dc-content">
 					<div class="dc-content-title">
 						<h1>어드민 보드 리스트</h1>
-					</div>
-					<div class="dc-content-box">
+						<a href="${pageContext.request.contextPath}/admin/board/notice/writeView.do">공지글 쓰기</a>
+						<br />
+						게시판별 보기
 						<select id="boardTypeNo">
 							<c:forEach items="${boardTypeList}" var="type">
 								<option value="${type.id}"
 									<c:if test="${type.id eq boardType}">selected</c:if>>${type.value}</option>
 							</c:forEach>
 						</select>
+						<br />
+						상태별 보기
+						<select id="boardStatusNo">
+							<c:forEach items="${boardStatusList}" var="type">
+								<option value="${type.id}"
+									<c:if test="${type.id eq boardType}">selected</c:if>>${type.value}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<div class="dc-content-box">
+
 						<div class="row table-row">
 							<div class="col column">번호</div>
 							<div class="col column">이름</div>
 							<div class="col column">작성일</div>
 						</div>
 						<c:forEach var="board" items="${boardList}">
-							<div class="row table-row">
+							<div class="row table-row" id="comment_${board.no}">
 								<div class="col column">${board.no}</div>
 								<div class="col column">
 									<a
@@ -65,6 +77,13 @@
 							location.href = "${pageContext.request.contextPath}/admin/board/list.do?boardType="
 									+ $("#boardTypeNo").val();
 						});
+		$("#boardStatusNo")
+		.on(
+				'change',
+				function() {
+					location.href = "${pageContext.request.contextPath}/admin/board/list.do?boardStatus="
+							+ $("#boardStatusNo").val();
+				});
 	</script>
 </body>
 </html>

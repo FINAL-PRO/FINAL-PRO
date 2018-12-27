@@ -21,12 +21,22 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	}
 
 	@Override
-	public List<Board> selectBoardList(String boardType) {
-		return boardDao.selectBoardList(boardType);
+	public List<Code> selectBoardTypeList() {
+		return boardDao.selectBoardTypeList();
 	}
 
 	@Override
-	public List<Code> selectBoardTypeList() {
-		return boardDao.selectBoardTypeList();
+	public int insertNotice(Board board) {
+		return boardDao.insertNotice(board);
+	}
+
+	@Override
+	public List<Board> selectBoardList(String boardType, String boardStatus) {
+		return boardDao.selectBoardList(boardType, boardStatus);
+	}
+
+	@Override
+	public List<Code> selectBoardStatusList() {
+		return boardDao.selectBoardStatusList();
 	}
 }
