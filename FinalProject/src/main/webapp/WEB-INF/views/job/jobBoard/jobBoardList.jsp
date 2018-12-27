@@ -31,8 +31,8 @@
     </style>
 	<script>
 		function jobBoardInsert(){
-			location.href = "${pageContext.request.contextPath}/job/jobBoard/jobBoardInsertForm.do?no="+${member.no};
-		}
+			location.href = "${pageContext.request.contextPath}/job/jobBoard/jobBoardInsertForm.do?no=${member.no}";
+		};
 		
 		$(function(){
 			$("div[id]").on("click",function(){
@@ -109,7 +109,7 @@
 						<c:out value="${pageBar}" escapeXml="false"/>
 					</div>
 				</div>
-			<div class="section-right">
+						<div class="section-right">
 			<img class="adimg" src="${pageContext.request.contextPath}/resources/images/adimg1.jpg" 
 			alt="메인_우측_세로배너" width="140" height="800"
 			style="margin-left: 1px;margin-right: 1px; margin-top:60px; margin-bottom:60px;
