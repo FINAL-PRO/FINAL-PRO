@@ -19,4 +19,8 @@ public interface JobBoardDao {
 	
 	int deleteJobBoard(int no);
 
+	List<Map<String, String>> selectJobBoardComPop(int cPage, int numPerPage);
+
+	int selectJobBoardComPopTotalContents();
+
 }

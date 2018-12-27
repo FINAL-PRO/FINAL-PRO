@@ -16,17 +16,16 @@
 	<main id="container">
 		<section>
 			<div class="section-left">
-			<!-- <a href="test/select.do">select test</a> -->
-				<img class="adimg" src="${pageContext.request.contextPath}/resources/images/adimg1.jpg" 
-				alt="메인_좌측_세로배너" width="140" height="800"
-				style="margin-left: 1px;margin-right: 1px; margin-top:60px; margin-bottom:60px;
-				border:1px solid red"/>
+					<!-- 내용없음 -->
 			</div>
 			
 			<div class="section-center">
-			<h1>구인구직 게시판 작성페이지</h1>
-			<div id="jobBoard-container">
-				<div class="dc-content"><br />
+			<div class="dc-content">
+				<div class="dc-content-title">
+				<h1>구인구직 게시판 작성페이지</h1>
+				</div>
+				<form id="jInsForm" method="post" action="${pageContext.request.contextPath}/job/jobBoard/insertJobBoard.do">
+				<div class="dc-content-box"><br />
 				제목 : <input type="text" class="" placeholder="제목" name="jobBoardTitle" id="jobBoardTitle" required/><br /><br />
 				작성자 : <input type="text" class="" value="${member.nickName}" readonly required/><br /><br />
 				구인구직여부 : 
@@ -42,16 +41,23 @@
 				<input type="date" name="endJob"/> <br /><br />
 				
 				근무시간 : 
-				<input type="number" min="0" max="24" class="" name="startHour" id="startTime" required/>시 
-				<input type="number" min="0" max="60" class="" name="startMin" id="startMin" required/>분   ~   
-				<input type="number" min="0" max="24" class="" name="endTime" id="endTime" required/>시
-				<input type="number" min="0" max="60" class="" name="endMin" id="endMin" required/>분<br /><br />
+				<input type="number" min="0" max="24" class="" id="startTime" required/>시 
+				<input type="number" min="0" max="60" class="" id="startMin" required/>분   ~   
+				<input type="number" min="0" max="24" class="" id="endTime" required/>시
+				<input type="number" min="0" max="60" class="" id="endMin" required/>분<br /><br />
 				
 				상호명 :
-				<input type="text" class="" placeholder="상호명" name="companyNo" id="companyNo" required/>
-				<input type="text" class="" placeholder="근무장소" name="endTime" id="endTime" required/>
-				<button type="button" onclick="selectCompany();">업체찾기</button><br /><br />
+				<input type="hidden" class="" id="companyNo" name="companyNo" value=""/>
+				<input type="text" class="" placeholder="상호명" id="companyName" onclick="selectCompany();" required/>
+				<input type="text" class="" placeholder="근무장소" id="location" onclick="selectCompany();" required/>
 				
+				<script type="text/javascript">
+					function selectCompany() {
+						window.name = "jobBoardInsertForm";	
+						var childWindow = window.open("jobBoardComPop.do", "popup01", "width=500, height=400");
+					}
+				</script>
+				<br/><br/>
 				고용형태 :
 				<select name="jobType" id="jobType" size="1">
 					<option value="JOBTYPE001" selected>정규직</option>
@@ -67,18 +73,15 @@
 					<option value="SALTYPE004">월급</option>
 					<option value="SALTYPE005">연봉</option>
 				</select><br/><hr />
+			내용 : <textarea id="summernote" name="content"></textarea> <br />
+			<button type="submit">게시글 등록</button>
 			</div>
-			
-			내용 : 
-			<textarea id="summernote" name="content"></textarea> <br />
-			</div>
-			<button type="submit" onclick="insertJobTable();">게시글 등록</button>	
+			</form>
+		</div>
 			</div>
 			<div class="section-right">
-			<img class="adimg" src="${pageContext.request.contextPath}/resources/images/adimg1.jpg" 
-			alt="메인_우측_세로배너" width="140" height="800"
-			style="margin-left: 1px;margin-right: 1px; margin-top:60px; margin-bottom:60px;
-			border:1px solid red"/></div>
+				<c:import url="../../common/rightSection.jsp"/>
+			</div>
 		</section>
 		<c:import url="../../common/footer.jsp"/>
 	</main>
