@@ -38,7 +38,11 @@
 	</select>
 	
 	<delete id="deleteComment" parameterType="_int">
-		DELETE DC_COMMENT_TB WHERE NO = #{no};
+		DELETE DC_COMMENT_TB WHERE NO = #{cno}
 	</delete>
+	
+	<update id="updateComment" parameterType="comment">
+		UPDATE DC_COMMENT_TB SET CONTENT = #{content} WHERE NO = #{cno}
+	</update>
 	
 </mapper>

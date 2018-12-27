@@ -1,9 +1,6 @@
 package com.kh.dc.comment.model.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,13 +25,24 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public int commentDelete(int no) {
-		return commentDao.commentDelete(no);
+	public int commentDelete(int cno) {
+		return commentDao.commentDelete(cno);
 	}
 
 	@Override
 	public void commentInsert(Comment comment) {
 		commentDao.commentInsert(comment);
 	}
+
+	@Override
+	public int commentUpdate(Comment comment) {
+		return commentDao.commentUpdate(comment);
+	}
+
+/*	@Override
+	public List<Comment> commentList() {
+		// TODO Auto-generated method stub
+		return commentDao.commentList();
+	}*/
 		
 }
