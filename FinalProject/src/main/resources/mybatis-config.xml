@@ -43,6 +43,7 @@
 		<typeAlias type="com.kh.dc.common.vo.ReportCategory" alias="reportCategory"/>
 		<typeAlias type="com.kh.dc.common.vo.Report" alias="report"/>
 		<typeAlias type="com.kh.dc.common.vo.Location" alias="location"/>
+		<typeAlias type="com.kh.dc.common.vo.AdminBoard" alias="aBoard"/>
 		
 
 		

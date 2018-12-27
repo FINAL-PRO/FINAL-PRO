@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dc.common.vo.AdminBoard;
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.Code;
 
@@ -14,11 +15,6 @@ public class AdminBoardDaoImpl implements AdminBoardDao {
 
 	@Autowired
 	SqlSessionTemplate sqlSession;
-	
-	@Override
-	public List<Board> selectBoardList(String boardType) {
-		return sqlSession.selectList("admin_mapper.selectBoardList", boardType);
-	}
 
 	@Override
 	public Board selectBoardOne(int boardNo) {
@@ -28,6 +24,23 @@ public class AdminBoardDaoImpl implements AdminBoardDao {
 	@Override
 	public List<Code> selectBoardTypeList() {
 		return sqlSession.selectList("admin_mapper.selectBoardTypeList");
+	}
+
+	@Override
+	public int insertNotice(Board board) {
+		return sqlSession.insert("admin_mapper.insertNotice", board);
+	}
+
+	@Override
+	public List<Board> selectBoardList(String boardType, String boardStatus) {
+		AdminBoard aBoard = new AdminBoard(boardType, boardStatus);
+		System.out.println("TYPES : " + aBoard);
+		return sqlSession.selectList("admin_mapper.selectBoardList", aBoard);
+	}
+
+	@Override
+	public List<Code> selectBoardStatusList() {
+		return sqlSession.selectList("admin_mapper.selectBoardStatusList");
 	}
 	
 	
