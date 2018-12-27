@@ -15,4 +15,6 @@ public interface AdminBoardService {
 	public int insertNotice(Board board);
 
 	public List<Code> selectBoardStatusList();
+
+	public int changeBoardStatus(int boardNo, String status);
 }

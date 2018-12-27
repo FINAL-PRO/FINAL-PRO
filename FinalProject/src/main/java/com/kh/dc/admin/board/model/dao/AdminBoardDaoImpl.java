@@ -1,6 +1,8 @@
 package com.kh.dc.admin.board.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,15 @@ public class AdminBoardDaoImpl implements AdminBoardDao {
 	@Override
 	public List<Code> selectBoardStatusList() {
 		return sqlSession.selectList("admin_mapper.selectBoardStatusList");
+	}
+
+	@Override
+	public int changeBoardStatus(int boardNo, String status) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boardNo", boardNo);
+		map.put("status", status);
+		
+		return sqlSession.update("admin_mapper.changeBoardStatus", map);
 	}
 	
 	

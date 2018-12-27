@@ -16,4 +16,6 @@ public interface AdminBoardDao {
 	public int insertNotice(Board board);
 
 	public List<Code> selectBoardStatusList();
+
+	public int changeBoardStatus(int boardNo, String status);
 }
