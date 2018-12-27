@@ -74,10 +74,33 @@ public class JobBoardController {
 			msg = "게시글 등록 성공!";
 			loc = "/jobBoard/jobBoardDetail.do?no"+ jobBoard.getNo();
 		} else {
-			msg = "게시글 등록 성공!";
+			msg = "게시글 등록 실패!";
 		}
 		model.addAttribute("loc", loc).addAttribute("msg", msg);
 		
 		return "common/msg";
+	}
+	
+	@RequestMapping("/job/jobBoard/jobBoardComPop.do")
+	public String jobBoardComPop(
+			@RequestParam(value="cPage", required=false, defaultValue="1")
+			int cPage, 
+			Model model) {
+		
+		int numPerPage = 5;
+		
+		ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>(
+				jobBoardService.selectJobBoardComPop(cPage, numPerPage));
+		
+		int totalContents = jobBoardService.selectJobBoardComPopTotalContents();
+		
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "jobBoardComPop.do");
+		
+		model.addAttribute("list", list)
+		.addAttribute("totalContents", totalContents)
+		.addAttribute("numPerPage", numPerPage)
+		.addAttribute("pageBar", pageBar);
+		
+		return "job/jobBoard/jobBoardComPop";
 	}
 }

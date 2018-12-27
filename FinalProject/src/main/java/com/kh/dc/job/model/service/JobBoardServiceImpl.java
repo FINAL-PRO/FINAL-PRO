@@ -86,4 +86,14 @@ public class JobBoardServiceImpl implements JobBoardService {
 		return result;
 	}
 
+	@Override
+	public List<Map<String, String>> selectJobBoardComPop(int cPage, int numPerPage) {
+		//
+		return jobBoardDao.selectJobBoardComPop(cPage, numPerPage);
+	}
+	@Override
+	public int selectJobBoardComPopTotalContents() {
+		// 
+		return jobBoardDao.selectJobBoardComPopTotalContents();
+	}
 }

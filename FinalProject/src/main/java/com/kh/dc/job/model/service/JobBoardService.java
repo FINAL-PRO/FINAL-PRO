@@ -1,5 +1,6 @@
 package com.kh.dc.job.model.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -22,5 +23,9 @@ public interface JobBoardService {
 	int updateJobBoard(JobBoard jobBoard);
 	
 	int deleteJobBoard(int no);
+
+	List<Map<String, String>> selectJobBoardComPop(int cPage, int numPerPage);
+
+	int selectJobBoardComPopTotalContents();
 	
 }

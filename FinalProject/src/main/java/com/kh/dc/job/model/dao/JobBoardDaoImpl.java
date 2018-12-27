@@ -52,5 +52,17 @@ public class JobBoardDaoImpl implements JobBoardDao {
 		// 
 		return sqlSession.update("jobBoard_mapper.deleteJobBoard", no);
 	}
-
+	
+	@Override
+	public List<Map<String, String>> selectJobBoardComPop(int cPage, int numPerPage) {
+		// 
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		
+		return sqlSession.selectList("jobBoard_mapper.selectJobBoardComPop", null, rowBounds);
+	}
+	@Override
+	public int selectJobBoardComPopTotalContents() {
+		// 
+		return sqlSession.selectOne("jobBoard_mapper.selectJobBoardComPopTotalContents");
+	}
 }
