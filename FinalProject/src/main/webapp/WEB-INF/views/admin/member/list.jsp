@@ -62,10 +62,7 @@
 	</div>
 	<c:import url="../../common/footer.jsp" />
 	<script>
-		$("#authNo")
-				.on(
-						'change',
-						function() {
+		$("#authNo").on('change',function() {
 							location.href = "${pageContext.request.contextPath}/admin/member/list.do?authNo="
 									+ $("#authNo").val();
 						});

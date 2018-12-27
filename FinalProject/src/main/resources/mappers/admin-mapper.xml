@@ -57,4 +57,9 @@
 		(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, #{type}, #{status}, #{memberNo}, NULL)
 	</insert>
 	
+	<!-- 게시글 상태 변경하기 -->
+	<update id="changeBoardStatus" parameterType="map">
+		UPDATE DC_BOARD_TB SET STATUS=#{status} WHERE NO = #{boardNo}
+	</update>
+	
 </mapper>

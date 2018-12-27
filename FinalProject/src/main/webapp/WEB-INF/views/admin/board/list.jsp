@@ -53,12 +53,15 @@
 								</div>
 								<div class="col column">${board.writeDate}</div>
 								<div class="col column">
-									<select id="changeStatusNo">
+									<select id="${board.no}_changeStatusNo">
 										<c:forEach items="${boardStatusList}" var="status">
-											<option value="${status.id}">${status.value}</option>
+											<c:if test="${boardStatus ne status.id}">
+												<option value="${status.id}">${status.value}</option>
+											</c:if>
+											
 										</c:forEach>
 									</select>
-									<button>상태변경</button>
+									<button onclick="changeBoardStatus(${board.no});">상태변경</button>
 								</div>
 							</div>
 						</c:forEach>
@@ -82,6 +85,26 @@
 					location.href = "${pageContext.request.contextPath}/admin/board/list.do?boardType="
 						+ $("#boardTypeNo").val() + "&boardStatus=" + $("#boardStatusNo").val();
 				});
+		
+		function changeBoardStatus(boardNo){
+			var status = $("#"+ boardNo + "_changeStatusNo").val();
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/admin/board/changeBoardStatus.do?boardNo="
+						+ boardNo+ "&status=" + status,
+				success : function(data){
+					if(data == "1"){
+						alert("변경 성공");
+						location.reload();
+					}else{
+						alert("변경 실패");
+					}
+					
+				},error : function(){
+					alert("error");
+				}
+			});
+		}
 	</script>
 </body>
 </html>

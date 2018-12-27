@@ -72,4 +72,14 @@ public class AdminBoardController {
 		
 		return "redirect:/admin/board/list.do";
 	}
+	
+	@RequestMapping("admin/board/changeBoardStatus.do")
+	@ResponseBody
+	public int changeBoardStatus(@RequestParam int boardNo, @RequestParam String status) {
+		System.out.println("상태 체크 : " + status + " 글번호 : " + boardNo);
+		
+		int result = boardService.changeBoardStatus(boardNo, status);
+		
+		return result;
+	}
 }

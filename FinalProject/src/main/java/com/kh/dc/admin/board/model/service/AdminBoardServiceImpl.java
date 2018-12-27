@@ -39,4 +39,9 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	public List<Code> selectBoardStatusList() {
 		return boardDao.selectBoardStatusList();
 	}
+
+	@Override
+	public int changeBoardStatus(int boardNo, String status) {
+		return boardDao.changeBoardStatus(boardNo, status);
+	}
 }
