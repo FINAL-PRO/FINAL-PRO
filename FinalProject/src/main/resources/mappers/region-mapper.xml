@@ -20,7 +20,12 @@
 	 	UPDATE DC_BOARD_TB SET TITLE= #{title}, CONTENT = #{content}, WRITEDATE = SYSDATE WHERE NO= #{no}
 	</update>
 	
-	<delete id="deleteRegion" parameterType="_int">
+	<!-- like 삭제 -->
+	<delete id="deleteRegionLike" parameterType="_int">
+	 DELETE FROM DC_LIKE_TB WHERE BOARDNO = #{no}
+	</delete>
+	
+	<delete id="deleteRegion" parameterType="_int">	
 		DELETE FROM DC_BOARD_TB WHERE NO = #{no}
 	</delete>
 	

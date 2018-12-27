@@ -276,6 +276,22 @@ public class MemberController {
 		return "member/memberView";
 		
 	}
+
+	@RequestMapping("/member/memberUpdateView.do")
+	public String memberUpdateView(Model model) {
+		
+		List<Location> locationList = memberService.selectLocationList();
+		List<Code> bankList = memberService.selectBankList();
+		
+		System.out.println("로케이션 리스트 : " + locationList);
+		System.out.println("은행 리스트 : " + bankList);
+		
+		model.addAttribute("locationList", locationList);
+		model.addAttribute("bankList", bankList);
+		
+		return "member/membeUpdate";
+		
+	}
 	
 	@RequestMapping("member/memberUpdate.do")
 	public String memberUpdate(Member member, Model model) {

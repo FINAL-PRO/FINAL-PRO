@@ -12,13 +12,27 @@
 	<script>
 		$(function(){
 			$.ajax({
-				url : "community/free/getList.do",
+				url : "community/free/getListData.do",
 				success:function(data){
 					console.log("ajax 성공");
 					console.log(data);
-					alert(data);
+					
+					$("#noticeTable").append(data);
 				},error : function(data){
 					console.log("ajax error");	
+				},complete : function(){
+					$("#loadingNotice").hide();
+				}
+			});
+			
+			$.ajax({
+				url : "community/free/getListData.do",
+				success:function(data){
+					$("#freeTable").append(data);
+				},error : function(data){
+					console.log("ajax error");	
+				},complete : function(){
+					$("#loadingFree").hide();
 				}
 			});
 		});
@@ -39,16 +53,9 @@
 						<div class="dc-content-box">
 							<h1>공지 게시판</h1>
 							<hr />
-							<table>
-								<tbody>
-									<c:forEach begin="1" end="10">
-										<tr>
-											<td>첫번째열</td>
-											<td>두번째열</td>
-											<td>세번째열</td>
-											<td>네번째열</td>
-										</tr>								
-									</c:forEach>								
+							<table class="table table-striped">
+								<tbody id="noticeTable">
+									<div id="loadingNotice" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
 								</tbody>
 							</table>
 						</div>
@@ -59,14 +66,9 @@
 						<div class="dc-content-box">
 							<h1>자유 게시판</h1>
 							<hr />
-							<table>
-								<tbody>
-									<tr>
-										<td>첫번째열</td>
-										<td>두번째열</td>
-										<td>세번째열</td>
-										<td>네번째열</td>
-									</tr>								
+							<table class="table table-striped">
+								<tbody id="freeTable">
+									<div id="loadingFree" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>							
 								</tbody>
 							</table>
 						</div>
@@ -74,14 +76,9 @@
 						<div class="dc-content-box">
 							<h1>거래 게시판</h1>
 							<hr />
-							<table>
-								<tbody>
-									<tr>
-										<td>첫번째열</td>
-										<td>두번째열</td>
-										<td>세번째열</td>
-										<td>네번째열</td>
-									</tr>								
+							<table class="">
+								<tbody id="saleTable">
+									<div id="loadingSale" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
 								</tbody>
 							</table>
 						</div>

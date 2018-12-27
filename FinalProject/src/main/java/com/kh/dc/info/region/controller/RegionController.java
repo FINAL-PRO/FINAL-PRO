@@ -104,19 +104,22 @@ public class RegionController {
 	// 삭제
 	@RequestMapping("info/region/deleteRegion.do")
 	public String deleteRegion(@RequestParam int no) {
+		rs.deleteRegionLike(no);
 		rs.deleteRegion(no);
 		
-		return "redirect:/info/region/list.do";
+		
+		return "info/region/list";
 	}
 	
 	
 	// 댓글 추가
-	@RequestMapping(value="info/region/reInsertRegion.do",method=RequestMethod.POST)
-	public String reInsertRegion(RegionRe rre) {
-		System.out.println( "댓글 정보 : " + rre);
+	@RequestMapping("info/region/regionReInsert.do")
+	public String reInsertRegion(@RequestParam(value="content")String content, @RequestParam(value="boardNo")int boardNo, Model model) {
+		System.out.println( "댓글 정보 : " + content + "     " + boardNo);
 		
-		int result = rs.reInsertRegion(rre);
-		System.out.println("reInsert 결과 : " + result);
+
+		
+		
 		
 		return "info/region/regionDetail";
 	}
@@ -126,7 +129,11 @@ public class RegionController {
 	// 추후 member No 에 @RequestParam 추가 현재는 임의로 1 넣었음
 
 	@RequestMapping("info/region/regionLikeCount.do")
-	public String regionLikeCount(@RequestParam int no) {
+	public String regionLikeCount(@RequestParam(value="lc") int lc) {
+		
+		int no = lc;
+		
+		System.out.println(lc);
 		
 		rs.regionLikeCount(no);
 		
