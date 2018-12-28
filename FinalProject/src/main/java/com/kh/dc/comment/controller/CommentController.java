@@ -31,11 +31,17 @@ public class CommentController {
 
         System.out.println("댓글 리스트!");
         
+        int totalComment = commentService.totalComment(bno);
+        
+        System.out.println("댓글 총 갯수:"+totalComment);
+        
+        model.addAttribute("totalComment", totalComment);
+        
         return commentService.commentList(bno);
 
     }
 
-    @RequestMapping("comment/commentWrite.do") //댓글 작성 
+    @RequestMapping("comment/commentWrite.do")
     @ResponseBody
     private int commentInsert(@RequestParam int bno, @RequestParam String content, @RequestParam int mno) throws Exception{
         

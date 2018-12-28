@@ -67,7 +67,7 @@
 											<div class="td-div">
 												<input type="text" name="title" id="title" style="width: 100%;" required>
 											</div>
-											<input type="hidden" id="mno" name="mno" value="${member.no}" required>
+											<input type="hidden" class="mno" name="memberNo" value="${member.no}" required>
 										</div>
 										<div class="tr-div">
 											<div class="td-div">내용</div>
