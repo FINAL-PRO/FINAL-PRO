@@ -49,6 +49,11 @@ a {
 	float: right;
 }
 
+#goodsPicture {
+	width: 100%;
+	height: 100%;
+}
+
 </style>
 
 </head>
@@ -76,7 +81,7 @@ a {
 <c:forEach items="${list}" var="g">
 <div class="product-box">
 	<div class="product-info product-img">
-		<a href="${viewPath}${g.boardNo}"><img src="${g.goodsPicture}" /></a>
+		<a href="${viewPath}${g.boardNo}"><img id="goodsPicture" src="${g.goodsPicture}" /></a>
 	</div>
 	<div class="product-info product-text">
 		<p class="title"><a href="${viewPath}${g.boardNo}">${g.title}</a></p>
@@ -88,8 +93,8 @@ a {
 	</div> 
 	<div class="product-info product-pro">
 		<p>진행자 : ${g.memberName}</p>
-		<p>마감일 : ${g.endDate}</p>
 		<p>인원 : ${g.maxCount}명/${g.currentCount}명</p>
+		<p>마감일 : ${g.endDate}</p>
 	</div>
 </div>
 </c:forEach>
