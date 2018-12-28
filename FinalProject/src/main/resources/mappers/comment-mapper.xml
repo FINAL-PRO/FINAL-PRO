@@ -42,7 +42,7 @@
 	</delete>
 	
 	<update id="updateComment" parameterType="comment">
-		UPDATE DC_COMMENT_TB SET CONTENT = #{content} WHERE NO = #{cno}
+		UPDATE DC_COMMENT_TB SET CONTENT = #{content} WHERE NO = #{no}
 	</update>
 	
 </mapper>

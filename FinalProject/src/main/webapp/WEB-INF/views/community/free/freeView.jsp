@@ -14,6 +14,10 @@
 		margin: 8px auto;
 	}
 	
+	.container3 {
+		padding: 15px;
+	}
+	
 	.article {
 		font-size: 0;
 		background-color: #fff;
@@ -213,132 +217,92 @@
 										<p class="both" style="clear: both;">&nbsp;</p>
 									</div>
 									<div style="border: solid 0.5px gray"></div>
-									<div class="commentlist" style="border: solid 0.5px green">
-										<div class="commentwriteboard">
-											<span class="nickname">${member.nickName}</span><br />
-											<div class="comment_textarea"
-												style="border: solid 0.5px pink">
-												<form id="commentFrm" method="post">
-													<textarea name="commentwrite" id="commentwrite" class="commentwrite" placeholder="댓글을 입력하세요."></textarea><br /> 
-													<%-- <input type="text" id="bno" name="bno" value="${board.no}" readonly="readonly" />
-													<input type="text" id="mno" name="mno" value="${member.no}" /> --%>
-												</form>
-											</div>
-											<div class="btn_comment">
-												<a href="#" id="btn_comment_wirte" class="btn pull-right btn-success">댓글쓰기</a>
-											</div>
-										<p class="both" style="clear: both;">&nbsp;</p>
-									</div>
+								    <div class="container3">
+								        <label for="content">comment</label>
+								        <form name="commentInsertForm">
+								            <div class="input-group">
+								               <input type="hidden" name="bno" value="${board.no}"/>
+								               <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
+								               <input type="hidden" id="mno" name="mno" value="${member.no}" />
+								               <span class="input-group-btn">
+								                    <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
+								               </span>
+								              </div>
+								        </form>
+								    </div>
 									<div style="border: solid 0.5px gray"></div>
 									<form id="commentListFrm" name="commentListFrm" method="post">
 										<div class="commentList" id="commentList" style="border: 1px solid blue">
 											<p class="both" style="clear: both;">&nbsp;</p>
 										</div>
 									</form>
+									<!--  댓글  -->
+
 									<script>
                             		/* 댓글 스크립트 */
                             		
-                            		var mno = $(".mno").val(); 									
-                            		var cno = $(".cno").val();
-                            		var bno = $(".bno").val();
+                            		var mno = $('[name=mno]').val(); 									
+                            		var cno = $('[name=cno]').val(); 
+                            		var bno = $('[name=bno]').val();
                             		
-                            		$("#btn_comment_wirte").on("click",function(){	
-			                            		
-	                            		var bno = $(".bno").val();
-	                            		var commentwrite = $("#commentwrite").val();
-	                            		
-	                            		console.log("commentwrite: "+commentwrite);
-		                            		
-                            			$.ajax({
-	                            			url: "${pageContext.request.contextPath}/comment/commentWrite.do",
-	                            			type:"post",
-	                            			data: JSON.stringify({
-	                            				content: commentwrite,
-	                            				memberNo: mno,
-	                            				boardNo: bno
-	                            			}),
-	                            			contentType: 'application/json; charset=utf-8',
-	                            			success: function(data){
-	                            				console.log(data);
-	                            				if(data=="SUCCESS"){
-	                            					$("#commentContent").val("");
-	                            					commentList(bno);
-	                            					alert("저장완료");
-	                            					console.log("성공 bno:"+bno);
-	                            				} else{
-	                            					alert("등록 실패!");
-	                            				}
-	                            			}
-	                            		});
-	   	
-	                            	});
+                            		commentList(bno);
                             		
+                            		$('[name=commentInsertBtn]').click(function(){ 
+                            		    var insertData = $('[name=commentInsertForm]').serialize(); 
+                            		    commentInsert(insertData);
+                            		});
                             		
-                            		
-		                            $(function(){	                                
-		                            	commentList(bno); 
-		                            });
+                            		//댓글 등록
+                            		function commentInsert(insertData){
+                            			
+                            			console.log(insertData);
+                            			
+                            		    $.ajax({
+                            		        url : '${pageContext.request.contextPath}/comment/commentWrite.do',
+                            		        type : 'post',
+                            		        data : insertData,
+                            		        success : function(data){
+                            		            if(data == 1) {
+                            		                commentList(bno); 
+                            		                $('[name=content]').val('');
+                            		            }
+                            		        }
+                            		    });
+                            		}
 		                            
 	                            	function commentList(bno){
-	                            		
-	                            		var bno = $("#bno").val();
 	                            		
 	                            		$.ajax({
 	                            			type: "get",
 	                            			url: "${pageContext.request.contextPath}/comment/commentList.do",
 	                            			data: {bno: bno},
-	                            			/* dateType:"json", */
 	                            			success: function(data){
 	                            				
-	                            				console.log(bno);
-	                            				console.log(data);
-				
-	                            				var html = "";
-	                            				var cCnt = data.length;
+	                            	            var a =''; 
+	                            	            $.each(data, function(key, value){ 
+	                            	                a += '<div class="commentArea">';
+	                            	                a += '<p class="profile" style="display:inline;">';
+                            						a += '<img class="picture" src="https://cf-epi.campuspick.com/0.png">';
+                            						a += '<span class="nickname">'+value.memberName+'</span>';
+                            						a += '</p>';
+	                            	                a += '<input type="hidden" name="bno" value="'+bno+'"/>';
+                            						a += '<input type="hidden" name="mno" value="'+mno+'"/>';
+                        							a += '<input type="hidden" name="cno" value="'+value.no+'"/>';
+                        							a += '<div class="btn_comment">';
+	                            	                a += '<a href="#" onclick="commentUpdate('+value.no+',\''+value.content+'\');"> 수정 </a>';
+	                            	                a += '<a href="#" onclick="commentDelete('+value.no+');"> 삭제 </a> </div>';
+	                            	                a += '</div>';
+	                            	                a += '<div class="commentContent'+value.no+'"> <p class="comment">'+value.content +'</p>';
+	                            	                a += '</div></div>';
+	                            	            });
+	                            	            
+	                            	            $("#commentList").html(a);
 
-	                            				console.log(cCnt);
-	                            				
-	                            				if(data.length>0){
-	                            					
-	                            					html += "<p>총 댓글: "+cCnt+"개</p>"
-	                            					
-	                            					for(i=0; i<data.length; i++){
-	                            						html += "<div class='commentbox'>"
-	                            						html += "<p class='profile'>";
-	                            						html += "<img class='picture' src='https://cf-epi.campuspick.com/0.png'>";
-	                            						html += "<span class='nickname'>"+data[i].memberName+"</span>";
-	                            						html += "</p>";
-	                            						html += "<div class='comment"+data[i].content+"'><p class='comment'>"+data[i].content+"</p></div>";
-	                            						html += "<input type='text' class='bno' name='bno' value='"+bno+"' readonly='readonly' />";
-	                            						html += "<input type='text' class='mno' name='mno' value='"+data[i].memberNo+"' readonly='readonly' />";
-                            							html += "<input type='text' class='cno' name='cno' value='"+data[i].no+"' readonly='readonly' />";
-	                            						html += "<div class='btn_comment'>";
-	                            						html += '<a href="#" onclick="commentUpdate('+data[i].no+',\''+data[i].content+'\');">수정</a>&nbsp';
-	                            						html += "<a href='#' onclick='commentDelete("+data[i].no+")'>삭제</a>&nbsp;";
-	                            						html += "<a href='#' onclick='commentReWrite("+data[i].no+")'>답글쓰기</a>&nbsp;";
-	                            						html += "</div></br></br></div>";                        						
-	                            					}
-	                            				} else{
-	                            	                html += "<div>";
-	                            	                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
-	                            	                html += "</table></div>";
-	                            	                html += "</div>";
-	                            				}
-	                            				
-	                            				$("#cCnt").html(cCnt);
-	                            	            $("#commentList").html(html);
-	                            	            	
 	                            			}
 	                            		});
 	                            	}
 	                            	
                             		function commentDelete(cno){
-	                          				
-                          				var cno = $(".cno").val();
-                          				var bno = $(".bno").val();
-	                          			
-                          				alert("삭제");
-                          				console.log("cno:" +cno);
 	                          			
 	                            		$.ajax({
 	                            			type: "post",
@@ -352,59 +316,36 @@
 	                            		})
                           			}
                             		
-                            		function commentUpdate(cno, comment){
-                            			
-                            			alert("수정");
-                            			var bno = $(".bno").val();
-
-                            			var html = "";
-                        				
-                            			html += "<div class='commentUpdatebox'>"
-                        				html += "<div class='comment"+cno+"'><p class='comment'>"+comment+"</p></div>";
-                        				html += "<input type='text' name='comment_"+cno+"' value='"+comment+"'/>";
-                						html += "<div class='btn_comment'>";
-                						html += "<a href='#' onclick='commentUpdateProc("+cno+")'>수정</a>&nbsp;";
-                						html += "<a href='#' onclick='commentCancle'>취소</a>&nbsp;";
-                						html += "</div></br></br></div>";  
-                						//html += "</div>";
-
-                						console.log(bno, cno, comment);
-
-                						$('#commentbox'+cno).html(html);
+                            		function commentUpdate(cno, content){
+                						
+                						var a ='';
+                					    
+                					    a += '<div class="input-group">';
+                					    a += '<input type="text" class="form-control" name="content_'+cno+'" value="'+content+'"/>';
+                					    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+cno+');">수정</button> </span>';
+                					    a += '</div>';
+                					    
+                					    $('.commentContent'+cno).html(a);
                 						
                             		}
                             		
+                            		//댓글 수정
                             		function commentUpdateProc(cno){
-                            			
-                            			var cno = $(".cno").val();
-                          				var bno = $(".bno").val();
-                          				
-                          				var updateComment = $("[name=comment_"+cno+"]").val();
-	                          			
-                          				alert("수정");
-                          				console.log("cno:" +cno);
-	                          			
-	                            		$.ajax({
-	                            			type: "post",
-	                            			url: "${pageContext.request.contextPath}/comment/commentUpdate.do",
-	                            			data: {
-	                            				cno:cno,
-	                            				content:content	
-	                            			}, 
-	                            			dataType: "text",
-	                            			success: function(data){
-	                            				
-	                            				if(data==1)commentList(bno);
-	                            					
-	                          					console.log("수정 뷰");	
-	                            				console.log(data);
-
-	                            			}
-	                            				
-	                            		})
+                            		    var updateContent = $('[name=content_'+cno+']').val();
+                            		    
+                            		    $.ajax({
+                            		        url : '${pageContext.request.contextPath}/comment/commentUpdate.do',
+                            		        type : 'post',
+                            		        data : {
+                            		        	'content' : updateContent, 
+                            		        	'cno' : cno},
+                            		        success : function(data){
+                            		            if(data == 1) commentList(bno); //댓글 수정후 목록 출력 
+                            		        }
+                            		    });
                             		}
-	                            
-	                          		$("#btn_comment_edit").click(function(){
+
+/* 	                          		$("#btn_comment_edit").click(function(){
 	                          			alert("수정");
 	                          			boardFrm.action="${pageContext.request.contextPath}/comment/commentUpdateComment.do"
 	                          			boardFrm.submit();
@@ -415,7 +356,7 @@
 	                          			alert("답글쓰기");
 	                          			boardFrm.action="${pageContext.request.contextPath}/community/free/freeReWriteComment.do"
 	                          			boardFrm.submit();
-	                          		});
+	                          		}); */
 	                            </script>
 								</div>
 								<button class="btn_back" id="btn_back">Back</button> 
