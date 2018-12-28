@@ -66,6 +66,8 @@ public class GroupController {
 	public String insertGroup(Group group,  Model model) {
 		
 		String loc = "sale/group/groupView";
+		
+		System.out.println("img : " + group.getGoodsPicture());
 	
 		if(groupService.insertGroup(group) > 0) {
 			model.addAttribute("group", groupService.selectOneGroup(group.getBoardNo()));

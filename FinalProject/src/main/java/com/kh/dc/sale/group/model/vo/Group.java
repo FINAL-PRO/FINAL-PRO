@@ -19,9 +19,10 @@ public class Group extends Board implements Serializable {
 	private int goodsNo;
 	private String deposit;
 	private Date endDate;
+	private String goodsName;
+	private String goodsPicture;
 	
 	// DB join용 변수
-	private String goodsName;
 	private String goodsCategory;
 	
 	public Group() {
@@ -29,7 +30,7 @@ public class Group extends Board implements Serializable {
 	}
 
 	public Group(int no, int price, int maxCount, int currentCount, int boardNo, String status, String dealType,
-			int goodsNo, String deposit, Date endDate, String goodsName, String goodsCategory) {
+			int goodsNo, String deposit, Date endDate, String goodsName, String goodsPicture, String goodsCategory) {
 		super();
 		this.no = no;
 		this.price = price;
@@ -42,6 +43,7 @@ public class Group extends Board implements Serializable {
 		this.deposit = deposit;
 		this.endDate = endDate;
 		this.goodsName = goodsName;
+		this.goodsPicture = goodsPicture;
 		this.goodsCategory = goodsCategory;
 	}
 
@@ -133,6 +135,14 @@ public class Group extends Board implements Serializable {
 		this.goodsName = goodsName;
 	}
 
+	public String getGoodsPicture() {
+		return goodsPicture;
+	}
+
+	public void setGoodsPicture(String goodsPicture) {
+		this.goodsPicture = goodsPicture;
+	}
+
 	public String getGoodsCategory() {
 		return goodsCategory;
 	}
@@ -149,8 +159,8 @@ public class Group extends Board implements Serializable {
 	public String toString() {
 		return "Group [no=" + no + ", price=" + price + ", maxCount=" + maxCount + ", currentCount=" + currentCount
 				+ ", boardNo=" + boardNo + ", status=" + status + ", dealType=" + dealType + ", goodsNo=" + goodsNo
-				+ ", deposit=" + deposit + ", endDate=" + endDate + ", goodsName=" + goodsName + ", goodsCategory="
-				+ goodsCategory + ", Board=" + super.toString() + "]";
+				+ ", deposit=" + deposit + ", endDate=" + endDate + ", goodsName=" + goodsName + ", goodsPicture=" 
+				+ goodsPicture + ", goodsCategory=" + goodsCategory + ", Board=" + super.toString() + "]";
 	}
 	
 }
