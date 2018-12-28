@@ -1,7 +1,7 @@
 package com.kh.dc.common.vo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class Board implements Serializable {
 	/**
