@@ -42,9 +42,9 @@
 			},
 			success: function(result){
 				var sky = result.weather.minutely["0"].sky.name;
-				var tc = Math.floor(result.weather.minutely["0"].temperature.tc);
-				var tmax = Math.floor(result.weather.minutely["0"].temperature.tmax);
-				var tmin = Math.floor(result.weather.minutely["0"].temperature.tmin);
+				var tc = Math.floor(result.weather.minutely["0"].temperature.tc) + "℃";
+				var tmax = Math.floor(result.weather.minutely["0"].temperature.tmax) + "℃";
+				var tmin = Math.floor(result.weather.minutely["0"].temperature.tmin) + "℃";
 				
 				console.log(sky);
 				console.log(tc);
@@ -52,26 +52,31 @@
 				console.log(tmin);
 				
 				switch(sky){
-				case "맑음": $("#weatherIcon").attr("class", "wi wi-day-sunny");
-				case "구름조금": $("#weatherIcon").attr("class", "wi wi-day-sunny-overcast");
-				case "구름많음": $("#weatherIcon").attr("class", "wi wi-day-cloudy");
-				case "구름많고 비": $("#weatherIcon").attr("class", "wi wi-rain");
-				case "구름많고 눈": $("#weatherIcon").attr("class", "wi wi-snow");
-				case "구름많고 비 또는 눈": $("#weatherIcon").attr("class", "wi wi-hail");
-				case "흐림": $("#weatherIcon").attr("class", "wi wi-cloudy");
-				case "흐리고 비": $("#weatherIcon").attr("class", "wi wi-rain");
-				case "흐리고 눈": $("#weatherIcon").attr("class", "wi wi-snow");
-				case "흐리고 비 또는 눈": $("#weatherIcon").attr("class", "wi wi-hail");
-				case "흐리고 낙뢰 ": $("#weatherIcon").attr("class", "wi wi-cloud");
-				case "뇌우/비": $("#weatherIcon").attr("class", "wi wi-rain");
-				case "뇌우/눈": $("#weatherIcon").attr("class", "wi wi-snow");
-				case "뇌우/비 또는 눈": $("#weatherIcon").attr("class", "wi wi-rain-mix");				
+					case "맑음": $("#weatherIcon").attr("class", "wi wi-day-sunny");
+					case "구름조금": $("#weatherIcon").attr("class", "wi wi-day-sunny-overcast");
+					case "구름많음": $("#weatherIcon").attr("class", "wi wi-day-cloudy");
+					case "구름많고 비": $("#weatherIcon").attr("class", "wi wi-rain");
+					case "구름많고 눈": $("#weatherIcon").attr("class", "wi wi-snow");
+					case "구름많고 비 또는 눈": $("#weatherIcon").attr("class", "wi wi-hail");
+					case "흐림": $("#weatherIcon").attr("class", "wi wi-cloudy");
+					case "흐리고 비": $("#weatherIcon").attr("class", "wi wi-rain");
+					case "흐리고 눈": $("#weatherIcon").attr("class", "wi wi-snow");
+					case "흐리고 비 또는 눈": $("#weatherIcon").attr("class", "wi wi-hail");
+					case "흐리고 낙뢰 ": $("#weatherIcon").attr("class", "wi wi-cloud");
+					case "뇌우/비": $("#weatherIcon").attr("class", "wi wi-rain");
+					case "뇌우/눈": $("#weatherIcon").attr("class", "wi wi-snow");
+					case "뇌우/비 또는 눈": $("#weatherIcon").attr("class", "wi wi-rain-mix");				
 				}
 				
 				$("#sky").text(sky);
 				$("#tc").text(tc);
 				$("#tmax").text(tmax);
 				$("#tmin").text(tmin);
+				
+				$("#sky1").text(sky);
+				$("#tc1").text(tc);
+				$("#tmax1").text(tmax);
+				$("#tmin1").text(tmin);
 				
 			},  error : function(jqxhr, textStatus, errorThrown) {
 				console.log("ajax 처리 실패");
