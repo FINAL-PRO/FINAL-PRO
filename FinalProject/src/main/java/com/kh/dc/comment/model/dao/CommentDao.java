@@ -14,7 +14,7 @@ public interface CommentDao {
 
 	int commentDelete(int cno);
 
-	void commentInsert(Comment comment);
+	int commentInsert(Comment comment);
 
 	int commentUpdate(Comment comment);
 
