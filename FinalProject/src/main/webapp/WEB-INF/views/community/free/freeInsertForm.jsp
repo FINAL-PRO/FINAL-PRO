@@ -102,7 +102,7 @@
 						</div>
 					</div>
 				</div>
-
+				
 				<div class="section-right">
 					<c:import url="../../common/rightSection.jsp" />
 				</div>
