@@ -30,8 +30,8 @@ public class FreeDaoImpl implements FreeDao{
 	}
 
 	@Override
-	public Board selectOneFree(int no) {
-		return sqlSession.selectOne("free_mapper.selectOneFree", no);
+	public Board selectOneFree(int bno) {
+		return sqlSession.selectOne("free_mapper.selectOneFree", bno);
 	}
 
 	@Override
@@ -40,8 +40,8 @@ public class FreeDaoImpl implements FreeDao{
 	}
 
 	@Override
-	public int freeDelete(int no) {
-		return sqlSession.delete("free_mapper.freeDelete", no);
+	public int freeDelete(int bno) {
+		return sqlSession.delete("free_mapper.freeDelete", bno);
 	}
 
 	@Override
@@ -50,35 +50,10 @@ public class FreeDaoImpl implements FreeDao{
 	}
 	
 	@Override
-	public int freeViewCount(int no) {
-		return sqlSession.update("free_mapper.freeViewCount", no);
-	}
-
-	@Override
-	public int commentInsert(Comment comment) {
-		return sqlSession.insert("comment_mapper.insertComment", comment);
+	public int freeViewCount(int bno) {
+		return sqlSession.update("free_mapper.freeViewCount", bno);
 	}
 	
-	@Override
-	public int totalComment(int no) {
-		return sqlSession.selectOne("comment_mapper.totalComment", no);
-	}
-
-	@Override
-	public List<Comment> commentList(int no) {
-
-		return sqlSession.selectList("comment_mapper.selectCommentList", no);
-	}
-
-	@Override
-	public int commentDelete(int no) {
-		return sqlSession.delete("comment_mapper.deleteComment", no);
-	}
-
-	@Override
-	public List<Board> selectFreeListData() {
-		return sqlSession.selectList("free_mapper.selectFreeListData");
-	}
 
 
 }

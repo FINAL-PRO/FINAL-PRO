@@ -12,24 +12,14 @@ public interface FreeService {
 	
 	int selectFreeTotalContents();
 	
-	Board selectOneFree(int no);
+	Board selectOneFree(int bno);
 	
 	int insertFree(Board board);
 
-	int freeDelete(int no);
+	int freeDelete(int bno);
 
 	int freeUpdate(Board board);
 	
-	int freeViewCount(int no);
-	
-	int commentInsert(Comment comment);
-	
-	int totalComment(int no);
-
-	List<Comment> commentList(int no);
-
-	int commentDelete(int no);
-
-	List<Board> selectFreeListData();
+	int freeViewCount(int bno);
 	
 }

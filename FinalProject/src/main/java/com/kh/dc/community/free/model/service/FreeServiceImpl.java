@@ -27,8 +27,8 @@ public class FreeServiceImpl implements FreeService{
 	}
 
 	@Override
-	public Board selectOneFree(int no) {
-		return freeDao.selectOneFree(no);
+	public Board selectOneFree(int bno) {
+		return freeDao.selectOneFree(bno);
 	}
 
 	@Override
@@ -37,8 +37,8 @@ public class FreeServiceImpl implements FreeService{
 	}
 
 	@Override
-	public int freeDelete(int no) {
-		return freeDao.freeDelete(no);
+	public int freeDelete(int bno) {
+		return freeDao.freeDelete(bno);
 	}
 
 	@Override
@@ -47,33 +47,9 @@ public class FreeServiceImpl implements FreeService{
 	}
 
 	@Override
-	public int freeViewCount(int no) {
-		return freeDao.freeViewCount(no);
+	public int freeViewCount(int bno) {
+		return freeDao.freeViewCount(bno);
 	}
 
-	@Override
-	public int commentInsert(Comment comment) {
-		return freeDao.commentInsert(comment);
-	}
-
-	@Override
-	public int totalComment(int no) {
-		return freeDao.totalComment(no);
-	}
-
-	@Override
-	public List<Comment> commentList(int no) {
-		return freeDao.commentList(no);
-	}
-
-	@Override
-	public int commentDelete(int no) {
-		return freeDao.commentDelete(no);
-	}
-
-	@Override
-	public List<Board> selectFreeListData() {
-		return freeDao.selectFreeListData();
-	}
 	
 }

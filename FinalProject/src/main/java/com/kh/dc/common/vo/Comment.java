@@ -21,6 +21,7 @@ public class Comment implements Serializable{
 	private String memberName;
 	private String boardType;
 	private String boardTitle;
+	private int recnt;
 	
 	public Comment() {
 		super();
@@ -107,11 +108,20 @@ public class Comment implements Serializable{
 	public void setBoardTitle(String boardTitle) {
 		this.boardTitle = boardTitle;
 	}
+	
+	public int getRecnt() {
+		return recnt;
+	}
+
+	public void setRecnt(int recnt) {
+		this.recnt = recnt;
+	}
 
 	@Override
 	public String toString() {
 		return "Comment [no=" + no + ", content=" + content + ", writeDate=" + writeDate + ", memberNo=" + memberNo
-				+ ", boardNo=" + boardNo + ", status=" + status + ", memberName=" + memberName + "]";
+				+ ", boardNo=" + boardNo + ", status=" + status + ", memberName=" + memberName + ", boardType="
+				+ boardType + ", boardTitle=" + boardTitle + ", recnt=" + recnt + "]";
 	}
 	
 }
