@@ -73,6 +73,11 @@ public class AdController {
 		
 		return "business/ad/InsertForm";
 	}
+	
+	@RequestMapping("business/ad/insert.do")
+	public void insertAd(Ad ad) {
+		System.out.println(ad);
+	}
 }
 
 
