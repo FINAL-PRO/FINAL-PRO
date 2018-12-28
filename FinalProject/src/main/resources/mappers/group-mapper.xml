@@ -77,7 +77,22 @@
 	<select id="selectBankList" resultMap="bankList">
 		SELECT * FROM DC_CODE_TB WHERE ID LIKE 'BANK%'
 	</select>
-
 	
+	<select id="selectGroupHistory" parameterType="_int" resultType="map">
+		SELECT * FROM DC_GROUP_HISTORY_TB WHERE GROUPNO = #{groupNo}
+	</select>
+	
+	<select id="selectOneGroupHistory" parameterType="map" resultType="map">
+		SELECT * FROM DC_GROUP_HISTORY_TB WHERE GROUPNO = #{groupNo} AND MEMBERNO = #{memberNo}
+	</select>
+	
+	<insert id="insertGroupHistory" parameterType="map">
+		INSERT INTO DC_GROUP_HISTORY_TB VALUES(SEQ_GROUP_HISTORY.NEXTVAL, #{groupNo}, #{memberNo})
+	</insert>
+	
+	<delete id="deleteGroupHistory" parameterType="map">
+		DELETE FROM DC_GROUP_HISTORY_TB WHERE GROUPNO = #{groupNo} AND MEMBERNO = #{memberNo}
+	</delete>
+
 	
 </mapper>

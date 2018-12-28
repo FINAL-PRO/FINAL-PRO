@@ -26,5 +26,13 @@ public interface GroupDao {
 	int updateViewCount(int boardNo);
 	
 	List<Map<String, String>> selectBankList();
+	
+	List<Map<String, String>> selectGroupHistory(int boardNo);
+	
+	Map<String, String> selectOneGroupHistory(Map<String, String> gh);
+
+	int insertGroupHistory(Map<String, String> gh);
+	
+	int deleteGroupHistory(Map<String, String> gh);
 		
 }

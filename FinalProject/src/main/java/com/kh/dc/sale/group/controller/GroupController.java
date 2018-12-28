@@ -3,11 +3,14 @@ package com.kh.dc.sale.group.controller;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.dc.common.util.Utils;
 import com.kh.dc.sale.group.model.service.GroupService;
@@ -33,7 +36,7 @@ public class GroupController {
 		int totalContents = groupService.selectGroupTotalContents();
 		
 		// 3. 페이지 계산 후 작성할 HTML 추가
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "sale/group/list.do");
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "list.do");
 		
 		model.addAttribute("list", list)
 			.addAttribute("totalContents", totalContents)
@@ -109,6 +112,13 @@ public class GroupController {
 		model.addAttribute("loc", loc).addAttribute("msg", msg);
 		
 		return "common/msg";
+	}
+	
+	@RequestMapping("sale/group/showDeposit.do")
+	@ResponseBody
+	public String convertImage(HttpSession session, @RequestParam Map<String, String> GroupHistory) {
+		
+		return (groupService.selectOneGroupHistory(GroupHistory)!=null) ? "OK" : "NO";
 	}
 	
 	

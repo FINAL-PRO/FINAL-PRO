@@ -17,11 +17,6 @@
 	margin-bottom: 50px;
 }
 
-label.info-label {
-	margin-left: 30px;
-	padding-top: 10px;
-}
-
 .title-box {
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -50,7 +45,8 @@ label.info-label {
 #content {
 	width: 100%;
 	height: auto;
-	broder: 1px solid gray;
+	padding: 30px;
+	border: 1px solid lightgray;
 }
 </style>
 
@@ -84,42 +80,37 @@ label.info-label {
 		</div>
 	</div>
 	
-	<div>
-	<table class="product-info">
-	<colgroup>
-		<col width="200px"/>
-		<col width="400px"/>
-	</colgroup>
-	<tbody>
-		<tr>
-			<th><label class="info-label" for=goodsName>물품명</label></th>
-			<td><span class="" id="">${group.goodsName }</span></td>
-		</tr>
-		<tr>
-			<th><label class="info-label" for="price">가격</label></th>
-			<td><span class="" id="">${group.price }</span></td>
-		</tr>
-		<tr>
-			<th><label class="info-label" for="maxCount">모집인원</label></th>
-			<td><span class="" id="">${group.maxCount }</span></td>
-		</tr>
-		<tr>
-			<th><label class="info-label" for="dealType">거래방법</label></th>
-			<td><span class="" id="">${group.dealType }</span></td>
-		</tr>
-		<tr>
-			<th><label class="info-label" for="deposit">계좌번호</label></th>
-			<td>
-				<span class="" id="bank">${group.deposit }</span>
-				<span class="" id="deposit">${group.deposit }</span>
-			</td>
-		</tr>
-		<tr>
-			<th><label class="info-label" for=endDate>마감일</label></th>
-			<td><span class="" id="endDate">${group.endDate }</span></td>
-		</tr>
-	</tbody>
-	</table>
+	<div class="row">
+		<div class="col-md-2">
+			<p class="info-label">물품명</p>
+			<p class="info-label">가격</p>
+		</div>
+		<div class="col-md-4">
+			<p>${group.goodsName}</p>
+			<p>${group.price}</p>
+		</div>
+		<div class="col-md-2">
+			<p class="info-label">모집인원</p>
+			<p class="info-label">거래방법</p>
+			<p class="info-label">마감일</p>
+		</div>
+		<div class="col-md-4">
+			<p>${group.maxCount}명 / ${group.currentCount}명</p>
+			<p>${group.dealType}</p>
+			<p>${group.endDate}</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+			<p class="info-label">계좌번호</p>
+		</div>
+		<div class="col-md-6">
+			<p id="depMsg">모집 인원이 마감되면 공구 참여자에게만 보입니다.</p>
+			<p id="deposit" style="display:none;">ㅇㅇ은행 ${group.deposit }</p>
+		</div>
+		<div class="col-md-4">
+			<input type="button" id="btnApply" value="참여신청"/>
+		</div>
 	</div>
 	
 </div> <hr />
@@ -152,6 +143,42 @@ label.info-label {
 
 <!-------------------- Script -------------------->
 <script>
+	
+	$(function(){
+		var remain = ${group.maxCount-group.currentCount};
+		if(remain < 1) {
+			$.ajax({
+				url : 'showDeposit.do',
+	            type : 'get',
+	            data : {
+	            	groupNo : '${group.no}',
+	            	memberNo: '${member.no}'
+	            }, 
+	            success : function(data){
+	            	if(data == 'OK') { //
+	                    $("#depMsg").css("display", "none");
+	                    $('#deposit').css("display", "block");
+					} else {
+						$("#depMsg").text("공동구매 참여자에게만 공개되는 정보입니다.");
+					}
+	            }
+			});	
+		}
+	});
+	
+	function inGroup() {
+		if (confirm("공동구매에 참여하시겠습니까?")) {
+		  txt = "공동구매에 참여하였습니다.";
+		}
+	}
+	
+	function outGroup() {
+		if (confirm("공동구매 참여를 취소하시겠습니까?")) {
+		  txt = "공동구매에 참여하였습니다.";
+		}
+	}
+	
+
 
 	function goGroupList() {
 		location.href = "${pageContext.request.contextPath}/sale/group/list.do";
