@@ -14,10 +14,6 @@
 		margin: 8px auto;
 	}
 	
-	.container3 {
-		padding: 15px;
-	}
-	
 	.article {
 		font-size: 0;
 		background-color: #fff;
@@ -186,10 +182,9 @@
 										<p class="title">${board.title}</p>
 										<div style="border: solid 0.5px gray"></div>
 										<p class="profile">
-											<img class="picture"
-												src="https://cf-epi.campuspick.com/0.png"> <span
-												class="nickname">${board.memberName}</span> <span
-												class="count">조회수: ${board.viewCount}</span>
+											<img class="picture" src="https://cf-epi.campuspick.com/0.png"> 
+											<span class="nickname">${board.memberName}</span> 
+											<span class="count">조회수: ${board.viewCount}</span>
 											<p class="time"><fmt:formatDate value="${board.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
 										</p>
 										<p class="text">${board.content}</p>
@@ -199,8 +194,8 @@
 											<button class="btn_board_delete" id="btn_board_delete">삭제</button>
 											<button class="btn_report">신고하기</button>
 											<button class="btn_like">좋아요</button>
-											<span class="likecount">: 1</span> <span class="commentcount">댓글:
-												${totalComment}</span>
+											<span class="likecount">: 1</span> 
+											<span class="commentcount">댓글:${totalComment}</span>
 										</div>
 										<script>
 				                      		$("#btn_board_edit").click(function(){
@@ -217,161 +212,22 @@
 										<p class="both" style="clear: both;">&nbsp;</p>
 									</div>
 									<div style="border: solid 0.5px gray"></div>
-								    <div class="container3">
-								        <label for="content">comment</label>
-								        <form name="commentInsertForm">
-								            <div class="input-group">
-								               <input type="hidden" name="bno" value="${board.no}"/>
-								               <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
-								               <input type="hidden" id="mno" name="mno" value="${member.no}" />
-								               <span class="input-group-btn">
-								                    <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
-								               </span>
-								              </div>
-								        </form>
-								    </div>
-									<div style="border: solid 0.5px gray"></div>
-									<form id="commentListFrm" name="commentListFrm" method="post">
-										<div class="commentList" id="commentList" style="border: 1px solid blue">
-											<p class="both" style="clear: both;">&nbsp;</p>
-										</div>
-									</form>
 									<!--  댓글  -->
-
+								    <div class="container3">
+								        <c:import url="../../common/comment.jsp" />
+									</div>
+									<button class="btn_back" id="btn_back">Back</button> 
 									<script>
-                            		/* 댓글 스크립트 */
-                            		
-                            		var mno = $('[name=mno]').val(); 									
-                            		var cno = $('[name=cno]').val(); 
-                            		var bno = $('[name=bno]').val();
-                            		
-                            		commentList(bno);
-                            		
-                            		$('[name=commentInsertBtn]').click(function(){ 
-                            		    var insertData = $('[name=commentInsertForm]').serialize(); 
-                            		    commentInsert(insertData);
-                            		});
-                            		
-                            		//댓글 등록
-                            		function commentInsert(insertData){
-                            			
-                            			console.log(insertData);
-                            			
-                            		    $.ajax({
-                            		        url : '${pageContext.request.contextPath}/comment/commentWrite.do',
-                            		        type : 'post',
-                            		        data : insertData,
-                            		        success : function(data){
-                            		            if(data == 1) {
-                            		                commentList(bno); 
-                            		                $('[name=content]').val('');
-                            		            }
-                            		        }
-                            		    });
-                            		}
-		                            
-	                            	function commentList(bno){
-	                            		
-	                            		$.ajax({
-	                            			type: "get",
-	                            			url: "${pageContext.request.contextPath}/comment/commentList.do",
-	                            			data: {bno: bno},
-	                            			success: function(data){
-	                            				
-	                            	            var a =''; 
-	                            	            $.each(data, function(key, value){ 
-	                            	                a += '<div class="commentArea">';
-	                            	                a += '<p class="profile" style="display:inline;">';
-                            						a += '<img class="picture" src="https://cf-epi.campuspick.com/0.png">';
-                            						a += '<span class="nickname">'+value.memberName+'</span>';
-                            						a += '</p>';
-	                            	                a += '<input type="hidden" name="bno" value="'+bno+'"/>';
-                            						a += '<input type="hidden" name="mno" value="'+mno+'"/>';
-                        							a += '<input type="hidden" name="cno" value="'+value.no+'"/>';
-                        							a += '<div class="btn_comment">';
-	                            	                a += '<a href="#" onclick="commentUpdate('+value.no+',\''+value.content+'\');"> 수정 </a>';
-	                            	                a += '<a href="#" onclick="commentDelete('+value.no+');"> 삭제 </a> </div>';
-	                            	                a += '</div>';
-	                            	                a += '<div class="commentContent'+value.no+'"> <p class="comment">'+value.content +'</p>';
-	                            	                a += '</div></div>';
-	                            	            });
-	                            	            
-	                            	            $("#commentList").html(a);
-
-	                            			}
-	                            		});
-	                            	}
-	                            	
-                            		function commentDelete(cno){
-	                          			
-	                            		$.ajax({
-	                            			type: "post",
-	                            			url: "${pageContext.request.contextPath}/comment/commentDelete.do",
-	                            			data: {cno:cno}, 
-	                            			dataType: "text",
-	                            			success: function(data){
-	                            				if(data==1)commentList(bno);
-	                            			}
-	                            				
-	                            		})
-                          			}
-                            		
-                            		function commentUpdate(cno, content){
-                						
-                						var a ='';
-                					    
-                					    a += '<div class="input-group">';
-                					    a += '<input type="text" class="form-control" name="content_'+cno+'" value="'+content+'"/>';
-                					    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+cno+');">수정</button> </span>';
-                					    a += '</div>';
-                					    
-                					    $('.commentContent'+cno).html(a);
-                						
-                            		}
-                            		
-                            		//댓글 수정
-                            		function commentUpdateProc(cno){
-                            		    var updateContent = $('[name=content_'+cno+']').val();
-                            		    
-                            		    $.ajax({
-                            		        url : '${pageContext.request.contextPath}/comment/commentUpdate.do',
-                            		        type : 'post',
-                            		        data : {
-                            		        	'content' : updateContent, 
-                            		        	'cno' : cno},
-                            		        success : function(data){
-                            		            if(data == 1) commentList(bno); //댓글 수정후 목록 출력 
-                            		        }
-                            		    });
-                            		}
-
-/* 	                          		$("#btn_comment_edit").click(function(){
-	                          			alert("수정");
-	                          			boardFrm.action="${pageContext.request.contextPath}/comment/commentUpdateComment.do"
-	                          			boardFrm.submit();
-	                          		}); 
-	                          		
-
-	                          		$("#btn_comment_rewirte").click(function(){
-	                          			alert("답글쓰기");
-	                          			boardFrm.action="${pageContext.request.contextPath}/community/free/freeReWriteComment.do"
-	                          			boardFrm.submit();
-	                          		}); */
-	                            </script>
-								</div>
-								<button class="btn_back" id="btn_back">Back</button> 
-								<script>
-				                    $("#btn_back").click(function(){
-				                    	boardFrm.action="${pageContext.request.contextPath}/community/free/list.do"
-				                    	boardFrm.submit();
-				                    });
-			                    </script>
+					                    $("#btn_back").click(function(){
+					                    	boardFrm.action="${pageContext.request.contextPath}/community/free/list.do"
+					                    	boardFrm.submit();
+					                    });
+				                    </script>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
 				<div class="section-right">
 					<c:import url="../../common/rightSection.jsp" />
 				</div>
