@@ -9,4 +9,5 @@ public class WeatherController {
 	public String weatherList() {
 		return "info/weather/list";
 	}
+	
 }

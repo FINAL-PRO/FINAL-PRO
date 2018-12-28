@@ -13,6 +13,7 @@
 <!-- 사용자작성 css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dc-default-style.css" />
 <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/images/spring_icon.png">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/weather-icons.min.css" />
 
 <!-- summernote 관련 라이브러리 -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
