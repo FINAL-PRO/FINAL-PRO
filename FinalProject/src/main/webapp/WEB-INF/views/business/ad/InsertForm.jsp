@@ -31,8 +31,8 @@
 								<tr>
 									<td>광고타입</td>
 									<td>
-										<select id="adContentTypeNo">
-											<c:forEach items="${adContentTypeList}" var="code">
+										<select id="adTypeNo">
+											<c:forEach items="${adTypeList}" var="code">
 												<option value="${code.id}" <c:if test="${code.id eq adContent}">selected</c:if>>${code.value}</option>
 											</c:forEach>
 										</select>

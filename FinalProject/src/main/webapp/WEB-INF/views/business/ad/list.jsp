@@ -27,7 +27,7 @@
 							<a href="${pageContext.request.contextPath}/business/ad/insertForm.do">광고신청</a>
 							
 						<select id="adContentTypeNo">
-							<c:forEach items="${adContentType}" var="code">
+							<c:forEach items="${adContentTypeList}" var="code">
 								<option value="${code.id}" <c:if test="${code.id eq adContent}">selected</c:if>>${code.value}</option>
 							</c:forEach>
 						</select>
