@@ -31,8 +31,8 @@
     </style>
 	<script>
 		function jobBoardInsert(){
-			location.href = "${pageContext.request.contextPath}/job/jobBoard/jobBoardInsertForm.do?no="+${member.no};
-		}
+			location.href = "${pageContext.request.contextPath}/job/jobBoard/jobBoardInsertForm.do?no=${member.no}";
+		};
 		
 		$(function(){
 			$("div[id]").on("click",function(){
@@ -50,17 +50,15 @@
 	<main id="container">
 		<section>
 			<div class="section-left">
-			<!-- <a href="test/select.do">select test</a> -->
-				<img class="adimg" src="${pageContext.request.contextPath}/resources/images/adimg1.jpg" 
-				alt="메인_좌측_세로배너" width="140" height="800"
-				style="margin-left: 1px;margin-right: 1px; margin-top:60px; margin-bottom:60px;
-				border:1px solid red"/>
+				<!-- 내용없음 -->
 			</div>
 			
 			<div class="section-center">
-				<div id="jobBoard" class="table">
-					
-					<section id="content">
+				<div class="dc-content">
+					<div class="dc-content-title">
+						<h1>제목</h1>
+					</div>
+					<div class="dc-content-box">
 						<h1>구인구직 게시판</h1>
 						<nav></nav>
 						
@@ -71,13 +69,8 @@
 								<div id="title" class="cell">제목</div>
 								<div id="nickName" class="cell">작성자</div>
 								<div id="writeDate" class="cell">작성일</div>
-								<!-- <div id="startJob" class="cell">근무시작일</div>
-								<div id="endJob" class="cell">근무종료일</div> -->
 								<div id="workDate" class="cell">근무기간</div>
-								<!-- <div id="salary" class="cell">급여</div>
-								<div id="salType" class="cell">급여타입</div> -->
 								<div id="salInfo" class="cell">급여</div>
-								
 								<div id="status" class="cell">마감여부</div>
 								<div id="endJobDday" class="cell">마감일</div>
 								<div id="viewCount" class="cell">조회수</div>
@@ -87,16 +80,10 @@
 							<div id="${jb.no}" class="colum"> 
 								<div class="cell">${jb.no}</div>
 								<div class="cell">
-									<a href="${pageContext.request.contextPath}/job/jobBoard/jobBoardDetail.do?no=${jb.no}";>${jb.title}</a></div>
+									<a href="${pageContext.request.contextPath}/job/jobBoard/jobBoardDetail.do?no=${jb.no}">${jb.title}</a></div>
 								<div class="cell"><a href="작성글 검색뜨게하기">${jb.nickName}</a></div>
 								<div class="cell">${jb.writeDate}</div>
-								<!-- 근무시작/종료일 -->
-								<%-- <div class="cell">${jb.startJob}</div>
-								<div class="cell">${jb.endJob}</div> --%>
 								<div class="cell">${jb.startJob} ~ ${jb.endJob}</div>
-								<!-- 급여/급여타입 -->
-								<%-- <div class="cell">${jb.salary}</div>
-								<div class="cell">${jb.salType}</div> --%>
 								<div class="cell">${jb.salary} / ${jb.salType}</div>
 								<div class="cell">${jb.status}</div>
 								<div class="cell">${jb.dday}일 남음</div>
@@ -109,7 +96,8 @@
 						<c:out value="${pageBar}" escapeXml="false"/>
 					</div>
 				</div>
-			<div class="section-right">
+			</div>	
+						<div class="section-right">
 			<img class="adimg" src="${pageContext.request.contextPath}/resources/images/adimg1.jpg" 
 			alt="메인_우측_세로배너" width="140" height="800"
 			style="margin-left: 1px;margin-right: 1px; margin-top:60px; margin-bottom:60px;

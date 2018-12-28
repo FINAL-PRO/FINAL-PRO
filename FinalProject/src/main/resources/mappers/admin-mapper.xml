@@ -8,8 +8,8 @@
 	</select>
 	
 	<!-- 게시물 전체 가져오기 -->
-	<select id="selectBoardList" resultType="board" parameterType="String">
-		SELECT * FROM DC_BOARD_TB WHERE TYPE = #{boardType}
+	<select id="selectBoardList" resultType="board" parameterType="aBoard">
+		SELECT * FROM DC_BOARD_TB WHERE TYPE = #{boardType} and STATUS = #{boardStatus}
 	</select>
 	
 	<!-- 업체 전체 가져오기 -->
@@ -42,9 +42,24 @@
 		SELECT * FROM DC_CODE_TB WHERE ATT = '게시판타입' 
 	</select>
 	
+	<select id="selectBoardStatusList" resultType="code">
+		SELECT * FROM DC_CODE_TB WHERE ATT = '게시물상태'
+	</select>
+	
 	<!-- 업체 타입 가져오기 -->
 	<select id="selectCompanyTypeList" resultType="code">
 		SELECT * FROM DC_CODE_TB WHERE ATT = '업체구분'
 	</select>
+	
+	<!-- 공지글 등록하기 -->
+	<insert id="insertNotice" parameterType="board">
+		INSERT INTO DC_BOARD_TB VALUES
+		(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, #{type}, #{status}, #{memberNo}, NULL)
+	</insert>
+	
+	<!-- 게시글 상태 변경하기 -->
+	<update id="changeBoardStatus" parameterType="map">
+		UPDATE DC_BOARD_TB SET STATUS=#{status} WHERE NO = #{boardNo}
+	</update>
 	
 </mapper>

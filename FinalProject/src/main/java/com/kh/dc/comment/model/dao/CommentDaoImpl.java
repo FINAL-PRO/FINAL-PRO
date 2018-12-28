@@ -39,6 +39,11 @@ public class CommentDaoImpl implements CommentDao{
 		sqlSession.insert("comment_mapper.insertComment", comment);
 	}
 
+	@Override
+	public int commentUpdate(Comment comment) {
+		return sqlSession.update("comment_mapper.updateComment", comment);
+	}
+
 
 
 }

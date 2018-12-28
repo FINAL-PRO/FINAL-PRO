@@ -10,12 +10,15 @@ public interface CommentService {
 	
 	/*String commentInsert(Comment comment);*/
 	
-	int totalComment(int no);
+	int totalComment(int bno);
 
-
-	int commentDelete(int no);
+	int commentDelete(int cno);
 
 	void commentInsert(Comment comment);
+
+	int commentUpdate(Comment comment);
+
+//	List<Comment> commentList();
 
 //	ArrayList<Comment> commentList(int bno);
 

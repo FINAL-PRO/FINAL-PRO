@@ -28,4 +28,11 @@
 		DELETE FROM DC_BOARD_TB WHERE NO = #{no}
 	</delete>
 	
+	<select id="selectRoomList" resultType="code">
+	SELECT * FROM DC_CODE_TB WHERE ID LIKE 'HUSTYP%'
+	</select>
+	
+	<select id="selectDealList" resultType="code">
+	SELECT * FROM DC_CODE_TB WHERE ID LIKE 'HUSDEAL%'
+	</select>
 </mapper>

@@ -16,6 +16,8 @@ public class Company implements Serializable {
 	private String address;
 	private String status;
 	
+	private String location;
+
 	public Company() {
 		super();
 	}
@@ -29,6 +31,16 @@ public class Company implements Serializable {
 		this.status = status;
 	}
 	
+	public Company(int no, String name, Date enrollDate, String address, String status, String location) {
+		super();
+		this.no = no;
+		this.name = name;
+		this.enrollDate = enrollDate;
+		this.address = address;
+		this.status = status;
+		this.location = location;
+	}
+
 	public int getNo() {
 		return no;
 	}
@@ -60,9 +72,18 @@ public class Company implements Serializable {
 		this.status = status;
 	}
 	
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
 	@Override
 	public String toString() {
 		return "Company [no=" + no + ", name=" + name + ", enrollDate=" + enrollDate + ", address=" + address
-				+ ", status=" + status + "]";
-	} 
+				+ ", status=" + status + ", location=" + location + "]";
+	}
+
 }

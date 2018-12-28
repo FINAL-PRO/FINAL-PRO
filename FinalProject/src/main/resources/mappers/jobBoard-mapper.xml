@@ -28,14 +28,14 @@
 		JOIN DC_CODE_TB CD3 ON(CD3.ID = JB.TYPE)
 		JOIN DC_CODE_TB CD4 ON(CD4.ID = B.STATUS)
 		WHERE B.STATUS != 'STATUS002'
+		AND B.TYPE = 'BOARD006'
 		ORDER BY JB.NO DESC
 	</select>
 	
 	<select id="selectJobBoardTotalContents" resultType="_int">
 		SELECT COUNT(*) FROM DC_BOARD_JOB_TB
 	</select>
-	
-	
+
 	<select id="selectWriteJobBoard" resultMap="jobBoardMap">
 		<!-- 작성자 게시글 보기 -->
 		SELECT JB.NO, TITLE, NICKNAME, WRITEDATE, STARTDATE, ENDDATE, 
@@ -54,6 +54,7 @@
 		JOIN DC_CODE_TB CD4 ON(CD4.ID = B.STATUS)
 		WHERE B.STATUS != 'STATUS002'
 		AND NICKNAME = #{nickName}
+		AND B.TYPE = 'BOARD006'
 		ORDER BY JB.NO DESC
 	</select>
 
@@ -87,7 +88,7 @@
 			  WHERE JB.NO = #{no}) A
 	</select>
 -->
-	<insert id="insertJobBoard">
+	<insert id="insertJobBoard" parameterType="JobBoard">
 		<!--
 		BOARD 추가
 	 	게시글번호 / 게시글제목 / 작성일 / 게시글내용 / 조회수 / 게시판유형 / 게시글상태 / 회원번호 / 자유게시판 카테고리 
@@ -109,6 +110,24 @@
 	 		#{companyNo}, #{jobType}, #{salType}, #{status}
 	 	)
 	</insert>
+	
+	<resultMap type="Company" id="JobCompanyMap">
+		<result column="location" property="location"/>
+		<result column="COMPANYNO" property="no"/>
+	</resultMap>
+	
+	<select id="selectJobBoardComPop" resultMap="JobCompanyMap">
+		SELECT COMPANYNO, NAME, LOCATION, ADDRESS
+		FROM DC_COMPANY_TB C
+		JOIN DC_BOARD_JOB_TB JB ON(JB.COMPANYNO = C.NO)
+		WHERE C.STATUS = 'STATUS020'
+	</select>
+	
+	<select id="selectJobBoardComPopTotalContents" resultType="_int">
+		SELECT COUNT(*) FROM DC_COMPANY_TB
+		WHERE STATUS = 'STATUS020'
+	</select>
+	
 	
 	<update id="updateJobBoard" parameterType="JobBoard">
 		

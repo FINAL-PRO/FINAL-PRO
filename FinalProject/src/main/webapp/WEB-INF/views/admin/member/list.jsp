@@ -23,14 +23,15 @@
 				<div class="dc-content">
 					<div class="dc-content-title">
 						<h1>어드민 멤버 리스트</h1>
-					</div>
-					<div class="dc-content-box">
 						<select id="authNo">
 							<c:forEach items="${memberAuthList}" var="auth">
 								<option value="${auth.no}"
 									<c:if test="${auth.no eq authNo}">selected</c:if>>${auth.content}</option>
 							</c:forEach>
 						</select>
+					</div>
+					<div class="dc-content-box">
+
 						<div>
 							<div class="row table-row">
 								<div class="col column">번호</div>
@@ -61,10 +62,7 @@
 	</div>
 	<c:import url="../../common/footer.jsp" />
 	<script>
-		$("#authNo")
-				.on(
-						'change',
-						function() {
+		$("#authNo").on('change',function() {
 							location.href = "${pageContext.request.contextPath}/admin/member/list.do?authNo="
 									+ $("#authNo").val();
 						});

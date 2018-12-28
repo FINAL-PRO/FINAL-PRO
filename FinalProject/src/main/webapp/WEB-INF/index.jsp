@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Hello Spring</title>
+	<title>동커</title>
 	<c:import url="views/common/header.jsp"/>
 	<script>
 		$(function(){
