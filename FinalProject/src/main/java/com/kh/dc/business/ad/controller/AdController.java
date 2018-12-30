@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,7 +77,7 @@ public class AdController {
 	}
 	
 	@RequestMapping("business/ad/insert.do")
-	public void insertAd(Ad ad) {
+	public void insertAd(Ad ad, HttpServletRequest request) {
 		System.out.println(ad);
 	}
 }

@@ -26,7 +26,8 @@
 						</div>
 						<div class="dc-content-box">
 							<h1>내용</h1>
-							<form action="${pageContext.request.contextPath}/business/ad/insert.do" method="post">
+							<form action="${pageContext.request.contextPath}/business/ad/insert.do" method="post"
+								enctype="multipart/form-data">
 							<table class="table">
 								<tr>
 									<td>광고타입</td>
@@ -92,7 +93,7 @@
 									</td>
 								</tr>		
 							</table>
-							<input type="hidden" name="status" value="" />
+							<input type="hidden" name="status" value="ADSTATUS000" />
 							<input type="hidden" name="memberNo" value="${member.no}"/>
 							</form>
 						</div>
