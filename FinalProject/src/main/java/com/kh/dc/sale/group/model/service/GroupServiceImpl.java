@@ -84,6 +84,12 @@ public class GroupServiceImpl implements GroupService {
 
 		return groupDao.deleteGroupHistory(gh);
 	}
+
+	@Override
+	public List<Map<String, String>> selectStatusList() {
+
+		return groupDao.selectStatusList();
+	}
 	
 	
 

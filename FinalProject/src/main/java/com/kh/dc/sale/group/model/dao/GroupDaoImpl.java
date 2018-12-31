@@ -80,7 +80,7 @@ public class GroupDaoImpl implements GroupDao {
 	@Override
 	public List<Map<String, String>> selectGroupHistory(int groupNo) {
 
-		return sqlSession.selectList("group_mapper.selectGroupHistory");
+		return sqlSession.selectList("group_mapper.selectGroupHistory", groupNo);
 	}
 
 	@Override
@@ -99,6 +99,12 @@ public class GroupDaoImpl implements GroupDao {
 	public int deleteGroupHistory(Map<String, String> gh) {
 
 		return sqlSession.delete("group_mapper.deleteGroupHistory", gh);
+	}
+
+	@Override
+	public List<Map<String, String>> selectStatusList() {
+
+		return sqlSession.selectList("group_mapper.selectStatusList");
 	}
 
 	

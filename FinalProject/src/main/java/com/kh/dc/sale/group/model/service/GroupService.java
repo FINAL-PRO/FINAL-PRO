@@ -28,4 +28,6 @@ public interface GroupService {
 	int insertGroupHistory(Map<String, String> gh);
 	
 	int deleteGroupHistory(Map<String, String> gh);
+	
+	List<Map<String, String>> selectStatusList();
 }

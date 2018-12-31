@@ -22,9 +22,15 @@
 		<result property="goodsPicture" column="goodspicture"/>
 	</resultMap>
 	
-	<resultMap type="java.util.HashMap" id="bankList" >
+	<resultMap type="java.util.HashMap" id="codeList" >
 		<result property="id" column="id"/>
 		<result property="value" column="value"/>
+	</resultMap>
+	
+	<resultMap type="java.util.HashMap" id="ghMap">
+		<result property="groupNo" column="groupno"/>
+		<result property="memberNo" column="memberno"/>
+		<result property="nickName" column="nickname"/>
 	</resultMap>
 	
 	<select id="selectGroupList" resultMap="resultGroup">
@@ -74,12 +80,13 @@
 		UPDATE DC_BOARD_TB SET STATUS='STATUS002' WHERE NO = #{boardNo}
 	</update>
 	
-	<select id="selectBankList" resultMap="bankList">
+	<select id="selectBankList" resultMap="codeList">
 		SELECT * FROM DC_CODE_TB WHERE ID LIKE 'BANK%'
 	</select>
 	
-	<select id="selectGroupHistory" parameterType="_int" resultType="map">
-		SELECT * FROM DC_GROUP_HISTORY_TB WHERE GROUPNO = #{groupNo}
+	<select id="selectGroupHistory" parameterType="_int" resultMap="ghMap">
+		SELECT GH.*, M.NICKNAME FROM DC_GROUP_HISTORY_TB GH 
+		JOIN DC_MEMBER_TB M ON (GH.MEMBERNO = M.NO) WHERE GROUPNO = #{groupNo}
 	</select>
 	
 	<select id="selectOneGroupHistory" parameterType="map" resultType="map">
@@ -93,6 +100,10 @@
 	<delete id="deleteGroupHistory" parameterType="map">
 		DELETE FROM DC_GROUP_HISTORY_TB WHERE GROUPNO = #{groupNo} AND MEMBERNO = #{memberNo}
 	</delete>
+	
+	<select id="selectStatusList" resultMap="codeList">
+		SELECT * FROM DC_CODE_TB WHERE ID LIKE 'GROUP%'
+	</select>
 
 	
 </mapper>

@@ -48,8 +48,17 @@ public class GroupController {
 	
 	@RequestMapping("sale/group/groupView.do")
 	public String selectOneGroup(@RequestParam int boardNo, Model model) {
+
+		Group group = groupService.selectOneGroup(boardNo);
 		
-		model.addAttribute("group", groupService.selectOneGroup(boardNo));
+		ArrayList<Map<String, String>> ghList = 
+				new ArrayList<Map<String, String>>(groupService.selectGroupHistory(group.getNo()));
+		
+		System.out.println("ghList : " + ghList);
+		
+		model.addAttribute("group", group)
+			 .addAttribute("statusList", groupService.selectStatusList())
+			 .addAttribute("ghList", ghList);
 	
 		return "sale/group/groupView";
 	}
@@ -114,12 +123,30 @@ public class GroupController {
 		return "common/msg";
 	}
 	
-	@RequestMapping("sale/group/showDeposit.do")
+	@RequestMapping("sale/group/settingGroup.do")
 	@ResponseBody
-	public String convertImage(HttpSession session, @RequestParam Map<String, String> GroupHistory) {
+	public String settingGroup(@RequestParam Map<String, String> groupHistory) {
 		
-		return (groupService.selectOneGroupHistory(GroupHistory)!=null) ? "OK" : "NO";
+		return (groupService.selectOneGroupHistory(groupHistory)!=null) ? "OK" : "NO";
 	}
+	
+	@RequestMapping("sale/group/gHistorySwitch.do")
+	public int switchGroupHistroy(@RequestParam Map<String, String> ghMap) {
+		
+		int result = 0;
+		
+		System.out.println("GroupHistory : " + ghMap);
+		
+		if(ghMap.get("req").equals("in")) {
+			result = groupService.insertGroupHistory(ghMap);
+		} else {
+			result = groupService.deleteGroupHistory(ghMap) * 2;
+		}
+
+		return result;
+	}
+	
+	
 	
 	
 	

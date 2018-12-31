@@ -48,6 +48,10 @@
 	padding: 30px;
 	border: 1px solid lightgray;
 }
+
+.status {
+	border: 1px solid lightgray;
+}
 </style>
 
 </head>
@@ -105,15 +109,38 @@
 			<p class="info-label">계좌번호</p>
 		</div>
 		<div class="col-md-6">
-			<p id="depMsg">모집 인원이 마감되면 공구 참여자에게만 보입니다.</p>
+			<p id="depMsg">모집 인원이 마감되면 공동구매 참여자에게만 보입니다.</p>
 			<p id="deposit" style="display:none;">ㅇㅇ은행 ${group.deposit }</p>
 		</div>
 		<div class="col-md-4">
-			<input type="button" id="btnApply" value="참여신청"/>
+			<c:if test="${!empty member and member.no ne group.memberNo}">
+			<input type="button" id="btnApply" value="참여신청" onClick="switchGroup(this);"/>
+			</c:if>
 		</div>
 	</div>
 	
+	<div class="row">
+		<div class="col-md-2">
+			<p class="info-label">진행상황</p>
+		</div>
+		<div class="col-md-10">
+			<c:forEach items="${statusList}" var="status">
+				<span class="status">${status.value} </span>
+			</c:forEach>
+		</div>
+	</div>
+
 </div> <hr />
+
+<c:if test="${!empty member and member.no eq group.memberNo}">
+<div class="row" id="ghBox" style="display:block;">
+	<p>-- 참여자 목록 --</p>
+	<c:forEach items="${ghList}" var="gh">
+		<span>${gh.nickName} </span>
+	</c:forEach>
+	<hr />
+</div>
+</c:if>
 	
 <div>
 	<div id="content">${group.content }</div>
@@ -146,39 +173,62 @@
 	
 	$(function(){
 		var remain = ${group.maxCount-group.currentCount};
-		if(remain < 1) {
-			$.ajax({
-				url : 'showDeposit.do',
-	            type : 'get',
-	            data : {
-	            	groupNo : '${group.no}',
-	            	memberNo: '${member.no}'
-	            }, 
-	            success : function(data){
-	            	if(data == 'OK') { //
-	                    $("#depMsg").css("display", "none");
-	                    $('#deposit').css("display", "block");
-					} else {
-						$("#depMsg").text("공동구매 참여자에게만 공개되는 정보입니다.");
+		
+		$.ajax({
+			url : 'settingGroup.do',
+		    type : 'get',
+		    data : {
+		    	groupNo : '${group.no}',
+		    	memberNo: '${member.no}'
+		    }, 
+		    success : function(data){				
+				if(remain < 1) { // 인원 마감 후
+					$('#btnApply').attr({
+						"value" : "모집마감",
+						"disabled" : "disabled"
+					});
+					if(data == 'OK') {
+						$("#depMsg").css("display", "none");
+						$('#deposit').css("display", "block");
 					}
-	            }
-			});	
-		}
+				} else { // 인원 마감 전
+					if(data == 'OK') {
+						console.log("인원 마감 전 & 참여자");
+						$('#btnApply').val("참여취소");
+						$('#depMsg').html("참여 신청되었습니다. <br>계좌번호는 모집 인원이 마감되면 공개됩니다.");
+					}
+				}
+		    }
+		});	
 	});
 	
-	function inGroup() {
-		if (confirm("공동구매에 참여하시겠습니까?")) {
-		  txt = "공동구매에 참여하였습니다.";
+	function switchGroup(obj) {
+		var req;
+		var question;
+		
+		if($(obj).val() == '참여신청') {
+			req = "in";
+			question = "공동구매에 참여하시겠습니까?";
+		} else if ($(obj).val() == '참여취소') {
+			req = "out";
+			question = "공동구매 참여를 취소하시겠습니까?";
 		}
-	}
-	
-	function outGroup() {
-		if (confirm("공동구매 참여를 취소하시겠습니까?")) {
-		  txt = "공동구매에 참여하였습니다.";
-		}
-	}
-	
 
+		if (confirm(question)) {
+			$.ajax({
+				url : 'gHistorySwitch.do',
+			    type : 'get',
+			    data : {
+			    	groupNo : '${group.no}',
+			    	memberNo: '${member.no}',
+			    	req: req,
+			    }, 
+			    success : function(data){				
+					location.reload();
+			    }
+			});	
+		}
+	}
 
 	function goGroupList() {
 		location.href = "${pageContext.request.contextPath}/sale/group/list.do";
