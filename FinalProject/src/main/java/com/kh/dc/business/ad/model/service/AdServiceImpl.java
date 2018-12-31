@@ -54,4 +54,9 @@ public class AdServiceImpl implements AdService {
 		return adDao.selectAdLocationList();
 	}
 
+	@Override
+	public int insertAd(Ad ad) {
+		return adDao.insertAd(ad);
+	}
+
 }
