@@ -53,6 +53,11 @@ public class FreeDaoImpl implements FreeDao{
 	public int freeViewCount(int bno) {
 		return sqlSession.update("free_mapper.freeViewCount", bno);
 	}
+
+	@Override
+	public List<Board> selectFreeListData() {
+		return sqlSession.selectList("free_mapper.selectFreeListData");
+	}
 	
 
 

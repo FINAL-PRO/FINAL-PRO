@@ -119,7 +119,7 @@ public class FreeController {
 		return "redirect:/community/free/list.do";
 	}
 	
-/*	@RequestMapping(value="community/free/getListData.do",produces ="application/text; charset=utf8")
+	@RequestMapping(value="community/free/getListData.do",produces ="application/text; charset=utf8")
 	@ResponseBody
 	public String getListData() {
 		String result = "";
@@ -135,6 +135,6 @@ public class FreeController {
 		}
 		
 		return result;
-	}*/
+	}
 	
 }
