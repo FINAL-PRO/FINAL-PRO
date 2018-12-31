@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>±¸ÀÎ±¸Á÷ °Ô½ÃÆÇ ÀÛ¼ºÆäÀÌÁö</title>
+	<title>êµ¬ì¸êµ¬ì§ ê²Œì‹œíŒ ìž‘ì„±íŽ˜ì´ì§€</title>
 	<c:import url="../../common/header.jsp"/>
 </head>
 <body>
@@ -16,40 +16,40 @@
 	<main id="container">
 		<section>
 			<div class="section-left">
-					<!-- ³»¿ë¾øÀ½ -->
+					<!-- ë‚´ìš©ì—†ìŒ -->
 			</div>
 			
 			<div class="section-center">
 			<div class="dc-content">
 				<div class="dc-content-title">
-				<h1>±¸ÀÎ±¸Á÷ °Ô½ÃÆÇ ÀÛ¼ºÆäÀÌÁö</h1>
+				<h1>êµ¬ì¸êµ¬ì§ ê²Œì‹œíŒ ìž‘ì„±íŽ˜ì´ì§€</h1>
 				</div>
 				<form id="jInsForm" method="post" action="${pageContext.request.contextPath}/job/jobBoard/insertJobBoard.do">
 				<div class="dc-content-box"><br />
-				Á¦¸ñ : <input type="text" class="" placeholder="Á¦¸ñ" name="jobBoardTitle" id="jobBoardTitle" required/><br /><br />
-				ÀÛ¼ºÀÚ : <input type="text" class="" value="${member.nickName}" readonly required/><br /><br />
-				±¸ÀÎ±¸Á÷¿©ºÎ : 
-				<input type="radio" name = "type" value = "hire" checked><label> ±¸ÀÎ </label>
-				<input type="radio" name = "type" value = "offer"><label> ±¸Á÷ </label><br /><br />
+				ì œëª© : <input type="text" class="" placeholder="ì œëª©" name="title" id="title" required/><br /><br />
+				ìž‘ì„±ìž : <input type="text" class="" value="${member.nickName}" readonly required/><br /><br />
+				<input type="hidden" class="" name="memberNo" id="memberNo" value="${member.no}" readonly required/>
 				
-				±¸ÀÎÀÏ : 
+				êµ¬ì¸êµ¬ì§ì—¬ë¶€ : 
+				<input type="radio" name = "type" value = "JTYPE001" checked><label> êµ¬ì¸ </label>
+				<input type="radio" name = "type" value = "JTYPE002"><label> êµ¬ì§ </label><br /><br />
+				
+				êµ¬ì¸ì¼ : 
 				<input type="date" name="startDate"/> ~
 				<input type="date" name="endDate"/> <br /><br />
 				
-				±Ù¹«ÀÏ : 
+				ê·¼ë¬´ì¼ : 
 				<input type="date" name="startJob"/> ~
 				<input type="date" name="endJob"/> <br /><br />
-				
-				±Ù¹«½Ã°£ : 
-				<input type="number" min="0" max="24" class="" id="startTime" required/>½Ã 
-				<input type="number" min="0" max="60" class="" id="startMin" required/>ºÐ   ~   
-				<input type="number" min="0" max="24" class="" id="endTime" required/>½Ã
-				<input type="number" min="0" max="60" class="" id="endMin" required/>ºÐ<br /><br />
-				
-				»óÈ£¸í :
-				<input type="hidden" class="" id="companyNo" name="companyNo" value=""/>
-				<input type="text" class="" placeholder="»óÈ£¸í" id="companyName" onclick="selectCompany();" required/>
-				<input type="text" class="" placeholder="±Ù¹«Àå¼Ò" id="location" onclick="selectCompany();" required/>
+				<!-- int 00 int 00 -> string 00:00 -->
+				ê·¼ë¬´ì‹œê°„ : 
+				<input type="time" name="startTime" id="startTime"> ~
+				<input type="time" name="endTime" id="endTime"><br /><br />
+
+				ìƒí˜¸ëª… :
+				<input type="hidden" class="" id="companyNo" name="companyNo"/>
+				<input type="text" class="" placeholder="ìƒí˜¸ëª…" id="companyName" onclick="selectCompany();" readonly required/>
+				<input type="text" class="" placeholder="ê·¼ë¬´ìž¥ì†Œ" name="location" id="location"/>
 				
 				<script type="text/javascript">
 					function selectCompany() {
@@ -58,23 +58,23 @@
 					}
 				</script>
 				<br/><br/>
-				°í¿ëÇüÅÂ :
+				ê³ ìš©í˜•íƒœ :
 				<select name="jobType" id="jobType" size="1">
-					<option value="JOBTYPE001" selected>Á¤±ÔÁ÷</option>
-					<option value="JOBTYPE002">ºñÁ¤±ÔÁ÷</option>
-					<option value="JOBTYPE003">ÆÄÆ®Å¸ÀÓ</option>
+					<option name="JOBTYPE001" value="JOBTYPE001" selected>ì •ê·œì§</option>
+					<option value="JOBTYPE002">ë¹„ì •ê·œì§</option>
+					<option value="JOBTYPE003">íŒŒíŠ¸íƒ€ìž„</option>
 				</select><br/><br />
-				±Þ¿©ÇüÅÂ : 
-				<input type="number" min="0"  class="" placeholder="±Þ¿©" name="salary" id="salary" required/>¿ø
+				ê¸‰ì—¬í˜•íƒœ : 
+				<input type="number" min="0"  class="" placeholder="ê¸‰ì—¬" name="salary" id="salary" required/>ì›
 				<select name="salType" id="salType" size="1">
-					<option value="SALTYPE001" selected>½Ã±Þ</option>
-					<option value="SALTYPE002">ÀÏ±Þ</option>
-					<option value="SALTYPE003">ÁÖ±Þ</option>
-					<option value="SALTYPE004">¿ù±Þ</option>
-					<option value="SALTYPE005">¿¬ºÀ</option>
+					<option name="salType" value="SALTYPE001" selected>ì‹œê¸‰</option>
+					<option name="salType" value="SALTYPE002">ì¼ê¸‰</option>
+					<option name="salType" value="SALTYPE003">ì£¼ê¸‰</option>
+					<option name="salType" value="SALTYPE004">ì›”ê¸‰</option>
+					<option name="salType" value="SALTYPE005">ì—°ë´‰</option>
 				</select><br/><hr />
-			³»¿ë : <textarea id="summernote" name="content"></textarea> <br />
-			<button type="submit">°Ô½Ã±Û µî·Ï</button>
+			ë‚´ìš© : <textarea id="summernote" name="content"></textarea> <br />
+			<button type="submit">ê²Œì‹œê¸€ ë“±ë¡</button>
 			</div>
 			</form>
 		</div>
@@ -116,7 +116,7 @@
 			success : function(url) {
 				$('#summernote').summernote('editor.insertImage', url);
 			}, error : function(){						
-				console.log("ÀÌ¹ÌÁö ¾÷·Îµå ½ÇÆÐ");						
+				console.log("ì´ë¯¸ì§€ ì—…ë¡œë“œ ì‹¤íŒ¨");						
 			}
 		});
 	}
