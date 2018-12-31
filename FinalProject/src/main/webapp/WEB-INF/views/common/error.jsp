@@ -3,13 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
 <head>
 <meta charset="UTF-8">
-<title>ERROR</title>
+<title>${msg}</title>
 </head>
-<body>
-	<h1>에러페이지 입니다.</h1>
-</body>
-</html>
+	<%-- <h2>msg : ${msg}</h2>
+	<h3>loc : ${loc} <a href="${pageContext.request.contextPath}/${loc}"> 페이지로 이동</a></h3> --%>
+<script>
+	alert("${msg}");
+	history.go(-1);
+</script>

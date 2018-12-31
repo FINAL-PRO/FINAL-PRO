@@ -19,8 +19,8 @@ public class CommentDaoImpl implements CommentDao{
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public int totalComment(int cno) {
-		return sqlSession.selectOne("comment_mapper.totalComment", cno);
+	public int totalComment(int bno) {
+		return sqlSession.selectOne("comment_mapper.totalComment", bno);
 	}
 
 	@Override
@@ -35,8 +35,8 @@ public class CommentDaoImpl implements CommentDao{
 	}
 
 	@Override
-	public void commentInsert(Comment comment) {
-		sqlSession.insert("comment_mapper.insertComment", comment);
+	public int commentInsert(Comment comment) {
+		return sqlSession.insert("comment_mapper.insertComment", comment);
 	}
 
 	@Override

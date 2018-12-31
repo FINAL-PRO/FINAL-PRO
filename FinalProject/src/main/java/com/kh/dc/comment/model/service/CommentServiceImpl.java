@@ -30,8 +30,8 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public void commentInsert(Comment comment) {
-		commentDao.commentInsert(comment);
+	public int commentInsert(Comment comment) {
+		return commentDao.commentInsert(comment);
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package com.kh.dc.common.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 public class Ad implements Serializable{
 
@@ -31,6 +31,20 @@ public class Ad implements Serializable{
 		super();
 		this.no = no;
 		this.adContentPath = adContentPath;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.memberNo = memberNo;
+		this.pageNo = pageNo;
+		this.sectionNo = sectionNo;
+		this.locationNo = locationNo;
+		this.adContentType = adContentType;
+		this.adType = adType;
+		this.status = status;
+	}
+	
+	public Ad(Date startDate, Date endDate, int memberNo, int pageNo, int sectionNo,
+			int locationNo, String adContentType, String adType, String status) {
+		super();
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.memberNo = memberNo;

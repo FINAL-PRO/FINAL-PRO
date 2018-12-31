@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ad_mapper">
+
+	<select id="selectAdContentList" resultType="code">
+		SELECT * FROM DC_CODE_TB WHERE ATT='광고물타입' ORDER BY ID
+	</select>
+	
+	<select id="selectAdTypeList" resultType="code">
+		SELECT * FROM DC_CODE_TB WHERE ATT='광고타입' ORDER BY ID
+	</select>
+	
+	<select id="selectAdStatusList" resultType="code">
+		SELECT * FROM DC_CODE_TB WHERE ATT='광고상태' ORDER BY ID	
+	</select>
+	
+	<select id="selectAdList" parameterType="map" resultType="adList">
+        SELECT 
+            AD.NO,AD.STARTDATE,AD.ENDDATE, M.NAME USERNAME, 
+            P.NAME PAGENAME,S.NAME SECTIONNAME, 
+            L.NAME LOCATIONNAME,C1.VALUE ADCONTENTTYPE,
+            C2.VALUE ADTYPE, C3.VALUE STATUS
+        FROM DC_AD_TB AD
+        LEFT JOIN DC_MEMBER_TB M ON AD.MEMBERNO = M.NO
+        LEFT JOIN DC_AD_PAGE_TB P ON AD.PAGENO = P.NO
+        LEFT JOIN DC_AD_SECTION_TB S ON AD.SECTIONNO = S.NO
+        LEFT JOIN DC_AD_LOCATION_TB L ON AD.LOCATIONNO = L.NO
+        LEFT JOIN DC_CODE_TB C1 ON AD.ADCONTENTTYPE = C1.ID
+        LEFT JOIN DC_CODE_TB C2 ON AD.ADTYPE = C2.ID
+        LEFT JOIN DC_CODE_TB C3 ON AD.STATUS = C3.ID
+        WHERE AD.ADCONTENTTYPE = #{adContent}
+		AND AD.ADTYPE = #{adType}
+		AND AD.STATUS = #{adStatus}
+	</select>
+	
+	<select id="selectAdPageList" resultType="adPage">SELECT * FROM DC_AD_PAGE_TB</select>
+	
+	<select id="selectAdSectionList" resultType="adSection">SELECT * FROM DC_AD_SECTION_TB</select>
+	
+	<select id="selectAdLocationList" resultType="adLocation">SELECT * FROM DC_AD_LOCATION_TB</select>
+	
+	<insert id="insertAd" parameterType="ad">
+		INSERT INTO DC_AD_TB VALUES(
+			SEQ_AD.NEXTVAL, #{adContentPath}, #{startDate}, #{endDate}, #{memberNo},
+			#{pageNo}, #{sectionNo}, #{locationNo}, #{adContentType}, #{adType}, #{status}
+		)
+	</insert>
+	
+</mapper>

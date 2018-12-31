@@ -13,15 +13,17 @@
 		FROM DC_COMMENT_TB C
 		JOIN DC_MEMBER_TB M  ON C.MEMBERNO = M.NO
 		JOIN DC_BOARD_TB B ON C.BOARDNO = B.NO
-		WHERE C.BOARDNO = #{boardNo} AND B.TYPE = 'BOARD001'
+		WHERE C.BOARDNO = #{bno} AND B.TYPE = 'BOARD001'
 		ORDER BY C.WRITEDATE DESC, C.NO DESC
 	</select>
 	
 	<!-- 댓글 하나 가져오기 -->
+	<!-- 
 	<select id="selectCommentOne" resultType="comment" parameterType="_int">
 		SELECT * FROM DC_COMMENT_TB WHERE no = #{no}
 	</select>
-	
+	 -->
+	 
 	<!-- 댓글 하나 입력 -->
 	<insert id="insertComment" parameterType="comment">
 		INSERT INTO DC_COMMENT_TB VALUES(SEQ_COMMENT.NEXTVAL,
@@ -33,8 +35,9 @@
 		FROM DC_COMMENT_TB C
 		JOIN DC_BOARD_TB B
 		ON C.BOARDNO = B.NO 
-		WHERE C.BOARDNO = #{no}
+		WHERE C.BOARDNO = #{bno}
 		AND B.TYPE = 'BOARD001'
+		AS #{recnt}
 	</select>
 	
 	<delete id="deleteComment" parameterType="_int">
@@ -42,7 +45,7 @@
 	</delete>
 	
 	<update id="updateComment" parameterType="comment">
-		UPDATE DC_COMMENT_TB SET CONTENT = #{content} WHERE NO = #{cno}
+		UPDATE DC_COMMENT_TB SET CONTENT = #{content} WHERE NO = #{no}
 	</update>
 	
 </mapper>

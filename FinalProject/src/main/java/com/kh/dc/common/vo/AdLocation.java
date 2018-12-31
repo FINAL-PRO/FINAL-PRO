@@ -10,13 +10,13 @@ public class AdLocation implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private int no;
-	private int name;
+	private String name;
 	
 	public AdLocation() {
 		super();
 	}
 
-	public AdLocation(int no, int name) {
+	public AdLocation(int no, String name) {
 		super();
 		this.no = no;
 		this.name = name;
@@ -30,11 +30,11 @@ public class AdLocation implements Serializable {
 		this.no = no;
 	}
 
-	public int getName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setName(int name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 

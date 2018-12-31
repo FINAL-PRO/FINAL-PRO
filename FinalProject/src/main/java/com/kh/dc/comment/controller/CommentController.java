@@ -24,60 +24,35 @@ public class CommentController {
 	
 	@Autowired
 	private CommentService commentService;
-	
-/*	@RequestMapping(value="comment/commentList.do")
-	public @ResponseBody ResponseEntity<List<Comment>> commentList(@RequestParam int bno){
-        //ResponseEntity 쓰면 list는물론 HttpStatus(접속 상태)도 같이 보낼 수 있다.
-        ResponseEntity<List<Comment>> entity = null;
-        System.out.println("댓글 리스트!");
-        try{
-        	List<Comment> clist = commentService.commentList(bno);
-        	entity = new ResponseEntity<List<Comment>>(clist, HttpStatus.OK);
-        }catch(Exception e){
-            entity = new ResponseEntity<List<Comment>>(HttpStatus.BAD_REQUEST);
-        }
-        return entity;
-        
-    }*/
-	
+
 	@RequestMapping(value="comment/commentList.do")
 	@ResponseBody
-	public List<Comment> commentList(Model model, @RequestParam Integer bno){
+	public List<Comment> commentList(Model model, @RequestParam int bno){
 
         System.out.println("댓글 리스트!");
+        
+        int totalComment = commentService.totalComment(bno);
+        
+        System.out.println("댓글 총 갯수:"+totalComment);
+        
+        model.addAttribute("totalComment", totalComment);
         
         return commentService.commentList(bno);
 
     }
-	
-	@RequestMapping(value="comment/commentWrite.do", method=RequestMethod.POST)
-	public ResponseEntity<String> commentInsert(@RequestBody Comment comment, HttpSession session) {
-		
-		ResponseEntity<String> entity = null;
-		System.out.println("댓글입력");
-		try{
-			String userId = (String)session.getAttribute("userId");
-			comment.setMemberName(userId);
-			commentService.commentInsert(comment);
-			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
-		}catch(Exception e){
-			e.printStackTrace();
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-		
-		return entity;
-	}
-	
-/*	public String commentInsert(Comment comment, @RequestParam int bno, HttpSession session) {
-		
-		int result = commentService.commentInsert(comment);
-		
-		System.out.println("comment insert 결과: "+result);
-		
-		return "community/free/freeView";
-	}*/
-	
-	
+
+    @RequestMapping("comment/commentWrite.do")
+    @ResponseBody
+    private int commentInsert(@RequestParam int bno, @RequestParam String content, @RequestParam int mno) throws Exception{
+        
+        Comment comment = new Comment();
+        comment.setBoardNo(bno);
+        comment.setContent(content);
+        comment.setMemberNo(mno);
+        
+        return commentService.commentInsert(comment);
+    }
+
 	@RequestMapping(value="comment/commentDelete.do", method=RequestMethod.POST)
 	@ResponseBody
 	public int commentDelete(@RequestParam int cno) {
