@@ -27,4 +27,6 @@ public interface AdService {
 
 	int insertAd(Ad ad);
 
+	Ad getAd();
+
 }

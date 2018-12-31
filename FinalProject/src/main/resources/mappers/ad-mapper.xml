@@ -46,4 +46,8 @@
 		)
 	</insert>
 	
+	<select id="getAd" resultType="ad">
+		SELECT * FROM DC_AD_TB WHERE  NO = 1
+	</select>
+	
 </mapper>

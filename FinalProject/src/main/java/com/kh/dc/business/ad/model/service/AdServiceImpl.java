@@ -59,4 +59,9 @@ public class AdServiceImpl implements AdService {
 		return adDao.insertAd(ad);
 	}
 
+	@Override
+	public Ad getAd() {
+		return adDao.getAd();
+	}
+
 }
