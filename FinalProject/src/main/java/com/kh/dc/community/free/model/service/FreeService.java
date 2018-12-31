@@ -21,5 +21,7 @@ public interface FreeService {
 	int freeUpdate(Board board);
 	
 	int freeViewCount(int bno);
+
+	List<Board> selectFreeListData();
 	
 }
