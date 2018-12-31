@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dc.common.vo.Board;
 import com.kh.dc.job.model.vo.JobBoard;
 
 @Repository
@@ -30,29 +31,24 @@ public class JobBoardDaoImpl implements JobBoardDao {
 	}
 
 	@Override
+	public int insertBoard(JobBoard jobBoard) {
+		// 
+		System.out.println(jobBoard);
+		return sqlSession.insert("jobBoard_mapper.insertBoard", jobBoard);
+	}
+	@Override
 	public int insertJobBoard(JobBoard jobBoard) {
 		// 
+		System.out.println(jobBoard);
 		return sqlSession.insert("jobBoard_mapper.insertJobBoard", jobBoard);
 	}
-
+	
 	@Override
 	public JobBoard selectOneJobBoard(int no) {
 		// 
 		return sqlSession.selectOne("jobBoard_mapper.selectOneJobBoard", no);
 	}
 
-	@Override
-	public int updateJobBoard(JobBoard jobBoard) {
-		// 
-		return sqlSession.update("jobBoard_mapper.updateJobBoard", jobBoard);
-	}
-
-	@Override
-	public int deleteJobBoard(int no) {
-		// 
-		return sqlSession.update("jobBoard_mapper.deleteJobBoard", no);
-	}
-	
 	@Override
 	public List<Map<String, String>> selectJobBoardComPop(int cPage, int numPerPage) {
 		// 
@@ -65,4 +61,30 @@ public class JobBoardDaoImpl implements JobBoardDao {
 		// 
 		return sqlSession.selectOne("jobBoard_mapper.selectJobBoardComPopTotalContents");
 	}
+	
+	@Override
+	public int updateBoard(JobBoard jobBoard) {
+		// 
+		System.out.println(jobBoard);
+		return sqlSession.update("jobBoard_mapper.updateBoard", jobBoard);
+	}
+	@Override
+	public int updateJobBoard(JobBoard jobBoard) {
+		//
+		System.out.println(jobBoard);
+		return sqlSession.update("jobBoard_mapper.updateJobBoard", jobBoard);
+	}
+	
+	public int updateViewCount(int boardNo) {
+		// 
+		return sqlSession.update("jobBoard_mapper.updateViewCount", boardNo);
+	}
+
+	@Override
+	public int deleteJobBoard(int boardNo) {
+		// 
+		return sqlSession.update("jobBoard_mapper.deleteJobBoard", boardNo);
+	}
+		
+	
 }

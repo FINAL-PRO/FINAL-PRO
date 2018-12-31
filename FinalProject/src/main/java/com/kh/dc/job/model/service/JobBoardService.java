@@ -1,10 +1,7 @@
 package com.kh.dc.job.model.service;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.stereotype.Service;
 
 import com.kh.dc.job.model.vo.JobBoard;
 
@@ -16,16 +13,18 @@ public interface JobBoardService {
 
 	int selectJobBoardTotalContents();
 	
+	int insertBoard(JobBoard jobBoard);
+	
 	int insertJobBoard(JobBoard jobBoard);
 	
 	JobBoard selectOneJobBoard(int no);
-	
-	int updateJobBoard(JobBoard jobBoard);
-	
-	int deleteJobBoard(int no);
 
 	List<Map<String, String>> selectJobBoardComPop(int cPage, int numPerPage);
 
 	int selectJobBoardComPopTotalContents();
+	
+	int updateJobBoard(JobBoard jobBoard);
+	
+	int deleteJobBoard(int boardNo);
 	
 }
