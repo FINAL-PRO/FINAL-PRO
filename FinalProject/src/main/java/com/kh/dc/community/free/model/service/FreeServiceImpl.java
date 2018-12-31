@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.dc.common.vo.Board;
+import com.kh.dc.common.vo.BoardList;
 import com.kh.dc.common.vo.Comment;
 import com.kh.dc.community.free.model.dao.FreeDao;
 
@@ -27,7 +28,7 @@ public class FreeServiceImpl implements FreeService{
 	}
 
 	@Override
-	public Board selectOneFree(int no) {
+	public BoardList selectOneFree(int no) {
 		return freeDao.selectOneFree(no);
 	}
 
@@ -49,26 +50,6 @@ public class FreeServiceImpl implements FreeService{
 	@Override
 	public int freeViewCount(int no) {
 		return freeDao.freeViewCount(no);
-	}
-
-	@Override
-	public int commentInsert(Comment comment) {
-		return freeDao.commentInsert(comment);
-	}
-
-	@Override
-	public int totalComment(int no) {
-		return freeDao.totalComment(no);
-	}
-
-	@Override
-	public List<Comment> commentList(int no) {
-		return freeDao.commentList(no);
-	}
-
-	@Override
-	public int commentDelete(int no) {
-		return freeDao.commentDelete(no);
 	}
 
 	@Override
