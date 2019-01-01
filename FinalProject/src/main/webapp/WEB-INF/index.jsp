@@ -35,6 +35,15 @@
 					$("#loadingFree").hide();
 				}
 			});
+			
+			$.ajax({
+				url : "business/ad/getAd.do",
+				success : function(data){
+					alert(data);
+				}, error : function(){
+					alert("ajax error");
+				}
+			});
 		});
 	</script>
 </head>

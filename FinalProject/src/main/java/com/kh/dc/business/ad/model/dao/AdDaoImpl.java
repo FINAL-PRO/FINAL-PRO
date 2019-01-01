@@ -59,4 +59,9 @@ public class AdDaoImpl implements AdDao{
 		return sqlSession.insert("ad_mapper.insertAd", ad);
 	}
 
+	@Override
+	public Ad getAd() {
+		return sqlSession.selectOne("ad_mapper.getAd");
+	}
+
 }

@@ -27,4 +27,6 @@ public interface AdDao {
 
 	int insertAd(Ad ad);
 
+	Ad getAd();
+
 }

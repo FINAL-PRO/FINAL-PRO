@@ -14,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.dc.business.ad.model.service.AdService;
@@ -143,6 +145,17 @@ public class AdController {
 			model.addAttribute("msg", "광고 입력 실패");
 			return "common/error";
 		}
+	}
+
+	@RequestMapping("business/ad/getAd.do")
+	@ResponseBody
+	public String getAd() {
+		
+		Ad ad = adService.getAd();
+		
+		System.out.println("가져온 아이디 : " + ad);
+		
+		return ad.getAdContentPath();
 	}
 }
 
