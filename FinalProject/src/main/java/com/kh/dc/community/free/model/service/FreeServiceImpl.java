@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.BoardList;
-import com.kh.dc.common.vo.Comment;
 import com.kh.dc.community.free.model.dao.FreeDao;
 
 @Service
@@ -28,7 +27,7 @@ public class FreeServiceImpl implements FreeService{
 	}
 
 	@Override
-	public BoardList selectOneFree(int no) {
+	public Board selectOneFree(int no) {
 		return freeDao.selectOneFree(no);
 	}
 

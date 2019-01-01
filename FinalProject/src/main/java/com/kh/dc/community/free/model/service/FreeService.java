@@ -12,7 +12,7 @@ public interface FreeService {
 	
 	int selectFreeTotalContents();
 	
-	BoardList selectOneFree(int no);
+	Board selectOneFree(int no);
 	
 	int insertFree(Board board);
 

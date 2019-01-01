@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.BoardList;
-import com.kh.dc.common.vo.Comment;
 
 @Repository
 public class FreeDaoImpl implements FreeDao{
@@ -30,7 +29,7 @@ public class FreeDaoImpl implements FreeDao{
 	}
 
 	@Override
-	public BoardList selectOneFree(int no) {
+	public Board selectOneFree(int no) {
 		return sqlSession.selectOne("free_mapper.selectOneFree", no);
 	}
 

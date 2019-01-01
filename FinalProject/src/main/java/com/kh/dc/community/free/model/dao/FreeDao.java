@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.BoardList;
-import com.kh.dc.common.vo.Comment;
 
 public interface FreeDao {
 
@@ -13,7 +12,7 @@ public interface FreeDao {
 	
 	int selectFreeTotalContents();
 	
-	BoardList selectOneFree(int no);
+	Board selectOneFree(int no);
 	
 	/*List<Map<String, String>> selectOneFree(int cPage, int numberPage, int no);*/
 
