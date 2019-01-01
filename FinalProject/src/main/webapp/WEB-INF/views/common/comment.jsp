@@ -80,7 +80,7 @@
 		<label for="content">comment</label>
 		<form name="commentInsertForm">
 			<div class="input-group">
-				<input type="hidden" name="bno" value="${board.no}" /> 
+				<input type="hidden" id="bno" name="bno" value="${board.no}" /> 
 				<input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요."/> 
 				<input type="hidden" id="mno" name="mno" value="${member.no}" /> 
 				<span class="input-group-btn">
@@ -91,8 +91,7 @@
 	</div>
 	<div style="border: solid 0.5px gray"></div>
 	<form id="commentListFrm" name="commentListFrm" method="post">
-		<div class="commentList" id="commentList"
-			style="border: 1px solid blue">
+		<div class="commentList" id="commentList" style="border: 1px solid blue">
 			<p class="both" style="clear: both;">&nbsp;</p>
 		</div>
 	</form>
@@ -103,7 +102,7 @@
 	var mno = $('[name=mno]').val(); 									
 	var cno = $('[name=cno]').val(); 
 	var bno = $('[name=bno]').val();
-	
+		
 	commentList(bno);
 	
 	$('[name=commentInsertBtn]').click(function(){ 
@@ -131,13 +130,16 @@
      
    	function commentList(bno){
    		
+   		console.log(bno);
+   		
    		$.ajax({
    			type: "get",
    			url: "${pageContext.request.contextPath}/comment/commentList.do",
    			data: {bno: bno},
    			success: function(data){
-   				
+
    	            var a =''; 
+   	            
    	            $.each(data, function(key, value){ 
    	                a += '<div class="commentArea">';
    	                a += '<p class="profile" style="display:inline;">';

@@ -36,6 +36,7 @@
 		<typeAlias type="com.kh.dc.common.vo.AdPage" alias="adPage"/>
 		<typeAlias type="com.kh.dc.common.vo.AdSection" alias="adSection"/>
 		<typeAlias type="com.kh.dc.common.vo.Ad" alias="ad"/>
+		<typeAlias type="com.kh.dc.common.vo.AdList" alias="adList"/>
 		<typeAlias type="com.kh.dc.common.vo.Like" alias="like"/>
 		<typeAlias type="com.kh.dc.common.vo.Message" alias="message"/>
 		<typeAlias type="com.kh.dc.common.vo.PointContent" alias="pointContent"/>

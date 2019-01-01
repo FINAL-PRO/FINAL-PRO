@@ -10,13 +10,6 @@
 	<meta charset="UTF-8">	
 	<title>게시글 상세페이지</title>
 	<c:import url="../../common/header.jsp"/>
-	<style>
-		div#board-container{width:400px; margin:0 auto; text-align:center;}
-		div#board-container input,div#board-container button{margin-bottom:15px;}
-		/* 부트스트랩 : 파일라벨명 정렬*/
-		div#board-container label.custom-file-label{text-align:left;}
-	</style>
-	<c:import url="../../common/header.jsp"/>
 </head>
 	
 <body>
@@ -43,9 +36,9 @@
 						<div>${jobBoard.location}</div>
 						<div>${jobBoard.companyNo}</div>
 						<!-- 모집시작/마감일 -->
-						<div>${jobBoard.startdate}</div>
-						<div>${jobBoard.enddate}</div>
-						<div>${jobBoard.startdate} ~ ${jobBoard.enddate}</div>
+						<div>${jobBoard.startDate}</div>
+						<div>${jobBoard.endDate}</div>
+						<div>${jobBoard.startDate} ~ ${jobBoard.endDate}</div>
 						<!-- 근무시작/종료일 -->
 						<div>${jobBoard.startJob}</div>
 						<div>${jobBoard.endJob}</div>
@@ -58,14 +51,17 @@
 						<div>${jobBoard.dday}일 남음</div>
 						
 						<button class="btn btn-outline-info" type="button" 
-							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/jobBoardUpdate.do?no=${jobBoard.no}'">수정 페이지</button>
+							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/jobBoardList.do'">목록</button>
 						<button class="btn btn-outline-info" type="button" 
-							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/jobBoardUpdate.do?no=${jobBoard.no}'">조기마감하기</button>
+							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/updateJobBoardForm.do?no=${jobBoard.no}'">수정 페이지</button>
+						<button class="btn btn-outline-info" type="button" 
+							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/deleteJobBoard.do?boardNo=${jobBoard.boardNo}'">조기마감하기</button>
 						
 						<button class="btn btn-outline-info" type="button" 
-							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/jobBoardDelete.do?no=${jobBoard.no}'">삭제 페이지</button>
+							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/deleteJobBoard.do?boardNo=${jobBoard.boardNo}'">삭제 페이지</button>
 					</div>
 				</div>
+			</div>
 			</div>	
 			<div class="section-right">
 				<c:import url="../../common/rightSection.jsp"/>

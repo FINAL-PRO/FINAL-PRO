@@ -11,12 +11,12 @@ public class JobBoard extends Board {
 	private int no;
 	private String type;
 	private int salary;
-	private Date startdate;
-	private Date enddate;
+	private Date startDate;
+	private Date endDate;
 	private Date startJob;
 	private Date endJob;
-	private Date startTime;
-	private Date endTime;
+	private String startTime;
+	private String endTime;
 	private String location;
 	private int boardNo;
 	private int companyNo;
@@ -27,18 +27,19 @@ public class JobBoard extends Board {
 	
 	private String nickName;
 	private int dday;
+	private String cName;
 	
 	public JobBoard() {}
 
-	public JobBoard(int no, String type, int salary, Date startdate, Date enddate, Date startJob, Date endJob,
-			Date startTime, Date endTime, String location, int boardNo, int companyNo, String jobType, String salType,
-			String status, String nickName, int dday) {
+	public JobBoard(int no, String type, int salary, Date startDate, Date endDate, Date startJob, Date endJob,
+			String startTime, String endTime, String location, int boardNo, int companyNo, String jobType, String salType,
+			String status, String nickName, int dday, String cName) {
 		super();
 		this.no = no;
 		this.type = type;
 		this.salary = salary;
-		this.startdate = startdate;
-		this.enddate = enddate;
+		this.startDate = startDate;
+		this.endDate = endDate;
 		this.startJob = startJob;
 		this.endJob = endJob;
 		this.startTime = startTime;
@@ -51,22 +52,7 @@ public class JobBoard extends Board {
 		this.status = status;
 		this.nickName = nickName;
 		this.dday = dday;
-	}
-
-	public int getDday() {
-		return dday;
-	}
-
-	public void setDday(int dday) {
-		this.dday = dday;
-	}
-
-	public String getNickName() {
-		return nickName;
-	}
-
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+		this.cName = cName;
 	}
 
 	public int getNo() {
@@ -93,20 +79,20 @@ public class JobBoard extends Board {
 		this.salary = salary;
 	}
 
-	public Date getStartdate() {
-		return startdate;
+	public Date getStartDate() {
+		return startDate;
 	}
 
-	public void setStartdate(Date startdate) {
-		this.startdate = startdate;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 
-	public Date getEnddate() {
-		return enddate;
+	public Date getEndDate() {
+		return endDate;
 	}
 
-	public void setEnddate(Date enddate) {
-		this.enddate = enddate;
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
 	public Date getStartJob() {
@@ -125,19 +111,19 @@ public class JobBoard extends Board {
 		this.endJob = endJob;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 
@@ -189,17 +175,41 @@ public class JobBoard extends Board {
 		this.status = status;
 	}
 
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public int getDday() {
+		return dday;
+	}
+
+	public void setDday(int dday) {
+		this.dday = dday;
+	}
+
+	public String getcName() {
+		return cName;
+	}
+
+	public void setcName(String cName) {
+		this.cName = cName;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
-		return "JobBoard [no=" + no + ", type=" + type + ", salary=" + salary + ", startdate=" + startdate
-				+ ", enddate=" + enddate + ", startJob=" + startJob + ", endJob=" + endJob + ", startTime=" + startTime
+		return "JobBoard [no=" + no + ", type=" + type + ", salary=" + salary + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", startJob=" + startJob + ", endJob=" + endJob + ", startTime=" + startTime
 				+ ", endTime=" + endTime + ", location=" + location + ", boardNo=" + boardNo + ", companyNo="
-				+ companyNo + ", jobType=" + jobType + ", salType=" + salType + ", status=" + status + ", nickName" + nickName + ", dday" + dday  +super.toString() +"]";
+				+ companyNo + ", jobType=" + jobType + ", salType=" + salType + ", status=" + status + ", nickName="
+				+ nickName + ", dday=" + dday + ", cName=" + cName + super.toString() +"]";
 	}
 
-	
 }

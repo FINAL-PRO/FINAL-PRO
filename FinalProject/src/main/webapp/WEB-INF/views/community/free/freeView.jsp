@@ -176,7 +176,7 @@
 							<div id="container2">
 								<div class="articlelist" style="border: solid 0.5px red">
 									<form name="boardFrm" method="post">
-										<input type="hidden" id="bno" name="bno" value="${board.no}" readonly="readonly" />
+										<input type="hidden" name="bno" value="${board.no}" />
 									</form>
 									<div class="group" style="border: solid 0.5px blue">
 										<p class="title">${board.title}</p>
@@ -195,7 +195,7 @@
 											<button class="btn_report">신고하기</button>
 											<button class="btn_like">좋아요</button>
 											<span class="likecount">: 1</span> 
-											<span class="commentcount">댓글:${totalComment}</span>
+											<span class="commentcount">댓글: ${totalComment}</span>
 										</div>
 										<script>
 				                      		$("#btn_board_edit").click(function(){

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.dc.community.free.model.service.FreeService;
+import com.kh.dc.sale.group.model.vo.Group;
 import com.kh.dc.common.util.Utils;
 
 import com.kh.dc.common.vo.Board;
@@ -56,7 +57,7 @@ public class FreeController {
 		
 	}
 	
-	
+	/*
 	@RequestMapping("community/free/freeInsertFormEnd.do")
 	public String insertFree(Board board) {
 		
@@ -66,24 +67,36 @@ public class FreeController {
 		System.out.println("insert 결과 : " + result);
 		
 		return "redirect:/community/free/list.do";
+	}*/
+	
+	@RequestMapping("community/free/freeInsertFormEnd.do")
+	public String insertFree(Board board,  Model model) {
+		
+		String loc = "community/free/freeView";
+	
+		if(freeService.insertFree(board) > 0) {
+			model.addAttribute("insertFree", freeService.selectOneFree(board.getNo()));
+		}
+				
+		return loc;
 	}
-
+	
 	@RequestMapping("community/free/freeView.do")
-	public String selectOneFree(@RequestParam int no, Model model) {
+	public String selectOneFree(@RequestParam int bno, Model model) {
 		
 		// 조회수 증가
-		int freeViewCount = freeService.freeViewCount(no);
+		int freeViewCount = freeService.freeViewCount(bno);
 		
-		model.addAttribute("board", freeService.selectOneFree(no))
+		model.addAttribute("board", freeService.selectOneFree(bno))
 		.addAttribute("freeViewCount", freeViewCount);
 		
 		return "community/free/freeView";
 	}
 	
 	@RequestMapping("community/free/freeUpdateForm.do")
-	public String freeUpdateView(Model model, @RequestParam int no) {
+	public String freeUpdateView(Model model, @RequestParam int bno) {
 
-		model.addAttribute("board", freeService.selectOneFree(no));
+		model.addAttribute("board", freeService.selectOneFree(bno));
 		
 		return "community/free/freeUpdateForm";
 	}
@@ -98,10 +111,10 @@ public class FreeController {
 	}
 	
 	@RequestMapping("community/free/freeDelete.do")
-	public String freeDelete(@RequestParam int no) {
+	public String freeDelete(@RequestParam int bno) {
 		
-		System.out.println("삭제:" +no);
-		freeService.freeDelete(no);
+		System.out.println("삭제:" +bno);
+		freeService.freeDelete(bno);
 		
 		return "redirect:/community/free/list.do";
 	}
