@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.dc.common.vo.Board;
-import com.kh.dc.common.vo.Comment;
+import com.kh.dc.common.vo.BoardList;
 
 public interface FreeService {
 
@@ -12,7 +12,7 @@ public interface FreeService {
 	
 	int selectFreeTotalContents();
 	
-	Board selectOneFree(int bno);
+	BoardList selectOneFree(int bno);
 	
 	int insertFree(Board board);
 

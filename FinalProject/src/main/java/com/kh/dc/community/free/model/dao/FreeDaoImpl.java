@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dc.common.vo.Board;
-import com.kh.dc.common.vo.Comment;
-
+import com.kh.dc.common.vo.BoardList;
 
 @Repository
 public class FreeDaoImpl implements FreeDao{
@@ -30,8 +29,9 @@ public class FreeDaoImpl implements FreeDao{
 	}
 
 	@Override
-	public Board selectOneFree(int bno) {
+	public BoardList selectOneFree(int bno) {
 		return sqlSession.selectOne("free_mapper.selectOneFree", bno);
+
 	}
 
 	@Override
@@ -52,6 +52,7 @@ public class FreeDaoImpl implements FreeDao{
 	@Override
 	public int freeViewCount(int bno) {
 		return sqlSession.update("free_mapper.freeViewCount", bno);
+
 	}
 
 	@Override
