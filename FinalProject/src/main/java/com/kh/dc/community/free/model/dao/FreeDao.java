@@ -7,8 +7,6 @@ import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.BoardList;
 
 public interface FreeDao {
-
-	// List<Map<String, String>> selectFreeList(int cPage, int numberPage, int tList);
 	
 	int selectFreeTotalContents();
 	

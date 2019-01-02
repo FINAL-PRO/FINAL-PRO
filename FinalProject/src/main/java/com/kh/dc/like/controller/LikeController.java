@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,7 @@ import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.Like;
 import com.kh.dc.like.model.service.LikeService;
 
+@Controller
 public class LikeController {
 	
 	@Autowired
@@ -66,20 +68,18 @@ public class LikeController {
 	@RequestMapping(value="/like/liketotal.do")
 	public int likeCount(@RequestParam int bno) {
 		
-		return 0;
+		return likeService.likecount(bno);
 		
 	}
 	
+	@RequestMapping("like/likecheck.do")
 	@ResponseBody
-	@RequestMapping(value="/like/likecheck.do")
-	private int likeInsert(@RequestParam int bno, @RequestParam int mno) {
+	public int likecheck(@RequestParam int bno, @RequestParam int mno) {
 
 		Like like = new Like();
 		like.setBoardNo(bno);
 		like.setMemberNo(mno);
-		
-		System.out.println("like:"+like);
-		
+
 		return likeService.likeInsert(like);
 	
 	}
