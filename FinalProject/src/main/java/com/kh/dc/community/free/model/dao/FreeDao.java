@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.dc.common.vo.Board;
-import com.kh.dc.common.vo.Comment;
+import com.kh.dc.common.vo.BoardList;
 
 public interface FreeDao {
 
-	List<Map<String, String>> selectFreeList(int cPage, int numberPage);
+	// List<Map<String, String>> selectFreeList(int cPage, int numberPage, int tList);
 	
 	int selectFreeTotalContents();
 	
-	Board selectOneFree(int bno);
-	
+	BoardList selectOneFree(int no);
+
 	/*List<Map<String, String>> selectOneFree(int cPage, int numberPage, int no);*/
 
 	int insertBoard(Board board);
@@ -25,5 +25,11 @@ public interface FreeDao {
 	int freeViewCount(int bno);
 
 	List<Board> selectFreeListData();
+
+	List<Map<String, String>> recentSort(int cPage, int numberPage);
+
+	List<Map<String, String>> commentSort(int cPage, int numberPage);
+
+	List<Map<String, String>> likeSort(int cPage, int numberPage);
 	
 }

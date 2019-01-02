@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.dc.common.vo.Board;
-import com.kh.dc.common.vo.Comment;
+import com.kh.dc.common.vo.BoardList;
 import com.kh.dc.community.free.model.dao.FreeDao;
 
 @Service
@@ -16,10 +16,11 @@ public class FreeServiceImpl implements FreeService{
 	@Autowired
 	FreeDao freeDao;
 
-	@Override
-	public List<Map<String, String>> selectFreeList(int cPage, int numberPage) {
-		return freeDao.selectFreeList(cPage, numberPage);
-	}
+/*	@Override
+	public List<Map<String, String>> selectFreeList(int cPage, int numberPage, int tList) {
+		System.out.println("list service");
+		return freeDao.selectFreeList(cPage, numberPage, tList);
+	}*/
 
 	@Override
 	public int selectFreeTotalContents() {
@@ -27,7 +28,7 @@ public class FreeServiceImpl implements FreeService{
 	}
 
 	@Override
-	public Board selectOneFree(int bno) {
+	public BoardList selectOneFree(int bno) {
 		return freeDao.selectOneFree(bno);
 	}
 
@@ -49,11 +50,29 @@ public class FreeServiceImpl implements FreeService{
 	@Override
 	public int freeViewCount(int bno) {
 		return freeDao.freeViewCount(bno);
+
 	}
 
 	@Override
 	public List<Board> selectFreeListData() {
 		return freeDao.selectFreeListData();
+	}
+
+	@Override
+	public List<Map<String, String>> recentSort(int cPage, int numberPage) {
+		return freeDao.recentSort(cPage, numberPage);
+	}
+
+	@Override
+	public List<Map<String, String>> commentSort(int cPage, int numberPage) {
+		// TODO Auto-generated method stub
+		return freeDao.commentSort(cPage, numberPage);
+	}
+
+	@Override
+	public List<Map<String, String>> likeSort(int cPage, int numberPage) {
+		// TODO Auto-generated method stub
+		return freeDao.likeSort(cPage, numberPage);
 	}
 
 	

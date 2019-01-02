@@ -20,4 +20,16 @@ public interface GroupService {
 	int deleteGroup(int boardNo);
 	
 	List<Map<String, String>> selectBankList();
+	
+	List<Map<String, String>> selectGroupHistory(int groupNo);
+	
+	Map<String, String> selectOneGroupHistory(Map<String, String> gh);
+
+	int insertGroupHistory(Map<String, String> gh);
+	
+	int deleteGroupHistory(Map<String, String> gh);
+	
+	List<Map<String, String>> selectStatusList();
+
+	int updateStatus(Map<String, String> status);
 }

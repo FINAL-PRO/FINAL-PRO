@@ -25,6 +25,7 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 
+	
 	@RequestMapping(value="comment/commentList.do")
 	@ResponseBody
 	public List<Comment> commentList(Model model, @RequestParam int bno){
@@ -40,6 +41,16 @@ public class CommentController {
         return commentService.commentList(bno);
 
     }
+	
+	public int totalComment(@RequestParam int bno, Model model) {
+		
+		int totalComment = commentService.totalComment(bno);
+		
+		System.out.println("totalComment: "+totalComment);
+		
+		return totalComment;
+		
+	}
 
     @RequestMapping("comment/commentWrite.do")
     @ResponseBody
