@@ -187,7 +187,7 @@ hr {
 										
 										<c:forEach items="${list}" var="b">
 											<li class="groupin" id="${b.no}"><a class="article"
-												href="${pageContext.request.contextPath}/community/free/freeView.do?no=${b.no}">
+												href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${b.no}">
 													<p class="time">
 														<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 													</p>

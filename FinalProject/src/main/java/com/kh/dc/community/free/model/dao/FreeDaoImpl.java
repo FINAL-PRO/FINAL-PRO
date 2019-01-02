@@ -29,8 +29,8 @@ public class FreeDaoImpl implements FreeDao{
 	}
 
 	@Override
-	public BoardList selectOneFree(int no) {
-		return sqlSession.selectOne("free_mapper.selectOneFree", no);
+	public BoardList selectOneFree(int bno) {
+		return sqlSession.selectOne("free_mapper.selectOneFree", bno);
 
 	}
 
@@ -50,8 +50,8 @@ public class FreeDaoImpl implements FreeDao{
 	}
 	
 	@Override
-	public int freeViewCount(int no) {
-		return sqlSession.update("free_mapper.freeViewCount", no);
+	public int freeViewCount(int bno) {
+		return sqlSession.update("free_mapper.freeViewCount", bno);
 
 	}
 

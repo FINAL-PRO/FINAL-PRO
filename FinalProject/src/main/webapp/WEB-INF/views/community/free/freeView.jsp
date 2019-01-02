@@ -176,7 +176,7 @@
 							<div id="container2">
 								<div class="articlelist" style="border: solid 0.5px red">
 									<form name="boardFrm" method="post">
-										<input type="hidden" id="bno" name="bno" value="${boardList.no}" readonly="readonly" />
+										<input type="hidden" name="bno" value="${boardList.no}"/>
 									</form>
 									<div class="group" style="border: solid 0.5px blue">
 										<p class="title">${boardList.title}</p>
