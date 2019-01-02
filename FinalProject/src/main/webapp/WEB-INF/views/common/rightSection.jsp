@@ -33,7 +33,39 @@
 <script>
 	$(document).ready(function(){
 		
+		var today = new Date();
+		
+		var dd = today.getDate();
+	    var mm = today.getMonth() + 1;
+	    var yyyy = today.getFullYear();
+	    if (dd < 10) {
+	    	dd = "0" + dd;
+	    }
+	    if (mm < 10) {
+	    	mm = "0" + mm;
+	    }
+		
+		
+		var uri = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData?";
+		var ServiceKey = "ServiceKey=sHO7cQ8W9S0IyMdkrHs0mfwGb47lglNNo8mg7IVAWb%2F29x%2BGQDGPPcZ32S03EiWOgTWQgY%2FM8HT7sqCAiK33vA%3D%3D";
+		var base_date= "&base_date=" + yyyy + mm + dd;
+		var base_time= "&base_time=0500";
+		var nx= "&nx=60";
+		var ny= "&ny=127";
+		var numOfRows= "&numOfRows=10";
+		var pageNo= "&pageNo=1";
+		var type= "&_type=json";
+		
+		
 		$.ajax({
+			   url: "http://weather.yahooapis.com/forecastjson?w=2295424",
+			   dataType: "json",
+			   success: function(data) {
+			      console.log( data.forecast[0].day );
+			      }
+			 });
+		
+		/* $.ajax({
 			type: "GET",
 			url: "https://api2.sktelecom.com/weather/current/minutely?appKey=a294c267-b2de-41f1-99ee-1a4894a40fdf&city=서울&county=강남구&village=삼성동",
 			header:{
@@ -82,7 +114,7 @@
 				console.log("ajax 처리 실패");
 			}
 			
-		});
+		}); */
 		
 	});
 

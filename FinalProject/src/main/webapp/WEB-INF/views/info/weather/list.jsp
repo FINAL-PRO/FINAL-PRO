@@ -13,7 +13,7 @@
 		.block {
 			float: left;
 			height: auto;
-			width: 200px;
+			width: auto;
 			border: 1px solid lightgray;
 		}
 	
@@ -46,12 +46,7 @@
 										최고 기온 : <label id="tmax1"></label>
 									</div>
 								</div>	
-								<div class="weekWeather" style="display: inline-block; margin-top:10px;">
-									<div class="block"></div>
-									<div class="block"></div>
-									<div class="block"></div>
-									<div class="block"></div>
-									<div class="block"></div>							
+								<div class="weekWeather-container" style="display: inline-block; margin-top:10px;">						
 								</div>						
 							</div>
 						</div>
@@ -69,17 +64,61 @@
 	<script>
 	$(document).ready(function(){
 		
-		var city = "Seoul";
-		var apiURI = "http://apidev.accuweather.com/locations/vl/search?1="+city + "apikey=0vOPJYcq2olPQTOyt2CQyH6bONtPNXjT";
+		var today = new Date();
+		
+		var dd = today.getDate();
+	    var mm = today.getMonth() + 1;
+	    var yyyy = today.getFullYear();
+	    if (dd < 10) {
+	    	dd = "0" + dd;
+	    }
+	    if (mm < 10) {
+	    	mm = "0" + mm;
+	    }
+		
+		today = yyyy+'-'+mm+'-'+dd + ' 00:00';
+		
+		console.log(today);
+				
+		//var apiURI = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1168058000";
+		var apiURI = "http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=109";
 		
 	        $.ajax({
 	            url: apiURI,
-	            dataType: "json",
+	            type: 'jsonp',
 	            type: "GET",
 	            async: "false",
-	            success: function(resp) {
-	                console.log(resp);
-           
+	            success: function(data) {
+	                console.log(data);  
+	                var output = "";
+	                
+	                $(data).find('location').each(function(){
+	                	
+	                	var city = $(this).find('city').text();
+	                	
+	                	if(city=='서울'){
+	
+				           	$(this).find('data').each(function(){
+				           			
+				           		//var time = $(this).find('tmEf').text().substring(10);
+				           		
+				           		if($(this).find('tmEf').text().substring(10) == today.substring(10)){
+        					
+				               	output += '<div class="block"><label>';
+				               	output += $(this).find("tmEf").text().substring(0,10) + '<br> 최저 : '; 
+				               	output += $(this).find('tmn').text() + ' 최고 : '; 
+				              	output += $(this).find("tmx").text() + '</label></div>';		                				
+		                	
+		                		$('.weekWeather-container').html(output);
+		                		
+		                		}
+	
+		                	});
+	                		
+	                		
+	                	}
+	                	
+	                });
 	            }
 	        })
 	    
