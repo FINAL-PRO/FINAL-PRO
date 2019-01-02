@@ -82,10 +82,12 @@ public class FreeController {
 	@RequestMapping("community/free/freeView.do")
 	public String selectOneFree(@RequestParam int bno, Model model) {
 		
+		System.out.println("bno:"+bno);
+		
 		// 조회수 증가
 		int freeViewCount = freeService.freeViewCount(bno);
 		
-		model.addAttribute("boardList", freeService.selectOneFree(no))
+		model.addAttribute("boardList", freeService.selectOneFree(bno))
 		.addAttribute("freeViewCount", freeViewCount);
 		
 		return "community/free/freeView";

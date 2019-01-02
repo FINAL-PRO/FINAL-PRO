@@ -14,7 +14,6 @@ public interface FreeDao {
 	
 	BoardList selectOneFree(int no);
 
-	
 	/*List<Map<String, String>> selectOneFree(int cPage, int numberPage, int no);*/
 
 	int insertBoard(Board board);
@@ -23,7 +22,7 @@ public interface FreeDao {
 
 	int freeUpdate(Board board);
 	
-	int freeViewCount(int no);
+	int freeViewCount(int bno);
 
 	List<Board> selectFreeListData();
 	

@@ -37,7 +37,6 @@
 		ON C.BOARDNO = B.NO 
 		WHERE C.BOARDNO = #{bno}
 		AND B.TYPE = 'BOARD001'
-		AS #{recnt}
 	</select>
 	
 	<delete id="deleteComment" parameterType="_int">
