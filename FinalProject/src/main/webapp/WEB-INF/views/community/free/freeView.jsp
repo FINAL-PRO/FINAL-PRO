@@ -176,18 +176,18 @@
 							<div id="container2">
 								<div class="articlelist" style="border: solid 0.5px red">
 									<form name="boardFrm" method="post">
-										<input type="text" id="bno" name="bno" value="${board.no}" readonly="readonly" />
+										<input type="hidden" id="bno" name="bno" value="${boardList.no}" readonly="readonly" />
 									</form>
 									<div class="group" style="border: solid 0.5px blue">
-										<p class="title">${board.title}</p>
+										<p class="title">${boardList.title}</p>
 										<div style="border: solid 0.5px gray"></div>
 										<p class="profile">
 											<img class="picture" src="https://cf-epi.campuspick.com/0.png"> 
-											<span class="nickname">${board.memberName}</span> 
-											<span class="count">조회수: ${board.viewCount}</span>
-											<p class="time"><fmt:formatDate value="${board.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
+											<span class="nickname">${boardList.memberName}</span> 
+											<span class="count">조회수: ${boardList.viewCount}</span>
+											<p class="time"><fmt:formatDate value="${boardList.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
 										</p>
-										<p class="text">${board.content}</p>
+										<p class="text">${boardList.content}</p>
 										<div style="border: solid 0.5px lightgray"></div>
 										<div class="status" style="border: solid 0.5px orange">
 											<button class="btn_board_edit" id="btn_board_edit">수정</button>
@@ -195,20 +195,19 @@
 											<button class="btn_report">신고하기</button>
 											<c:choose>
 												<c:when test="${mno ne null}">
-													<a href="javascript: like_func(${board.no});"><img src="./resources/images/dislike.png" id="like_img"></a>
+													<a href="javascript: like_func(${boardList.no});"><img src="./resources/images/dislike.png" id="like_img"></a>
 												</c:when>
 												<c:otherwise>
 													<img src="/resources/images/dislike.png" id="like_img">
 													<span class="likecount">: ${boardList.likeCount}</span>
-													<input type="text" value="${boardList.no}" />
 												</c:otherwise>
 											</c:choose>
 										<%-- 	<a href="#" onclick="likecount(${board.no});">좋아요</a>
 											<span class="likecount">: ${likecount}</span>  --%>
-											<span class="commentcount">댓글:${like.no}</span>
+											<span class="commentcount">댓글: ${boardList.commentCount}</span>
 										</div>
 										<script>
-											var bno = bno.val();
+											var bno = $('[name=bno]').val();
 										
 											function like_func(bno){
 												

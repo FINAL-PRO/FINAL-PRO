@@ -72,7 +72,7 @@ public class FreeController {
 		// 조회수 증가
 		int freeViewCount = freeService.freeViewCount(no);
 		
-		model.addAttribute("BoardList", freeService.selectOneFree(no))
+		model.addAttribute("boardList", freeService.selectOneFree(no))
 		.addAttribute("freeViewCount", freeViewCount);
 		
 		return "community/free/freeView";
