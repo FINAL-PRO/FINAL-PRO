@@ -171,12 +171,22 @@ hr {
 							<div id="container2">
 								<div class="free_top">
 									<div class="category">
-										<select id="categorySort" name="categorySort" class="custom-select"> 
-											<option value="recentSort" <c:if test="${categorySort==recentSort}"> selected </c:if>>최신 순 정렬</option>
-											<option value="commentSort" <c:if test="${categorySort==commentSort}"></c:if>>댓글 많은 순 정렬</option>
-											<option value="likeSort" <c:if test="${categorySort==likeSort}"></c:if>>좋아요 순 정렬</option>
+										<select id="tList"> 
+											<option value="" selected disabled hidden>정렬</option>
+											<option value="1">최신 순 정렬</option>
+											<option value="2">댓글 많은 순 정렬</option>
+											<option value="3">좋아요 순 정렬</option>
 										</select>
 									</div>
+									<script>
+									
+									$("#tList").change(function(){
+										var tList = $(this).val();
+										console.log("tlist:"+tList);
+										location.href="${pageContext.request.contextPath}/community/free/list.do?tList="+tList;
+									});
+									
+									</script>
 									<div class="free_btn">
 										<input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/free/freeInsertForm.do'" />
 									</div>
@@ -186,8 +196,8 @@ hr {
 										<p>총 ${totalContents}건의 게시물이 있습니다.</p>
 										
 										<c:forEach items="${list}" var="b">
-											<li class="groupin" id="${b.no}"><a class="article"
-												href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${b.no}">
+											<li class="groupin" id="${b.no}">
+											<a class="article" href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${b.no}">
 													<p class="time">
 														<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 													</p>
@@ -200,6 +210,7 @@ hr {
 														<span class="votecount">좋아요: ${b.likeCount}</span> 
 														<span class="commentcount">댓글: ${b.commentCount}</span>
 													</p>
+													
 													<p class="attach">
 														<span class="attachcount">이미지</span>
 													</p>
