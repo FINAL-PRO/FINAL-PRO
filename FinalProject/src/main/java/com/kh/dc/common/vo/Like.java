@@ -12,14 +12,14 @@ public class Like implements Serializable{
 	
 	private int no;
 	private Date likeDate;
-	private String boardNo;
+	private int boardNo;
 	private int memberNo;
 	
 	public Like() {
 		super();
 	}
 
-	public Like(int no, Date likeDate, String boardNo, int memberNo) {
+	public Like(int no, Date likeDate, int boardNo, int memberNo) {
 		super();
 		this.no = no;
 		this.likeDate = likeDate;
@@ -43,12 +43,12 @@ public class Like implements Serializable{
 		this.likeDate = likeDate;
 	}
 
-	public String getBoardNo() {
+	public int getBoardNo() {
 		return boardNo;
 	}
 
-	public void setBoardNo(String boardNo) {
-		this.boardNo = boardNo;
+	public void setBoardNo(int bno) {
+		this.boardNo = bno;
 	}
 
 	public int getMemberNo() {

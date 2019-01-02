@@ -184,9 +184,10 @@ hr {
 								<div class="articlelist">
 									<ol class="group"></br>
 										<p>총 ${totalContents}건의 게시물이 있습니다.</p>
-										<c:forEach items="${recentSort}" var="b">
-											<li class="groupin" id="${b.no}">
-											<a class="article" href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${b.no}">
+										
+										<c:forEach items="${list}" var="b">
+											<li class="groupin" id="${b.no}"><a class="article"
+												href="${pageContext.request.contextPath}/community/free/freeView.do?no=${b.no}">
 													<p class="time">
 														<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 													</p>
@@ -196,8 +197,8 @@ hr {
 														<span class="count">조회수: ${b.viewCount}</span>
 													</p> <span class="content">${b.content}</span>
 													<p class="status">
-														<span class="votecount">좋아요: 1</span> 
-														<span class="commentcount">댓글: ${totalComment}</span>
+														<span class="votecount">좋아요: ${b.likeCount}</span> 
+														<span class="commentcount">댓글: ${b.commentCount}</span>
 													</p>
 													<p class="attach">
 														<span class="attachcount">이미지</span>

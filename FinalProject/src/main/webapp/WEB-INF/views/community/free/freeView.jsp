@@ -176,28 +176,74 @@
 							<div id="container2">
 								<div class="articlelist" style="border: solid 0.5px red">
 									<form name="boardFrm" method="post">
-										<input type="hidden" name="bno" value="${board.no}" />
+										<input type="hidden" id="bno" name="bno" value="${boardList.no}" readonly="readonly" />
 									</form>
 									<div class="group" style="border: solid 0.5px blue">
-										<p class="title">${board.title}</p>
+										<p class="title">${boardList.title}</p>
 										<div style="border: solid 0.5px gray"></div>
 										<p class="profile">
 											<img class="picture" src="https://cf-epi.campuspick.com/0.png"> 
-											<span class="nickname">${board.memberName}</span> 
-											<span class="count">조회수: ${board.viewCount}</span>
-											<p class="time"><fmt:formatDate value="${board.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
+											<span class="nickname">${boardList.memberName}</span> 
+											<span class="count">조회수: ${boardList.viewCount}</span>
+											<p class="time"><fmt:formatDate value="${boardList.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
 										</p>
-										<p class="text">${board.content}</p>
+										<p class="text">${boardList.content}</p>
 										<div style="border: solid 0.5px lightgray"></div>
 										<div class="status" style="border: solid 0.5px orange">
 											<button class="btn_board_edit" id="btn_board_edit">수정</button>
 											<button class="btn_board_delete" id="btn_board_delete">삭제</button>
 											<button class="btn_report">신고하기</button>
-											<button class="btn_like">좋아요</button>
-											<span class="likecount">: 1</span> 
-											<span class="commentcount">댓글: ${totalComment}</span>
+											<c:choose>
+												<c:when test="${mno ne null}">
+													<a href="javascript: like_func(${boardList.no});"><img src="./resources/images/dislike.png" id="like_img"></a>
+												</c:when>
+												<c:otherwise>
+													<img src="/resources/images/dislike.png" id="like_img">
+													<span class="likecount">: ${boardList.likeCount}</span>
+												</c:otherwise>
+											</c:choose>
+										<%-- 	<a href="#" onclick="likecount(${board.no});">좋아요</a>
+											<span class="likecount">: ${likecount}</span>  --%>
+											<span class="commentcount">댓글: ${boardList.commentCount}</span>
 										</div>
 										<script>
+											var bno = $('[name=bno]').val();
+										
+											function like_func(bno){
+												
+												console.log("bno:"+bno);
+												
+												$.ajax({
+													type: "get",
+										   			url: "${pageContext.request.contextPath}/like/likecheck.do",
+										   			data: {bno: bno},
+										   			cache: false,
+										   			dataType: "json",
+										   			success: function(data){
+													
+										   				var msg = "";
+										   				var like_img = "";
+										   				
+										   				msg += data.msg;
+										   				alert(msg);
+										   				
+										   				if(data.likeInsert == 0){
+										   					like_img = "/images/dislike.png";
+										   				} else {
+										   					like_img = "/images/like.png";
+										   				}
+										   				
+														$('#likecount').html(data.likecount);
+														$('#likeInsert').html(data.likeInsert);
+										   					
+										   			}
+										   				
+										   				
+												});
+												
+												
+											}
+											
 				                      		$("#btn_board_edit").click(function(){
 				                      			boardFrm.action="${pageContext.request.contextPath}/community/free/freeUpdateForm.do?no=${board.no}"
 				                      			boardFrm.submit();

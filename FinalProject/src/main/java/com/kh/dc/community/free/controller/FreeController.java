@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,11 +27,11 @@ public class FreeController {
 	public String selectFreeList(@RequestParam(value="cPage", required=false, defaultValue="1")
 	int cPage, Model model) {
 		
-		int numPerPage = 10; // 한 페이지당 게시글 수
+		int numberPage = 10; // 한 페이지당 게시글 수
 		
 		// 1. 현재 페이지 게시글 목록 가져오기
 		ArrayList<Map<String, String>> list = 
-				new ArrayList<Map<String, String>>(freeService.selectFreeList(cPage, numPerPage));
+				new ArrayList<Map<String, String>>(freeService.selectFreeList(cPage, numberPage));
 		
 		System.out.println("list: "+list);
 		
@@ -41,11 +39,11 @@ public class FreeController {
 		int totalContents = freeService.selectFreeTotalContents();
 		
 		// 3. 페이지 계산 후 작성할 HTML 추가
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "list.do");
+		String pageBar = Utils.getPageBar(totalContents, cPage, numberPage, "list.do");
 		
 		model.addAttribute("list", list)
 		.addAttribute("totalContents", totalContents)
-		.addAttribute("numPerPage", numPerPage)
+		.addAttribute("numberPage", numberPage)
 		.addAttribute("pageBar", pageBar);
 		
 		return "community/free/list";
@@ -87,7 +85,7 @@ public class FreeController {
 		// 조회수 증가
 		int freeViewCount = freeService.freeViewCount(bno);
 		
-		model.addAttribute("board", freeService.selectOneFree(bno))
+		model.addAttribute("boardList", freeService.selectOneFree(no))
 		.addAttribute("freeViewCount", freeViewCount);
 		
 		return "community/free/freeView";
