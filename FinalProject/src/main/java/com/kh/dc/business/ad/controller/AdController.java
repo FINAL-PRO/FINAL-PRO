@@ -149,11 +149,20 @@ public class AdController {
 
 	@RequestMapping("business/ad/getAd.do")
 	@ResponseBody
-	public String getAd() {
+	public String getAd(@RequestParam(value="adPage", defaultValue="메인") String adPage,
+			@RequestParam(value="adSection", defaultValue="우측") String adSection,
+			@RequestParam(value="adLocation", defaultValue="하단") String adLocation) {
 		
-		Ad ad = adService.getAd();
+		System.out.println(adPage + " : " + adSection + " : " + adLocation);
 		
-		System.out.println("가져온 아이디 : " + ad);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("adPage", adSection);
+		params.put("adSection", "우측");
+		params.put("adLocation", "하단");
+		
+		Ad ad = adService.getAd(params);
+		
+		System.out.println("가져온 광고 : " + ad);
 		
 		return ad.getAdContentPath();
 	}

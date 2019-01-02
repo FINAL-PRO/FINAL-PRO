@@ -47,7 +47,13 @@
 	</insert>
 	
 	<select id="getAd" resultType="ad">
-		SELECT * FROM DC_AD_TB WHERE  NO = 1
+		SELECT A.* from DC_AD_TB A
+		LEFT JOIN DC_AD_PAGE_TB P ON A.PAGENO = P.NO
+		LEFT JOIN DC_AD_SECTION_TB S ON A.SECTIONNO = S.NO
+		LEFT JOIN DC_AD_LOCATION_TB L ON A.LOCATIONNO = L.NO
+		WHERE P.ENAME = #{adPage}
+		AND S.NAME = #{adSection}
+		AND L.NAME= #{adLocation}
 	</select>
 	
 </mapper>

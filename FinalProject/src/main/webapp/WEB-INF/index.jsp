@@ -38,12 +38,19 @@
 			
 			$.ajax({
 				url : "business/ad/getAd.do",
+				data : { adPage : "main",
+					adSection : "main",
+					adLocation : "하단"},
 				success : function(data){
-					/* alert("${pageContext.request.contextPath}/" + data); */
-					/* $("#ad-main-img").attr("src", "${pageContext.request.contextPath}/resources/upload/ad/1100x100.png");
-					$("#ad-main-img").attr("src", "${pageContext.request.contextPath}/resources/upload/ad/1100x100.png"); */
-				}, error : function(){
-					alert("ajax error");
+					$(".ad-main").css("width", "1126px").css("height", "100%").attr("background-position", "center")
+					.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
+					.css("margin-right", "auto");
+					$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/1200x120.png")');
+				}, error : function(error){
+					$(".ad-main").css("width", "1126px").css("height", "100%").attr("background-position", "center")
+					.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
+					.css("margin-right", "auto");
+					$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/1200x120.png")');
 				}
 			});
 		});
@@ -71,7 +78,7 @@
 							</table>
 						</div>
 						<div class="dc-ad-box" style="border:1px solid black;height:100px;margin:10px">
-							<h1>메인 광고(AD)</h1>
+							<!-- <h1>메인 광고(AD)</h1> -->
 							<div class="ad-main">
 								<img id="ad-main-img" src="" alt="" />
 							</div>
