@@ -80,7 +80,7 @@
 	span {
 		display: inline-block;
 		margin-right: 8px;
-		padding-left: 10px;
+		padding-left: 5px;
 		line-height: 18px;
 		color: #a6a6a6;
 		font-size: 12px;
@@ -155,6 +155,7 @@
 		border: 1px solid yellow;
 	}
 	
+	
 </style>
 </head>
 <body>
@@ -177,6 +178,7 @@
 								<div class="articlelist" style="border: solid 0.5px red">
 									<form name="boardFrm" method="post">
 										<input type="hidden" name="bno" value="${boardList.no}"/>
+										<input type="hidden" name="mno" value="${member.no}"/>
 									</form>
 									<div class="group" style="border: solid 0.5px blue">
 										<p class="title">${boardList.title}</p>
@@ -194,48 +196,47 @@
 											<button class="btn_board_delete" id="btn_board_delete">삭제</button>
 											<button class="btn_report">신고하기</button>
 											<c:choose>
-												<c:when test="${mno ne null}">
-													<a href="javascript: like_func(${boardList.no});"><img src="./resources/images/dislike.png" id="like_img"></a>
+												<c:when test="${!empty member.no}">
+													<a href="#" onclick="like_func();">
+														<img src="/dc/resources/images/dislike.png" id="like_img" style="height: 17px; width: 17px;">
+													</a>
 												</c:when>
 												<c:otherwise>
-													<img src="/resources/images/dislike.png" id="like_img">
-													<span class="likecount">: ${boardList.likeCount}</span>
+													<img src="/dc/resources/images/dislike.png" id="like_img" style="height: 17px; width: 17px;">
 												</c:otherwise>
 											</c:choose>
-										<%-- 	<a href="#" onclick="likecount(${board.no});">좋아요</a>
-											<span class="likecount">: ${likecount}</span>  --%>
+											<span class="likecount">: ${boardList.likeCount}</span>
 											<span class="commentcount">댓글: ${boardList.commentCount}</span>
 										</div>
 										<script>
 											var bno = $('[name=bno]').val();
+											var mno = $('[name=mno]').val();
+				
 										
-											function like_func(bno){
+											function like_func(){
 												
 												console.log("bno:"+bno);
+												console.log("mno:"+mno);
 												
 												$.ajax({
-													type: "get",
+													type: "post",
 										   			url: "${pageContext.request.contextPath}/like/likecheck.do",
-										   			data: {bno: bno},
-										   			cache: false,
-										   			dataType: "json",
+										   			data: { bno: bno,
+										   					mno: mno },
 										   			success: function(data){
 													
-										   				var msg = "";
 										   				var like_img = "";
 										   				
-										   				msg += data.msg;
-										   				alert(msg);
-										   				
-										   				if(data.likeInsert == 0){
-										   					like_img = "/images/dislike.png";
-										   				} else {
-										   					like_img = "/images/like.png";
+										   				if(data == null){
+										   					like_img = "/dc/resources/images/dislike.png";
+										   				} else if(data != null){
+										   					like_img = "/dc/resources/images/like.png";
 										   				}
 										   				
-														$('#likecount').html(data.likecount);
-														$('#likeInsert').html(data.likeInsert);
-										   					
+														$('#likecount').html(data);
+														//$('#likeInsert').html(data.likeInsert);
+										   					 
+										   				console.log(data);
 										   			}
 										   				
 										   				

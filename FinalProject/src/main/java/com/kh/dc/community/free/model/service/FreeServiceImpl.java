@@ -16,12 +16,6 @@ public class FreeServiceImpl implements FreeService{
 	@Autowired
 	FreeDao freeDao;
 
-/*	@Override
-	public List<Map<String, String>> selectFreeList(int cPage, int numberPage, int tList) {
-		System.out.println("list service");
-		return freeDao.selectFreeList(cPage, numberPage, tList);
-	}*/
-
 	@Override
 	public int selectFreeTotalContents() {
 		return freeDao.selectFreeTotalContents();
@@ -65,13 +59,11 @@ public class FreeServiceImpl implements FreeService{
 
 	@Override
 	public List<Map<String, String>> commentSort(int cPage, int numberPage) {
-		// TODO Auto-generated method stub
 		return freeDao.commentSort(cPage, numberPage);
 	}
 
 	@Override
 	public List<Map<String, String>> likeSort(int cPage, int numberPage) {
-		// TODO Auto-generated method stub
 		return freeDao.likeSort(cPage, numberPage);
 	}
 
