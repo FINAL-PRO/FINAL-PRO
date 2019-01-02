@@ -78,8 +78,6 @@ public class GroupController {
 	public String insertGroup(Group group,  Model model) {
 		
 		String loc = "sale/group/groupView";
-		
-		System.out.println("img : " + group.getGoodsPicture());
 	
 		if(groupService.insertGroup(group) > 0) {
 			model.addAttribute("group", groupService.selectOneGroup(group.getBoardNo()));
@@ -103,7 +101,6 @@ public class GroupController {
 		
 		ArrayList<Map<String, String>> bankList = 
 				new ArrayList<Map<String, String>>(groupService.selectBankList());
-		
 		
 		model.addAttribute("group", groupService.selectOneGroup(group.getBoardNo()))
 			.addAttribute("bankList", bankList);;
@@ -131,7 +128,8 @@ public class GroupController {
 	}
 	
 	@RequestMapping("sale/group/gHistorySwitch.do")
-	public int switchGroupHistroy(@RequestParam Map<String, String> ghMap) {
+	@ResponseBody
+	public String switchGroupHistroy(@RequestParam Map<String, String> ghMap) {
 		
 		int result = 0;
 		
@@ -143,11 +141,15 @@ public class GroupController {
 			result = groupService.deleteGroupHistory(ghMap) * 2;
 		}
 
-		return result;
+		return String.valueOf(result);
 	}
 	
-	
-	
+	@RequestMapping("sale/group/updateStatus.do")
+	@ResponseBody
+	public String updateStatus(@RequestParam Map<String, String> status) {
+		
+		return (groupService.updateStatus(status) > 0) ? "OK" : "NO";
+	}
 	
 	
 }

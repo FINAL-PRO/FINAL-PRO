@@ -50,8 +50,18 @@
 }
 
 .status {
-	border: 1px solid lightgray;
+	height: auto;
+	width: auto;
+	background: white;
+	border: 1px solid black;
 }
+
+.current {
+	background: skyblue;
+}	
+
+
+
 </style>
 
 </head>
@@ -125,8 +135,10 @@
 		</div>
 		<div class="col-md-10">
 			<c:forEach items="${statusList}" var="status">
-				<span class="status">${status.value} </span>
+				<input type="button" class="status" name="status" id="${status.id}"
+					value="${status.value}" onClick="changeStatus(this);"/>
 			</c:forEach>
+			<p style="font-size:10px; color:lightgray;">공동구매 진행자는 진행상황을 클릭하여 변경할 수 있습니다.</p>
 		</div>
 	</div>
 
@@ -174,6 +186,7 @@
 	$(function(){
 		var remain = ${group.maxCount-group.currentCount};
 		
+		// 계좌번호, 참여신청 버튼 초기 세팅
 		$.ajax({
 			url : 'settingGroup.do',
 		    type : 'get',
@@ -200,8 +213,11 @@
 				}
 		    }
 		});	
+		
+		$(('input[value="${group.status}"]')).addClass('current');
 	});
 	
+	// 참여신청 버튼 클릭
 	function switchGroup(obj) {
 		var req;
 		var question;
@@ -223,10 +239,37 @@
 			    	memberNo: '${member.no}',
 			    	req: req,
 			    }, 
-			    success : function(data){				
-					location.reload();
+			    success : function(data){
+			    	location.reload();
 			    }
 			});	
+		}
+	}
+	
+	function changeStatus(obj) {
+		var statusId = $(obj).attr("id");
+		
+		if(${member.no}+0 != ${group.memberNo}) {
+			;
+		} else if(statusId == "GROUP003" || statusId == "GROUP004") {
+			if(confirm("공동구매의 진행상황을 '"+$(obj).val()+"'로 변경하시겠습니까?")) {
+				$.ajax({
+					url : 'updateStatus.do',
+				    type : 'get',
+				    data : {
+				    	groupNo : '${group.no}',
+				    	status: statusId,
+				    }, 
+				    success : function(data){
+				    	if(data == 'OK') {
+				    		alert("변경되었습니다.");
+							location.reload();
+				    	}
+				    }
+				});	
+			}
+		} else {
+			alert("해당 진행상황으로는 변경할 수 없습니다.");
 		}
 	}
 

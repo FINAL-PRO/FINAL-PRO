@@ -107,5 +107,11 @@ public class GroupDaoImpl implements GroupDao {
 		return sqlSession.selectList("group_mapper.selectStatusList");
 	}
 
+	@Override
+	public int updateStatus(Map<String, String> status) {
+		
+		return sqlSession.update("group_mapper.updateStatus", status);
+	}
+
 	
 }

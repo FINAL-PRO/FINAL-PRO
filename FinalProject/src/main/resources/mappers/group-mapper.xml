@@ -33,6 +33,7 @@
 		<result property="nickName" column="nickname"/>
 	</resultMap>
 	
+	
 	<select id="selectGroupList" resultMap="resultGroup">
 		SELECT * FROM DC_BOARD_GROUP_VIEW WHERE STATUS='STATUS001'
 	</select>
@@ -104,6 +105,10 @@
 	<select id="selectStatusList" resultMap="codeList">
 		SELECT * FROM DC_CODE_TB WHERE ID LIKE 'GROUP%'
 	</select>
+	
+	<update id="updateStatus" parameterType="map">
+		UPDATE DC_BOARD_GROUP_TB SET STATUS = #{status} WHERE NO = #{groupNo}
+	</update>
 
 	
 </mapper>

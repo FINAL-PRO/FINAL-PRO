@@ -90,6 +90,12 @@ public class GroupServiceImpl implements GroupService {
 
 		return groupDao.selectStatusList();
 	}
+
+	@Override
+	public int updateStatus(Map<String, String> status) {
+		
+		return groupDao.updateStatus(status);
+	}
 	
 	
 

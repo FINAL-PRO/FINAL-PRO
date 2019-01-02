@@ -36,5 +36,7 @@ public interface GroupDao {
 	int deleteGroupHistory(Map<String, String> gh);
 	
 	List<Map<String, String>> selectStatusList();
+	
+	int updateStatus(Map<String, String> status);
 		
 }
