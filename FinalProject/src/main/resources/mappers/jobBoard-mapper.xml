@@ -64,11 +64,14 @@
 		SELECT JB.NO, TITLE, NICKNAME, CONTENT, 
 			WRITEDATE, STARTDATE, ENDDATE, 
             FLOOR(ENDDATE - SYSDATE) "DDAY",
-            LOCATION, STARTJOB, ENDJOB, SALARY, 
+            STARTTIME, ENDTIME, BOARDNO, COMPANYNO,
+            LOCATION, STARTJOB, ENDJOB, SALARY, SALTYPE,
             CD1.VALUE  "JOBTYPE",
             CD2.VALUE "JOBTYPE", VIEWCOUNT,
             CD3.VALUE "TYPE",
-            CD4.VALUE "STATUS"
+            CD4.VALUE "STATUS",
+            CO.NAME "CNAME",
+            B.NO, B.TYPE, B.STATUS, B.MEMBERNO
 		FROM DC_BOARD_JOB_TB JB
 		JOIN DC_BOARD_TB B ON(B.NO = JB.BOARDNO)
 		JOIN DC_MEMBER_TB M ON(M.NO = B.MEMBERNO)
@@ -76,26 +79,27 @@
 		JOIN DC_CODE_TB CD2 ON(CD2.ID = JB.JOBTYPE)
 		JOIN DC_CODE_TB CD3 ON(CD3.ID = JB.TYPE)
 		JOIN DC_CODE_TB CD4 ON(CD4.ID = B.STATUS)
+		JOIN DC_COMPANY_TB CO ON(CO.NO = JB.COMPANYNO)
 		WHERE JB.NO = #{no}
 	</select>
-<!-- 왜 이거 활성화하면 오류뜨나요
-	<select id="selectWorkTime" resultType="int">
-		근무시간
-		SELECT CASE WHEN MIN < 0 THEN ABS(MIN) ELSE MIN end "MIN",
-			   CASE WHEN MIN > 0 THEN HOUR - 1 ELSE HOUR end "HOUR"
-		FROM (SELECT SUBSTR(ENDTIME, 1, 2) - SUBSTR(STARTTIME, 1, 2) HOUR, SUBSTR(ENDTIME, 4, 2) - SUBSTR(STARTTIME, 4, 2) MIN
-			  FROM DC_BOARD_JOB_TB JB  
-			  WHERE JB.NO = #{no}) A
-	</select>
--->
-	<insert id="insertJobBoard" parameterType="JobBoard">
+
+	<insert id="insertBoard" parameterType="JobBoard">
 		<!--
 		BOARD 추가
 	 	게시글번호 / 게시글제목 / 작성일 / 게시글내용 / 조회수 / 게시판유형 / 게시글상태 / 회원번호 / 자유게시판 카테고리 
 		-->
 		INSERT INTO DC_BOARD_TB VALUES(
-			SEQ_MEMBER.NEXTVAL, #{title}, SYSDATE, #{content}, 0, BOARD006, STATUS001, #{memberNo}, NULL
+			SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, 'BOARD006', 'STATUS001', #{memberNo}, NULL
 		)
+		<selectKey keyProperty="boardNo" resultType="_int" order="AFTER"> 
+			SELECT SEQ_BOARD.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<insert id="insertJobBoard" parameterType="JobBoard">
+		<selectKey keyProperty="boardNo" resultType="_int" order="BEFORE"> 
+			SELECT SEQ_BOARD.CURRVAL FROM DUAL
+		</selectKey>
 		<!-- 
 			BOARD 구인구직테이블 추가
 			구인구직게시글번호 / 구인구직구분 / 급여 / 
@@ -107,30 +111,59 @@
 	 		SEQ_BOARD_JOB.NEXTVAL, #{type}, #{salary}, 
 	 		#{startDate}, #{endDate}, #{startJob}, #{endJob},
 	 		#{startTime}, #{endTime}, #{location}, #{boardNo},
-	 		#{companyNo}, #{jobType}, #{salType}, #{status}
+	 		#{companyNo}, #{jobType}, #{salType}, 'STATUS001'
 	 	)
 	</insert>
-	
-	<resultMap type="Company" id="JobCompanyMap">
-		<result column="location" property="location"/>
-		<result column="COMPANYNO" property="no"/>
-	</resultMap>
-	
-	<select id="selectJobBoardComPop" resultMap="JobCompanyMap">
-		SELECT COMPANYNO, NAME, LOCATION, ADDRESS
+
+	<select id="selectJobBoardComPop" resultType="Company">
+		SELECT DISTINCT NO, NAME, ADDRESS
 		FROM DC_COMPANY_TB C
-		JOIN DC_BOARD_JOB_TB JB ON(JB.COMPANYNO = C.NO)
-		WHERE C.STATUS = 'STATUS020'
+		WHERE C.STATUS = 'COMTYPE001'
+		ORDER BY NO
 	</select>
 	
 	<select id="selectJobBoardComPopTotalContents" resultType="_int">
 		SELECT COUNT(*) FROM DC_COMPANY_TB
-		WHERE STATUS = 'STATUS020'
+		WHERE STATUS = 'COMTYPE001'
 	</select>
 	
 	
+	<update id="updateBoard" parameterType="JobBoard">
+		UPDATE DC_BOARD_TB SET 
+		TITLE = #{title}, 
+		CONTENT = #{content}
+		WHERE NO = #{boardNo}
+	</update>
+
 	<update id="updateJobBoard" parameterType="JobBoard">
-		
+	<!-- 
+		BOARD 구인구직테이블 추가
+		구인구직게시글번호 / 구인구직구분 / 급여 / 
+		게시글 시작일 / 게시글 마감일 / 근무 시작일 / 근무 종료일 /
+		근무시작시간 / 근무종료시간 / 근무장소 / 게시글번호 /
+		업체번호 / 고용타입 / 봉급타입 / 구인구직상태
+	-->
+		UPDATE DC_BOARD_JOB_TB SET 
+			SALARY = #{salary},
+			STARTDATE = #{startDate}
+			ENDDATE = #{endDate}
+			STARTJOB = #{startJob}
+			ENDJOB = #{endJob}
+			STARTTIME = #{startTime}
+			ENDTIME = #{endTime}
+			LOCATION = #{location}
+			COMPANYNO = #{companyNo}
+			JOBTYPE = #{jobType}
+			SALTYPE = #{salType}
+		WHERE BOARDNO = #{boardNo}
+	</update>
+	
+	<update id="updateViewCount" parameterType="_int">
+		UPDATE DC_BOARD_TB SET VIEWCOUNT = VIEWCOUNT + 1 WHERE NO = #{boardNo}
+	</update>
+	
+	<update id="deleteJobBoard" parameterType="_int">
+		UPDATE DC_BOARD_TB SET STATUS='STATUS002' WHERE NO = #{boardNo}
 	</update>
 	
 	

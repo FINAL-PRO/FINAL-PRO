@@ -171,10 +171,10 @@ hr {
 							<div id="container2">
 								<div class="free_top">
 									<div class="category">
-										<select>
-											<option value="서버넘길값">최신 순 정렬</option>
-											<option value="서버넘길값">좋아요 순 정렬</option>
-											<option value="서버넘길값">댓글 많은 순 정렬</option>
+										<select id="categorySort" name="categorySort" class="custom-select"> 
+											<option value="recentSort" <c:if test="${categorySort==recentSort}"> selected </c:if>>최신 순 정렬</option>
+											<option value="commentSort" <c:if test="${categorySort==commentSort}"></c:if>>댓글 많은 순 정렬</option>
+											<option value="likeSort" <c:if test="${categorySort==likeSort}"></c:if>>좋아요 순 정렬</option>
 										</select>
 									</div>
 									<div class="free_btn">
@@ -182,7 +182,7 @@ hr {
 									</div>
 								</div>
 								<div class="articlelist">
-									<ol class="group">
+									<ol class="group"></br>
 										<p>총 ${totalContents}건의 게시물이 있습니다.</p>
 										
 										<c:forEach items="${list}" var="b">

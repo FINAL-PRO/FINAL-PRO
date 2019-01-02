@@ -11,16 +11,22 @@ public interface JobBoardDao {
 
 	int selectJobBoardTotalContents();
 	
+	int insertBoard(JobBoard jobBoard);
+	
 	int insertJobBoard(JobBoard jobBoard);
 	
 	JobBoard selectOneJobBoard(int no);
-	
-	int updateJobBoard(JobBoard jobBoard);
-	
-	int deleteJobBoard(int no);
 
 	List<Map<String, String>> selectJobBoardComPop(int cPage, int numPerPage);
 
 	int selectJobBoardComPopTotalContents();
 
+	int updateBoard(JobBoard jobBoard);
+	
+	int updateJobBoard(JobBoard jobBoard);
+	
+	int updateViewCount(int boardNo);
+	
+	int deleteJobBoard(int boardNo);
+	
 }

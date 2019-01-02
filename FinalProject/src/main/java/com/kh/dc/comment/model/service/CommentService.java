@@ -8,8 +8,6 @@ public interface CommentService {
 	
 	List<Comment> commentList(int bno);
 	
-	/*String commentInsert(Comment comment);*/
-	
 	int totalComment(int bno);
 
 	int commentDelete(int cno);
@@ -17,10 +15,5 @@ public interface CommentService {
 	int commentInsert(Comment comment);
 
 	int commentUpdate(Comment comment);
-
-//	List<Comment> commentList();
-
-//	ArrayList<Comment> commentList(int bno);
-
 	
 }

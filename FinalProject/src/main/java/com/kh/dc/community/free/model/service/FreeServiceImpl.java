@@ -37,8 +37,8 @@ public class FreeServiceImpl implements FreeService{
 	}
 
 	@Override
-	public int freeDelete(int no) {
-		return freeDao.freeDelete(no);
+	public int freeDelete(int bno) {
+		return freeDao.freeDelete(bno);
 	}
 
 	@Override
@@ -49,11 +49,13 @@ public class FreeServiceImpl implements FreeService{
 	@Override
 	public int freeViewCount(int no) {
 		return freeDao.freeViewCount(no);
+
 	}
 
 	@Override
 	public List<Board> selectFreeListData() {
 		return freeDao.selectFreeListData();
 	}
+
 	
 }

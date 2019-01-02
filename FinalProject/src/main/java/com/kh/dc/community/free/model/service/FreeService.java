@@ -16,7 +16,7 @@ public interface FreeService {
 	
 	int insertFree(Board board);
 
-	int freeDelete(int no);
+	int freeDelete(int bno);
 
 	int freeUpdate(Board board);
 	

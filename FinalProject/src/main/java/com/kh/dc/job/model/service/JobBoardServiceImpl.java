@@ -33,22 +33,20 @@ public class JobBoardServiceImpl implements JobBoardService {
 	}
 
 	@Override
-	public int insertJobBoard(JobBoard jobBoard) {
+	public int insertBoard(JobBoard jobBoard) {
 		// 
 		int result = 0;
 		int no = 0;
 		
 		try {
-			result = jobBoardDao.insertJobBoard(jobBoard);
+			result = jobBoardDao.insertBoard(jobBoard);
 			if(result == Board_SERVICE_ERROR) throw new BoardException();
 			
 			no = jobBoard.getNo();
 			logger.info("no = "+ no);
 			
-			result = jobBoardDao.insertJobBoard(jobBoard);
-			if(result == Board_SERVICE_ERROR) throw new BoardException();
-			
 		} catch(Exception e) {
+			e.printStackTrace();
 			logger.info("게시물등록 불가");
 		}
 		
@@ -56,34 +54,39 @@ public class JobBoardServiceImpl implements JobBoardService {
 	}
 
 	@Override
-	public JobBoard selectOneJobBoard(int no) {
-		// 
-		return jobBoardDao.selectOneJobBoard(no);
-	}
-
-	@Override
-	public int updateJobBoard(JobBoard jobBoard) {
+	public int insertJobBoard(JobBoard jobBoard) {
 		// 
 		int result = 0;
+		int no = 0;
 		
 		try {
-			result = jobBoardDao.updateJobBoard(jobBoard);
-		
-		} catch(Exception e) {
-			logger.info("게시물 업데이트 불가");
-		}
 			
+			result = jobBoardDao.insertBoard(jobBoard);
+			
+			if(result != Board_SERVICE_ERROR) {
+				result = jobBoardDao.insertJobBoard(jobBoard);
+				if(result == Board_SERVICE_ERROR) throw new BoardException();
+			
+				no = jobBoard.getNo();
+				logger.info("no = "+ no);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			logger.info("게시물등록 불가");
+		}
+		
 		return result;
 	}
-
+	
 	@Override
-	public int deleteJobBoard(int no) {
+	public JobBoard selectOneJobBoard(int no) {
 		// 
-		int result = jobBoardDao.deleteJobBoard(no);
+		JobBoard jobBoard = jobBoardDao.selectOneJobBoard(no);
 		
-		if(result < Board_SERVICE_COMPLETE) throw new BoardException("게시글 삭제 실패!");
+		if(jobBoard != null) jobBoardDao.updateViewCount(no);
 		
-		return result;
+		return jobBoard;
+		
 	}
 
 	@Override
@@ -95,5 +98,39 @@ public class JobBoardServiceImpl implements JobBoardService {
 	public int selectJobBoardComPopTotalContents() {
 		// 
 		return jobBoardDao.selectJobBoardComPopTotalContents();
+	}	
+	
+	@Override
+	public int updateJobBoard(JobBoard jobBoard) {
+		// 
+		int result = 0;
+		int no = 0;
+		
+		try {
+			result = jobBoardDao.updateBoard(jobBoard);
+			
+			if(result != Board_SERVICE_ERROR) {
+				result = jobBoardDao.updateJobBoard(jobBoard);
+				no = jobBoard.getNo();
+				logger.info("no = "+ no);
+			}
+		
+		} catch(Exception e) {
+			logger.info("게시물 업데이트 불가");
+		}
+			
+		return result;
 	}
+
+
+	@Override
+	public int deleteJobBoard(int boardNo) {
+		// 
+		int result = jobBoardDao.deleteJobBoard(boardNo);
+		
+		if(result < Board_SERVICE_COMPLETE) throw new BoardException("게시글 삭제 실패!");
+		
+		return result;
+	}
+
 }

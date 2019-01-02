@@ -56,7 +56,7 @@
 	<insert id="insertFree" parameterType="Board">
 		INSERT INTO DC_BOARD_TB VALUES
 		<!-- (SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, 'BOARD001', 'STATUS001', 5, NULL) -->
-		(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, 'BOARD001', 'STATUS001', #{memberNo}, NULL)
+		(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, 'BOARD001', 'BSTATUS001', #{memberNo}, NULL)
 		<!-- INSERT INTO DC_BOARD_TB VALUES
 		(SEQ_BOARD.NEXTVAL, '제목', SYSDATE, '내용', 0, 'BOARD001', 'STATUS001', 5, NULL) -->
 	</insert>

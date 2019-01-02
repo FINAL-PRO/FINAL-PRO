@@ -97,11 +97,9 @@
 					</div>
 				</div>
 			</div>	
-						<div class="section-right">
-			<img class="adimg" src="${pageContext.request.contextPath}/resources/images/adimg1.jpg" 
-			alt="메인_우측_세로배너" width="140" height="800"
-			style="margin-left: 1px;margin-right: 1px; margin-top:60px; margin-bottom:60px;
-			border:1px solid red"/></div>
+			<div class="section-right">
+				<c:import url="../../common/rightSection.jsp"/>
+			</div>	
 		</section>	
 		<c:import url="../../common/footer.jsp"/>
 		</main>
