@@ -18,11 +18,23 @@ public class FreeDaoImpl implements FreeDao{
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<Map<String, String>> selectFreeList(int cPage, int numberPage) {
+	public List<Map<String, String>> recentSort(int cPage, int numberPage) {
 		RowBounds rowBounds = new RowBounds((cPage-1)*numberPage, numberPage);
-		return sqlSession.selectList("free_mapper.selectFreeList", null, rowBounds);
+		return sqlSession.selectList("free_mapper.recentSort", null, rowBounds);
 	}
 
+	@Override
+	public List<Map<String, String>> commentSort(int cPage, int numberPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numberPage, numberPage);
+		return sqlSession.selectList("free_mapper.commentSort", null, rowBounds);
+	}
+
+	@Override
+	public List<Map<String, String>> likeSort(int cPage, int numberPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numberPage, numberPage);
+		return sqlSession.selectList("free_mapper.likeSort", null, rowBounds);
+	}
+	
 	@Override
 	public int selectFreeTotalContents() {
 		return sqlSession.selectOne("free_mapper.selectFreeTotalContents");
@@ -59,6 +71,8 @@ public class FreeDaoImpl implements FreeDao{
 	public List<Board> selectFreeListData() {
 		return sqlSession.selectList("free_mapper.selectFreeListData");
 	}
+
+
 	
 
 

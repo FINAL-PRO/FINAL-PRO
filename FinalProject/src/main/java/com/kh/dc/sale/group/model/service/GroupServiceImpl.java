@@ -60,6 +60,42 @@ public class GroupServiceImpl implements GroupService {
 		
 		return groupDao.selectBankList();
 	}
+
+	@Override
+	public List<Map<String, String>> selectGroupHistory(int groupNo) {
+
+		return groupDao.selectGroupHistory(groupNo);
+	}
+
+	@Override
+	public Map<String, String> selectOneGroupHistory(Map<String, String> gh) {
+
+		return groupDao.selectOneGroupHistory(gh);
+	}
+
+	@Override
+	public int insertGroupHistory(Map<String, String> gh) {
+
+		return groupDao.insertGroupHistory(gh);
+	}
+
+	@Override
+	public int deleteGroupHistory(Map<String, String> gh) {
+
+		return groupDao.deleteGroupHistory(gh);
+	}
+
+	@Override
+	public List<Map<String, String>> selectStatusList() {
+
+		return groupDao.selectStatusList();
+	}
+
+	@Override
+	public int updateStatus(Map<String, String> status) {
+		
+		return groupDao.updateStatus(status);
+	}
 	
 	
 

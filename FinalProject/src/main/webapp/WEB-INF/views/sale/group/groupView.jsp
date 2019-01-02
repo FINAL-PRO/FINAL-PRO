@@ -17,11 +17,6 @@
 	margin-bottom: 50px;
 }
 
-label.info-label {
-	margin-left: 30px;
-	padding-top: 10px;
-}
-
 .title-box {
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -50,8 +45,23 @@ label.info-label {
 #content {
 	width: 100%;
 	height: auto;
-	broder: 1px solid gray;
+	padding: 30px;
+	border: 1px solid lightgray;
 }
+
+.status {
+	height: auto;
+	width: auto;
+	background: white;
+	border: 1px solid black;
+}
+
+.current {
+	background: skyblue;
+}	
+
+
+
 </style>
 
 </head>
@@ -84,45 +94,65 @@ label.info-label {
 		</div>
 	</div>
 	
-	<div>
-	<table class="product-info">
-	<colgroup>
-		<col width="200px"/>
-		<col width="400px"/>
-	</colgroup>
-	<tbody>
-		<tr>
-			<th><label class="info-label" for=goodsName>물품명</label></th>
-			<td><span class="" id="">${group.goodsName }</span></td>
-		</tr>
-		<tr>
-			<th><label class="info-label" for="price">가격</label></th>
-			<td><span class="" id="">${group.price }</span></td>
-		</tr>
-		<tr>
-			<th><label class="info-label" for="maxCount">모집인원</label></th>
-			<td><span class="" id="">${group.maxCount }</span></td>
-		</tr>
-		<tr>
-			<th><label class="info-label" for="dealType">거래방법</label></th>
-			<td><span class="" id="">${group.dealType }</span></td>
-		</tr>
-		<tr>
-			<th><label class="info-label" for="deposit">계좌번호</label></th>
-			<td>
-				<span class="" id="bank">${group.deposit }</span>
-				<span class="" id="deposit">${group.deposit }</span>
-			</td>
-		</tr>
-		<tr>
-			<th><label class="info-label" for=endDate>마감일</label></th>
-			<td><span class="" id="endDate">${group.endDate }</span></td>
-		</tr>
-	</tbody>
-	</table>
+	<div class="row">
+		<div class="col-md-2">
+			<p class="info-label">물품명</p>
+			<p class="info-label">가격</p>
+		</div>
+		<div class="col-md-4">
+			<p>${group.goodsName}</p>
+			<p>${group.price}</p>
+		</div>
+		<div class="col-md-2">
+			<p class="info-label">모집인원</p>
+			<p class="info-label">거래방법</p>
+			<p class="info-label">마감일</p>
+		</div>
+		<div class="col-md-4">
+			<p>${group.maxCount}명 / ${group.currentCount}명</p>
+			<p>${group.dealType}</p>
+			<p>${group.endDate}</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+			<p class="info-label">계좌번호</p>
+		</div>
+		<div class="col-md-6">
+			<p id="depMsg">모집 인원이 마감되면 공동구매 참여자에게만 보입니다.</p>
+			<p id="deposit" style="display:none;">ㅇㅇ은행 ${group.deposit }</p>
+		</div>
+		<div class="col-md-4">
+			<c:if test="${!empty member and member.no ne group.memberNo}">
+			<input type="button" id="btnApply" value="참여신청" onClick="switchGroup(this);"/>
+			</c:if>
+		</div>
 	</div>
 	
+	<div class="row">
+		<div class="col-md-2">
+			<p class="info-label">진행상황</p>
+		</div>
+		<div class="col-md-10">
+			<c:forEach items="${statusList}" var="status">
+				<input type="button" class="status" name="status" id="${status.id}"
+					value="${status.value}" onClick="changeStatus(this);"/>
+			</c:forEach>
+			<p style="font-size:10px; color:lightgray;">공동구매 진행자는 진행상황을 클릭하여 변경할 수 있습니다.</p>
+		</div>
+	</div>
+
 </div> <hr />
+
+<c:if test="${!empty member and member.no eq group.memberNo}">
+<div class="row" id="ghBox" style="display:block;">
+	<p>-- 참여자 목록 --</p>
+	<c:forEach items="${ghList}" var="gh">
+		<span>${gh.nickName} </span>
+	</c:forEach>
+	<hr />
+</div>
+</c:if>
 	
 <div>
 	<div id="content">${group.content }</div>
@@ -152,6 +182,96 @@ label.info-label {
 
 <!-------------------- Script -------------------->
 <script>
+	
+	$(function(){
+		var remain = ${group.maxCount-group.currentCount};
+		
+		// 계좌번호, 참여신청 버튼 초기 세팅
+		$.ajax({
+			url : 'settingGroup.do',
+		    type : 'get',
+		    data : {
+		    	groupNo : '${group.no}',
+		    	memberNo: '${member.no}'
+		    }, 
+		    success : function(data){				
+				if(remain < 1) { // 인원 마감 후
+					$('#btnApply').attr({
+						"value" : "모집마감",
+						"disabled" : "disabled"
+					});
+					if(data == 'OK') {
+						$("#depMsg").css("display", "none");
+						$('#deposit').css("display", "block");
+					}
+				} else { // 인원 마감 전
+					if(data == 'OK') {
+						console.log("인원 마감 전 & 참여자");
+						$('#btnApply').val("참여취소");
+						$('#depMsg').html("참여 신청되었습니다. <br>계좌번호는 모집 인원이 마감되면 공개됩니다.");
+					}
+				}
+		    }
+		});	
+		
+		$(('input[value="${group.status}"]')).addClass('current');
+	});
+	
+	// 참여신청 버튼 클릭
+	function switchGroup(obj) {
+		var req;
+		var question;
+		
+		if($(obj).val() == '참여신청') {
+			req = "in";
+			question = "공동구매에 참여하시겠습니까?";
+		} else if ($(obj).val() == '참여취소') {
+			req = "out";
+			question = "공동구매 참여를 취소하시겠습니까?";
+		}
+
+		if (confirm(question)) {
+			$.ajax({
+				url : 'gHistorySwitch.do',
+			    type : 'get',
+			    data : {
+			    	groupNo : '${group.no}',
+			    	memberNo: '${member.no}',
+			    	req: req,
+			    }, 
+			    success : function(data){
+			    	location.reload();
+			    }
+			});	
+		}
+	}
+	
+	function changeStatus(obj) {
+		var statusId = $(obj).attr("id");
+		
+		if(${member.no}+0 != ${group.memberNo}) {
+			;
+		} else if(statusId == "GROUP003" || statusId == "GROUP004") {
+			if(confirm("공동구매의 진행상황을 '"+$(obj).val()+"'로 변경하시겠습니까?")) {
+				$.ajax({
+					url : 'updateStatus.do',
+				    type : 'get',
+				    data : {
+				    	groupNo : '${group.no}',
+				    	status: statusId,
+				    }, 
+				    success : function(data){
+				    	if(data == 'OK') {
+				    		alert("변경되었습니다.");
+							location.reload();
+				    	}
+				    }
+				});	
+			}
+		} else {
+			alert("해당 진행상황으로는 변경할 수 없습니다.");
+		}
+	}
 
 	function goGroupList() {
 		location.href = "${pageContext.request.contextPath}/sale/group/list.do";
