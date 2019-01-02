@@ -35,6 +35,17 @@
 					$("#loadingFree").hide();
 				}
 			});
+			
+			$.ajax({
+				url : "business/ad/getAd.do",
+				success : function(data){
+					/* alert("${pageContext.request.contextPath}/" + data); */
+					/* $("#ad-main-img").attr("src", "${pageContext.request.contextPath}/resources/upload/ad/1100x100.png");
+					$("#ad-main-img").attr("src", "${pageContext.request.contextPath}/resources/upload/ad/1100x100.png"); */
+				}, error : function(){
+					alert("ajax error");
+				}
+			});
 		});
 	</script>
 </head>
@@ -61,6 +72,9 @@
 						</div>
 						<div class="dc-ad-box" style="border:1px solid black;height:100px;margin:10px">
 							<h1>메인 광고(AD)</h1>
+							<div class="ad-main">
+								<img id="ad-main-img" src="" alt="" />
+							</div>
 						</div>
 						
 						<div class="dc-content-box">

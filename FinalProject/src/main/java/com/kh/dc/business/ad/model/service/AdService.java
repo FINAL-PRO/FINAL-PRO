@@ -25,4 +25,8 @@ public interface AdService {
 
 	List<AdLocation> selectAdLocationList();
 
+	int insertAd(Ad ad);
+
+	Ad getAd();
+
 }

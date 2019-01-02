@@ -51,5 +51,10 @@ public class FreeServiceImpl implements FreeService{
 		return freeDao.freeViewCount(bno);
 	}
 
+	@Override
+	public List<Board> selectFreeListData() {
+		return freeDao.selectFreeListData();
+	}
+
 	
 }

@@ -58,14 +58,13 @@
 									<c:forEach items="${adList}" var="ad">
 										<tr>
 											<td>${ad.no}</td>
-											<td>${ad.memberNo}</td>
-											<td>${ad.sectionNo }</td>
+											<td>${ad.userName}</td>
+											<td>${ad.pageName} / ${ad.sectionName} / ${ad.locationName}</td>
 											<td>${ad.adContentType}</td>
 											<td>${ad.adType}</td>
 											<td>${ad.status}</td>
 										</tr>
 									</c:forEach>
-								
 								</tbody>
 							</table>
 						</div>
@@ -79,5 +78,22 @@
 		</main>
 	</div>
 	<c:import url="../../common/footer.jsp"/>
+	
+	<script>
+	$("#adContentTypeNo").on('change',function() {
+		location.href = "${pageContext.request.contextPath}/business/ad/list.do?adContent="
+			+ $("#adContentTypeNo").val() + "&adType=" + $("#adTypeNo").val() + "&adStatus=" + $("#adStatusNo").val();
+	});
+	
+	$("#adTypeNo").on('change',function() {
+		location.href = "${pageContext.request.contextPath}/business/ad/list.do?adContent="
+			+ $("#adContentTypeNo").val() + "&adType=" + $("#adTypeNo").val() + "&adStatus=" + $("#adStatusNo").val();
+	});
+	
+	$("#adStatusNo").on('change',function() {
+		location.href = "${pageContext.request.contextPath}/business/ad/list.do?adContent="
+			+ $("#adContentTypeNo").val() + "&adType=" + $("#adTypeNo").val() + "&adStatus=" + $("#adStatusNo").val();
+	});
+	</script>
 </body>
 </html>
