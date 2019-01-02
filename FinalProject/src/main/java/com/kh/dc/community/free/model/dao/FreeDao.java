@@ -13,6 +13,7 @@ public interface FreeDao {
 	int selectFreeTotalContents();
 	
 	Board selectOneFree(int no);
+	BoardList selectOneFree(int no);
 	
 	/*List<Map<String, String>> selectOneFree(int cPage, int numberPage, int no);*/
 

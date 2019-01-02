@@ -9,13 +9,13 @@
 		<result property="commentCount" column="comment_count"/>
 		<result property="likeCount" column="like_count"/>
 	</resultMap>
-	
+	<!-- 
 	<resultMap type="board" id="resultBoard">
 		<id property="no" column="no" />
 		<result property="memberName"  column="nickName" />
 		<result property="thumbnail" column="thumbnail"/>
 	</resultMap>
-	 
+	-->
 	<!-- 
  	<select id="selectFreeList" resultMap="resultBoard">
 		SELECT B.*, M.NICKNAME

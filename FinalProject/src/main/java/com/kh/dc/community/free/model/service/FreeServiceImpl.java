@@ -27,7 +27,7 @@ public class FreeServiceImpl implements FreeService{
 	}
 
 	@Override
-	public Board selectOneFree(int no) {
+	public BoardList selectOneFree(int no) {
 		return freeDao.selectOneFree(no);
 	}
 

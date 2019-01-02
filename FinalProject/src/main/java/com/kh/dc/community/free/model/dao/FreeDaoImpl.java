@@ -29,7 +29,7 @@ public class FreeDaoImpl implements FreeDao{
 	}
 
 	@Override
-	public Board selectOneFree(int no) {
+	public BoardList selectOneFree(int no) {
 		return sqlSession.selectOne("free_mapper.selectOneFree", no);
 	}
 
