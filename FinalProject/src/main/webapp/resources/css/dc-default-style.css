@@ -166,3 +166,12 @@ footer{
     padding-right: 15px;
     padding-left: 15px;
 }
+
+.board-title{
+	color : ;
+	font-weight : bold;
+}
+
+tr{
+	height:5px;
+}
