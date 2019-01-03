@@ -33,7 +33,7 @@
 <script>
 	$(document).ready(function(){
 		
-		var today = new Date();
+		/* var today = new Date();
 		
 		var dd = today.getDate();
 	    var mm = today.getMonth() + 1;
@@ -63,9 +63,9 @@
 			   success: function(data) {
 			      console.log( data.forecast[0].day );
 			      }
-			 });
+			 }); */
 		
-		/* $.ajax({
+		 $.ajax({
 			type: "GET",
 			url: "https://api2.sktelecom.com/weather/current/minutely?appKey=a294c267-b2de-41f1-99ee-1a4894a40fdf&city=서울&county=강남구&village=삼성동",
 			header:{
@@ -84,20 +84,20 @@
 				console.log(tmin);
 				
 				switch(sky){
-					case "맑음": $("#weatherIcon").attr("class", "wi wi-day-sunny");
-					case "구름조금": $("#weatherIcon").attr("class", "wi wi-day-sunny-overcast");
-					case "구름많음": $("#weatherIcon").attr("class", "wi wi-day-cloudy");
-					case "구름많고 비": $("#weatherIcon").attr("class", "wi wi-rain");
-					case "구름많고 눈": $("#weatherIcon").attr("class", "wi wi-snow");
-					case "구름많고 비 또는 눈": $("#weatherIcon").attr("class", "wi wi-hail");
-					case "흐림": $("#weatherIcon").attr("class", "wi wi-cloudy");
-					case "흐리고 비": $("#weatherIcon").attr("class", "wi wi-rain");
-					case "흐리고 눈": $("#weatherIcon").attr("class", "wi wi-snow");
-					case "흐리고 비 또는 눈": $("#weatherIcon").attr("class", "wi wi-hail");
-					case "흐리고 낙뢰 ": $("#weatherIcon").attr("class", "wi wi-cloud");
-					case "뇌우/비": $("#weatherIcon").attr("class", "wi wi-rain");
-					case "뇌우/눈": $("#weatherIcon").attr("class", "wi wi-snow");
-					case "뇌우/비 또는 눈": $("#weatherIcon").attr("class", "wi wi-rain-mix");				
+					case "맑음": $("#weatherIcon").attr("class", "wi wi-day-sunny"); break;
+					case "구름조금": $("#weatherIcon").attr("class", "wi wi-day-sunny-overcast"); break;
+					case "구름많음": $("#weatherIcon").attr("class", "wi wi-day-cloudy"); break;
+					case "구름많고 비": $("#weatherIcon").attr("class", "wi wi-rain"); break;
+					case "구름많고 눈": $("#weatherIcon").attr("class", "wi wi-snow"); break;
+					case "구름많고 비 또는 눈": $("#weatherIcon").attr("class", "wi wi-hail"); break;
+					case "흐림": $("#weatherIcon").attr("class", "wi wi-cloudy"); break;
+					case "흐리고 비": $("#weatherIcon").attr("class", "wi wi-rain"); break;
+					case "흐리고 눈": $("#weatherIcon").attr("class", "wi wi-snow"); break;
+					case "흐리고 비 또는 눈": $("#weatherIcon").attr("class", "wi wi-hail"); break;
+					case "흐리고 낙뢰 ": $("#weatherIcon").attr("class", "wi wi-cloud"); break;
+					case "뇌우/비": $("#weatherIcon").attr("class", "wi wi-rain"); break;
+					case "뇌우/눈": $("#weatherIcon").attr("class", "wi wi-snow"); break;
+					case "뇌우/비 또는 눈": $("#weatherIcon").attr("class", "wi wi-rain-mix"); break;		
 				}
 				
 				$("#sky").text(sky);
@@ -105,16 +105,11 @@
 				$("#tmax").text(tmax);
 				$("#tmin").text(tmin);
 				
-				$("#sky1").text(sky);
-				$("#tc1").text(tc);
-				$("#tmax1").text(tmax);
-				$("#tmin1").text(tmin);
-				
 			},  error : function(jqxhr, textStatus, errorThrown) {
 				console.log("ajax 처리 실패");
 			}
 			
-		}); */
+		}); 
 		
 	});
 
