@@ -15,6 +15,14 @@
 			height: auto;
 			width: auto;
 			/* border: 1px solid lightgray; */
+		}
+		
+		.currentWeather{
+			display: inline-block; 
+			margin-top:10px; 
+			font-size:16px; 
+			text-align:center; 
+			border: 1px solid lightgray;
 		}	
 	</style>
 </head>
@@ -36,33 +44,15 @@
 							<div class="weather-container" style="margin: 20px;">
 								<!-- 오늘 내일 모레 날씨 -->
 								<!-- 동네 이름 -->
-								<h3 class="townName"></h3>
-								<div class="currentWeather" style="display: inline-block; margin-top:10px; font-size:16px; text-align:center;">
-									<div class="block">
-									<label style="font-weight:bold;">
+								<h4 class="townName"></h4>
+								<div class="currentWeather">
+									<div class="block">									
 									날짜  <br>
 									시간  <br>
-									날씨  <br><br>	
+									<div style="height:55px;">날씨 </div><br>	
 									최저온도  <br>
-									최고온도  <br>
-									</label>
-									</div>
-									
-									
-									<!-- <table>
-									<thead>
-										<tr>
-											<th>날짜</th>
-											<th>시간</th>
-											<th>최저온도</th>
-											<th>최고온도</th>
-											<th>날씨</th>
-										</tr>
-									</thead>
-									<tbody id="currentWeather">
-									
-									</tbody>
-									</table> -->					
+									최고온도  <br>									
+									</div>					
 								</div>
 								
 								<hr />
@@ -102,14 +92,33 @@
 		
 		today = yyyy+'-'+mm+'-'+dd + ' 00:00';
 		
+		// 사용자 Location으로 동네 이름 불러오기
 		
+		var url = "";
+		
+		<c:if test="${!empty member}">			
+			switch("${member.locationNo}"){
+				case '2': url="http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1168064000"; break;
+				case '5': url="http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1120065000"; break;
+				case '8': url="http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1144074000"; break;
+				case '11': url="http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1114055000"; break;
+				case '14': url="http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1138056000"; break;
+			}
+			
+		</c:if> 
+		
+		<c:if test="${empty member}">
+			url="http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1168064000";
+		</c:if> 
+
 		// 단기 예보(3시간별 오늘, 내일, 모레)
 		$.ajax({
-	        url: "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1168064000",
+	        url: url,
 	        dataType: "xml",
 	        type: "GET",
 	        async: "false",
 	        success: function(data) {
+	        	
 	            console.log(data);  
 	            var output = "";   	            
 	            
@@ -122,20 +131,16 @@
 	            			            		
 	            		var day ="";
 	            		var mintemp = $(this).find('tmn').text();
+	            		var maxtemp = $(this).find('tmx').text();
 	            		var sky = "";
 	            		
 	            		// 날짜 구분
 	            		switch($(this).find('day').text()){
-	            		case '0': day = "오늘"; break;
-	            		case '1': day = "내일"; break;
-	            		case '2': day = "모레"; break;	            		
+	            		case '0': day = '<label style="background-color:lightblue; width:50px; margin-bottom: 0;">오늘'; break;
+	            		case '1': day = '<label style="background-color:lightpink; width:50px; margin-bottom: 0;">내일'; break;
+	            		case '2': day = '<label style="background-color:lightgray; width:50px; margin-bottom: 0;">모레'; break;	            		
 	            		}
-	            		
-	            		// 최저 기온 잘못된 정보일 때 구분
-	            		if(mintemp == "-999.0"){
-	            			mintemp = '-';
-	            		}
-	            		
+
 	            		// 날씨 아이콘 넣기	            		
 	            		switch($(this).find('wfKor').text()){
 							case "맑음": sky='<i class="wi wi-day-sunny"></i>'; break;
@@ -147,36 +152,32 @@
 							case "눈/비": sky='<i class="wi wi-hail"></i>'; break;
 						}
 	            		
+	            		// 최저 기온 잘못된 정보일 때 구분
+	            		if(mintemp == '-999.0'){
+	            			mintemp = '-';
+	            		}
+	            		
+	            		if(maxtemp == '-999.0' ){
+	            			maxtemp = '-';
+	            		}
+	            		
 	             		
-	            		output += '<div class="block currentWeather" style="width: 50px; text-align: center;"><label>';
+	            		output += '<div class="block" style="width: 50px; text-align: center;">';
 	            		output += day + '<br>';
 	            		output += $(this).find('hour').text() + '시<br>';
 	            		output += sky + '<br>';	            		
-	            		output += $(this).find('wfKor').text() + '<br>';
-	            		output += $(this).find('tmx').text()  + '<br>';
-	            		output += mintemp + '</div>';
-	            		
-	            		
-						/* 테이블 형태로 만든 버전 : 세로 테이블이라 사용 불가
-	            		output += "<tr>";
-	            		output += "<th>" + day + "</th>";
-	            		output += "<td>" + $(this).find('hour').text() + "</td>";
-	            		output += "<td>" + $(this).find('tmn').text() + "</td>";
-	            		output += "<td>" + $(this).find('tmx').text() + "</td>";
-	            		output += "<td>" + $(this).find('wfKor').text() + "</td>";
-	            		output += "</tr>";	
-	            		
-	            		$('#currentWeather').html(output);*/	            		
+	            		output += '<div style="height: 30px;">' + $(this).find('wfKor').text() + '</div><br>';
+	            		output += mintemp + '<br>';            		
+	            		output += maxtemp  + '</label></div>';
 	     	            
 	 	            });
 	            	
-	            	$('.currentWeather').append(output);
-	            	
-	            	
+	            	$('.currentWeather').append(output);           	
 	            }); 
-	            
-	            
-	            
+      
+	        },error:function(data){
+	        	console.log("날씨 ajax 실패");
+	        	location.href="/dc";
 	        }
 	    });		
 		
@@ -204,7 +205,7 @@
 			           		
 			           		if($(this).find('tmEf').text().substring(10) == today.substring(10)){
 	       				
-			               	output += '<div class="block"><label>';
+			               	output += '<div class="block"><label style="width:100px; text-align:center;">';
 			               	output += $(this).find("tmEf").text().substring(0,10) + '<br> 최저 : '; 
 			               	output += $(this).find('tmn').text() + '<br> 최고 : '; 
 			              	output += $(this).find("tmx").text() + '</label></div>';		                				

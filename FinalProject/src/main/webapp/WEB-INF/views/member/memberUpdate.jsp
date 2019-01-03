@@ -146,7 +146,7 @@
 				   <div class="col-md-3 btn-container"><input type="submit" class="btn btn-outline-success" value="수정" ></div>
 				   <div class="col-md-3 btn-container">
 				   	<input type="button"  class="btn btn-outline-danger" 
-				   			data-toggle="modal" data-target="#modalDeleteMember" value="삭제"></div>
+				   			data-toggle="modal" data-target="#modalDeleteMember" value="회원 탈퇴"></div>
 				   <div class="col-md-3" id=""></div>
 				   </div>	
 				</form>

@@ -39,8 +39,7 @@
 					</div>
 					<div class="dc-content-box">
 						<div id="enroll-container">
-						<form name="memberEnrollFrm" action="memberEnrollEnd.do"
-							method="post">
+						<form name="memberEnrollFrm" id="memberEnroll" action="memberEnrollEnd.do" method="post">
 							<div class="row email-container" id="email-container">
 								<div class="col-md-3">이메일</div>
 								<div class="col-md-6">
@@ -59,8 +58,7 @@
 										id="password_" required>
 								</div>
 								<div class="col-md-3 comment" id="">
-									<label class="pwdChkComment" id="pwdChkComment">비밀번호을
-										입력하세요.</label>
+									<label class="pwdChkComment" id="pwdChkComment">비밀번호을 입력하세요.</label>
 								</div>
 							</div>
 
@@ -124,7 +122,7 @@
 							<div class="row btn-container">
 								<div class="col-md-3"></div>
 								<div class="col-md-3 btn-container">
-									<input type="submit" class="btn btn-outline-success" value="가입">
+									<input type="button" class="btn btn-outline-success" id="enrollSubmit" value="가입">
 								</div>
 								<div class="col-md-3 btn-container">
 									<input type="reset" class="btn btn-outline-danger" value="취소">
@@ -149,133 +147,115 @@
 		$(function() {
 
 			/* 이메일 중복검사 이벤트 추가 */
-			$("#email")
-					.on(
-							"keyup",
-							function() {
+			$("#email").on("keyup",function() {
 
-								var email = $(this).val().trim();
-								var regEmail = /^[a-zA-Z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
+				var email = $(this).val().trim();
+				var regEmail = /^[a-zA-Z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
 
-								if (email == "") {
-									$(".guide1").text('이메일을 입력하세요.');
-								} else if (email != null) {
-									$
-											.ajax({
-												url : "${pageContext.request.contextPath}/member/checkEmailDuplicate.do",
-												data : {
-													email : email
-												},
-												dataType : "json",
-												success : function(data) {
-													console.log(data);
-													if (data == 1) {
-														$(".guide1")
-																.text(
-																		'이미 가입된 이메일입니다.');
-													} else if (!(regEmail
-															.test(email))) {
-														$(".guide1")
-																.text(
-																		'이메일 형식에 맞지 않습니다.');
-													} else if (data == 0
-															&& regEmail
-																	.test(email)) {
-														$(".guide1").text('');
-													}
-												},
-												error : function(jqxhr,
-														textStatus, errorThrown) {
-													console.log("ajax 처리 실패");
-													//에러로그
-													console.log(jqxhr);
-													console.log(textStatus);
-													console.log(errorThrown);
-												}
-											});
-								}
-							});
+				if (email == "") {
+					$(".guide1").text('이메일을 입력하세요.');
+				} else if (email != null) {
+					$.ajax({
+						url : "${pageContext.request.contextPath}/member/checkEmailDuplicate.do",
+						data : {email : email},
+						dataType : "json",
+						success : function(data) {
+							console.log(data);
+							if (data == 1) {
+								$(".guide1").text('이미 가입된 이메일입니다.');
+							} else if (!(regEmail.test(email))) {
+								$(".guide1").text('이메일 형식에 맞지 않습니다.');
+							} else if (data == 0 && regEmail.test(email)) {
+								$(".guide1").text('');
+							}
+						}, error : function(jqxhr,textStatus, errorThrown) {
+							console.log("ajax 처리 실패");
+							//에러로그
+							console.log(jqxhr);
+							console.log(textStatus);
+							console.log(errorThrown);
+						}
+					});
+				}
+			});
 
 			/* 닉네임 중복검사 이벤트 추가 */
-			$("#nickName")
-					.on(
-							"keyup",
-							function() {
-								var nickName = $(this).val().trim();
+			$("#nickName").on("keyup", function() {
+				var nickName = $(this).val().trim();
 
-								if (nickName == "") {
-									$(".guide").text("닉네임을 입력해주세요.");
+				if (nickName == "") {
+					$(".guide").text("닉네임을 입력해주세요.");
 
-								} else if (nickName != null
-										&& nickName.length < 2) {
-									$(".guide").text("2자 이상 입력해주세요.");
-									return;
+				} else if (nickName != null
+						&& nickName.length < 2) {
+					$(".guide").text("2자 이상 입력해주세요.");
+					return;
 
-								} else if (nickName.length > 10) {
-									$(".guide").text("10자 미만으로 입력해주세요.");
-									return;
-								} else {
-									$
-											.ajax({
-												url : "${pageContext.request.contextPath}/member/checkNickNameDuplicate.do",
-												data : {
-													nickName : nickName
-												},
-												dataType : "json",
-												success : function(data) {
-													console.log(data);
-													if (data == 1) {
-														$(".guide")
-																.text(
-																		"이미 사용중인 닉네임입니다.");
-													} else {
-														$(".guide")
-																.text(
-																		"사용할 수 있는 닉네임입니다.");
-													}
-												},
-												error : function(jqxhr,
-														textStatus, errorThrown) {
-													console.log("ajax 처리 실패");
-													//에러로그
-													console.log(jqxhr);
-													console.log(textStatus);
-													console.log(errorThrown);
-												}
-											});
-								}
-							});
+				} else if (nickName.length > 10) {
+					$(".guide").text("10자 미만으로 입력해주세요.");
+					return;
+				} else {
+					$.ajax({
+						url : "${pageContext.request.contextPath}/member/checkNickNameDuplicate.do",
+						data : {nickName : nickName},
+						dataType : "json",
+						success : function(data) {
+							console.log(data);
+							if (data == 1) {
+								$(".guide").text("이미 사용중인 닉네임입니다.");
+							} else {
+								$(".guide").text("사용할 수 있는 닉네임입니다.");
+							}
+							},error : function(jqxhr,textStatus, errorThrown) {
+								console.log("ajax 처리 실패");
+								//에러로그
+								console.log(jqxhr);
+								console.log(textStatus);
+								console.log(errorThrown);
+							}
+					});
+				}
+			});
 
-			$("#password_")
-					.on(
-							"keyup",
-							function checkedPassword() {
-								var pwd = $("#password_").val().trim();
-								var pwd2 = $("#password2").val().trim();
+			$("#password_").on("keyup", function checkedPassword() {
+				var pwd = $("#password_").val().trim();
 
-								var regPwd = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,12}$/;
+				var regPwd = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,12}$/;
 
-								if (pwd == "") {
-									$("#pwdChkComment").text('비밀번호을 입력하세요.');
-								} else if (!regPwd.test(pwd)) {
-
-									$("#pwdChkComment").text(
-											'영대문자/특수문자/숫자 최소 1개 포함 6자 이상!');
-
-								} else {
-									$("#pwdChkComment").text('OK!');
-								}
-							});
+				if (pwd == "") {
+					$("#pwdChkComment").text('비밀번호을 입력하세요.');
+				} else if (!regPwd.test(pwd)) {
+					$("#pwdChkComment").text('영대문자/특수문자/숫자 최소 1개 포함 6자 이상!');
+				} else {
+					$("#pwdChkComment").text('');
+				}
+			});
 
 			$("#password2").on("keyup", function() {
 				var pwd = $("#password_").val(), pwd2 = $("#password2").val();
 				if (pwd != pwd2) {
 					$("#pwdChkComment2").text('위의 비밀번호와 다릅니다.');
 				} else if (pwd != null && pwd2 != null && pwd == pwd2) {
-					$("#pwdChkComment2").text('OK!');
+					$("#pwdChkComment2").text('');
 				}
 
 			});
+			
+			$("#enrollSubmit").on("click", function() {
+				
+				var pwd = $("#password_").val().trim();
+				var pwd2 = $("#password2").val().trim();
+				var regPwd = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,12}$/;
+				
+				if(regPwd.test(pwd) && pwd==pwd2 ){
+					$("#memberEnroll").submit();
+				} else{
+					alert("비밀번호를 다시 입력해주세요.");
+					return;
+				}
+			
+			});
+			
 		});
 	</script>
 </body>
