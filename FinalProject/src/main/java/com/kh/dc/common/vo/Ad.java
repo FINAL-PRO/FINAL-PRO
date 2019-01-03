@@ -21,6 +21,7 @@ public class Ad implements Serializable{
 	private String adContentType;
 	private String adType;
 	private String status;
+	private String landingPage;
 	
 	public Ad() {
 		super();
@@ -43,7 +44,7 @@ public class Ad implements Serializable{
 	}
 	
 	public Ad(Date startDate, Date endDate, int memberNo, int pageNo, int sectionNo,
-			int locationNo, String adContentType, String adType, String status) {
+			int locationNo, String adContentType, String adType, String status, String landingPage) {
 		super();
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -54,6 +55,7 @@ public class Ad implements Serializable{
 		this.adContentType = adContentType;
 		this.adType = adType;
 		this.status = status;
+		this.setLandingPage(landingPage);
 	}
 
 	public int getNo() {
@@ -144,10 +146,19 @@ public class Ad implements Serializable{
 		this.status = status;
 	}
 
+	public String getLandingPage() {
+		return landingPage;
+	}
+
+	public void setLandingPage(String landingPage) {
+		this.landingPage = landingPage;
+	}
+
 	@Override
 	public String toString() {
 		return "Ad [no=" + no + ", adContentPath=" + adContentPath + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", memberNo=" + memberNo + ", pageNo=" + pageNo + ", sectionNo=" + sectionNo + ", locationNo="
-				+ locationNo + ", adContentType=" + adContentType + ", adType=" + adType + ", status=" + status + "]";
+				+ locationNo + ", adContentType=" + adContentType + ", adType=" + adType + ", status=" + status
+				+ ", landingPage=" + landingPage + "]";
 	}
 }

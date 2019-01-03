@@ -27,6 +27,6 @@ public interface AdDao {
 
 	int insertAd(Ad ad);
 
-	Ad getAd();
+	Ad getAd(Map<String, Object> params);
 
 }

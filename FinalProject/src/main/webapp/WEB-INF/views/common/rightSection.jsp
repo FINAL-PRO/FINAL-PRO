@@ -1,5 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<script>
+	var uris = "${pageContext.request.requestURI}".split("/");
+	console.log(uris);
+	$.ajax({
+		url : "${pageContext.request.contextPath}/business/ad/getAd.do",
+		data : {adPage : uris[4],
+				adSection : uris[5],
+				adLocation : uris[6]},
+		success : function(data){
+			var img = data['adContentPath'].split("\\ad/");
+			
+			$(".ad-right").css("width", "256px").css("height", "280px").attr("background-position", "center")
+			.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
+			.css("margin-right", "auto");
+			$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/' + img[1] + '")');
+			
+			$(".ad-right").attr("onclick", "window.open('" + data['landingPage'] + "');");
+		}, error : function(){
+			$(".ad-right").css("width", "256px").css("height", "280px").attr("background-position", "center")
+			.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
+			.css("margin-right", "auto");
+			$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/260x280.png")');			
+		}
+	});
+</script>	
 
 <div class="dc-content">
 	<%-- <img class="adimg" src="${pageContext.request.contextPath}/resources/images/adimg1.jpg" 
@@ -26,7 +52,10 @@
 		
 	</div>
 	<div class="dc-content-box">
-		<h1>광고(AD)</h1>
+		<!-- <h1>광고(AD)</h1> -->
+		<div class="ad-right">
+			<img id="ad-right-img" src=""/>
+		</div>
 	</div>
 </div>
 

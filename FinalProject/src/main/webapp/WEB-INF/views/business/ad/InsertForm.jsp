@@ -72,19 +72,26 @@
 								<tr>
 									<td>시작일</td>
 									<td>
-										<input name="startDate" type="date" />
+										<input name="startDate" type="date" required="required"/>
 									</td>
 								</tr>	
 								<tr>
 									<td>종료일</td>
 									<td>
-										<input name="endDate" type="date" />
+										<input name="endDate" type="date" required="required"/>
 									</td>
 								</tr>	
 								<tr>
 									<td>광고물</td>
 									<td>
-										<input name="adContentPath" type="file" />
+										<input name="adContentPath" type="file" required="required"/>
+									</td>
+								</tr>
+								<tr>
+									<td>연결 페이지</td>
+									<td>
+										<input name="landingPage" type="text" required="required" />
+										<button type="button" onclick="landingCheck();">랜딩확인</button>
 									</td>
 								</tr>
 								<tr>
@@ -107,5 +114,14 @@
 		</main>
 	</div>
 	<c:import url="../../common/footer.jsp"/>
+	
+	<script>
+		function landingCheck(){
+			var url = $("input[name=landingPage]").val();
+			
+			window.open(url);
+		}
+	
+	</script>
 </body>
 </html>
