@@ -12,14 +12,24 @@
 		success : function(data){
 			console.log("우측 섹션 광고 ajax 성공");
 			console.log(data);
-			var img = data['adContentPath'].split("\\ad/");
 			
-			$(".ad-right").css("width", "256px").css("height", "280px").attr("background-position", "center")
-			.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
-			.css("margin-right", "auto");
-			$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/' + img[1] + '")');
+			if(data == ""){
+				$(".ad-right").css("width", "256px").css("height", "290px").attr("background-position", "center")
+				.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
+				.css("margin-right", "auto");
+				$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/260x280.png")');
+				$(".ad-right").attr("onclick", "window.open('" + "http://www.iei.or.kr/main/main.kh" + "');");
+			}else{
+				var img = data['adContentPath'].split("\\ad/");
+				
+				$(".ad-right").css("width", "256px").css("height", "290px").attr("background-position", "center")
+				.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
+				.css("margin-right", "auto");
+				$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/' + img[1] + '")');
+				
+				$(".ad-right").attr("onclick", "window.open('" + data['landingPage'] + "');");
+			}
 			
-			$(".ad-right").attr("onclick", "window.open('" + data['landingPage'] + "');");
 		}, error : function(){
 			console.log("우측 섹션 광고 ajax 에러");
 			$(".ad-right").css("width", "256px").css("height", "280px").attr("background-position", "center")
@@ -36,11 +46,23 @@
 						style="margin-left: 1px;margin-right: 1px; margin-top:60px; margin-bottom:60px;
 						border:1px solid red"/> --%>
 	<div class="dc-content-box">
-		<h1>정보</h1>
+		<h4>
+			<span class="board-title">정보</span>
+		</h4>
+		<div align="center">
+			<img src="" alt="프로필 이미지" />
+			<p>유저이름</p>
+			<button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal">로그인</button>
+			<button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='/dc/member/memberEnroll.do'">회원가입</button>
+			<br />
+			<span>내가쓴글</span> / <span>내가쓴댓글</span> / <span>쪽지</span>
+		</div>
+		
 	</div>
 	<div class="dc-content-box">
-		
-		<h1>오늘의 날씨</h1>
+		<h4>
+			<span class="board-title">날씨</span>
+		</h4>
 		<hr />	
 		<div class="" style="text-align: center">
 			<label style="margin-bottom: 10px;">(일단 default 삼성동 날씨)</label><br>

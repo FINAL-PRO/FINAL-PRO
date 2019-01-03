@@ -18,7 +18,7 @@
 					var result = "";
 						
 					if(data.length == 0){
-						result += "<tr><td align='center'>";
+						result += "<tr style='height:200px'><td align='center'>";
 						result += "<span>불러온 데이터가 없습니다.</span>"
 						result += "<tr><td>";
 					}else{
@@ -44,7 +44,7 @@
 					var result = "";
 					
 					if(data.length == 0){
-						result += "<tr><td align='center'>";
+						result += "<tr style='height:200px'><td align='center'>";
 						result += "<span>불러온 데이터가 없습니다.</span>"
 						result += "<tr><td>";
 					}else{
@@ -70,7 +70,7 @@
 					var result = "";
 					
 					if(data.length == 0){
-						result += "<tr><td align='center'>";
+						result += "<tr style='height:200px'><td align='center'>";
 						result += "<span>불러온 데이터가 없습니다.</span>"
 						result += "<tr><td>";
 					}else{
@@ -98,10 +98,19 @@
 					console.log("메인 광고 ajax 성공");
 					console.log(data);
 					
-					$(".ad-main").css("width", "1126px").css("height", "100%").attr("background-position", "center")
-					.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
-					.css("margin-right", "auto");
-					$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/1200x120.png")');
+					if(data == ""){
+						$(".ad-main").css("width", "1126px").css("height", "100%").attr("background-position", "center")
+						.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
+						.css("margin-right", "auto");
+						$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/1200x120.png")');
+						
+						$(".ad-main").attr("onclick", "window.open('" + "http://www.iei.or.kr/main/main.kh" + "');");
+					}else{
+						$(".ad-main").css("width", "1126px").css("height", "100%").attr("background-position", "center")
+						.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
+						.css("margin-right", "auto");
+						$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/1200x120.png")');						
+					}
 				}, error : function(error){
 					console.log("메인 광고 ajax 에러");
 					$(".ad-main").css("width", "1126px").css("height", "100%").attr("background-position", "center")
@@ -126,9 +135,11 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-box">
-							<h1>공지 게시판</h1>
+							<h4>
+								<span class="board-title">공지 게시판</span>
+							</h4>
 							<hr />
-							<table class="table table-striped">
+							<table class="table">
 								<tbody id="noticeTable">
 									<div id="loadingNotice" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
 								</tbody>
@@ -142,9 +153,11 @@
 						</div>
 						
 						<div class="dc-content-box">
-							<h1>자유 게시판</h1>
+							<h4>
+								<span class="board-title">자유 게시판</span>
+							</h4>
 							<hr />
-							<table class="table table-striped">
+							<table class="table">
 								<tbody id="freeTable">
 									<div id="loadingFree" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>							
 								</tbody>
@@ -152,9 +165,11 @@
 						</div>
 						
 						<div class="dc-content-box">
-							<h1>거래 게시판</h1>
+							<h4>
+								<span class="board-title">공동구매 게시판</span>
+							</h4>
 							<hr />
-							<table class="table table-striped">
+							<table class="table">
 								<tbody id="groupTable">
 									<div id="loadingGroup" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
 								</tbody>
