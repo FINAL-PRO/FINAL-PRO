@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -8,14 +8,9 @@
 <head>
 
 <title>조회</title>
-<c:import url="../../common/header.jsp"/>
-</head>
-<body>
+<c:import url="../../common/header.jsp" />
 
-  <c:import url="../../common/menubar.jsp"/>
-  
-<div id="content">
-        <div class="centralizer">				<script type="text/javascript">//<![CDATA[
+<script type="text/javascript">//<![CDATA[
             var lb = new Array;
             lb.lang = new Array;
             lb.lang['confirm_report'] = '신고하시겠습니까?';
@@ -44,134 +39,50 @@
                     firstDay: 0,
                     isRTL: false
                     };
-        //]]></script>
+//]]></script>
+</head>
+<body>
+	<c:import url="../../common/menubar.jsp" />
+	<div class="wrap_inner">
+		<main id="container">
+		<section>
+			<div class="section-left">
+				<!-- 내용없음 -->
+			</div>
 
-        <div id="cdetail" class="" style="margin: auto; margin-left: auto; margin-top: auto; width: 800px;">
-            <div id="">
-            
-                <div class="" style="display:block; margin: auto; margin-left: auto; margin-top: auto; width: 800;">
-                    <h2 class="" style="margin-top:50px; margin-bottom: 10px;">${house.title}</h2>
-                    <span class="" style="margin-right: 30px;">${house.userName}</span>${house.writeDate }
-                    <dl class="" style="float:right; display: table; margin:0px;">
-                        <dt class="" style="float: left; margin-left:30px;">조회 수</dt>
-                            <dd class="" style="float:right; margin-inline-start: 15px;">${house.viewcount}</dd>
-                        <dt class="" style="float: right; margin-left:30px;">추천 수</dt>
-                            <dd class="" style="float:right; margin-inline-start: 15px;">00</dd>
-                    </dl>
-                </div>
-                   
-                <br>
-                <div class="ccontent" style="margin: auto; margin-left: auto; margin-top: auto; width: 800; border:1px solid black; min-height: 600px; width: 800px">
-                    <div class="content_text" style="padding-left: 20px; padding-top: 20px;">
-                    ${house.content}
-                    </div>
-                </div>
-            </div>
+			<div class="section-center">
+				<div class="dc-content">
+					<div class="dc-content-title">
+						<h1>${house.title}</h1>
+						${house.userName} / ${house.writeDate } / 조회수 : ${house.viewcount}
+					</div>
+					<div class="dc-content-box">${house.content}</div>
+					<div class="" style="">
+						<ul class=""
+							style="list-style-type: none; padding-left: 0px; display: block;">
+							<li class=""
+								style="display: block; float: left; padding-right: 15px;"><a
+								class=""
+								href="${pageContext.request.contextPath}/info/house/list.do"
+								title="목록">목록</a></li>
+							<li class=""
+								style="display: block; float: left; padding-right: 15px;"><a
+								class="" href="#" accesskey="t" title="상단이동">맨 위로</a></li>
+						<a href="${pageContext.request.contextPath}/info/house/updateHouse.do?no=${house.no}">수정하기</a>
+						</ul>
+					</div>
+				</div>
+			</div>
 
+			<div class="section-right">
+				<c:import url="../../common/rightSection.jsp" />
+			</div>
+		</section>
+		</main>
+	</div>
+	<c:import url="../../common/footer.jsp" />
 
-            <div class="" style="">
-                <ul class="" style="list-style-type:none; padding-left:0px; display: block;">
-                    <li class="" style="display: block; float: left; padding-right: 15px;"><a class="" href="${pageContext.request.contextPath}/info/house/list.do" title="목록">목록</a> </li>
-                    <li class="" style="display: block; float: left; padding-right: 15px; "><a class="" href="#" accesskey="t" title="상단이동">맨 위로</a></li>
-                    <li class="" style="display: block; float: left;"><a onclick="updatehouse()"  title="수정">수정하기</a></li>		
-                </ul>
-            </div>
-            <br>
-            <div class="" >
-                <ul class="" style="list-style-type:none; padding-left:0px; display: block;">
-                    <li class="" style="display: block; float: left; padding-right: 15px;">
-                    <button class="" title="추천" onclick=";">
-                        <span class="">추천 (0)</span>
-                    </button>
-                    </li>				
-                    
-                    <li class="">              
-                        <button class="" title="비추천" onclick="alert('로그인을 하지 않았습니다.'); ">
-                            <span class="">비추천 (0) </span>
-                        </button>
-                    </li>								
-                </ul>
-            </div>	
-            
-            
-            
-            <div id="comments" class="" style="margin: auto; margin-left: auto; margin-top: auto; width: 800px; border: 1px solid black;">
-            <div class="">
-                  <span class="">작성자</span>
-                  <span>작성일</span>
-            </div>
-            
-            <div class="">
-                     내용 
-            </div>
-            
-            <form id="reComInsert" >
-            <div class="reCommentInsert" style="display:block; background:gray; height: 80px; text-align: center; padding-top: 10px;">
-            	<textarea id="content" name="content" style="resize: none; heght:80px; width: 700px;">댓글</textarea>
-            	<input type="hidden" name="reComW" value=""/>			<!-- 해당 페이지 접근 멤버 회원 넘버 추가 -->
-            	<input type="hidden" name="boardNo" id="boardNo" value="${house.no}"/>
-            	<button onclick="reComInsert();">작성하기</button>
-            </div>    
-            </form> 
-            
-        </div> <!-- cdatail 끝 -->
-
-        <br><br><br><br></br>
-
-        <div style="margin: auto; margin-left: auto; margin-top: auto; width: 800px; border:1px solid black; text-align: center; align-content: center; text-align: center;'">
-            <h3 class="">목록</h3>
-
-            
-            <table id="list" cellspacing="0" cellpadding="0" style="display:block; margin-left: auto; margin-right:auto; ">
-             
-                    <tr  style="margin: auto; margin-left: auto; margin-top: auto; text-align: center; align-content: center; text-align: center;">															    
-                        <th class=""  >번호</th>																			
-                        <th class="">제목</th>																		
-                        <th class="">글쓴이</th>																		
-                        <th class="">날짜</th>																			
-                        <th class="">조회 수</th>															
-                    </tr>
-             
-                	 <c:forEach items="${list}" var="houseList" varStatus="vs">
-                    <tr>								
-                        <td class=""><span class="">${houseList.no}</span></td>
-                        <td class=""><a onclick="selecthouse(${houseList.no})"><span>${houseList.title }</span></a></td>
-                        <td class=""><span class="">${houseList.userName }</span></td>
-                        <td class="">${houseList.writeDate }</td>
-                        <td class="조회수">${houseList.viewcount }</td>
-                    </tr>
-                    </c:forEach>
-               
-             </table>
-            </div>
-
-            <br><br><br><br>
-                
-            <div class="" style="display:block; margin: auto; margin-left: auto; margin-top: auto; width: 800px; border:1px solid black; text-align: center;">
-                <h4 class="">Page Navigation</h4>
-                    <ul class="">
-                        <li class="" style="display: block; float: left; padding-right:10px;"><a class="" href="" title="첫 페이지">첫 페이지 </a></li>										
-                        <li class="" style="display: block; float: left; padding-right:10px;"><a class="" href=""></a>1</li>
-                        <li class="" style="display: block; float: left; padding-right:10px;"><a class="" href=""></a>2</li>
-                        <li class="" style="display: block; float: left; padding-right:10px;"><a class="" href=""></a>3</li>
-                        <li class="" style="display: block; float: left; padding-right:10px;"><a class="" href=""></a>4</li>
-                        <li class="" style="display: block; float: left; padding-right:10px;"><a class="" href=""></a>5</li>
-                        <li class="" style="display: block; float: left; "><a class="" href="" title="끝 페이지">끝 페이지</a></li>				
-                    </ul>
-            </div>
-        
-        
-        </div>
-        </div>
-        
-        <br><br><br>
-        <c:import url="../../common/footer.jsp"/>
-        
-        <script>
-        	function updatehouse(){
-        		location.href="${pageContext.request.contextPath}/info/house/updateHouse.do?no="+${house.no};
-        	}
-        	
+	<script>
 			function selecthouse(no){
 				location.href="${pageContext.request.contextPath}/info/house/selectOne.do?no="+no;
 				}
