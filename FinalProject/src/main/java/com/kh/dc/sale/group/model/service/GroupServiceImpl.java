@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.dc.common.vo.Board;
 import com.kh.dc.sale.group.model.dao.GroupDao;
 import com.kh.dc.sale.group.model.vo.Group;
 
@@ -95,6 +96,11 @@ public class GroupServiceImpl implements GroupService {
 	public int updateStatus(Map<String, String> status) {
 		
 		return groupDao.updateStatus(status);
+	}
+
+	@Override
+	public List<Board> getGroupListData() {
+		return groupDao.getGroupListData();
 	}
 	
 	

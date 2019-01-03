@@ -12,14 +12,26 @@
 	<script>
 		$(function(){
 			$.ajax({
-				url : "community/free/getListData.do",
+				url : "${pageContext.request.contextPath}/community/notice/getListData.do",
 				success:function(data){
-					console.log("ajax 성공");
-					console.log(data);
+					console.log("공지사항 가져오기 ajax 성공");
+					var result = "";
+						
+					if(data.length == 0){
+						result += "<tr><td align='center'>";
+						result += "<span>불러온 데이터가 없습니다.</span>"
+						result += "<tr><td>";
+					}else{
+						for(var i = 0 ; i < data.length; i++){
+							result += "<tr><td>";
+							result += "<a href='${pageContext.request.contextPath}/community/free/freeView.do?bno=" + data[i]['no'] + "'>" + data[i]['title'] + "</a>";
+							result += "</td></tr>";
+						}
+					}
 					
-					$("#noticeTable").append(data);
+					$("#noticeTable").append(result);
 				},error : function(data){
-					console.log("ajax error");	
+					console.log("공지사항 가져오기 ajax error");	
 				},complete : function(){
 					$("#loadingNotice").hide();
 				}
@@ -28,11 +40,52 @@
 			$.ajax({
 				url : "community/free/getListData.do",
 				success:function(data){
-					$("#freeTable").append(data);
+					console.log("자유게시판 가져오기 ajax 성공");
+					var result = "";
+					
+					if(data.length == 0){
+						result += "<tr><td align='center'>";
+						result += "<span>불러온 데이터가 없습니다.</span>"
+						result += "<tr><td>";
+					}else{
+						for(var i = 0 ; i < data.length; i++){
+							result += "<tr><td>";
+							result += "<a href='${pageContext.request.contextPath}/community/free/freeView.do?bno=" + data[i]['no'] + "'>" + data[i]['title'] + "</a>";
+							result += "</td></tr>";
+						}
+					}
+					
+					$("#freeTable").append(result);
 				},error : function(data){
-					console.log("ajax error");	
+					console.log("자유게시판 가져오기 ajax error");
 				},complete : function(){
 					$("#loadingFree").hide();
+				}
+			});
+			
+			$.ajax({
+				url : "sale/group/getListData.do",
+				success:function(data){
+					console.log("공동구매 가져오기 ajax 성공");
+					var result = "";
+					
+					if(data.length == 0){
+						result += "<tr><td align='center'>";
+						result += "<span>불러온 데이터가 없습니다.</span>"
+						result += "<tr><td>";
+					}else{
+						for(var i = 0 ; i < data.length; i++){
+							result += "<tr><td>";
+							result += "<a href='${pageContext.request.contextPath}/sale/group/groupView.do?boardNo=" + data[i]['no'] + "'>" + data[i]['title'] + "</a>";
+							result += "</td></tr>";
+						}
+					}
+					
+					$("#groupTable").append(result);
+				},error : function(data){
+					console.log("공동구매 가져오기 ajax error");
+				},complete : function(){
+					$("#loadingGroup").hide();
 				}
 			});
 			
@@ -42,11 +95,15 @@
 					adSection : "main",
 					adLocation : "하단"},
 				success : function(data){
+					console.log("메인 광고 ajax 성공");
+					console.log(data);
+					
 					$(".ad-main").css("width", "1126px").css("height", "100%").attr("background-position", "center")
 					.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
 					.css("margin-right", "auto");
 					$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/1200x120.png")');
 				}, error : function(error){
+					console.log("메인 광고 ajax 에러");
 					$(".ad-main").css("width", "1126px").css("height", "100%").attr("background-position", "center")
 					.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
 					.css("margin-right", "auto");
@@ -97,9 +154,9 @@
 						<div class="dc-content-box">
 							<h1>거래 게시판</h1>
 							<hr />
-							<table class="">
-								<tbody id="saleTable">
-									<div id="loadingSale" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
+							<table class="table table-striped">
+								<tbody id="groupTable">
+									<div id="loadingGroup" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
 								</tbody>
 							</table>
 						</div>

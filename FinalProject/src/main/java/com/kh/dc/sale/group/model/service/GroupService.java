@@ -3,6 +3,7 @@ package com.kh.dc.sale.group.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.dc.common.vo.Board;
 import com.kh.dc.sale.group.model.vo.Group;
 
 public interface GroupService {
@@ -32,4 +33,6 @@ public interface GroupService {
 	List<Map<String, String>> selectStatusList();
 
 	int updateStatus(Map<String, String> status);
+
+	List<Board> getGroupListData();
 }
