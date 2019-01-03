@@ -62,7 +62,7 @@
 <script>
 	$(document).ready(function(){
 		
-		$.ajax({
+/* 		$.ajax({
 			type: "GET",
 			url: "https://api2.sktelecom.com/weather/current/minutely?appKey=a294c267-b2de-41f1-99ee-1a4894a40fdf&city=서울&county=강남구&village=삼성동",
 			header:{
@@ -106,7 +106,7 @@
 				console.log("ajax 처리 실패");
 			}
 			
-		});
+		}); */
 		
 	});
 
