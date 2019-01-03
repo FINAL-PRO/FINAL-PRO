@@ -210,9 +210,15 @@ hr {
 														<span class="votecount">좋아요: ${b.likeCount}</span> 
 														<span class="commentcount">댓글: ${b.commentCount}</span>
 													</p>
-													
 													<p class="attach">
-														<span class="attachcount">이미지</span>
+														<c:choose>
+													<c:when test="${!empty member.no}">
+														<img src="/dc/resources/images/images.png" class="attachcount" style="height: 17px; width: 17px;">
+													</c:when>
+													<c:otherwise>
+														<img src="/dc/resources/images/images.png" class="attachcount" style="height: 17px; width: 17px;">
+													</c:otherwise>
+												</c:choose>
 													</p>
 											</a></li>
 										</c:forEach>

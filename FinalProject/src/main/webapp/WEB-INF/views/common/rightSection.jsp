@@ -29,7 +29,7 @@
 		<h1>광고(AD)</h1>
 	</div>
 </div>
-
+<!-- 
 <script>
 	$(document).ready(function(){
 		
@@ -83,3 +83,4 @@
 
 
 </script>
+ -->

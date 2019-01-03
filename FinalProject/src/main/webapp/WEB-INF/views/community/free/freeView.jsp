@@ -155,6 +155,11 @@
 		border: 1px solid yellow;
 	}
 	
+	.likecount2{
+		border:none;
+		width: 10px;
+	}
+	
 	
 </style>
 </head>
@@ -195,54 +200,82 @@
 											<button class="btn_board_edit" id="btn_board_edit">수정</button>
 											<button class="btn_board_delete" id="btn_board_delete">삭제</button>
 											<button class="btn_report">신고하기</button>
-											<c:choose>
-												<c:when test="${!empty member.no}">
-													<a href="#" onclick="like_func();">
-														<img src="/dc/resources/images/dislike.png" id="like_img" style="height: 17px; width: 17px;">
-													</a>
-												</c:when>
-												<c:otherwise>
-													<img src="/dc/resources/images/dislike.png" id="like_img" style="height: 17px; width: 17px;">
-												</c:otherwise>
-											</c:choose>
-											<span class="likecount">: ${boardList.likeCount}</span>
+											<span class="likecount">
+											<a href="#" class="likefunc">
+												<img src="/dc/resources/images/dislike.png" id="like_img" style="height: 17px; width: 17px;">
+												: <input type="text" value="${boardList.likeCount}" class="likecount2" readonly/></span>
+											</a>
+											<input type="hidden" value="1" class="likecount3"/>
 											<span class="commentcount">댓글: ${boardList.commentCount}</span>
 										</div>
 										<script>
-											var bno = $('[name=bno]').val();
-											var mno = $('[name=mno]').val();
-				
-										
-											function like_func(){
-												
-												console.log("bno:"+bno);
-												console.log("mno:"+mno);
-												
-												$.ajax({
-													type: "post",
-										   			url: "${pageContext.request.contextPath}/like/likecheck.do",
-										   			data: { bno: bno,
-										   					mno: mno },
-										   			success: function(data){
+										var bno = $('[name=bno]').val();
+										var mno = $('[name=mno]').val();
+											
+										$(document).ready(function(){
+											
+											$.ajax({
+												type: "post",
+									   			url: "${pageContext.request.contextPath}/like/likeImages.do",
+									   			data: { bno: bno,
+									   					mno: mno },
+									   			success: function(result){
+									   				
+													var like_img = "";
 													
-										   				var like_img = "";
-										   				
-										   				if(data == null){
-										   					like_img = "/dc/resources/images/dislike.png";
-										   				} else if(data != null){
-										   					like_img = "/dc/resources/images/like.png";
-										   				}
-										   				
-														$('#likecount').html(data);
-														//$('#likeInsert').html(data.likeInsert);
-										   					 
-										   				console.log(data);
-										   			}
-										   				
-										   				
-												});
+													console.log("result: "+result);
+													
+									   				if(result == 1){
+									   					like_img = "/dc/resources/images/like.png";
+									   				} else {
+									   					like_img = "/dc/resources/images/dislike.png";
+									   				}
+													
+													$('#like_img').attr('src', like_img); 
+									   			}
+											
+											});
+										}) 
+											
+										
+										$('.likefunc').on('click', function(){	
+											
+											var likecount2 = parseInt($('.likecount2').val());
+											var likecount3 = parseInt($('.likecount3').val());
+											
+											var likecount = likecount2 + likecount3;
+											
+											$.ajax({
+												type: "post",
+									   			url: "${pageContext.request.contextPath}/like/likecheck.do",
+									   			data: { bno: bno,
+									   					mno: mno },
+									   			success: function(result){
 												
-												
+									   				var like_img = "";
+
+									   				if(result == 2){
+									   					like_img = "/dc/resources/images/dislike.png";
+									   					var likecount = likecount2 - likecount3;
+									   				} else{
+									   					like_img = "/dc/resources/images/like.png";
+									   					var likecount = likecount2 + likecount3;
+									   				}
+									   				
+									   				console.log("resultfunc: "+result)
+									   			 											   				
+								   					$('.likecount2').attr('value', likecount); 
+									   				$('#like_img').attr('src', like_img);
+
+									   			}
+									   			
+											});
+											
+											
+											})
+										
+											function login_need(){
+												alert("로그인하세요");
 											}
 											
 				                      		$("#btn_board_edit").click(function(){

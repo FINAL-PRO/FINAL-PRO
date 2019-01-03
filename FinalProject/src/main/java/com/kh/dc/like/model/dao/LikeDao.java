@@ -6,4 +6,8 @@ public interface LikeDao {
 
 	int likeInsert(Like like);
 
+	int likeCount(Like like);
+
+	int likeDelete(Like like);
+
 }
