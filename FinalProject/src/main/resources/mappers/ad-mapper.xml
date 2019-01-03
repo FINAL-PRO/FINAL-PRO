@@ -42,7 +42,7 @@
 	<insert id="insertAd" parameterType="ad">
 		INSERT INTO DC_AD_TB VALUES(
 			SEQ_AD.NEXTVAL, #{adContentPath}, #{startDate}, #{endDate}, #{memberNo},
-			#{pageNo}, #{sectionNo}, #{locationNo}, #{adContentType}, #{adType}, #{status}
+			#{pageNo}, #{sectionNo}, #{locationNo}, #{adContentType}, #{adType}, #{status}, #{landingPage}
 		)
 	</insert>
 	

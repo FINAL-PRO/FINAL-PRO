@@ -10,12 +10,14 @@
 				adSection : uris[5],
 				adLocation : uris[6]},
 		success : function(data){
-			var img = data.split("\\ad/");
+			var img = data['adContentPath'].split("\\ad/");
 			
 			$(".ad-right").css("width", "256px").css("height", "280px").attr("background-position", "center")
 			.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
 			.css("margin-right", "auto");
 			$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/' + img[1] + '")');
+			
+			$(".ad-right").attr("onclick", "window.open('" + data['landingPage'] + "');");
 		}, error : function(){
 			$(".ad-right").css("width", "256px").css("height", "280px").attr("background-position", "center")
 			.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")

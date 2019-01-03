@@ -99,10 +99,11 @@ public class AdController {
 			@RequestParam(value="adContentType", required=true) String adContentType,
 			@RequestParam(value="adType", required=true) String adType,
 			@RequestParam(value="status", required=true) String status,
+			@RequestParam(value="landingPage", required=true) String landingPage,
 			@RequestParam(value="adContentPath", required=false) MultipartFile adContentPath) {
 		
 		
-		Ad ad = new Ad(startDate, endDate, memberNo, pageNo, sectionNo, locationNo, adContentType, adType, status);
+		Ad ad = new Ad(startDate, endDate, memberNo, pageNo, sectionNo, locationNo, adContentType, adType, status, landingPage);
 		
 		System.out.println("받은 ad : " + ad);
 		
@@ -149,7 +150,7 @@ public class AdController {
 
 	@RequestMapping("business/ad/getAd.do")
 	@ResponseBody
-	public String getAd(@RequestParam(value="adPage", defaultValue="메인") String adPage,
+	public Object getAd(@RequestParam(value="adPage", defaultValue="메인") String adPage,
 			@RequestParam(value="adSection", defaultValue="우측") String adSection,
 			@RequestParam(value="adLocation", defaultValue="하단") String adLocation) {
 		
@@ -164,7 +165,7 @@ public class AdController {
 		
 		System.out.println("가져온 광고 : " + ad);
 		
-		return ad.getAdContentPath();
+		return ad;
 	}
 }
 
