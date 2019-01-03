@@ -274,9 +274,14 @@
 											
 											})
 										
-											function login_need(){
-												alert("로그인하세요");
-											}
+											$('.btn_report').on('click', function(){
+												
+												var popUrl = "/report/reportView.do";
+												var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+
+												window.open(popUrl, "", popOption);
+												
+											});
 											
 				                      		$("#btn_board_edit").click(function(){
 				                      			boardFrm.action="${pageContext.request.contextPath}/community/free/freeUpdateForm.do?no=${board.no}"
