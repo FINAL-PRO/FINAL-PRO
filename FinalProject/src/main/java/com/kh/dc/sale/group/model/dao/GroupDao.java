@@ -3,6 +3,7 @@ package com.kh.dc.sale.group.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.dc.common.vo.Board;
 import com.kh.dc.sale.group.model.vo.Group;
 
 public interface GroupDao {
@@ -38,5 +39,7 @@ public interface GroupDao {
 	List<Map<String, String>> selectStatusList();
 	
 	int updateStatus(Map<String, String> status);
+
+	List<Board> getGroupListData();
 		
 }

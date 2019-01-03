@@ -10,6 +10,8 @@
 				adSection : uris[5],
 				adLocation : uris[6]},
 		success : function(data){
+			console.log("우측 섹션 광고 ajax 성공");
+			console.log(data);
 			var img = data['adContentPath'].split("\\ad/");
 			
 			$(".ad-right").css("width", "256px").css("height", "280px").attr("background-position", "center")
@@ -19,6 +21,7 @@
 			
 			$(".ad-right").attr("onclick", "window.open('" + data['landingPage'] + "');");
 		}, error : function(){
+			console.log("우측 섹션 광고 ajax 에러");
 			$(".ad-right").css("width", "256px").css("height", "280px").attr("background-position", "center")
 			.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
 			.css("margin-right", "auto");
