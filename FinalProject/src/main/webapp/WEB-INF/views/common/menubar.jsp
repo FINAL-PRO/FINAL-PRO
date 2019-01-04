@@ -20,9 +20,9 @@
 			</div>
 		</div>
 	</div>
-	<div class="dc-menubar bg-dark">
+	<div class="dc-menubar">
 		<div class="dc-manebar-main" style="width: 1450px; margin: 0 auto;">
-			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<nav class="navbar navbar-expand-lg">
 				<%-- <a class="navbar-brand" href="/dc">
 					<img src="${pageContext.request.contextPath }/resources/images/test-img.png" alt="로고" width="50px" />
 				</a> --%>
@@ -38,7 +38,9 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> 커뮤니티 </a>
+							aria-expanded="false"> 커뮤니티 
+							<i class="fa fa-heart"></i>
+							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item"
 									href="${pageContext.request.contextPath}/community/notice/list.do">공지</a>

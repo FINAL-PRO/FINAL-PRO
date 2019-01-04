@@ -73,7 +73,9 @@ footer{
 }
 
 .dc-menubar{
-	background-color: lightblue;
+	background-color: ;
+	border-top : 1px solid #f1f3f6;
+	border-bottom : 1px solid #f1f3f6;
 }
 
 .dc-menubar-main{
@@ -86,7 +88,7 @@ footer{
 	background-color: ;
 	margin : 15px 5px;
 	min-height: 100vh;
-	border : 1px solid black;
+	border : 1px solid #f1f3f6;
 }
 
 /* main 제목 div */
@@ -95,7 +97,7 @@ footer{
 	margin:10px;
 	/* background-color: gray; */
 	min-height: 10vh;
-	border : 1px solid black;	
+	border : 1px solid #f1f3f6;	
 }
 
 /* main 내용 div */
@@ -104,7 +106,7 @@ footer{
 	margin:10px;
 	/* background-color: gray; */
 	min-height: 30vh;
-	border : 1px solid black;
+	border : 1px solid #f1f3f6;
 }
 
 .section-center{
@@ -174,4 +176,15 @@ footer{
 
 tr{
 	height:5px;
+}
+
+.dropdown-menu {
+    margin: 7.7px auto;
+    background-color: wihte;
+    border-radius:0;
+    border-top : 1px solid transparent;
+}
+
+.dropdown-toggle::after {
+    display: none;
 }
