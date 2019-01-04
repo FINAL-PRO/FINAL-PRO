@@ -38,7 +38,7 @@ public class MessageController {
 		
 		int totalContents = messageService.selectMessageTotalContents(no);
 		
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "messageList.do?no=" + no);
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "messageList.do", no);
 		
 		model.addAttribute("list", list)
 		.addAttribute("totalContents", totalContents)
