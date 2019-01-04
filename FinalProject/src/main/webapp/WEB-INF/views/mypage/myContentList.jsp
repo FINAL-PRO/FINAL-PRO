@@ -45,7 +45,7 @@
 						                <th style="width:200px;" >
 						                <c:choose>
 						                	<c:when test = "${board.boardType eq '자유게시판'}">
-						                	<a href="${pageContext.request.contextPath}/community/free/freeView.do?no=${board.no}">${board.title}</a>
+						                	<a href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${board.no}">${board.title}</a>
 						                	</c:when>
 											<c:when test = "${board.title eq '맛집'}">
 								          	<a href="#">${board.title}</a>
@@ -89,23 +89,23 @@
 						                <th style="width:150px;">작성일</th>				
 						            </tr>    
 						            
-						            <tr style="background-color:#FFFFFF; color:gray;">	
+						           
 						            <c:set value="${commentList}" var="commentList" />
 						            <c:if test="${!empty commentList}" >
 						            <c:forEach items="${commentList}" var="comment" varStatus="co">						            
-						            				            	
+						            	<tr style="background-color:#FFFFFF; color:gray;">				            	
 						                <th style="width:50px;" > ${co.index + 1}</th>
 						                <th style="width:150px;" >${comment.boardType}</th>
 						                <th style="width:200px;" >
 						                <c:choose>
 						                	<c:when test = "${comment.boardType eq '자유게시판'}">
-						                	<a href="${pageContext.request.contextPath}/community/free/freeView.do?no=${comment.boardNo}">${comment.boardTitle}</a>
+						                	<a href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${comment.boardNo}">${comment.boardTitle}</a>
 						                	</c:when>
 											<c:when test = "${comment.boardType eq '맛집'}">
 								          	<a href="#">${board.title}</a>
 								         	</c:when>
 								         	<c:when test = "${comment.boardType eq '공동구매'}">
-								          	<a href="${pageContext.request.contextPath}/sale/group/groupView.do?no=${comment.boardNo}">${comment.boardTitle}</a>
+								          	<a href="#}">${comment.boardTitle}</a>
 								        	 </c:when>
 								        	 <c:when test = "${comment.boardType eq '중고거래'}">
 								          	<a href="#">${board.title}</a>
@@ -118,13 +118,13 @@
 								         	</c:when>							                	
 						                </c:choose>
 						                </th>
-						                <th style="width:200px;" >${comment.content}</th>
+						                <th style="width:200px;"><a href="#" onclick="goComment(${comment.boardNo},${comment.no});" id="commentContent">${comment.content}</a></th>
 						                <th style="width:150px;"><fmt:formatDate pattern="yyyy-MM-dd" value="${comment.writeDate}" /></th>
 						                
-						            
+						            	</tr>
 						            </c:forEach>	
 						            </c:if>
-						            </tr>
+						            
 						            
 						            <c:if test="${empty commentList}">				        		
 					        		<tr style="background-color:#FFFFFF; color:gray;">
@@ -151,6 +151,13 @@
 		</main>
 	</div>
 	<c:import url="../common/footer.jsp"/>
+	
+	<script type="text/javascript">		
+		function goComment(bno, cno){
+			location.href="${pageContext.request.contextPath}/community/free/freeView.do?bno="+ bno+"#commentArea"+ cno;
+		}
+
+	</script>
 
 </body>
 </html>
