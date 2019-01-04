@@ -80,7 +80,7 @@
 	span {
 		display: inline-block;
 		margin-right: 8px;
-		padding-left: 10px;
+		padding-left: 5px;
 		line-height: 18px;
 		color: #a6a6a6;
 		font-size: 12px;
@@ -155,6 +155,12 @@
 		border: 1px solid yellow;
 	}
 	
+	.likecount2{
+		border:none;
+		width: 10px;
+	}
+	
+	
 </style>
 </head>
 <body>
@@ -176,7 +182,8 @@
 							<div id="container2">
 								<div class="articlelist" style="border: solid 0.5px red">
 									<form name="boardFrm" method="post">
-										<input type="hidden" id="bno" name="bno" value="${boardList.no}" readonly="readonly" />
+										<input type="hidden" name="bno" value="${boardList.no}"/>
+										<input type="hidden" name="mno" value="${member.no}"/>
 									</form>
 									<div class="group" style="border: solid 0.5px blue">
 										<p class="title">${boardList.title}</p>
@@ -193,56 +200,88 @@
 											<button class="btn_board_edit" id="btn_board_edit">수정</button>
 											<button class="btn_board_delete" id="btn_board_delete">삭제</button>
 											<button class="btn_report">신고하기</button>
-											<c:choose>
-												<c:when test="${mno ne null}">
-													<a href="javascript: like_func(${boardList.no});"><img src="./resources/images/dislike.png" id="like_img"></a>
-												</c:when>
-												<c:otherwise>
-													<img src="/resources/images/dislike.png" id="like_img">
-													<span class="likecount">: ${boardList.likeCount}</span>
-												</c:otherwise>
-											</c:choose>
-										<%-- 	<a href="#" onclick="likecount(${board.no});">좋아요</a>
-											<span class="likecount">: ${likecount}</span>  --%>
+											<span class="likecount">
+											<a href="#" class="likefunc">
+												<img src="/dc/resources/images/dislike.png" id="like_img" style="height: 17px; width: 17px;">
+												: <input type="text" value="${boardList.likeCount}" class="likecount2" readonly/></span>
+											</a>
+											<input type="hidden" value="1" class="likecount3"/>
 											<span class="commentcount">댓글: ${boardList.commentCount}</span>
 										</div>
 										<script>
-											var bno = $('[name=bno]').val();
-										
-											function like_func(bno){
-												
-												console.log("bno:"+bno);
-												
-												$.ajax({
-													type: "get",
-										   			url: "${pageContext.request.contextPath}/like/likecheck.do",
-										   			data: {bno: bno},
-										   			cache: false,
-										   			dataType: "json",
-										   			success: function(data){
+										var bno = $('[name=bno]').val();
+										var mno = $('[name=mno]').val();
+											
+										$(document).ready(function(){
+											
+											$.ajax({
+												type: "post",
+									   			url: "${pageContext.request.contextPath}/like/likeImages.do",
+									   			data: { bno: bno,
+									   					mno: mno },
+									   			success: function(result){
+									   				
+													var like_img = "";
 													
-										   				var msg = "";
-										   				var like_img = "";
-										   				
-										   				msg += data.msg;
-										   				alert(msg);
-										   				
-										   				if(data.likeInsert == 0){
-										   					like_img = "/images/dislike.png";
-										   				} else {
-										   					like_img = "/images/like.png";
-										   				}
-										   				
-														$('#likecount').html(data.likecount);
-														$('#likeInsert').html(data.likeInsert);
-										   					
-										   			}
-										   				
-										   				
-												});
+													console.log("result: "+result);
+													
+									   				if(result == 1){
+									   					like_img = "/dc/resources/images/like.png";
+									   				} else {
+									   					like_img = "/dc/resources/images/dislike.png";
+									   				}
+													
+													$('#like_img').attr('src', like_img); 
+									   			}
+											
+											});
+										}) 
+											
+										
+										$('.likefunc').on('click', function(){	
+											
+											var likecount2 = parseInt($('.likecount2').val());
+											var likecount3 = parseInt($('.likecount3').val());
+											
+											var likecount = likecount2 + likecount3;
+											
+											$.ajax({
+												type: "post",
+									   			url: "${pageContext.request.contextPath}/like/likecheck.do",
+									   			data: { bno: bno,
+									   					mno: mno },
+									   			success: function(result){
 												
+									   				var like_img = "";
+
+									   				if(result == 2){
+									   					like_img = "/dc/resources/images/dislike.png";
+									   					var likecount = likecount2 - likecount3;
+									   				} else{
+									   					like_img = "/dc/resources/images/like.png";
+									   					var likecount = likecount2 + likecount3;
+									   				}
+									   				
+									   				console.log("resultfunc: "+result)
+									   			 											   				
+								   					$('.likecount2').attr('value', likecount); 
+									   				$('#like_img').attr('src', like_img);
+
+									   			}
+									   			
+											});
+											
+											
+											})
+										
+											$('.btn_report').on('click', function(){
 												
-											}
+												var popUrl = "/report/reportView.do";
+												var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+
+												window.open(popUrl, "", popOption);
+												
+											});
 											
 				                      		$("#btn_board_edit").click(function(){
 				                      			boardFrm.action="${pageContext.request.contextPath}/community/free/freeUpdateForm.do?no=${board.no}"

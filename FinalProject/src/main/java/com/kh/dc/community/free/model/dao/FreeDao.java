@@ -7,14 +7,11 @@ import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.BoardList;
 
 public interface FreeDao {
-
-	List<Map<String, String>> selectFreeList(int cPage, int numberPage);
 	
 	int selectFreeTotalContents();
 	
 	BoardList selectOneFree(int no);
 
-	
 	/*List<Map<String, String>> selectOneFree(int cPage, int numberPage, int no);*/
 
 	int insertBoard(Board board);
@@ -23,8 +20,14 @@ public interface FreeDao {
 
 	int freeUpdate(Board board);
 	
-	int freeViewCount(int no);
+	int freeViewCount(int bno);
 
 	List<Board> selectFreeListData();
+
+	List<Map<String, String>> recentSort(int cPage, int numberPage);
+
+	List<Map<String, String>> commentSort(int cPage, int numberPage);
+
+	List<Map<String, String>> likeSort(int cPage, int numberPage);
 	
 }

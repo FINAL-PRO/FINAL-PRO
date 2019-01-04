@@ -7,12 +7,16 @@ import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.BoardList;
 
 public interface FreeService {
-
-	List<Map<String,String>> selectFreeList(int cPage, int numberPage);
+	
+	List<Map<String,String>> recentSort(int cPage, int numberPage);
+	
+	List<Map<String,String>> commentSort(int cPage, int numberPage);
+	
+	List<Map<String,String>> likeSort(int cPage, int numberPage);
 	
 	int selectFreeTotalContents();
 	
-	BoardList selectOneFree(int no);
+	BoardList selectOneFree(int bno);
 	
 	int insertFree(Board board);
 
@@ -20,7 +24,7 @@ public interface FreeService {
 
 	int freeUpdate(Board board);
 	
-	int freeViewCount(int no);
+	int freeViewCount(int bno);
 
 	List<Board> selectFreeListData();
 	

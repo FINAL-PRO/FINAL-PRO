@@ -22,10 +22,17 @@
 		<result property="goodsPicture" column="goodspicture"/>
 	</resultMap>
 	
-	<resultMap type="java.util.HashMap" id="bankList" >
+	<resultMap type="java.util.HashMap" id="codeList" >
 		<result property="id" column="id"/>
 		<result property="value" column="value"/>
 	</resultMap>
+	
+	<resultMap type="java.util.HashMap" id="ghMap">
+		<result property="groupNo" column="groupno"/>
+		<result property="memberNo" column="memberno"/>
+		<result property="nickName" column="nickname"/>
+	</resultMap>
+	
 	
 	<select id="selectGroupList" resultMap="resultGroup">
 		SELECT * FROM DC_BOARD_GROUP_VIEW WHERE STATUS='STATUS001'
@@ -74,10 +81,39 @@
 		UPDATE DC_BOARD_TB SET STATUS='STATUS002' WHERE NO = #{boardNo}
 	</update>
 	
-	<select id="selectBankList" resultMap="bankList">
+	<select id="selectBankList" resultMap="codeList">
 		SELECT * FROM DC_CODE_TB WHERE ID LIKE 'BANK%'
 	</select>
-
 	
+	<select id="selectGroupHistory" parameterType="_int" resultMap="ghMap">
+		SELECT GH.*, M.NICKNAME FROM DC_GROUP_HISTORY_TB GH 
+		JOIN DC_MEMBER_TB M ON (GH.MEMBERNO = M.NO) WHERE GROUPNO = #{groupNo}
+	</select>
+	
+	<select id="selectOneGroupHistory" parameterType="map" resultType="map">
+		SELECT * FROM DC_GROUP_HISTORY_TB WHERE GROUPNO = #{groupNo} AND MEMBERNO = #{memberNo}
+	</select>
+	
+	<insert id="insertGroupHistory" parameterType="map">
+		INSERT INTO DC_GROUP_HISTORY_TB VALUES(SEQ_GROUP_HISTORY.NEXTVAL, #{groupNo}, #{memberNo})
+	</insert>
+	
+	<delete id="deleteGroupHistory" parameterType="map">
+		DELETE FROM DC_GROUP_HISTORY_TB WHERE GROUPNO = #{groupNo} AND MEMBERNO = #{memberNo}
+	</delete>
+	
+	<select id="selectStatusList" resultMap="codeList">
+		SELECT * FROM DC_CODE_TB WHERE ID LIKE 'GROUP%'
+	</select>
+	
+	<update id="updateStatus" parameterType="map">
+		UPDATE DC_BOARD_GROUP_TB SET STATUS = #{status} WHERE NO = #{groupNo}
+	</update>
+	
+	<select id="getGroupListData" resultType="board">
+		SELECT * FROM DC_BOARD_TB WHERE TYPE='BOARD003' 
+		AND STATUS = 'BSTATUS001' AND ROWNUM <![CDATA[ <= 5 ORDER BY NO ]]>
+	</select>
+
 	
 </mapper>

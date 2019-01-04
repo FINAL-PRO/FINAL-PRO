@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,14 +27,25 @@ public class FreeController {
 	private FreeService freeService;
 	
 	@RequestMapping("community/free/list.do")
-	public String selectFreeList(@RequestParam(value="cPage", required=false, defaultValue="1")
-	int cPage, Model model) {
+	public String selectFreeList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, 
+			@RequestParam(value="tList", required=false, defaultValue="1") int tList, Model model, HttpServletRequest request) {
 		
 		int numberPage = 10; // 한 페이지당 게시글 수
+
+		ArrayList<Map<String, String>> list = null;
 		
-		// 1. 현재 페이지 게시글 목록 가져오기
-		ArrayList<Map<String, String>> list = 
-				new ArrayList<Map<String, String>>(freeService.selectFreeList(cPage, numberPage));
+//		String tList1 = request.getParameter("tList");
+//		tList = Integer.parseInt(tList1);
+
+		System.out.println("tList:"+tList);
+		
+		if(tList == 1) {
+			list = new ArrayList<Map<String, String>>(freeService.recentSort(cPage, numberPage));
+		}else if(tList == 2){
+			list = new ArrayList<Map<String, String>>(freeService.commentSort(cPage, numberPage));
+		}else if(tList == 3){
+			list = new ArrayList<Map<String, String>>(freeService.likeSort(cPage, numberPage));
+		}
 		
 		System.out.println("list: "+list);
 		
@@ -70,7 +84,7 @@ public class FreeController {
 	@RequestMapping("community/free/freeInsertFormEnd.do")
 	public String insertFree(Board board,  Model model) {
 		
-		String loc = "community/free/freeView";
+		String loc = "${pageContext.request.contextPath}/community/free/list.do";
 	
 		if(freeService.insertFree(board) > 0) {
 			model.addAttribute("insertFree", freeService.selectOneFree(board.getNo()));
@@ -82,10 +96,12 @@ public class FreeController {
 	@RequestMapping("community/free/freeView.do")
 	public String selectOneFree(@RequestParam int bno, Model model) {
 		
+		System.out.println("bno:"+bno);
+		
 		// 조회수 증가
 		int freeViewCount = freeService.freeViewCount(bno);
 		
-		model.addAttribute("boardList", freeService.selectOneFree(no))
+		model.addAttribute("boardList", freeService.selectOneFree(bno))
 		.addAttribute("freeViewCount", freeViewCount);
 		
 		return "community/free/freeView";
@@ -117,22 +133,12 @@ public class FreeController {
 		return "redirect:/community/free/list.do";
 	}
 	
-	@RequestMapping(value="community/free/getListData.do",produces ="application/text; charset=utf8")
+	@RequestMapping("community/free/getListData.do")
 	@ResponseBody
-	public String getListData() {
-		String result = "";
-		
+	public List<Board> getListData() {
 		List<Board> freeList = freeService.selectFreeListData();
 		
-		System.out.println(freeList);
-		
-		for (Board board : freeList) {
-			result += "<tr><td>";
-			result += "<a href='/dc/community/free/freeView.do?no=" + board.getNo() + "'>" + board.getTitle() + "</a>";
-			result += "</td></tr>";
-		}
-		
-		return result;
+		return freeList;
 	}
 	
 }

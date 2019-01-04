@@ -1,6 +1,7 @@
 package com.kh.dc.sale.group.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.dc.common.util.Utils;
+import com.kh.dc.common.vo.Board;
 import com.kh.dc.sale.group.model.service.GroupService;
 import com.kh.dc.sale.group.model.vo.Group;
 
@@ -33,7 +36,7 @@ public class GroupController {
 		int totalContents = groupService.selectGroupTotalContents();
 		
 		// 3. 페이지 계산 후 작성할 HTML 추가
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "sale/group/list.do");
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "list.do");
 		
 		model.addAttribute("list", list)
 			.addAttribute("totalContents", totalContents)
@@ -45,8 +48,17 @@ public class GroupController {
 	
 	@RequestMapping("sale/group/groupView.do")
 	public String selectOneGroup(@RequestParam int boardNo, Model model) {
+
+		Group group = groupService.selectOneGroup(boardNo);
 		
-		model.addAttribute("group", groupService.selectOneGroup(boardNo));
+		ArrayList<Map<String, String>> ghList = 
+				new ArrayList<Map<String, String>>(groupService.selectGroupHistory(group.getNo()));
+		
+		System.out.println("ghList : " + ghList);
+		
+		model.addAttribute("group", group)
+			 .addAttribute("statusList", groupService.selectStatusList())
+			 .addAttribute("ghList", ghList);
 	
 		return "sale/group/groupView";
 	}
@@ -66,8 +78,6 @@ public class GroupController {
 	public String insertGroup(Group group,  Model model) {
 		
 		String loc = "sale/group/groupView";
-		
-		System.out.println("img : " + group.getGoodsPicture());
 	
 		if(groupService.insertGroup(group) > 0) {
 			model.addAttribute("group", groupService.selectOneGroup(group.getBoardNo()));
@@ -92,7 +102,6 @@ public class GroupController {
 		ArrayList<Map<String, String>> bankList = 
 				new ArrayList<Map<String, String>>(groupService.selectBankList());
 		
-		
 		model.addAttribute("group", groupService.selectOneGroup(group.getBoardNo()))
 			.addAttribute("bankList", bankList);;
 	
@@ -111,6 +120,45 @@ public class GroupController {
 		return "common/msg";
 	}
 	
+	@RequestMapping("sale/group/settingGroup.do")
+	@ResponseBody
+	public String settingGroup(@RequestParam Map<String, String> groupHistory) {
+		
+		return (groupService.selectOneGroupHistory(groupHistory)!=null) ? "OK" : "NO";
+	}
+	
+	@RequestMapping("sale/group/gHistorySwitch.do")
+	@ResponseBody
+	public String switchGroupHistroy(@RequestParam Map<String, String> ghMap) {
+		
+		int result = 0;
+		
+		System.out.println("GroupHistory : " + ghMap);
+		
+		if(ghMap.get("req").equals("in")) {
+			result = groupService.insertGroupHistory(ghMap);
+		} else {
+			result = groupService.deleteGroupHistory(ghMap) * 2;
+		}
+
+		return String.valueOf(result);
+	}
+	
+	@RequestMapping("sale/group/updateStatus.do")
+	@ResponseBody
+	public String updateStatus(@RequestParam Map<String, String> status) {
+		
+		return (groupService.updateStatus(status) > 0) ? "OK" : "NO";
+	}
+	
+	
+	@RequestMapping("sale/group/getListData.do")
+	@ResponseBody
+	public List<Board> getListData(){
+		List<Board> groupList = groupService.getGroupListData();
+		
+		return groupList;
+	}
 	
 	
 }

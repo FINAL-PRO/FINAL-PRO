@@ -80,7 +80,7 @@
 		<label for="content">comment</label>
 		<form name="commentInsertForm">
 			<div class="input-group">
-				<input type="hidden" id="bno" name="bno" value="${board.no}" /> 
+				<input type="hidden" id="bno" name="bno" value="${boardList.no}" /> 
 				<input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요."/> 
 				<input type="hidden" id="mno" name="mno" value="${member.no}" /> 
 				<span class="input-group-btn">

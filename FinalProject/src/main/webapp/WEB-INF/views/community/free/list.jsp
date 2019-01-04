@@ -79,10 +79,13 @@
 }
 
 .content {
-	margin-top: 8px;
-	line-height: 18px;
 	color: #292929;
 	font-size: 14px;
+	width:80%;
+	padding:0.5px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
 }
 
 #container2 .article>p.status {
@@ -112,8 +115,6 @@
 	line-height: 18px;
 	color: #ffa81f;
 	font-size: 12px;
-	background: transparent
-		url('/images/community.board.article.attachcount.png') no-repeat;
 	background-size: 16px 16px;
 }
 
@@ -150,7 +151,9 @@ hr {
 	float: right;
 	padding-right: 20px;
 }
+
 </style>
+
 </head>
 <body>
 	<div id="container">
@@ -171,12 +174,23 @@ hr {
 							<div id="container2">
 								<div class="free_top">
 									<div class="category">
-										<select id="categorySort" name="categorySort" class="custom-select"> 
-											<option value="recentSort" <c:if test="${categorySort==recentSort}"> selected </c:if>>최신 순 정렬</option>
-											<option value="commentSort" <c:if test="${categorySort==commentSort}"></c:if>>댓글 많은 순 정렬</option>
-											<option value="likeSort" <c:if test="${categorySort==likeSort}"></c:if>>좋아요 순 정렬</option>
+										<select id="tList"> 
+											<option value="" selected disabled hidden>정렬</option>
+											<option value="1">최신 순 정렬</option>
+											<option value="2">댓글 많은 순 정렬</option>
+											<option value="3">좋아요 순 정렬</option>
 										</select>
 									</div>
+									<script>
+									
+									
+									$("#tList").change(function(){
+										var tList = $(this).val();
+										console.log("tlist:"+tList);
+										location.href="${pageContext.request.contextPath}/community/free/list.do?tList="+tList;
+									});
+									
+									</script>
 									<div class="free_btn">
 										<input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/free/freeInsertForm.do'" />
 									</div>
@@ -186,25 +200,47 @@ hr {
 										<p>총 ${totalContents}건의 게시물이 있습니다.</p>
 										
 										<c:forEach items="${list}" var="b">
-											<li class="groupin" id="${b.no}"><a class="article"
-												href="${pageContext.request.contextPath}/community/free/freeView.do?no=${b.no}">
-													<p class="time">
-														<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
-													</p>
-													<p class="profile">
-														<span class="title">${b.title}</span> <img class="picture" src="https://cf-epi.campuspick.com/0.png" /> 
-														<span class="nickname">${b.memberName}</span> 
-														<span class="count">조회수: ${b.viewCount}</span>
-													</p> <span class="content">${b.content}</span>
-													<p class="status">
-														<span class="votecount">좋아요: ${b.likeCount}</span> 
-														<span class="commentcount">댓글: ${b.commentCount}</span>
-													</p>
-													<p class="attach">
-														<span class="attachcount">이미지</span>
-													</p>
+											<li class="groupin" id="${b.no}">
+											<a class="article" href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${b.no}">
+												<p class="time">
+													<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+												</p>
+												<p class="profile">
+													<span class="title">${b.title}</span> <img class="picture" src="https://cf-epi.campuspick.com/0.png" /> 
+													<span class="nickname">${b.memberName}</span> 
+													<span class="count">조회수: ${b.viewCount}</span>
+												</p>
+												<c:choose>
+												<c:when test="${b.content eq '.png'}">
+													<div class="content">(이미지)</div>
+												</c:when>
+												<c:otherwise>
+													<div class="content">${b.content}</div>
+												</c:otherwise>
+												</c:choose>
+												<p class="status">
+													<span class="votecount">좋아요: ${b.likeCount}</span> 
+													<span class="commentcount">댓글: ${b.commentCount}</span>
+												</p>
+												<p class="attach">
+												<c:choose>
+												<c:when test="${!empty member.no}">
+													<img src="/dc/resources/images/images.png" class="attachcount" style="height: 17px; width: 17px;">
+												</c:when>
+												<c:otherwise>
+													<img src="/dc/resources/images/images.png" class="attachcount" style="height: 17px; width: 17px;">
+												</c:otherwise>
+												</c:choose></p>
 											</a></li>
 										</c:forEach>
+										<script>
+										
+											var con = 
+										
+											$(document).ready(function(){
+												if()
+											}
+										</script>
 									</ol>
 									<c:out value="${pageBar}" escapeXml="false" />
 								</div>
