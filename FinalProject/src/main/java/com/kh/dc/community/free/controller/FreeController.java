@@ -55,6 +55,7 @@ public class FreeController {
 		// 3. 페이지 계산 후 작성할 HTML 추가
 		String pageBar = Utils.getPageBar(totalContents, cPage, numberPage, "list.do");
 		
+		
 		model.addAttribute("list", list)
 		.addAttribute("totalContents", totalContents)
 		.addAttribute("numberPage", numberPage)
@@ -83,14 +84,11 @@ public class FreeController {
 	
 	@RequestMapping("community/free/freeInsertFormEnd.do")
 	public String insertFree(Board board,  Model model) {
-		
-		String loc = "${pageContext.request.contextPath}/community/free/list.do";
-	
 		if(freeService.insertFree(board) > 0) {
 			model.addAttribute("insertFree", freeService.selectOneFree(board.getNo()));
 		}
 				
-		return loc;
+		return "redirect:/community/free/list.do";
 	}
 	
 	@RequestMapping("community/free/freeView.do")
