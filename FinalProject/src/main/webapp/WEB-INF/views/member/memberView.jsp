@@ -124,7 +124,12 @@
 							   		<div class="col-md-3" id="">
 							   			<label class=""></label>			            
 							   		</div>		   		
-							   </div>							   						   
+							   </div>
+							   <div class="row point-container">
+								   <div class="col-md-3">포인트</div>
+								   <div class="col-md-6"><input type="text" class="form-control" name="point" id="point" value="${member.point}" readonly></div>				  
+								   <div class="col-md-3" id=""></div>
+								</div>							   							   						   
 							   <div class="row btn-container">
 								   <div class="col-md-3"></div>
 								   <div class="col-md-6 btn-container"><input type="button" id="memberUpdateView" class="btn btn-outline-success" value="회원정보 수정" onclick="${pageContext.request.contextPath}/member/memberUpdateView.do"></div>				  
