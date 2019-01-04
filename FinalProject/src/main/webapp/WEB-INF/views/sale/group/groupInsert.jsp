@@ -18,11 +18,6 @@
 	margin-bottom: 50px;
 }
 
-label.info-label {
-	margin-left: 30px;
-	padding-top: 10px;
-}
-
 .title-box {
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -71,10 +66,15 @@ label.info-label {
 <form name="boardForm" action="${pageContext.request.contextPath}/sale/group/groupFormEnd.do" method="post">
 	<input type="hidden" name="memberNo" value="${member.no}" required /> 
 	
-	<div class="title-box">
-		<label class="title-label" for="title">제목</label>
-		<input type="text" name="title" style="width:90%; float:right;"/>
-		<p class="warn-msg">제목은 50글자를 넘을 수 없습니다.</p>
+	<div class="row title-box">
+		<div class="col-md-1">
+			<label class="title-label" for="title">제목</label>
+		</div>
+		<div class="col-md-9">
+			<input type="text" class="info" name="title" id="title" />
+			<p class="warn-msg" id="titleMsg">제목은 50글자를 넘을 수 없습니다.</p>
+		</div>
+		<div class="col-md-2"></div>
 	</div> <hr />
 	
 	<div style="display:inline-block; width:100%;">
@@ -97,15 +97,18 @@ label.info-label {
 		<tbody>
 			<tr>
 				<th><label class="info-label" for=goodsName>물품명</label></th>
-				<td><input type="text" class="info txt" name="goodsName" /></td>
+				<td><input type="text" class="info" name="goodsName" id="goodsName" /></td>
 			</tr>
 			<tr>
 				<th><label class="info-label" for="price">가격</label></th>
-				<td><input type="text" class="info txt" name="price" /></td>
+				<td><input type="text" class="info" name="price" id="price" /></td>
 			</tr>
 			<tr>
 				<th><label class="info-label" for="maxCount">모집인원</label></th>
-				<td><input type="text" class="info txt" name="maxCount" /></td>
+				<td>
+					<input type="text" class="info" name="maxCount" id="maxCount" />
+					<p class="warn-msg" id="maxCountMsg"></p>
+				</td>
 			</tr>
 			<tr>
 				<th><label class="info-label" for="dealType">거래방법</label></th>
@@ -120,13 +123,13 @@ label.info-label {
 							<option value="${bank.id}">${bank.value}</option>
 						</c:forEach>
 					</select> 
-					<input type="text" class="info txt" name="deposit" style="width:68%;"/> <br /> 
+					<input type="text" class="info" name="deposit" id="deposit" style="width:68%;"/> <br /> 
 					<p class="warn-msg">반드시 본인 명의의 계좌를 입력해 주세요.</p>
 				</td>
 			</tr>
 			<tr>
 				<th><label class="info-label" for=endDate>마감일</label></th>
-				<td><input type="date" class="info txt" name="endDate" /></td>
+				<td><input type="date" class="info" name="endDate" id="endDate"/></td>
 			</tr>
 		</tbody>
 		</table>
@@ -139,7 +142,7 @@ label.info-label {
 	</div>
 	
 	<br /><br />
-	<input type="submit" class="a" value="글쓰기" />
+	<input type="button" class="a" value="글쓰기" onClick="submitForm();"/>
 	<br /><br />
 </form>
 
@@ -219,10 +222,76 @@ label.info-label {
 			});
 		}
 	}
-
 	
+	// 폼 미입력시 입력하라는 알림창 띄움
+	function submitForm() {
+		if($('input[name="memberNo"]').val() == 0 ) {
+			alert("로그인이 필요한 기능입니다.");
+		} else if($('input[name="title"]').val() == "" ) {
+			alert("제목을 입력해 주세요.");
+		} else if ($('input[name="goodsPicture"]').val() == "" ) {
+			alert("물품 사진을 등록해주세요.");
+		} else if ($('input[name="goodsName"]').val() == "" ) {
+			alert("물품명을 입력해 주세요.");
+		} else if ($('input[name="price"]').val() == "" ) {
+			alert("물품 가격을 입력해 주세요.");
+		} else if ($('input[name="maxCount"]').val() == "" ) {
+			alert("공동구매 모집 인원을 입력해 주세요.");
+		} else if ($('input[name="dealType"]').val() == "" ) {
+			alert("거래 방법을 선택해 주세요.");
+		} else if ($('input[name="deposit"]').val() == "" ) {
+			alert("계좌번호를 입력해 주세요.");
+		} else if ($('input[name="endDate"]').val() == "" ) {
+			alert("마감일을 입력해 주세요.");
+		} else {
+			$('form').submit();
+		}
+	}
 	
 	// 제목 100바이트 넘지 않게 정규식 처리
+	$("#title").on("keyup", function() {
+		var title = $("#maxCount").val().trim();
+		var regPwd = /^[0-9]$/g;
+
+	});
+	
+	// 물품명 100바이트 넘지 않게 정규식 처리
+	$("#goodsName").on("keyup", function() {
+		var goodsName = $("#goodsName").val().trim();
+		var regPwd = /^[0-9]$/g;
+
+	});
+	
+	// 가격 --> 정규식처리:100~1000000 (백원~백만원)
+	$("#price").on("keyup", function() {
+		var price = $("#price").val().trim();
+		var regPwd = /^[0-9]$/g;
+		
+	});
+	
+	// 모집인원 --> 정규식처리:1~20 사이 숫자만
+	$("#maxCount").on("keyup", function() {
+		var maxCount = $("#maxCount").val().trim();
+		var regPwd = /^[0-9]$/g;
+
+		if (title == "") {
+			$("#maxCountMsg").text('');
+		} else if (!regPwd.test(title)) {
+			$("#maxCountMsg").text('숫자만 입력해 주세요.');
+		} else {
+			$("#maxCountMsg").text('ok!');
+		}
+	});
+	
+	// 마감일 --> 과거선택x, 오늘부터 10일
+	$("#endDate").on("keyup", function() {
+		var endDate = $("#endDate").val().trim();
+		var regPwd = /^[0-9]$/g;
+		
+		console.log(endDate);
+	});
+	
+
 	
 </script>
 

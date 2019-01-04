@@ -90,7 +90,7 @@
 <div style="display:inline-block; width:100%;">
 	<div style="float:left; width:30%;">
 		<div class="img-box" style="border:1px solid black;">
-			<img id="goodsImg"/>
+			<img id="goodsImg" src="${group.goodsPicture}"/>
 		</div>
 	</div>
 	
@@ -101,7 +101,7 @@
 		</div>
 		<div class="col-md-4">
 			<p>${group.goodsName}</p>
-			<p>${group.price}</p>
+			<p>${group.price}<span>원</span></p>
 		</div>
 		<div class="col-md-2">
 			<p class="info-label">모집인원</p>
@@ -120,7 +120,7 @@
 		</div>
 		<div class="col-md-6">
 			<p id="depMsg">모집 인원이 마감되면 공동구매 참여자에게만 보입니다.</p>
-			<p id="deposit" style="display:none;">ㅇㅇ은행 ${group.deposit }</p>
+			<p id="deposit" style="display:none;">${group.bank} ${group.deposit }</p>
 		</div>
 		<div class="col-md-4">
 			<c:if test="${!empty member and member.no ne group.memberNo}">
@@ -240,6 +240,15 @@
 			    	req: req,
 			    }, 
 			    success : function(data){
+			    	if(data == 1) {
+			    		alert("신청 성공하였습니다.");
+			    	} else if (data == 2) {
+			    		alert("모집 인원이 마감되었습니다.");
+			    	} else if (data == 3) {
+			    		alert("취소 성공하였습니다.");
+			    	} else if (data == 4) {
+			    		alert("취소 불가능합니다.");
+			    	}
 			    	location.reload();
 			    }
 			});	
