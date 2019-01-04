@@ -182,8 +182,8 @@
 							<div id="container2">
 								<div class="articlelist" style="border: solid 0.5px red">
 									<form name="boardFrm" method="post">
-										<input type="hidden" name="bno" value="${boardList.no}"/>
-										<input type="hidden" name="mno" value="${member.no}"/>
+										<input type="hidden" id="bno" name="bno" value="${boardList.no}"/>
+										<input type="hidden" id="mno" name="mno" value="${member.no}"/>
 									</form>
 									<div class="group" style="border: solid 0.5px blue">
 										<p class="title">${boardList.title}</p>
@@ -199,7 +199,8 @@
 										<div class="status" style="border: solid 0.5px orange">
 											<button class="btn_board_edit" id="btn_board_edit">수정</button>
 											<button class="btn_board_delete" id="btn_board_delete">삭제</button>
-											<button class="btn_report">신고하기</button>
+											<!-- <button class="btn_report" id="btn_report">신고하기</button> -->
+											<input type="button" class="btn_report" id="btn_report" value="신고하기" onclick="btn_report();"/>
 											<span class="likecount">
 											<a href="#" class="likefunc">
 												<img src="/dc/resources/images/dislike.png" id="like_img" style="height: 17px; width: 17px;">
@@ -274,14 +275,29 @@
 											
 											})
 										
-											$('.btn_report').on('click', function(){
+											function btn_report(){
+												window.name="freeView";
+												var childWindow = window.open("${pageContext.request.contextPath}/report/reportView.do", "report", "width=470, height=360, resizable=no, scrollbars=no, status=no")
+											}
+										/* 
+											$('#btn_report').on('click', function(){
 												
-												var popUrl = "/report/reportView.do";
+												var popUrl = "${pageContext.request.contextPath}/report/reportView.do";
 												var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
 
-												window.open(popUrl, "", popOption);
+												winObject = window.open(popUrl, "popupView", popOption);
 												
-											});
+												document.action = "${pageContext.request.contextPath}/report/reportView.do";
+												document.target = "popupView";
+												document.bno.value = bno;
+												document.mno.value = mno;
+												document.submit(); 
+												
+											});*/
+									/* 	
+											function submitPopup(){
+												winObject.document.all
+											} */
 											
 				                      		$("#btn_board_edit").click(function(){
 				                      			boardFrm.action="${pageContext.request.contextPath}/community/free/freeUpdateForm.do?no=${board.no}"

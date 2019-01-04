@@ -58,9 +58,6 @@
 	line-height: 20px;
 	color: #292929;
 	font-size: 12px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
 .time {
@@ -71,16 +68,17 @@
 	font-size: 12px;
 }
 
-#container2 .article>p.text {
+/* #container2 .article>p.text {
 	margin-top: 8px;
 	line-height: 18px;
 	color: #292929;
 	font-size: 14px;
-}
+} */
 
 .content {
+	display: inline-block;
 	color: #292929;
-	font-size: 14px;
+	font-size: 12px;
 	width:80%;
 	padding:0.5px;
 	overflow:hidden;
@@ -89,14 +87,12 @@
 }
 
 #container2 .article>p.status {
-	float: left;
 	margin-top: 8px;
 }
-
-#container2 .article>p.status>span {
+ 
+span {
 	display: inline-block;
 	margin-right: 8px;
-	padding-left: 19px;
 	line-height: 18px;
 	color: #a6a6a6;
 	font-size: 12px;
@@ -104,21 +100,21 @@
 	background-size: 16px 16px;
 }
 
-#container2 .article>p.attach {
+p.attach {
+	display: inline-block;
 	float: right;
 	margin-top: 8px;
 }
 
-#container2 .article>p.attach>span.attachcount {
+span.attachcount {
 	display: inline-block;
-	padding-left: 19px;
 	line-height: 18px;
 	color: #ffa81f;
 	font-size: 12px;
 	background-size: 16px 16px;
 }
 
-#container2 div.articlelist>ol.group>li>a.article {
+a.article {
 	display: block;
 	padding: 12px 12px;
 	border-bottom: 1px solid #f2f2f2;
@@ -221,29 +217,18 @@ hr {
 													<p class="status">
 														<span class="votecount">좋아요: ${b.likeCount}</span> 
 														<span class="commentcount">댓글: ${b.commentCount}</span>
+														<c:choose>
+															<c:when test="${b.imageCheck eq 0}">
+																<span class="attachcount"></span>
+															</c:when>
+															<c:otherwise>
+																<span class="attachcount"><img src="/dc/resources/images/images.png" style="height: 17px; width: 17px;"></span>
+															</c:otherwise>
+														</c:choose>
 													</p>
-													
-													<p class="attach">
-													<c:choose>
-														<c:when test="${b.imageCheck eq 0}">
-															<span class="attachcount"></span>
-														</c:when>
-														<c:otherwise>
-															<span class="attachcount"><img src="/dc/resources/images/image.png" style="height: 17px; width: 17px;"></span>
-														</c:otherwise>
-													</c:choose>
-													</p>
-
 											</a></li>
 										</c:forEach>
-										<script>
-										
-											var con = 
-										
-											$(document).ready(function(){
-												if()
-											}
-										</script>
+			
 									</ol>
 									<c:out value="${pageBar}" escapeXml="false" />
 								</div>
