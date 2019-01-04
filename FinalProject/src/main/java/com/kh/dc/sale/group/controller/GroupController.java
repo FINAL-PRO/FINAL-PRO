@@ -135,10 +135,12 @@ public class GroupController {
 		
 		System.out.println("GroupHistory : " + ghMap);
 		
+		int remain = groupService.selectRemainCount(Integer.parseInt(ghMap.get("groupNo")));
+		
 		if(ghMap.get("req").equals("in")) {
-			result = groupService.insertGroupHistory(ghMap);
+			result = (remain > 0) ? groupService.insertGroupHistory(ghMap) : 2;
 		} else {
-			result = groupService.deleteGroupHistory(ghMap) * 2;
+			result = (remain > 0) ? groupService.deleteGroupHistory(ghMap)*3 : 4;
 		}
 
 		return String.valueOf(result);
@@ -149,8 +151,7 @@ public class GroupController {
 	public String updateStatus(@RequestParam Map<String, String> status) {
 		
 		return (groupService.updateStatus(status) > 0) ? "OK" : "NO";
-	}
-	
+	}	
 	
 	@RequestMapping("sale/group/getListData.do")
 	@ResponseBody

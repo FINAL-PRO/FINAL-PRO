@@ -115,6 +115,12 @@ public class GroupDaoImpl implements GroupDao {
 	}
 
 	@Override
+	public int selectRemainCount(int groupNo) {
+			
+		return sqlSession.selectOne("group_mapper.selectRemainCount", groupNo);
+	}
+	
+	@Override
 	public List<Board> getGroupListData() {
 
 		return sqlSession.selectList("group_mapper.getGroupListData");

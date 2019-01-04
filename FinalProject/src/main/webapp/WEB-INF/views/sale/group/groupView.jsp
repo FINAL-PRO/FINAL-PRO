@@ -240,6 +240,15 @@
 			    	req: req,
 			    }, 
 			    success : function(data){
+			    	if(data == 1) {
+			    		alert("신청 성공하였습니다.");
+			    	} else if (data == 2) {
+			    		alert("모집 인원이 마감되었습니다.");
+			    	} else if (data == 3) {
+			    		alert("취소 성공하였습니다.");
+			    	} else if (data == 4) {
+			    		alert("취소 불가능합니다.");
+			    	}
 			    	location.reload();
 			    }
 			});	

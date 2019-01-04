@@ -11,31 +11,38 @@
 <c:import url="../../common/header.jsp" />
 
 <style>
+
 .dc-content-box {
 	padding-left: 50px;
 	padding-right: 50px;
 	margin-bottom: 50px;
 }
+
 .title-box {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
 .img-box {
 	height: 250px;
 	width: 250px;
 }
+
 .info {
 	width: 100%;
 }
+
 .warn-msg {
 	color:red; 
 	font-size:12px; 
 	padding-top:3px;
 }
+
 #goodsImg {
 	width: 100%;
 	height: 100%;
 }
+
 </style>
 
 </head>
@@ -98,7 +105,10 @@
 			</tr>
 			<tr>
 				<th><label class="info-label" for="maxCount">모집인원</label></th>
-				<td><input type="text" class="info" name="maxCount" id="maxCount" /></td>
+				<td>
+					<input type="text" class="info" name="maxCount" id="maxCount" />
+					<p class="warn-msg" id="maxCountMsg"></p>
+				</td>
 			</tr>
 			<tr>
 				<th><label class="info-label" for="dealType">거래방법</label></th>
@@ -152,6 +162,7 @@
 
 <!-------------------- Script -------------------->
 <script>
+
 	$('#summernote').summernote({
 		height : 500,
 		minHeight : 500,
@@ -163,9 +174,11 @@
 					sendFile(files[i]);
 		}}}
 	});
+
 	function sendFile(file) {
 		var form_data = new FormData();
 		form_data.append('file', file);
+
 		$.ajax({
 			url : '${pageContext.request.contextPath}/common/summernote/convertImage.do',
 			data : form_data,
@@ -192,6 +205,7 @@
 			var reader = new FileReader();
 			var form_data = new FormData();
 			form_data.append('file', value.files[0]);
+
 			$.ajax({
 				url : '${pageContext.request.contextPath}/common/summernote/convertImage.do',
 				data : form_data,
@@ -237,16 +251,18 @@
 	$("#maxCount").on("keyup", function() {
 		var title = $("#maxCount").val().trim();
 		var regPwd = /^[0-9]$/g;
+
 		if (title == "") {
-			$("#pwdChkComment").text('비밀번호을 입력하세요.');
+			$("#maxCountMsg").text('비밀번호을 입력하세요.');
 		} else if (!regPwd.test(title)) {
-			$("#pwdChkComment").text('영대문자/특수문자/숫자 최소 1개 포함 6자 이상!');
+			$("#maxCountMsg").text('숫자만 입력해 주세요.');
 		} else {
 			$("#pwdChkComment").text('OK!');
 		}
 	});
 	
 	
+
 	
 	
 	// 제목 100바이트 넘지 않게 정규식 처리
