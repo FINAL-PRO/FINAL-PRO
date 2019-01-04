@@ -360,6 +360,9 @@ public class MemberController {
 		List<Board> boardList = memberService.selectMyBoardList(mNo);
 		List<Comment> commentList = memberService.selectMyCommentList(mNo);	
 		
+		System.out.println("boardList : " + boardList);
+		System.out.println("commentList : " + commentList);
+		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("commentList", commentList);
 		

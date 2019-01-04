@@ -141,14 +141,14 @@
    	            var a =''; 
    	            
    	            $.each(data, function(key, value){ 
-   	                a += '<div class="commentArea">';
+   	                a += '<div class="commentArea" id="commentArea'+value.no+'">';
    	                a += '<p class="profile" style="display:inline;">';
 					a += '<img class="picture" src="https://cf-epi.campuspick.com/0.png">';
 					a += '<span class="nickname">'+value.memberName+'</span>';
 					a += '</p>';
    	                a += '<input type="hidden" name="bno" value="'+bno+'"/>';
 					a += '<input type="hidden" name="mno" value="'+mno+'"/>';
-					a += '<input type="hidden" name="cno" value="'+value.no+'"/>';
+					a += '<input type="hidden" name="cno"  value="'+value.no+'"/>';
 					a += '<div class="btn_comment">';
    	                a += '<a href="#" onclick="commentUpdate('+value.no+',\''+value.content+'\');"> 수정 </a>';
    	                a += '<a href="#" onclick="commentDelete('+value.no+');"> 삭제 </a> </div>';

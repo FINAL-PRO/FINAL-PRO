@@ -36,7 +36,7 @@
 	
 	<!-- 내가 쓴 댓글 리스트 가져오기 -->
 	<select id="selectMyCommentList" parameterType="_int" resultMap="resultComment">
-		SELECT C.VALUE, B.TITLE, CO.CONTENT, CO.WRITEDATE
+		SELECT CO.NO, C.VALUE, B.TITLE, CO.BOARDNO, CO.CONTENT, CO.WRITEDATE
 		FROM DC_COMMENT_TB CO
 		JOIN DC_BOARD_TB B ON CO.BOARDNO = B.NO
 		JOIN DC_CODE_TB C ON  c.id = B.TYPE
