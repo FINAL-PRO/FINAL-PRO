@@ -29,4 +29,9 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 		return memberDao.selectMemberList(authNo);
 	}
 
+	@Override
+	public Member checkAuthMember(int no) {
+		return memberDao.checkAuthMember(no);
+	}
+
 }

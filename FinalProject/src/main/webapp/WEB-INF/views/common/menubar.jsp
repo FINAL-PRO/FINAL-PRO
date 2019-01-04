@@ -102,7 +102,7 @@
 									신청</a>
 							</div></li>
 						<li class="nav-item"><a class="nav-link"
-							href="${pageContext.request.contextPath}/admin/index.do"> 관리자
+							href="${pageContext.request.contextPath}/admin/index.do?no=${member.no}"> 관리자
 								페이지 </a></li>
 					</ul>
 
