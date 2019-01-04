@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="group_mapper">
+	
+	<resultMap id="resultGroup" type="group">
+		<id property="no" column="no" />
+		<result property="boardNo" column="boardno" />
+		<result property="goodsName" column="goodsname" />
+		<result property="price" column="price" />
+		<result property="endDate" column="enddate" />
+		<result property="deposit" column="deposit" />
+		<result property="maxCount" column="maxcount" />
+		<result property="currentCount" column="currentcount" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="goodsCategory" column="goodscategory" />
+		<result property="memberName"  column="member" />
+		<result property="status" column="gstatus" />
+		<result property="dealType" column="dealtype" />
+		<result property="writeDate" column="writedate" />
+		<result property="viewCount" column="viewcount" />
+		<result property="goodsPicture" column="goodspicture"/>
+	</resultMap>
+	
+	<resultMap type="java.util.HashMap" id="codeList" >
+		<result property="id" column="id"/>
+		<result property="value" column="value"/>
+	</resultMap>
+	
+	<resultMap type="java.util.HashMap" id="ghMap">
+		<result property="groupNo" column="groupno"/>
+		<result property="memberNo" column="memberno"/>
+		<result property="nickName" column="nickname"/>
+	</resultMap>
+	
+	
+	<select id="selectGroupList" resultMap="resultGroup">
+		SELECT * FROM DC_BOARD_GROUP_VIEW WHERE STATUS='STATUS001'
+	</select>
+	
+	<select id="selectGroupTotalContents" resultType="_int">
+		SELECT COUNT(*) FROM DC_BOARD_GROUP_VIEW WHERE STATUS='STATUS001'
+	</select>
+	
+	<select id="selectOneGroup" parameterType="_int" resultMap="resultGroup">
+		SELECT * FROM DC_BOARD_GROUP_VIEW WHERE STATUS='STATUS001' AND BOARDNO = #{boardNo}
+	</select>
+	
+	<insert id="insertBoard" parameterType="group">
+		INSERT INTO DC_BOARD_TB VALUES(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE,
+			#{content}, 0, 'BOARD003', 'STATUS001', #{memberNo}, NULL)
+		<selectKey keyProperty="boardNo" resultType="_int" order="AFTER">
+			SELECT SEQ_BOARD.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<insert id="insertGroup" parameterType="group">
+		<selectKey keyProperty="boardNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_BOARD.CURRVAL FROM DUAL
+		</selectKey>
+		INSERT INTO DC_BOARD_GROUP_TB VALUES(SEQ_BOARD_GROUP.NEXTVAL, #{price}, #{maxCount}, 0,
+			#{boardNo}, 'STATUS007', 'DEAL002', 1, #{deposit}, #{endDate}, #{goodsName}, #{goodsPicture})
+	</insert>
+	
+	<update id="updateBoard" parameterType="group">
+		UPDATE DC_BOARD_TB SET TITLE = #{title}, CONTENT = #{content}
+		WHERE NO = #{boardNo}
+	</update>
+
+	<update id="updateGroup" parameterType="group">
+		UPDATE DC_BOARD_GROUP_TB SET DEALTYPE = #{dealType}, GOODSNO = #{goodsNo}, DEPOSIT = #{deposit},
+			ENDDATE = #{endDate}, GOODSNAME = #{goodsName}, GOODSPICTURE = #{goodsPicture}
+		WHERE BOARDNO = #{boardNo}
+	</update>
+	
+	<update id="updateViewCount" parameterType="_int">
+		UPDATE DC_BOARD_TB SET VIEWCOUNT = VIEWCOUNT + 1 WHERE NO = #{boardNo}
+	</update>
+	
+	<update id="deleteGroup" parameterType="_int">
+		UPDATE DC_BOARD_TB SET STATUS='STATUS002' WHERE NO = #{boardNo}
+	</update>
+	
+	<select id="selectBankList" resultMap="codeList">
+		SELECT * FROM DC_CODE_TB WHERE ID LIKE 'BANK%'
+	</select>
+	
+	<select id="selectGroupHistory" parameterType="_int" resultMap="ghMap">
+		SELECT GH.*, M.NICKNAME FROM DC_GROUP_HISTORY_TB GH 
+		JOIN DC_MEMBER_TB M ON (GH.MEMBERNO = M.NO) WHERE GROUPNO = #{groupNo}
+	</select>
+	
+	<select id="selectOneGroupHistory" parameterType="map" resultType="map">
+		SELECT * FROM DC_GROUP_HISTORY_TB WHERE GROUPNO = #{groupNo} AND MEMBERNO = #{memberNo}
+	</select>
+	
+	<insert id="insertGroupHistory" parameterType="map">
+		INSERT INTO DC_GROUP_HISTORY_TB VALUES(SEQ_GROUP_HISTORY.NEXTVAL, #{groupNo}, #{memberNo})
+	</insert>
+	
+	<delete id="deleteGroupHistory" parameterType="map">
+		DELETE FROM DC_GROUP_HISTORY_TB WHERE GROUPNO = #{groupNo} AND MEMBERNO = #{memberNo}
+	</delete>
+	
+	<select id="selectStatusList" resultMap="codeList">
+		SELECT * FROM DC_CODE_TB WHERE ID LIKE 'GROUP%'
+	</select>
+	
+	<update id="updateStatus" parameterType="map">
+		UPDATE DC_BOARD_GROUP_TB SET STATUS = #{status} WHERE NO = #{groupNo}
+	</update>
+	
+	<select id="getGroupListData" resultType="board">
+		SELECT * FROM DC_BOARD_TB WHERE TYPE='BOARD003' 
+		AND STATUS = 'BSTATUS001' AND ROWNUM <![CDATA[ <= 5 ORDER BY NO ]]>
+	</select>
+
+	
+</mapper>

@@ -1,7 +1,7 @@
 package com.kh.dc.common.vo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class Board implements Serializable {
 	/**
@@ -18,6 +18,11 @@ public class Board implements Serializable {
 	private String status;
 	private int memberNo;
 	private String category;
+	
+	// DB join용 변수
+	private String memberName;
+	private String thumbnail;
+	private String boardType;
 	
 	public Board() {
 		super();
@@ -91,11 +96,37 @@ public class Board implements Serializable {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+
+	public String getBoardType() {
+		return boardType;
+	}
+
+	public void setBoardType(String boardType) {
+		this.boardType = boardType;
+	}
 
 	@Override
 	public String toString() {
 		return "Board [no=" + no + ", title=" + title + ", writeDate=" + writeDate + ", content=" + content
 				+ ", viewCount=" + viewCount + ", type=" + type + ", status=" + status + ", memberNo=" + memberNo
-				+ ", category=" + category + "]";
+				+ ", category=" + category + ", memberName=" + memberName + ", thumbnail=" + thumbnail + ", boardType="
+				+ boardType + "]";
 	}
+
+
+
 }

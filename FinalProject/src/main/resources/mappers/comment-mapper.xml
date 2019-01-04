@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="comment_mapper">
+	
+	<resultMap type="comment" id="resultComment">
+		<id property="no" column="no" />
+		<result property="memberName"  column="nickName" />
+	</resultMap>
+	
+	<!-- 게시글의 댓글 전체 가져오기 -->
+	<select id="selectCommentList" resultMap="resultComment" parameterType="_int">
+		SELECT C.*, M.NICKNAME
+		FROM DC_COMMENT_TB C
+		JOIN DC_MEMBER_TB M  ON C.MEMBERNO = M.NO
+		JOIN DC_BOARD_TB B ON C.BOARDNO = B.NO
+		WHERE C.BOARDNO = #{bno} AND B.TYPE = 'BOARD001'
+		ORDER BY C.WRITEDATE DESC, C.NO DESC
+	</select>
+	
+	<!-- 댓글 하나 가져오기 -->
+	<!-- 
+	<select id="selectCommentOne" resultType="comment" parameterType="_int">
+		SELECT * FROM DC_COMMENT_TB WHERE no = #{no}
+	</select>
+	 -->
+	 
+	<!-- 댓글 하나 입력 -->
+	<insert id="insertComment" parameterType="comment">
+		INSERT INTO DC_COMMENT_TB VALUES(SEQ_COMMENT.NEXTVAL,
+			#{content}, SYSDATE, #{memberNo}, #{boardNo}, 'STATUS001')
+	</insert>
+	
+	<select id="totalComment" resultType="_int">
+		SELECT COUNT(*) 
+		FROM DC_COMMENT_TB C
+		JOIN DC_BOARD_TB B
+		ON C.BOARDNO = B.NO 
+		WHERE C.BOARDNO = #{bno}
+		AND B.TYPE = 'BOARD001'
+	</select>
+	
+	<delete id="deleteComment" parameterType="_int">
+		DELETE DC_COMMENT_TB WHERE NO = #{cno}
+	</delete>
+	
+	<update id="updateComment" parameterType="comment">
+		UPDATE DC_COMMENT_TB SET CONTENT = #{content} WHERE NO = #{no}
+	</update>
+	
+</mapper>

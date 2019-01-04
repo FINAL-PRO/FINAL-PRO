@@ -11,13 +11,42 @@
 	</settings>
 	
 	<typeAliases>
-	<!-- VO 객체를 위한 별칭 선언부-->
+		<!-- 테스트용 -->
 		<typeAlias type="com.kh.dc.test.model.vo.TestDc" alias="testdc"/>
-		<typeAlias type="com.kh.dc.info.region.model.vo.Region" alias="Region"/>
+	
+		<!-- VO 객체를 위한 별칭 선언부-->	
+		<!-- alias 소문자로통일 단어 연결시 카멜표기법 ex) boardComment -->
+		<typeAlias type="com.kh.dc.info.region.model.vo.Region" alias="region"/>
+		<typeAlias type="com.kh.dc.info.house.model.vo.House" alias="house"/>
+   		<typeAlias type="com.kh.dc.job.model.vo.JobBoard" alias="jobBoard"/>
+		<typeAlias type="com.kh.dc.member.model.vo.Member" alias="member"/>		
 		
+		<typeAlias type="com.kh.dc.sale.group.model.vo.Group" alias="group"/>
+		<typeAlias type="com.kh.dc.sale.used.model.vo.Used" alias="used"/>
+		<typeAlias type="com.kh.dc.sale.group.model.vo.GroupHistory" alias="groupHistory"/>
+		<typeAlias type="com.kh.dc.sale.used.model.vo.UsedHistory" alias="usedHistory"/>
+
+		<!-- 공통 VO -->
+		<typeAlias type="com.kh.dc.common.vo.Company" alias="company"/>
+		<typeAlias type="com.kh.dc.common.vo.Board" alias="board"/>		
+		<typeAlias type="com.kh.dc.common.vo.Authority" alias="authority"/>
+		<typeAlias type="com.kh.dc.common.vo.Code" alias="code"/>
+		<typeAlias type="com.kh.dc.common.vo.Comment" alias="comment"/>
+		<typeAlias type="com.kh.dc.common.vo.AdLocation" alias="adLocation"/>
+		<typeAlias type="com.kh.dc.common.vo.AdPage" alias="adPage"/>
+		<typeAlias type="com.kh.dc.common.vo.AdSection" alias="adSection"/>
+		<typeAlias type="com.kh.dc.common.vo.Ad" alias="ad"/>
+		<typeAlias type="com.kh.dc.common.vo.AdList" alias="adList"/>
+		<typeAlias type="com.kh.dc.common.vo.Like" alias="like"/>
+		<typeAlias type="com.kh.dc.common.vo.Message" alias="message"/>
+		<typeAlias type="com.kh.dc.common.vo.PointContent" alias="pointContent"/>
+		<typeAlias type="com.kh.dc.common.vo.Point" alias="point"/>
+		<typeAlias type="com.kh.dc.common.vo.ReportCategory" alias="reportCategory"/>
+		<typeAlias type="com.kh.dc.common.vo.Report" alias="report"/>
+		<typeAlias type="com.kh.dc.common.vo.Location" alias="location"/>
+		<typeAlias type="com.kh.dc.common.vo.AdminBoard" alias="aBoard"/>
+		<typeAlias type="com.kh.dc.common.vo.BoardList" alias="boardList"/>	
 		
-		<!-- 연동 안 되어서 우선 빼놨음 -->
-		<!-- <typeAlias type="com.kh.common.StringArrayTypeHandler" alias="strArrTypeHandler"/>  -->
 	</typeAliases>
 	
 

@@ -13,7 +13,7 @@
       <property name="username" value="DCDB"/>
       <property name="password" value="DCDB"/>
    </bean>
-   
+
    <!-- log4jdbc용 연결 객체 -->
    	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg ref="realDataSource"/>
