@@ -8,60 +8,44 @@
 		<result property="thumbnail" column="thumbnail"/>
 		<result property="commentCount" column="comment_count"/>
 		<result property="likeCount" column="like_count"/>
+		<result property="imageCheck" column="imageCheck"/>
 	</resultMap>
-	<!-- 
-	<resultMap type="board" id="resultBoard">
-		<id property="no" column="no" />
-		<result property="memberName"  column="nickName" />
-		<result property="thumbnail" column="thumbnail"/>
-	</resultMap>
-	-->
-	<!-- 
- 	<select id="selectFreeList" resultMap="resultBoard">
-		SELECT B.*, M.NICKNAME
-		FROM DC_BOARD_TB B
-		INNER JOIN DC_MEMBER_TB M 
-		ON B.MEMBERNO = M.NO
-		WHERE B.TYPE = 'BOARD001'
-		ORDER BY B.WRITEDATE DESC, B.NO DESC
-	</select>
-	 -->
 	
 	<select id="recentSort" resultMap="resultBoardList">
-		SELECT B.*, M.NICKNAME, NVL(L.like_count, 0) like_count, NVl(C.comment_count,0) comment_count
+		SELECT B.*, M.NICKNAME, NVL(L.like_count, 0) like_count, NVl(C.comment_count,0) comment_count, INSTR(b.CONTENT, 'img') imageCheck
 		FROM DC_BOARD_TB B
 		INNER JOIN DC_MEMBER_TB M 
 		ON B.MEMBERNO = M.NO
 		  LEFT JOIN (SELECT COUNT(*) like_count, BOARDNO FROM DC_LIKE_TB GROUP BY BOARDNO) L ON L.BOARDNO = B.NO
-		  LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
-		WHERE B.TYPE = 'BOARD001'
+		  LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB WHERE STATUS = 'STATUS001' GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
+		WHERE B.TYPE = 'BOARD001' AND B.STATUS = 'BSTATUS001'
 		ORDER BY B.WRITEDATE DESC, B.NO DESC
 	</select>
 	
 	<select id="commentSort" resultMap="resultBoardList">
-		SELECT B.*, M.NICKNAME, NVL(L.like_count, 0) like_count, NVl(C.comment_count,0) comment_count
+		SELECT B.*, M.NICKNAME, NVL(L.like_count, 0) like_count, NVl(C.comment_count,0) comment_count, INSTR(b.CONTENT, 'img') imageCheck
 		FROM DC_BOARD_TB B
 		INNER JOIN DC_MEMBER_TB M 
 		ON B.MEMBERNO = M.NO
 		  LEFT JOIN (SELECT COUNT(*) like_count, BOARDNO FROM DC_LIKE_TB GROUP BY BOARDNO) L ON L.BOARDNO = B.NO
-		  LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
-		WHERE B.TYPE = 'BOARD001'
+		  LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB WHERE STATUS = 'STATUS001' GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
+		WHERE B.TYPE = 'BOARD001' AND B.STATUS = 'BSTATUS001'
 		ORDER BY comment_count DESC, B.NO DESC
 	</select>
 	
 	<select id="likeSort" resultMap="resultBoardList">
-		SELECT B.*, M.NICKNAME, NVL(L.like_count, 0) like_count, NVl(C.comment_count,0) comment_count
+		SELECT B.*, M.NICKNAME, NVL(L.like_count, 0) like_count, NVl(C.comment_count,0) comment_count, INSTR(b.CONTENT, 'img') imageCheck
 		FROM DC_BOARD_TB B
 		INNER JOIN DC_MEMBER_TB M 
 		ON B.MEMBERNO = M.NO
 		  LEFT JOIN (SELECT COUNT(*) like_count, BOARDNO FROM DC_LIKE_TB GROUP BY BOARDNO) L ON L.BOARDNO = B.NO
-		  LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
-		WHERE B.TYPE = 'BOARD001'
+		  LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB WHERE STATUS = 'STATUS001' GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
+		WHERE B.TYPE = 'BOARD001' AND B.STATUS = 'BSTATUS001'
 		ORDER BY like_count DESC, B.NO DESC
 	</select>
 	
 	<select id="selectFreeTotalContents" resultType="_int">
-		SELECT COUNT(*) FROM DC_BOARD_TB WHERE TYPE = 'BOARD001'
+		SELECT COUNT(*) FROM DC_BOARD_TB WHERE TYPE = 'BOARD001' AND STATUS = 'BSTATUS001'
 	</select>
 	
 	<select id="selectOneFree" parameterType="_int" resultMap="resultBoardList">
@@ -70,8 +54,8 @@
 		INNER JOIN DC_MEMBER_TB M 
 		ON B.MEMBERNO = M.NO
 		LEFT JOIN (SELECT COUNT(*) like_count, BOARDNO FROM DC_LIKE_TB GROUP BY BOARDNO) L ON L.BOARDNO = B.NO
-		LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
-		WHERE B.TYPE = 'BOARD001' AND B.NO = #{bno}
+		LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB WHERE STATUS = 'STATUS001' GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
+		WHERE B.TYPE = 'BOARD001' AND B.NO = #{bno}  AND B.STATUS = 'BSTATUS001'
 		ORDER BY B.WRITEDATE DESC, B.NO DESC
 	</select>
 	
@@ -87,9 +71,9 @@
 		UPDATE DC_BOARD_TB SET TITLE = #{title}, CONTENT = #{content} WHERE NO = #{no}
 	</update>
 	
-	<delete id="freeDelete" parameterType="_int"> 
-		DELETE FROM DC_BOARD_TB WHERE NO = #{no} 
-	</delete>
+	<update id="freeDelete" parameterType="_int"> 
+		UPDATE DC_BOARD_TB SET STATUS = 'BSTATUS002'  WHERE NO = #{no} 
+	</update>
 	
 	<select id="freeViewCount" parameterType="_int">
 		UPDATE DC_BOARD_TB SET VIEWCOUNT = VIEWCOUNT + 1 WHERE NO = #{no}

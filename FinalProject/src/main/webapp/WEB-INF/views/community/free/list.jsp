@@ -205,14 +205,29 @@ hr {
 														<span class="title">${b.title}</span> <img class="picture" src="https://cf-epi.campuspick.com/0.png" /> 
 														<span class="nickname">${b.memberName}</span> 
 														<span class="count">조회수: ${b.viewCount}</span>
-													</p> <span class="content">${b.content}</span>
+													</p>
+													<c:choose>
+														<c:when test="${b.imageCheck eq 0}">
+															<span class="content">${b.content}</span>
+														</c:when>
+														<c:otherwise>
+															<span class="content"><p>(이미지)</p></span>
+														</c:otherwise>
+													</c:choose>
 													<p class="status">
 														<span class="votecount">좋아요: ${b.likeCount}</span> 
 														<span class="commentcount">댓글: ${b.commentCount}</span>
 													</p>
 													
 													<p class="attach">
-														<span class="attachcount">이미지</span>
+													<c:choose>
+														<c:when test="${b.imageCheck eq 0}">
+															<span class="attachcount"></span>
+														</c:when>
+														<c:otherwise>
+															<span class="attachcount"><img src="/dc/resources/images/image.png" style="height: 17px; width: 17px;"></span>
+														</c:otherwise>
+													</c:choose>
 													</p>
 											</a></li>
 										</c:forEach>
