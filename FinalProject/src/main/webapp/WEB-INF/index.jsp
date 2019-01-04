@@ -145,7 +145,7 @@
 								</tbody>
 							</table>
 						</div>
-						<div class="dc-ad-box" style="border:1px solid black;height:100px;margin:10px">
+						<div class="dc-ad-box" style="border:1px solid #f1f3f6;height:100px;margin:10px">
 							<!-- <h1>메인 광고(AD)</h1> -->
 							<div class="ad-main">
 								<img id="ad-main-img" src="" alt="" />
