@@ -103,7 +103,7 @@ public class GroupController {
 				new ArrayList<Map<String, String>>(groupService.selectBankList());
 		
 		model.addAttribute("group", groupService.selectOneGroup(group.getBoardNo()))
-			.addAttribute("bankList", bankList);;
+			.addAttribute("bankList", bankList);
 	
 		return "sale/group/groupView";
 	}
