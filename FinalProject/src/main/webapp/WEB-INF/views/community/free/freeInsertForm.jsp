@@ -75,12 +75,42 @@
 												<textarea name="content" id="summernote"
 													class="form-control" rows="20" cols="70" required></textarea>
 												<script>
-					                                $(document).ready(function() {
-					                                    $('#summernote').summernote({
-					                                        height: 300,
-					                                        lang: 'ko-KR'
-					                                    }); 
-					                                });
+					                                
+					                                $('#summernote').summernote({
+					                            		height : 300,
+					                            		minHeight : 500,
+					                            		maxHeight : 500,
+					                            		focus : true,
+					                            		callbacks : {
+					                            			onImageUpload : function(files) {
+					                            				for (var i = files.length - 1; i >= 0; i--) {
+					                            					sendFile(files[i]);
+					                            		}}}
+					                            	});
+
+					                                
+					                                
+					                            	function sendFile(file) {
+					                            		var form_data = new FormData();
+					                            		form_data.append('file', file);
+
+					                            		$.ajax({
+					                            			url : '${pageContext.request.contextPath}/common/summernote/convertImage.do',
+					                            			data : form_data,
+					                            			type : "POST",
+					                            			cache : false,
+					                            			contentType : false,
+					                            			enctype : 'multipart/form-data',
+					                            			processData : false,
+					                            			success : function(url) {
+					                            				$('#summernote').summernote('editor.insertImage', url);
+					                            				console.log("url: "+url);
+					                            			},
+					                            			error : function() {
+					                            				console.log("이미지 업로드 실패");
+					                            			}
+					                            		});
+					                            	}
 					                            </script>
 											</div>
 										</div>

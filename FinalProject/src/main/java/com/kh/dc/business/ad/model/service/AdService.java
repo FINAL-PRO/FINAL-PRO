@@ -27,6 +27,6 @@ public interface AdService {
 
 	int insertAd(Ad ad);
 
-	Ad getAd();
+	Ad getAd(Map<String, Object> params);
 
 }

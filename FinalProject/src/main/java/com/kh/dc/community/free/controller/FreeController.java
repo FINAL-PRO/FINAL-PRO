@@ -84,7 +84,7 @@ public class FreeController {
 	@RequestMapping("community/free/freeInsertFormEnd.do")
 	public String insertFree(Board board,  Model model) {
 		
-		String loc = "community/free/freeView";
+		String loc = "${pageContext.request.contextPath}/community/free/list.do";
 	
 		if(freeService.insertFree(board) > 0) {
 			model.addAttribute("insertFree", freeService.selectOneFree(board.getNo()));
@@ -133,22 +133,12 @@ public class FreeController {
 		return "redirect:/community/free/list.do";
 	}
 	
-	@RequestMapping(value="community/free/getListData.do",produces ="application/text; charset=utf8")
+	@RequestMapping("community/free/getListData.do")
 	@ResponseBody
-	public String getListData() {
-		String result = "";
-		
+	public List<Board> getListData() {
 		List<Board> freeList = freeService.selectFreeListData();
 		
-		System.out.println(freeList);
-		
-		for (Board board : freeList) {
-			result += "<tr><td>";
-			result += "<a href='/dc/community/free/freeView.do?no=" + board.getNo() + "'>" + board.getTitle() + "</a>";
-			result += "</td></tr>";
-		}
-		
-		return result;
+		return freeList;
 	}
 	
 }

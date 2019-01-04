@@ -1,9 +1,8 @@
 package com.kh.dc.sale.group.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.dc.common.util.Utils;
+import com.kh.dc.common.vo.Board;
 import com.kh.dc.sale.group.model.service.GroupService;
 import com.kh.dc.sale.group.model.vo.Group;
 
@@ -149,6 +149,15 @@ public class GroupController {
 	public String updateStatus(@RequestParam Map<String, String> status) {
 		
 		return (groupService.updateStatus(status) > 0) ? "OK" : "NO";
+	}
+	
+	
+	@RequestMapping("sale/group/getListData.do")
+	@ResponseBody
+	public List<Board> getListData(){
+		List<Board> groupList = groupService.getGroupListData();
+		
+		return groupList;
 	}
 	
 	

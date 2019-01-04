@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dc.common.vo.Board;
 import com.kh.dc.sale.group.model.vo.Group;
 
 @Repository
@@ -111,6 +112,12 @@ public class GroupDaoImpl implements GroupDao {
 	public int updateStatus(Map<String, String> status) {
 		
 		return sqlSession.update("group_mapper.updateStatus", status);
+	}
+
+	@Override
+	public List<Board> getGroupListData() {
+
+		return sqlSession.selectList("group_mapper.getGroupListData");
 	}
 
 	

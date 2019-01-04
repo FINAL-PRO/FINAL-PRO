@@ -109,6 +109,11 @@
 	<update id="updateStatus" parameterType="map">
 		UPDATE DC_BOARD_GROUP_TB SET STATUS = #{status} WHERE NO = #{groupNo}
 	</update>
+	
+	<select id="getGroupListData" resultType="board">
+		SELECT * FROM DC_BOARD_TB WHERE TYPE='BOARD003' 
+		AND STATUS = 'BSTATUS001' AND ROWNUM <![CDATA[ <= 5 ORDER BY NO ]]>
+	</select>
 
 	
 </mapper>

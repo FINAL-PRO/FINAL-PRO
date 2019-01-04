@@ -2,17 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="like_mapper">
 
-	<select id="likeCount" parameterType="_int">
-		SELECT COUNT(*) 
-		FROM DC_LIKE_TB L
-		JOIN DC_BOARD_TB B
-		ON L.BOARDNO = B.NO 
-		WHERE L.BOARDNO = #{bno}
-		AND B.TYPE = 'BOARD001'
+	<select id="likeCount" resultType="_int" parameterType="like">
+		SELECT NVL(COUNT(*), 0) 
+		FROM DC_LIKE_TB
+		WHERE BOARDNO = #{boardNo}
+		AND MEMBERNO = #{memberNo}
 	</select>
-
+ 
 	<insert id="likeInsert" parameterType="like">
 		INSERT INTO DC_LIKE_TB VALUES (SEQ_LIKE.NEXTVAL, SYSDATE, #{boardNo}, #{memberNo})
 	</insert>
+
+	<delete id="likeDelete" parameterType="like">
+		DELETE FROM DC_LIKE_TB WHERE BOARDNO = #{boardNo} AND MEMBERNO = #{memberNo}
+	</delete>
 
 </mapper>
