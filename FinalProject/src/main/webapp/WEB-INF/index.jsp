@@ -43,7 +43,7 @@
 					/* $("#ad-main-img").attr("src", "${pageContext.request.contextPath}/resources/upload/ad/1100x100.png");
 					$("#ad-main-img").attr("src", "${pageContext.request.contextPath}/resources/upload/ad/1100x100.png"); */
 				}, error : function(){
-					alert("ajax error");
+					alert("ajax error 여긴가요");
 				}
 			});
 		});

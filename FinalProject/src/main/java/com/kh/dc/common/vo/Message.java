@@ -17,6 +17,25 @@ public class Message implements Serializable {
 	private int toMember;
 	private String status;
 	
+	private String frommNick;
+	private String tomNick;
+	
+	public String getFrommNick() {
+		return frommNick;
+	}
+
+	public void setFrommNick(String frommNick) {
+		this.frommNick = frommNick;
+	}
+
+	public String getTomNick() {
+		return tomNick;
+	}
+
+	public void setTomNick(String tomNick) {
+		this.tomNick = tomNick;
+	}
+
 	public Message() {
 		super();
 	}
@@ -82,6 +101,8 @@ public class Message implements Serializable {
 	@Override
 	public String toString() {
 		return "Message [no=" + no + ", content=" + content + ", sendDate=" + sendDate + ", fromMember=" + fromMember
-				+ ", toMember=" + toMember + ", status=" + status + "]";
+				+ ", toMember=" + toMember + ", status=" + status + ", frommNick=" + frommNick + ", tomNick=" + tomNick
+				+ "]";
 	}
+
 }

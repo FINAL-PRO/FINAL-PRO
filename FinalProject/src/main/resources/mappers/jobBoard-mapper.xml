@@ -33,7 +33,9 @@
 	</select>
 	
 	<select id="selectJobBoardTotalContents" resultType="_int">
-		SELECT COUNT(*) FROM DC_BOARD_JOB_TB
+		SELECT COUNT(*) FROM DC_BOARD_JOB_TB JB
+	JOIN DC_BOARD_TB B ON(B.NO = JB.BOARDNO)
+	WHERE B.STATUS != 'STATUS002'
 	</select>
 
 	<select id="selectWriteJobBoard" resultMap="jobBoardMap">
