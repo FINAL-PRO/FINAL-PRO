@@ -61,18 +61,28 @@
 	</div>
 	<div class="dc-content-box">
 		<h4>
-			<span class="board-title">날씨</span>
+			<span class="board-title">현재 날씨</span>
 		</h4>
 		<hr />	
 		<div class="" style="text-align: center">
-			<label style="margin-bottom: 10px;">(일단 default 삼성동 날씨)</label><br>
+			<label id="village" style="margin-bottom: 10px;"></label><br>
 			<i class="wi wi-night-sleet" id="weatherIcon" style="font-size: 50px; margin-bottom: 10px;"></i> <br>
 			<label id="sky"></label>
 		
 		<hr />
-		현재 기온 : <label id="tc"></label><br>
-		최저 기온 : <label id="tmin"></label><br>
-		최고 기온 : <label id="tmax"></label>
+		
+		<div class="nowWeather-container" style="display: inline-block; ">	
+			<div class="block" style="text-align: center; width: auto;">
+				현재 기온 :	<label id="tc"></label><br>
+				최저 기온 :	<label id="tmin"></label><br>
+				최고 기온 :	<label id="tmax"></label>
+			</div>
+			<!-- <div class="block" style="text-align: center; width: auto;">
+				<label id="tc"></label><br>
+				<label id="tmin"></label><br>
+				<label id="tmax"></label>
+			</div> -->
+		</div>
 		</div>
 		
 	</div>
@@ -88,21 +98,17 @@
 	$(document).ready(function(){
 			 
 		var url = "";
-			 
-		<c:if test="${!empty member}">			
-			switch("${member.locationNo}"){
-				case '2': url="&city=서울&county=강남구&village=역삼1동"; break;
-				case '5': url="&city=서울&county=성동구&village=성수1가1동"; break;
-				case '8': url="&city=서울&county=마포구&village=상암동"; break;
-				case '11': url="&city=서울&county=중구&village=명동1가"; break;
-				case '14': url="&city=서울&county=은평구&village=구산동"; break;
-			}
-		</c:if> 
-			
-		<c:if test="${empty member}">
-			url="&city=서울&county=강남구&village=역삼1동";
-		</c:if> 
-		
+		var village = "";
+				
+		switch("${member.locationNo}"){
+			case '2': url="&city=서울&county=강남구&village=역삼1동"; village="역삼동"; break;
+			case '5': url="&city=서울&county=성동구&village=성수1가1동"; village="성수동"; break;
+			case '8': url="&city=서울&county=마포구&village=상암동"; village="상암동"; break;
+			case '11': url="&city=서울&county=중구&village=명동1가"; village="명동"; break;
+			case '14': url="&city=서울&county=은평구&village=구산동"; village="구산동"; break;
+			default : url="&city=서울&county=강남구&village=역삼1동"; village="역삼동"; break;
+		}
+
 		 $.ajax({
 			type: "GET",
 			url: "https://api2.sktelecom.com/weather/current/minutely?appKey=a294c267-b2de-41f1-99ee-1a4894a40fdf" + url,
@@ -142,6 +148,7 @@
 				$("#tc").text(tc);
 				$("#tmax").text(tmax);
 				$("#tmin").text(tmin);
+				$("#village").text(village);
 				
 			},  error : function(jqxhr, textStatus, errorThrown) {
 				console.log("ajax 처리 실패");
