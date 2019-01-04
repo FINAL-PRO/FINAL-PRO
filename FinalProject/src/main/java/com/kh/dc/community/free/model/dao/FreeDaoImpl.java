@@ -72,8 +72,4 @@ public class FreeDaoImpl implements FreeDao{
 		return sqlSession.selectList("free_mapper.selectFreeListData");
 	}
 
-
-	
-
-
 }
