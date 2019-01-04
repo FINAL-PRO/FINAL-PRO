@@ -16,6 +16,15 @@
 					</a> <span class="search_span"> <input type="text"
 						class="serarh_text" placeholder="" />
 					</span>
+					<span id="msg-container">
+					
+					<button id="msgPop" onclick="msgPop();">쪽지</button>	<label for="">안읽은쪽지 0개</label>
+					<script type="text/javascript">
+					function msgPop() {
+						window.open("${pageContext.request.contextPath}/message/messageList.do?no=${member.no}", "msgPop", "width=500, height=400");
+					}
+					</script>
+					</span>
 				</div>
 			</div>
 		</div>

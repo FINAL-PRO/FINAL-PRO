@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.dc.common.vo.Message;
+import com.kh.dc.job.model.vo.JobBoard;
 import com.kh.dc.message.model.dao.MessageDao;
-import com.kh.dc.message.model.vo.Message;
-
 @Service
 public class MessageServiceImpl implements MessageService {
 
@@ -20,15 +20,16 @@ public class MessageServiceImpl implements MessageService {
 	MessageDao messageDao;
 	
 	@Override
-	public List<Map<String, String>> selectMessageList(int cPage, int numPerPage) {
+	public List<Map<String, String>> selectMessageList(int no, int cPage, int numPerPage) {
 		// 
-		return messageDao.selectMessageList(cPage, numPerPage);
+
+		return messageDao.selectMessageList(no, cPage, numPerPage);
 	}
 
 	@Override
-	public int selectMessageTotalContents() {
+	public int selectMessageTotalContents(int no) {
 		// 
-		return messageDao.selectMessageTotalContents();
+		return messageDao.selectMessageTotalContents(no);
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class MessageServiceImpl implements MessageService {
 			
 			
 		} catch(Exception e) {
-			
+			e.printStackTrace();
 		}
 		
 		return result;
@@ -55,7 +56,17 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public Message selectOneMessage(int no) {
 		// 
-		return messageDao.selectOneMessage(no);
+		Message message =  messageDao.selectOneMessage(no);
+		
+		if(message.getStatus().equals("MSGTYPE001")) messageDao.readMessage(no);
+		
+		return message;
+	}
+	
+	@Override
+	public int readMessage(int no) {
+		// 
+		return messageDao.readMessage(no);
 	}
 
 	@Override

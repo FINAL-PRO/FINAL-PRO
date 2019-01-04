@@ -3,11 +3,12 @@ package com.kh.dc.message.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.dc.message.model.vo.Message;
+import com.kh.dc.common.vo.Message;
 
 @Repository
 public class MessageDaoImpl implements MessageDao {
@@ -16,33 +17,41 @@ public class MessageDaoImpl implements MessageDao {
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<Map<String, String>> selectMessageList(int cPage, int numPerPage) {
+	public List<Map<String, String>> selectMessageList(int no, int cPage, int numPerPage) {
 		// 
-		return null;
+
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("message_mapper.selectMessageList", no, rowBounds);
 	}
 
 	@Override
-	public int selectMessageTotalContents() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int insertMessage(Message message) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int selectMessageTotalContents(int no) {
+		// 
+		return sqlSession.selectOne("message_mapper.selectMessageTotalContents", no);
 	}
 
 	@Override
 	public Message selectOneMessage(int no) {
-		// TODO Auto-generated method stub
-		return null;
+		// 
+		return sqlSession.selectOne("message_mapper.selectOneMessage", no);
 	}
 
 	@Override
+	public int insertMessage(Message message) {
+		// 
+		System.out.println("msg DAO 확인 : "+message);
+		return sqlSession.insert("message_mapper.insertMessage", message);
+	}
+	
+	@Override
+	public int readMessage(int no) {
+		// 
+		return sqlSession.update("message_mapper.deleteMessage", no);
+	}
+	@Override
 	public int deleteMessage(int no) {
-		// TODO Auto-generated method stub
-		return 0;
+		// 
+		return sqlSession.update("message_mapper.deleteMessage", no);
 	}
 
 }

@@ -54,7 +54,7 @@
 				<script type="text/javascript">
 					function selectCompany() {
 						window.name = "jobBoardInsertForm";	
-						var childWindow = window.open("jobBoardComPop.do", "popup01", "width=500, height=400");
+						var childWindow = window.open("jobBoardComPop.do", "comPop", "width=500, height=400");
 					}
 				</script>
 				<br/><br/>
