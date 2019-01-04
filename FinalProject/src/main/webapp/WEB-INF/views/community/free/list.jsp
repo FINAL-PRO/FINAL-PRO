@@ -202,35 +202,38 @@ hr {
 										<c:forEach items="${list}" var="b">
 											<li class="groupin" id="${b.no}">
 											<a class="article" href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${b.no}">
-												<p class="time">
-													<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
-												</p>
-												<p class="profile">
-													<span class="title">${b.title}</span> <img class="picture" src="https://cf-epi.campuspick.com/0.png" /> 
-													<span class="nickname">${b.memberName}</span> 
-													<span class="count">조회수: ${b.viewCount}</span>
-												</p>
-												<c:choose>
-												<c:when test="${b.content eq '.png'}">
-													<div class="content">(이미지)</div>
-												</c:when>
-												<c:otherwise>
-													<div class="content">${b.content}</div>
-												</c:otherwise>
-												</c:choose>
-												<p class="status">
-													<span class="votecount">좋아요: ${b.likeCount}</span> 
-													<span class="commentcount">댓글: ${b.commentCount}</span>
-												</p>
-												<p class="attach">
-												<c:choose>
-												<c:when test="${!empty member.no}">
-													<img src="/dc/resources/images/images.png" class="attachcount" style="height: 17px; width: 17px;">
-												</c:when>
-												<c:otherwise>
-													<img src="/dc/resources/images/images.png" class="attachcount" style="height: 17px; width: 17px;">
-												</c:otherwise>
-												</c:choose></p>
+													<p class="time">
+														<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+													</p>
+													<p class="profile">
+														<span class="title">${b.title}</span> <img class="picture" src="https://cf-epi.campuspick.com/0.png" /> 
+														<span class="nickname">${b.memberName}</span> 
+														<span class="count">조회수: ${b.viewCount}</span>
+													</p>
+													<c:choose>
+														<c:when test="${b.imageCheck eq 0}">
+															<span class="content">${b.content}</span>
+														</c:when>
+														<c:otherwise>
+															<span class="content"><p>(이미지)</p></span>
+														</c:otherwise>
+													</c:choose>
+													<p class="status">
+														<span class="votecount">좋아요: ${b.likeCount}</span> 
+														<span class="commentcount">댓글: ${b.commentCount}</span>
+													</p>
+													
+													<p class="attach">
+													<c:choose>
+														<c:when test="${b.imageCheck eq 0}">
+															<span class="attachcount"></span>
+														</c:when>
+														<c:otherwise>
+															<span class="attachcount"><img src="/dc/resources/images/image.png" style="height: 17px; width: 17px;"></span>
+														</c:otherwise>
+													</c:choose>
+													</p>
+
 											</a></li>
 										</c:forEach>
 										<script>

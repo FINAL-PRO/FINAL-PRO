@@ -33,6 +33,8 @@ public interface GroupService {
 	List<Map<String, String>> selectStatusList();
 
 	int updateStatus(Map<String, String> status);
+	
+	int selectRemainCount(int groupNo);	
 
 	List<Board> getGroupListData();
 }

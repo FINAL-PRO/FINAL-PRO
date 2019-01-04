@@ -11,5 +11,5 @@
    <h3>loc : ${loc} <a href="${pageContext.request.contextPath}/${loc}"> 페이지로 이동</a></h3> --%>
 <script>
    alert("${msg}");
-   history.go(${loc});
+   location.href = "${pageContext.request.contextPath}${loc}";
 </script>

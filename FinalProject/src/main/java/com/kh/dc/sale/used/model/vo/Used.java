@@ -1,6 +1,12 @@
 package com.kh.dc.sale.used.model.vo;
 
-public class Used {
+import java.io.Serializable;
+
+import com.kh.dc.common.vo.Board;
+
+public class Used extends Board implements Serializable {
+
+	private static final long serialVersionUID = -4100584657635408899L;
 
 	private int no;
 	private int price;
@@ -10,11 +16,15 @@ public class Used {
 	private int goodsNo;
 	private String goodsName;
 	
+	// DB join용 변수
+	private String goodsCategory;
+	
 	public Used() {
 		super();
 	}
 
-	public Used(int no, int price, String dealType, int boardNo, String status, int goodsNo, String goodsName) {
+	public Used(int no, int price, String dealType, int boardNo, String status, int goodsNo, String goodsName,
+			String goodsCategory) {
 		super();
 		this.no = no;
 		this.price = price;
@@ -23,6 +33,7 @@ public class Used {
 		this.status = status;
 		this.goodsNo = goodsNo;
 		this.goodsName = goodsName;
+		this.goodsCategory = goodsCategory;
 	}
 
 	public int getNo() {
@@ -81,10 +92,19 @@ public class Used {
 		this.goodsName = goodsName;
 	}
 
+	public String getGoodsCategory() {
+		return goodsCategory;
+	}
+
+	public void setGoodsCategory(String goodsCategory) {
+		this.goodsCategory = goodsCategory;
+	}
+
 	@Override
 	public String toString() {
 		return "Used [no=" + no + ", price=" + price + ", dealType=" + dealType + ", boardNo=" + boardNo + ", status="
-				+ status + ", goodsNo=" + goodsNo + ", goodsName=" + goodsName + "]";
+				+ status + ", goodsNo=" + goodsNo + ", goodsName=" + goodsName + ", goodsCategory=" + goodsCategory
+				+ ", Board=[" + super.toString() + "]";
 	}
 	
 }

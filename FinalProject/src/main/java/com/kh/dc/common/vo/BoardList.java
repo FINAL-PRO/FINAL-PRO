@@ -28,6 +28,7 @@ public class BoardList implements Serializable {
 	// list용 개수 변수
 	private int commentCount;
 	private int likeCount;
+	private int imageCheck;
 	
 	public BoardList() {
 		super();
@@ -35,7 +36,7 @@ public class BoardList implements Serializable {
 
 	public BoardList(int no, String title, Date writeDate, String content, int viewCount, String type, String status,
 			int memberNo, String category, String memberName, String thumbnail, String boardType, int commentCount,
-			int likeCount) {
+			int likeCount, int imageCheck) {
 		super();
 		this.no = no;
 		this.title = title;
@@ -51,7 +52,10 @@ public class BoardList implements Serializable {
 		this.boardType = boardType;
 		this.commentCount = commentCount;
 		this.likeCount = likeCount;
+		this.imageCheck = imageCheck;
 	}
+
+
 
 	public int getNo() {
 		return no;
@@ -165,12 +169,21 @@ public class BoardList implements Serializable {
 		this.likeCount = likeCount;
 	}
 
+	public int getImageCheck() {
+		return imageCheck;
+	}
+
+	public void setImageCheck(int imageCheck) {
+		this.imageCheck = imageCheck;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardList [no=" + no + ", title=" + title + ", writeDate=" + writeDate + ", content=" + content
 				+ ", viewCount=" + viewCount + ", type=" + type + ", status=" + status + ", memberNo=" + memberNo
 				+ ", category=" + category + ", memberName=" + memberName + ", thumbnail=" + thumbnail + ", boardType="
-				+ boardType + ", commentCount=" + commentCount + ", likeCount=" + likeCount + "]";
+				+ boardType + ", commentCount=" + commentCount + ", likeCount=" + likeCount + ", imageCheck="
+				+ imageCheck + "]";
 	}
 	
 }
