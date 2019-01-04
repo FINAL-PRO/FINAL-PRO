@@ -122,7 +122,7 @@
 							<div class="row btn-container">
 								<div class="col-md-3"></div>
 								<div class="col-md-3 btn-container">
-									<input type="button" class="btn btn-outline-success" id="enrollSubmit" value="가입">
+									<input type="button" class="btn btn-outline-success" id="submitButton" value="가입">
 								</div>
 								<div class="col-md-3 btn-container">
 									<input type="reset" class="btn btn-outline-danger" value="취소">
@@ -163,10 +163,13 @@
 							console.log(data);
 							if (data == 1) {
 								$(".guide1").text('이미 가입된 이메일입니다.');
+								$("#submitButton").attr('disabled', true);
 							} else if (!(regEmail.test(email))) {
 								$(".guide1").text('이메일 형식에 맞지 않습니다.');
+								$("#submitButton").attr('disabled', true);
 							} else if (data == 0 && regEmail.test(email)) {
 								$(".guide1").text('');
+								$("#submitButton").attr('disabled', false);
 							}
 						}, error : function(jqxhr,textStatus, errorThrown) {
 							console.log("ajax 처리 실패");
@@ -189,10 +192,12 @@
 				} else if (nickName != null
 						&& nickName.length < 2) {
 					$(".guide").text("2자 이상 입력해주세요.");
+					$("#submitButton").attr('disabled', true);
 					return;
 
 				} else if (nickName.length > 10) {
 					$(".guide").text("10자 미만으로 입력해주세요.");
+					$("#submitButton").attr('disabled', true);
 					return;
 				} else {
 					$.ajax({
@@ -203,8 +208,10 @@
 							console.log(data);
 							if (data == 1) {
 								$(".guide").text("이미 사용중인 닉네임입니다.");
+								$("#submitButton").attr('disabled', true);
 							} else {
 								$(".guide").text("사용할 수 있는 닉네임입니다.");
+								$("#submitButton").attr('disabled', false);
 							}
 							},error : function(jqxhr,textStatus, errorThrown) {
 								console.log("ajax 처리 실패");
@@ -225,9 +232,11 @@
 				if (pwd == "") {
 					$("#pwdChkComment").text('비밀번호을 입력하세요.');
 				} else if (!regPwd.test(pwd)) {
-					$("#pwdChkComment").text('영대문자/특수문자/숫자 최소 1개 포함 6자 이상!');
+					$("#pwdChkComment").text('영대문자/특수문자/숫자 최소 1개 포함 6자 이상 12자 이하!');
+					$("#submitButton").attr('disabled', true);
 				} else {
 					$("#pwdChkComment").text('');
+					$("#submitButton").attr('disabled', false);
 				}
 			});
 
@@ -235,19 +244,21 @@
 				var pwd = $("#password_").val(), pwd2 = $("#password2").val();
 				if (pwd != pwd2) {
 					$("#pwdChkComment2").text('위의 비밀번호와 다릅니다.');
+					$("#submitButton").attr('disabled', true);
 				} else if (pwd != null && pwd2 != null && pwd == pwd2) {
 					$("#pwdChkComment2").text('');
+					$("#submitButton").attr('disabled', false);
 				}
 
 			});
 			
-			$("#enrollSubmit").on("click", function() {
+			$("#submitButton").on("click", function() {
 				
 				var pwd = $("#password_").val().trim();
 				var pwd2 = $("#password2").val().trim();
 				var regPwd = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,12}$/;
 				
-				if(regPwd.test(pwd) && pwd==pwd2 ){
+				if(regPwd.test(pwd) && pwd==pwd2){
 					$("#memberEnroll").submit();
 				} else{
 					alert("비밀번호를 다시 입력해주세요.");

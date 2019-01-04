@@ -15,6 +15,7 @@
 			height: auto;
 			width: auto;
 			/* border: 1px solid lightgray; */
+			text-align: center;
 		}
 		
 		.currentWeather{
@@ -22,7 +23,7 @@
 			margin-top:10px; 
 			font-size:16px; 
 			text-align:center; 
-			border: 1px solid lightgray;
+			
 		}	
 	</style>
 </head>
@@ -44,21 +45,28 @@
 							<div class="weather-container" style="margin: 20px;">
 								<!-- 오늘 내일 모레 날씨 -->
 								<!-- 동네 이름 -->
-								<h4 class="townName"></h4>
-								<div class="currentWeather">
-									<div class="block">									
-									날짜  <br>
-									시간  <br>
-									<div style="height:55px;">날씨 </div><br>	
-									최저온도  <br>
-									최고온도  <br>									
+								<h4 class="townName" style="margin: 0 0 0 10px;"></h4>
+								<div class="currentWeather" style="width:100%;">
+									<div class="block" style="width:50px;">									
+									날짜<br>
+									시간<br>
+									<div style="height:55px;">날씨</div><br>	
+									<span style="font-size: 8px;">최저온도</span><br>
+									<span style="font-size: 8px;">최고온도</span><br>									
 									</div>					
 								</div>
 								
 								<hr />
 								
 								<!-- 주간 날씨 부분 -->
-								<div class="weekWeather-container" style="display: inline-block; margin-top:10px;">						
+								<h4 style="margin: 0 0 0 10px;"> 주간 날씨</h4>
+								<div class="weekWeather-container" style="display: inline-block; margin-top:10px; width: 100%">	
+									<div class="block" style="width:50px;">									
+									날짜<br>
+									<div style="">날씨</div><br>	
+									<span style="font-size: 8px;">최저온도</span><br>
+									<span style="font-size: 8px;">최고온도</span><br>									
+									</div>						
 								</div>	
 													
 							</div>
@@ -76,6 +84,8 @@
 	
 	<script>
 	$(document).ready(function(){
+		
+		var sky = "";	// 날씨 아이콘 변수
 		
 		// 날짜 qeury
 		var today = new Date();
@@ -129,16 +139,16 @@
 	            	
 	            	$(this).find('data').each(function(){
 	            			            		
-	            		var day ="";
+	            		var day ="";	// 오늘/ 내일/ 모레 
 	            		var mintemp = $(this).find('tmn').text();
 	            		var maxtemp = $(this).find('tmx').text();
-	            		var sky = "";
+	            		
 	            		
 	            		// 날짜 구분
 	            		switch($(this).find('day').text()){
-	            		case '0': day = '<label style="background-color:lightblue; width:50px; margin-bottom: 0;">오늘'; break;
-	            		case '1': day = '<label style="background-color:lightpink; width:50px; margin-bottom: 0;">내일'; break;
-	            		case '2': day = '<label style="background-color:lightgray; width:50px; margin-bottom: 0;">모레'; break;	            		
+	            		case '0': day = '<label style="background-color:lightblue; width:auto; margin-bottom: 0;">오늘'; break;
+	            		case '1': day = '<label style="background-color:lightpink; width:auto; margin-bottom: 0;">내일'; break;
+	            		case '2': day = '<label style="background-color:lightgray; width:auto; margin-bottom: 0;">모레'; break;	            		
 	            		}
 
 	            		// 날씨 아이콘 넣기	            		
@@ -162,11 +172,11 @@
 	            		}
 	            		
 	             		
-	            		output += '<div class="block" style="width: 50px; text-align: center;">';
+	            		output += '<div class="block" style="width: 48px; text-align: center;">';
 	            		output += day + '<br>';
 	            		output += $(this).find('hour').text() + '시<br>';
 	            		output += sky + '<br>';	            		
-	            		output += '<div style="height: 30px;">' + $(this).find('wfKor').text() + '</div><br>';
+	            		output += '<div style="width: 48px; height: 30px;">' + $(this).find('wfKor').text() + '</div><br>';
 	            		output += mintemp + '<br>';            		
 	            		output += maxtemp  + '</label></div>';
 	     	            
@@ -177,7 +187,7 @@
       
 	        },error:function(data){
 	        	console.log("날씨 ajax 실패");
-	        	location.href="/dc";
+	        	/* location.href="/dc"; */
 	        }
 	    });		
 		
@@ -202,23 +212,38 @@
 			           	$(this).find('data').each(function(){
 			           			
 			           		//var time = $(this).find('tmEf').text().substring(10);
+			           	// 날씨 아이콘 넣기	            		
+		            		switch($(this).find('wf').text()){
+								case "맑음": sky='<i class="wi wi-day-sunny"></i>'; break;
+								case "구름조금": sky='<i class="wi wi-day-sunny-overcast"></i>'; break;
+								case "구름많음": sky='<i class="wi wi-day-cloudy"></i>'; break;
+								case "흐림": sky='<i class="wi wi-cloudy"></i>'; break;
+								case "비": sky='<i class="wi wi-rain"></i>'; break;
+								case "눈": sky='<i class="wi wi-snow"></i>'; break;
+								case "눈/비": sky='<i class="wi wi-hail"></i>'; break;
+		            		}			           		
+			           		
 			           		
 			           		if($(this).find('tmEf').text().substring(10) == today.substring(10)){
 	       				
-			               	output += '<div class="block"><label style="width:100px; text-align:center;">';
-			               	output += $(this).find("tmEf").text().substring(0,10) + '<br> 최저 : '; 
-			               	output += $(this).find('tmn').text() + '<br> 최고 : '; 
+			               	output += '<div class="block"><label style="width:110px; text-align:center;">';
+			               	output += $(this).find("tmEf").text().substring(0,10) + '<br>'; 
+			               	output += sky + '<br>';	 
+			               	output += $(this).find("wf").text().substring(0,10) + '<br>'; 
+			               	output += $(this).find('tmn').text() + '<br>'; 
 			              	output += $(this).find("tmx").text() + '</label></div>';		                				
-			            	
-			            	$('.weekWeather-container').html(output);
 			            		
 			            	}
-		
+			           		
 			            });
+			           	
+			           	$('.weekWeather-container').append(output);
 	            		            		
 	            	}
 	            	
 	            });
+	        }, error : function(data){
+	        	console.log("주간 날씨 ajax 에러");
 	        }
 	    });
 	    

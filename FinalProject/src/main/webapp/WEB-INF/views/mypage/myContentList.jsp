@@ -105,7 +105,7 @@
 								          	<a href="#">${board.title}</a>
 								         	</c:when>
 								         	<c:when test = "${comment.boardType eq '공동구매'}">
-								          	<a href="#">${board.title}</a>
+								          	<a href="${pageContext.request.contextPath}/sale/group/groupView.do?no=${comment.boardNo}">${comment.boardTitle}</a>
 								        	 </c:when>
 								        	 <c:when test = "${comment.boardType eq '중고거래'}">
 								          	<a href="#">${board.title}</a>
