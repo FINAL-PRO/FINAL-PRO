@@ -60,7 +60,7 @@
 			SELECT SEQ_BOARD.CURRVAL FROM DUAL
 		</selectKey>
 		INSERT INTO DC_BOARD_GROUP_TB VALUES(SEQ_BOARD_GROUP.NEXTVAL, #{price}, #{maxCount}, 0,
-			#{boardNo}, 'GROUP001', #{dealType}, 1, #{deposit}, #{endDate}, #{goodsName}, #{goodsPicture})
+			#{boardNo}, 'GROUP001', #{dealType}, 1, #{deposit}, #{endDate}, #{goodsName}, #{goodsPicture}, #{bank})
 	</insert>
 	
 	<update id="updateBoard" parameterType="group">
@@ -70,7 +70,7 @@
 
 	<update id="updateGroup" parameterType="group">
 		UPDATE DC_BOARD_GROUP_TB SET DEALTYPE = #{dealType}, GOODSNO = #{goodsNo}, DEPOSIT = #{deposit},
-			ENDDATE = #{endDate}, GOODSNAME = #{goodsName}, GOODSPICTURE = #{goodsPicture}
+			BANK=#{bank}, ENDDATE = #{endDate}, GOODSNAME = #{goodsName}, GOODSPICTURE = #{goodsPicture}
 		WHERE BOARDNO = #{boardNo}
 	</update>
 	

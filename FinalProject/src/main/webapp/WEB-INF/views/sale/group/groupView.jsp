@@ -90,7 +90,7 @@
 <div style="display:inline-block; width:100%;">
 	<div style="float:left; width:30%;">
 		<div class="img-box" style="border:1px solid black;">
-			<img id="goodsImg"/>
+			<img id="goodsImg" src="${group.goodsPicture}"/>
 		</div>
 	</div>
 	

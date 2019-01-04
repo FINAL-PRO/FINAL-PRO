@@ -225,7 +225,7 @@ label.info-label {
 	}	
 	
 	
-	// 제목 100바이트 넘지 않게 정규식 처리
+	// groupInsert랑 똑같은 정규식 처리
 	
 </script>
 

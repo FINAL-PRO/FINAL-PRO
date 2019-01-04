@@ -80,7 +80,8 @@ public class GroupController {
 		String loc = "sale/group/groupView";
 	
 		if(groupService.insertGroup(group) > 0) {
-			model.addAttribute("group", groupService.selectOneGroup(group.getBoardNo()));
+			model.addAttribute("group", groupService.selectOneGroup(group.getBoardNo()))
+				 .addAttribute("statusList", groupService.selectStatusList());
 		}
 				
 		return loc;
@@ -89,7 +90,8 @@ public class GroupController {
 	@RequestMapping("sale/group/groupUpdateForm.do")
 	public String updateGroupForm(@RequestParam int boardNo, Model model) {
 		
-		model.addAttribute("group", groupService.selectOneGroup(boardNo));
+		model.addAttribute("group", groupService.selectOneGroup(boardNo))
+			 .addAttribute("bankList", groupService.selectBankList());;
 	
 		return "sale/group/groupUpdate";
 	}
@@ -98,12 +100,8 @@ public class GroupController {
 	public String updateGroup(Group group, Model model) {
 		
 		int result = groupService.updateGroup(group);
-		
-		ArrayList<Map<String, String>> bankList = 
-				new ArrayList<Map<String, String>>(groupService.selectBankList());
-		
-		model.addAttribute("group", groupService.selectOneGroup(group.getBoardNo()))
-			.addAttribute("bankList", bankList);
+
+		model.addAttribute("group", groupService.selectOneGroup(group.getBoardNo()));
 	
 		return "sale/group/groupView";
 	}

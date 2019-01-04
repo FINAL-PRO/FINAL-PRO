@@ -72,7 +72,7 @@
 		</div>
 		<div class="col-md-9">
 			<input type="text" class="info" name="title" id="title" />
-			<p class="warn-msg">제목은 50글자를 넘을 수 없습니다.</p>
+			<p class="warn-msg" id="titleMsg">제목은 50글자를 넘을 수 없습니다.</p>
 		</div>
 		<div class="col-md-2"></div>
 	</div> <hr />
@@ -123,7 +123,7 @@
 							<option value="${bank.id}">${bank.value}</option>
 						</c:forEach>
 					</select> 
-					<input type="text" class="info" name="deposit" id="endDate" style="width:68%;"/> <br /> 
+					<input type="text" class="info" name="deposit" id="deposit" style="width:68%;"/> <br /> 
 					<p class="warn-msg">반드시 본인 명의의 계좌를 입력해 주세요.</p>
 				</td>
 			</tr>
@@ -223,6 +223,7 @@
 		}
 	}
 	
+	// 폼 미입력시 입력하라는 알림창 띄움
 	function submitForm() {
 		if($('input[name="memberNo"]').val() == 0 ) {
 			alert("로그인이 필요한 기능입니다.");
@@ -243,29 +244,54 @@
 		} else if ($('input[name="endDate"]').val() == "" ) {
 			alert("마감일을 입력해 주세요.");
 		} else {
-			alert($('input[name="maxCount"]').val());
 			$('form').submit();
 		}
 	}
 	
-	$("#maxCount").on("keyup", function() {
+	// 제목 100바이트 넘지 않게 정규식 처리
+	$("#title").on("keyup", function() {
 		var title = $("#maxCount").val().trim();
 		var regPwd = /^[0-9]$/g;
 
+	});
+	
+	// 물품명 100바이트 넘지 않게 정규식 처리
+	$("#goodsName").on("keyup", function() {
+		var goodsName = $("#goodsName").val().trim();
+		var regPwd = /^[0-9]$/g;
+
+	});
+	
+	// 가격 --> 정규식처리:100~1000000 (백원~백만원)
+	$("#price").on("keyup", function() {
+		var price = $("#price").val().trim();
+		var regPwd = /^[0-9]$/g;
+		
+	});
+	
+	// 모집인원 --> 정규식처리:1~20 사이 숫자만
+	$("#maxCount").on("keyup", function() {
+		var maxCount = $("#maxCount").val().trim();
+		var regPwd = /^[0-9]$/g;
+
 		if (title == "") {
-			$("#maxCountMsg").text('비밀번호을 입력하세요.');
+			$("#maxCountMsg").text('');
 		} else if (!regPwd.test(title)) {
 			$("#maxCountMsg").text('숫자만 입력해 주세요.');
 		} else {
-			$("#pwdChkComment").text('OK!');
+			$("#maxCountMsg").text('ok!');
 		}
 	});
 	
+	// 마감일 --> 과거선택x, 오늘부터 10일
+	$("#endDate").on("keyup", function() {
+		var endDate = $("#endDate").val().trim();
+		var regPwd = /^[0-9]$/g;
+		
+		console.log(endDate);
+	});
 	
 
-	
-	
-	// 제목 100바이트 넘지 않게 정규식 처리
 	
 </script>
 
