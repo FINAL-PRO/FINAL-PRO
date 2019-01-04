@@ -79,10 +79,13 @@
 }
 
 .content {
-	margin-top: 8px;
-	line-height: 18px;
 	color: #292929;
 	font-size: 14px;
+	width:80%;
+	padding:0.5px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
 }
 
 #container2 .article>p.status {
@@ -112,8 +115,6 @@
 	line-height: 18px;
 	color: #ffa81f;
 	font-size: 12px;
-	background: transparent
-		url('/images/community.board.article.attachcount.png') no-repeat;
 	background-size: 16px 16px;
 }
 
@@ -150,7 +151,9 @@ hr {
 	float: right;
 	padding-right: 20px;
 }
+
 </style>
+
 </head>
 <body>
 	<div id="container">
@@ -179,6 +182,7 @@ hr {
 										</select>
 									</div>
 									<script>
+									
 									
 									$("#tList").change(function(){
 										var tList = $(this).val();
@@ -229,8 +233,17 @@ hr {
 														</c:otherwise>
 													</c:choose>
 													</p>
+
 											</a></li>
 										</c:forEach>
+										<script>
+										
+											var con = 
+										
+											$(document).ready(function(){
+												if()
+											}
+										</script>
 									</ol>
 									<c:out value="${pageBar}" escapeXml="false" />
 								</div>

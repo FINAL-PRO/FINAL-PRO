@@ -1,6 +1,5 @@
 package com.kh.dc.like.model.service;
 
-import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,28 +12,21 @@ public class LikeServiceImpl implements LikeService {
 
 	@Autowired
 	LikeDao likeDao;
-	
-	@Override
-	public int like_check(HashMap<String, Object> hmap) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void like_uncheck(HashMap<String, Object> hmap) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int likecount(int bno) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int likeInsert(Like like) {
 		return likeDao.likeInsert(like);
+	}
+
+	@Override
+	public int likeCount(Like like) {
+		System.out.println("likecount service:"+like);
+		return likeDao.likeCount(like);
+	}
+
+	@Override
+	public int likeDelete(Like like) {
+		return likeDao.likeDelete(like);
 	}
 
 }

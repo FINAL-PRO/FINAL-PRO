@@ -132,7 +132,6 @@ public class JobBoardController {
 		return "redirect:/job/jobBoard/jobBoardDetail.do?no="+ jobBoard.getNo();	
 	}
 	
-	//@RequestMapping("/job/jobBoard/updateViewCount.do")
 	
 	@RequestMapping("/job/jobBoard/deleteJobBoard.do")
 	public String deleteJobBoard(@RequestParam int boardNo, Model model) {

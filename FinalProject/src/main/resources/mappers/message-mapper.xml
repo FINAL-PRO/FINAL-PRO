@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="message_mapper">
+	
+	<resultMap type="message" id="messageMap">
+		<result column="FROMMNICK" property="frommNick"/>
+		<result column="TOMNICK" property="tomNick"/>
+	</resultMap>	
+
+	<select id="selectMessageList" resultMap="messageMap">
+		SELECT MSG.NO, MSG.CONTENT, MSG.SENDDATE, 
+		MSG.FROMMEMBER, MSG.TOMEMBER, 
+        C.VALUE "STATUS",
+        FROMM.NICKNAME "FROMMNICK",
+        TOM.NICKNAME "TOMNICK"
+		FROM DC_MESSAGE_TB MSG
+		JOIN DC_MEMBER_TB M ON(M.NO = MSG.TOMEMBER)
+		JOIN DC_MEMBER_TB FROMM ON(FROMM.NO = MSG.FROMMEMBER)
+		JOIN DC_MEMBER_TB TOM ON(TOM.NO = MSG.TOMEMBER)
+        JOIN DC_CODE_TB C ON(C.ID = MSG.STATUS)
+		WHERE STATUS != 'MSGTYPE003'
+		AND MSG.TOMEMBER = #{no}
+		ORDER BY MSG.SENDDATE
+	</select>
+	
+	<select id="selectMessageTotalContents" resultType="_int">
+		SELECT COUNT(*) 
+		FROM DC_MESSAGE_TB MSG
+		JOIN DC_MEMBER_TB M ON(M.NO = MSG.TOMEMBER)
+		WHERE STATUS != 'MSGTYPE003'
+		AND M.NO = #{no}
+	</select>
+	
+	<select id="selectOneMessage" parameterType="_int" resultType="message">
+		SELECT MSG.*,
+		FROMM.NICKNAME "FROMMNICK",
+		TOM.NICKNAME "TOMNICK"
+		FROM DC_MESSAGE_TB MSG
+		JOIN DC_MEMBER_TB FROMM ON(FROMM.NO = MSG.FROMMEMBER)
+		JOIN DC_MEMBER_TB TOM ON(TOM.NO = MSG.TOMEMBER)
+		WHERE MSG.NO = #{no} 
+	</select>
+	
+	<insert id="insertMessage" parameterType="message">
+		<selectKey keyProperty="toMember" resultType="_int" order="BEFORE"> 
+			SELECT NO FROM DC_MEMBER_TB WHERE NICKNAME = #{tomNick}
+		</selectKey>
+		INSERT INTO DC_MESSAGE_TB 
+		VALUES(SEQ_MESSAGE.NEXTVAL, #{content}, SYSDATE, 
+			   #{fromMember}, #{toMember}, 'MSGTYPE001')
+	</insert>
+			
+	<update id="readJobBoard" parameterType="_int">
+		UPDATE DC_MESSAGE_TB SET STATUS='MSGTYPE002' WHERE NO = #{no}
+	</update>
+	
+	<update id="deleteMessage" parameterType="_int">
+		UPDATE DC_MESSAGE_TB SET STATUS='MSGTYPE003' WHERE NO = #{no}
+	</update>
+	
+<!-- 	<update>
+		UPDATE DC_MESSAGE_TB SET STATUS = 'N'
+		WHERE NO IN(
+		<foreach collection="list" item="no" separator=",">
+			#{no}
+		</foreach>
+		)
+	</update> -->
+</mapper>

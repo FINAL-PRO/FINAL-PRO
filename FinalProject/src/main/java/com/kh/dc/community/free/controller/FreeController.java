@@ -84,7 +84,6 @@ public class FreeController {
 	
 	@RequestMapping("community/free/freeInsertFormEnd.do")
 	public String insertFree(Board board,  Model model) {
-			
 		if(freeService.insertFree(board) > 0) {
 			model.addAttribute("insertFree", freeService.selectOneFree(board.getNo()));
 		}
