@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <header>
 	<div id="header-container">
@@ -101,9 +102,12 @@
 									href="${pageContext.request.contextPath}/business/ad/list.do">광고
 									신청</a>
 							</div></li>
-						<li class="nav-item"><a class="nav-link"
-							href="${pageContext.request.contextPath}/admin/index.do?no=${member.no}"> 관리자
-								페이지 </a></li>
+						<li class="nav-item">
+						<sec:authorize access="isAuthenticated()">
+							<a class="nav-link" href="${pageContext.request.contextPath}/admin/index.do?no=${member.no}"> 관리자 페이지 </a>
+									<form action="${pageContext.request.contextPath}/logout" method="get"> <input type="submit" value="로그아웃" /> </form> 
+						</sec:authorize>
+						</li>
 					</ul>
 
 					<!-- 로그인처리  -->

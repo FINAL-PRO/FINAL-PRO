@@ -15,7 +15,7 @@ import com.kh.dc.member.model.vo.Member;
 @Aspect
 public class LoginAspect {
 
-	@Pointcut("execution(* com.kh.dc..*(..))")
+/*	@Pointcut("execution(* com.kh.dc..*(..))")
 	public void pointcut() {}
 	
 	@Around("execution(* com.kh.dc.admin..*(..))")
@@ -45,5 +45,5 @@ public class LoginAspect {
 		}else {
 			return "redirect:/";
 		}
-	}
+	}*/
 }

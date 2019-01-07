@@ -13,8 +13,7 @@ import com.kh.dc.member.model.vo.Member;
 public class AdminController {
 	
 	@RequestMapping("admin/index.do")
-	public String Admin(@RequestParam int no) {
-		System.out.println("로그인 멤버 번호 : " + no);
+	public String Admin() {
 		
 		return "admin/index";
 	}

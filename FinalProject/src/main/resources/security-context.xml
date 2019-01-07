@@ -4,8 +4,35 @@
 	xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
-		
- 	<!-- 비밀번호 암호화 관련 객체 -->
-	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+	<!-- 비밀번호 암호화 관련 객체 -->
+	<bean id="bcryptPasswordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+	
+	<security:http security="none" pattern="**/getListData.do"/>
+	<security:http security="none" pattern="/resources/**"/>
+	<security:http use-expressions="true">
+		<security:intercept-url pattern="/login/loginForm.do" access="permitAll" />
+		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/**" access="hasRole('USER') or hasRole('ADMIN')" />
+
+		<security:form-login default-target-url="/index.do"
+							 authentication-failure-url="/login/loginForm.do?error"/>
+		<security:logout logout-url="/logout"
+						 logout-success-url="/" />
+						 
+		<security:access-denied-handler error-page="/login/accessDenied.do"/>
+	</security:http> 
+	<!-- provider -->
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="user" password="password" authorities="ROLE_USER" />
+				<security:user name="admin" password="admin" authorities="ROLE_ADMIN" />
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>
 
 </beans>

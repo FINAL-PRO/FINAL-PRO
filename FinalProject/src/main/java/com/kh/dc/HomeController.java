@@ -33,7 +33,14 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "index";
+	}
+	
+	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
+	public String index(Locale locale, Model model) {
+		logger.info("index.do {}.", locale);
+		
+		return "index";
 	}
 	
 }
