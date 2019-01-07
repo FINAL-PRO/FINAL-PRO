@@ -81,7 +81,7 @@
 	<update id="updateMember" parameterType="Member">
 		UPDATE DC_MEMBER_TB SET
 		NICKNAME = #{nickName}, PASSWORD = #{password}, 
-		LOCATIONNO = #{locationNo}, ADDRESS=#{address}, DEPOSIT=#{deposit}, BANK=#{bank}
+		LOCATIONNO = #{locationNo}, ADDRESS=#{address}, DEPOSIT=#{deposit}, BANK=#{bank}, PROFILE=#{profile}
 		WHERE NO = #{no}
 	</update>
 	

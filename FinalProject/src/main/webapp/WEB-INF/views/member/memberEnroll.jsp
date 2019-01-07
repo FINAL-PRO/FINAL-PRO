@@ -60,9 +60,8 @@
 				  					<label class="profileLabel">기본 이미지를 누르면</label>
 				  					<label class="profileLabel">프로필사진을 변경할 수 있습니다.</label>
 				  				</div>
-							</div>
-							
-							
+							</div>	
+																				
 							<div class="row email-container" id="email-container">
 								<div class="col-md-3">이메일</div>
 								<div class="col-md-6">
@@ -233,7 +232,7 @@
 								$(".guide").text("이미 사용중인 닉네임입니다.");
 								$("#submitButton").attr('disabled', true);
 							} else {
-								$(".guide").text("사용할 수 있는 닉네임입니다.");
+								$(".guide").text("");
 								$("#submitButton").attr('disabled', false);
 							}
 							},error : function(jqxhr,textStatus, errorThrown) {
