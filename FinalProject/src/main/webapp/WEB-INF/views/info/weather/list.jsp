@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -81,7 +81,7 @@
 		</main>
 	</div>
 	<c:import url="../../common/footer.jsp"/>
-	
+
 	<script>
 	$(document).ready(function(){
 		
@@ -123,8 +123,9 @@
 
 		// 단기 예보(3시간별 오늘, 내일, 모레)
 		$.ajax({
-	        url: url,
-	        dataType: "xml",
+			crossOrigin: true,
+			url : url,
+			dataType: 'jsonp',
 	        type: "GET",
 	        async: "false",
 	        success: function(data) {
@@ -195,8 +196,10 @@
 		var apiURI = "http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=109";
 		
 	    $.ajax({
+	    	crossOrigin: true,
 	        url: apiURI,
-	        type: 'jsonp',
+	        dataType: 'jsonp',
+	        jsonp: "callback",
 	        type: "GET",
 	        async: "false",
 	        success: function(data) {
