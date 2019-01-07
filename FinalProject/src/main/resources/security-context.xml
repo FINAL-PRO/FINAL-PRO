@@ -9,19 +9,17 @@
 	<bean id="bcryptPasswordEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
-	
-	<security:http security="none" pattern="**/getListData.do"/>
 	<security:http security="none" pattern="/resources/**"/>
 	<security:http use-expressions="true">
 		<security:intercept-url pattern="/login/loginForm.do" access="permitAll" />
-		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/index.do" access="permitAll" />
 		<security:intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/**" access="hasRole('USER') or hasRole('ADMIN')" />
 
 		<security:form-login default-target-url="/index.do"
 							 authentication-failure-url="/login/loginForm.do?error"/>
 		<security:logout logout-url="/logout"
-						 logout-success-url="/" />
+						 logout-success-url="/index.do" />
 						 
 		<security:access-denied-handler error-page="/login/accessDenied.do"/>
 	</security:http> 
