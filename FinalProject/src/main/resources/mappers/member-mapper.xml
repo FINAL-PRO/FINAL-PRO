@@ -63,7 +63,7 @@
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO DC_MEMBER_TB VALUES(
 			SEQ_MEMBER.NEXTVAL, #{email}, #{nickName}, 
-			#{password}, SYSDATE, 0, #{locationNo}, 1, 'STATUS001', null, #{name}, null, null
+			#{password}, SYSDATE, 0, #{locationNo}, 1, 'STATUS001', null, #{name}, null, null, #{profile}
 		)
 	</insert>
 	

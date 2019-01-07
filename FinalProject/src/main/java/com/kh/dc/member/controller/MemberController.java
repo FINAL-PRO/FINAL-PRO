@@ -1,5 +1,9 @@
 package com.kh.dc.member.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.Code;
@@ -35,6 +40,7 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
+	// 회원가입 페이지 가져오기
 	@RequestMapping("/member/memberEnroll.do")
 	public String memberEnroll(Model model) {
 		List<Location> locationList = memberService.selectLocationList();
@@ -46,6 +52,7 @@ public class MemberController {
 		
 	}
 	
+	// 회원가입시 닉네임 중복 체크 ajax
 	@RequestMapping("member/checkNickNameDuplicate.do")
 	@ResponseBody
 	public int checkNickNameDuplicate(@RequestParam String nickName){		
@@ -56,6 +63,7 @@ public class MemberController {
 		
 	}
 	
+	// 회원가입시 이메일 중복 체크 ajax
 	@RequestMapping("member/checkEmailDuplicate.do")
 	@ResponseBody
 	public int checkEmailDuplicate(@RequestParam String email){		
@@ -66,18 +74,53 @@ public class MemberController {
 		
 	}
 	
+	// 회원가입 완료 - memberInsert
 	@RequestMapping("member/memberEnrollEnd.do")
-	public String memberEnrollEnd(HttpSession session, Member member, Model model) {
+	public String memberEnrollEnd(HttpSession session, Member member, 
+			Model model, @RequestParam(value="file", required = false) MultipartFile upFile) {
 		
 		System.out.println("member : " + member);
-
-		// 원래 비밀번호
-		String rawPassword = member.getPassword();
-		System.out.println("비밀번호 암호화 전 : " +rawPassword);		
-
-		member.setPassword(bcryptPasswordEncoder.encode(rawPassword));
 		
-		System.out.println("비밀번호 암호화 후 : "+member.getPassword());
+		// 1. 파일을 저장할 경로 생성
+		String saveDir = session.getServletContext().getRealPath("/resources/upload/profile");
+		
+		//List<Attachment> attachList = new ArrayList<Attachment>();
+		
+		// 2. 폴더 유무 확인 후 생성
+		File dir = new File(saveDir);
+		
+		System.out.println("폴더가 있나요? " + dir.exists());
+		
+		if(dir.exists() == false) dir.mkdirs();
+		
+		// 3. 파일 업로드 시작 
+		
+			if(!upFile.isEmpty()) {
+				// 원본 이름 가져오기
+				String originName = upFile.getOriginalFilename();
+				String ext = originName.substring(originName.lastIndexOf(".")+1);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+				
+				int rnNum = (int)(Math.random() * 1000);
+				
+				// 서버에서 저장 후 관리할 파일 명
+				String renamedName = sdf.format(new Date()) + "_" + rnNum + "." + ext;
+				
+				// 실제 파일을 지정한 파일명으로 변환하며 데이터를 저장한다.
+				try {
+					upFile.transferTo(new File(saveDir + "/" + renamedName));
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+				}
+				
+				member.setProfile(renamedName);
+				
+				System.out.println("프사 서버 저장 완료?" + member.getProfile());
+			}
+		
+		// 비밀번호 암호화 //
+		String rawPassword = member.getPassword();	// 원래 비밀번호
+		member.setPassword(bcryptPasswordEncoder.encode(rawPassword));
 		
 		int result = memberService.insertMember(member);
 		

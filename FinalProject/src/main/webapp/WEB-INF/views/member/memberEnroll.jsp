@@ -21,6 +21,15 @@
 		
 		#modalBtn>button {width: 40%; text-align:center; margin-bottom: 10px;}		
 		#modalPassword {width: 80%;}
+		
+		#file {display:none;}
+		#profileImg {
+			border-radius: 100px;
+		    border: 1px solid lightgray; 
+		    width: 150px; 
+		    height: 150px;
+		    margin-bottom: 15px;
+		}
 </style>
 </head>
 <body>
@@ -39,7 +48,21 @@
 					</div>
 					<div class="dc-content-box">
 						<div id="enroll-container">
-						<form name="memberEnrollFrm" id="memberEnroll" action="memberEnrollEnd.do" method="post">
+						<form name="memberEnrollFrm" id="memberEnroll" action="memberEnrollEnd.do" method="post" enctype="multipart/form-data">
+							<div class="row profile-container" id="profile-container">
+								<div class="col-md-3">프로필</div>
+				  				<div class="col-md-6" align="center">
+				  					<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/profileDefaultImg.png"/>
+				    				<input type="file" name="file" id="file" onchange="inputProfile(this);" multiple/>
+				  				</div>
+				  				
+				  				<div class="col-md-3">
+				  					<label class="profileLabel">기본 이미지를 누르면</label>
+				  					<label class="profileLabel">프로필사진을 변경할 수 있습니다.</label>
+				  				</div>
+							</div>
+							
+							
 							<div class="row email-container" id="email-container">
 								<div class="col-md-3">이메일</div>
 								<div class="col-md-6">
@@ -268,6 +291,22 @@
 			});
 			
 		});
+		
+		// 프로필 이미지 클릭시 파일 태그 클릭 효과
+		$('#profileImg').click(() => { $('#file').click(); });
+		
+		// 프로필 사진 미리보기 스크립트
+		function inputProfile(value) {
+			if(value.files && value.files[0]) {
+				var reader = new FileReader();				
+				
+				reader.onload = function (e) {
+					$("#profileImg").attr("src", e.target.result);
+					$(".profileLabel").hide();					
+				}				
+				reader.readAsDataURL(value.files[0]);				
+			}
+		}
 	</script>
 </body>
 </html>
