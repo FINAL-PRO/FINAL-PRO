@@ -52,7 +52,8 @@
 		<div align="center">
 			<img src="" alt="프로필 이미지" />
 			<p>유저이름</p>
-			<button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal">로그인</button>
+			<!-- <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal">로그인</button> -->
+			<a href="${pageContext.request.contextPath}/login">로그인</a>
 			<button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='/dc/member/memberEnroll.do'">회원가입</button>
 			<br />
 			<span>내가쓴글</span> / <span>내가쓴댓글</span> / <span>쪽지</span>
