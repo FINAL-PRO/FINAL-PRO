@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 	
 <script>
 	var uris = "${pageContext.request.requestURI}".split("/");
@@ -53,12 +54,17 @@
 			<img src="" alt="프로필 이미지" />
 			<p>유저이름</p>
 			<!-- <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal">로그인</button> -->
-			<a href="${pageContext.request.contextPath}/login">로그인</a>
-			<button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='/dc/member/memberEnroll.do'">회원가입</button>
 			<br />
-			<span>내가쓴글</span> / <span>내가쓴댓글</span> / <span>쪽지</span>
+			<sec:authorize access="isAnonymous()">
+				<button class="btn btn-outline-success" onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<form action="${pageContext.request.contextPath}/logout" method="get"> 
+					<input type="submit" class="btn btn-outline-success" value="로그아웃" /> 
+				</form> 
+			</sec:authorize>
+			<button class="btn btn-outline-success" type="button" onclick="location.href='/dc/member/memberEnroll.do'">회원가입</button>
 		</div>
-		
 	</div>
 	<div class="dc-content-box">
 		<h4>

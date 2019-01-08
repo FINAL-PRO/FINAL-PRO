@@ -105,7 +105,6 @@
 						<li class="nav-item">
 						<sec:authorize access="isAuthenticated()">
 							<a class="nav-link" href="${pageContext.request.contextPath}/admin/index.do?no=${member.no}"> 관리자 페이지 </a>
-									<form action="${pageContext.request.contextPath}/logout" method="get"> <input type="submit" value="로그아웃" /> </form> 
 						</sec:authorize>
 						</li>
 					</ul>

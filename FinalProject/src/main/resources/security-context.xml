@@ -18,25 +18,26 @@
 	<security:http security="none" pattern="/member/memberEnrollEnd.do" />
 	<security:http security="none" pattern="/member/memberSearch.do" />
 	
+	<security:http security="none" pattern="/**/*End.do" />
+	
+	
+	<!-- 중복로그인 처리 -->
+	<security:http security="none" pattern="/login_duplicate.do" />
+	
 	<!-- 리소스파일 -->
 	<security:http security="none" pattern="/resources/**" />
 	
 	<security:http use-expressions="true">
-		<security:intercept-url
-			pattern="/login/loginForm.do" access="permitAll" />
-		<security:intercept-url pattern="/index.do"
-			access="permitAll" />
-		<security:intercept-url pattern="/"
-			access="permitAll" />
-		<security:intercept-url pattern="/admin/**"
-			access="hasRole('ROLE_ADMIN')" />
-		<security:intercept-url pattern="/business/**"
-			access="hasRole('ROLE_ADMIN')" />
-		<security:intercept-url pattern="/**"
-			access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/login/loginForm.do" access="permitAll" />
+		<security:intercept-url pattern="/index.do" access="permitAll" />
+		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/business/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/**" access="hasRole('USER') or hasRole('ROLE_ANONYMOUS')" />
 			
 		<security:form-login
-			default-target-url="/index.do"/>
+			default-target-url="/index.do"
+			always-use-default-target="true"/>
 
 		<!-- <security:form-login
 			default-target-url="/index.do"
@@ -46,6 +47,10 @@
 
 		<security:access-denied-handler
 			error-page="/login/accessDenied.do" />
+			
+		<security:session-management>
+			<security:concurrency-control max-sessions="1" expired-url="/login_duplicate.do"/>
+		</security:session-management>
 	</security:http>
 	<!-- provider -->
 	

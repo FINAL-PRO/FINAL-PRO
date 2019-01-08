@@ -1,19 +1,26 @@
 package com.kh.dc;
 
+import java.security.Principal;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.kh.dc.member.model.service.MemberService;
+import com.kh.dc.member.model.vo.Member;
 
 /**
  * Handles requests for the application home page.
  */
+@SessionAttributes(value= {"member"})
 @Controller
 public class HomeController {
 	
@@ -36,8 +43,22 @@ public class HomeController {
 		return "index";
 	}
 	
+	@Autowired
+	private MemberService memberService;
+	
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
-	public String index(Locale locale, Model model) {
+	public String index(Locale locale, Model model, Principal principal) {
+		
+		if(principal != null) {
+			System.out.println(principal.getName());
+			
+			Member m = memberService.selectOne(principal.getName());
+			
+			System.out.println("로그인 멤버 : " + m);
+			
+			model.addAttribute("member", m);
+		}
+		
 		logger.info("index.do {}.", locale);
 		
 		return "index";
