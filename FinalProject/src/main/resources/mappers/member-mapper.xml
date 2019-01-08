@@ -63,7 +63,7 @@
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO DC_MEMBER_TB VALUES(
 			SEQ_MEMBER.NEXTVAL, #{email}, #{nickName}, 
-			#{password}, SYSDATE, 0, #{locationNo}, 1, 'STATUS001', null, #{name}, null, null
+			#{password}, SYSDATE, 0, #{locationNo}, 1, 'STATUS001', null, #{name}, null, null, #{profile}
 		)
 	</insert>
 	
@@ -81,7 +81,7 @@
 	<update id="updateMember" parameterType="Member">
 		UPDATE DC_MEMBER_TB SET
 		NICKNAME = #{nickName}, PASSWORD = #{password}, 
-		LOCATIONNO = #{locationNo}, ADDRESS=#{address}, DEPOSIT=#{deposit}, BANK=#{bank}
+		LOCATIONNO = #{locationNo}, ADDRESS=#{address}, DEPOSIT=#{deposit}, BANK=#{bank}, PROFILE=#{profile}
 		WHERE NO = #{no}
 	</update>
 	
