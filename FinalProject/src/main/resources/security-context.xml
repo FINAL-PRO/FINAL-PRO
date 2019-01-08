@@ -68,6 +68,7 @@
 
 	<security:authentication-manager>
 		<security:authentication-provider user-service-ref="userService">
+			<security:password-encoder ref="bcryptPasswordEncoder"/>
 		</security:authentication-provider>
 	</security:authentication-manager>
 
