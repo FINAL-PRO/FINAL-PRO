@@ -59,7 +59,7 @@
 								<div class="currentWeather" style="width:100%;">
 									<h3 id="currentWeatherLabel">현재 날씨를 불러오는 중입니다.</h3>
 									<div id="loadingTodayWeather"> 
-										<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading.gif" />
+										<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" />
 									</div>														
 								</div>
 								<hr />
@@ -69,7 +69,7 @@
 								<div class="weekWeather-container" style="display: inline-block; margin-top:10px; width: 100%">	
 									<h3 id="weekWeatherLabel">주간 날씨를 불러오는 중입니다.</h3>
 									<div id="loadingWeekWeather">													
-										<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading.gif" />
+										<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" />
 									 </div>										
 								</div>	
 													
@@ -208,6 +208,7 @@
 				$("#currentWeatherLabel").hide();
 			}
 	    });		
+		
 		
 		// 주간날씨(기상청 중기예보 - 10일 예보)
 		var apiURI = "http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=109";
