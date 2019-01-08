@@ -164,7 +164,7 @@ hr {
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>자유게시판</h1>
+							<h1>제목</h1>
 						</div>
 						<div class="dc-content-box">
 							<div id="container2">

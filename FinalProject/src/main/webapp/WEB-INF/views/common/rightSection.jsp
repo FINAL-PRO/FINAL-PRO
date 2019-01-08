@@ -67,17 +67,18 @@
 		<hr />	
 		<div class="" style="text-align: center">
 			<label id="village" style="margin-bottom: 10px;"></label><br>
-			<i class="wi wi-night-sleet" id="weatherIcon" style="font-size: 50px; margin-bottom: 10px;"></i> <br>
+			<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" style="width:100px; height: 100px;"/>
+			<i class="" id="weatherIcon" style="font-size: 50px; margin-bottom: 10px;"></i> <br>
 			<label id="sky"></label>
 		
 		<hr />
 		
 		<div class="nowWeather-container" style="display: inline-block; ">	
-			<div class="block" style="text-align: center; width: auto;">
+			<!-- <div class="block" style="text-align: center; width: auto;">
 				현재 기온 :	<label id="tc"></label><br>
 				최저 기온 :	<label id="tmin"></label><br>
 				최고 기온 :	<label id="tmax"></label>
-			</div>
+			</div> -->
 			<!-- <div class="block" style="text-align: center; width: auto;">
 				<label id="tc"></label><br>
 				<label id="tmin"></label><br>
@@ -100,6 +101,7 @@
 			 
 		var url = "";
 		var village = "";
+		var output = "";
 				
 		switch("${member.locationNo}"){
 			case '2': url="&city=서울&county=강남구&village=역삼1동"; village="역삼동"; break;
@@ -145,14 +147,22 @@
 					case "뇌우/비 또는 눈": $("#weatherIcon").attr("class", "wi wi-rain-mix"); break;		
 				}
 				
-				$("#sky").text(sky);
+				output += '현재 기온 :	<label id="tc">'+ tc +'</label><br>';
+				output += '최저 기온 :	<label id="tmin">'+ tmin +'</label><br>';
+				output += '최고 기온 :	<label id="tmax">'+ tmax +'</label>';
+				
+				$('.nowWeather-container').append(output);
+
+				/* $("#sky").text(sky);
 				$("#tc").text(tc);
 				$("#tmax").text(tmax);
 				$("#tmin").text(tmin);
-				$("#village").text(village);
+				$("#village").text(village); */
 				
 			},  error : function(jqxhr, textStatus, errorThrown) {
 				console.log("ajax 처리 실패");
+			}, complete : function(){
+				$("#loadingTodayWeather").hide();
 			}
 			
 		}); 

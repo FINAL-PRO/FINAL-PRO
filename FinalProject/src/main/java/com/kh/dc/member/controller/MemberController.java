@@ -444,13 +444,16 @@ public class MemberController {
 		List<Comment> commentList = memberService.selectMyCommentList(mNo);	
 		
 		System.out.println("boardList : " + boardList);
-		System.out.println("commentList : " + commentList);
-		
+		System.out.println("commentList : " + commentList);		
+
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("commentList", commentList);
 		
+		
 		return "mypage/myContentList";
 	}
+	
+	
 	
 
 	
