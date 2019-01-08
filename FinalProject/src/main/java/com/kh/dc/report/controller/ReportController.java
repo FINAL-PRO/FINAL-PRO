@@ -15,17 +15,19 @@ public class ReportController {
 	@Autowired
 	private ReportService reportService;
 	
-	@RequestMapping("/report/reportView.do")
+/*	@RequestMapping("/report/reportView.do")
 	public void reportForm() {
 			
-	}
+	}*/
 	
 	@RequestMapping("/report/reportInsert.do")
-	public int reportInsert(@RequestParam int bno, @RequestParam int mno) {
+	@ResponseBody
+	public int reportInsert(@RequestParam int bno, @RequestParam int mno, @RequestParam int reCheck) {
 		
 		Report report = new Report();
 		report.setBoardNo(bno);
-		report.setMembmerNo(mno);
+		report.setMemberNo(mno);
+		report.setRcNo(reCheck);
 		
 		int result = reportService.reportInsert(report);
 		

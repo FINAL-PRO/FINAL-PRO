@@ -199,7 +199,7 @@ hr {
 											<li class="groupin" id="${b.no}">
 											<a class="article" href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${b.no}">
 													<p class="time">
-														<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+														<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd" />
 													</p>
 													<p class="profile">
 														<span class="title">${b.title}</span> <img class="picture" src="https://cf-epi.campuspick.com/0.png" /> 

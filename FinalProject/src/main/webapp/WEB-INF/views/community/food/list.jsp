@@ -10,142 +10,120 @@
 <title>동커</title>
 <c:import url="../../common/header.jsp" />
 <style>
-#container2 {
-	margin: 8px auto;
-}
-
-#container2 .article {
-	font-size: 0;
-	background-color: #fff;
-	text-decoration: none;
-}
-
-#container2 .article>p.profile>img.picture {
-	display: inline-block;
-	margin-right: 6px;
-	width: 20px;
-	height: 20px;
-	vertical-align: top;
-}
-
-#container2 .article>p.profile>span.nickname {
-	display: inline-block;
-	max-width: 60%;
-	line-height: 20px;
-	color: #292929;
-	font-size: 14px;
-	font-weight: bold;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-#container2 .article>p.profile>span.title {
-	display: inline-block;
-	max-width: 60%;
-	line-height: 20px;
-	color: #292929;
-	font-size: 14px;
-	font-weight: bold;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-#container2 .article>p.profile>span.count {
-	display: inline-block;
-	max-width: 60%;
-	line-height: 20px;
-	color: #292929;
-	font-size: 12px;
-}
-
-.time {
-	float: right;
-	display: inline-block;
-	line-height: 20px;
-	color: #a6a6a6;
-	font-size: 12px;
-}
-
-/* #container2 .article>p.text {
-	margin-top: 8px;
-	line-height: 18px;
-	color: #292929;
-	font-size: 14px;
-} */
-
-.content {
-	display: inline-block;
-	color: #292929;
-	font-size: 12px;
-	width:80%;
-	padding:0.5px;
-	overflow:hidden;
-	text-overflow:ellipsis;
-	white-space:nowrap;
-}
-
-#container2 .article>p.status {
-	margin-top: 8px;
-}
- 
-span {
-	display: inline-block;
-	margin-right: 8px;
-	line-height: 18px;
-	color: #a6a6a6;
-	font-size: 12px;
-	background-repeat: no-repeat;
-	background-size: 16px 16px;
-}
-
-p.attach {
-	display: inline-block;
-	float: right;
-	margin-top: 8px;
-}
-
-span.attachcount {
-	display: inline-block;
-	line-height: 18px;
-	color: #ffa81f;
-	font-size: 12px;
-	background-size: 16px 16px;
-}
-
-a.article {
-	display: block;
-	padding: 12px 12px;
-	border-bottom: 1px solid #f2f2f2;
-	height: 140px;
-}
-
-#container2 div.articlelist>ol.group>li>a.article:hover {
-	background-color: #f8f8f8;
-}
-
-.articlelist {
-	padding-top: 15px;
-}
-
-.group {
-	list-style: none;
-	padding: 20px;
-}
-
-hr {
-	border: 0.3px solid lightgrey;
-}
 
 .category {
 	float: left;
+	padding-top: 10px;
 	padding-left: 20px;
 }
 
 .food_btn {
+	padding-top: 10px;
 	float: right;
 	padding-right: 20px;
+}
+
+.review {
+	float: left;
+}
+ 
+.article{
+	list-style: none;
+}
+
+.title {
+	color: rgb(85, 85, 85);
+	line-height: 1.4em;
+	overflow: hidden;
+	font-size: 1.4rem;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.title a {
+	text-decoration: none;
+	color: rgb(85, 85, 85);
+}
+
+.title a h3 {
+	font-size: inherit;
+	display: inline;
+}
+
+.point {
+	line-height: 1.2em;
+}
+
+.address {
+	color: lightslategray;
+	display: inline-block;
+	padding-left: 10px;
+}
+
+.short_review {
+	display: inline-block;
+}
+
+.nickname {
+	display: inline;
+	padding-left: 20px;
+	font-size: 0.8rem;
+	color: rgb(85, 85, 85);
+}
+
+.time {
+	display: inline;
+	padding-left: 20px;
+	font-size: 0.8rem;
+	color: rgb(85, 85, 85);
+}
+
+.count {
+	display: inline-block;
+	max-width: 60%;
+	line-height: 20px;
+	color: #292929;
+	font-size: 12px;
+}
+
+.review_more{
+	display: inline-block;
+}
+
+.thumb_review{
+	display: inline-block;
+	height: 200px; 
+	width: 200px; 
+	border: 1px solid green;
+}
+
+.thumb_review .center{
+	height: 199px; 
+	width: 200px; 
+}
+
+.board_review{
+	display: inline-block;
+	padding-left: 30px; 
+	padding-top: 10px; 
+	padding-right: 100px; 
+	padding-bottom: 20px; 
+	height: 200px; 
+	width: 80%;
+	border: 1px solid navy; 
+	font-size: 0.8rem;
+}
+
+.article{
+	border: 1px solid red;
+	height: 200px; 
+	display: flex;
+	background:white;
+  	opacity: 1.0;
+}
+
+.article:hover{
+	opacity: 0.7;
 }
 
 </style>
@@ -192,44 +170,44 @@ hr {
 									</div>
 								</div>
 								<div class="articlelist">
-									<ol class="group"></br>
+									<ol class="group"><br><br>
 										<p>총 ${totalContents}건의 게시물이 있습니다.</p>
 										
 										<c:forEach items="${flist}" var="b">
 											<li class="groupin" id="${b.no}">
-											<a class="article" href="${pageContext.request.contextPath}/community/food/foodView.do?bno=${b.no}">
+											<div class="article" onclick="location.href='${pageContext.request.contextPath}/community/food/foodView.do?bno=${b.no}';">
+											
+												<div class="thumb_review">
+									            	<img class="center" src="https://mp-seoul-image-production-s3.mangoplate.com/646949_1523505282361983.jpg">
+									          	</div>
+												<div class="board_review">
+										            <span class="title"> <h3>${b.title}</h3></span>
+										            <p class="nickname">${b.memberName}</p>
 													<p class="time">
-														<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+														<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd" />
 													</p>
-													<p class="profile">
-														<span class="title">${b.title}</span> <img class="picture" src="https://cf-epi.campuspick.com/0.png" /> 
-														<span class="nickname">${b.memberName}</span> 
-														<span class="count">조회수: ${b.viewCount}</span>
-													</p>
-													<c:choose>
+										            <br>
+										            <strong class="point"><span>4.4</span></strong>
+										            <p class="address">서울시 역삼동 삼역빌딩 102-78</p>
+										            <br><br>
+										            <c:choose>
 														<c:when test="${b.imageCheck eq 0}">
-															<span class="content">${b.content}</span>
+															<span class="short_review">${b.content}</span>
 														</c:when>
 														<c:otherwise>
 															<span class="content"><p>(이미지)</p></span>
 														</c:otherwise>
 													</c:choose>
-													<p class="status">
-														<span class="votecount">좋아요: ${b.likeCount}</span> 
-														<span class="commentcount">댓글: ${b.commentCount}</span>
-														<c:choose>
-															<c:when test="${b.imageCheck eq 0}">
-																<span class="attachcount"></span>
-															</c:when>
-															<c:otherwise>
-																<span class="attachcount"><img src="/dc/resources/images/images.png" style="height: 17px; width: 17px;"></span>
-															</c:otherwise>
-														</c:choose>
-													</p>
-											</a></li>
+										            <br><br>
+										            <div class="count">조회수: ${b.viewCount}</div>&nbsp;&nbsp;
+										            <div class="count">댓글: ${b.commentCount}</div>&nbsp;&nbsp;
+										            <div class="count">좋아요: ${b.likeCount}</div>
+												</div>
+										
+											</div><br /></li>
 										</c:forEach>
-			
-									</ol>
+										
+										</ol>
 									<c:out value="${pageBar}" escapeXml="false" />
 								</div>
 							</div>

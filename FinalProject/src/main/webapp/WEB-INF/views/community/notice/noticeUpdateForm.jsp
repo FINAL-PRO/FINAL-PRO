@@ -57,7 +57,7 @@
 						<div class="dc-content-box">
 							<div class="board_area">
 								<form name="boardFrm"
-									action="${pageContext.request.contextPath}/community/free/freeUpdateFormEnd.do?no=${board.no}"
+									action="${pageContext.request.contextPath}/community/notice/noticeUpdateFormEnd.do?no=${board.no}"
 									method="post">
 									<div>
 										<b>글쓰기</b> <input type="text" id="bno" name="bno"
@@ -103,12 +103,12 @@
 									</div>
 									<script>
 										$("#btn_board_save").click(function() {
-												boardFrm.action = "${pageContext.request.contextPath}/community/free/freeUpdateFormEnd.do?no=${board.no}"
+												boardFrm.action = "${pageContext.request.contextPath}/community/notice/noticeUpdateFormEnd.do?no=${board.no}"
 												boardFrm.submit();
 											});
 
 										$("#btn_board_back").click(function() {
-												boardFrm.action = "${pageContext.request.contextPath}/community/free/list.do"
+												boardFrm.action = "${pageContext.request.contextPath}/community/notice/list.do"
 												boardFrm.submit();
 											});
 									</script>

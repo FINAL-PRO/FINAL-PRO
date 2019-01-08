@@ -160,6 +160,31 @@
 		width: 10px;
 	}
 	
+	.starRev{
+		padding-top: 10px;
+		float: left;
+	}
+	
+	.starR1{
+	    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
+	    background-size: auto 100%;
+	    width: 15px;
+	    height: 30px;
+	    float:left;
+	    text-indent: -9999px;
+	    cursor: pointer;
+	}
+	.starR2{
+	    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+	    background-size: auto 100%;
+	    width: 15px;
+	    height: 30px;
+	    float:left;
+	    text-indent: -9999px;
+	    cursor: pointer;
+	}
+	.starR1.on{background-position:0 0;}
+	.starR2.on{background-position:-15px 0;}
 	
 </style>
 </head>
@@ -176,14 +201,14 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>제목</h1>
+							<h1>맛집게시판</h1>
 						</div>
 						<div class="dc-content-box">
 							<div id="container2">
 								<div class="articlelist" style="border: solid 0.5px red">
 									<form name="boardFrm" method="post">
-										<input type="hidden" id="bno" name="bno" value="${boardList.no}"/>
-										<input type="hidden" id="mno" name="mno" value="${member.no}"/>
+										<input type="hidden" name="bno" value="${boardList.no}"/>
+										<input type="hidden" name="mno" value="${member.no}"/>
 									</form>
 									<div class="group" style="border: solid 0.5px blue">
 										<p class="title">${boardList.title}</p>
@@ -196,6 +221,20 @@
 										</p>
 										<p class="text">${boardList.content}</p>
 										<div style="border: solid 0.5px lightgray"></div>
+										<div>
+										<div class="starRev">
+										  <span class="starR1 on">★★★★★</span>
+										  <span class="starR2">★★★★★</span>
+										  <span class="starR1">★★★★★</span>
+										  <span class="starR2">★★★★★</span>
+										  <span class="starR1">★★★★★</span>
+										  <span class="starR2">★★★★★</span>
+										  <span class="starR1">★★★★★</span>
+										  <span class="starR2">★★★★★</span>
+										  <span class="starR1">★★★★★</span>
+										  <span class="starR2">★★★★★</span>
+										</div>
+										<input type="button" value="평점 제출" class="starInsert" onclick="starInsert();"/>
 										<div class="status" style="border: solid 0.5px orange">
 											<button class="btn_board_edit" id="btn_board_edit">수정</button>
 											<button class="btn_board_delete" id="btn_board_delete">삭제</button>
@@ -204,10 +243,11 @@
 											<span class="likecount">
 											<a href="#" class="likefunc">
 												<img src="/dc/resources/images/dislike.png" id="like_img" style="height: 17px; width: 17px;">
-												: <input type="text" value="${boardList.likeCount}" class="likecount2" readonly/></span>
-											</a>
+												: <input type="text" value="${boardList.likeCount}" class="likecount2" readonly/>
+											</a></span>
 											<input type="hidden" value="1" class="likecount3"/>
 											<span class="commentcount">댓글: ${boardList.commentCount}</span>
+										</div>
 										</div>
 										<script>
 										var bno = $('[name=bno]').val();
@@ -275,29 +315,48 @@
 											
 											})
 										
-											function btn_report(){
-												window.name="foodView";
-												var childWindow = window.open("${pageContext.request.contextPath}/report/reportView.do", "report", "width=470, height=360, resizable=no, scrollbars=no, status=no")
+											function btn_report(){												
+												$('#myModal').show();
 											}
-										/* 
-											$('#btn_report').on('click', function(){
+											
+											function reportInsert(){
 												
-												var popUrl = "${pageContext.request.contextPath}/report/reportView.do";
-												var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
-
-												winObject = window.open(popUrl, "popupView", popOption);
+												var reCheck = $('input:radio[name=category]:checked').val();
+												console.log("reCheck: "+reCheck);
 												
-												document.action = "${pageContext.request.contextPath}/report/reportView.do";
-												document.target = "popupView";
-												document.bno.value = bno;
-												document.mno.value = mno;
-												document.submit(); 
+												$.ajax({
+													type: "post",
+										   			url: "${pageContext.request.contextPath}/report/reportInsert.do",
+										   			data: { bno: bno,
+										   					mno: mno,
+										   					reCheck: reCheck},
+										   			success: function(result){
+										   				
+													if(reCheck == undefined){
+													    alert('옵션을 선택해주세요.');
+													} else {
+													    alert("신고 되었습니다.");
+													    
+													    if(result == 1){
+													    	$('#myModal').hide();
+													    }
+													} 
+													
+												}
 												
-											});*/
-									/* 	
-											function submitPopup(){
-												winObject.document.all
-											} */
+											});
+												
+											}
+										
+											function close_box(flag) {
+									             $('#myModal').hide();
+									        };
+									        
+									        $('.starRev span').click(function(){
+									        	  $(this).parent().children('span').removeClass('on');
+									        	  $(this).addClass('on').prevAll('span').addClass('on');
+									        	  return false;
+									        });
 											
 				                      		$("#btn_board_edit").click(function(){
 				                      			boardFrm.action="${pageContext.request.contextPath}/community/food/foodUpdateForm.do?no=${board.no}"
