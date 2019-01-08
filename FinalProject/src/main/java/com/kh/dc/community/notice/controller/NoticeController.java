@@ -23,12 +23,12 @@ public class NoticeController {
 	@Autowired
 	NoticeService noticeService;
 	
-	@RequestMapping("community/notice/list.do")
+/*	@RequestMapping("community/notice/list.do")
 	public String noticeList() {
 		return "community/notice/list";
-	}
+	}*/
 	
-	@RequestMapping("community/food/list.do")
+	@RequestMapping("community/notice/list.do")
 	public String selectFoodList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, 
 		Model model, HttpServletRequest request) {
 	

@@ -7,10 +7,10 @@
 	.modal {
 	    display: none; /* Hidden by default */
 	    position: fixed; /* Stay in place */
-	    z-index: 1; /* Sit on top */
+	    /* z-index: 1; /* Sit on top */
 	    left: 0;
 	    top: 0;
-	    width: 1500px; /* Full width */
+	    /* width: 1500px; */ /* Full width */
 	    height: 100%; /* Full height */
 	    overflow: auto; /* Enable scroll if needed */
 	    background-color: rgb(0,0,0); /* Fallback color */
@@ -23,7 +23,7 @@
 	    margin: 15% auto; /* 15% from the top and centered */
 	    padding: 20px;
 	    border: 1px solid #888;
-	    width: 30%; /* Could be more or less, depending on screen size */                          
+	    /* width: 30%; */ /* Could be more or less, depending on screen size */                          
 	}
 	
 	.rep_box{
