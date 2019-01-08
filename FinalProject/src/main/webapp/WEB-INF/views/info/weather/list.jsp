@@ -22,9 +22,19 @@
 			display: inline-block; 
 			margin-top:10px; 
 			font-size:16px; 
-			text-align:center; 
-			
-		}	
+			text-align:center; 	
+			align : center;		
+		}
+		
+		.weekWeather-container{
+			display: inline-block; 
+			margin-top:10px; 
+			font-size:16px; 
+			text-align:center; 	
+			align : center;		
+		}
+		
+		.loadingImg { width:250px;height:250px }
 	</style>
 </head>
 <body>
@@ -45,28 +55,22 @@
 							<div class="weather-container" style="margin: 20px;">
 								<!-- 오늘 내일 모레 날씨 -->
 								<!-- 동네 이름 -->
-								<h4 class="townName" style="margin: 0 0 0 10px;"></h4>
+								<h4 class="townName" style="margin: 0 0 0 10px;">현재 날씨</h4>
 								<div class="currentWeather" style="width:100%;">
-									<div class="block" style="width:50px;">									
-									날짜<br>
-									시간<br>
-									<div style="height:55px;">날씨</div><br>	
-									<span style="font-size: 8px;">최저온도</span><br>
-									<span style="font-size: 8px;">최고온도</span><br>									
-									</div>					
+									<h3 id="currentWeatherLabel">현재 날씨를 불러오는 중입니다.</h3>
+									<div id="loadingTodayWeather"> 
+										<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading.gif" />
+									</div>														
 								</div>
-								
 								<hr />
 								
 								<!-- 주간 날씨 부분 -->
 								<h4 style="margin: 0 0 0 10px;"> 주간 날씨</h4>
 								<div class="weekWeather-container" style="display: inline-block; margin-top:10px; width: 100%">	
-									<div class="block" style="width:50px;">									
-									날짜<br>
-									<div style="">날씨</div><br>	
-									<span style="font-size: 8px;">최저온도</span><br>
-									<span style="font-size: 8px;">최고온도</span><br>									
-									</div>						
+									<h3 id="weekWeatherLabel">주간 날씨를 불러오는 중입니다.</h3>
+									<div id="loadingWeekWeather">													
+										<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading.gif" />
+									 </div>										
 								</div>	
 													
 							</div>
@@ -131,12 +135,22 @@
 	        success: function(data) {
 	        	
 	            console.log(data);  
-	            var output = "";   	            
+	            var value1 = "";   	            
+	            var value2 = "";   	            
 	            
 	            $(data).find('item').each(function(){
 	            	
 	            	// 동네 이름 넣기
-	            	$('.townName').text($(this).find('category').text());	
+	            	$('.townName').append(' : ' +$(this).find('category').text());
+	            	
+	            	value1 += '<div class="block" style="width:50px;">';						
+	            	value1 += '날짜<br>시간<br>'
+	            	value1 += '<div style="height:55px;">날씨</div><br>';						
+	            	value1 += '<span style="font-size: 8px;">최저온도</span><br>';
+	            	value1 += '<span style="font-size: 8px;">최고온도</span><br>';
+	            	value1 += '</div>';
+					
+					$('.currentWeather').append(value1); 
 	            	
 	            	$(this).find('data').each(function(){
 	            			            		
@@ -173,23 +187,26 @@
 	            		}
 	            		
 	             		
-	            		output += '<div class="block" style="width: 48px; text-align: center;">';
-	            		output += day + '<br>';
-	            		output += $(this).find('hour').text() + '시<br>';
-	            		output += sky + '<br>';	            		
-	            		output += '<div style="width: 48px; height: 30px;">' + $(this).find('wfKor').text() + '</div><br>';
-	            		output += mintemp + '<br>';            		
-	            		output += maxtemp  + '</label></div>';
+	            		value2 += '<div class="block" style="width: 48px; text-align: center;">';
+	            		value2 += day + '<br>';
+	            		value2 += $(this).find('hour').text() + '시<br>';
+	            		value2 += sky + '<br>';	            		
+	            		value2 += '<div style="width: 48px; height: 30px;">' + $(this).find('wfKor').text() + '</div><br>';
+	            		value2 += mintemp + '<br>';            		
+	            		value2 += maxtemp  + '</label></div>';
 	     	            
 	 	            });
 	            	
-	            	$('.currentWeather').append(output);           	
+	            	$('.currentWeather').append(value2);
+	            	
 	            }); 
       
-	        },error:function(data){
+	        }, error:function(data){
 	        	console.log("날씨 ajax 실패");
-	        	/* location.href="/dc"; */
-	        }
+	        }, complete : function(){
+				$("#loadingTodayWeather").hide();
+				$("#currentWeatherLabel").hide();
+			}
 	    });		
 		
 		// 주간날씨(기상청 중기예보 - 10일 예보)
@@ -204,7 +221,17 @@
 	        async: "false",
 	        success: function(data) {
 	            console.log(data);  
-	            var output = "";
+	            var value1 = "";
+	            var value2 = "";
+	            
+	            value1 += '<div class="block" style="width:50px;">';
+	            value1 += '날짜<br>';
+	            value1 += '<div style="">날씨</div><br>	';
+	            value1 += '<span style="font-size: 8px;">최저온도</span><br>';
+	            value1 += '<span style="font-size: 8px;">최고온도</span><br>';
+	            value1 += '</div>';
+	            
+	            $('.weekWeather-container').append(value1); 
        
 	            $(data).find('location').each(function(){
 	            	
@@ -229,25 +256,29 @@
 			           		
 			           		if($(this).find('tmEf').text().substring(10) == today.substring(10)){
 	       				
-			               	output += '<div class="block"><label style="width:110px; text-align:center;">';
-			               	output += $(this).find("tmEf").text().substring(0,10) + '<br>'; 
-			               	output += sky + '<br>';	 
-			               	output += $(this).find("wf").text().substring(0,10) + '<br>'; 
-			               	output += $(this).find('tmn').text() + '<br>'; 
-			              	output += $(this).find("tmx").text() + '</label></div>';		                				
+			           			value2 += '<div class="block"><label style="width:110px; text-align:center;">';
+			           			value2 += $(this).find("tmEf").text().substring(0,10) + '<br>'; 
+			           			value2 += sky + '<br>';	 
+			           			value2 += $(this).find("wf").text().substring(0,10) + '<br>'; 
+			           			value2 += $(this).find('tmn').text() + '<br>'; 
+			           			value2 += $(this).find("tmx").text() + '</label></div>';		                				
 			            		
 			            	}
 			           		
 			            });
 			           	
-			           	$('.weekWeather-container').append(output);
+			           	$('.weekWeather-container').append(value2);
+			           	$('.weekWeather-container').append('</div>');
 	            		            		
 	            	}
 	            	
 	            });
 	        }, error : function(data){
 	        	console.log("주간 날씨 ajax 에러");
-	        }
+	        }, complete : function(){
+				$("#loadingWeekWeather").hide();
+				$("#weekWeatherLabel").hide();
+			}
 	    });
 	    
 			
