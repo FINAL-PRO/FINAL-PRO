@@ -35,24 +35,31 @@ div{
 			<input type="button" name="reButton" value="취소"/> -->
 			<button type="submit" id="rpButton">신고하기</button>
 			<button type="reset" id="reButton">취소</button>
+			<input type="text" id="bno" />
 			<br />
-			<input type="text" name="bno" class="bno" value="${boardList.no}"/>
-			<input type="text" name="mno" class="mno" value="${member.no}"/>
+		
 			<script>
 	 			//var reCheck = $('input:radio[name=category]:checked').val();
+	 			
 				
 	 			$('#rpButton').on('click',function (obj) {
 	 				
-	 				opener.document.getElementById("bno").value = $(obj).children(".bno").val();
+	 				//opener.document.getElementById("bno").value;
+	 				
+	 				var bno = '${bno}';
+	
+	 				console.log("bno: "+bno);
+	 				
+	 				/* opener.document.getElementById("bno").value = $(obj).children(".bno").val();
 		            opener.document.getElementById("mno").value = $(obj).children(".mno").val();
 	 				
-		            console.log(opener.document.getElementById("bno").value);
+		            console.log(opener.document.getElementById("bno").value); */
 		            
 	 			});
 	 			
 /* 				$('#rpButton').on('click',function (obj) {
 					var reCheck = $('input[name="category"]:checked').val();
-					var bno = $(opener.document).find('#id').val();;
+					var bno = $(opener.document).find('#id').val();
 					
 					console.log("bno: "+bno);
 					

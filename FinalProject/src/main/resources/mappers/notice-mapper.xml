@@ -6,4 +6,51 @@
 		SELECT * FROM DC_BOARD_TB WHERE STATUS = 'BSTATUS004' AND ROWNUM <![CDATA[ <= 5 ORDER BY NO ]]>
 	</select>
 	
+	<resultMap type="boardList" id="resultBoardList">
+		<id property="no" column="no" />
+		<result property="memberName"  column="nickName" />
+		<result property="commentCount" column="comment_count"/>
+	</resultMap>
+	
+	<select id="recentSort" resultMap="resultBoardList">
+		SELECT B.*, M.NICKNAME, NVl(C.comment_count,0) comment_count
+		FROM DC_BOARD_TB B
+		INNER JOIN DC_MEMBER_TB M 
+		ON B.MEMBERNO = M.NO
+		  LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB WHERE STATUS = 'BSTATUS001' GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
+		WHERE B.TYPE = 'BSTATUS004' AND B.STATUS = 'BSTATUS001'
+		ORDER BY B.WRITEDATE DESC, B.NO DESC
+	</select>
+	
+	<select id="selectNoticeTotalContents" resultType="_int">
+		SELECT COUNT(*) FROM DC_BOARD_TB WHERE TYPE = 'BSTATUS004' AND STATUS = 'BSTATUS001'
+	</select>
+	
+	<select id="selectOneNotice" parameterType="_int" resultMap="resultBoardList">
+		SELECT B.*, M.NICKNAME, NVl(C.comment_count,0) comment_count
+		FROM DC_BOARD_TB B
+		INNER JOIN DC_MEMBER_TB M 
+		ON B.MEMBERNO = M.NO
+		LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB WHERE STATUS = 'STATUS001' GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
+		WHERE B.TYPE = 'BSTATUS004' AND B.NO = #{bno}  AND B.STATUS = 'BSTATUS001'
+		ORDER BY B.WRITEDATE DESC, B.NO DESC
+	</select>
+	
+	<insert id="insertNotice" parameterType="Board">
+		INSERT INTO DC_BOARD_TB VALUES
+		(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, 'BSTATUS004', 'BSTATUS001', #{memberNo}, NULL)
+	</insert>
+	
+	<update id="updateNotice" parameterType="Board">
+		UPDATE DC_BOARD_TB SET TITLE = #{title}, CONTENT = #{content} WHERE NO = #{no}
+	</update>
+	
+	<update id="noticeDelete" parameterType="_int"> 
+		UPDATE DC_BOARD_TB SET STATUS = 'BSTATUS002'  WHERE NO = #{no} 
+	</update>
+	
+	<select id="noticeViewCount" parameterType="_int">
+		UPDATE DC_BOARD_TB SET VIEWCOUNT = VIEWCOUNT + 1 WHERE NO = #{no}
+	</select>
+	
 </mapper>

@@ -10,7 +10,7 @@
 	</select>
  
 	<insert id="reportInsert" parameterType="Report">
-		INSERT INTO DC_REPORT_TB VALUES (SEQ_REPORT.NEXTVAL, #{bno}, #{reno}, #{mno}, SYSDATE, 'STATUS006')
+		INSERT INTO DC_REPORT_TB VALUES (SEQ_REPORT.NEXTVAL, #{boardNo}, #{rcNo}, #{memberNo}, SYSDATE, 'STATUS006')
 	</insert>
 
 	<delete id="likeDelete" parameterType="like">
