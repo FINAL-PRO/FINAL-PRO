@@ -51,7 +51,7 @@
     	<!-- 신고 Modal content -->
      	<div class="modal-content">
 	        <p align="center"><b><span style="font-size: 24pt;">신고하기</span></b></p>
-	        <p>제목: ${boardList.title}</p>
+	       <%--  <p>제목: ${boardList.title}</p> --%>
 	        <p>신고자: ${member.name}</p>
 	        <br />
 			사유선택: <p style="font-size:13px;">여러 사유에 해당하는 경우, <br /> 대표적인 사유 1개를 선택해 주세요.</p>

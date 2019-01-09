@@ -39,10 +39,17 @@
 		SELECT CO.NO, C.VALUE, B.TITLE, CO.BOARDNO, CO.CONTENT, CO.WRITEDATE
 		FROM DC_COMMENT_TB CO
 		JOIN DC_BOARD_TB B ON CO.BOARDNO = B.NO
+		JOIN DC_CODE_TB C ON  C.ID = B.TYPE
+		WHERE CO.MEMBERNO = #{mNo}
+	</select>
+	
+	<select id="selectTotalMyComment" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		FROM DC_COMMENT_TB CO
+		JOIN DC_BOARD_TB B ON CO.BOARDNO = B.NO
 		JOIN DC_CODE_TB C ON  c.id = B.TYPE
 		WHERE CO.MEMBERNO = #{no}
 	</select>	
-
 	
 	<!-- 닉네임 중복 체크 -->
 	<select id="checkNickNameDuplicate" parameterType="String" resultType="_int">
