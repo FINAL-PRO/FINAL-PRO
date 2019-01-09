@@ -40,6 +40,33 @@
 #zipCode{
  	display: inline-block;
 }
+
+.starR1{
+	    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
+	    background-size: auto 100%;
+	    width: 15px;
+	    height: 30px;
+	    float:left;
+	    text-indent: -9999px;
+	    cursor: pointer;
+	}
+	.starR2{
+	    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+	    background-size: auto 100%;
+	    width: 15px;
+	    height: 30px;
+	    float:left;
+	    text-indent: -9999px;
+	    cursor: pointer;
+	}
+	.starR1.on{background-position:0 0;}
+	.starR2.on{background-position:-15px 0;}
+
+#foodImg{
+	width: 100%;
+	height: 100%
+}
+
 </style>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </head>
@@ -64,16 +91,25 @@
 									<div>
 										<b>글쓰기</b>
 									</div>
-									<div class="table-div">
+									<div>
+										<div>제목</div>
+											<div>
+												<input type="text" name="title" id="title" style="width: 100%;" required>
+											</div>
+										</div>
+									<div>
 										<br>
 										<input type="hidden" id="mno" name="memberNo" value="${member.no}" required>
 										
-										<div class="tr-div">
-											<div class="td-div" style="height:200px; width:100px;">
-												<div class="tr-div" style="height:150px; width:200px; border:1px solid lightgrey;"></div>
-												<input type="button" value="썸네일"/>
+										<div>
+											<div class="add" style="display:inline-block;">
+												<div style="height:150px; width:200px; border:1px solid lightgrey;">
+													<img id="foodImg"/>
+													<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);" />
+												</div>
+												<input type="button" id="foodThumbsnail" value="썸네일 등록" style="margin-top: 10px; margin-bottom: 10px;"/>
 											</div>
-											<div class="td-div">
+											<div class="table-div" style="display:inline-block; border:1px soild black;">
 												<div class="tr-div">
 													<div class="td-div">우편번호</div>
 													<div class="td-div" style="text-align:left;">
@@ -84,32 +120,43 @@
 												<div class="tr-div">
 													<div class="td-div">주소</div>
 													<div class="td-div" style="text-align:left;">
-														<input type="text" id="address1" name="address1" style="width: 50%;" required>
+														<input type="text" id="address1" name="address1" style="width: 500px;" required>
 													</div>
 												</div>
 												<div class="tr-div">
 													<div class="td-div">상세주소</div>
 													<div class="td-div" style="text-align:left;">
-														<input type="text" id="address2" name="address2" style="width: 50%;" required>
+														<input type="text" id="address2" name="address2" style="width: 500px;" required>
 													</div>
 												</div>
 												<div class="tr-div">
 													<div class="td-div">평점</div>
+													<div class="td-div" style="text-align:left;">
+														<div class="starRev">
+														  <span class="starR1 on">★★★★★</span>
+														  <span class="starR2">★★★★★</span>
+														  <span class="starR1">★★★★★</span>
+														  <span class="starR2">★★★★★</span>
+														  <span class="starR1">★★★★★</span>
+														  <span class="starR2">★★★★★</span>
+														  <span class="starR1">★★★★★</span>
+														  <span class="starR2">★★★★★</span>
+														  <span class="starR1">★★★★★</span>
+														  <span class="starR2">★★★★★</span>
+														</div>
+													</div>
+												</div>
+												<div class="tr-div">
+													<div class="td-div">먼가</div>
 													<div class="td-div" style="text-align:left;">
 														
 													</div>
 												</div>
 											</div>
 										</div>
-										<div class="tr-div">
-											<div class="td-div">제목</div>
-											<div class="td-div">
-												<input type="text" name="title" id="title" style="width: 100%;" required>
-											</div>
-										</div>
-										<div class="tr-div">
-											<div class="td-div">내용</div>
-											<div class="td-div">
+										<div>
+											<div>내용</div>
+											<div>
 												<textarea name="content" id="summernote"
 													class="form-control" rows="20" cols="70" required></textarea>
 												<script>
@@ -125,8 +172,33 @@
 					                            					sendFile(files[i]);
 					                            		}}}
 					                            	});
-
+													
+					                                $('#foodThumbsnail').on("click", function(){
+					                                	$('#inputFile').click();
+					                                });'#inputPicture'
 					                                
+					                                function inputPicture(value){
+					                                	
+					                                	if(value.files && value.files[0]) {
+					                            			var reader = new FileReader();
+					                            			var form_data = new FormData();
+					                            			form_data.append('file', value.files[0]);
+
+					                            			$.ajax({
+					                            				url : '${pageContext.request.contextPath}/common/summernote/convertImage.do',
+					                            				data : form_data,
+					                            				type : "POST",
+					                            				cache : false,
+					                            				contentType : false,
+					                            				enctype : 'multipart/form-data',
+					                            				processData : false,
+					                            				success : function(url) {
+					                            					$('#foodImg').attr('src', url);
+					                            				}
+					                            			});
+					                            		}
+					                                	
+					                                }
 					                                
 					                            	function sendFile(file) {
 					                            		var form_data = new FormData();
@@ -193,6 +265,12 @@
 					                			        }).open();
 					                			    };
 					                            	
+					                			    $('.starRev span').click(function(){
+											        	  $(this).parent().children('span').removeClass('on');
+											        	  $(this).addClass('on').prevAll('span').addClass('on');
+											        	  return false;
+											        });
+					                			    
 					                            </script>
 											</div>
 										</div>
