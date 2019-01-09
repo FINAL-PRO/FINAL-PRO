@@ -168,29 +168,6 @@ hr {
 						</div>
 						<div class="dc-content-box">
 							<div id="container2">
-								<div class="notice_top">
-						<!-- 			<div class="category">
-										<select id="tList"> 
-											<option value="" selected disabled hidden>정렬</option>
-											<option value="1">최신 순 정렬</option>
-											<option value="2">댓글 많은 순 정렬</option>
-											<option value="3">좋아요 순 정렬</option>
-										</select>
-									</div>
-									<script>
-									
-									
-									$("#tList").change(function(){
-										var tList = $(this).val();
-										console.log("tlist:"+tList);
-										location.href="${pageContext.request.contextPath}/community/notice/list.do?tList="+tList;
-									});
-									
-									</script> -->
-									<div class="notice_btn">
-										<input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/notice/noticeInsertForm.do'" />
-									</div>
-								</div>
 								<div class="articlelist">
 									<ol class="group"></br>
 										<p>총 ${totalContents}건의 공지사항이 있습니다.</p>
