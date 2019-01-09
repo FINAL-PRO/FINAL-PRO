@@ -5,8 +5,8 @@ import java.util.Map;
 
 public interface MypageDao {
 	
-	List<Map<String, String>> selectGroupList(int cPage, int numPerPage);
+	List<Map<String, String>> selectGroupList(int cPage, int numPerPage, int mNo);
 	
-	int selectGroupTotalContents();
+	int selectTotalMyComment(int mNo);
 
 }

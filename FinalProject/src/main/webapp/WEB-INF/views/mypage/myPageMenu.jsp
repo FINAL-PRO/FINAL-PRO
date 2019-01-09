@@ -24,7 +24,7 @@
 							<a class="nav-link" href="${pageContext.request.contextPath}/member/memberView.do?no=${member.no}">내정보보기 </a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="${pageContext.request.contextPath}/member/myContentList.do?no=${member.no}">내가 쓴 글/댓글 </a>
+							<a class="nav-link" href="${pageContext.request.contextPath}/mypage/myContentList.do?no=${member.no}">내가 쓴 글/댓글 </a>
 						</li>
 					
 					</ul>
