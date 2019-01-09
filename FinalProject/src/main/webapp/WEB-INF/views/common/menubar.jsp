@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+			<!-- default header name is X-CSRF-TOKEN -->
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 <!DOCTYPE html>
 <header>
 	<div id="header-container">
@@ -90,20 +94,21 @@
 								<a class="dropdown-item"
 									href="${pageContext.request.contextPath}/job/jobBoard/jobBoardList.do">구인구직</a>
 							</div></li>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> 제휴 / 광고 </a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item"
-									href="${pageContext.request.contextPath}/business/partnership/list.do">제휴
-									신청</a> <a class="dropdown-item"
-									href="${pageContext.request.contextPath}/business/ad/list.do">광고
-									신청</a>
-							</div></li>
-						<li class="nav-item"><a class="nav-link"
-							href="${pageContext.request.contextPath}/admin/index.do"> 관리자
-								페이지 </a></li>
+						<li class="nav-item dropdown">
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 제휴 / 광고 </a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/business/partnership/list.do">제휴 신청</a> 
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/business/ad/list.do">광고 신청</a>
+								</div>
+							</sec:authorize>
+						</li>
+						
+						<li class="nav-item">
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
+								<a class="nav-link" href="${pageContext.request.contextPath}/admin/index.do?no=${member.no}"> 관리자 페이지 </a>
+							</sec:authorize>
+						</li>
 					</ul>
 
 					<!-- 로그인처리  -->
@@ -165,6 +170,12 @@
 	</div>
 	<!-- Modal 끝-->
 	<script>
+	$(function() {
+	    $(document).ajaxSend(function(e, xhr, options) {
+	    	xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	    });
+	});
+	
 		$("#submit")
 				.on(
 						"click",

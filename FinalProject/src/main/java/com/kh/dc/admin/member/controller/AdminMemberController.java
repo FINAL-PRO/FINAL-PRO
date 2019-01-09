@@ -47,4 +47,11 @@ public class AdminMemberController {
 		
 		return "admin/member/detailView";
 	}
+	
+	public Member checkAuthMember(int no) {
+		System.out.println("no 검색 : " + no);
+		Member member = memberService.checkAuthMember(no); 
+		
+		return member;
+	}
 }
