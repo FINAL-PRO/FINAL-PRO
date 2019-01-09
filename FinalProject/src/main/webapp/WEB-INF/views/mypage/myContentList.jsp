@@ -92,7 +92,7 @@
 						            </tr>    
 						            
 						           
-						            <c:set value="${commentList}" var="commentList" />
+						            <c:set value="${currentPageCommentlist}" var="commentList" />
 						            <c:if test="${!empty commentList}" >
 						            <c:forEach items="${commentList}" var="comment" varStatus="co">						            
 						            	<tr style="background-color:#FFFFFF; color:gray;">				            	
@@ -134,7 +134,7 @@
 					        		</c:if>					              						            
 						            </thead>
 					        	</table>
-					        	<%-- <c:out value="${pageBar}" escapeXml="false"/> --%>
+					        	<c:out value="${commentPageBar}" escapeXml="false"/>
 					        	
 					        	
 					        	
