@@ -168,6 +168,12 @@
 	</div>
 	<!-- Modal 끝-->
 	<script>
+	$(function() {
+	    $(document).ajaxSend(function(e, xhr, options) {
+	    	xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	    });
+	});
+	
 		$("#submit")
 				.on(
 						"click",

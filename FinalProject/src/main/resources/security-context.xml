@@ -18,9 +18,6 @@
 	<security:http security="none" pattern="/member/memberEnrollEnd.do" />
 	<security:http security="none" pattern="/member/memberSearch.do" />
 	
-	<security:http security="none" pattern="/**/*End.do" />
-	
-	
 	<!-- 중복로그인 처리 -->
 	<security:http security="none" pattern="/login_duplicate.do" />
 	
@@ -33,7 +30,7 @@
 		<security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/business/**" access="hasRole('ADMIN')" />
-		<security:intercept-url pattern="/**" access="hasRole('USER') or hasRole('ROLE_ANONYMOUS')" />
+		<security:intercept-url pattern="/**" access="hasRole('USER') or hasRole('ADMIN')" />
 			
 		<security:form-login
 			default-target-url="/index.do"
@@ -51,6 +48,8 @@
 		<security:session-management>
 			<security:concurrency-control max-sessions="1" expired-url="/login_duplicate.do"/>
 		</security:session-management>
+		
+		<security:csrf/>
 	</security:http>
 	<!-- provider -->
 	
