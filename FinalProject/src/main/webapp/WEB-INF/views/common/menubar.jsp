@@ -91,21 +91,26 @@
 								<a class="dropdown-item"
 									href="${pageContext.request.contextPath}/job/jobBoard/jobBoardList.do">구인구직</a>
 							</div></li>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> 제휴 / 광고 </a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item"
-									href="${pageContext.request.contextPath}/business/partnership/list.do">제휴
-									신청</a> <a class="dropdown-item"
-									href="${pageContext.request.contextPath}/business/ad/list.do">광고
-									신청</a>
-							</div></li>
+						<li class="nav-item dropdown">
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
+							<a
+								class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> 제휴 / 광고 </a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item"
+										href="${pageContext.request.contextPath}/business/partnership/list.do">제휴
+										신청</a> <a class="dropdown-item"
+										href="${pageContext.request.contextPath}/business/ad/list.do">광고
+										신청</a>
+								</div>
+							</sec:authorize>
+						</li>
+						
 						<li class="nav-item">
-						<sec:authorize access="isAuthenticated()">
-							<a class="nav-link" href="${pageContext.request.contextPath}/admin/index.do?no=${member.no}"> 관리자 페이지 </a>
-						</sec:authorize>
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
+								<a class="nav-link" href="${pageContext.request.contextPath}/admin/index.do?no=${member.no}"> 관리자 페이지 </a>
+							</sec:authorize>
 						</li>
 					</ul>
 
