@@ -130,7 +130,8 @@
 				console.log(tmin);
 				
 				switch(sky){
-					case "맑음": $("#weatherIcon").attr("class", "wi wi-day-sunny"); break;
+					case "맑음": 
+						$("#weatherIcon").attr("class", "wi wi-day-sunny"); break;
 					case "구름조금": $("#weatherIcon").attr("class", "wi wi-day-sunny-overcast"); break;
 					case "구름많음": $("#weatherIcon").attr("class", "wi wi-day-cloudy"); break;
 					case "구름많고 비": $("#weatherIcon").attr("class", "wi wi-rain"); break;
@@ -146,6 +147,7 @@
 					case "뇌우/비 또는 눈": $("#weatherIcon").attr("class", "wi wi-rain-mix"); break;		
 				}
 				
+				$("#sky").text(sky); 
 				output += '현재 기온 :	<label id="tc">'+ tc +'</label><br>';
 				output += '최저 기온 :	<label id="tmin">'+ tmin +'</label><br>';
 				output += '최고 기온 :	<label id="tmax">'+ tmax +'</label>';
@@ -161,7 +163,7 @@
 			},  error : function(jqxhr, textStatus, errorThrown) {
 				console.log("ajax 처리 실패");
 			}, complete : function(){
-				$("#loadingTodayWeather").hide();
+				$(".loadingImg").hide();
 			}
 			
 		}); 
