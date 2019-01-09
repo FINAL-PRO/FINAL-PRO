@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <style>
 
@@ -46,12 +49,15 @@
 	
 
 </style>
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.min.js"></script>
 <footer>
 	<div id="myModal" class="modal">
     	<!-- 신고 Modal content -->
      	<div class="modal-content">
 	        <p align="center"><b><span style="font-size: 24pt;">신고하기</span></b></p>
-	        <p>제목: ${boardList.title}</p>
+	       	<c:if test="${!empty boardList}">
+	       		<span class="mtitle">제목: ${boardList.title}</span>
+	       	</c:if>
 	        <p>신고자: ${member.name}</p>
 	        <br />
 			사유선택: <p style="font-size:13px;">여러 사유에 해당하는 경우, <br /> 대표적인 사유 1개를 선택해 주세요.</p>

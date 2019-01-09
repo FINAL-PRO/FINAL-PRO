@@ -12,7 +12,7 @@
 		<result property="commentCount" column="comment_count"/>
 	</resultMap>
 	
-	<select id="recentSort" resultMap="resultBoardList">
+	<select id="noticerecentSort" resultMap="resultBoardList">
 		SELECT B.*, M.NICKNAME, NVl(C.comment_count,0) comment_count
 		FROM DC_BOARD_TB B
 		INNER JOIN DC_MEMBER_TB M 
