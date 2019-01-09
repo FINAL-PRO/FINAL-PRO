@@ -64,6 +64,7 @@
 				</form> 
 			</sec:authorize>
 			<button class="btn btn-outline-success" type="button" onclick="location.href='/dc/member/memberEnroll.do'">회원가입</button>
+			<a href="${pageContext.request.contextPath}/member/memberSearch.do" class="search">아이디/비밀번호 찾기</a>
 		</div>
 	</div>
 	<div class="dc-content-box">
