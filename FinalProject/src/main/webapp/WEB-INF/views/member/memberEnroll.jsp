@@ -167,6 +167,10 @@
 
 	<script>
 		$(function() {
+			
+			var emailChk = false;
+			var pwdChk = false;
+			var nickNameChk = false;
 
 			/* 이메일 중복검사 이벤트 추가 */
 			$("#email").on("keyup",function() {
@@ -186,12 +190,14 @@
 							if (data == 1) {
 								$(".guide1").text('이미 가입된 이메일입니다.');
 								$("#submitButton").attr('disabled', true);
+
 							} else if (!(regEmail.test(email))) {
 								$(".guide1").text('이메일 형식에 맞지 않습니다.');
 								$("#submitButton").attr('disabled', true);
 							} else if (data == 0 && regEmail.test(email)) {
 								$(".guide1").text('');
 								$("#submitButton").attr('disabled', false);
+								emailChk = true;
 							}
 						}, error : function(jqxhr,textStatus, errorThrown) {
 							console.log("ajax 처리 실패");
@@ -234,6 +240,7 @@
 							} else {
 								$(".guide").text("");
 								$("#submitButton").attr('disabled', false);
+								nickNameChk = true;
 							}
 							},error : function(jqxhr,textStatus, errorThrown) {
 								console.log("ajax 처리 실패");
@@ -258,7 +265,7 @@
 					$("#submitButton").attr('disabled', true);
 				} else {
 					$("#pwdChkComment").text('');
-					$("#submitButton").attr('disabled', false);
+					$("#submitButton").attr('disabled', false);					
 				}
 			});
 
@@ -270,24 +277,29 @@
 				} else if (pwd != null && pwd2 != null && pwd == pwd2) {
 					$("#pwdChkComment2").text('');
 					$("#submitButton").attr('disabled', false);
+					pwdChk = true;
 				}
 
 			});
 			
 			$("#submitButton").on("click", function() {
-				
-				var pwd = $("#password_").val().trim();
-				var pwd2 = $("#password2").val().trim();
-				var regPwd = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,12}$/;
-				
-				if(regPwd.test(pwd) && pwd==pwd2){
+		
+				if(emailChk == true && nickNameChk == true && pwdChk == true){
 					$("#memberEnroll").submit();
-				} else{
+				} else if(emailChk == false){
+					alert("이메일을 다시 입력해주세요.");
+					return;
+				} else if(nickNameChk == false){
+					alert("닉네임을 다시 입력해주세요.");
+					return;
+				} else if(pwdChk == false){
 					alert("비밀번호를 다시 입력해주세요.");
 					return;
 				}
 			
 			});
+			
+			
 			
 		});
 		
@@ -306,6 +318,8 @@
 				reader.readAsDataURL(value.files[0]);				
 			}
 		}
+		
+		
 	</script>
 </body>
 </html>
