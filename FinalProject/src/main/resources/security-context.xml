@@ -16,6 +16,8 @@
 	<!-- 회원가입 / 비번찾기 -->	
 	<!-- <security:http security="none" pattern="/member/memberEnroll.do" /> -->
 	<security:http security="none" pattern="/member/memberEnrollEnd.do" />
+	<security:http security="none" pattern="/member/memberUpdate.do" />
+	
 	<!-- <security:http security="none" pattern="/member/memberSearch.do" /> -->
 	<!-- <security:http security="none" pattern="/member/chkEmail.do" /> -->
 	<!-- 이거 말고 좀 더 자세히 처리해야함 -->

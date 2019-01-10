@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 	
 <script>
@@ -47,24 +50,39 @@
 						style="margin-left: 1px;margin-right: 1px; margin-top:60px; margin-bottom:60px;
 						border:1px solid red"/> --%>
 	<div class="dc-content-box">
-		<h4>
+		<!-- <h4>
 			<span class="board-title">정보</span>
-		</h4>
-		<div align="center">
-			<img src="" alt="프로필 이미지" />
-			<p>유저이름</p>
-			<!-- <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal">로그인</button> -->
-			<br />
+		</h4> -->
+		<div align="center" style="padding-top:50px;">
+			<!-- 로그인 -->
 			<sec:authorize access="isAnonymous()">
-				<button class="btn btn-outline-success" onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
+				<button class="btn btn-outline-success" id="loginBtn" onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
+				<button class="btn btn-outline-success" id="enrollBtn" type="button" onclick="location.href='/dc/member/memberEnroll.do'">회원가입</button>
+				<br/>
+				<a href="${pageContext.request.contextPath}/member/memberSearch.do" id="searchBtn" class="search">아이디/비밀번호 찾기</a>
 			</sec:authorize>
+			
 			<sec:authorize access="isAuthenticated()">
+				<c:if test="${!empty member.profile}">
+					<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/${member.profile}"
+						style="border-radius: 50px; border: 1px solid lightgray; width: 100px; height: 100px; margin-bottom: 15px;"/>					    				
+				</c:if>
+				<c:if test="${empty member.profile}">
+					<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/profileDefaultImg.png"
+						style="border-radius: 50px; border: 1px solid lightgray; width: 100px; height: 100px; margin-bottom: 15px;"/>
+				</c:if>
+				<br/>
+				<span>
+					<a href="${pageContext.request.contextPath}/member/memberView.do?no=${member.no}"
+						title="내정보보기">${member.nickName}</a> 님, 안녕하세요!
+				</span>
+				<!-- <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal">로그인</button> -->
+				<br />						
 				<form action="${pageContext.request.contextPath}/logout" method="get"> 
 					<input type="submit" class="btn btn-outline-success" value="로그아웃" /> 
 				</form> 
 			</sec:authorize>
-			<button class="btn btn-outline-success" type="button" onclick="location.href='/dc/member/memberEnroll.do'">회원가입</button>
-			<a href="${pageContext.request.contextPath}/member/memberSearch.do" class="search">아이디/비밀번호 찾기</a>
+			
 		</div>
 	</div>
 	<div class="dc-content-box">
@@ -161,12 +179,6 @@
 				output += '최고 기온 :	<label id="tmax">'+ tmax +'</label>';
 				
 				$('.nowWeather-container').append(output);
-
-				/* $("#sky").text(sky);
-				$("#tc").text(tc);
-				$("#tmax").text(tmax);
-				$("#tmin").text(tmin);
-				$("#village").text(village); */
 				
 			},  error : function(jqxhr, textStatus, errorThrown) {
 				console.log("ajax 처리 실패");
