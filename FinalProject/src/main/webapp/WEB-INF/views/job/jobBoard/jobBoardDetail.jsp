@@ -60,6 +60,7 @@
 						<button class="btn btn-outline-info" type="button" 
 							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/deleteJobBoard.do?boardNo=${jobBoard.boardNo}'">삭제 페이지</button>
 					</div>
+					<c:import url="../../common/comment.jsp" />
 				</div>
 			</div>
 			</div>	

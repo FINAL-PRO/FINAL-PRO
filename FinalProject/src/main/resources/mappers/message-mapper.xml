@@ -50,13 +50,23 @@
 			   #{fromMember}, #{toMember}, 'MSGTYPE001')
 	</insert>
 			
-	<update id="readJobBoard" parameterType="_int">
+	<update id="readMessage" parameterType="_int">
 		UPDATE DC_MESSAGE_TB SET STATUS='MSGTYPE002' WHERE NO = #{no}
 	</update>
 	
 	<update id="deleteMessage" parameterType="_int">
 		UPDATE DC_MESSAGE_TB SET STATUS='MSGTYPE003' WHERE NO = #{no}
 	</update>
+	
+	<select id="checkNickDuplicate" statementType="CALLABLE" 
+       parameterType="hashmap">
+		{ CALL NICK_DUP_CHK(
+			#{nickName, mode=IN, jdbcType=VARCHAR},
+			#{result, mode=OUT, jdbcType=NUMERIC,
+			  javaType=integer}
+			)
+		}
+	</select>
 	
 <!-- 	<update>
 		UPDATE DC_MESSAGE_TB SET STATUS = 'N'

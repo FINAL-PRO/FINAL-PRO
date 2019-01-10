@@ -42,6 +42,10 @@
 			$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/260x280.png")');			
 		}
 	});
+	
+	function msgPop() {
+		window.open("${pageContext.request.contextPath}/message/messageList.do?no=${member.no}", "msgPop", "width=700, height=600");
+	}
 </script>	
 
 <div class="dc-content">
@@ -76,13 +80,13 @@
 					<a href="${pageContext.request.contextPath}/member/memberView.do?no=${member.no}"
 						title="내정보보기">${member.nickName}</a> 님, 안녕하세요!
 				</span>
+        <span onclick="msgPop();">쪽지 <label for="">0</label></span>
 				<!-- <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal">로그인</button> -->
 				<br />						
 				<form action="${pageContext.request.contextPath}/logout" method="get"> 
 					<input type="submit" class="btn btn-outline-success" value="로그아웃" /> 
 				</form> 
 			</sec:authorize>
-			
 		</div>
 	</div>
 	<div class="dc-content-box">
