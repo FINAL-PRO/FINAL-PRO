@@ -18,6 +18,8 @@
 	<security:http security="none" pattern="/member/memberEnrollEnd.do" />
 	<security:http security="none" pattern="/member/memberUpdate.do" />
 	
+	<security:http security="none" pattern="/community/free/freeInsertFormEnd.do" />
+	
 	<!-- <security:http security="none" pattern="/member/memberSearch.do" /> -->
 	<!-- <security:http security="none" pattern="/member/chkEmail.do" /> -->
 	<!-- 이거 말고 좀 더 자세히 처리해야함 -->
@@ -35,6 +37,7 @@
 		<security:intercept-url pattern="/login/loginForm.do" access="permitAll" />
 		<security:intercept-url pattern="/index.do" access="permitAll" />
 		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/search/**" access="permitAll" />
 		<security:intercept-url pattern="/member/**" access="permitAll" />
 		<security:intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/business/**" access="hasRole('ADMIN')" />
