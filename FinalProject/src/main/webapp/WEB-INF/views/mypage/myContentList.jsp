@@ -36,7 +36,7 @@
 						                <th scope="col" style="width:200px;">작성일</th>
 						                <th scope="col" style="width:150px;">조회수</th>						
 						            </tr>    
-						            <c:set value="${boardList}" var="boardList" />
+						            <c:set value="${currentPageBoardlist}" var="boardList" />
 					        		<c:if test="${!empty boardList}" >
 						            <c:forEach items="${boardList}" var="board" varStatus="bo">
 						            <tr style="background-color:#FFFFFF; color:gray;">
@@ -73,7 +73,8 @@
 						              	<th colspan="5" style="width:auto; text-align:center;">작성된 게시물이 없습니다.</th>
 						              </c:if>
 						            </thead>
-					        	</table>				        	
+					        	</table>
+					        	<c:out value="${boardPageBar}" escapeXml="false"/>				        	
 					        </div>
 					        
 					        <hr/>

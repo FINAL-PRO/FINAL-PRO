@@ -45,7 +45,7 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>제목</h1>
+							<c:import url="../mypage/myPageMenu.jsp"/>
 						</div>
 						<div class="dc-content-box">
 							<div id="enroll-container">
