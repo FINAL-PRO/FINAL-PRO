@@ -10,29 +10,43 @@
 <!DOCTYPE html>
 <header>
 	<div id="header-container">
-		<div class="header_top">
-
-			<div class="header_search">
-
-				<div class="search_div">
+		<div class="header_top" style="display:block;">
+			<div class="header_logo" style="display:inline-block;">				
+					<div>
 					<a class="navbar-brand" href="/dc">
 						<h2>DONGKER IMG</h2> <%-- <img src="${pageContext.request.contextPath }/resources/images/test-img.png" alt="로고" width="50px" /> --%>
-					</a> <span class="search_span"> <input type="text"
-						class="serarh_text" placeholder="" />
-					</span>
-					<span id="msg-container">
+					</a> 
+					</div>
+			</div>
+			<div class="header_search" style="display:inline-block; width: 40%">
+					<div class="input-group">
+						<input type="text" class="form-control" id="searchWord" placeholder="Search for...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" id="search" type="button">Go!</button>
+						</span>
+						
+						<script>
+						$("#search").on("click", function(){
+							location.href= "${pageContext.request.contextPath}/search/searchView.do?searchWord="+$('#searchWord').val();
+						});
+						</script>						
+					</div>
+			</div>
+			<div class="header_msg" style="display:inline-block">
+				<span id="msg-container">
+					<button id="msgPop" onclick="msgPop();">쪽지</button>	
+					<label for="">안읽은쪽지 0개</label>
 					
-					<button id="msgPop" onclick="msgPop();">쪽지</button>	<label for="">안읽은쪽지 0개</label>
 					<script type="text/javascript">
-					function msgPop() {
-						window.open("${pageContext.request.contextPath}/message/messageList.do?no=${member.no}", "msgPop", "width=500, height=400");
-					}
+						function msgPop() {
+							window.open("${pageContext.request.contextPath}/message/messageList.do?no=${member.no}", "msgPop", "width=500, height=400");
+						}
 					</script>
-					</span>
-				</div>
+				</span>			
 			</div>
 		</div>
 	</div>
+	
 	<div class="dc-menubar">
 		<div class="dc-manebar-main" style="width: 1450px; margin: 0 auto;">
 			<nav class="navbar navbar-expand-lg">

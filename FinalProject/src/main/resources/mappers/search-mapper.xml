@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="search_mapper">
+
+	<resultMap type="board" id="resultBoardList">
+		<id property="no" column="no" />		
+		<result property="title"  column="title" />
+		<result property="content"  column="content" />
+		<result property="memberName"  column="nickname" />
+		<result property="writeDate"  column="writedate" />
+	</resultMap>
+	
+	<select id="searchResultList" parameterType="string" resultMap="resultBoardList">
+		SELECT TITLE, CONTENT, M.NICKNAME, WRITEDATE
+		FROM DC_BOARD_TB B
+		JOIN DC_MEMBER_TB M ON (B.MEMBERNO = M.NO)
+		WHERE TITLE LIKE '%'||#{searchWord}||'%' OR CONTENT LIKE '%'||#{searchWord}||'%' OR M.NICKNAME LIKE '%'||#{searchWord}||'%'
+	</select>	
+	
+</mapper>
