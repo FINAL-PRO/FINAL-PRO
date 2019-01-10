@@ -34,8 +34,7 @@ public class MypageController {
 		// 1. 현재 페이지 게시글 목록 가져오기
 		ArrayList<Map<String, String>> currentPageBoardlist = 
 				new ArrayList<Map<String, String>>(mypageService.selectBoardList(cPage, numPerPage, mNo));
-		System.out.println("currentPageBoardlist : " + currentPageBoardlist);
-		
+		System.out.println("currentPageBoardlist : " + currentPageBoardlist);		
 		
 		// 2. 전체 게시글 개수 가져오기
 		int totalBoardContents = mypageService.selectTotalMyBoard(mNo);
@@ -52,8 +51,7 @@ public class MypageController {
 		// 1. 현재 페이지 게시글 목록 가져오기
 		ArrayList<Map<String, String>> currentPageCommentlist = 
 				new ArrayList<Map<String, String>>(mypageService.selectCommentList(cPage, numPerPage, mNo));
-		System.out.println("currentPageCommentlist : " + currentPageCommentlist);
-		
+		System.out.println("currentPageCommentlist : " + currentPageCommentlist);		
 		
 		// 2. 전체 게시글 개수 가져오기
 		int totalCommentContents = mypageService.selectTotalMyComment(mNo);
@@ -65,8 +63,7 @@ public class MypageController {
 		model.addAttribute("currentPageCommentlist", currentPageCommentlist)
 		.addAttribute("totalCommentContents", totalCommentContents)
 		.addAttribute("numPerPage", numPerPage)
-		.addAttribute("commentPageBar", commentPageBar);		
-		
+		.addAttribute("commentPageBar", commentPageBar);				
 		
 		return "mypage/myContentList";
 	}
