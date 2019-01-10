@@ -30,11 +30,15 @@
 	<input type="button" value="삭제" id="btn-add" class="btn" onclick="messageDelete();"/>
 		
 	<script>
+		function messageReply(){
+			location.href = "${pageContext.request.contextPath}/message/messageInsertForm.do?no=${member.no}&fromMember=${message.fromMember}";
+		}
+	
 		function messageList(){
 			location.href = "${pageContext.request.contextPath}/message/messageList.do?no=${member.no}";
 		};
 		function messageDelete(){
-			location.href = "${pageContext.request.contextPath}/message/messageDelete.do?no=${member.no}";
+			location.href = "${pageContext.request.contextPath}/message/messageDelete.do?no=${message.no}&memNo=${member.no}";
 		};
 	</script>	
 </body>

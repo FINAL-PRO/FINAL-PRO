@@ -37,7 +37,6 @@ public class MessageController {
 		
 		ArrayList<Map<String, String>> list = 
 				new  ArrayList<Map<String, String>>(messageService.selectMessageList(no, cPage, numPerPage));
-		System.out.println("list : "+ list);
 		
 		int totalContents = messageService.selectMessageTotalContents(no);
 		
@@ -59,20 +58,32 @@ public class MessageController {
 	@RequestMapping(value="/message/messageInsert.do")
 	public String insertMessage(Message message, Model model, HttpSession session) {
 		
-		int result = messageService.insertMessage(message);
-		
+		String res;
 		String loc = "/message/messageList.do";
 		String msg = "";
 		
-		if(result > 0) {
-			msg = "게시글 등록 성공!";
+		//String replyNick = messageService.replyNick();
+		if(message.getFrommNick().equals(message.getTomNick())) {
+			msg = "작성자가 받는사람과 같습니다.";
 			loc = "/message/messageList.do?no="+ message.getFromMember();
+			res = "/common/msg";
 		} else {
-			msg = "게시글 등록 실패!";
-		}
+			int result = messageService.insertMessage(message);
+			if(result > 0) {
+				msg = "게시글 등록 성공!";
+				loc = "/message/messageList.do?no="+ message.getFromMember();
+				res = "/common/msg";
+			} else {
+				msg = "게시글 등록 실패!";
+				loc = "/message/messageList.do?no="+ message.getFromMember();
+				res = "/common/msg";
+			}
+		}	
+
 		model.addAttribute("loc", loc).addAttribute("msg", msg);
-		
-		return "redirect:/message/messageList.do?no="+ message.getFromMember();	
+		System.out.println(message);
+		//return "redirect:/message/messageList.do?no="+ message.getFromMember();
+		return res;
 	}
 	
 	@RequestMapping("/message/messageDetail.do")
@@ -84,16 +95,16 @@ public class MessageController {
 	}
 	
 	@RequestMapping("/message/messageDelete.do")
-	public String deleteMessage(@RequestParam int no, Model model) {
-
-		String loc = "/message/jobBoardList.do";
-		System.out.println("no : "+no);
+	public String deleteMessage(@RequestParam int no, @RequestParam int memNo, Model model) {
+		
+		String loc = "/message/messageList.do?no="+ memNo;
+		
 		String msg = (messageService.deleteMessage(no)>0) ? "쪽지를 삭제하였습니다." : "쪽지삭제에 실패하였습니다.";
-
+		
 		model.addAttribute("loc", loc).addAttribute("msg", msg);
 		System.out.println(msg);
 		System.out.println(no);
-		return "redirect:/message/messageList.do?no="+ no;
+		return "common/msg";
 	}
 	@RequestMapping("/message/checkToNick.do")
 	@ResponseBody

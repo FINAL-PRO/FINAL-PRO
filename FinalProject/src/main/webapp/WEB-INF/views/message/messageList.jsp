@@ -47,7 +47,8 @@
 			${msgList.content}</a></div>
 			<div id="sendDateValue" class="cell">${msgList.sendDate}</div>
 			<div id="fromMemberValue" class="cell">
-			<a href="${pageContext.request.contextPath}/message/messageInsertForm.do?no=${msgList.no}">
+			<!-- 닉네임 클릭시 회원번호 가지고 쪽지입력폼 이동 -->
+			<a href="${pageContext.request.contextPath}/message/messageInsertForm.do?fromMember=${msgList.frommNick}">
 			${msgList.frommNick}</a></div>
 			<div id="statuesValue" class="cell">${msgList.status}</div>
 		</div>
@@ -55,10 +56,13 @@
 		</div>
 		<c:out value="${pageBar}" escapeXml="false"/>
 		<input type="button" value="쪽지쓰기" id="btn-add" class="btn" onclick="messageInsert();"/>
-		<input type="button" value="선택삭제" id="btn-add" class="btn" onclick="messageDelete();"/>
+		<input type="button" value="선택삭제" id="btn-add" class="btn" onclick="messageSelectDelete();"/>
 		<script>
 			function messageInsert(){
 				location.href = "${pageContext.request.contextPath}/message/messageInsertForm.do?no=${member.no}";
+			};
+			function messageSelectDelete(){
+				location.href = "${pageContext.request.contextPath}/message/messageDelete.do?no=${msgList.no}";
 			};
 		</script>
 </body>

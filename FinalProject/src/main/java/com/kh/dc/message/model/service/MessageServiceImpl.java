@@ -66,12 +66,6 @@ public class MessageServiceImpl implements MessageService {
 	}
 	
 	@Override
-	public int readMessage(int no) {
-		// 
-		return messageDao.readMessage(no);
-	}
-
-	@Override
 	public int deleteMessage(int no) {
 		// 
 		return messageDao.deleteMessage(no);
