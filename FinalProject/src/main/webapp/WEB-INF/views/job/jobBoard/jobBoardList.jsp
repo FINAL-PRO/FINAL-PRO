@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,14 +34,7 @@
 		function jobBoardInsert(){
 			location.href = "${pageContext.request.contextPath}/job/jobBoard/jobBoardInsertForm.do?no=${member.no}";
 		};
-		
-		$(function(){
-			$("div[id]").on("click",function(){
-				var no = $(this).attr("id");
-				console.log("no="+no);
-				location.href = "${pageContext.request.contextPath}/board/boardView.do?no="+no;
-			});
-		});
+
 	</script>
 	<c:import url="../../common/header.jsp"/>
 </head>
@@ -61,6 +55,62 @@
 					<div class="dc-content-box">
 						<h1>구인구직 게시판</h1>
 						<nav></nav>
+						<!-- 날짜/조회순 정렬 -->
+						<select id="arrayType" name="arrayType">
+							<option value="B.WRITEDATE" <c:if test="${arrayType == B.WRITEDATE}">selected</c:if>>최신순</option>
+							<option value="B.VIEWCOUNT" <c:if test="${arrayType == B.VIEWCOUNT}">selected</c:if>>조회순</option>
+						</select>
+						<!-- 구인/구직만 보기 -->
+						<select id="type" name="type">
+							<option value="selAll">전체</option>
+							<c:forEach items="${typeList}" var="type_one">
+								<option value="${type_one.id}" <c:if test="${type_one.id eq type}">selected</c:if>>${type_one.value}</option>
+							</c:forEach>
+						</select>
+						<!-- 정규/비정규/파트 만 보기 -->
+						<select id="jobType" name="jobType">
+							<option value="selAllJob">전체</option>
+							<c:forEach items="${jobTypeList}" var="job">
+								<option value="${job.id}" <c:if test="${job.id eq jobType}">selected</c:if>>${job.value}</option>
+							</c:forEach>
+						</select>
+						<select id="salType" name="salType">
+							<option value="selAllSel">전체</option>
+							<c:forEach items="${salTypeList}" var="sal">
+								<option value="${sal.id}" <c:if test="${sal.id eq salType}">selected</c:if>>${sal.value}</option>
+							</c:forEach>
+						</select>
+					<script>
+						
+						$("#arrayType").on('change',function() {
+							location.href = "${pageContext.request.contextPath}/job/jobBoard/jobBoardList.do?arrayType="
+									+ $("#arrayType").val() 
+									+ "&type=" + $("#type").val() 
+									+ "&jobType=" + $("#jobType").val()
+									+ "&salType=" + $("#salType").val();
+						});
+						$("#type").on('change',function() {
+							location.href = "${pageContext.request.contextPath}/job/jobBoard/jobBoardList.do?arrayType="
+									+ $("#arrayType").val() 
+									+ "&type=" + $("#type").val() 
+									+ "&jobType=" + $("#jobType").val()
+									+ "&salType=" + $("#salType").val();
+						});
+						$("#jobType").on('change',function() {
+							location.href = "${pageContext.request.contextPath}/job/jobBoard/jobBoardList.do?arrayType="
+									+ $("#arrayType").val() 
+									+ "&type=" + $("#type").val() 
+									+ "&jobType=" + $("#jobType").val()
+									+ "&salType=" + $("#salType").val();
+						});
+						$("#salType").on('change',function() {
+							location.href = "${pageContext.request.contextPath}/job/jobBoard/jobBoardList.do?arrayType="
+									+ $("#arrayType").val() 
+									+ "&type=" + $("#type").val() 
+									+ "&jobType=" + $("#jobType").val()
+									+ "&salType=" + $("#salType").val();
+						});
+					</script>
 						
 						<p>총 ${totalContents}건의 게시물이 있습니다.</p>
 						<div id="job-board" class="jb-table">
@@ -81,7 +131,7 @@
 								<div class="cell">${jb.no}</div>
 								<div class="cell">
 									<a href="${pageContext.request.contextPath}/job/jobBoard/jobBoardDetail.do?no=${jb.no}">${jb.title}</a></div>
-								<div class="cell"><a href="작성글 검색뜨게하기">${jb.nickName}</a></div>
+								<div class="cell"><a href="${pageContext.request.contextPath}/job/jobBoard/jobBoardListOne.do?memberNo=${jb.memberNo}">${jb.nickName}</a></div>
 								<div class="cell">${jb.writeDate}</div>
 								<div class="cell">${jb.startJob} ~ ${jb.endJob}</div>
 								<div class="cell">${jb.salary} / ${jb.salType}</div>

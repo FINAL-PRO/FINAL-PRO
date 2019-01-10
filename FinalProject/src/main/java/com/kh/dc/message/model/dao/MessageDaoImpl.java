@@ -1,5 +1,6 @@
 package com.kh.dc.message.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dc.common.vo.Message;
+import com.kh.dc.member.model.vo.Member;
 
 @Repository
 public class MessageDaoImpl implements MessageDao {
@@ -46,7 +48,7 @@ public class MessageDaoImpl implements MessageDao {
 	@Override
 	public int readMessage(int no) {
 		// 
-		return sqlSession.update("message_mapper.deleteMessage", no);
+		return sqlSession.update("message_mapper.readMessage", no);
 	}
 	@Override
 	public int deleteMessage(int no) {
@@ -54,4 +56,11 @@ public class MessageDaoImpl implements MessageDao {
 		return sqlSession.update("message_mapper.deleteMessage", no);
 	}
 
+	@Override
+	public int checkToNick(HashMap<String, Object> hmap) {
+		// 
+		sqlSession.selectOne("message_mapper.checkNickDuplicate", hmap);
+		
+		return (Integer)hmap.get("result");
+	}
 }
