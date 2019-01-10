@@ -17,8 +17,6 @@ public interface MessageService {
 	int insertMessage(Message message);
 	// 쪽지선택
 	Message selectOneMessage(int no);
-	// 쪽지읽음
-	int readMessage(int no);
 	// 쪽지삭제
 	int deleteMessage(int no);
 

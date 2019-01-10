@@ -139,10 +139,10 @@
 								<div class="cell">${jb.dday}일 남음</div>
 								<div class="cell">${jb.viewCount}</div>
 								<div class="cell">${jb.type}</div>		
-							</div>
+							</div><br/>
 							</c:forEach>				
 						</div>
-						<input type="button" value="글쓰기" id="btn-add" class="btn" onclick="jobBoardInsert();"/>
+						<input type="button" value="글쓰기" id="btn-add" class="btn" onclick="jobBoardInsert();"/><br/>
 						<c:out value="${pageBar}" escapeXml="false"/>
 					</div>
 				</div>

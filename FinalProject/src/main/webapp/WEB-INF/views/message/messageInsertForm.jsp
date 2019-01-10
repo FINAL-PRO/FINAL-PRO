@@ -23,10 +23,17 @@
 		
 		<div id="tomNick-container"> 
 			받는사람 : 
-			<input type="text" name="nickName" id="nickName_"  
-			 placeholder="받을사람 닉네임" required/>
+			<c:if test="${empty param.fromMember}">
+			<input type="text" name="tomNick" id="nickName_"
+			 placeholder="받을사람 닉네임" required/> 그냥작성
+			</c:if>
+			<c:if test="${!empty param.fromMember}">
+			<input type="text" name="tomNick" id="nickName_" value="${param.fromMember}"
+			 placeholder="받을사람 닉네임" required/> 답장
+			</c:if>
 	     	<span style="display:none; color:#4CAF50" class="exist">존재하는 닉네임</span>
 	     	<span style="display:none; color:red" class="noOne">없는 닉네임</span>
+	     	<span style="display:none; color:yellow" class="equal">작성자와 받는사람이 같습니다.</span>
 	     	<input type="hidden" name="nickDuplicateCheck" id="nickDuplicateCheck" value="0"/>
 	    </div><br />
 		
