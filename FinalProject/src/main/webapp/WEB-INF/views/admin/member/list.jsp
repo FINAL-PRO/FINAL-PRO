@@ -29,6 +29,11 @@
 									<c:if test="${auth.no eq authNo}">selected</c:if>>${auth.content}</option>
 							</c:forEach>
 						</select>
+						<select id="memberStatusNo">
+							<c:forEach items="${memberStatusList}" var="status">
+									<option value="${status.id}" <c:if test="${status.id eq memberStatus}">selected</c:if>>${status.value}</option>
+							</c:forEach>
+						</select>
 					</div>
 					<div class="dc-content-box">
 
@@ -37,6 +42,7 @@
 								<div class="col column">번호</div>
 								<div class="col column">이름</div>
 								<div class="col column">가입일</div>
+								<div class="col column">상태</div>
 							</div>
 
 							<c:forEach var="member" items="${memberList}">
@@ -47,6 +53,16 @@
 											href="${pageContext.request.contextPath}/admin/member/detailView.do?memberNo=${member.no}">${member.name}</a>
 									</div>
 									<div class="col column">${member.enrollDate}</div>
+									<div class="col column">
+										<select id="${member.no}_changeStatusNo">
+											<c:forEach items="${memberStatusList}" var="status">
+												<c:if test="${memberStatus ne status.id}">
+													<option value="${status.id}">${status.value}</option>
+												</c:if>
+											</c:forEach>
+										</select>
+									<button onclick="changeMemberStatus(${member.no});">상태변경</button>
+									</div>
 								</div>
 							</c:forEach>
 							<div class="table" style="background: red"></div>
@@ -63,9 +79,35 @@
 	<c:import url="../../common/footer.jsp" />
 	<script>
 		$("#authNo").on('change',function() {
-							location.href = "${pageContext.request.contextPath}/admin/member/list.do?authNo="
-									+ $("#authNo").val();
-						});
+			location.href = "${pageContext.request.contextPath}/admin/member/list.do?authNo="
+				+ $("#authNo").val() + "&memberStatus=" + $("#memberStatusNo").val();
+		});
+		
+		$("#memberStatusNo").on('change',function() {
+			location.href = "${pageContext.request.contextPath}/admin/member/list.do?authNo="
+				+ $("#authNo").val() + "&memberStatus=" + $("#memberStatusNo").val();
+		});
+		
+		
+		
+		function changeMemberStatus(memberNo){
+			var status = $("#"+ memberNo + "_changeStatusNo").val();
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/admin/member/changeMemberStatus.do?memberNo="
+						+ memberNo + "&status=" + status,
+				success : function(data){
+					if(data == "1"){
+						alert("변경 성공");
+						location.reload();
+					}else{
+						alert("변경 실패");
+					}
+				},error : function(){
+					alert("error");
+				}
+			});
+		}
 	</script>
 </body>
 </html>
