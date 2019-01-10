@@ -99,21 +99,21 @@
 					console.log(data);
 					
 					if(data == ""){
-						$(".ad-main").css("width", "1126px").css("height", "100%").attr("background-position", "center")
+						$(".ad-main").css("width", "798px").css("height", "100%").attr("background-position", "center")
 						.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
 						.css("margin-right", "auto");
 						$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/1200x120.png")');
 						
 						$(".ad-main").attr("onclick", "window.open('" + "http://www.iei.or.kr/main/main.kh" + "');");
 					}else{
-						$(".ad-main").css("width", "1126px").css("height", "100%").attr("background-position", "center")
+						$(".ad-main").css("width", "798px").css("height", "100%").attr("background-position", "center")
 						.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
 						.css("margin-right", "auto");
 						$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/1200x120.png")');						
 					}
 				}, error : function(error){
 					console.log("메인 광고 ajax 에러");
-					$(".ad-main").css("width", "1126px").css("height", "100%").attr("background-position", "center")
+					$(".ad-main").css("width", "798px").css("height", "100%").attr("background-position", "center")
 					.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
 					.css("margin-right", "auto");
 					$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/1200x120.png")');
@@ -145,13 +145,12 @@
 								</tbody>
 							</table>
 						</div>
-						<div class="dc-ad-box" style="border:1px solid #f1f3f6;height:100px;margin:10px">
-							<!-- <h1>메인 광고(AD)</h1> -->
-							<div class="ad-main">
-								<img id="ad-main-img" src="" alt="" />
+							<div class="dc-ad-box" style="height:100px;">
+								<!-- <h1>메인 광고(AD)</h1> -->
+								<div class="ad-main">
+									<img id="ad-main-img" src="" alt="" />
+								</div>
 							</div>
-						</div>
-						
 						<div class="dc-content-box">
 							<h4>
 								<span class="board-title">자유 게시판</span>

@@ -18,7 +18,7 @@
 			console.log(data);
 			
 			if(data == ""){
-				$(".ad-right").css("width", "256px").css("height", "290px").attr("background-position", "center")
+				$(".ad-right").css("width", "258px").css("height", "290px").attr("background-position", "center")
 				.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
 				.css("margin-right", "auto");
 				$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/260x280.png")');
@@ -26,7 +26,7 @@
 			}else{
 				var img = data['adContentPath'].split("\\ad/");
 				
-				$(".ad-right").css("width", "256px").css("height", "290px").attr("background-position", "center")
+				$(".ad-right").css("width", "258px").css("height", "290px").attr("background-position", "center")
 				.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
 				.css("margin-right", "auto");
 				$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/' + img[1] + '")');
@@ -36,7 +36,7 @@
 			
 		}, error : function(){
 			console.log("우측 섹션 광고 ajax 에러");
-			$(".ad-right").css("width", "256px").css("height", "280px").attr("background-position", "center")
+			$(".ad-right").css("width", "258px").css("height", "280px").attr("background-position", "center")
 			.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
 			.css("margin-right", "auto");
 			$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/260x280.png")');			
@@ -53,40 +53,54 @@
 						alt="메인_우측_세로배너" width="140" height="800"
 						style="margin-left: 1px;margin-right: 1px; margin-top:60px; margin-bottom:60px;
 						border:1px solid red"/> --%>
-	<div class="dc-content-box">
+	<div class="dc-content-box" style="min-height: 0vh;">
 		<!-- <h4>
 			<span class="board-title">정보</span>
 		</h4> -->
-		<div align="center" style="padding-top:50px;">
-			<!-- 로그인 -->
-			<sec:authorize access="isAnonymous()">
-				<button class="btn btn-outline-success" id="loginBtn" onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
-				<button class="btn btn-outline-success" id="enrollBtn" type="button" onclick="location.href='/dc/member/memberEnroll.do'">회원가입</button>
-				<br/>
-				<a href="${pageContext.request.contextPath}/member/memberSearch.do" id="searchBtn" class="search">아이디/비밀번호 찾기</a>
-			</sec:authorize>
-			
-			<sec:authorize access="isAuthenticated()">
+		<div class="dc-user-profile" align="center">
+			<div class="dc-profile-area-top" style="background:white;padding:5px">
+				<!-- 로그인 안했을때 -->
+				<sec:authorize access="isAnonymous()">
+					<button style="width:90%;height:80%;margin:10px" class="btn btn-outline-success" id="loginBtn" onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
+				</sec:authorize>
+				
+				<!-- 로그인 했을때 -->
+				<sec:authorize access="isAuthenticated()">
 				<c:if test="${!empty member.profile}">
 					<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/${member.profile}"
-						style="border-radius: 50px; border: 1px solid lightgray; width: 100px; height: 100px; margin-bottom: 15px;"/>					    				
+						style="border-radius: 50px; border: 1px solid lightgray; width: 80px; height: 80px; margin-bottom: 15px;"/>					    				
 				</c:if>
 				<c:if test="${empty member.profile}">
 					<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/profileDefaultImg.png"
-						style="border-radius: 50px; border: 1px solid lightgray; width: 100px; height: 100px; margin-bottom: 15px;"/>
+						style="border-radius: 50px; border: 1px solid lightgray; width: 80px; height: 80px; margin-bottom: 15px;"/>
 				</c:if>
-				<br/>
+				<br />
 				<span>
 					<a href="${pageContext.request.contextPath}/member/memberView.do?no=${member.no}"
 						title="내정보보기">${member.nickName}</a> 님, 안녕하세요!
 				</span>
-        <span onclick="msgPop();">쪽지 <label for="">0</label></span>
-				<!-- <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal">로그인</button> -->
-				<br />						
-				<form action="${pageContext.request.contextPath}/logout" method="get"> 
-					<input type="submit" class="btn btn-outline-success" value="로그아웃" /> 
-				</form> 
-			</sec:authorize>
+
+				</sec:authorize>
+				
+			</div>
+			
+			<div class="dc-profile-area-bottom" style="background:#f1f3f6;padding:8px 0px;">
+				<!-- 로그인 안했을때 -->
+				<sec:authorize access="isAnonymous()">
+					<ul>
+						<li><button class="btn btn-outline-success" onclick="location.href='${pageContext.request.contextPath}/member/memberSearch.do'">id/pw 찾기</button></li>
+						<li><button class="btn btn-outline-success" id="enrollBtn" type="button" onclick="location.href='/dc/member/memberEnroll.do'">회원가입</button></li>
+					</ul>
+				</sec:authorize>
+				
+				<!-- 로그인 했을때 -->
+				<sec:authorize access="isAuthenticated()">
+					<ul>
+						<li><button class="btn btn-outline-success" onclick="msgPop();">쪽지 0</button></li>
+						<li><button class="btn btn-outline-success" onclick="location.href='${pageContext.request.contextPath}/logout'">로그아웃</button></li>
+					</ul>
+				</sec:authorize>
+			</div>
 		</div>
 	</div>
 	<div class="dc-content-box">
