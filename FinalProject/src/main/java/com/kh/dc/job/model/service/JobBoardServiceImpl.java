@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.dc.common.exception.BoardException;
+import com.kh.dc.common.vo.Code;
 import com.kh.dc.job.model.dao.JobBoardDao;
 import com.kh.dc.job.model.vo.JobBoard;
 
@@ -21,9 +22,9 @@ public class JobBoardServiceImpl implements JobBoardService {
 	JobBoardDao jobBoardDao;
 	
 	@Override
-	public List<Map<String, String>> selectJobBoardList(int cPage, int numPerPage) {
+	public List<Map<String, String>> selectJobBoardList(Map<String, String> map, int cPage, int numPerPage) {
 		//
-		return jobBoardDao.selectJobBoardList(cPage, numPerPage);
+		return jobBoardDao.selectJobBoardList(map, cPage, numPerPage);
 	}
 
 	@Override
@@ -83,6 +84,8 @@ public class JobBoardServiceImpl implements JobBoardService {
 		// 
 		JobBoard jobBoard = jobBoardDao.selectOneJobBoard(no);
 		
+		System.out.println(jobBoard);
+		
 		if(jobBoard != null) jobBoardDao.updateViewCount(no);
 		
 		return jobBoard;
@@ -132,5 +135,22 @@ public class JobBoardServiceImpl implements JobBoardService {
 		
 		return result;
 	}
-
+/*	
+	@Override
+	public List<JobBoard> selectArrayType(int arrayType) {
+		return jobBoardDao.selectArrayType(arrayType);
+	}
+*/	
+	@Override
+	public List<Code> selectJobBoardTypeList() {
+		return jobBoardDao.selectJobBoardTypeList();
+	}
+	@Override
+	public List<Code> selectJobBoardJobTypeList() {
+		return jobBoardDao.selectJobBoardJobTypeList();
+	}
+	@Override
+	public List<Code> selectJobBoardSalTypeList() {
+		return jobBoardDao.selectJobBoardSalTypeList();
+	}
 }

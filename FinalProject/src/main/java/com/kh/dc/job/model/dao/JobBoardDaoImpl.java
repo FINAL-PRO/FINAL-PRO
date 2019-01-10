@@ -8,7 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.dc.common.vo.Board;
+import com.kh.dc.common.vo.Code;
 import com.kh.dc.job.model.vo.JobBoard;
 
 @Repository
@@ -18,10 +18,10 @@ public class JobBoardDaoImpl implements JobBoardDao {
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<Map<String, String>> selectJobBoardList(int cPage, int numPerPage) {
+	public List<Map<String, String>> selectJobBoardList(Map<String, String> map, int cPage, int numPerPage) {
 		// 
 		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
-		return sqlSession.selectList("jobBoard_mapper.selectJobBoardList", null, rowBounds);
+		return sqlSession.selectList("jobBoard_mapper.selectJobBoardList", map, rowBounds);
 	}
 
 	@Override
@@ -75,9 +75,9 @@ public class JobBoardDaoImpl implements JobBoardDao {
 		return sqlSession.update("jobBoard_mapper.updateJobBoard", jobBoard);
 	}
 	
-	public int updateViewCount(int boardNo) {
+	public int updateViewCount(int no) {
 		// 
-		return sqlSession.update("jobBoard_mapper.updateViewCount", boardNo);
+		return sqlSession.update("jobBoard_mapper.updateViewCount", no);
 	}
 
 	@Override
@@ -85,6 +85,24 @@ public class JobBoardDaoImpl implements JobBoardDao {
 		// 
 		return sqlSession.update("jobBoard_mapper.deleteJobBoard", boardNo);
 	}
-		
-	
+/*
+	@Override
+	public List<JobBoard> selectArrayType(int arrayType) {
+		return sqlSession.selectList("jobBoard_mapper.selectArrayType", arrayType);
+	}
+*/
+	@Override
+	public List<Code> selectJobBoardTypeList() {
+		return sqlSession.selectList("jobBoard_mapper.selectJobBoardTypeList");
+	}	
+	@Override
+	public List<Code> selectJobBoardJobTypeList() {
+		return sqlSession.selectList("jobBoard_mapper.selectJobBoardJobTypeList");
+	}	
+	@Override
+	public List<Code> selectJobBoardSalTypeList() {
+		return sqlSession.selectList("jobBoard_mapper.selectJobBoardSalTypeList");
+	}
+
+
 }

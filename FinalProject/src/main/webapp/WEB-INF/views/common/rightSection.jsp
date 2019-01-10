@@ -38,6 +38,10 @@
 			$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/260x280.png")');			
 		}
 	});
+	
+	function msgPop() {
+		window.open("${pageContext.request.contextPath}/message/messageList.do?no=${member.no}", "msgPop", "width=700, height=600");
+	}
 </script>	
 
 <div class="dc-content">
@@ -55,7 +59,7 @@
 			<button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal">로그인</button>
 			<button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='/dc/member/memberEnroll.do'">회원가입</button>
 			<br />
-			<span>내가쓴글</span> / <span>내가쓴댓글</span> / <span>쪽지</span>
+			<span>내가쓴글</span> / <span>내가쓴댓글</span> / <span onclick="msgPop();">쪽지 <label for="">0</label></span>
 		</div>
 		
 	</div>

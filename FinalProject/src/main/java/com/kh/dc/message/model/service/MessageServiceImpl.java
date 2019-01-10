@@ -1,5 +1,6 @@
 package com.kh.dc.message.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.dc.common.vo.Message;
 import com.kh.dc.job.model.vo.JobBoard;
+import com.kh.dc.member.model.vo.Member;
 import com.kh.dc.message.model.dao.MessageDao;
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -74,5 +76,12 @@ public class MessageServiceImpl implements MessageService {
 		// 
 		return messageDao.deleteMessage(no);
 	}
-
+	@Override
+	public int checkToNick(String nickName) {
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		
+		hmap.put("nickName", nickName);
+		
+		return messageDao.checkToNick(hmap);
+	}
 }

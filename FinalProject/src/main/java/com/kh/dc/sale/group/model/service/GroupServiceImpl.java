@@ -19,7 +19,9 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public List<Map<String, String>> selectGroupList(int cPage, int numPerPage) {
 		
-		return groupDao.selectGroupList(cPage, numPerPage);
+		List list = groupDao.selectGroupList(cPage, numPerPage);
+		
+		return list;
 	}
 
 	@Override

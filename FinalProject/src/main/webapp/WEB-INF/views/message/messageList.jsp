@@ -12,17 +12,16 @@
 	<style>
     .columName  {
     	display: table-row;
-    	background: lightgreen;
     	border : 1px solid black;
-      }
+    }
     .row {
     	display: table-row;
     	border : 1px solid black;
     }        
     .cell {
-      display: table-cell;
-      border : 1px solid black;
-      }
+	      display: table-cell;
+	      border : 1px solid black;
+    }
     </style>
 </head>
 <body>
@@ -30,7 +29,7 @@
 	<p>Total : ${totalContents}</p>
 		<input type="hidden" value="${member.no}"/>
 		<div id="msg-table" class="msg-table">
-		<div class="columName">
+		<div class="columName bg-primary text-white">
 			<div id="check" class="cell"></div>
 			<div id="no" class="cell">번호</div>
 			<div id="content" class="cell">내용</div>

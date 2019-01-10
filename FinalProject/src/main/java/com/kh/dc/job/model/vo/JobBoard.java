@@ -28,12 +28,13 @@ public class JobBoard extends Board {
 	private String nickName;
 	private int dday;
 	private String cName;
+	private String arrayType;
 	
 	public JobBoard() {}
 
 	public JobBoard(int no, String type, int salary, Date startDate, Date endDate, Date startJob, Date endJob,
 			String startTime, String endTime, String location, int boardNo, int companyNo, String jobType, String salType,
-			String status, String nickName, int dday, String cName) {
+			String status, String nickName, int dday, String cName, String arrayType) {
 		super();
 		this.no = no;
 		this.type = type;
@@ -53,6 +54,8 @@ public class JobBoard extends Board {
 		this.nickName = nickName;
 		this.dday = dday;
 		this.cName = cName;
+		this.arrayType = arrayType;
+		
 	}
 
 	public int getNo() {
@@ -199,17 +202,24 @@ public class JobBoard extends Board {
 		this.cName = cName;
 	}
 
+	public String getArrayType() {
+		return arrayType;
+	}
+
+	public void setArrayType(String arrayType) {
+		this.arrayType = arrayType;
+	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
 	@Override
 	public String toString() {
 		return "JobBoard [no=" + no + ", type=" + type + ", salary=" + salary + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", startJob=" + startJob + ", endJob=" + endJob + ", startTime=" + startTime
 				+ ", endTime=" + endTime + ", location=" + location + ", boardNo=" + boardNo + ", companyNo="
 				+ companyNo + ", jobType=" + jobType + ", salType=" + salType + ", status=" + status + ", nickName="
-				+ nickName + ", dday=" + dday + ", cName=" + cName + super.toString() +"]";
+				+ nickName + ", dday=" + dday + ", cName=" + cName + ", arrayType" + arrayType + super.toString() +"]";
 	}
 
 }
