@@ -54,16 +54,19 @@
 						<div class="col-md-3">프로필</div>
 					  	<div class="col-md-6" align="center">
 						  	<c:if test="${!empty member.profile}">
-						  		<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/${member.profile}"/>					    				
+						  		<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/${member.profile}"/>	
+						  		<br>
+						  		<input type="button" class="btn btn-sm btn-outline-success" id="deleteProfileImg" value="프로필 사진 삭제">				    				
 						  	</c:if>
 						  	<c:if test="${empty member.profile}">
 						  		<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/profileDefaultImg.png"/>
+						  		<br/>						  		
 						  	</c:if>					  	
 					  		<input type="file" name="file" id="file" onchange="inputProfile(this);" multiple/>
 						</div>
 					  	<div class="col-md-3">
-					  		<label class="profileLabel">기본 이미지를 누르면</label>
-					  		<label class="profileLabel">프로필사진을 변경할 수 있습니다.</label>
+					  		<br><br>
+					  		<label class="profileLabel" style="text-align:center;">이미지를 누르면 <br>프로필 사진을 <br> 변경할 수 있습니다.</label>
 					  	</div>
 					</div>	
 					<div class="row email-container" id="email-container">
@@ -407,6 +410,10 @@
 				reader.readAsDataURL(value.files[0]);				
 			}
 		}
+		
+		$("#deleteProfileImg").on("click", function() {
+				$("#profileImg").attr("src", "${pageContext.request.contextPath}/resources/upload/profile/profileDefaultImg.png");				
+		});
 
 		</script>
 </body>
