@@ -34,7 +34,7 @@
 	</style>
 </head>
 <body>
-		<c:import url="../common/menubar.jsp"/>
+	<c:import url="../common/menubar.jsp"/>
 	<div class="wrap_inner">
 		<main id="container">
 			<section>

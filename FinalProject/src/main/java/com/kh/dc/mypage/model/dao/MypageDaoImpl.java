@@ -15,8 +15,7 @@ public class MypageDaoImpl implements MypageDao{
 	SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<Map<String, String>> selectGroupList(int cPage, int numPerPage, int mNo) {
-		System.out.println("mNo : " + mNo);
+	public List<Map<String, String>> selectCommentList(int cPage, int numPerPage, int mNo) {		
 		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
 		return sqlSession.selectList("member_mapper.selectMyCommentList", mNo, rowBounds);
 	}
@@ -24,6 +23,17 @@ public class MypageDaoImpl implements MypageDao{
 	@Override
 	public int selectTotalMyComment(int mNo) {
 		return sqlSession.selectOne("member_mapper.selectTotalMyComment", mNo);
+	}
+
+	@Override
+	public List<Map<String, String>> selectBoardList(int cPage, int numPerPage, int mNo) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("member_mapper.selectMyBoardList", mNo, rowBounds);
+	}
+
+	@Override
+	public int selectTotalMyBoard(int mNo) {
+		return sqlSession.selectOne("member_mapper.selectTotalMyBoard", mNo);
 	}
 
 }

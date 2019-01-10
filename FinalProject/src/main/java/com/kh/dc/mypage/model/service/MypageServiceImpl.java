@@ -15,13 +15,23 @@ public class MypageServiceImpl implements MypageService {
 	MypageDao mypageDao;
 
 	@Override
-	public List<Map<String, String>> selectGroupList(int cPage, int numPerPage, int mNo) {		
-		return mypageDao.selectGroupList(cPage, numPerPage, mNo);
+	public List<Map<String, String>> selectCommentList(int cPage, int numPerPage, int mNo) {		
+		return mypageDao.selectCommentList(cPage, numPerPage, mNo);
 	}
 
 	@Override
 	public int selectTotalMyComment(int mNo) {
 		return mypageDao.selectTotalMyComment(mNo);
+	}
+
+	@Override
+	public List<Map<String, String>> selectBoardList(int cPage, int numPerPage, int mNo) {
+		return mypageDao.selectBoardList(cPage, numPerPage, mNo);
+	}
+
+	@Override
+	public int selectTotalMyBoard(int mNo) {
+		return mypageDao.selectTotalMyBoard(mNo);
 	}
 
 }
