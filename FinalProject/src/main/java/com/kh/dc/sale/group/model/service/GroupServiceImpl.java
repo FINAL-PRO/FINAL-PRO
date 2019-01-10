@@ -99,12 +99,17 @@ public class GroupServiceImpl implements GroupService {
 		
 		return groupDao.updateStatus(status);
 	}
+	
+	@Override
+	public int selectRemainCount(int groupNo) {
+		
+		return groupDao.selectRemainCount(groupNo);
+	}
 
 	@Override
 	public List<Board> getGroupListData() {
 		return groupDao.getGroupListData();
 	}
-	
-	
+
 
 }

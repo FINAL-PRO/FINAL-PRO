@@ -34,16 +34,30 @@
 		WHERE MEMBERNO = #{no}
 	</select>
 	
+	<select id="selectTotalMyBoard" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		FROM DC_BOARD_TB B
+		JOIN DC_CODE_TB C ON (B.TYPE = C.ID)
+		WHERE MEMBERNO = #{no}
+	</select>
+	
 	<!-- 내가 쓴 댓글 리스트 가져오기 -->
 	<select id="selectMyCommentList" parameterType="_int" resultMap="resultComment">
-		SELECT C.VALUE, B.TITLE, CO.CONTENT, CO.WRITEDATE
+		SELECT CO.NO, C.VALUE, B.TITLE, CO.BOARDNO, CO.CONTENT, CO.WRITEDATE
+		FROM DC_COMMENT_TB CO
+		JOIN DC_BOARD_TB B ON CO.BOARDNO = B.NO
+		JOIN DC_CODE_TB C ON  C.ID = B.TYPE
+		WHERE CO.MEMBERNO = #{mNo}
+	</select>
+	
+	<select id="selectTotalMyComment" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
 		FROM DC_COMMENT_TB CO
 		JOIN DC_BOARD_TB B ON CO.BOARDNO = B.NO
 		JOIN DC_CODE_TB C ON  c.id = B.TYPE
 		WHERE CO.MEMBERNO = #{no}
-	</select>	
-
-	
+	</select>
+						
 	<!-- 닉네임 중복 체크 -->
 	<select id="checkNickNameDuplicate" parameterType="String" resultType="_int">
 		SELECT COUNT(*)
@@ -56,14 +70,13 @@
 		SELECT COUNT(*)
      	FROM DC_MEMBER_TB
     	WHERE EMAIL = #{email}
-	</select>
-	
+	</select>	
 	
 	<!-- 회원가입 -->
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO DC_MEMBER_TB VALUES(
 			SEQ_MEMBER.NEXTVAL, #{email}, #{nickName}, 
-			#{password}, SYSDATE, 0, #{locationNo}, 1, 'STATUS001', null, #{name}, null, null
+			#{password}, SYSDATE, 0, #{locationNo}, 1, 'STATUS001', null, #{name}, null, null, #{profile}
 		)
 	</insert>
 	
@@ -81,7 +94,7 @@
 	<update id="updateMember" parameterType="Member">
 		UPDATE DC_MEMBER_TB SET
 		NICKNAME = #{nickName}, PASSWORD = #{password}, 
-		LOCATIONNO = #{locationNo}, ADDRESS=#{address}, DEPOSIT=#{deposit}, BANK=#{bank}
+		LOCATIONNO = #{locationNo}, ADDRESS=#{address}, DEPOSIT=#{deposit}, BANK=#{bank}, PROFILE=#{profile}
 		WHERE NO = #{no}
 	</update>
 	

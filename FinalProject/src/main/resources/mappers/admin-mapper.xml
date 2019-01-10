@@ -62,4 +62,8 @@
 		UPDATE DC_BOARD_TB SET STATUS=#{status} WHERE NO = #{boardNo}
 	</update>
 	
+	<select id="checkAuthMember" parameterType="_int" resultType="member">
+		SELECT * FROM DC_MEMBER_TB WHERE NO = #{no}
+	</select>
+	
 </mapper>

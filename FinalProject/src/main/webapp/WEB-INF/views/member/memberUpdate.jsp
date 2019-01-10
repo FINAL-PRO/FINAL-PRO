@@ -21,6 +21,15 @@
 		
 		#modalBtn>button {width: 40%; text-align:center; margin-bottom: 10px;}		
 		#modalPassword {width: 80%;}
+		
+		#file {display:none;}
+		#profileImg {
+			border-radius: 100px;
+		    border: 1px solid lightgray; 
+		    width: 150px; 
+		    height: 150px;
+		    margin-bottom: 15px;
+		}
 				
 	</style>
 </head>
@@ -36,11 +45,30 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>제목</h1>
+							<c:import url="../mypage/myPageMenu.jsp"/>
 						</div>
 						<div class="dc-content-box">
 							<div id="enroll-container">
-				<form name="memberEnrollFrm" action="memberUpdate.do" method="post" onsubmit="return fn_enroll_validate();" >								 
+				<form action="memberUpdate.do" id="memberUpdate" method="post" enctype="multipart/form-data">								 
+					<div class="row profile-container" id="profile-container">
+						<div class="col-md-3">프로필</div>
+					  	<div class="col-md-6" align="center">
+						  	<c:if test="${!empty member.profile}">
+						  		<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/${member.profile}"/>	
+						  		<br>
+						  		<input type="button" class="btn btn-sm btn-outline-success" id="deleteProfileImg" value="프로필 사진 삭제">				    				
+						  	</c:if>
+						  	<c:if test="${empty member.profile}">
+						  		<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/profileDefaultImg.png"/>
+						  		<br/>						  		
+						  	</c:if>					  	
+					  		<input type="file" name="file" id="file" onchange="inputProfile(this);" multiple/>
+						</div>
+					  	<div class="col-md-3">
+					  		<br><br>
+					  		<label class="profileLabel" style="text-align:center;">이미지를 누르면 <br>프로필 사진을 <br> 변경할 수 있습니다.</label>
+					  	</div>
+					</div>	
 					<div class="row email-container" id="email-container">
 						<div class="col-md-3">이메일</div>
 						<div class="col-md-6"><input type="email" class="form-control" name="email" id="email" value="${member.email}" readonly></div>
@@ -143,9 +171,11 @@
 				   
 				   <div class="row btn-container">
 				   <div class="col-md-3"></div>
-				   <div class="col-md-3 btn-container"><input type="submit" class="btn btn-outline-success" value="수정" ></div>
 				   <div class="col-md-3 btn-container">
-				   	<input type="button"  class="btn btn-outline-danger" 
+				   		<input type="button" class="btn btn-outline-success" id="submitButton" value="수정">
+				   </div>
+				   <div class="col-md-3 btn-container">
+				   		<input type="button"  class="btn btn-outline-danger" 
 				   			data-toggle="modal" data-target="#modalDeleteMember" value="회원 탈퇴"></div>
 				   <div class="col-md-3" id=""></div>
 				   </div>	
@@ -277,12 +307,15 @@
 				
 				if(pwd==""){
 					$("#pwdChkComment").text('비밀번호을 입력하세요.');
+					$("#submitButton").attr('disabled', true);
 				}else if(!regPwd.test(pwd)){
 					
 					$("#pwdChkComment").text('영대문자/특수문자/숫자 최소 1개 포함 6자 이상!');
+					$("#submitButton").attr('disabled', true);
 					
 				} else {
-					$("#pwdChkComment").text('OK!');		
+					$("#pwdChkComment").text('');
+					$("#submitButton").attr('disabled', false);
 				} 
 			});
 			
@@ -290,9 +323,11 @@
 			$("#password2").on("keyup", function(){
 				var pwd=$("#password_").val(), pwd2=$("#password2").val();
 				if(pwd != pwd2){
-					$("#pwdChkComment2").text('위의 비밀번호와 다릅니다.');				
+					$("#pwdChkComment2").text('위의 비밀번호와 다릅니다.');
+					$("#submitButton").attr('disabled', true);
 				} else if(pwd!=null && pwd2!= null && pwd == pwd2){
-					$("#pwdChkComment2").text('OK!');
+					$("#pwdChkComment2").text('');
+					$("#submitButton").attr('disabled', false);
 				}
 			
 			});	
@@ -342,6 +377,42 @@
 				this.value = this.value.replace(/[^0-9\.]/g,'');				
 			});
 			
+		});
+			
+		$("#submitButton").on("click", function() {
+				
+				var pwd = $("#password_").val().trim();
+				var pwd2 = $("#password2").val().trim();
+				var regPwd = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,12}$/;
+				
+				if(regPwd.test(pwd) && pwd==pwd2){
+					$("#memberUpdate").submit();
+				} else{
+					alert("패스워드가 올바르지 않습니다. 다시 확인해주세요.");
+					return;
+				}
+			
+		});
+			
+		// 프로필 이미지 클릭시 파일 태그 클릭 효과
+		$('#profileImg').click(() => { $('#file').click(); });
+			
+		// 프로필 사진 미리보기 스크립트
+		function inputProfile(value) {
+			if(value.files && value.files[0]) {
+				var reader = new FileReader();				
+					
+				reader.onload = function (e) {
+					$("#profileImg").attr("src", e.target.result);
+					$(".profileLabel").hide();					
+				}	
+				
+				reader.readAsDataURL(value.files[0]);				
+			}
+		}
+		
+		$("#deleteProfileImg").on("click", function() {
+				$("#profileImg").attr("src", "${pageContext.request.contextPath}/resources/upload/profile/profileDefaultImg.png");				
 		});
 
 		</script>

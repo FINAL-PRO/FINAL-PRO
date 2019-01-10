@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 	
 <script>
 	var uris = "${pageContext.request.requestURI}".split("/");
@@ -50,33 +54,66 @@
 						style="margin-left: 1px;margin-right: 1px; margin-top:60px; margin-bottom:60px;
 						border:1px solid red"/> --%>
 	<div class="dc-content-box">
-		<h4>
+		<!-- <h4>
 			<span class="board-title">정보</span>
-		</h4>
-		<div align="center">
-			<img src="" alt="프로필 이미지" />
-			<p>유저이름</p>
-			<button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal">로그인</button>
-			<button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='/dc/member/memberEnroll.do'">회원가입</button>
-			<br />
-			<span>내가쓴글</span> / <span>내가쓴댓글</span> / <span onclick="msgPop();">쪽지 <label for="">0</label></span>
+		</h4> -->
+		<div align="center" style="padding-top:50px;">
+			<!-- 로그인 -->
+			<sec:authorize access="isAnonymous()">
+				<button class="btn btn-outline-success" id="loginBtn" onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
+				<button class="btn btn-outline-success" id="enrollBtn" type="button" onclick="location.href='/dc/member/memberEnroll.do'">회원가입</button>
+				<br/>
+				<a href="${pageContext.request.contextPath}/member/memberSearch.do" id="searchBtn" class="search">아이디/비밀번호 찾기</a>
+			</sec:authorize>
+			
+			<sec:authorize access="isAuthenticated()">
+				<c:if test="${!empty member.profile}">
+					<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/${member.profile}"
+						style="border-radius: 50px; border: 1px solid lightgray; width: 100px; height: 100px; margin-bottom: 15px;"/>					    				
+				</c:if>
+				<c:if test="${empty member.profile}">
+					<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/profileDefaultImg.png"
+						style="border-radius: 50px; border: 1px solid lightgray; width: 100px; height: 100px; margin-bottom: 15px;"/>
+				</c:if>
+				<br/>
+				<span>
+					<a href="${pageContext.request.contextPath}/member/memberView.do?no=${member.no}"
+						title="내정보보기">${member.nickName}</a> 님, 안녕하세요!
+				</span>
+        <span onclick="msgPop();">쪽지 <label for="">0</label></span>
+				<!-- <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal">로그인</button> -->
+				<br />						
+				<form action="${pageContext.request.contextPath}/logout" method="get"> 
+					<input type="submit" class="btn btn-outline-success" value="로그아웃" /> 
+				</form> 
+			</sec:authorize>
 		</div>
-		
 	</div>
 	<div class="dc-content-box">
 		<h4>
-			<span class="board-title">날씨</span>
+			<span class="board-title">현재 날씨</span>
 		</h4>
 		<hr />	
 		<div class="" style="text-align: center">
-			<label style="margin-bottom: 10px;">(일단 default 삼성동 날씨)</label><br>
-			<i class="wi wi-night-sleet" id="weatherIcon" style="font-size: 50px; margin-bottom: 10px;"></i> <br>
+			<label id="village" style="margin-bottom: 10px;"></label><br>
+			<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" style="width:100px; height: 100px;"/>
+			<i class="" id="weatherIcon" style="font-size: 50px; margin-bottom: 10px;"></i> <br>
 			<label id="sky"></label>
 		
 		<hr />
-		현재 기온 : <label id="tc"></label><br>
-		최저 기온 : <label id="tmin"></label><br>
-		최고 기온 : <label id="tmax"></label>
+		
+		<div class="nowWeather-container" style="display: inline-block; ">	
+			<!-- <div class="block" style="text-align: center; width: auto;">
+				현재 기온 :	<label id="tc"></label><br>
+				최저 기온 :	<label id="tmin"></label><br>
+				최고 기온 :	<label id="tmax"></label>
+			</div> -->
+			<!-- <div class="block" style="text-align: center; width: auto;">
+				<label id="tc"></label><br>
+				<label id="tmin"></label><br>
+				<label id="tmax"></label>
+			</div> -->
+		</div>
 		</div>
 		
 	</div>
@@ -87,45 +124,26 @@
 		</div>
 	</div>
 </div>
-<!-- 
+
 <script>
 	$(document).ready(function(){
-		
-		/* var today = new Date();
-		
-		var dd = today.getDate();
-	    var mm = today.getMonth() + 1;
-	    var yyyy = today.getFullYear();
-	    if (dd < 10) {
-	    	dd = "0" + dd;
-	    }
-	    if (mm < 10) {
-	    	mm = "0" + mm;
-	    }
-		
-		
-		var uri = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData?";
-		var ServiceKey = "ServiceKey=sHO7cQ8W9S0IyMdkrHs0mfwGb47lglNNo8mg7IVAWb%2F29x%2BGQDGPPcZ32S03EiWOgTWQgY%2FM8HT7sqCAiK33vA%3D%3D";
-		var base_date= "&base_date=" + yyyy + mm + dd;
-		var base_time= "&base_time=0500";
-		var nx= "&nx=60";
-		var ny= "&ny=127";
-		var numOfRows= "&numOfRows=10";
-		var pageNo= "&pageNo=1";
-		var type= "&_type=json";
-		
-		
-		$.ajax({
-			   url: "http://weather.yahooapis.com/forecastjson?w=2295424",
-			   dataType: "json",
-			   success: function(data) {
-			      console.log( data.forecast[0].day );
-			      }
-			 }); */
-		
+			 
+		var url = "";
+		var village = "";
+		var output = "";
+				
+		switch("${member.locationNo}"){
+			case '2': url="&city=서울&county=강남구&village=역삼1동"; village="역삼동"; break;
+			case '5': url="&city=서울&county=성동구&village=성수1가1동"; village="성수동"; break;
+			case '8': url="&city=서울&county=마포구&village=상암동"; village="상암동"; break;
+			case '11': url="&city=서울&county=중구&village=명동1가"; village="명동"; break;
+			case '14': url="&city=서울&county=은평구&village=구산동"; village="구산동"; break;
+			default : url="&city=서울&county=강남구&village=역삼1동"; village="역삼동"; break;
+		}
+
 		 $.ajax({
 			type: "GET",
-			url: "https://api2.sktelecom.com/weather/current/minutely?appKey=a294c267-b2de-41f1-99ee-1a4894a40fdf&city=서울&county=강남구&village=삼성동",
+			url: "https://api2.sktelecom.com/weather/current/minutely?appKey=a294c267-b2de-41f1-99ee-1a4894a40fdf" + url,
 			header:{
 				"Accept": "application/json",
 				"Content-Type": "application/json; charset=UTF-8"
@@ -142,7 +160,8 @@
 				console.log(tmin);
 				
 				switch(sky){
-					case "맑음": $("#weatherIcon").attr("class", "wi wi-day-sunny"); break;
+					case "맑음": 
+						$("#weatherIcon").attr("class", "wi wi-day-sunny"); break;
 					case "구름조금": $("#weatherIcon").attr("class", "wi wi-day-sunny-overcast"); break;
 					case "구름많음": $("#weatherIcon").attr("class", "wi wi-day-cloudy"); break;
 					case "구름많고 비": $("#weatherIcon").attr("class", "wi wi-rain"); break;
@@ -158,13 +177,17 @@
 					case "뇌우/비 또는 눈": $("#weatherIcon").attr("class", "wi wi-rain-mix"); break;		
 				}
 				
-				$("#sky").text(sky);
-				$("#tc").text(tc);
-				$("#tmax").text(tmax);
-				$("#tmin").text(tmin);
+				$("#sky").text(sky); 
+				output += '현재 기온 :	<label id="tc">'+ tc +'</label><br>';
+				output += '최저 기온 :	<label id="tmin">'+ tmin +'</label><br>';
+				output += '최고 기온 :	<label id="tmax">'+ tmax +'</label>';
+				
+				$('.nowWeather-container').append(output);
 				
 			},  error : function(jqxhr, textStatus, errorThrown) {
 				console.log("ajax 처리 실패");
+			}, complete : function(){
+				$(".loadingImg").hide();
 			}
 			
 		}); 
@@ -173,4 +196,3 @@
 
 
 </script>
- -->

@@ -30,4 +30,9 @@ public class AdminMemberDaoImpl implements AdminMemberDao{
 		return sqlSession.selectList("admin_mapper.selectMemberAuthList");
 	}
 
+	@Override
+	public Member checkAuthMember(int no) {
+		return sqlSession.selectOne("admin_mapper.checkAuthMember",no);
+	}
+
 }

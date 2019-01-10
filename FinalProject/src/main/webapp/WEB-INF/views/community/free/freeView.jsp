@@ -160,7 +160,8 @@
 		width: 10px;
 	}
 	
-	
+
+
 </style>
 </head>
 <body>
@@ -176,14 +177,14 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>제목</h1>
+							<h1>자유게시판</h1>
 						</div>
 						<div class="dc-content-box">
 							<div id="container2">
 								<div class="articlelist" style="border: solid 0.5px red">
 									<form name="boardFrm" method="post">
-										<input type="hidden" name="bno" value="${boardList.no}"/>
-										<input type="hidden" name="mno" value="${member.no}"/>
+										<input type="hidden" id="bno" name="bno" value="${boardList.no}"/>
+										<input type="hidden" id="mno" name="mno" value="${member.no}"/>
 									</form>
 									<div class="group" style="border: solid 0.5px blue">
 										<p class="title">${boardList.title}</p>
@@ -199,7 +200,8 @@
 										<div class="status" style="border: solid 0.5px orange">
 											<button class="btn_board_edit" id="btn_board_edit">수정</button>
 											<button class="btn_board_delete" id="btn_board_delete">삭제</button>
-											<button class="btn_report">신고하기</button>
+											<!-- <button class="btn_report" id="btn_report">신고하기</button> -->
+											<input type="button" class="btn_report" id="btn_report" value="신고하기" onclick="javascript:btn_report();"/>
 											<span class="likecount">
 											<a href="#" class="likefunc">
 												<img src="/dc/resources/images/dislike.png" id="like_img" style="height: 17px; width: 17px;">
@@ -208,6 +210,7 @@
 											<input type="hidden" value="1" class="likecount3"/>
 											<span class="commentcount">댓글: ${boardList.commentCount}</span>
 										</div>
+
 										<script>
 										var bno = $('[name=bno]').val();
 										var mno = $('[name=mno]').val();
@@ -232,6 +235,7 @@
 									   				}
 													
 													$('#like_img').attr('src', like_img); 
+													$('#myModal').hide();
 									   			}
 											
 											});
@@ -274,14 +278,43 @@
 											
 											})
 										
-											$('.btn_report').on('click', function(){
+											function btn_report(){
+												$('#myModal').show();
+											}
+											
+											function reportInsert(){
+											
+												var reCheck = $('input:radio[name=category]:checked').val();
+												console.log("reCheck: "+reCheck);
 												
-												var popUrl = "/report/reportView.do";
-												var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
-
-												window.open(popUrl, "", popOption);
+												$.ajax({
+													type: "post",
+										   			url: "${pageContext.request.contextPath}/report/reportInsert.do",
+										   			data: { bno: bno,
+										   					mno: mno,
+										   					reCheck: reCheck},
+										   			success: function(result){
+										   				
+													if(reCheck == undefined){
+													    alert('옵션을 선택해주세요.');
+													} else {
+													    alert("신고 되었습니다.");
+													    
+													    if(result == 1){
+													    	$('#myModal').hide();
+													    }
+													} 
+													
+												}
 												
 											});
+												
+											}
+										
+											function close_box(flag) {
+									             $('#myModal').hide();
+									        };
+
 											
 				                      		$("#btn_board_edit").click(function(){
 				                      			boardFrm.action="${pageContext.request.contextPath}/community/free/freeUpdateForm.do?no=${board.no}"

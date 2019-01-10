@@ -20,6 +20,7 @@
 		<result property="writeDate" column="writedate" />
 		<result property="viewCount" column="viewcount" />
 		<result property="goodsPicture" column="goodspicture"/>
+		<result property="bank" column="bank"/>
 	</resultMap>
 	
 	<resultMap type="java.util.HashMap" id="codeList" >
@@ -59,7 +60,7 @@
 			SELECT SEQ_BOARD.CURRVAL FROM DUAL
 		</selectKey>
 		INSERT INTO DC_BOARD_GROUP_TB VALUES(SEQ_BOARD_GROUP.NEXTVAL, #{price}, #{maxCount}, 0,
-			#{boardNo}, 'STATUS007', 'DEAL002', 1, #{deposit}, #{endDate}, #{goodsName}, #{goodsPicture})
+			#{boardNo}, 'GROUP001', #{dealType}, 1, #{deposit}, #{endDate}, #{goodsName}, #{goodsPicture}, #{bank})
 	</insert>
 	
 	<update id="updateBoard" parameterType="group">
@@ -69,7 +70,7 @@
 
 	<update id="updateGroup" parameterType="group">
 		UPDATE DC_BOARD_GROUP_TB SET DEALTYPE = #{dealType}, GOODSNO = #{goodsNo}, DEPOSIT = #{deposit},
-			ENDDATE = #{endDate}, GOODSNAME = #{goodsName}, GOODSPICTURE = #{goodsPicture}
+			BANK=#{bank}, ENDDATE = #{endDate}, GOODSNAME = #{goodsName}, GOODSPICTURE = #{goodsPicture}
 		WHERE BOARDNO = #{boardNo}
 	</update>
 	
@@ -109,6 +110,10 @@
 	<update id="updateStatus" parameterType="map">
 		UPDATE DC_BOARD_GROUP_TB SET STATUS = #{status} WHERE NO = #{groupNo}
 	</update>
+	
+	<select id="selectRemainCount" parameterType="_int" resultType="_int">
+		SELECT MAXCOUNT-CURRENTCOUNT REMAIN FROM DC_BOARD_GROUP_VIEW WHERE NO = #{groupNo}
+	</select>
 	
 	<select id="getGroupListData" resultType="board">
 		SELECT * FROM DC_BOARD_TB WHERE TYPE='BOARD003' 

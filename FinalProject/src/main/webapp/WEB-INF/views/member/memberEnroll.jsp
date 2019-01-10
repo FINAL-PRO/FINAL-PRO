@@ -21,6 +21,15 @@
 		
 		#modalBtn>button {width: 40%; text-align:center; margin-bottom: 10px;}		
 		#modalPassword {width: 80%;}
+		
+		#file {display:none;}
+		#profileImg {
+			border-radius: 100px;
+		    border: 1px solid lightgray; 
+		    width: 150px; 
+		    height: 150px;
+		    margin-bottom: 15px;
+		}
 </style>
 </head>
 <body>
@@ -39,7 +48,20 @@
 					</div>
 					<div class="dc-content-box">
 						<div id="enroll-container">
-						<form name="memberEnrollFrm" id="memberEnroll" action="memberEnrollEnd.do" method="post">
+						<form name="memberEnrollFrm" id="memberEnroll" action="memberEnrollEnd.do" method="post" enctype="multipart/form-data">
+							<div class="row profile-container" id="profile-container">
+								<div class="col-md-3">프로필</div>
+				  				<div class="col-md-6" align="center">
+				  					<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/profileDefaultImg.png"/>
+				    				<input type="file" name="file" id="file" onchange="inputProfile(this);" multiple/>
+				  				</div>
+				  				
+				  				<div class="col-md-3">
+				  					<label class="profileLabel">기본 이미지를 누르면</label>
+				  					<label class="profileLabel">프로필사진을 변경할 수 있습니다.</label>
+				  				</div>
+							</div>	
+																				
 							<div class="row email-container" id="email-container">
 								<div class="col-md-3">이메일</div>
 								<div class="col-md-6">
@@ -122,7 +144,7 @@
 							<div class="row btn-container">
 								<div class="col-md-3"></div>
 								<div class="col-md-3 btn-container">
-									<input type="button" class="btn btn-outline-success" id="enrollSubmit" value="가입">
+									<input type="button" class="btn btn-outline-success" id="submitButton" value="가입">
 								</div>
 								<div class="col-md-3 btn-container">
 									<input type="reset" class="btn btn-outline-danger" value="취소">
@@ -145,6 +167,10 @@
 
 	<script>
 		$(function() {
+			
+			var emailChk = false;
+			var pwdChk = false;
+			var nickNameChk = false;
 
 			/* 이메일 중복검사 이벤트 추가 */
 			$("#email").on("keyup",function() {
@@ -163,10 +189,15 @@
 							console.log(data);
 							if (data == 1) {
 								$(".guide1").text('이미 가입된 이메일입니다.');
+								$("#submitButton").attr('disabled', true);
+
 							} else if (!(regEmail.test(email))) {
 								$(".guide1").text('이메일 형식에 맞지 않습니다.');
+								$("#submitButton").attr('disabled', true);
 							} else if (data == 0 && regEmail.test(email)) {
 								$(".guide1").text('');
+								$("#submitButton").attr('disabled', false);
+								emailChk = true;
 							}
 						}, error : function(jqxhr,textStatus, errorThrown) {
 							console.log("ajax 처리 실패");
@@ -189,10 +220,12 @@
 				} else if (nickName != null
 						&& nickName.length < 2) {
 					$(".guide").text("2자 이상 입력해주세요.");
+					$("#submitButton").attr('disabled', true);
 					return;
 
 				} else if (nickName.length > 10) {
 					$(".guide").text("10자 미만으로 입력해주세요.");
+					$("#submitButton").attr('disabled', true);
 					return;
 				} else {
 					$.ajax({
@@ -203,8 +236,11 @@
 							console.log(data);
 							if (data == 1) {
 								$(".guide").text("이미 사용중인 닉네임입니다.");
+								$("#submitButton").attr('disabled', true);
 							} else {
-								$(".guide").text("사용할 수 있는 닉네임입니다.");
+								$(".guide").text("");
+								$("#submitButton").attr('disabled', false);
+								nickNameChk = true;
 							}
 							},error : function(jqxhr,textStatus, errorThrown) {
 								console.log("ajax 처리 실패");
@@ -225,9 +261,11 @@
 				if (pwd == "") {
 					$("#pwdChkComment").text('비밀번호을 입력하세요.');
 				} else if (!regPwd.test(pwd)) {
-					$("#pwdChkComment").text('영대문자/특수문자/숫자 최소 1개 포함 6자 이상!');
+					$("#pwdChkComment").text('영대문자/특수문자/숫자 최소 1개 포함 6자 이상 12자 이하!');
+					$("#submitButton").attr('disabled', true);
 				} else {
 					$("#pwdChkComment").text('');
+					$("#submitButton").attr('disabled', false);					
 				}
 			});
 
@@ -235,28 +273,50 @@
 				var pwd = $("#password_").val(), pwd2 = $("#password2").val();
 				if (pwd != pwd2) {
 					$("#pwdChkComment2").text('위의 비밀번호와 다릅니다.');
+					$("#submitButton").attr('disabled', true);
 				} else if (pwd != null && pwd2 != null && pwd == pwd2) {
 					$("#pwdChkComment2").text('');
+					$("#submitButton").attr('disabled', false);
+					pwdChk = true;
 				}
 
 			});
 			
-			$("#enrollSubmit").on("click", function() {
-				
-				var pwd = $("#password_").val().trim();
-				var pwd2 = $("#password2").val().trim();
-				var regPwd = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,12}$/;
-				
-				if(regPwd.test(pwd) && pwd==pwd2 ){
+			$("#submitButton").on("click", function() {
+		
+				if(emailChk == true && nickNameChk == true && pwdChk == true){
 					$("#memberEnroll").submit();
-				} else{
+				} else if(emailChk == false){
+					alert("이메일을 다시 입력해주세요.");
+					return;
+				} else if(nickNameChk == false){
+					alert("닉네임을 다시 입력해주세요.");
+					return;
+				} else if(pwdChk == false){
 					alert("비밀번호를 다시 입력해주세요.");
 					return;
 				}
 			
-			});
+			});						
 			
 		});
+		
+		// 프로필 이미지 클릭시 파일 태그 클릭 효과
+		$('#profileImg').click(() => { $('#file').click(); });
+		
+		// 프로필 사진 미리보기 스크립트
+		function inputProfile(value) {
+			if(value.files && value.files[0]) {
+				var reader = new FileReader();				
+				
+				reader.onload = function (e) {
+					$("#profileImg").attr("src", e.target.result);
+					$(".profileLabel").hide();					
+				}				
+				reader.readAsDataURL(value.files[0]);				
+			}
+		}		
+		
 	</script>
 </body>
 </html>

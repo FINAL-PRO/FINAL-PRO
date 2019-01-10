@@ -11,4 +11,6 @@ public interface AdminMemberService {
 	public Member selectMemberOne(int memberNo);
 
 	public List<String> selectMemberAuthList();
+
+	public Member checkAuthMember(int no);
 }

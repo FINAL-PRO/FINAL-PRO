@@ -13,7 +13,7 @@ public class Report implements Serializable {
 	private int no;
 	private int boardNo;
 	private int rcNo; // 신고 카테고리(rc) 번호
-	private int membmerNo;
+	private int memberNo;
 	private Date reportDate;
 	private String status;
 	
@@ -21,12 +21,12 @@ public class Report implements Serializable {
 		super();
 	}
 
-	public Report(int no, int boardNo, int rcNo, int membmerNo, Date reportDate, String status) {
+	public Report(int no, int boardNo, int rcNo, int memberNo, Date reportDate, String status) {
 		super();
 		this.no = no;
 		this.boardNo = boardNo;
 		this.rcNo = rcNo;
-		this.membmerNo = membmerNo;
+		this.memberNo = memberNo;
 		this.reportDate = reportDate;
 		this.status = status;
 	}
@@ -55,12 +55,12 @@ public class Report implements Serializable {
 		this.rcNo = rcNo;
 	}
 
-	public int getMembmerNo() {
-		return membmerNo;
+	public int getMemberNo() {
+		return memberNo;
 	}
 
-	public void setMembmerNo(int membmerNo) {
-		this.membmerNo = membmerNo;
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
 
 	public Date getReportDate() {
@@ -81,7 +81,7 @@ public class Report implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Report [no=" + no + ", boardNo=" + boardNo + ", rcNo=" + rcNo + ", membmerNo=" + membmerNo
+		return "Report [no=" + no + ", boardNo=" + boardNo + ", rcNo=" + rcNo + ", memberNo=" + memberNo
 				+ ", reportDate=" + reportDate + ", status=" + status + "]";
 	}
 }

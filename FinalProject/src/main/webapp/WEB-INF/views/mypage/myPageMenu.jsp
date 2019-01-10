@@ -10,9 +10,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="dc-menubar bg-dark">
+	<div class="dc-menubar">
 		<div class="dc-manebar-main" style="width: auto; margin: 0 auto;">
-			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<nav class="navbar navbar-expand-lg">
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarNav" aria-controls="navbarNav"
 					aria-expanded="false" aria-label="Toggle navigation">
@@ -24,7 +24,7 @@
 							<a class="nav-link" href="${pageContext.request.contextPath}/member/memberView.do?no=${member.no}">내정보보기 </a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="${pageContext.request.contextPath}/member/myContentList.do?no=${member.no}">내가 쓴 글/댓글 </a>
+							<a class="nav-link" href="${pageContext.request.contextPath}/mypage/myContentList.do?no=${member.no}">내가 쓴 글/댓글 </a>
 						</li>
 					
 					</ul>

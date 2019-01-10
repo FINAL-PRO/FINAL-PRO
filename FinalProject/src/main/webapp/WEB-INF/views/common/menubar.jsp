@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+			<!-- default header name is X-CSRF-TOKEN -->
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 <!DOCTYPE html>
 <header>
 	<div id="header-container">
@@ -84,112 +88,33 @@
 								<a class="dropdown-item"
 									href="${pageContext.request.contextPath}/job/jobBoard/jobBoardList.do">구인구직</a>
 							</div></li>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> 제휴 / 광고 </a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item"
-									href="${pageContext.request.contextPath}/business/partnership/list.do">제휴
-									신청</a> <a class="dropdown-item"
-									href="${pageContext.request.contextPath}/business/ad/list.do">광고
-									신청</a>
-							</div></li>
-						<li class="nav-item"><a class="nav-link"
-							href="${pageContext.request.contextPath}/admin/index.do"> 관리자
-								페이지 </a></li>
+						<li class="nav-item dropdown">
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 제휴 / 광고 </a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/business/partnership/list.do">제휴 신청</a> 
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/business/ad/list.do">광고 신청</a>
+								</div>
+							</sec:authorize>
+						</li>
+						
+						<li class="nav-item">
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
+								<a class="nav-link" href="${pageContext.request.contextPath}/admin/index.do?no=${member.no}"> 관리자 페이지 </a>
+							</sec:authorize>
+						</li>
 					</ul>
-
-					<!-- 로그인처리  -->
-					<c:if test="${empty member}">
-						<!-- 로그인,회원가입 버튼 -->
-						<button class="btn btn-outline-success my-2 my-sm-0" type="button"
-							data-toggle="modal" data-target="#loginModal">로그인</button>
-			        &nbsp;
-			        <button class="btn btn-outline-success my-2 my-sm-0"
-							type="button"
-							onclick="location.href='${pageContext.request.contextPath}/member/memberEnroll.do'">회원가입</button>
-					</c:if>
-					<c:if test="${!empty member}">
-						<span><a
-							href="${pageContext.request.contextPath}/member/memberView.do?no=${member.no}"
-							title="내정보보기">${member.nickName}</a> 님, 안녕하세요</span>
-			        &nbsp;
-			        <button class="btn btn-outline-success my-2 my-sm-0"
-							type="button"
-							onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">로그아웃</button>
-					</c:if>
+					
 				</div>
 			</nav>
 		</div>
 	</div>
-	<!-- Modal시작 -->
-	<!-- https://getbootstrap.com/docs/4.1/components/modal/#live-demo -->
-	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
-		aria-labelledby="loginModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="loginModalLabel">로그인</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<!--로그인폼 -->
-				<!-- https://getbootstrap.com/docs/4.1/components/forms/#overview -->
-				<form action="" method="post">
-					<div class="modal-body">
-						<input type="email" class="form-control" id="loginEmail"
-							name="email" placeholder="아이디" required> <br /> <input
-							type="password" class="form-control" id="loginPassword"
-							name="password" placeholder="비밀번호" required>
-					</div>
-					<div class="modal-footer">
-						<a
-							href="${pageContext.request.contextPath}/member/memberSearch.do"
-							class="search">아이디/비밀번호 찾기</a>
-						<button type="button" class="btn btn-outline-success" id="submit">로그인</button>
-						<button type="button" class="btn btn-outline-success"
-							data-dismiss="modal">취소</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<!-- Modal 끝-->
+	
 	<script>
-		$("#submit")
-				.on(
-						"click",
-						function() {
-
-							var email = $("#loginEmail").val();
-							var password = $("#loginPassword").val();
-							console.log(email);
-
-							$
-									.ajax({
-										type : "POST",
-										url : "${pageContext.request.contextPath}/member/memberLogin.do",
-										data : {
-											email : email,
-											password : password
-										},
-										dataType : "json",
-										success : function(data) {
-											alert(data.msg);
-											location.reload();
-										},
-										error : function(jqxhr, textStatus,
-												errorThrown) {
-											console.log("ajax 처리 실패");
-											//에러로그
-											console.log(jqxhr);
-											console.log(textStatus);
-											console.log(errorThrown);
-										}
-									});
-						});
+	$(function() {
+	    $(document).ajaxSend(function(e, xhr, options) {
+	    	xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	    });
+	});
 	</script>
 </header>

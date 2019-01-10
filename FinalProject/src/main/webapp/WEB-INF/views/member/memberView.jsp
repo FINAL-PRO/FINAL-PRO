@@ -22,11 +22,19 @@
 		#modalBtn>button {width: 40%; text-align:center; margin-bottom: 10px;}
 		
 		#modalPassword {width: 80%;}
+		
+		#profileImg {
+			border-radius: 100px;
+		    border: 1px solid lightgray; 
+		    width: 150px; 
+		    height: 150px;
+		    margin-bottom: 15px;
+		}
 				
 	</style>
 </head>
 <body>
-		<c:import url="../common/menubar.jsp"/>
+	<c:import url="../common/menubar.jsp"/>
 	<div class="wrap_inner">
 		<main id="container">
 			<section>
@@ -43,7 +51,19 @@
 						
 						<div class="dc-content-box">
 							<div id="enroll-container">
-							<form name="memberEnrollFrm" action="" method="post">								 
+							<form name="memberEnrollFrm" action="" method="post">
+								<div class="row profile-container" id="profile-container">
+									<div class="col-md-3">프로필</div>
+					  				<div class="col-md-6" align="center">
+					  					<c:if test="${!empty member.profile}">
+					  						<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/${member.profile}"/>					    				
+					  					</c:if>
+					  					<c:if test="${empty member.profile}">
+					  						<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/profileDefaultImg.png"/>
+					  					</c:if>
+					  				</div>				  				
+					  				<div class="col-md-3"></div>
+								</div>								 
 								<div class="row email-container" id="email-container">
 									<div class="col-md-3">이메일</div>
 									<div class="col-md-6"><input type="email" class="form-control" name="email" id="email" value="${member.email}" readonly></div>
@@ -124,7 +144,12 @@
 							   		<div class="col-md-3" id="">
 							   			<label class=""></label>			            
 							   		</div>		   		
-							   </div>							   						   
+							   </div>
+							   <div class="row point-container">
+								   <div class="col-md-3">포인트</div>
+								   <div class="col-md-6"><input type="text" class="form-control" name="point" id="point" value="${member.point}" readonly></div>				  
+								   <div class="col-md-3" id=""></div>
+								</div>							   							   						   
 							   <div class="row btn-container">
 								   <div class="col-md-3"></div>
 								   <div class="col-md-6 btn-container"><input type="button" id="memberUpdateView" class="btn btn-outline-success" value="회원정보 수정" onclick="${pageContext.request.contextPath}/member/memberUpdateView.do"></div>				  

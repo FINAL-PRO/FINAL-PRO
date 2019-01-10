@@ -4,8 +4,82 @@
 	xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!-- 비밀번호 암호화 관련 객체 -->
+	<bean id="bcryptPasswordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+	<!-- 리스트&광고 불러오기 -->
+	<security:http security="none" pattern="/**/getListData.do" />
+	<security:http security="none" pattern="/**/getAd.do" />
+	
+	<!-- 회원가입 / 비번찾기 -->	
+	<!-- <security:http security="none" pattern="/member/memberEnroll.do" /> -->
+	<security:http security="none" pattern="/member/memberEnrollEnd.do" />
+	<security:http security="none" pattern="/member/memberUpdate.do" />
+	
+	<!-- <security:http security="none" pattern="/member/memberSearch.do" /> -->
+	<!-- <security:http security="none" pattern="/member/chkEmail.do" /> -->
+	<!-- 이거 말고 좀 더 자세히 처리해야함 -->
+	
+	<!-- 중복로그인 처리 -->
+	<security:http security="none" pattern="/login_duplicate.do" />
+	
+	<!-- 리소스파일 -->
+	<security:http security="none" pattern="/resources/**" />
+	
+	<security:http use-expressions="true">
+		<security:intercept-url pattern="/login/loginForm.do" access="permitAll" />
+		<security:intercept-url pattern="/index.do" access="permitAll" />
+		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/member/**" access="permitAll" />
+		<security:intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/business/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/**" access="hasRole('USER') or hasRole('ADMIN')" />
+			
+		<security:form-login
+			default-target-url="/index.do"
+			always-use-default-target="true"/>
+
+		<!-- <security:form-login
+			default-target-url="/index.do"
+			authentication-failure-url="/login/loginForm.do?error" /> -->
+		<security:logout logout-url="/logout"
+			logout-success-url="/index.do" />
+
+		<security:access-denied-handler
+			error-page="/login/accessDenied.do" />
+			
+		<security:session-management>
+			<security:concurrency-control max-sessions="1" expired-url="/login_duplicate.do"/>
+		</security:session-management>
 		
- 	<!-- 비밀번호 암호화 관련 객체 -->
-	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+		<security:csrf/>
+	</security:http>
+	<!-- provider -->
+	
+<!-- <security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="user" password="password"
+					authorities="ROLE_USER" />
+				<security:user name="admin" password="admin"
+					authorities="ROLE_ADMIN" />
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>  -->
+
+	<security:jdbc-user-service data-source-ref="dataSource"
+		id="userService"
+		users-by-username-query="SELECT EMAIL as username, password as password, AUTHNO as enabled FROM DC_MEMBER_TB WHERE EMAIL=?"
+		authorities-by-username-query="select EMAIL as username, content as authority from DC_MEMBER_TB M
+	JOIN DC_AUTHORITY_TB A ON M.AUTHNO = A.NO WHERE EMAIL=?" />
+
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="userService">
+			<security:password-encoder ref="bcryptPasswordEncoder"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
 
 </beans>
