@@ -187,7 +187,7 @@
 														<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd" />
 													</p>
 										            <br>
-										            <strong class="point"><span>4.4</span></strong>
+										            <strong class="point"><span>${foodPoint.point}</span></strong>
 										            <p class="address">서울시 역삼동 삼역빌딩 102-78</p>
 										            <br><br>
 										            <c:choose>

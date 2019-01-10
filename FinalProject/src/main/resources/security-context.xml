@@ -19,6 +19,10 @@
 	<!-- <security:http security="none" pattern="/member/memberSearch.do" /> -->
 	<!-- <security:http security="none" pattern="/member/chkEmail.do" /> -->
 	<!-- 이거 말고 좀 더 자세히 처리해야함 -->
+
+	<security:http security="none" pattern="/community/food/foodInsertFormEnd.do" />
+	<security:http security="none" pattern="/community/food/foodDelete.do" />
+	<security:http security="none" pattern="/community/food/foodUpdateForm.do" />
 	
 	<!-- 중복로그인 처리 -->
 	<security:http security="none" pattern="/login_duplicate.do" />

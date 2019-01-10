@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.BoardList;
+import com.kh.dc.community.food.model.vo.Food;
+import com.kh.dc.community.food.model.vo.FoodPoint;
 
 public interface FoodService {
 	
@@ -18,7 +20,7 @@ public interface FoodService {
 	
 	BoardList selectOneFood(int bno);
 	
-	int insertFood(Board board);
+	int insertFood(Board board, Food food, FoodPoint foodPoint);
 
 	int foodDelete(int bno);
 
