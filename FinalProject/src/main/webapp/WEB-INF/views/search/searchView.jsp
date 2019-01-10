@@ -22,27 +22,24 @@
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-					
-						
-						
+						<h3>검색결과</h3>
 					</div>
 					<div class="dc-content-box">
 						<c:set value="${searchResultList}" var="result" />
 					    <c:if test="${!empty result}" >
 							<c:forEach items="${result}" var="result" varStatus="">
-								<h3>검색결과</h3>
+							<div style="border : 1px solid red;">
 								<a href="#">${result.title}</a> <br>
 								<a href="#">${result.content}</a> <br>
 								<a href="#">${result.memberName}</a> <br>
-								${result.writeDate}<br>						
+								${result.writeDate}<br>
+							</div>						
 							</c:forEach>
 						</c:if>
 						
-						<c:if test="${empty result}" >
+						<c:if test="${empty searchResultList}" >
 							<h3>검색 결과가 없습니다.</h3>
 						</c:if>
-						
-						
 					</div>
 				</div>
 			</div>
