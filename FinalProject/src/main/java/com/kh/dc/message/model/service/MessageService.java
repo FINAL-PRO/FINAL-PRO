@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.dc.common.vo.Message;
+import com.kh.dc.member.model.vo.Member;
 
 public interface MessageService {
 	static int Board_SERVICE_ERROR = 0;
@@ -20,5 +21,6 @@ public interface MessageService {
 	int readMessage(int no);
 	// 쪽지삭제
 	int deleteMessage(int no);
-	
+
+	int checkToNick(String nickName);
 }

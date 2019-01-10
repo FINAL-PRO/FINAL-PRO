@@ -1,6 +1,8 @@
 package com.kh.dc.job.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -11,10 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.kh.dc.job.model.service.JobBoardService;
 import com.kh.dc.job.model.vo.JobBoard;
 import com.kh.dc.common.util.Utils;
+import com.kh.dc.common.vo.Code;
 
 @Controller
 public class JobBoardController {
@@ -24,25 +26,60 @@ public class JobBoardController {
 	
 	@RequestMapping("/job/jobBoard/jobBoardList.do")
 	public String jobBoardList(
-			@RequestParam(value="cPage", required=false, defaultValue="1")
-			int cPage, 
+			@RequestParam(value="arrayType", required=false, defaultValue="B.WRITEDATE")String arrayType,
+			@RequestParam(value="type", defaultValue="selAll", required=false) String type,
+			@RequestParam(value="jobType", defaultValue="selAllJob", required=false) String jobType,
+			@RequestParam(value="salType", defaultValue="selAllSel", required=false) String salType,
+			@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, 
 			Model model) {
-		
+
 		int numPerPage = 10;
 		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("arrayType", arrayType);
+		map.put("type", type);
+		map.put("jobType", jobType);
+		map.put("salType", salType);
+		
+		
+		System.out.println("map : "+ map);
+		
 		ArrayList<Map<String, String>> list = 
-				new  ArrayList<Map<String, String>>(jobBoardService.selectJobBoardList(cPage, numPerPage));
+				new  ArrayList<Map<String, String>>(
+						jobBoardService.selectJobBoardList(map, cPage, numPerPage));
+		
+		//List<JobBoard> arrayJobBoard = jobBoardService.selectArrayType(arrayType);
+		
+		List<Code> typeList = jobBoardService.selectJobBoardTypeList();
+		List<Code> jobTypeList = jobBoardService.selectJobBoardJobTypeList();
+		List<Code> salTypeList = jobBoardService.selectJobBoardSalTypeList();
+		
+
+/*		for(JobBoard jb : arrayJobBoard) {
+			System.out.println(jb.getNo() + " : " + jb.getJobType() + " : " + jb.getSalType() + " : " + jb.getType());
+		}*/
+		
+		for(Code t : typeList) {
+			System.out.println(t);
+		}
 		
 		int totalContents = jobBoardService.selectJobBoardTotalContents();
 		
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "jobBoardList.do");
 		
 		model.addAttribute("list", list)
+		.addAttribute("arrayType", arrayType)
+		.addAttribute("type", type)
+		.addAttribute("jobType", jobType)
+		.addAttribute("salType", salType)
+		.addAttribute("typeList", typeList)
+		.addAttribute("jobTypeList", jobTypeList)
+		.addAttribute("salTypeList", salTypeList)
 		.addAttribute("totalContents", totalContents)
 		.addAttribute("numPerPage", numPerPage)
 		.addAttribute("pageBar", pageBar);
 		
-		return "job/jobBoard/jobBoardList";
+		return "/job/jobBoard/jobBoardList";
 	}
 	
 	
@@ -54,7 +91,7 @@ public class JobBoardController {
 	public String selectOneBoard(@RequestParam int no, Model model) {
 		
 		model.addAttribute("jobBoard", jobBoardService.selectOneJobBoard(no));
-		System.out.println(jobBoardService.selectOneJobBoard(no));
+		
 		return "job/jobBoard/jobBoardDetail";
 	}
 	
@@ -144,4 +181,5 @@ public class JobBoardController {
 		
 		return "redirect:/job/jobBoard/jobBoardList.do";
 	}
+
 }

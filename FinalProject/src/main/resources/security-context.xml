@@ -24,6 +24,9 @@
 	<!-- <security:http security="none" pattern="/member/chkEmail.do" /> -->
 	<!-- 이거 말고 좀 더 자세히 처리해야함 -->
 	
+	<!-- 메시지 전송 -->
+	<security:http security="none" pattern="/message/messageInsert.do" />
+	
 	<!-- 중복로그인 처리 -->
 	<security:http security="none" pattern="/login_duplicate.do" />
 	

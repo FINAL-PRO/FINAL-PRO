@@ -11,7 +11,7 @@
 		<result column="dday" property="dday"/>
 	</resultMap>
 	
-	<select id="selectJobBoardList" resultMap="jobBoardMap">
+	<select id="selectJobBoardList" parameterType="HashMap" resultMap="jobBoardMap">
 		<!-- 게시판  + 구인구직테이블 조회 -->
 		SELECT JB.NO, TITLE, NICKNAME, WRITEDATE, STARTDATE, ENDDATE, 
                 FLOOR(ENDDATE - SYSDATE) "DDAY",
@@ -29,13 +29,23 @@
 		JOIN DC_CODE_TB CD4 ON(CD4.ID = B.STATUS)
 		WHERE B.STATUS != 'STATUS002'
 		AND B.TYPE = 'BOARD006'
-		ORDER BY JB.NO DESC
+		<if test="type != 'selAll'">
+			AND JB.TYPE = #{type}
+		</if>
+		<if test="jobType != 'selAllJob'">
+		AND JB.JOBTYPE = #{jobType}
+		</if>
+		<if test="salType != 'selAllSel'">
+		AND JB.SALTYPE = #{salType}
+		</if>
+		ORDER BY #{arrayType} DESC
+		
 	</select>
 	
 	<select id="selectJobBoardTotalContents" resultType="_int">
 		SELECT COUNT(*) FROM DC_BOARD_JOB_TB JB
-	JOIN DC_BOARD_TB B ON(B.NO = JB.BOARDNO)
-	WHERE B.STATUS != 'STATUS002'
+		JOIN DC_BOARD_TB B ON(B.NO = JB.BOARDNO)
+		WHERE B.STATUS != 'STATUS002'
 	</select>
 
 	<select id="selectWriteJobBoard" resultMap="jobBoardMap">
@@ -61,7 +71,7 @@
 	</select>
 
 	
-	<select id="selectOneJobBoard" parameterType="_int" resultType="JobBoard">
+	<select id="selectOneJobBoard" parameterType="_int" resultType="jobBoard">
 		<!-- 게시물 상세조회 -->
 		SELECT JB.NO, TITLE, NICKNAME, CONTENT, 
 			WRITEDATE, STARTDATE, ENDDATE, 
@@ -161,12 +171,52 @@
 	</update>
 	
 	<update id="updateViewCount" parameterType="_int">
-		UPDATE DC_BOARD_TB SET VIEWCOUNT = VIEWCOUNT + 1 WHERE NO = #{boardNo}
+		UPDATE DC_BOARD_TB SET VIEWCOUNT = VIEWCOUNT + 1 
+		WHERE TYPE='BOARD006'
+		AND NO = #{no}
 	</update>
 	
 	<update id="deleteJobBoard" parameterType="_int">
 		UPDATE DC_BOARD_TB SET STATUS='STATUS002' WHERE NO = #{boardNo}
 	</update>
 	
+	<!-- 최신순 / 조회순 -->
+	<select id="selectArrayType" parameterType="_int" resultMap="jobBoardMap">
+		SELECT JB.NO, TITLE, NICKNAME, WRITEDATE, STARTDATE, ENDDATE, 
+                FLOOR(ENDDATE - SYSDATE) "DDAY",
+                STARTJOB, ENDJOB, SALARY, 
+                CD1.VALUE  "SALTYPE", 
+                CD2.VALUE "JOBTYPE", VIEWCOUNT, 
+                CD3.VALUE "TYPE",
+                CD4.VALUE "STATUS"
+		FROM DC_BOARD_JOB_TB JB
+		JOIN DC_BOARD_TB B ON(B.NO = JB.BOARDNO)
+		JOIN DC_MEMBER_TB M ON(M.NO = B.MEMBERNO)
+		JOIN DC_CODE_TB CD1 ON(CD1.ID = JB.SALTYPE)
+		JOIN DC_CODE_TB CD2 ON(CD2.ID = JB.JOBTYPE)
+		JOIN DC_CODE_TB CD3 ON(CD3.ID = JB.TYPE)
+		JOIN DC_CODE_TB CD4 ON(CD4.ID = B.STATUS)
+		WHERE B.TYPE='BOARD006'<!-- 
+		AND JB.TYPE = #{type}
+		AND JB.JOBTYPE = #{jobType}
+		AND JB.SALTYPE = #{salType} -->
+		 <if test="arrayType == 1">
+			ORDER BY B.WRITEDATE DESC
+		</if>
+		<if test="arrayType == 2">
+			ORDER BY B.VIEWCOUNT DESC
+		</if>
+	</select>
+	<!-- 구인 / 구직 -->
+	<select id="selectJobBoardTypeList" resultType="code">
+		SELECT * FROM DC_CODE_TB WHERE ATT = '구인구직타입'
+	</select>
+
+	<select id="selectJobBoardJobTypeList" resultType="code">
+		SELECT * FROM DC_CODE_TB WHERE ATT = '근무타입구분'
+	</select>
 	
+	<select id="selectJobBoardSalTypeList" resultType="code">
+		SELECT * FROM DC_CODE_TB WHERE ATT = '급여타입'
+	</select>	
 </mapper>

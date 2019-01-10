@@ -1,16 +1,19 @@
 package com.kh.dc.message.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.dc.common.util.Utils;
 import com.kh.dc.common.vo.Message;
@@ -91,5 +94,19 @@ public class MessageController {
 		System.out.println(msg);
 		System.out.println(no);
 		return "redirect:/message/messageList.do?no="+ no;
+	}
+	@RequestMapping("/message/checkToNick.do")
+	@ResponseBody
+	public Map<String, Object> checkToNick(@RequestParam String nickName){
+		Logger logger = LoggerFactory.getLogger(MessageController.class);
+		
+		if(logger.isDebugEnabled())	logger.debug("아이디 중복체크 확인!!");
+		Map<String, Object> map = new HashMap<String, Object>();
+		boolean isUsable = messageService.checkToNick(nickName) == 0 ? true : false;
+		
+		map.put("isUsable", isUsable);
+		
+		return map;
+		
 	}
 }
