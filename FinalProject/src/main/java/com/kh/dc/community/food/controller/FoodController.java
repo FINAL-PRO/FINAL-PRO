@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.dc.common.util.Utils;
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.community.food.model.service.FoodService;
+import com.kh.dc.community.food.model.vo.Food;
+import com.kh.dc.community.food.model.vo.FoodPoint;
 
 @Controller
 public class FoodController {
@@ -70,8 +72,12 @@ public class FoodController {
 	}
 	
 	@RequestMapping("community/food/foodInsertFormEnd.do")
-	public String insertFood(Board board,  Model model) {
-		if(foodService.insertFood(board) > 0) {
+	public String insertFood(Board board, Food food, FoodPoint foodPoint, Model model) {
+		if(foodService.insertFood(board, food, foodPoint) > 0) {
+			System.out.println("board: "+board);
+			System.out.println("food: "+food);
+			System.out.println("foodPoint: "+foodPoint);
+			
 			model.addAttribute("insertFood", foodService.selectOneFood(board.getNo()));
 		}
 				

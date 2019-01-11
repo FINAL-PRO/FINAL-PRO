@@ -49,7 +49,6 @@
 	
 
 </style>
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.min.js"></script>
 <footer>
 	<div id="myModal" class="modal">
     	<!-- 신고 Modal content -->
@@ -73,7 +72,6 @@
 	</div>
 	<!--End Modal-->
 
-	<hr />
 	<div class="footer_bottom">
 		<p align="center">
 			<span class="footer-text">Copyright 2019. 1st All rights reserved.</span>
