@@ -1,0 +1,8 @@
+﻿-- 주소 칼럼 추가
+ALTER TABLE DC_BOARD_FOOD_TB ADD (ADDRESS VARCHAR2(500));
+
+-- 메시지 알람 전송
+INSERT INTO DC_MEMBER_TB VALUES(SEQ_MEMBER.NEXTVAL, 'unknown', '알리미', 'unknown', SYSDATE, 0, 1, 2, 'STATUS001', NULL, '알리미이름', NULL, NULL, NULL);
+
+-- 구인구직 코드 추가
+INSERT INTO DC_CODE_TB VALUES('JTYPE003', '마감', '구인구직타입');
