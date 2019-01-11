@@ -58,8 +58,8 @@
 								<h4 class="townName" style="margin: 0 0 0 10px;">현재 날씨</h4>
 								<div class="currentWeather" style="width:100%;">
 									<h3 id="currentWeatherLabel">현재 날씨를 불러오는 중입니다.</h3>
-									<div id="loadingTodayWeather"> 
-										<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" />
+									<div> 
+										<img class="loadingImg" id="loadingTodayWeather" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" />
 									</div>														
 								</div>
 								<hr />
@@ -68,10 +68,11 @@
 								<h4 style="margin: 0 0 0 10px;"> 주간 날씨</h4>
 								<div class="weekWeather-container" style="display: inline-block; margin-top:10px; width: 100%">	
 									<h3 id="weekWeatherLabel">주간 날씨를 불러오는 중입니다.</h3>
-									<div id="loadingWeekWeather">													
-										<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" />
+									<div>													
+										<img class="loadingImg" id="loadingWeekWeather" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" />
 									 </div>										
 								</div>	
+								
 													
 							</div>
 						</div>
@@ -133,6 +134,9 @@
 	        type: "GET",
 	        async: "false",
 	        success: function(data) {
+	        	
+	        	$("#loadingTodayWeather").hide();
+				$("#currentWeatherLabel").hide();        	
 	        	
 	            console.log(data);  
 	            var value1 = "";   	            
@@ -203,9 +207,10 @@
       
 	        }, error:function(data){
 	        	console.log("날씨 ajax 실패");
-	        }, complete : function(){
-				$("#loadingTodayWeather").hide();
-				$("#currentWeatherLabel").hide();
+	        	$("#loadingTodayWeather").toggle();
+	        	
+	        }, complete : function(){				
+	        	
 			}
 	    });		
 		
@@ -221,6 +226,10 @@
 	        type: "GET",
 	        async: "false",
 	        success: function(data) {
+	        	
+	        	$("#loadingWeekWeather").hide();
+				$("#weekWeatherLabel").hide();
+				
 	            console.log(data);  
 	            var value1 = "";
 	            var value2 = "";
@@ -276,9 +285,10 @@
 	            });
 	        }, error : function(data){
 	        	console.log("주간 날씨 ajax 에러");
+	        	$("#loadingWeekWeather").toggle();
+	        	
 	        }, complete : function(){
-				$("#loadingWeekWeather").hide();
-				$("#weekWeatherLabel").hide();
+				
 			}
 	    });
 	    
