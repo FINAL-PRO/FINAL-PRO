@@ -8,16 +8,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	section {background-color: white;}
+</style>
 </head>
 <body>
 	<div class="dc-menubar">
 		<div class="dc-manebar-main" style="width: auto; margin: 0 auto;">
-			<nav class="navbar navbar-expand-lg">
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarNav" aria-controls="navbarNav"
-					aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+			<div class="navbar navbar-expand-lg">			
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item">
@@ -25,11 +23,10 @@
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="${pageContext.request.contextPath}/mypage/myContentList.do?no=${member.no}">내가 쓴 글/댓글 </a>
-						</li>
-					
+						</li>					
 					</ul>
 				</div>
-			</nav>
+			</div>
 		</div>	
 	</div>
 </body>
