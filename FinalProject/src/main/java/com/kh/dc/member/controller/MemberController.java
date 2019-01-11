@@ -283,10 +283,13 @@ public class MemberController {
 				
 				
 				StringBuilder sb = new StringBuilder();
-				sb.append("<html><body> ");
-				sb.append("<p> 임시 비밀번호는 ");
-				sb.append(temporaryPwd);
-				sb.append("입니다. <br>  로그인 후 반드시 비밀번호를 변경해주세요!</p>");
+				sb.append("<html><head>");
+				sb.append("</head><body>");
+				sb.append("<div align='center' style='border: 1px solid midnightblue; width:400px; display: inline-block;'>");
+				sb.append("<div style='padding:10px 0px 10px 0px;'><p> 동커 홈페이지 임시 비밀번호가 발급되었습니다. </p></div>");
+				sb.append("<div style='background-color: lavender; padding:10px 0px 10px 0px;'><h4>임시 비밀번호 : " + temporaryPwd+"</h4></div>");
+				sb.append("<div style='padding:10px 0px 10px 0px;'>로그인 후 반드시 비밀번호를 변경해주세요!</div>");
+				sb.append("</div>");				
 				sb.append("</body></html>");				
 
 				sendEmail.setHtmlMsg(sb.toString());				

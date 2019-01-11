@@ -13,9 +13,7 @@
 	#resultTitle{font-size : 20px; color: darkgreen;}
 	#resultContent{padding: 10px 0px 10px 0px; margin-bottom:0;}
 	#resultMemberName{color: green;}
-	#resultWriteDate{color: lightgray;}
-	
-	section{background-color: white;}
+	#resultWriteDate{color: lightgray;}	
 </style>
 </head>
 <body>
