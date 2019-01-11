@@ -58,10 +58,10 @@
 			<span class="board-title">정보</span>
 		</h4> -->
 		<div class="dc-user-profile" align="center">
-			<div class="dc-profile-area-top" style="background:white;padding:5px">
+			<div class="dc-profile-area-top" style="background:white; padding:5px;">
 				<!-- 로그인 안했을때 -->
 				<sec:authorize access="isAnonymous()">
-					<button style="width:90%;height:80%;margin:10px" class="btn btn-outline-success" id="loginBtn" onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
+					<button style="width:90%;margin:10px;margin-top:15%" class="btn btn-outline-success" id="loginBtn" onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
 				</sec:authorize>
 				
 				<!-- 로그인 했을때 -->

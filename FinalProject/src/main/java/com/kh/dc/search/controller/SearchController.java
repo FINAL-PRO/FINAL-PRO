@@ -25,24 +25,22 @@ public class SearchController {
 	public String memberEnroll(@RequestParam String searchWord, Model model) {
 		
 		List<Board> searchResultList = searchService.searchResultList(searchWord);
+		
 							
 		for(int i = 0; i < searchResultList.size(); i++) {
-			String regex = "<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>";
-			String str = searchResultList.get(i).getContent();
-			String temp = "";
 
-			Pattern pattern = Pattern.compile(regex);
+			String resultContent = "";
+			String originContent = searchResultList.get(i).getContent();			
+			String patterString = "(&lt;img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*&gt;|<p>|</p>|<br>)";
 
-			Matcher matcher = pattern.matcher(str);
+				Pattern pattern = Pattern.compile(patterString);	
+				Matcher matcher = pattern.matcher(originContent);
+				
+				while(matcher.find()) {
+					resultContent = matcher.replaceAll("");
+				}
 
-			while (matcher.find()) {
-
-			temp = matcher.replaceAll("");
-
-			
-			}	
-			System.out.println("temp : " + temp);
-			searchResultList.get(i).setContent(temp);		
+			searchResultList.get(i).setContent(resultContent);		
 		
 		}		
 		
