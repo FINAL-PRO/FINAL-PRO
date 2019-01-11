@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.BoardList;
+import com.kh.dc.community.food.model.vo.Food;
+import com.kh.dc.community.food.model.vo.FoodPoint;
 
 public interface FoodDao {
 	
@@ -15,6 +17,10 @@ public interface FoodDao {
 	/*List<Map<String, String>> selectOneFood(int cPage, int numberPage, int no);*/
 
 	int insertBoard(Board board);
+	
+	int insertFood(Food food);
+	
+	int insertFoodPoint(FoodPoint foodPoint);
 
 	int foodDelete(int bno);
 

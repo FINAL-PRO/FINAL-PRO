@@ -105,11 +105,49 @@
 											<div class="add" style="display:inline-block;">
 												<div style="height:150px; width:200px; border:1px solid lightgrey;">
 													<img id="foodImg"/>
-													<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);" />
+													<input type="file" id="inputFile" name="thumbnail" style="display:none;" onchange="inputPicture(this);" />
 												</div>
 												<input type="button" id="foodThumbsnail" value="썸네일 등록" style="margin-top: 10px; margin-bottom: 10px;"/>
 											</div>
 											<div class="table-div" style="display:inline-block; border:1px soild black;">
+												
+												<div class="tr-div">
+													<div class="td-div">카테고리</div>
+													<div class="td-div" style="text-align:left;">
+														<select id="category" name="category"> 
+															<option value="" selected disabled hidden>카테고리 선택</option>
+															<option value="FOOD001">한식</option>
+															<option value="FOOD002">일식</option>
+															<option value="FOOD003">중식</option>
+															<option value="FOOD004">양식</option>
+															<option value="FOOD005">카페</option>
+															<option value="FOOD006">디저트</option>
+														</select>
+													</div>
+												</div>
+												
+												<div class="tr-div">
+													<div class="td-div">평점</div>
+													<div class="td-div" style="text-align:left;">
+														<div class="starRev">
+															<span class="starR1 on">0</span>
+															<span class="starR2">1</span>
+															<span class="starR1">1.5</span>
+															<span class="starR2">2</span>
+															<span class="starR1">2.5</span>
+															<span class="starR2">3</span>
+															<span class="starR1">3.5</span>
+															<span class="starR2">4</span>
+															<span class="starR1">4.5</span>
+															<span class="starR2">5</span>
+														</div>
+														<div>
+															&nbsp;
+															<input type="text" id="point" name="point" value="0" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/>
+														</div>
+													</div>
+												</div>
+												
 												<div class="tr-div">
 													<div class="td-div">우편번호</div>
 													<div class="td-div" style="text-align:left;">
@@ -120,36 +158,13 @@
 												<div class="tr-div">
 													<div class="td-div">주소</div>
 													<div class="td-div" style="text-align:left;">
-														<input type="text" id="address1" name="address1" style="width: 500px;" required>
+														<input type="text" id="address1" name="address" style="width: 500px;" required>
 													</div>
 												</div>
 												<div class="tr-div">
 													<div class="td-div">상세주소</div>
 													<div class="td-div" style="text-align:left;">
 														<input type="text" id="address2" name="address2" style="width: 500px;" required>
-													</div>
-												</div>
-												<div class="tr-div">
-													<div class="td-div">평점</div>
-													<div class="td-div" style="text-align:left;">
-														<div class="starRev">
-														  <span class="starR1 on">★★★★★</span>
-														  <span class="starR2">★★★★★</span>
-														  <span class="starR1">★★★★★</span>
-														  <span class="starR2">★★★★★</span>
-														  <span class="starR1">★★★★★</span>
-														  <span class="starR2">★★★★★</span>
-														  <span class="starR1">★★★★★</span>
-														  <span class="starR2">★★★★★</span>
-														  <span class="starR1">★★★★★</span>
-														  <span class="starR2">★★★★★</span>
-														</div>
-													</div>
-												</div>
-												<div class="tr-div">
-													<div class="td-div">먼가</div>
-													<div class="td-div" style="text-align:left;">
-														
 													</div>
 												</div>
 											</div>
@@ -175,7 +190,7 @@
 													
 					                                $('#foodThumbsnail').on("click", function(){
 					                                	$('#inputFile').click();
-					                                });'#inputPicture'
+					                                });
 					                                
 					                                function inputPicture(value){
 					                                	
@@ -266,8 +281,15 @@
 					                			    };
 					                            	
 					                			    $('.starRev span').click(function(){
-											        	  $(this).parent().children('span').removeClass('on');
+					                			    	  $(this).parent().children('span').removeClass('on');
 											        	  $(this).addClass('on').prevAll('span').addClass('on');
+											        	  
+											        	  var star = Integer.parseInt($(this).text());
+											        	  
+											        	  console.log("별 값: "+star);
+											        
+											        	  $('#point').val(star);
+											        	  
 											        	  return false;
 											        });
 					                			    

@@ -49,7 +49,6 @@
 	
 
 </style>
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.min.js"></script>
 <footer>
 	<div id="myModal" class="modal">
     	<!-- 신고 Modal content -->
