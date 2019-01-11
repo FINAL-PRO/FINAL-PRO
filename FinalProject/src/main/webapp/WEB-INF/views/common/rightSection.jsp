@@ -84,7 +84,7 @@
 				
 			</div>
 			
-			<div class="dc-profile-area-bottom" style="background:#f1f3f6;padding:8px 0px;">
+			<div class="dc-profile-area-bottom" style="padding:8px 0px;">
 				<!-- 로그인 안했을때 -->
 				<sec:authorize access="isAnonymous()">
 					<ul>
