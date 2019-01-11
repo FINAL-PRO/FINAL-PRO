@@ -18,14 +18,14 @@
 					var result = "";
 						
 					if(data.length == 0){
-						result += "<tr style='height:200px'><td align='center'>";
+						result += "<tr style='height:200px'><td align='center' style='vertical-align:middle;'>";
 						result += "<span>불러온 데이터가 없습니다.</span>"
-						result += "<tr><td>";
+						result += "</tr></td>";
 					}else{
 						for(var i = 0 ; i < data.length; i++){
-							result += "<tr><td>";
-							result += "<a href='${pageContext.request.contextPath}/community/free/freeView.do?bno=" + data[i]['no'] + "'>" + data[i]['title'] + "</a>";
-							result += "</td></tr>";
+							result += "<div class='dc-tb-row'>";
+							result += "<span><a href='${pageContext.request.contextPath}/community/free/freeView.do?bno=" + data[i]['no'] + "'>" + data[i]['title'] + "</a></span>";
+							result += "</div>";
 						}
 					}
 					
@@ -44,14 +44,14 @@
 					var result = "";
 					
 					if(data.length == 0){
-						result += "<tr style='height:200px'><td align='center'>";
+						result += "<tr style='height:200px'><td align='center' style='vertical-align:middle;'>";
 						result += "<span>불러온 데이터가 없습니다.</span>"
-						result += "<tr><td>";
+						result += "</tr></td>";
 					}else{
 						for(var i = 0 ; i < data.length; i++){
-							result += "<tr><td>";
-							result += "<a href='${pageContext.request.contextPath}/community/free/freeView.do?bno=" + data[i]['no'] + "'>" + data[i]['title'] + "</a>";
-							result += "</td></tr>";
+							result += "<div class='dc-tb-row'>";
+							result += "<span><a href='${pageContext.request.contextPath}/community/free/freeView.do?bno=" + data[i]['no'] + "'>" + data[i]['title'] + "</a></span>";
+							result += "</div>";
 						}
 					}
 					
@@ -70,14 +70,14 @@
 					var result = "";
 					
 					if(data.length == 0){
-						result += "<tr style='height:200px'><td align='center'>";
+						result += "<tr style='height:200px'><td align='center' style='vertical-align:middle;'>";
 						result += "<span>불러온 데이터가 없습니다.</span>"
-						result += "<tr><td>";
+						result += "</tr></td>";
 					}else{
 						for(var i = 0 ; i < data.length; i++){
-							result += "<tr><td>";
-							result += "<a href='${pageContext.request.contextPath}/sale/group/groupView.do?boardNo=" + data[i]['no'] + "'>" + data[i]['title'] + "</a>";
-							result += "</td></tr>";
+							result += "<div class='dc-tb-row'>";
+							result += "<span><a href='${pageContext.request.contextPath}/sale/group/groupView.do?boardNo=" + data[i]['no'] + "'>" + data[i]['title'] + "</a></span>";
+							result += "</div>";
 						}
 					}
 					
@@ -135,44 +135,90 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-box">
-							<h4>
-								<span class="board-title">공지 게시판</span>
-							</h4>
-							<hr />
-							<table class="table">
-								<tbody id="noticeTable">
-									<div id="loadingNotice" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
-								</tbody>
-							</table>
+							<div class="dc-con-title">
+								<h4>
+									<span class="board-title">공지 게시판</span>
+								</h4>
+							</div>
+							<div class="dc-con-content">
+								<div class="dc-tb">
+									<div class="dc-tb-head">
+										<div class="dc-tb-row">
+											<!-- head -->
+										</div>										
+									</div>
+									<div id="noticeTable" class="dc-tb-body">
+										<div class="dc-tb-row">
+											<div id="loadingNotice" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
+						</div>
+						
 							<div class="dc-ad-box" style="height:100px;">
 								<!-- <h1>메인 광고(AD)</h1> -->
 								<div class="ad-main">
 									<img id="ad-main-img" src="" alt="" />
 								</div>
 							</div>
+							
 						<div class="dc-content-box">
-							<h4>
-								<span class="board-title">자유 게시판</span>
-							</h4>
-							<hr />
-							<table class="table">
-								<tbody id="freeTable">
-									<div id="loadingFree" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>							
-								</tbody>
-							</table>
+							<div class="dc-con-title">
+								<h4>
+									<span class="board-title">자유 게시판</span>
+								</h4>
+							</div>
+							
+							<div class="dc-con-content">
+								<table class="table">
+									<tbody id="freeTable">
+										<div id="loadingFree" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>							
+									</tbody>
+								</table>
+							</div>
 						</div>
 						
 						<div class="dc-content-box">
-							<h4>
-								<span class="board-title">공동구매 게시판</span>
-							</h4>
-							<hr />
-							<table class="table">
-								<tbody id="groupTable">
-									<div id="loadingGroup" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
-								</tbody>
-							</table>
+							<div class="dc-con-title">
+								<h4>
+									<span class="board-title">공동구매 게시판</span>
+								</h4>							
+							</div>
+							
+							<div class="dc-con-content">
+								<table class="table">
+									<tbody id="groupTable">
+										<div id="loadingGroup" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
+									</tbody>
+								</table>							
+							</div>
+						</div>
+						
+						<div class="dc-content-box">
+							<div class="dc-con-title">
+								<h4>
+									<span class="board-title">테스트 게시판</span>
+								</h4>							
+							</div>
+							
+							<div class="dc-con-content">
+								<div class="dc-tb">
+									<div class="dc-tb-head">
+										<div class="dc-tb-row">
+											<!-- head -->
+										</div>										
+									</div>
+									<div class="dc-tb-body">
+										<c:forEach begin="1" end="10">
+											<div class="dc-tb-row">
+												<span><strong>[공지]</strong> 여러분 오늘 미세먼지가 매우 심합니다. 아이들 외출 자제해주세요. 좋은하루 되세요 ^_____^</span>
+											</div>
+										</c:forEach>
+									</div>
+								</div>							
+							</div>
 						</div>
 					</div>
 				</div>

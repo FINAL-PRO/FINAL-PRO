@@ -21,11 +21,6 @@ nav{
 	height:50px;
 }
 
-.dc-content-box{
-	background-color : #fff;
-	border-top : 1px solid black;
-}
-
 .dc-ad-box{
 	border : 1px solid #dee3eb;
 }
@@ -91,6 +86,8 @@ footer{
 	clear:both;
 	display:block;
 	background-color: #fff;
+	border-top : 1px solid #e3e7ee;
+	padding-top : 40px;
 }
 
 .footer_bottom{
@@ -136,8 +133,12 @@ footer{
 .dc-content-box{
 	display:block;
 	margin:10px 0px;
-	/* background-color: gray; */
+	background-color: #fff;
 	min-height: 30vh;
+	/* border : 1px solid #dee3eb; */
+}
+
+.dc-border{
 	border : 1px solid #dee3eb;
 }
 
@@ -256,6 +257,7 @@ div[class^="ad-"]:hover {
 .dc-profile-area-bottom{
 	height : 30%;
 	border : 1px solid #ebeef3;
+	background-color: #fff;
 }
 
 .dc-profile-area-bottom ul{
@@ -276,5 +278,17 @@ div[class^="ad-"]:hover {
     padding: 0;
 }
 
+.dc-con-title{
+	border-bottom:2px solid black;
+	padding:10px;
+}
+
+.dc-con-content{
+	/* background-color: gray; */
+}
+
+.dc-tb-row{
+	margin : 10px;	
+}
 
 
