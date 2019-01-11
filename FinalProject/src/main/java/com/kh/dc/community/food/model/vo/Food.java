@@ -9,9 +9,8 @@ public class Food extends Board implements Serializable{
 	private int no;
 	private int boardNo;
 	private String category;
-	
-	// DB join용 변수
 	private String address;
+	
 	
 	public Food() {
 		super();

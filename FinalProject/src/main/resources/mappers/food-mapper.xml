@@ -2,6 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="food_mapper">
 
+	<resultMap type="FoodList" id="resultFoodList">
+		<id property="no" column="no" />
+		<result property="fno"  column="foodNo" />
+		<result property="pno"  column="pointNo" />
+		<result property="memberName"  column="nickName" />
+		<result property="thumbnail" column="thumbnail"/>
+		<result property="commentCount" column="comment_count"/>
+		<result property="likeCount" column="like_count"/>
+		<result property="imageCheck" column="imageCheck"/>
+		<result property="category" column="food_category"/>
+		<result property="address" column="food_address"/>
+		<result property="point" column="point"/>
+	</resultMap>
+	
 	<resultMap type="boardList" id="resultBoardList">
 		<id property="no" column="no" />
 		<result property="memberName"  column="nickName" />
@@ -9,11 +23,13 @@
 		<result property="commentCount" column="comment_count"/>
 		<result property="likeCount" column="like_count"/>
 		<result property="imageCheck" column="imageCheck"/>
-		<result property="point" column="point"/>
 	</resultMap>
 	
-	<select id="foodrecentSort" resultMap="resultBoardList">
-		SELECT B.*, M.NICKNAME, NVL(L.like_count, 0) like_count, NVl(C.comment_count,0) comment_count, F.CATEGORY, P.POINT
+	<select id="foodrecentSort" resultMap="resultFoodList">
+		SELECT B.*, M.NICKNAME, NVL(L.like_count, 0) like_count, 
+				NVl(C.comment_count,0) comment_count, F.NO foodNo,
+				F.CATEGORY food_category, 
+				F.ADDRESS food_address, P.POINT, INSTR(b.CONTENT, 'img') imageCheck
 		FROM DC_BOARD_TB B
 		INNER JOIN DC_MEMBER_TB M 
 		ON (B.MEMBERNO = M.NO)
@@ -27,7 +43,7 @@
 		ORDER BY B.WRITEDATE DESC, B.NO DESC
 	</select>
 	
-	<select id="foodcommentSort" resultMap="resultBoardList">
+	<select id="foodcommentSort" resultMap="resultFoodList">
 		SELECT B.*, M.NICKNAME, NVL(L.like_count, 0) like_count, NVl(C.comment_count,0) comment_count, INSTR(b.CONTENT, 'img') imageCheck
 		FROM DC_BOARD_TB B
 		INNER JOIN DC_MEMBER_TB M 
@@ -38,7 +54,7 @@
 		ORDER BY comment_count DESC, B.NO DESC
 	</select>
 	
-	<select id="foodlikeSort" resultMap="resultBoardList">
+	<select id="foodlikeSort" resultMap="resultFoodList">
 		SELECT B.*, M.NICKNAME, NVL(L.like_count, 0) like_count, NVl(C.comment_count,0) comment_count, INSTR(b.CONTENT, 'img') imageCheck
 		FROM DC_BOARD_TB B
 		INNER JOIN DC_MEMBER_TB M 
@@ -53,13 +69,18 @@
 		SELECT COUNT(*) FROM DC_BOARD_TB WHERE TYPE = 'BOARD002' AND STATUS = 'BSTATUS001'
 	</select>
 	
-	<select id="selectOneFood" parameterType="_int" resultMap="resultBoardList">
-		SELECT B.*, M.NICKNAME, NVL(L.like_count, 0) like_count, NVl(C.comment_count,0) comment_count
+	<select id="selectOneFood" parameterType="_int" resultMap="resultFoodList">
+		SELECT B.*, F.NO foodNo, P.NO pointNo, M.NICKNAME, NVL(L.like_count, 0) like_count, NVl(C.comment_count,0) comment_count,
+				F.CATEGORY food_category, F.ADDRESS food_address, P.POINT
 		FROM DC_BOARD_TB B
 		INNER JOIN DC_MEMBER_TB M 
 		ON B.MEMBERNO = M.NO
 		LEFT JOIN (SELECT COUNT(*) like_count, BOARDNO FROM DC_LIKE_TB GROUP BY BOARDNO) L ON L.BOARDNO = B.NO
 		LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB WHERE STATUS = 'STATUS001' GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
+		INNER JOIN DC_BOARD_FOOD_TB F
+		ON (F.BOARDNO = B.NO)
+		INNER JOIN DC_FOOD_POINT_TB P
+		ON (P.FOODNO = F.NO)
 		WHERE B.TYPE = 'BOARD002' AND B.NO = #{bno}  AND B.STATUS = 'BSTATUS001'
 		ORDER BY B.WRITEDATE DESC, B.NO DESC
 	</select>
@@ -74,7 +95,7 @@
 			SELECT SEQ_BOARD.CURRVAL FROM DUAL
 		</selectKey>
 		INSERT INTO DC_BOARD_FOOD_TB VALUES
-		(SEQ_BOARD_FOOD.NEXTVAL, #{boardNo}, #{category})
+		(SEQ_BOARD_FOOD.NEXTVAL, #{boardNo}, #{category}, #{address})
 	</insert>
 	
 	<insert id="insertFoodPoint" parameterType="FoodPoint">
@@ -85,9 +106,25 @@
 		(SEQ_FOOD_POINT.NEXTVAL, #{point}, SYSDATE, #{foodNo}, #{memberNo})
 	</insert>
 
-	<update id="updateFood" parameterType="Board">
+	<update id="foodUpdate" parameterType="foodList">
 		UPDATE DC_BOARD_TB SET TITLE = #{title}, CONTENT = #{content} WHERE NO = #{no}
 	</update>
+
+<!-- 	<update id="updateBoard" parameterType="map">
+		UPDATE DC_BOARD_TB SET TITLE = #{title}, CONTENT = #{content} WHERE NO = #{bno}
+	</update>
+	
+	<update id="updateBoard" parameterType="map">
+		UPDATE DC_BOARD_TB SET TITLE = #{title}, CONTENT = #{content} WHERE NO = #{bno}
+	</update> -->
+<!-- 	
+	<update id="updateFood" parameterType="food">
+		UPDATE DC_BOARD_FOOD_TB SET CATEGORY = #{category}, ADDRESS = #{address} WHERE BOARDNO = #{boardNo}
+	</update>
+	
+	<update id="updateFoodPoint" parameterType="foodPoint">
+		UPDATE DC_FOOD_POINT_TB SET POINT = #{point} WHERE FOODNO = #{no}
+	</update> -->
 	
 	<update id="foodDelete" parameterType="_int"> 
 		UPDATE DC_BOARD_TB SET STATUS = 'BSTATUS002'  WHERE NO = #{no} 

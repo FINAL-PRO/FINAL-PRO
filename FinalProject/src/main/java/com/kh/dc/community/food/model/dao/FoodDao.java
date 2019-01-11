@@ -6,15 +6,14 @@ import java.util.Map;
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.BoardList;
 import com.kh.dc.community.food.model.vo.Food;
+import com.kh.dc.community.food.model.vo.FoodList;
 import com.kh.dc.community.food.model.vo.FoodPoint;
 
 public interface FoodDao {
 	
 	int selectFoodTotalContents();
 	
-	BoardList selectOneFood(int no);
-
-	/*List<Map<String, String>> selectOneFood(int cPage, int numberPage, int no);*/
+	FoodList selectOneFood(int no);
 
 	int insertBoard(Board board);
 	
@@ -24,7 +23,11 @@ public interface FoodDao {
 
 	int foodDelete(int bno);
 
-	int foodUpdate(Board board);
+	/*int boardUpdate(Board board);
+	
+	int foodUpdate(Food food);
+	
+	int foodPointUpdate(FoodPoint foodPoint);*/
 	
 	int foodViewCount(int bno);
 
@@ -35,5 +38,9 @@ public interface FoodDao {
 	List<Map<String, String>> commentSort(int cPage, int numberPage);
 
 	List<Map<String, String>> likeSort(int cPage, int numberPage);
+
+	// int boardUpdate(Map<String, Object> map);
+
+	int foodUpdate(FoodList foodList);
 	
 }
