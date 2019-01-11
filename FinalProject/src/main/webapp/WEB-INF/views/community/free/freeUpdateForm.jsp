@@ -56,12 +56,10 @@
 						</div>
 						<div class="dc-content-box">
 							<div class="board_area">
-								<form name="boardFrm"
-									action="${pageContext.request.contextPath}/community/free/freeUpdateFormEnd.do?no=${board.no}"
-									method="post">
+								<form name="boardFrm" action="${pageContext.request.contextPath}/community/free/freeUpdateFormEnd.do?no=${board.no}" method="post">
 									<div>
-										<b>글쓰기</b> <input type="text" id="bno" name="bno"
-											value="${board.no}" readonly="readonly" />
+										<b>글쓰기</b> 
+										<input type="text" id="bno" name="bno" value="${board.no}" readonly="readonly" />
 									</div>
 									<div class="table-div">
 										<br>
@@ -75,21 +73,44 @@
 										<div class="tr-div">
 											<div class="td-div">내용</div>
 											<div class="td-div">
-												<%-- <div id="summernote">${board.content}</div> --%>
-												<%-- <div id="summernote" style="resize: none;" value="${board.content}"></div> --%>
 												<textarea name="content" id="summernote"
 													class="form-control" rows="20" cols="70" required>${board.content}</textarea>
 												<script>
-													$(document)
-															.ready(
-																	function() {
-																		$(
-																				'#summernote')
-																				.summernote(
-																						{
-																							height : 300
-																						});
-																	});
+												
+												$('#summernote').summernote({
+				                            		height : 300,
+				                            		minHeight : 500,
+				                            		maxHeight : 500,
+				                            		focus : true,
+				                            		callbacks : {
+				                            			onImageUpload : function(files) {
+				                            				for (var i = files.length - 1; i >= 0; i--) {
+				                            					sendFile(files[i]);
+				                            		}}}
+				                            	});
+												
+												function sendFile(file) {
+				                            		var form_data = new FormData();
+				                            		form_data.append('file', file);
+
+				                            		$.ajax({
+				                            			url : '${pageContext.request.contextPath}/common/summernote/convertImage.do',
+				                            			data : form_data,
+				                            			type : "POST",
+				                            			cache : false,
+				                            			contentType : false,
+				                            			enctype : 'multipart/form-data',
+				                            			processData : false,
+				                            			success : function(url) {
+				                            				$('#summernote').summernote('editor.insertImage', url);
+				                            				console.log("url: "+url);
+				                            			},
+				                            			error : function() {
+				                            				console.log("이미지 업로드 실패");
+				                            			}
+				                            		});
+				                            	}
+												
 												</script>
 											</div>
 										</div>

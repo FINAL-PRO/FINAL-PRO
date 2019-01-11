@@ -17,6 +17,7 @@ import com.kh.dc.common.util.Utils;
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.community.food.model.service.FoodService;
 import com.kh.dc.community.food.model.vo.Food;
+import com.kh.dc.community.food.model.vo.FoodList;
 import com.kh.dc.community.food.model.vo.FoodPoint;
 
 @Controller
@@ -92,24 +93,25 @@ public class FoodController {
 		// 조회수 증가
 		int foodViewCount = foodService.foodViewCount(bno);
 		
-		model.addAttribute("boardList", foodService.selectOneFood(bno))
+		model.addAttribute("foodList", foodService.selectOneFood(bno))
 		.addAttribute("foodViewCount", foodViewCount);
 		
 		return "community/food/foodView";
 	}
 	
 	@RequestMapping("community/food/foodUpdateForm.do")
-	public String foodUpdateView(Model model, @RequestParam int bno) {
+	public String foodUpdateView(@RequestParam int bno, Model model) {
 
-		model.addAttribute("board", foodService.selectOneFood(bno));
+		model.addAttribute("foodList", foodService.selectOneFood(bno));
 		
 		return "community/food/foodUpdateForm";
 	}
 	
 	@RequestMapping("community/food/foodUpdateFormEnd.do")
-	public String foodUpdate(Board board) {
+	public String foodUpdate(FoodList foodList) {
 		
-		foodService.foodUpdate(board);
+		foodService.foodUpdate(foodList);
+		System.out.println("upfoodList: "+foodList);
 		System.out.println("수정완료");
 		
 		return "redirect:/community/food/list.do";

@@ -193,7 +193,7 @@
 											<img class="picture" src="https://cf-epi.campuspick.com/0.png"> 
 											<span class="nickname">${boardList.memberName}</span> 
 											<span class="count">조회수: ${boardList.viewCount}</span>
-											<p class="time"><fmt:formatDate value="${boardList.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
+											<p class="time"><fmt:formatDate value="${boardList.writeDate}" pattern="yyyy-MM-dd" /></p>
 										</p>
 										<p class="text">${boardList.content}</p>
 										<div style="border: solid 0.5px lightgray"></div>

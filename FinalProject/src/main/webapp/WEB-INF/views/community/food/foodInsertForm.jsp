@@ -41,26 +41,21 @@
  	display: inline-block;
 }
 
-.starR1{
-	    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
-	    background-size: auto 100%;
-	    width: 15px;
-	    height: 30px;
-	    float:left;
-	    text-indent: -9999px;
-	    cursor: pointer;
-	}
-	.starR2{
-	    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
-	    background-size: auto 100%;
-	    width: 15px;
-	    height: 30px;
-	    float:left;
-	    text-indent: -9999px;
-	    cursor: pointer;
-	}
-	.starR1.on{background-position:0 0;}
-	.starR2.on{background-position:-15px 0;}
+.starRev{
+	display: inline-block;
+}
+
+.starR{
+  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+  background-size: auto 100%;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  text-indent: -9999px;
+  cursor: pointer;
+}
+
+.starR.on{background-position:0 0;}
 
 #foodImg{
 	width: 100%;
@@ -100,12 +95,12 @@
 									<div>
 										<br>
 										<input type="hidden" id="mno" name="memberNo" value="${member.no}" required>
-										
 										<div>
 											<div class="add" style="display:inline-block;">
 												<div style="height:150px; width:200px; border:1px solid lightgrey;">
 													<img id="foodImg"/>
-													<input type="file" id="inputFile" name="thumbnail" style="display:none;" onchange="inputPicture(this);" />
+													<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);" />
+													<input type="hidden" name="thumbnail" id="thumbnail" />
 												</div>
 												<input type="button" id="foodThumbsnail" value="썸네일 등록" style="margin-top: 10px; margin-bottom: 10px;"/>
 											</div>
@@ -130,20 +125,12 @@
 													<div class="td-div">평점</div>
 													<div class="td-div" style="text-align:left;">
 														<div class="starRev">
-															<span class="starR1 on">0</span>
-															<span class="starR2">1</span>
-															<span class="starR1">1.5</span>
-															<span class="starR2">2</span>
-															<span class="starR1">2.5</span>
-															<span class="starR2">3</span>
-															<span class="starR1">3.5</span>
-															<span class="starR2">4</span>
-															<span class="starR1">4.5</span>
-															<span class="starR2">5</span>
-														</div>
-														<div>
-															&nbsp;
-															<input type="text" id="point" name="point" value="0" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/>
+														  <span class="starR on">1</span>
+														  <span class="starR">2</span>
+														  <span class="starR">3</span>
+														  <span class="starR">4</span>
+														  <span class="starR">5</span>
+														<input type="text" id="point" name="point" value="0" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/>
 														</div>
 													</div>
 												</div>
@@ -209,6 +196,7 @@
 					                            				processData : false,
 					                            				success : function(url) {
 					                            					$('#foodImg').attr('src', url);
+					                            					$('#thumbnail').attr('value', url);
 					                            				}
 					                            			});
 					                            		}
@@ -284,7 +272,9 @@
 					                			    	  $(this).parent().children('span').removeClass('on');
 											        	  $(this).addClass('on').prevAll('span').addClass('on');
 											        	  
-											        	  var star = Integer.parseInt($(this).text());
+											        	  var star = 0;
+											        	  
+											        	  star = Number($(this).text());
 											        	  
 											        	  console.log("별 값: "+star);
 											        
