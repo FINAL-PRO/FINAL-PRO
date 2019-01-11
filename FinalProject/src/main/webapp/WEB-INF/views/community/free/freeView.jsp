@@ -337,8 +337,9 @@
 									<button class="btn_back" id="btn_back">Back</button> 
 									<script>
 					                    $("#btn_back").click(function(){
-					                    	boardFrm.action="${pageContext.request.contextPath}/community/free/list.do"
-					                    	boardFrm.submit();
+					                    	/* boardFrm.action="${pageContext.request.contextPath}/community/free/list.do"
+					                    	boardFrm.submit(); */
+					                    	location.href="${pageContext.request.contextPath}/community/free/list.do";
 					                    });
 				                    </script>
 								</div>
