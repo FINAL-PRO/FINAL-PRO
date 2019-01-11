@@ -25,7 +25,9 @@
 		<typeAlias type="com.kh.dc.sale.used.model.vo.Used" alias="used"/>
 		<typeAlias type="com.kh.dc.sale.group.model.vo.GroupHistory" alias="groupHistory"/>
 		<typeAlias type="com.kh.dc.sale.used.model.vo.UsedHistory" alias="usedHistory"/>
-
+		<typeAlias type="com.kh.dc.community.food.model.vo.Food" alias="food"/>
+		<typeAlias type="com.kh.dc.community.food.model.vo.FoodPoint" alias="foodPoint"/>
+		
 		<!-- 공통 VO -->
 		<typeAlias type="com.kh.dc.common.vo.Company" alias="company"/>
 		<typeAlias type="com.kh.dc.common.vo.Board" alias="board"/>		

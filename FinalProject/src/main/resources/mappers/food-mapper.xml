@@ -9,15 +9,20 @@
 		<result property="commentCount" column="comment_count"/>
 		<result property="likeCount" column="like_count"/>
 		<result property="imageCheck" column="imageCheck"/>
+		<result property="point" column="point"/>
 	</resultMap>
 	
 	<select id="foodrecentSort" resultMap="resultBoardList">
-		SELECT B.*, M.NICKNAME, NVL(L.like_count, 0) like_count, NVl(C.comment_count,0) comment_count, INSTR(b.CONTENT, 'img') imageCheck
+		SELECT B.*, M.NICKNAME, NVL(L.like_count, 0) like_count, NVl(C.comment_count,0) comment_count, F.CATEGORY, P.POINT
 		FROM DC_BOARD_TB B
 		INNER JOIN DC_MEMBER_TB M 
-		ON B.MEMBERNO = M.NO
+		ON (B.MEMBERNO = M.NO)
 		  LEFT JOIN (SELECT COUNT(*) like_count, BOARDNO FROM DC_LIKE_TB GROUP BY BOARDNO) L ON L.BOARDNO = B.NO
 		  LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB WHERE STATUS = 'STATUS001' GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
+		INNER JOIN DC_BOARD_FOOD_TB F
+		ON (F.BOARDNO = B.NO)
+		INNER JOIN DC_FOOD_POINT_TB P
+		ON (P.FOODNO = F.NO)
 		WHERE B.TYPE = 'BOARD002' AND B.STATUS = 'BSTATUS001'
 		ORDER BY B.WRITEDATE DESC, B.NO DESC
 	</select>
@@ -59,9 +64,25 @@
 		ORDER BY B.WRITEDATE DESC, B.NO DESC
 	</select>
 	
-	<insert id="insertFood" parameterType="Board">
+	 <insert id="insertBoard" parameterType="Board">
 		INSERT INTO DC_BOARD_TB VALUES
 		(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, 'BOARD002', 'BSTATUS001', #{memberNo}, NULL)
+	</insert>
+	
+	<insert id="insertFood" parameterType="Food">
+		<selectKey keyProperty="boardNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_BOARD.CURRVAL FROM DUAL
+		</selectKey>
+		INSERT INTO DC_BOARD_FOOD_TB VALUES
+		(SEQ_BOARD_FOOD.NEXTVAL, #{boardNo}, #{category})
+	</insert>
+	
+	<insert id="insertFoodPoint" parameterType="FoodPoint">
+		<selectKey keyProperty="foodNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_BOARD_FOOD.CURRVAL FROM DUAL
+		</selectKey>
+		INSERT INTO DC_FOOD_POINT_TB VALUES 
+		(SEQ_FOOD_POINT.NEXTVAL, #{point}, SYSDATE, #{foodNo}, #{memberNo})
 	</insert>
 
 	<update id="updateFood" parameterType="Board">

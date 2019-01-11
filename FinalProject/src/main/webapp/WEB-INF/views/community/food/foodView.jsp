@@ -166,13 +166,15 @@
 	}
 	
 	.starR1{
-	    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
+        background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
 	    background-size: auto 100%;
 	    width: 15px;
 	    height: 30px;
 	    float:left;
 	    text-indent: -9999px;
 	    cursor: pointer;
+	    padding: 0px;
+	    margin: 0px;
 	}
 	.starR2{
 	    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
@@ -182,6 +184,7 @@
 	    float:left;
 	    text-indent: -9999px;
 	    cursor: pointer;
+	    padding: 0px;
 	}
 	.starR1.on{background-position:0 0;}
 	.starR2.on{background-position:-15px 0;}
@@ -219,22 +222,25 @@
 											<span class="count">조회수: ${boardList.viewCount}</span>
 											<p class="time"><fmt:formatDate value="${boardList.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
 										</p>
+										<div class="starRev" style="width: 100%;">
+										  <span class="starR1 on">0</span>
+										  <span class="starR2">1</span>
+										  <span class="starR1">1.5</span>
+										  <span class="starR2">2</span>
+										  <span class="starR1">2.5</span>
+										  <span class="starR2">3</span>
+										  <span class="starR1">3.5</span>
+										  <span class="starR2">4</span>
+										  <span class="starR1">4.5</span>
+										  <span class="starR2">5</span>
+										</div>
+										<div>
+											주소: ${food.address}
+										</div>
 										<p class="text">${boardList.content}</p>
 										<div style="border: solid 0.5px lightgray"></div>
 										<div>
-										<div class="starRev">
-										  <span class="starR1 on">★★★★★</span>
-										  <span class="starR2">★★★★★</span>
-										  <span class="starR1">★★★★★</span>
-										  <span class="starR2">★★★★★</span>
-										  <span class="starR1">★★★★★</span>
-										  <span class="starR2">★★★★★</span>
-										  <span class="starR1">★★★★★</span>
-										  <span class="starR2">★★★★★</span>
-										  <span class="starR1">★★★★★</span>
-										  <span class="starR2">★★★★★</span>
-										</div>
-										<input type="button" value="평점 제출" class="starInsert" onclick="starInsert();"/>
+										<div style="height:12px;"></div>
 										<div class="status" style="border: solid 0.5px orange">
 											<button class="btn_board_edit" id="btn_board_edit">수정</button>
 											<button class="btn_board_delete" id="btn_board_delete">삭제</button>
@@ -355,6 +361,10 @@
 									        $('.starRev span').click(function(){
 									        	  $(this).parent().children('span').removeClass('on');
 									        	  $(this).addClass('on').prevAll('span').addClass('on');
+									        	  
+									        	  var star = $(this).parent().children('span').val();
+									        	  
+									        	  console.log("별 값: "+star);
 									        	  return false;
 									        });
 											

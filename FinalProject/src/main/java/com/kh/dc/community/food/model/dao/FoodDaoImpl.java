@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.BoardList;
+import com.kh.dc.community.food.model.vo.Food;
+import com.kh.dc.community.food.model.vo.FoodPoint;
 
 @Repository
 public class FoodDaoImpl implements FoodDao{
@@ -48,7 +50,17 @@ public class FoodDaoImpl implements FoodDao{
 
 	@Override
 	public int insertBoard(Board board) {
-		return sqlSession.insert("food_mapper.insertFood", board);
+		return sqlSession.insert("food_mapper.insertBoard", board);
+	}
+	
+	@Override
+	public int insertFood(Food food) {
+		return sqlSession.insert("food_mapper.insertFood", food);
+	}
+	
+	@Override
+	public int insertFoodPoint(FoodPoint foodPoint) {
+		return sqlSession.insert("food_mapper.insertFoodPoint", foodPoint);
 	}
 
 	@Override
@@ -71,5 +83,6 @@ public class FoodDaoImpl implements FoodDao{
 	public List<Board> selectFoodListData() {
 		return sqlSession.selectList("food_mapper.selectFoodListData");
 	}
+
 
 }

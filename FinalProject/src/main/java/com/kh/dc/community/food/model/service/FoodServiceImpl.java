@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.BoardList;
 import com.kh.dc.community.food.model.dao.FoodDao;
+import com.kh.dc.community.food.model.vo.Food;
+import com.kh.dc.community.food.model.vo.FoodPoint;
 
 @Service
 public class FoodServiceImpl implements FoodService{
@@ -27,8 +29,8 @@ public class FoodServiceImpl implements FoodService{
 	}
 
 	@Override
-	public int insertFood(Board board) {
-		return foodDao.insertBoard(board);
+	public int insertFood(Board board, Food food, FoodPoint foodPoint) {
+		return foodDao.insertBoard(board) * foodDao.insertFood(food) * foodDao.insertFoodPoint(foodPoint) ;
 	}
 
 	@Override
