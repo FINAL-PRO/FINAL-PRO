@@ -8,12 +8,14 @@
 		<result property="content"  column="content" />
 		<result property="memberName"  column="nickname" />
 		<result property="writeDate"  column="writedate" />
+		<result property="boardType"  column="value" />
 	</resultMap>
 	
 	<select id="searchResultList" parameterType="string" resultMap="resultBoardList">
-		SELECT TITLE, CONTENT, M.NICKNAME, WRITEDATE
+		SELECT B.NO, TITLE, CONTENT, M.NICKNAME, WRITEDATE, C.VALUE
 		FROM DC_BOARD_TB B
 		JOIN DC_MEMBER_TB M ON (B.MEMBERNO = M.NO)
+		JOIN DC_CODE_TB C ON (B.TYPE = C.ID)
 		WHERE TITLE LIKE '%'||#{searchWord}||'%' OR CONTENT LIKE '%'||#{searchWord}||'%' OR M.NICKNAME LIKE '%'||#{searchWord}||'%'
 	</select>	
 	

@@ -42,8 +42,9 @@ public class SearchController {
 
 			searchResultList.get(i).setContent(resultContent);		
 		
-		}		
+		}
 		
+		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("searchResultList", searchResultList);
 		
 		return "/search/searchView";
