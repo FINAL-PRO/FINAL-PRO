@@ -24,7 +24,7 @@
 					}else{
 						for(var i = 0 ; i < data.length; i++){
 							result += "<div class='dc-tb-row'>";
-							result += "<span><a href='${pageContext.request.contextPath}/community/free/freeView.do?bno=" + data[i]['no'] + "'>" + data[i]['title'] + "</a></span>";
+							result += "<a href='${pageContext.request.contextPath}/community/free/freeView.do?bno=" + data[i]['no'] + "'>● <span>" + data[i]['title'] + "</span></a>";
 							result += "</div>";
 						}
 					}
@@ -50,7 +50,7 @@
 					}else{
 						for(var i = 0 ; i < data.length; i++){
 							result += "<div class='dc-tb-row'>";
-							result += "<span><a href='${pageContext.request.contextPath}/community/free/freeView.do?bno=" + data[i]['no'] + "'>" + data[i]['title'] + "</a></span>";
+							result += "<a href='${pageContext.request.contextPath}/community/free/freeView.do?bno=" + data[i]['no'] + "'>● <span>" + data[i]['title'] + "</span></a>";
 							result += "</div>";
 						}
 					}
@@ -67,21 +67,22 @@
 				url : "sale/group/getListData.do",
 				success:function(data){
 					console.log("공동구매 가져오기 ajax 성공");
+					console.log(data);
 					var result = "";
 					
 					if(data.length == 0){
-						result += "<tr style='height:200px'><td align='center' style='vertical-align:middle;'>";
+						result += "<div style='height:200px'><div align='center' style='margin:auto;vertical-align:middle;align:center'>";
 						result += "<span>불러온 데이터가 없습니다.</span>"
-						result += "</tr></td>";
+						result += "</div></div>";
 					}else{
 						for(var i = 0 ; i < data.length; i++){
-							result += "<div class='dc-tb-row'>";
-							result += "<span><a href='${pageContext.request.contextPath}/sale/group/groupView.do?boardNo=" + data[i]['no'] + "'>" + data[i]['title'] + "</a></span>";
-							result += "</div>";
+							result += "<div class='main-img-div'><a href='#'><span><img src='" + data[i]['thumbnail'] + "' width='190'/>";
+							result += "</span><div class='img-text'><strong>" + data[i]['title'] + "</strong><br />";
+							result += "<span>" + data[i]['goodsCategory'] +"</span></div></a></div>"
 						}
 					}
 					
-					$("#groupTable").append(result);
+					$("#main-img-list").append(result);
 				},error : function(data){
 					console.log("공동구매 가져오기 ajax error");
 				},complete : function(){
@@ -188,11 +189,18 @@
 							</div>
 							
 							<div class="dc-con-content">
-								<table class="table">
-									<tbody id="groupTable">
-										<div id="loadingGroup" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
-									</tbody>
-								</table>							
+								<div class="dc-tb">
+									<div class="dc-tb-head">
+										<div class="dc-tb-row">
+											
+										</div>					
+									</div>
+									<div id="groupTable" class="dc-tb-body" style="">
+										<div id="main-img-list" class="main-img-list">
+												
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						
@@ -213,7 +221,7 @@
 									<div class="dc-tb-body">
 										<c:forEach begin="1" end="10">
 											<div class="dc-tb-row">
-												<span><strong>[공지]</strong> 여러분 오늘 미세먼지가 매우 심합니다. 아이들 외출 자제해주세요. 좋은하루 되세요 ^_____^</span>
+												<a href="#">● <span><strong>[공지]</strong> 여러분 오늘 미세먼지가 매우 심합니다. 아이들 외출 자제해주세요. 좋은하루 되세요 ^_____^</span></a>
 											</div>
 										</c:forEach>
 									</div>

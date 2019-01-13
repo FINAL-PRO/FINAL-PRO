@@ -24,7 +24,7 @@
 				<div class="dc-content">
 					<div class="dc-content-title">
 						<h1>지역정보 게시판</h1>
-						<a href="${pageContext.request.contextPath}/info/region/insertRegionView.do">글쓰기</a>
+						<a href="${pageContext.request.contextPath}/info/region/insert/view.do">글쓰기</a>
 					</div>
 					<div class="dc-content-box">
 						<table class="table table-striped">
@@ -41,7 +41,7 @@
 								<c:forEach items="${list}" var="region" varStatus="vs">
 									<tr>
 										<th>${region.no}</th>
-										<th><a href="${pageContext.request.contextPath}/info/region/rgSelectOne.do?no=${region.no}">${region.title}</a></th>
+										<th><a href="${pageContext.request.contextPath}/info/region/view.do?no=${region.no}">${region.title}</a></th>
 										<th>${region.userName }</th>
 										<th>${region.writeDate}</th>
 										<th>${region.viewcount }</th>

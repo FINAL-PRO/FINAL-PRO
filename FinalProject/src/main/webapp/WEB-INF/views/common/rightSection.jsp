@@ -53,7 +53,7 @@
 						alt="메인_우측_세로배너" width="140" height="800"
 						style="margin-left: 1px;margin-right: 1px; margin-top:60px; margin-bottom:60px;
 						border:1px solid red"/> --%>
-	<div class="dc-content-box" style="min-height: 0vh;">
+	<div class="dc-content-box dc-border" style="min-height: 0vh;">
 		<!-- <h4>
 			<span class="board-title">정보</span>
 		</h4> -->
@@ -103,7 +103,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="dc-content-box">
+	<div class="dc-content-box dc-border">
 		<h4>
 			<span class="board-title">현재 날씨</span>
 		</h4>
@@ -131,7 +131,7 @@
 		</div>
 		
 	</div>
-	<div class="dc-content-box">
+	<div class="dc-content-box dc-border">
 		<!-- <h1>광고(AD)</h1> -->
 		<div class="ad-right">
 			<img id="ad-right-img" src=""/>

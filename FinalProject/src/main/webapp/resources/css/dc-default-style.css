@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 body {
-	background-color : #f1f3f6;
+	/* background-color : #f1f3f6; */
 }
 
 header{
@@ -14,7 +14,7 @@ div#header-container{
 }
 
 .dc-menubar{
-	background-color : #fff;
+	/* background-color : #03cf5d; */
 }
 
 nav{
@@ -134,7 +134,7 @@ footer{
 	display:block;
 	margin:10px 0px;
 	background-color: #fff;
-	min-height: 30vh;
+	/* min-height: 30vh; */
 	/* border : 1px solid #dee3eb; */
 }
 
@@ -236,7 +236,7 @@ div[class^="ad-"]:hover {
 }
 
 .dc-user-menu span{
-	color : green;
+	/* color : white; */
 	font-weight : bold;
 }
 
@@ -251,12 +251,13 @@ div[class^="ad-"]:hover {
 
 .dc-profile-area-top{
 	height : 70%;
-	border : 1px solid #dee3eb;
+	/* border : 1px solid #dee3eb; */
 }
 
 .dc-profile-area-bottom{
 	height : 30%;
-	border : 1px solid #ebeef3;
+	/* border : 1px solid #ebeef3; */
+	border-top : 1px solid #ebeef3;
 	background-color: #fff;
 }
 
@@ -290,5 +291,26 @@ div[class^="ad-"]:hover {
 .dc-tb-row{
 	margin : 10px;	
 }
+
+.dc-con-title span{
+	color : #03cf5d;
+}
+
+.dc-con-content a span{
+	/* color : red; */
+}
+
+.main-img-list{
+	display : block;
+}
+
+.main-img-div{
+	display : inline-block;
+	width : 190px;
+	/* background:red; */
+	margin:3px;
+}
+
+
 
 

@@ -26,6 +26,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.ajax-cross-origin.min.js"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="${pageContext.request.contextPath }/resources/icons/favicon.ico">
 <style>
 	section{background-color: white;}
 /* 	header {

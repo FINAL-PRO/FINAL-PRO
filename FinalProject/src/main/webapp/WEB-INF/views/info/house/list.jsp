@@ -8,27 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>부동산</title>
-
-<style>
-* {
-	list-style-type: none;
-}
-
-li {
-	float: left;
-	display: block;
-	padding: 1px;
-	margin: 0px;
-	padding: 0px;
-}
-
-ul {
-	list-style: none;
-	margin: 0px;
-	padding: 0px;
-}
-</style>
 <c:import url="../../common/header.jsp" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/info/house/dc-info-house.css" />
 </head>
 <body>
 
@@ -44,47 +25,41 @@ ul {
 				<div class="dc-content">
 					<div class="dc-content-title">
 						<h1>부동산 리스트</h1>
+						<button onclick="insertHouse();">글쓰기</button>
 					</div>
 					<div class="dc-content-box">
-						<div display="block">
+						<div style="display:block">
+
 						<c:forEach items="${list}" var="house" varStatus="hvs">
 							<li id="hlist" class="" style="padding-left: 10px; padding-top: 10px;">
-								<div class="item_box"
-									style="width: 220px; height: 355px; border: 1px solid gray; margin-left: auto; margin-right: auto;">
-
-									<div class="thumbnail"
-										style="width: 200px; height: 220px; border: 1px solid gray; margin-left: auto; margin-right: auto; margin-top: 12px;">
-										<a onclick="selectHouse(${house.boardNo})"><img src=""
-											id="" alt="" />img 삽입될 곳</a> <span class="wish"></span>
-										<div class="button"></div>
+								<a onclick="selectHouse(${house.boardNo})" href="#">
+									<div class="dc-house-item-box">
+										<div class="dc-house-thumbnail">
+											<img src="" id="" alt="" />img 삽입될 곳 <span class="wish"></span>
+										</div>
+										<div class="dc-house-description">
+											<strong class="name"> 
+												<span>${house.title}</span>
+											</strong>
+											<ul>
+												<li>
+													<strong>
+														<span>크기 </span> :
+													</strong> 
+														<span>${house.area }</span> <br>
+													<strong>
+														<span>매매가 </span> :
+													</strong> 
+													<span>${house.minprice} &nbsp;원</span> <br> 
+													<span>${house.hType} &nbsp;/&nbsp; ${house.dealType}</span>
+												</li>
+											</ul>
+										</div>
 									</div>
-									<div style="height: 5px"></div>
-									<div class="description"
-										style="width: 200px; height: 100px; border: 1px solid gray; margin-left: auto; margin-right: auto;">
-										<strong class="name"> 
-											<a href="${pageContext.request.contextPath}/info/house/selectOne.do?no=${house.boardNo}" class=""> 
-												<span style="font-size: 12px; color: #555555;">${house.title}</span>
-											</a>
-										</strong>
-										<ul class="">
-											<li class=" xans-record-">
-												<strong class="">
-													<span style="font-size: 12px; color: #333333;">크기 </span> :
-												</strong> 
-													<span style="font-size: 12px; color: #333333;">${house.area }</span> <br>
-												<strong class="">
-													<span style="font-size: 12px; color: #333333;">매매가 </span> :
-												</strong> 
-												<span style="font-size: 12px; color: #333333;">${house.minprice} &nbsp;원</span> <br> 
-												<span style="font-size: 12px; color: #999999;">${house.hType} &nbsp;/&nbsp; ${house.dealType}</span>
-											</li>
-										</ul>
-									</div>
-								</div>
+								</a>
 							</li>
 						</c:forEach>
 						</div>
-						<button onclick="insertHouse();">글쓰기</button>
 					</div>
 				</div>
 			</div>
@@ -99,11 +74,11 @@ ul {
 
 	<script>
 		function selectHouse(no){
-			location.href="${pageContext.request.contextPath}/info/house/selectOne.do?no="+no;
+			location.href="${pageContext.request.contextPath}/info/house/view.do?no="+no;
 		}
 		
 		function insertHouse(){
-			location.href="${pageContext.request.contextPath}/info/house/insertHouseV.do";
+			location.href="${pageContext.request.contextPath}/info/house/insert/view.do";
 		}
 	</script>
 </body>

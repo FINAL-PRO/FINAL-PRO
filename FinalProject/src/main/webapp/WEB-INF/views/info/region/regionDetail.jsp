@@ -53,34 +53,31 @@
 				<div class="dc-content">
 
 					<div class="dc-content-title">
-
 						<h2>${region.title}</h2>
-						<span>${region.userName}</span>${region.writeDate } 조회 수 :
-						${likeCount} <br /> 추천 수 : ${region.viewcount}
+						<span>작성자 : ${region.userName}</span>
 					</div>
 
 					<div class="dc-content-box">
-						<div class="content_text"
-							style="padding-left: 20px; padding-top: 20px;">
-							${region.content}</div>
-					</div>
-
-					<div class="" style="">
-						<ul class=""
-							style="list-style-type: none; padding-left: 0px; display: block;">
-							<li class=""
-								style="display: block; float: left; padding-right: 15px;"><a
-								class=""
-								href="${pageContext.request.contextPath}/info/region/list.do"
-								title="목록">목록</a></li>
-							<li class=""
-								style="display: block; float: left; padding-right: 15px;"><a
-								class="" href="#" accesskey="t" title="상단이동">맨 위로</a></li>
-							<li class="" style="display: block; float: left;"><a
-								onclick="updateRegion()" title="수정">수정하기</a></li>
-							<li class="" style="display: block; float: left;"><a
-								onclick="deleteRegion()" title="삭제">삭제제하기</a></li>
-						</ul>
+						<table class="table">
+							<tr>
+								<td>작성일 : ${region.writeDate }</td>
+								<td>조회수 : ${region.viewcount} </td>
+								<td>추천수 : ${likeCount}</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									<div class="content_text" style="padding-left: 20px; padding-top: 20px;"> ${region.content}</div>
+								</td>	
+							</tr>
+							<tr>
+								<td colspan="3">
+									[<a class="" href="${pageContext.request.contextPath}/info/region/list.do" title="목록">목록</a>]
+									[<a class="" href="#" accesskey="t" title="상단이동">맨 위로</a>]
+									[<a onclick="updateRegion()" href="#" title="수정">수정하기</a>]
+									[<a onclick="deleteRegion()" href="#" title="삭제">삭제하기</a>]
+								</td>
+							</tr>
+						</table>	
 					</div>
 				</div>
 				<!-- content box end -->
@@ -96,33 +93,11 @@
 	<script>
 
 	function updateRegion(){
-		location.href="${pageContext.request.contextPath}/info/region/updateRegion.do?no="+${region.no};
+		location.href="${pageContext.request.contextPath}/info/region/update/view.do?no="+${region.no};
 	}
 	
 	function deleteRegion(){
-		location.href="${pageContext.request.contextPath}/info/region/deleteRegion.do?no="+${region.no};
-	}
-	
-	function selectRegion(no){
-		location.href="${pageContext.request.contextPath}/info/region/rgSelectOne.do?no="+no;
-	}
-	
-	function regionLike(no){  
-		var lc = no + 1;
-		var no = ${region.no}
-		console.log(lc);
-		console.log(no);
-		
-		$.ajax({
-			url:'${pageContext.request.contextPath}/info/region/regionLikeCount.do',
-			data :{'lc' : no},
-			
-			type : "POST",
-			success : function(response){
-				alert("좋아요 완료");
-				location.href="${pageContext.request.contextPath}/info/region/rgSelectOne.do?no="+no;
-			}
-		})
+		location.href="${pageContext.request.contextPath}/info/region/delete.do?no="+${region.no};
 	}
 </script>
 

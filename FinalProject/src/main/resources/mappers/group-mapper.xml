@@ -119,6 +119,11 @@
 		SELECT * FROM DC_BOARD_TB WHERE TYPE='BOARD003' 
 		AND STATUS = 'BSTATUS001' AND ROWNUM <![CDATA[ <= 5 ORDER BY NO ]]>
 	</select>
+	
+	<select id="selectSumGroupList" resultMap="resultGroup">
+		SELECT * FROM DC_BOARD_GROUP_VIEW WHERE STATUS='BSTATUS001'
+		AND ROWNUM <![CDATA[ <= 5 ORDER BY NO ]]>
+	</select>
 
 	
 </mapper>

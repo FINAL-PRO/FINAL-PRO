@@ -43,5 +43,7 @@ public interface GroupDao {
 	int selectRemainCount(int groupNo);
 
 	List<Board> getGroupListData();
+
+	List<Board> selectGroupList();
 		
 }
