@@ -83,9 +83,9 @@
 						</div>
 						<div class="dc-content-box">
 							<div class="board_area">
-								<form name="boardFrm" action="${pageContext.request.contextPath}/community/food/foodUpdateFormEnd.do?bno=${foodList.no}&fno=${foodList.fno}&pno=${foodList.pno}" method="post">
+								<form name="boardFrm" action="${pageContext.request.contextPath}/community/food/foodUpdateFormEnd.do?no=${foodList.no}&fno=${foodList.fno}&pno=${foodList.pno}" method="post">
 									<b>글쓰기</b> 
-									<input type="text" id="bno" name="bno" value="${foodList.no}" readonly="readonly" />
+									<input type="text" id="no" name="no" value="${foodList.no}" readonly="readonly" />
 									<input type="text" id="fno" name="fno" value="${foodList.fno}" readonly="readonly" />
 									<input type="text" id="pno" name="pno" value="${foodList.pno}" readonly="readonly"/>
 									<div>
@@ -95,20 +95,18 @@
 											</div>
 										</div>
 										
-										<div class="add" style="display:inline-block;">
+								<%-- 	<div class="add" style="display:inline-block;">
 											<div style="height:150px; width:200px; border:1px solid lightgrey;">
 												<img id="foodImg" value="${foodList.thumbnail}"/>
 												<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);" />
 												<input type="hidden" name="thumbnail" id="thumbnail" />
 											</div>
-											<input type="button" id="foodThumbsnail" value="썸네일 수정" style="margin-top: 10px; margin-bottom: 10px;"/>
-										</div>
+										</div> --%>
 										<div class="table-div" style="display:inline-block; border:1px soild black;">
 											<div class="tr-div">
 													<div class="td-div">카테고리</div>
 													<div class="td-div" style="text-align:left;">
 														<select id="category" name="category"> 
-															<option value="" selected disabled hidden>카테고리 선택</option>
 															<option value="FOOD001">한식</option>
 															<option value="FOOD002">일식</option>
 															<option value="FOOD003">중식</option>
@@ -116,6 +114,7 @@
 															<option value="FOOD005">카페</option>
 															<option value="FOOD006">디저트</option>
 														</select>
+														<input type="hidden" id="categoryCheck" name="categoryCheck" value="${foodList.category}" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/>
 													</div>
 												</div>
 											<div class="tr-div">
@@ -130,7 +129,7 @@
 														</div>
 														<div>
 															&nbsp;
-															<input type="text" id="point" name="point" value="${foodList.point}" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/>
+															<input type="hidden" id="point" name="point" value="${foodList.point}" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/>
 														</div>
 													</div>
 												</div>
@@ -167,13 +166,19 @@
 													$(document).ready(function(){
 														
 											    	  var starPoint = $('[name=point]').val();
-											    	  var starDate = $('.starRev');
-											    	  
 											    	  console.log("starPoint: "+starPoint);
-											    	  console.log(starDate);
-										        	  $('.starRev span').addClass('on');
-											    	  /* $('.starRev span').parent().children('span').removeClass('on');*/
 											    	  
+											    	  var j = $('.starRev span');
+											    	  
+											    	  for(var i=0; i<starPoint; i++){
+											    		  $('.starRev span').eq(i).addClass('on');
+											    		  console.log(i);
+											    	  }
+
+											    	  var categoryCheck = $('[name=categoryCheck]').val();
+											    	  console.log("categoryCheck: "+categoryCheck);
+											    	  
+											    	  $('.category').val('categoryCheck').attr("selected", "selected");
 											        	  
 														
 													});
@@ -189,35 +194,7 @@
 					                            					sendFile(files[i]);
 					                            		}}}
 					                            	});
-													
-					                                $('#foodThumbsnail').on("click", function(){
-					                                	$('#inputFile').click();
-					                                });
-					                                
-													function inputPicture(value){
-					                                	
-					                                	if(value.files && value.files[0]) {
-					                            			var reader = new FileReader();
-					                            			var form_data = new FormData();
-					                            			form_data.append('file', value.files[0]);
-
-					                            			$.ajax({
-					                            				url : '${pageContext.request.contextPath}/common/summernote/convertImage.do',
-					                            				data : form_data,
-					                            				type : "POST",
-					                            				cache : false,
-					                            				contentType : false,
-					                            				enctype : 'multipart/form-data',
-					                            				processData : false,
-					                            				success : function(url) {
-					                            					$('#foodImg').attr('src', url);
-					                            					$('#thumbnail').attr('value', url);
-					                            				}
-					                            			});
-					                            		}
-					                                	
-					                                }
-					                                
+			                                
 					                            	function sendFile(file) {
 					                            		var form_data = new FormData();
 					                            		form_data.append('file', file);

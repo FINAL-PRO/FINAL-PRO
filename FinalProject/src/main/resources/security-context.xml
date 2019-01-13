@@ -28,6 +28,7 @@
 	<security:http security="none" pattern="/community/food/foodDelete.do" />
 	<security:http security="none" pattern="/community/food/foodUpdateForm.do" />
 	<security:http security="none" pattern="/community/food/foodUpdateFormEnd.do" />
+	<security:http security="none" pattern="/sale/group/groupFormEnd.do" />
 	
 	<!-- 메시지 전송 -->
 	<security:http security="none" pattern="/message/messageInsert.do" />

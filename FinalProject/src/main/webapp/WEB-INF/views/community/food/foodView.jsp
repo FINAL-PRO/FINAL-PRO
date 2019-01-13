@@ -80,6 +80,13 @@
 		word-wrap: break-word;
 	}
 	
+	.category{
+		float: left;
+		line-height: 30px;
+		color: #a6a6a6;
+		font-size: 12px;
+	}
+	
 	.comment {
 		padding: 5px;
 		line-height: 20px;
@@ -274,6 +281,7 @@
 										  </c:if>
 										</div> --%>
 										<div>
+											<p class="category">카테고리: ${foodList.category}</p><br />
 											<p class="address">주소: ${foodList.address}</p>
 										</div>
 										<div style="border: solid 0.5px lightgray"></div><br />

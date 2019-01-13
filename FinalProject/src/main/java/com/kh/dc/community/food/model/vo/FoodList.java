@@ -15,6 +15,8 @@ public class FoodList extends Board implements Serializable{
 	private int no;
 	private int fno;
 	private int pno;
+	private String title;
+	private String content;
 	private String memberName;
 	private String thumbnail;
 	private int commentCount;
@@ -28,12 +30,14 @@ public class FoodList extends Board implements Serializable{
 		super();
 	}
 
-	public FoodList(int no, int fno, int pno, String memberName, String thumbnail, int commentCount, int likeCount,
-			String category, String address, int point, int imageCheck) {
+	public FoodList(int no, int fno, int pno, String title, String content, String memberName, String thumbnail,
+			int commentCount, int likeCount, String category, String address, int point, int imageCheck) {
 		super();
 		this.no = no;
 		this.fno = fno;
 		this.pno = pno;
+		this.title = title;
+		this.content = content;
 		this.memberName = memberName;
 		this.thumbnail = thumbnail;
 		this.commentCount = commentCount;
@@ -43,6 +47,7 @@ public class FoodList extends Board implements Serializable{
 		this.point = point;
 		this.imageCheck = imageCheck;
 	}
+
 
 	public int getNo() {
 		return no;
@@ -132,11 +137,28 @@ public class FoodList extends Board implements Serializable{
 		this.pno = pno;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 	@Override
 	public String toString() {
-		return "FoodList [no=" + no + ", fno=" + fno + ", pno=" + pno + ", memberName=" + memberName + ", thumbnail="
-				+ thumbnail + ", commentCount=" + commentCount + ", likeCount=" + likeCount + ", category=" + category
-				+ ", address=" + address + ", point=" + point + ", imageCheck=" + imageCheck + "]";
+		return "FoodList [no=" + no + ", fno=" + fno + ", pno=" + pno + ", title=" + title + ", content=" + content
+				+ ", memberName=" + memberName + ", thumbnail=" + thumbnail + ", commentCount=" + commentCount
+				+ ", likeCount=" + likeCount + ", category=" + category + ", address=" + address + ", point=" + point
+				+ ", imageCheck=" + imageCheck + "]";
 	}
 
 }

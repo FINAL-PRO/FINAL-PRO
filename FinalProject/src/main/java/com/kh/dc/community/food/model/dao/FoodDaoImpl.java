@@ -68,20 +68,20 @@ public class FoodDaoImpl implements FoodDao{
 		return sqlSession.delete("food_mapper.foodDelete", bno);
 	}
 
-/*	@Override
-	public int boardUpdate(Board board) {
-		return sqlSession.insert("food_mapper.updateBoard", board);
+	@Override
+	public int boardUpdate(FoodList foodList) {
+		return sqlSession.insert("food_mapper.updateBoard", foodList);
 	}
 
 	@Override
-	public int foodUpdate(Food food) {
-		return sqlSession.insert("food_mapper.updateFood", food);
+	public int foodUpdate(FoodList foodList) {
+		return sqlSession.insert("food_mapper.updateFood", foodList);
 	}
 
 	@Override
-	public int foodPointUpdate(FoodPoint foodPoint) {
-		return sqlSession.insert("food_mapper.updateFoodPoint", foodPoint);
-	}*/
+	public int foodPointUpdate(FoodList foodList) {
+		return sqlSession.insert("food_mapper.updateFoodPoint", foodList);
+	}
 	
 	@Override
 	public int foodViewCount(int bno) {
@@ -99,10 +99,10 @@ public class FoodDaoImpl implements FoodDao{
 		return sqlSession.insert("food_mapper.updateBoard", map);
 	}*/
 
-	@Override
+/*	@Override
 	public int foodUpdate(FoodList foodList) {
 		return sqlSession.insert("food_mapper.foodUpdate", foodList);
-	}
+	}*/
 
 
 

@@ -3,6 +3,8 @@ package com.kh.dc.community.food.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -56,7 +58,24 @@ public class FoodController {
 		
 		// 3. 페이지 계산 후 작성할 HTML 추가
 		String pageBar = Utils.getPageBar(totalContents, cPage, numberPage, "list.do");
-		
+/*		
+		// 이미지 태그 제거하는 정규식
+		Pattern pattern  =  Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
+		 
+		// 추출할 내용
+		String content = toString();
+		 
+		// 내용 중에서 이미지 태그를 찾아라!
+		Matcher match = pattern.matcher(content);
+		 
+		String imgTag = null;
+		 
+		if(match.find()){ // 이미지 태그를 찾았다면,,
+		    imgTag = match.group(0); // 글 내용 중에 첫번째 이미지 태그를 뽑아옴.
+		}
+		 
+		// 결과값은 name1.jpg
+		System.out.println("imgTag : " + imgTag);*/	
 		
 		model.addAttribute("flist", flist)
 		.addAttribute("totalContents", totalContents)
@@ -88,13 +107,15 @@ public class FoodController {
 	@RequestMapping("community/food/foodView.do")
 	public String selectOneFood(@RequestParam int bno, Model model) {
 		
-		System.out.println("bno:"+bno);
+		System.out.println("클린 된 bno:"+bno);
 		
 		// 조회수 증가
 		int foodViewCount = foodService.foodViewCount(bno);
 		
 		model.addAttribute("foodList", foodService.selectOneFood(bno))
 		.addAttribute("foodViewCount", foodViewCount);
+		
+		System.out.println("foodViewCount: "+foodViewCount);
 		
 		return "community/food/foodView";
 	}
@@ -111,8 +132,6 @@ public class FoodController {
 	public String foodUpdate(FoodList foodList) {
 		
 		foodService.foodUpdate(foodList);
-		System.out.println("upfoodList: "+foodList);
-		System.out.println("수정완료");
 		
 		return "redirect:/community/food/list.do";
 	}
