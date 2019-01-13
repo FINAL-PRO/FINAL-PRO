@@ -29,12 +29,12 @@ public class HouseDaoImpl implements HouseDao {
 
 	@Override
 	public int insertHouse(House hs) {
-		return sqlSession.insert("house_mapper.insertHouse", hs);
+		return sqlSession.insert("house_mapper.insertBoard", hs)*sqlSession.insert("house_mapper.insertHouse", hs);
 	}
 
 	@Override
 	public int updateHouse(House hs) {
-		return sqlSession.update("house_mapper.updateHouse", hs);
+		return sqlSession.update("house_mapper.updateBoard", hs)*sqlSession.update("house_mapper.updateHouse", hs);
 	}
 
 	@Override

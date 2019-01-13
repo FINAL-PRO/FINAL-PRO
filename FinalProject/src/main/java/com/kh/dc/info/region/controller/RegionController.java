@@ -32,30 +32,27 @@ public class RegionController {
 		return "info/region/list";
 	}
 	
-	
 	// insert
-	@RequestMapping(value="info/region/insertRegion.do", method=RequestMethod.POST)
+	@RequestMapping(value="info/region/insert.do", method=RequestMethod.POST)
 	public String insertRegion(Region rg) {
 		System.out.println("받아온 정보 : " + rg);
 		
 		int result = rs.insertRegion(rg);
 		System.out.println("insert 결과 : " + result);
 		
-		return "redirect:/";
+		return "redirect:/info/region/list.do";
 	}
 	
 	// insertView
 	// 회원 넘버 받아오는 거 아직 안 함
-	@RequestMapping("info/region/insertRegionView.do")
+	@RequestMapping("info/region/insert/view.do")
 	public String insertRegionView( ) {
 		
 		return "info/region/regionInsert";
 	}
 	
-
-	
 	// select one
-	@RequestMapping("info/region/rgSelectOne.do")
+	@RequestMapping("info/region/view.do")
 	public String selectRegion( Model model, Model lModel, @RequestParam int no) {
 		System.out.println("con : " + no);
 		Region region = rs.selectRegion(no);
@@ -80,7 +77,7 @@ public class RegionController {
 	
 	
 	// 수정창 이동
-	@RequestMapping("info/region/updateRegion.do")
+	@RequestMapping("info/region/update/view.do")
 	public String updateRegion(Model model, @RequestParam int no) {
 		
 		Region region = rs.selectRegion(no);
@@ -93,39 +90,23 @@ public class RegionController {
 	}
 	
 	// 수정완료
-	@RequestMapping("info/region/updateRegionEnd.do")
+	@RequestMapping("info/region/update.do")
 	public String updateRegionEnd(Region rg) {
 		rs.updateRegion(rg);
 		
 		System.out.println("수정con region :  " + rg );
 		
-		return "redirect:/";
+		return "redirect:/info/region/list.do";
 	}
 	
-	
 	// 삭제
-	@RequestMapping("info/region/deleteRegion.do")
+	@RequestMapping("info/region/delete.do")
 	public String deleteRegion(@RequestParam int no) {
 		rs.deleteRegionLike(no);
 		rs.deleteRegion(no);
 		
-		
-		return "info/region/list";
+		return "redirect:/info/region/list.do";
 	}
-	
-	
-	// 댓글 추가
-	@RequestMapping("info/region/regionReInsert.do")
-	public String reInsertRegion(@RequestParam(value="content")String content, @RequestParam(value="boardNo")int boardNo, Model model) {
-		System.out.println( "댓글 정보 : " + content + "     " + boardNo);
-		
-
-		
-		
-		
-		return "info/region/regionDetail";
-	}
-	
 	
 	// 좋아요 
 	// 추후 member No 에 @RequestParam 추가 현재는 임의로 1 넣었음
@@ -141,8 +122,6 @@ public class RegionController {
 		
 		return "info/region/regionDetail";
 	}
-	
-	
 	
 	@RequestMapping(value="info/region/getRegionListData.do",produces ="application/text; charset=utf8")
 	@ResponseBody
@@ -162,8 +141,6 @@ public class RegionController {
 		
 		return result;
 	}
-	
-	
 
 }
 

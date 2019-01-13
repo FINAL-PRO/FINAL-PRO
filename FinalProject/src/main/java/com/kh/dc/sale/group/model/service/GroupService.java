@@ -37,4 +37,6 @@ public interface GroupService {
 	int selectRemainCount(int groupNo);	
 
 	List<Board> getGroupListData();
+
+	List<Board> selectGroupList();
 }

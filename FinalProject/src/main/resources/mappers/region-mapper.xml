@@ -3,17 +3,26 @@
 <mapper namespace="region_mapper">
 
 	<select id="selectList" resultType="region">
-		SELECT * FROM DC_BOARD_TB WHERE TYPE='BOARD007' ORDER BY 1 DESC
+		SELECT 
+		B.*,
+		M.NAME userName
+		FROM 
+		DC_BOARD_TB B
+		JOIN DC_MEMBER_TB M ON B.MEMBERNO = M.NO
+		WHERE STATUS='BSTATUS001' 
+		AND TYPE='BOARD007' 
+		ORDER BY 1 DESC
 	</select>
 	
 	<select id="selectOne" parameterType="_int" resultType="region">
-		SELECT *
-		FROM DC_BOARD_TB 
-		WHERE NO = #{no}
+		SELECT B.*, M.NAME userName
+		FROM DC_BOARD_TB B
+		JOIN DC_MEMBER_TB M ON B.MEMBERNO = M.NO 
+		WHERE B.NO = #{no}
 	</select>
 	
 	<insert id="insertRegion" parameterType="region">
-		INSERT INTO DC_BOARD_TB VALUES(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 1, 'BOARD007','STATUS001', 1,NULL)
+		INSERT INTO DC_BOARD_TB VALUES(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 1, 'BOARD007','BSTATUS001', 1,NULL)
 	</insert>
 	
 	<update id="updateRegion" parameterType="region">
@@ -25,9 +34,9 @@
 	 DELETE FROM DC_LIKE_TB WHERE BOARDNO = #{no}
 	</delete>
 	
-	<delete id="deleteRegion" parameterType="_int">	
-		DELETE FROM DC_BOARD_TB WHERE NO = #{no}
-	</delete>
+	<update id="deleteRegion" parameterType="_int">	
+		UPDATE DC_BOARD_TB SET STATUS = 'BSTATUS002' WHERE NO = #{no}
+	</update>
 	
 	<insert id="regionLikeCount" parameterType="like">
 		INSERT INTO DC_LIKE_TB VALUES(SEQ_LIKE.NEXTVAL, SYSDATE, #{no}, 1)

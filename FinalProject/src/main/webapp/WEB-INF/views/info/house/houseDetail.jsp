@@ -54,22 +54,27 @@
 				<div class="dc-content">
 					<div class="dc-content-title">
 						<h1>${house.title}</h1>
-						${house.userName} / ${house.writeDate } / 조회수 : ${house.viewcount}
 					</div>
-					<div class="dc-content-box">${house.content}</div>
-					<div class="" style="">
-						<ul class=""
-							style="list-style-type: none; padding-left: 0px; display: block;">
-							<li class=""
-								style="display: block; float: left; padding-right: 15px;"><a
-								class=""
-								href="${pageContext.request.contextPath}/info/house/list.do"
-								title="목록">목록</a></li>
-							<li class=""
-								style="display: block; float: left; padding-right: 15px;"><a
-								class="" href="#" accesskey="t" title="상단이동">맨 위로</a></li>
-						<a href="${pageContext.request.contextPath}/info/house/updateHouse.do?no=${house.no}">수정하기</a>
-						</ul>
+					<div class="dc-content-box">
+						<table class="table">
+							<tr>
+								<td>작성자 : ${house.userName}</td>
+								<td>작성일 : ${house.writeDate }</td>
+								<td>조회수 : ${house.viewcount}</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									${house.content}			
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									[<a class="" href="${pageContext.request.contextPath}/info/house/list.do" title="목록">목록</a>]
+									[<a class="" href="#" accesskey="t" title="상단이동">맨 위로</a>]
+									[<a href="${pageContext.request.contextPath}/info/house/update/view.do?no=${house.boardNo}">수정하기</a>]
+								</td>
+							</tr>
+						</table>
 					</div>
 				</div>
 			</div>
@@ -81,22 +86,5 @@
 		</main>
 	</div>
 	<c:import url="../../common/footer.jsp" />
-
-	<script>
-			function selecthouse(no){
-				location.href="${pageContext.request.contextPath}/info/house/selectOne.do?no="+no;
-				}
-			
-			function reComInsert(){
-				$("#reComInsert").attr("action","${pageContext.request.contextPath}/info/house/reInserthouse.do");
-				$("#reComInsert").attr("method","post");
-				$("#reCominsert").submit();
-			}
-			
-
-		
-        </script>
-
-
 </body>
 </html>

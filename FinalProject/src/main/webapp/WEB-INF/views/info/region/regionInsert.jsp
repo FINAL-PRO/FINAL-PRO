@@ -33,25 +33,33 @@
 					</div>
 					<div class="dc-content-box">
 						<form id="insertFrm" method="post"
-							action="<c:if test="${region.no!=null}">${pageContext.request.contextPath}/info/region/updateRegionEnd.do</c:if>
-							 <c:if test="${region.no==null}">${pageContext.request.contextPath}/info/region/insertRegion.do</c:if>">
-
-
-							<input type="text" id="title" name="title"
-								style="width: 800px; height: 30px;"
-								value='<c:if test="${region.title != null }">${region.title }</c:if>'
-								required> <br> <br>
-							<textarea id="summernote" name="content" required>
-            <c:if test="${region.content != null }"> ${region.content}</c:if>
-            </textarea>
-
-							<c:if test="${region.no != null }">
-								<input type="hidden" name="no" value="${region.no}" required />
-							</c:if>
-
-							<button type="submit" onclick="insertRegion()">확인</button>
-							<button type="reset">취소</button>
-
+							action="<c:if test="${region.no!=null}">${pageContext.request.contextPath}/info/region/update.do</c:if>
+							 <c:if test="${region.no==null}">${pageContext.request.contextPath}/info/region/insert.do</c:if>">
+							<table class="table">
+								<tr>
+									<td>제목</td>
+									<td>
+										<input type="text" id="title" name="title" value='<c:if test="${region.title != null }">${region.title }</c:if>' required>
+									</td>
+								</tr>		
+								<tr>
+									<td colspan="2">
+										<textarea id="summernote" name="content" required>
+			            					<c:if test="${region.content != null }"> ${region.content}</c:if>
+			            				</textarea>	
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<c:if test="${region.no != null }">
+											<input type="hidden" name="no" value="${region.no}" required />
+										</c:if>
+			
+										<button type="submit" onclick="insertRegion()">확인</button>
+										<button type="reset">취소</button>									
+									</td>
+								</tr>				
+							</table>
 						</form>
 
 					</div>

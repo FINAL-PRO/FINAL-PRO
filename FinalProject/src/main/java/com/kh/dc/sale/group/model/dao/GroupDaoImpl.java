@@ -126,5 +126,10 @@ public class GroupDaoImpl implements GroupDao {
 		return sqlSession.selectList("group_mapper.getGroupListData");
 	}
 
+	@Override
+	public List<Board> selectGroupList() {
+		return sqlSession.selectList("group_mapper.selectSumGroupList");
+	}
+
 	
 }
