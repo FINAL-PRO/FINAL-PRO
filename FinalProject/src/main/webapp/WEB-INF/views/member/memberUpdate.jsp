@@ -15,7 +15,6 @@
 		div#enroll-container input, div#enroll-container select {margin-bottom:10px;}
 		div#enroll-container .col-md-3{text-align: right; padding-right:10px;}
 		
-		.dc-content-box{padding: 40px;}
 		.btn-container>.btn{width:100%}
 		.row label{width: 100%; text-align:left; font-size: 8px;}
 		
@@ -55,13 +54,13 @@
 					  	<div class="col-md-6" align="center">
 						  	<c:if test="${!empty member.profile}">
 						  		<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/${member.profile}"/>	
-						  		<br>
-						  		<input type="button" class="btn btn-sm btn-outline-success" id="deleteProfileImg" value="프로필 사진 삭제">				    				
+						  		<br>				    				
 						  	</c:if>
 						  	<c:if test="${empty member.profile}">
 						  		<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/profileDefaultImg.png"/>
 						  		<br/>						  		
-						  	</c:if>					  	
+						  	</c:if>
+						  	<input type="button" class="btn btn-sm btn-outline-success" id="deleteProfileImg" value="프로필 사진 삭제">				  	
 					  		<input type="file" name="file" id="file" onchange="inputProfile(this);" multiple/>
 						</div>
 					  	<div class="col-md-3">
@@ -228,38 +227,9 @@
 	<script>
 			$(function(){
 				
-				/* 이메일 중복검사 이벤트 추가 */
-				$("#email").on("keyup", function(){
-					
-					 var email = $(this).val().trim();
-					 var regEmail = /^[a-zA-Z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
-					 
-					 if(email == ""){
-						 $(".guide1").text('이메일을 입력하세요.');
-				     } else if(email != null){
-				    	 $.ajax({
-					            url  : "${pageContext.request.contextPath}/member/checkEmailDuplicate.do",
-					            data : {email:email},
-					            dataType: "json",
-					            success : function(data){
-					                console.log(data);
-					                if(data==1){ 
-					                	$(".guide1").text('이미 가입된 이메일입니다.');
-					                } else if(!(regEmail.test(email))) {
-					                	$(".guide1").text('이메일 형식에 맞지 않습니다.');
-					                } else if(data==0 && regEmail.test(email)){
-					                	$(".guide1").text('');				                	
-					                }
-					            }, error : function(jqxhr, textStatus, errorThrown){
-					                console.log("ajax 처리 실패");
-					                //에러로그
-					                console.log(jqxhr);
-					                console.log(textStatus);
-					                console.log(errorThrown);
-					            }
-				        	});			    	 
-				     }
-				});
+				var pwdChk = false;
+				var nickNameChk = true;
+								
 				
 				/* 닉네임 중복검사 이벤트 추가 */
 				$("#nickName").on("keyup", function(){
@@ -270,11 +240,10 @@
 			        	
 			        } else if(nickName != null && nickName.length<2) {
 			        	$(".guide").text("2자 이상 입력해주세요.");
-			        	return;
-			        	
+			        	nickNameChk = false;
 			        } else if (nickName.length>10){
 			        	$(".guide").text("10자 미만으로 입력해주세요.");
-			        	return;			        	
+			        	nickNameChk = false;		        	
 			        } else {     	
 				        $.ajax({
 				            url  : "${pageContext.request.contextPath}/member/checkNickNameDuplicate.do",
@@ -283,9 +252,10 @@
 				            success : function(data){
 				                console.log(data);
 				                if(data==1){
-							        $(".guide").text("이미 사용중인 닉네임입니다.");			                    
+							        $(".guide").text("이미 사용중인 닉네임입니다.");
+							        nickNameChk = false;
 				                } else {
-							        $(".guide").text("사용할 수 있는 닉네임입니다.");
+							        $(".guide").text("");s
 				                }
 				            }, error : function(jqxhr, textStatus, errorThrown){
 				                console.log("ajax 처리 실패");
@@ -299,38 +269,41 @@
 				});
 
 			
-			$("#password_").on("keyup", function checkedPassword() {
-				var pwd = $("#password_").val().trim();
-				var pwd2 = $("#password2").val().trim();
-				
+			$("#password_").on("keyup", function() {
+
 				var regPwd = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,12}$/;
-				
-				if(pwd==""){
+				var pwd1 = $("#password_").val();
+				var pwd2 = $("#password2").val();
+
+				if (pwd1 == "") {
 					$("#pwdChkComment").text('비밀번호을 입력하세요.');
+				} else if (!regPwd.test(pwd1)) {
+					$("#pwdChkComment").text('영대문자/특수문자/숫자 최소 1개 포함 6자 이상 12자 이하!');
 					$("#submitButton").attr('disabled', true);
-				}else if(!regPwd.test(pwd)){
-					
-					$("#pwdChkComment").text('영대문자/특수문자/숫자 최소 1개 포함 6자 이상!');
+				} else if (pwd1 != pwd2) {
+					$("#pwdChkComment").text('아래의 비밀번호와 다릅니다.');
 					$("#submitButton").attr('disabled', true);
-					
 				} else {
 					$("#pwdChkComment").text('');
-					$("#submitButton").attr('disabled', false);
-				} 
+					$("#submitButton").attr('disabled', false);					
+				}
 			});
-			
-			
-			$("#password2").on("keyup", function(){
-				var pwd=$("#password_").val(), pwd2=$("#password2").val();
-				if(pwd != pwd2){
+
+			$("#password2").on("keyup", function() {
+				var pwd1 = $("#password_").val();
+				var pwd2 = $("#password2").val();
+				
+				if (pwd1 != pwd2) {
 					$("#pwdChkComment2").text('위의 비밀번호와 다릅니다.');
 					$("#submitButton").attr('disabled', true);
-				} else if(pwd!=null && pwd2!= null && pwd == pwd2){
+				} else if (pwd1 != null && pwd2 != null && pwd1 == pwd2) {
+					$("#pwdChkComment").text('');
 					$("#pwdChkComment2").text('');
 					$("#submitButton").attr('disabled', false);
+					pwdChk = true;
 				}
-			
-			});	
+
+			});
 			
 			$("#deleteBtn").on("click", function(){
 				var no = "${member.no}";
@@ -377,22 +350,26 @@
 				this.value = this.value.replace(/[^0-9\.]/g,'');				
 			});
 			
-		});
-			
-		$("#submitButton").on("click", function() {
+			$("#submitButton").on("click", function() {
 				
-				var pwd = $("#password_").val().trim();
-				var pwd2 = $("#password2").val().trim();
-				var regPwd = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,12}$/;
-				
-				if(regPwd.test(pwd) && pwd==pwd2){
+				if(nickNameChk == true && pwdChk == true){
 					$("#memberUpdate").submit();
-				} else{
-					alert("패스워드가 올바르지 않습니다. 다시 확인해주세요.");
+				} else if(nickNameChk == false){
+					alert("닉네임을 다시 입력해주세요.");
+					return;
+				} else if(pwdChk == false){
+					alert("비밀번호를 다시 입력해주세요.");
 					return;
 				}
 			
+			});		
+			
+			
+			
+			
 		});
+			
+			
 			
 		// 프로필 이미지 클릭시 파일 태그 클릭 효과
 		$('#profileImg').click(() => { $('#file').click(); });
@@ -404,16 +381,21 @@
 					
 				reader.onload = function (e) {
 					$("#profileImg").attr("src", e.target.result);
-					$(".profileLabel").hide();					
+					$(".profileLabel").hide();
+					console.log($("#file").val());
 				}	
 				
 				reader.readAsDataURL(value.files[0]);				
 			}
 		}
 		
-		$("#deleteProfileImg").on("click", function() {
-				$("#profileImg").attr("src", "${pageContext.request.contextPath}/resources/upload/profile/profileDefaultImg.png");				
-		});
+		$('#deleteProfileImg').on('click', function(e){
+			   var $el = $('#file');
+			   $("#profileImg").attr("src", "${pageContext.request.contextPath}/resources/upload/profile/profileDefaultImg.png");	
+			   
+			   $el.wrap('<form>').closest('form').get(0).reset();
+			   $el.unwrap();
+			});
 
 		</script>
 </body>
