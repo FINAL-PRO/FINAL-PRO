@@ -147,7 +147,7 @@
 	            	// 동네 이름 넣기
 	            	$('.townName').append(' : ' +$(this).find('category').text());
 	            	
-	            	value1 += '<div class="block" style="width:50px;">';						
+	            	value1 += '<div class="block" style="width:40px;">';						
 	            	value1 += '날짜<br>시간<br>'
 	            	value1 += '<div style="height:55px;">날씨</div><br>';						
 	            	value1 += '<span style="font-size: 8px;">최저온도</span><br>';
@@ -191,11 +191,11 @@
 	            		}
 	            		
 	             		
-	            		value2 += '<div class="block" style="width: 48px; text-align: center;">';
+	            		value2 += '<div class="block" style="width: 40px; text-align: center;">';
 	            		value2 += day + '<br>';
 	            		value2 += $(this).find('hour').text() + '시<br>';
 	            		value2 += sky + '<br>';	            		
-	            		value2 += '<div style="width: 48px; height: 30px;">' + $(this).find('wfKor').text() + '</div><br>';
+	            		value2 += '<div style="width: 40px; height: 30px;">' + $(this).find('wfKor').text() + '</div><br>';
 	            		value2 += mintemp + '<br>';            		
 	            		value2 += maxtemp  + '</label></div>';
 	     	            
@@ -266,8 +266,8 @@
 			           		
 			           		if($(this).find('tmEf').text().substring(10) == today.substring(10)){
 	       				
-			           			value2 += '<div class="block"><label style="width:110px; text-align:center;">';
-			           			value2 += $(this).find("tmEf").text().substring(0,10) + '<br>'; 
+			           			value2 += '<div class="block"><label style="width:85px; text-align:center;">';
+			           			value2 += $(this).find("tmEf").text().substring(5,10) + '<br>'; 
 			           			value2 += sky + '<br>';	 
 			           			value2 += $(this).find("wf").text().substring(0,10) + '<br>'; 
 			           			value2 += $(this).find('tmn').text() + '<br>'; 

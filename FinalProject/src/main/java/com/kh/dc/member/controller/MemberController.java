@@ -45,7 +45,6 @@ public class MemberController {
 	public String memberEnroll(Model model) {
 		List<Location> locationList = memberService.selectLocationList();
 		
-		System.out.println("로케이션 리스트 : " + locationList);
 		model.addAttribute("locationList", locationList);
 		
 		return "member/memberEnroll";
@@ -84,12 +83,10 @@ public class MemberController {
 		// 1. 파일을 저장할 경로 생성
 		String saveDir = session.getServletContext().getRealPath("/resources/upload/profile");
 		
-		//List<Attachment> attachList = new ArrayList<Attachment>();
-		
 		// 2. 폴더 유무 확인 후 생성
 		File dir = new File(saveDir);
 		
-		System.out.println("폴더가 있나요? " + dir.exists());
+		//System.out.println("폴더가 있나요? " + dir.exists());
 		
 		if(dir.exists() == false) dir.mkdirs();
 		
@@ -113,10 +110,9 @@ public class MemberController {
 				e.printStackTrace();
 			}
 			
-			member.setProfile(renamedName);
-			
-			System.out.println("프사 서버 저장 완료?" + member.getProfile());
-		}
+			member.setProfile(renamedName);			
+			//System.out.println("프사 서버 저장 완료?" + member.getProfile());
+		} else member.setProfile(null);
 		
 		// 비밀번호 암호화 //
 		String rawPassword = member.getPassword();	// 원래 비밀번호
@@ -313,9 +309,6 @@ public class MemberController {
 		List<Location> locationList = memberService.selectLocationList();
 		List<Code> bankList = memberService.selectBankList();
 		
-		System.out.println("로케이션 리스트 : " + locationList);
-		System.out.println("은행 리스트 : " + bankList);
-		
 		model.addAttribute("locationList", locationList);
 		model.addAttribute("bankList", bankList);
 		
@@ -329,9 +322,6 @@ public class MemberController {
 		List<Location> locationList = memberService.selectLocationList();
 		List<Code> bankList = memberService.selectBankList();
 		
-		System.out.println("로케이션 리스트 : " + locationList);
-		System.out.println("은행 리스트 : " + bankList);
-		
 		model.addAttribute("locationList", locationList);
 		model.addAttribute("bankList", bankList);
 		
@@ -344,16 +334,15 @@ public class MemberController {
 				Model model, @RequestParam(value="file", required = false) MultipartFile mf) {
 		
 		System.out.println("member : " + member);
+		System.out.println("mf : " + mf.getOriginalFilename());
 		
 		// 1. 파일을 저장할 경로 생성
 		String saveDir = session.getServletContext().getRealPath("/resources/upload/profile");
 		
-		//List<Attachment> attachList = new ArrayList<Attachment>();
-		
 		// 2. 폴더 유무 확인 후 생성
 		File dir = new File(saveDir);
 		
-		System.out.println("폴더가 있나요? " + dir.exists());
+		//System.out.println("폴더가 있나요? " + dir.exists());
 		
 		if(dir.exists() == false) dir.mkdirs();
 		
@@ -378,7 +367,8 @@ public class MemberController {
 			}
 			
 			member.setProfile(renamedName);
-		}
+			
+		} else member.setProfile(null);
 		
 		
 		String rawPassword = member.getPassword();

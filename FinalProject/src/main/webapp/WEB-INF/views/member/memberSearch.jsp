@@ -18,13 +18,26 @@ section {
 	float: left;
 	height: auto;
 	width: 300px;
-	margin: 120px 10px 120px 10px;
-	margin-left: 50px;
+	/* margin: 50px 10px 50px 10px; */
+	/* margin-left: 50px; */
 }
 
 form>input {
 	width: 100%;
 	margin-bottom: 5px;
+}
+
+.emailArea{
+	margin-right: 20px;
+}
+
+.nickNameArea{
+	margin-top: 20px;
+	margin-right: 20px;
+}
+
+.passwordArea {
+	margin-left: 20px;
 }
 
 .idArea {
@@ -49,13 +62,13 @@ form>input {
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-						<h1>제목</h1>
+
 					</div>
 					<div class="dc-content-box" >
 						<div class="center" style="display: inline-block; margin-left:12%;">
-							<div class="block">
-								<div class="emailArea">
-									<label>이메일 찾기</label>
+							<div class="block" style="border-right: 1px solid lightgray">
+								<div class="emailArea" align="center">
+									<label >이메일 찾기</label>
 									<form>
 										<input type="text" class="form-control"
 											id="nickname_emailArea" name="nickName"
@@ -66,10 +79,9 @@ form>input {
 											onclick="searchEmail();" value="Go!">
 									</form>
 								</div>
+								
 
-								<hr />
-
-								<div class="nickNameArea">
+								<div class="nickNameArea" align="center">
 									<label>닉네임 찾기</label>
 									<form>
 										<input type="email" class="form-control"
@@ -81,7 +93,7 @@ form>input {
 								</div>
 							</div>
 
-							<div class="block">
+							<div class="block passwordArea"  align="center">
 								<label>비밀번호 찾기</label>
 								<form action="sendPwd.do" method="post" id="sendPwd">
 									<input type="email" class="form-control" id="email_pwdArea"

@@ -10,12 +10,11 @@
 <title>동커 회원가입</title>
 <c:import url="../common/header.jsp" />
 <style>
-		section {background-color: white;}
+
 		div#enroll-container{width:600px; margin:0 auto; text-align:center;}
 		div#enroll-container input, div#enroll-container select {margin-bottom:10px;}
 		div#enroll-container .col-md-3{text-align: right; padding-right:10px;}
 		
-		.dc-content-box{padding: 40px;}
 		.btn-container>.btn{width:100%}
 		.row label{width: 100%; text-align:left; font-size: 8px;}
 		
@@ -171,6 +170,7 @@
 			var emailChk = false;
 			var pwdChk = false;
 			var nickNameChk = false;
+			
 
 			/* 이메일 중복검사 이벤트 추가 */
 			$("#email").on("keyup",function() {
@@ -253,15 +253,19 @@
 				}
 			});
 
-			$("#password_").on("keyup", function checkedPassword() {
-				var pwd = $("#password_").val().trim();
+			$("#password_").on("keyup", function() {
 
 				var regPwd = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,12}$/;
+				var pwd1 = $("#password_").val();
+				var pwd2 = $("#password2").val();
 
-				if (pwd == "") {
+				if (pwd1 == "") {
 					$("#pwdChkComment").text('비밀번호을 입력하세요.');
-				} else if (!regPwd.test(pwd)) {
+				} else if (!regPwd.test(pwd1)) {
 					$("#pwdChkComment").text('영대문자/특수문자/숫자 최소 1개 포함 6자 이상 12자 이하!');
+					$("#submitButton").attr('disabled', true);
+				} else if (pwd1 != pwd2) {
+					$("#pwdChkComment").text('아래의 비밀번호와 다릅니다.');
 					$("#submitButton").attr('disabled', true);
 				} else {
 					$("#pwdChkComment").text('');
@@ -270,11 +274,14 @@
 			});
 
 			$("#password2").on("keyup", function() {
-				var pwd = $("#password_").val(), pwd2 = $("#password2").val();
-				if (pwd != pwd2) {
+				var pwd1 = $("#password_").val();
+				var pwd2 = $("#password2").val();
+				
+				if (pwd1 != pwd2) {
 					$("#pwdChkComment2").text('위의 비밀번호와 다릅니다.');
 					$("#submitButton").attr('disabled', true);
-				} else if (pwd != null && pwd2 != null && pwd == pwd2) {
+				} else if (pwd1 != null && pwd2 != null && pwd1 == pwd2) {
+					$("#pwdChkComment").text('');
 					$("#pwdChkComment2").text('');
 					$("#submitButton").attr('disabled', false);
 					pwdChk = true;
