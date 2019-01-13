@@ -23,11 +23,11 @@ public interface FoodDao {
 
 	int foodDelete(int bno);
 
-	/*int boardUpdate(Board board);
+	int boardUpdate(FoodList foodList);
 	
-	int foodUpdate(Food food);
+	int foodUpdate(FoodList foodList);
 	
-	int foodPointUpdate(FoodPoint foodPoint);*/
+	int foodPointUpdate(FoodList foodList);
 	
 	int foodViewCount(int bno);
 
@@ -41,6 +41,6 @@ public interface FoodDao {
 
 	// int boardUpdate(Map<String, Object> map);
 
-	int foodUpdate(FoodList foodList);
+	//int foodUpdate(FoodList foodList);
 	
 }

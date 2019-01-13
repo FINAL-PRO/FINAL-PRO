@@ -34,10 +34,10 @@ public class FoodServiceImpl implements FoodService{
 		return foodDao.insertBoard(board) * foodDao.insertFood(food) * foodDao.insertFoodPoint(foodPoint) ;
 	}
 	
-/*	@Override
-	public int foodUpdate(Board board, Food food, FoodPoint foodPoint) {
-		return foodDao.boardUpdate(board) * foodDao.foodUpdate(food) * foodDao.foodPointUpdate(foodPoint);
-	}*/
+	@Override
+	public int foodUpdate(FoodList foodList) {
+		return foodDao.boardUpdate(foodList) * foodDao.foodUpdate(foodList) * foodDao.foodPointUpdate(foodList);
+	}
 
 	@Override
 	public int foodDelete(int bno) {
@@ -75,10 +75,10 @@ public class FoodServiceImpl implements FoodService{
 		return foodDao.boardUpdate(map);
 	}*/
 
-	@Override
+/*	@Override
 	public int foodUpdate(FoodList foodList) {
 		return foodDao.foodUpdate(foodList);
-	}
+	}*/
 
 	
 }

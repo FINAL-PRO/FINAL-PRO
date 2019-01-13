@@ -71,6 +71,12 @@
 	color: rgb(85, 85, 85);
 }
 
+.categoryName{
+	display: inline;
+	padding-left: 20px;
+	font-size: 0.8rem;
+	color: rgb(85, 85, 85);
+}
 .time {
 	display: inline;
 	padding-left: 20px;
@@ -177,12 +183,17 @@
 											<li class="groupin" id="${b.no}">
 											<div class="article" onclick="location.href='${pageContext.request.contextPath}/community/food/foodView.do?bno=${b.no}';">
 											
+									          	<div class="imgtag" style="display:none;">
+									          		${b.content}
+									          	</div>
 												<div class="thumb_review">
-									            	<img class="center" src="${b.thumbnail}">
+									            	<img id="center" class="center" src="${b.thumbnail}">
+									            
 									          	</div>
 												<div class="board_review">
 										            <span class="title"> <h3>${b.title}</h3></span>
 										            <p class="nickname">${b.memberName}</p>
+										           	<p class="categoryName">카테고리: ${b.category}</p>
 													<p class="time">
 														<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd" />
 													</p>
@@ -203,11 +214,24 @@
 										            <div class="count">댓글: ${b.commentCount}</div>&nbsp;&nbsp;
 										            <div class="count">좋아요: ${b.likeCount}</div>
 												</div>
+												
 										
 											</div><br /></li>
 										</c:forEach>
-										
 										</ol>
+										<script>
+											/* 	$(document).ready(function(){
+													
+													var imgtag = $('.imgtag').html();
+													
+													var img = $('.imgtag').find('img').attr('src');
+													console.log("img: "+img);
+													
+													//$('#center').attr('src', img);
+													
+																							
+												}); */
+										</script>
 									<c:out value="${pageBar}" escapeXml="false" />
 								</div>
 							</div>

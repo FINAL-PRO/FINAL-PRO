@@ -46,6 +46,9 @@ public class SummerNoteController {
 			e.printStackTrace();
 		}
 		
+		System.out.println("uploadPath: "+uploadPath);
+		System.out.println("renamedName: "+renamedName);
+		
 		return uploadPath + "/" + renamedName;
 	}
 
