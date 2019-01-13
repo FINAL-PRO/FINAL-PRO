@@ -20,7 +20,7 @@
 			<div class="header_logo" style="display:inline-block;">				
 					<div>
 					<a class="navbar-brand" href="/dc">
-						<h2>DONGKER IMG</h2> <%-- <img src="${pageContext.request.contextPath }/resources/images/test-img.png" alt="로고" width="50px" /> --%>
+						<img src="${pageContext.request.contextPath }/resources/images/logo.png" alt="로고" width="300px"/>
 					</a> 
 					</div>
 			</div>

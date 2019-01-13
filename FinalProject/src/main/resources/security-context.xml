@@ -19,6 +19,10 @@
 	<security:http security="none" pattern="/member/memberUpdate.do" />
 	
 	<security:http security="none" pattern="/community/free/freeInsertFormEnd.do" />
+	<security:http security="none" pattern="/info/region/insert.do" />
+	<security:http security="none" pattern="/info/house/insert.do" />
+	<security:http security="none" pattern="/info/house/update.do" />
+	<security:http security="none" pattern="/info/region/update.do" />
 	
 	<!-- <security:http security="none" pattern="/member/memberSearch.do" /> -->
 	<!-- <security:http security="none" pattern="/member/chkEmail.do" /> -->
