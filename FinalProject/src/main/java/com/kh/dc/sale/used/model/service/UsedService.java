@@ -15,19 +15,13 @@ public interface UsedService {
 	
 	int insertUsed(Used used);
 	
-	int insertBoard(Used used);
-	
 	int updateUsed(Used used);
-	
-	int updateBoard(Used used);
 	
 	int deleteUsed(int boardNo);
 	
-	int updateViewCount(int boardNo);
-	
 	List<Map<String, String>> selectUsedHistory(int boardNo);
 	
-	Map<String, String> selectOneUsedHistory(Map<String, String> uh);
+	Map<String, String> selectOneUsedHistory(int usedNo);
 
 	int insertUsedHistory(Map<String, String> uh);
 	

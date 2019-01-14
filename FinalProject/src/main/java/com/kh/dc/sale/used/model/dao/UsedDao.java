@@ -27,7 +27,7 @@ public interface UsedDao {
 	
 	List<Map<String, String>> selectUsedHistory(int boardNo);
 	
-	Map<String, String> selectOneUsedHistory(Map<String, String> uh);
+	Map<String, String> selectOneUsedHistory(int usedNo);
 
 	int insertUsedHistory(Map<String, String> uh);
 	

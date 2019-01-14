@@ -3,6 +3,7 @@ package com.kh.dc.sale.used.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,56 +18,57 @@ public class UsedDaoImpl implements UsedDao {
 
 	@Override
 	public List<Map<String, String>> selectUsedList(int cPage, int numPerPage) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("used_mapper.selectUsedList", null, rowBounds);
 	}
 
 	@Override
 	public int selectUsedTotalContents() {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return sqlSession.selectOne("used_mapper.selectUsedTotalContents");
 	}
 
 	@Override
 	public Used selectOneUsed(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return sqlSession.selectOne("used_mapper.selectOneUsed", boardNo);
 	}
 
 	@Override
 	public int insertUsed(Used used) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return sqlSession.insert("used_mapper.insertUsed", used);
 	}
 
 	@Override
 	public int insertBoard(Used used) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return sqlSession.insert("used_mapper.insertBoard", used);
 	}
 
 	@Override
 	public int updateUsed(Used used) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return sqlSession.update("used_mapper.updateUsed", used);
 	}
 
 	@Override
 	public int updateBoard(Used used) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return sqlSession.update("used_mapper.updateBoard", used);
 	}
 
 	@Override
 	public int deleteUsed(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return sqlSession.update("used_mapper.deleteUsed", boardNo);
 	}
 
 	@Override
 	public int updateViewCount(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return sqlSession.update("used_mapper.updateViewCount", boardNo);
 	}
 
 	@Override
@@ -76,15 +78,15 @@ public class UsedDaoImpl implements UsedDao {
 	}
 
 	@Override
-	public Map<String, String> selectOneUsedHistory(Map<String, String> uh) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, String> selectOneUsedHistory(int usedNo) {
+
+		return sqlSession.selectOne("used_mapper.selectOneUsedHistory", usedNo);
 	}
 
 	@Override
 	public int insertUsedHistory(Map<String, String> uh) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return sqlSession.insert("used_mapper.insertUsedHistory", uh);
 	}
 
 	@Override
@@ -102,7 +104,7 @@ public class UsedDaoImpl implements UsedDao {
 	@Override
 	public int updateStatus(Map<String, String> status) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("used_mapper.updateUsedStatus", status);
 	}
 	
 
