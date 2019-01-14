@@ -23,7 +23,7 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<c:import url="../mypage/myPageMenu.jsp"/>
+							<c:import url="../mypage/myPageMenubar.jsp"/>
 						</div>
 						<div class="dc-content-box">
 							<div id="enroll-container">

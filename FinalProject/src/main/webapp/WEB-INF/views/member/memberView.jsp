@@ -150,7 +150,7 @@
 	
 	<script>
 	$("#memberUpdateView").on("click", function(){
-		location.href= "${pageContext.request.contextPath}/member/memberUpdateView.do";
+		location.href= "${pageContext.request.contextPath}/member/memberUpdateView.do?no=${member.no}";
 	});
 	
 	</script>
