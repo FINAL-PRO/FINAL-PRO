@@ -10,94 +10,9 @@
 	<meta charset="UTF-8">
 	<title>구인구직 게시판 목록</title>
 	
-	<style>
-	
-		.job-board {
-			border-collapse: collapse;
-			text-align: left;
-			line-height: 1.5;
-			
-			margin: 20px 10px;
-		}
-	    .columName  {
-	    
-			margin: 2px;
-	    	display: table-row;
-	    	background: skyblue;
-	    	font-weight: bold;
-	    	font-size: 15px;
-	    	width: 200px;
-	    	height: 30px;
-			vertical-align: bottom;
-			color: #fff;
-	      }
-	    .colum {
-		    height: 30px;
-	    	display: table-row;
-	    	width: 10%;
-		    padding: 10px;
-		    vertical-align: top;
-	    }  
-	 
-	    .cell {
-		    display: table-cell;
-		    
-		    width: auto;
-		}
-		.colum:hover{
-			background: lightgray;
-		}
-		.jbEnd{
-			color: gray;
-		}
-		.cArray{
-			
-		}
-		select.cArray, select.cArray-color {
-		   -webkit-appearance: button;
-		   -webkit-border-radius: 2px;
-		   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-		   -webkit-padding-end: 20px;
-		   -webkit-padding-start: 2px;
-		   -webkit-user-select: none;
-		   font-weight: bold;
-		   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
-		   background-position: 97% center;
-		   background-repeat: no-repeat;
-		   border: 1px solid #AAA;
-		   color: #555;
-		   font-size: inherit;
-		   margin: 5px;
-		   overflow: hidden;
-		   padding: 5px 10px;
-		   text-overflow: ellipsis;
-		   white-space: nowrap;
-		   width: 100px;
-		}
-		
-			select.cArray-color {
-		   color: #fff;
-		   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#779126, #779126 40%, #779126);
-		   background-color: #779126;
-		   -webkit-border-radius: 20px;
-		   -moz-border-radius: 20px;
-		   border-radius: 20px;
-		   padding-left: 15px;
-		}
-		#title {width:;}
-		#writeDate{
-			width:;
-		}
-		#nickName, #salInfo, #endJobDday{
-			width:; 
-		}
-		#viewCount, #hide-work {
-			width:; 
-		}
-		
-    </style>
 
 	<c:import url="../../common/header.jsp"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/jobBoard/jobBoardListCss.css" />
 </head>
 <body>
 	<c:import url="../../common/menubar.jsp"/>
@@ -148,7 +63,7 @@
 							<option value="s-TitNick">제목 + 작성자</option>
 						</select>
 						<input type="text" /><button>검색</button>
-						</div>
+					</div>
 						<div class="job-board table">
 							<div class="columName">
 								<div id="no" class="cell">번호</div>
@@ -166,13 +81,14 @@
 								<div class="cell" style="width:50px">${jb.no}</div>
 								<div class="cell">
 									<a href="${pageContext.request.contextPath}/job/jobBoard/jobBoardDetail.do?no=${jb.no}">${jb.title}</a></div>
-								<div class="cell"><a href="${pageContext.request.contextPath}/job/jobBoard/jobBoardListOne.do?memberNo=${jb.memberNo}">${jb.nickName}</a></div>
+								<div class="cell"><a href="" onclick="sendMsg();">${jb.nickName}</a></div>
 								<div class="cell">${jb.writeDate}</div>
 								<div class="cell">${jb.salary} / ${jb.salType}</div>
 								<div class="cell">${jb.dday}일 남음</div>
 								<div class="cell">${jb.viewCount}</div>
 								<div class="cell">${jb.type}</div>		
 							</div>
+							
 							</c:if>
 							<!-- 마감된것들 -->
 							<c:if test="${0 > jb.dday}">
@@ -194,15 +110,16 @@
 
 						<c:out value="${pageBar}" escapeXml="false"/>
 					</div>
-					</div>
 				</div>
 			</div>		
 			<div class="section-right">
 				<c:import url="../../common/rightSection.jsp"/>
 			</div>	
-		<c:import url="../../common/footer.jsp"/>
 		
-		</main>
+		</section>	
+		<c:import url="../../common/footer.jsp"/>
+	</main>
+	</div>
 		<script>
 		function jobBoardInsert(){
 			location.href = "${pageContext.request.contextPath}/job/jobBoard/jobBoardInsertForm.do?no=${member.no}";
@@ -235,6 +152,9 @@
 					+ "&jobType=" + $("#jobType").val()
 					+ "&salType=" + $("#salType").val();
 		});
+		function sendMsg() {
+			window.open("${pageContext.request.contextPath}/message/messageInsertForm.do?fromMember=${jobBoard.nickName}", "msgPop", "width=700, height=600");
+		}		
 	</script>
 </body>
 </html>

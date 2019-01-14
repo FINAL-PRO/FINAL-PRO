@@ -1,28 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>구인구직 게시판 작성페이지</title>
 	<c:import url="../../common/header.jsp"/>
-	<style>
-		.insTitle{
-			width:600px;
-			
-		}
-		.insLabel{
-			font-weight:bold;
-			margin: 10px;
-			width: 120px;
-		}
-		.jb-margin{
-		margin: 10px;
-		}
-	</style>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jobBoard/jobBoardInsCss.css" />
 </head>
 <body>
 	<c:import url="../../common/menubar.jsp"/>	
@@ -33,7 +20,7 @@
 					<!-- 내용없음 -->
 			</div>
 			
-			<div class="section-center">
+		<div class="section-center">
 			<div class="dc-content">
 				<div class="dc-content-title">
 				<h1>구인구직 게시판 작성페이지</h1>
@@ -62,7 +49,7 @@
 				<label class="insLabel">근무기간&nbsp;</label>
 				<input type="date" name="startJob"/> ~
 				<input type="date" name="endJob"/> <br />
-				<!-- int 00 int 00 -> string 00:00 -->
+				
 				 
 				<label class="insLabel">근무시간&nbsp;</label>
 				<input type="time" name="startTime" id="startTime"> ~
@@ -73,13 +60,6 @@
 				<input type="hidden" class="" id="companyNo" name="companyNo"/>
 				<input type="text" class="" placeholder="상호명" id="companyName" onclick="selectCompany();" readonly required/>
 				<input type="text" class="" placeholder="근무장소" name="location" id="location"/>
-				
-				<script type="text/javascript">
-					function selectCompany() {
-						window.name = "jobBoardInsertForm";	
-						var childWindow = window.open("jobBoardComPop.do", "comPop", "width=500, height=400");
-					}
-				</script>
 				<br/>
 				
 				<label class="insLabel">고용형태&nbsp;</label>
@@ -117,7 +97,10 @@
 	</div>
 	
 <script>
-	
+	function selectCompany() {
+		window.name = "jobBoardInsertForm";	
+		var childWindow = window.open("jobBoardComPop.do", "comPop", "width=500, height=400");
+	}
 	$('#summernote').summernote({
 		height : 500,
 		minHeight : 500,

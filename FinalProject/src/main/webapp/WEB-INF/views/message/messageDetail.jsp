@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>쪽지 상세페이지 입니다.</title>
 <c:import url="../common/header.jsp"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/msg/msgDetailCss.css" />
 </head>
 <body>
 	<h1>쪽지 상세페이지 입니다.</h1>

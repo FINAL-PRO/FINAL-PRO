@@ -10,46 +10,12 @@
 	<meta charset="UTF-8">	
 	<title>게시글 상세페이지</title>
 	<c:import url="../../common/header.jsp"/>
-	<style>
-	.dc-content-title{
-		background:white;
-		font-weight:bold;
-		font-size:x-large;
-	}
-	.dc-content-detail{
-		margin: 20px;
-	}
-	.jb-content{
-		border:solid 1px;
-		width: 760px;
-		height: 500px;
-		border-style:dotted
-	}
-	.jb-nickDate{
-		font-weight:bold;
-	}
-	.collapse{
-		font-weight: normal;
-		
-	}
-	.float{
-		width: 760px;
-		height: 180px;
-	}
-	.inlie-t{
-		font-weight:bold;
-		margin: 10px;
-		width: 140px;
-	}
-	.inline{
-		display:inline-block;
-		width: 200px;
-	}
-	</style>
+
 </head>
 	
 <body class="boay_style">
 	<c:import url="../../common/menubar.jsp"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/jobBoard/jobBoardDetailCss.css" />
 	<div class="wrap_inner">
 	<main id="container">
 		<section>
@@ -64,9 +30,10 @@
 					<div class="dc-content-title">${jobBoard.title}</div>
 					<div id="jobBoard" class="table">	
 						<div class="jb-nickDate">
-						<span data-toggle="collapse" data-target="#demo">
-							<label class="inlie-t">작성자</label>${jobBoard.nickName}</span>
+						<a href="#"><span data-toggle="collapse" data-target="#demo">
+							<label class="inlie-t">작성자</label>${jobBoard.nickName}</span></a>
 						<div id="demo" class="collapse">
+						
 						<div>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -77,9 +44,9 @@
 						<label class="inlie-t">
 						작성일
 						</label><div class="inline">
-						<a href="">${jobBoard.writeDate}</a></div>	
+						${jobBoard.writeDate}</div>	
 						<label class="inlie-t">조회수</label><div class="inline">
-						<a href="">${jobBoard.viewCount}</a></div><br />
+						${jobBoard.viewCount}</div><br />
 						<label class="inlie-t">근무장소</label><div class="inline"> 
 						<a href="">${jobBoard.location}</a>&nbsp;&nbsp;<span onclick="locPop();"><a href="">[위치찾기]</a></span> </div>
 						<label class="inlie-t">구인구직타입</label><div class="inline">

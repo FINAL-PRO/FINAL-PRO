@@ -9,44 +9,27 @@
 <meta charset="UTF-8">
 <title>쪽지목록 페이지 입니다.</title>
 <c:import url="../common/header.jsp"/>
-	<style>
-	.msg-table{
-		border-collapse: collapse;
-		text-align: left;
-		line-height: 1.5;
-		
-		margin: 20px 10px;
-	}
-    .columName  {
-    	display: table-row;
-    	border : 1px solid black;
-    }
-    .row {
-    	display: table-row;
-    	border : 1px solid black;
-    }        
-    .cell {
-	      display: table-cell;
-	      border : 1px solid black;
-    }
-    </style>
+
+
 </head>
 <body>
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/msg/msgListCss.css" />
+	<div class="msgBody">
 	<h1>쪽지목록 페이지 입니다.</h1>
 	<p>Total : ${totalContents}</p>
 		<input type="hidden" value="${member.no}"/>
 		<div id="msg-table" class="msg-table">
 		<div class="columName bg-primary text-white">
-			<div id="no" class="cell">번호</div>
+			<div id="no" class="cell mini">번호</div>
 			<div id="content" class="cell">내용</div>
 			<div id="sendDate" class="cell">보낸날짜</div>
 			<div id="fromMember" class="cell">보낸사람</div>
 			<div id="statues" class="cell">상태</div>
-			<div id="delete" class="cell">삭제</div>
+			<div id="delete" class="cell mini">삭제</div>
 		</div>
 		<c:forEach items="${list}" var="msgList">
 		<div id="${msgList.no}" class="row" onclick="">
-			<div id="noValue" class="cell">${msgList.no}</div>
+			<div id="noValue" class="cell mini">${msgList.no}</div>
 			<div id="contentValue" class="cell" style="text-overflow: ellipsis;">
 			<a href="${pageContext.request.contextPath}/message/messageDetail.do?no=${msgList.no}">
 			${msgList.content}</a></div>
@@ -56,7 +39,8 @@
 			<a href="${pageContext.request.contextPath}/message/messageInsertForm.do?fromMember=${msgList.frommNick}">
 			${msgList.frommNick}</a></div>
 			<div id="statuesValue" class="cell">${msgList.status}</div>
-			<div id="check" class="cell"><a href="${pageContext.request.contextPath}/message/messageDelete.do?no=${msgList.no}&memNo=${member.no}">O</a></div>
+			<div id="check" class="cell mini"><a href="${pageContext.request.contextPath}/message/messageDelete.do?no=${msgList.no}&memNo=${member.no}">
+			<img src="${pageContext.request.contextPath }/resources/icons/del.png" id="msgIcon"/></a></div>
 		</div>
 		</c:forEach>
 		</div>
@@ -70,5 +54,6 @@
 				location.href = "${pageContext.request.contextPath}/message/messageDelete.do?no=${msgList.no}&memNo=${member.no}";
 			};
 		</script>
+	</div>	
 </body>
 </html>

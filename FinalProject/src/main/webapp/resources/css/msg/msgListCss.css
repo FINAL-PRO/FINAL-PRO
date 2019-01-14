@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+	.msgBody{
+		margin: 5%;
+	}
+	.msg-table{
+		border-collapse: collapse;
+		line-height: 1.5;
+	}
+    .columName  {
+    	text-align:center; 
+    	vertical-align:middle;
+    	display: table-row;
+    	border : 1px solid black;
+    	margin: 2px;
+    	background: skyblue;
+    	font-weight: bold;
+    	font-size: 15px;
+    	height: 30px;
+		color: #fff;
+    }
+	.colum {
+		text-align:center; 
+    	vertical-align:middle;
+		height: 30px;
+		display: table-row;
+		width: 10%;
+		padding: 10px;
+		vertical-align: top;
+	}  
+	 
+    .row {
+    	
+    	display: table-row;
+    	border : 1px solid black;
+    }        
+    .cell {
+	      display: table-cell;
+	      border : 1px solid black;
+    }
+        #msgIcon {
+    	width:30px;
+    }
+    .mini{
+    	top: 50%;
+    	width:50px;
+    	text-align: center;
+    }
