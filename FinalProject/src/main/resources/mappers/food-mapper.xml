@@ -9,6 +9,7 @@
 		<result property="title"  column="title" />
 		<result property="content"  column="content" />
 		<result property="memberName"  column="nickName" />
+		<result property="memberNo" column="memberNo" />
 		<result property="thumbnail" column="thumbnail"/>
 		<result property="commentCount" column="comment_count"/>
 		<result property="likeCount" column="like_count"/>

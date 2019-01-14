@@ -18,6 +18,7 @@ public class FoodList extends Board implements Serializable{
 	private String title;
 	private String content;
 	private String memberName;
+	private int memberNo;
 	private String thumbnail;
 	private int commentCount;
 	private int likeCount;
@@ -31,9 +32,9 @@ public class FoodList extends Board implements Serializable{
 		super();
 	}
 
-	public FoodList(int no, int fno, int pno, String title, String content, String memberName, String thumbnail,
-			int commentCount, int likeCount, String category, String address, int point, int imageCheck,
-			String profile) {
+	public FoodList(int no, int fno, int pno, String title, String content, String memberName, int memberNo,
+			String thumbnail, int commentCount, int likeCount, String category, String address, int point,
+			int imageCheck, String profile) {
 		super();
 		this.no = no;
 		this.fno = fno;
@@ -41,6 +42,7 @@ public class FoodList extends Board implements Serializable{
 		this.title = title;
 		this.content = content;
 		this.memberName = memberName;
+		this.memberNo = memberNo;
 		this.thumbnail = thumbnail;
 		this.commentCount = commentCount;
 		this.likeCount = likeCount;
@@ -163,12 +165,21 @@ public class FoodList extends Board implements Serializable{
 		this.profile = profile;
 	}
 
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+
 	@Override
 	public String toString() {
 		return "FoodList [no=" + no + ", fno=" + fno + ", pno=" + pno + ", title=" + title + ", content=" + content
-				+ ", memberName=" + memberName + ", thumbnail=" + thumbnail + ", commentCount=" + commentCount
-				+ ", likeCount=" + likeCount + ", category=" + category + ", address=" + address + ", point=" + point
-				+ ", imageCheck=" + imageCheck + ", profile=" + profile + "]";
+				+ ", memberName=" + memberName + ", memberNo=" + memberNo + ", thumbnail=" + thumbnail
+				+ ", commentCount=" + commentCount + ", likeCount=" + likeCount + ", category=" + category
+				+ ", address=" + address + ", point=" + point + ", imageCheck=" + imageCheck + ", profile=" + profile
+				+ "]";
 	}
 
 }

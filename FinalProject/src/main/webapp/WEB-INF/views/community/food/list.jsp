@@ -17,6 +17,11 @@
 	padding-left: 20px;
 }
 
+.group {
+	list-style: none;
+	padding-left: 20px;
+}
+
 .food_btn {
 	padding-top: 10px;
 	float: right;
@@ -32,12 +37,13 @@
 }
 
 .title {
-	color: rgb(85, 85, 85);
+	color: #000000;
 	line-height: 1.4em;
 	overflow: hidden;
 	font-size: 1.4rem;
 	vertical-align: middle;
 	display: inline-block;
+	font-weight: bold;
 }
 
 .title a {
@@ -52,15 +58,15 @@
 
 .point {
 	line-height: 1.2em;
-	color: lightslategray;
 	display: inline;
 	padding-left: 10px;
+	font-weight: bold;
 }
 
 .address {
-	color: lightslategray;
 	display: inline-block;
 	padding-left: 10px;
+	font-weight: bold;
 }
 
 .short_review {
@@ -69,39 +75,37 @@
 
 .nickname {
 	display: inline-block;
-	font-size: 0.8rem;
-	color: lightslategray;
+	font-size: 1rem;
+	color: rgb(85, 85, 85);
+	padding-left: 5px;
+	font-weight: bold;
 }
 
 .categoryName{
 	display: inline;
-	color: lightslategray;
+	color:rgb(244, 126, 96);
 	font-size: 0.8rem;
+	font-weight: bold;
 }
 .time {
 	display: inline;
 	padding-left: 10px;
 	font-size: 0.8rem;
-	color: lightslategray;	
+	font-weight: bold;
 }
 
 .count {
 	display: inline-block;
 	max-width: 60%;
 	line-height: 20px;
-	color: #292929;
 	font-size: 12px;
-}
-
-.review_more{
-	display: inline-block;
+	font-weight: bold;
 }
 
 .thumb_review{
 	display: inline-block;
 	height: 180px; 
 	width: 200px; 
-	border: 1px solid green;
 }
 
 .thumb_review .center{
@@ -117,7 +121,6 @@
 	padding-bottom: 10px; 
 	height: 180px; 
 	width: 80%;
-	border: 1px solid navy; 
 	font-size: 0.8rem;
 }
 
@@ -128,7 +131,6 @@
 }
 
 .article{
-	border: 1px solid red;
 	height: 180px; 
 	display: flex;
 	background:white;
@@ -148,6 +150,12 @@ p.profile>img.picture {
 
 .profile{
 	display: inline-block;
+}
+
+.food_btn2{
+	background: rgb(171, 187, 129);
+    color: white;
+    cursor: pointer;
 }
 
 </style>
@@ -190,7 +198,7 @@ p.profile>img.picture {
 									
 									</script>
 									<div class="food_btn">
-										<input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/food/foodInsertForm.do'" />
+										<input class="btn food_btn2" type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/food/foodInsertForm.do'" />
 									</div>
 								</div>
 								<div class="articlelist">
@@ -217,13 +225,13 @@ p.profile>img.picture {
 															</c:otherwise>
 														</c:choose>
 										            <p class="nickname">${b.memberName}</p>
-										            <br>
-										           	<p class="categoryName">${b.category}</p>
-										            <p class="point">${b.point} 점</p>
-										            <p class="address">${b.address}</p>
 													<p class="time">
 														<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd" />
 													</p>
+										            <br>
+										           	<p class="categoryName">${b.category}</p>
+										            <p class="point"><span style="color:rgb(244, 126, 96);">${b.point}</span>/5</p>
+										            <p class="address">${b.address}</p>
 										            <br>
 										            <div class="table_review">
 										            <c:choose>
@@ -235,28 +243,15 @@ p.profile>img.picture {
 														</c:otherwise>
 													</c:choose>
 													</div>
-										            <div class="count">조회수: ${b.viewCount}</div>&nbsp;&nbsp;
-										            <div class="count">댓글: ${b.commentCount}</div>&nbsp;&nbsp;
-										            <div class="count">좋아요: ${b.likeCount}</div>
+										            <div class="count">조회수: <span style="color:rgb(244, 126, 96);">${b.viewCount}</span></div>&nbsp;&nbsp;
+										            <div class="count">댓글: <span style="color:rgb(244, 126, 96);">${b.commentCount}</span></div>&nbsp;&nbsp;
+										            <div class="count">좋아요: <span style="color:rgb(244, 126, 96);">${b.likeCount}</span></div>
 												</div>
-												
-										
-											</div><br /></li>
+											</div>
+											<div style="margin-top: 10px; margin-bottom: 10px; border: solid 0.5px gray"></div>												
+											</li>
 										</c:forEach>
 										</ol>
-										<script>
-											/* 	$(document).ready(function(){
-													
-													var imgtag = $('.imgtag').html();
-													
-													var img = $('.imgtag').find('img').attr('src');
-													console.log("img: "+img);
-													
-													//$('#center').attr('src', img);
-													
-																							
-												}); */
-										</script>
 									<c:out value="${pageBar}" escapeXml="false" />
 								</div>
 							</div>

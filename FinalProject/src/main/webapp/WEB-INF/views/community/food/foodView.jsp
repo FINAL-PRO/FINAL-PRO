@@ -27,22 +27,31 @@
 		vertical-align: top;
 	}
 	
-	.nickname {
+	.count{
+		float: right;
 		display: inline-block;
 		line-height: 20px;
 		color: #292929;
 		font-size: 12px;
 		font-weight: bold;
+	}
+	
+	.nickname {
+		display: inline-block;
+		line-height: 20px;
+		color: #292929;
+		font-size: 12px;
 		white-space: nowrap;
 		overflow: hidden;
 		float: left;
+		font-weight: bold;
 	}
 	
 	.title {
 		display: inline-block;
 		line-height: 20px;
 		color: #292929;
-		font-size: 15px;
+		font-size: 20px;
 		font-weight: bold;
 		white-space: nowrap;
 		overflow: hidden;
@@ -51,24 +60,29 @@
 	.time {
 		float: right;
 		display: inline-block;
-		line-height: 20px;
-		color: #a6a6a6;
+		line-height: 30px;
+		color: #292929;
 		font-size: 12px;
+		margin-right:10px;
+		font-weight: bold;
 	}
 	
 	.address{
-		float: left;
-		display: inline-block;
-		line-height: 30px;
-		color: #a6a6a6;
+		color: #292929;
 		font-size: 12px;
+		font-weight: bold;
 	}
 	
 	.point{
-		float: left;
-		line-height: 30px;
-		color: #a6a6a6;
+		color: #292929;
 		font-size: 12px;
+		font-weight: bold;
+	}
+	
+	.category1{
+		color: #292929;
+		font-size: 12px;
+		font-weight: bold;
 	}
 	
 	.text {
@@ -78,13 +92,7 @@
 		color: #292929;
 		font-size: 14px;
 		word-wrap: break-word;
-	}
-	
-	.category{
-		float: left;
-		line-height: 30px;
-		color: #a6a6a6;
-		font-size: 12px;
+		padding-left:10px;
 	}
 	
 	.comment {
@@ -98,17 +106,7 @@
 		float: right;
 		padding: 10px;
 	}
-	
-	span {
-		display: inline-block;
-		margin-right: 8px;
-		padding-left: 5px;
-		line-height: 18px;
-		color: #a6a6a6;
-		font-size: 12px;
-		background-repeat: no-repeat;
-	}
-	
+
 	.attach {
 		float: right;
 		margin-top: 8px;
@@ -127,7 +125,6 @@
 	
 	.group {
 		list-style: none;
-		padding-top: 20px;
 		padding-left: 20px;
 		padding-right: 20px;
 	}
@@ -159,7 +156,6 @@
 	
 	.category {
 		float: left;
-		padding-left: 20px;
 	}
 	
 	.btn_comment {
@@ -182,6 +178,11 @@
 		width: 10px;
 	}
 	
+	.profile{
+		display: inline-block;
+		width: 100%;
+	}
+	
 	.starRev{
 		padding-top: 10px;
 		float: left;
@@ -199,6 +200,7 @@
 	    padding: 0px;
 	    margin: 0px;
 	}
+	
 	.starR2{
 	    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
 	    background-size: auto 100%;
@@ -209,6 +211,7 @@
 	    cursor: pointer;
 	    padding: 0px;
 	}
+	
 	.starR1.on{background-position:0 0;}
 	.starR2.on{background-position:-15px 0;}
 	
@@ -231,37 +234,46 @@
 						</div>
 						<div class="dc-content-box">
 							<div id="container2">
-								<div class="articlelist" style="border: solid 0.5px red">
+								<div class="articlelist">
 									<form name="boardFrm" method="post">
-										<input type="text" name="bno" value="${foodList.no}"/>
+										<input type="hidden" name="bno" value="${foodList.no}"/>
 										<input type="hidden" name="mno" value="${member.no}"/>
-										<input type="text" name="fno" value="${foodList.fno}"/>
+										<input type="hidden" name="fno" value="${foodList.fno}"/>
 									</form>
-									<div class="group" style="border: solid 0.5px blue">
-										<p class="title">${foodList.title}</p>
+									<div class="group">
+										<span class="title">${foodList.title}</span>
 										<div style="border: solid 0.5px gray"></div>
 										<p class="profile">
-											<img class="picture" src="https://cf-epi.campuspick.com/0.png"> 
+											<c:choose>
+												<c:when test="${!empty foodList.profile}">
+													<img class="picture" src="/dc/resources/upload/profile/${foodList.profile}" /> 
+												</c:when>
+												<c:otherwise>
+													<img class="picture" src="/dc/resources/upload/profile/profileDefaultImg.png" /> 
+												</c:otherwise>
+											</c:choose>
 											<span class="nickname">${foodList.memberName}</span> 
 											<span class="count">조회수: ${foodList.viewCount}</span>
 											<span class="time">
 												<fmt:formatDate value="${foodList.writeDate}" pattern="yyyy-MM-dd" />
 											</span>
 										</p>
-										<p class="text">${foodList.content}</p>
-										<div>
-											<p class="category">카테고리: ${foodList.category}</p><br />
-											<p class="address">주소: ${foodList.address}</p>
-										</div>
-										<div style="border: solid 0.5px lightgray"></div><br />
+										
+										<p class="category1">카테고리: ${foodList.category}</p>
+										<p class="address">주소: ${foodList.address}</p>
 										<p class="point">평가자 평점: ${foodList.point} 점</p>
-										<div>
+										
+										<p class="text">${foodList.content}</p>
+										<div style="border: solid 0.5px lightgray"></div>
 										<div style="height:12px;"></div>
-										<div class="status" style="border: solid 0.5px orange">
+										<div class="status">
+											<c:if test="${!empty member and member.no eq foodList.memberNo}">
 											<button class="btn_board_edit" id="btn_board_edit">수정</button>
 											<button class="btn_board_delete" id="btn_board_delete">삭제</button>
-											<!-- <button class="btn_report" id="btn_report">신고하기</button> -->
+											</c:if>
+											<c:if test="${!empty member and member.no ne foodList.memberNo}">
 											<input type="button" class="btn_report" id="btn_report" value="신고하기" onclick="btn_report();"/>
+											</c:if>
 											<span class="likecount">
 											<a href="#" class="likefunc">
 												<img src="/dc/resources/images/dislike.png" id="like_img" style="height: 17px; width: 17px;">
@@ -373,20 +385,7 @@
 											function close_box(flag) {
 									             $('#myModal').hide();
 									        };
-									        
-									     /*    $('.starRev span').click(function(){
-									        	  $(this).parent().children('span').removeClass('on');
-									        	  $(this).addClass('on').prevAll('span').addClass('on');
-									        	  
-									        	  var star = 0;
-									        	  
-									        	  star = Number($(this).text());
-									        	  
-									        	  console.log("별 값: "+star);
-									        
-									        	  $('#point').val(star);
-									        }); */
-											
+\
 				                      		$("#btn_board_edit").click(function(){
 				                      			boardFrm.action="${pageContext.request.contextPath}/community/food/foodUpdateForm.do?bno=${foodList.no}"
 				                      			boardFrm.submit();
@@ -408,8 +407,6 @@
 									<button class="btn_back" id="btn_back">Back</button> 
 									<script>
 					                    $("#btn_back").click(function(){
-					                    	/* boardFrm.action="${pageContext.request.contextPath}/community/food/list.do"
-					                    	boardFrm.submit(); */
 					                    	location.href="${pageContext.request.contextPath}/community/food/list.do";
 					                    });
 				                    </script>
