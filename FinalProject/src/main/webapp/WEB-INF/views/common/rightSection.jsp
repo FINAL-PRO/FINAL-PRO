@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dc-rightSection.css" />
 	
 <script>
 	var uris = "${pageContext.request.requestURI}".split("/");
@@ -58,8 +60,8 @@
 			<span class="board-title">정보</span>
 		</h4> -->
 		<div class="dc-user-profile" align="center">
-			<div class="dc-profile-area-top" style="background:white; padding:5px;">
-				<!-- 로그인 안했을때 -->
+			<div class="dc-profile-area-top" style="background:white; padding:10px;">
+				<!-- 로그인 안 했을때 -->
 				<sec:authorize access="isAnonymous()">
 					<button style="width:90%;margin:10px;margin-top:15%" class="btn btn-outline-success" id="loginBtn" onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
 				</sec:authorize>
@@ -68,16 +70,16 @@
 				<sec:authorize access="isAuthenticated()">
 				<c:if test="${!empty member.profile}">
 					<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/${member.profile}"
-						style="border-radius: 50px; border: 1px solid lightgray; width: 80px; height: 80px; margin-bottom: 15px;"/>					    				
+						style="border-radius: 50px; border: 1px solid lightgray; width: 80px; height: 80px; margin: 0px 0px 10px 0px;"/>					    				
 				</c:if>
 				<c:if test="${empty member.profile}">
 					<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/profileDefaultImg.png"
-						style="border-radius: 50px; border: 1px solid lightgray; width: 80px; height: 80px; margin-bottom: 15px;"/>
+						style="border-radius: 50px; border: 1px solid lightgray; width: 80px; height: 80px; margin: 0px 0px 10px 0px;"/>
 				</c:if>
 				<br />
 				<span>
 					<a href="${pageContext.request.contextPath}/member/memberView.do?no=${member.no}"
-						title="내정보보기">${member.nickName}</a> 님, 안녕하세요!
+						title="내정보보기" style="color: green; font-weight: bold; margin-bottom: 10px;">${member.nickName}</a> 님, 안녕하세요!
 				</span>
 
 				</sec:authorize>
@@ -93,11 +95,11 @@
 					</ul>
 				</sec:authorize>
 				
-				<!-- 로그인 했을때 -->
+				<!-- 로그인 했을 때 -->
 				<sec:authorize access="isAuthenticated()">
-					<ul>
-						<li><button type="button" class="btn btn-outline-success"> 
-						  <a href="" onclick="msgPop();">쪽지</a> <span class="badge badge-dark"><label id="countUnreadMSG"></label></span>
+					<ul class="afterLoginUl">
+						<li><button type="button" class="btn btn-warning afterLogin" onclick="msgPop();"> 
+						  쪽지 <span class="badge" id="countUnreadMSG"></span>
 						</button>
 						<script>
 							$(document).ready(function(){
@@ -115,17 +117,17 @@
 							}
 						</script>
 						</li>
-						<li><button class="btn btn-outline-success" onclick="location.href='${pageContext.request.contextPath}/logout'">로그아웃</button></li>
+						<li><button class="btn btn-warning afterLogin" onclick="location.href='${pageContext.request.contextPath}/logout'">로그아웃</button></li>
 					</ul>
 				</sec:authorize>
 			</div>
 		</div>
 	</div>
-	<div class="dc-content-box dc-border">
-		<h4>
+	<div class="dc-content-box dc-border" align="center">
+		<h4 style="margin: 10px 0px 10px 0px;">
 			<span class="board-title">현재 날씨</span>
 		</h4>
-		<hr />	
+		<hr style="margin:0;">	
 		<div class="" style="text-align: center">
 			<label id="village" style="margin-bottom: 10px;"></label><br>
 			<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" style="width:100px; height: 100px;"/>
@@ -139,8 +141,8 @@
 				현재 기온 :	<label id="tc"></label><br>
 				최저 기온 :	<label id="tmin"></label><br>
 				최고 기온 :	<label id="tmax"></label>
-			</div> -->
-			<!-- <div class="block" style="text-align: center; width: auto;">
+			</div>
+			<div class="block" style="text-align: center; width: auto;">
 				<label id="tc"></label><br>
 				<label id="tmin"></label><br>
 				<label id="tmax"></label>
@@ -218,8 +220,9 @@
 				
 			},  error : function(jqxhr, textStatus, errorThrown) {
 				console.log("ajax 처리 실패");
+				$(".loadingImg").toggle();
 			}, complete : function(){
-				$(".loadingImg").hide();
+				$(".loadingImg").toggle();
 			}
 			
 		}); 
