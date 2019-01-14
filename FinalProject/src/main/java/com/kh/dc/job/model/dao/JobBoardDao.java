@@ -28,6 +28,8 @@ public interface JobBoardDao {
 	
 	int updateViewCount(int no);
 	
+	int endJobBoard(int boardNo);
+	
 	int deleteJobBoard(int boardNo);
 
 	//List<JobBoard> selectArrayType(int arrayType);

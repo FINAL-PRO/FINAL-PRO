@@ -120,4 +120,13 @@ public class MessageController {
 		return map;
 		
 	}
+	@RequestMapping("/message/countUnreadMSG")
+	@ResponseBody
+	public int countUnreadMSG(@RequestParam String memNo) {
+		Logger logger = LoggerFactory.getLogger(MessageController.class);
+		
+		int cuMSG = messageService.countUnreadMSG(Integer.parseInt(memNo));
+		
+		return cuMSG;
+	}
 }

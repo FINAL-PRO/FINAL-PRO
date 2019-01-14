@@ -78,4 +78,10 @@ public class MessageServiceImpl implements MessageService {
 		
 		return messageDao.checkToNick(hmap);
 	}
+
+	@Override
+	public int countUnreadMSG(int memNo) {
+		// 
+		return messageDao.countUnreadMSG(memNo);
+	}
 }

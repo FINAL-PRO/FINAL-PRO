@@ -10,10 +10,12 @@
 	<meta charset="UTF-8">	
 	<title>게시글 상세페이지</title>
 	<c:import url="../../common/header.jsp"/>
+
 </head>
 	
-<body>
+<body class="boay_style">
 	<c:import url="../../common/menubar.jsp"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/jobBoard/jobBoardDetailCss.css" />
 	<div class="wrap_inner">
 	<main id="container">
 		<section>
@@ -22,46 +24,59 @@
 			</div>
 			<div class="section-center">
 			<div class="dc-content">
-				<div class="dc-content-title">
-					<h1>제목</h1>
-				</div>
+				
 				<div class="dc-content-box">
-					<h1>구인구직 게시판 상세페이지</h1>
-					<div id="jobBoard" class="table">			
-						<div>${jobBoard.no}</div>
-						<div>${jobBoard.title}</div>
-						<div>${jobBoard.content}</div>
-						<div>${jobBoard.nickName}</div>
-						<div>${jobBoard.writeDate}</div>
-						<div>${jobBoard.location}</div>
-						<div>${jobBoard.companyNo}</div>
+					<div class="dc-content-detail">
+					<div class="dc-content-title">${jobBoard.title}</div>
+					<div id="jobBoard" class="table">	
+						<div class="jb-nickDate">
+						<a href="#"><span data-toggle="collapse" data-target="#demo">
+							<label class="inlie-t">작성자</label>${jobBoard.nickName}</span></a>
+						<div id="demo" class="collapse">
+						
+						<div>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="">작성글 보기</a>&nbsp;|&nbsp;<span onclick="sendMsg();"><a href="">쪽지보내기</a></span></div>
+						</div></div>
+						<div class="float">
+						<label class="inlie-t">
+						작성일
+						</label><div class="inline">
+						${jobBoard.writeDate}</div>	
+						<label class="inlie-t">조회수</label><div class="inline">
+						${jobBoard.viewCount}</div><br />
+						<label class="inlie-t">근무장소</label><div class="inline"> 
+						<a href="">${jobBoard.location}</a>&nbsp;&nbsp;<span onclick="locPop();"><a href="">[위치찾기]</a></span> </div>
+						<label class="inlie-t">구인구직타입</label><div class="inline">
+						<a href="">${jobBoard.type}</a></div><br />	
 						<!-- 모집시작/마감일 -->
-						<div>${jobBoard.startDate}</div>
-						<div>${jobBoard.endDate}</div>
-						<div>${jobBoard.startDate} ~ ${jobBoard.endDate}</div>
+						<label class="inlie-t">모집시작/마감일 </label><div class="inline"> ${jobBoard.startDate} ~ ${jobBoard.endDate}</div>
 						<!-- 근무시작/종료일 -->
-						<div>${jobBoard.startJob}</div>
-						<div>${jobBoard.endJob}</div>
-						<div>${jobBoard.startJob} ~ ${jobBoard.endJob}</div>
+						<label class="inlie-t">근무시작/종료일</label><div class="inline"> ${jobBoard.startJob} ~ ${jobBoard.endJob}</div><br />
 						<!-- 급여/급여타입 -->
-						<div>${jobBoard.salary} / ${jobBoard.salType}</div>
-						<div>${jobBoard.status}</div>
-						<div>${jobBoard.viewCount}</div>
-						<div>${jobBoard.type}</div>
-						<div>${jobBoard.dday}일 남음</div>
+						<label class="inlie-t">급여/급여타입</label><div class="inline"> ${jobBoard.salary} / ${jobBoard.salType}</div>
 						
-						<button class="btn btn-outline-info" type="button" 
+						<label class="inlie-t">마감일</label><div class="inline">${jobBoard.dday}일 남음</div>
+						</div>
+						<div class="jb-content">${jobBoard.content}</div>
+						<c:import url="../../common/comment.jsp" />
+					
+						<br /><button class="btn btn-outline-info" 
 							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/jobBoardList.do'">목록</button>
-						<button class="btn btn-outline-info" type="button" 
-							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/updateJobBoardForm.do?no=${jobBoard.no}'">수정 페이지</button>
-						<button class="btn btn-outline-info" type="button" 
-							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/deleteJobBoard.do?boardNo=${jobBoard.boardNo}'">조기마감하기</button>
 						
+						<c:if test="${member.no eq jobBoard.memberNo}">
 						<button class="btn btn-outline-info" type="button" 
-							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/deleteJobBoard.do?boardNo=${jobBoard.boardNo}'">삭제 페이지</button>
+							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/updateJobBoardForm.do?no=${jobBoard.no}'">수정</button>
+						<button class="btn btn-outline-info" type="button" 
+							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/endJobBoard.do?boardNo=${jobBoard.boardNo}'">조기마감</button>
+						<button class="btn btn-outline-info" type="button" 
+							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/deleteJobBoard.do?boardNo=${jobBoard.boardNo}'">삭제</button>
+						</c:if>	
 					</div>
-					<c:import url="../../common/comment.jsp" />
-				</div>
+					</div>
+				</div>	
 			</div>
 			</div>	
 			<div class="section-right">
@@ -70,6 +85,14 @@
 		</section>
 	</main>			
 	</div>
-	<c:import url="../../common/footer.jsp"/>		
+	<c:import url="../../common/footer.jsp"/>
+	<script>
+		function sendMsg() {
+			window.open("${pageContext.request.contextPath}/message/messageInsertForm.do?fromMember=${jobBoard.nickName}", "msgPop", "width=700, height=600");
+		}
+		function locPop(){
+			window.open("https://map.naver.com/?query=${jobBoard.location}", "locPop", "width=700, height=600");
+		}
+	</script>	
 </body>
 </html>
