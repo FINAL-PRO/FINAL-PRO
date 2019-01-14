@@ -22,4 +22,8 @@ public interface MessageDao {
 	int deleteMessage(int no);
 	
 	int checkToNick(HashMap<String, Object> hmap);
+	
+	int countUnreadMSG(int memNo);
+	
+	int replyMSG(int boardNo);
 }

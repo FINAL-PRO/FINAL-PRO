@@ -25,6 +25,8 @@ public interface JobBoardService {
 	int selectJobBoardComPopTotalContents();
 	
 	int updateJobBoard(JobBoard jobBoard);
+
+	int endJobBoard(int boardNo);
 	
 	int deleteJobBoard(int boardNo);
 
@@ -35,5 +37,6 @@ public interface JobBoardService {
 	List<Code> selectJobBoardJobTypeList();
 
 	List<Code> selectJobBoardSalTypeList();
+
 	
 }

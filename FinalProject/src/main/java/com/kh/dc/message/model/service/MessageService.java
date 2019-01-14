@@ -21,4 +21,6 @@ public interface MessageService {
 	int deleteMessage(int no);
 
 	int checkToNick(String nickName);
+	
+	int countUnreadMSG(int memNo);
 }

@@ -7,13 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.kh.dc.comment.model.dao.CommentDao;
 import com.kh.dc.common.vo.Comment;
+import com.kh.dc.message.model.dao.MessageDao;
 
 @Service
 public class CommentServiceImpl implements CommentService{
 
 	@Autowired
 	CommentDao commentDao;
-
+	@Autowired
+	MessageDao messageDao;
+	
 	@Override
 	public int totalComment(int bno) {
 		return commentDao.totalComment(bno);
@@ -31,6 +34,9 @@ public class CommentServiceImpl implements CommentService{
 
 	@Override
 	public int commentInsert(Comment comment) {
+		System.out.println("comment.getBoardNo() : " + comment.getBoardNo());
+		messageDao.replyMSG(comment.getBoardNo());
+		
 		return commentDao.commentInsert(comment);
 	}
 
