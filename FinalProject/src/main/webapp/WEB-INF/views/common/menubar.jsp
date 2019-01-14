@@ -9,28 +9,25 @@
 <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 <!DOCTYPE html>
 <header>
+	<style>
+	 #searchWord{
+	 	border: 3px solid green;
+	 }
+	</style>
+	
 	<div id="header-container">
 		<div class="header_top" style="display:block;">
 			<div class="header_logo" style="display:inline-block;">				
 					<div>
 					<a class="navbar-brand" href="/dc">
-						<h2>DONGKER IMG</h2> <%-- <img src="${pageContext.request.contextPath }/resources/images/test-img.png" alt="로고" width="50px" /> --%>
+						<img src="${pageContext.request.contextPath }/resources/images/logo.png" alt="로고" width="300px"/>
 					</a> 
 					</div>
 			</div>
 			<div class="header_search" style="display:inline-block; width: 40%">
-					<div class="input-group">
-						<input type="text" class="form-control" id="searchWord" placeholder="Search for...">
-						<span class="input-group-btn">
-							<button class="btn btn-default" id="search" type="button">Go!</button>
-						</span>
-						
-						<script>
-						$("#search").on("click", function(){
-							location.href= "${pageContext.request.contextPath}/search/searchView.do?searchWord="+$('#searchWord').val();
-						});
-						</script>						
-					</div>
+				<form class="" action="${pageContext.request.contextPath}/search/searchView.do?">
+					<input type="text" class="form-control" id="searchWord" name="searchWord" placeholder="검색어를 입력하세요.">
+				</form>
 			</div>
 		</div>
 	</div>

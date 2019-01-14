@@ -53,15 +53,15 @@
 						alt="메인_우측_세로배너" width="140" height="800"
 						style="margin-left: 1px;margin-right: 1px; margin-top:60px; margin-bottom:60px;
 						border:1px solid red"/> --%>
-	<div class="dc-content-box" style="min-height: 0vh;">
+	<div class="dc-content-box dc-border" style="min-height: 0vh;">
 		<!-- <h4>
 			<span class="board-title">정보</span>
 		</h4> -->
 		<div class="dc-user-profile" align="center">
-			<div class="dc-profile-area-top" style="background:white;padding:5px">
+			<div class="dc-profile-area-top" style="background:white; padding:5px;">
 				<!-- 로그인 안했을때 -->
 				<sec:authorize access="isAnonymous()">
-					<button style="width:90%;height:80%;margin:10px" class="btn btn-outline-success" id="loginBtn" onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
+					<button style="width:90%;margin:10px;margin-top:15%" class="btn btn-outline-success" id="loginBtn" onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
 				</sec:authorize>
 				
 				<!-- 로그인 했을때 -->
@@ -84,7 +84,7 @@
 				
 			</div>
 			
-			<div class="dc-profile-area-bottom" style="background:#f1f3f6;padding:8px 0px;">
+			<div class="dc-profile-area-bottom" style="padding:8px 0px;">
 				<!-- 로그인 안했을때 -->
 				<sec:authorize access="isAnonymous()">
 					<ul>
@@ -121,7 +121,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="dc-content-box">
+	<div class="dc-content-box dc-border">
 		<h4>
 			<span class="board-title">현재 날씨</span>
 		</h4>
@@ -149,7 +149,7 @@
 		</div>
 		
 	</div>
-	<div class="dc-content-box">
+	<div class="dc-content-box dc-border">
 		<!-- <h1>광고(AD)</h1> -->
 		<div class="ad-right">
 			<img id="ad-right-img" src=""/>

@@ -19,7 +19,6 @@
 			<div class="section-left">
 				<!-- 내용없음 -->
 			</div>
-
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
@@ -32,41 +31,73 @@
 					</div>
 					<div class="dc-content-box">
 						<form id="insertFrm" method="post"
-							action="<c:if test="${house.boardNo!=null}">${pageContext.request.contextPath}/info/house/updatehouseEnd.do</c:if>
-							 <c:if test="${house.boardNo==null}">${pageContext.request.contextPath}/info/house/inserthouse.do</c:if>">
+							action="<c:if test="${house.boardNo!=null}">${pageContext.request.contextPath}/info/house/update.do</c:if>
+							 <c:if test="${house.boardNo==null}">${pageContext.request.contextPath}/info/house/insert.do</c:if>">
+							<table class="table">
+								<tr>
+									<td>제목 : </td>
+									<td><input type="text" id="title" name="title" value='<c:if test="${house.title != null }">${house.title }</c:if>' required></td>
+								</tr>
+								<tr>
+									<td>매매타입 :</td>
+									<td>
+										<select name="dealType">
+											<c:forEach items="${dealList}" var="deal">
+												<option value="${deal.id}"
+													<c:if test="${house.dealType eq deal.id}">selected</c:if>
+												>${deal.value}</option>
+											</c:forEach>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>매매가 : </td>
+									<td>
+										<input type="text" name="minprice" id="minprice" value="${house.minprice}">
+									</td>
+								</tr>
+								<tr>
+									<td>방 타입 :</td>
+									<td>
+										<select name="hType">
+											<c:forEach items="${roomList}" var="room">
+												<option value="${room.id}"
+													<c:if test="${house.hType eq room.id}">selected</c:if>
+												>${room.value}</option>
+											</c:forEach>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>방 크기 : </td>
+									<td>
+										<input type="text" name="area" id="area" value="${house.area}">
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<textarea id="summernote" name="content" required>
+										<c:if test="${house.content != null }"> ${house.content}</c:if>
+	            						</textarea>	
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
 
-
-							제목 : <input type="text" id="title" name="title"
-								style="width: 700px; height: 30px;"
-								value='<c:if test="${house.title != null }">${house.title }</c:if>'
-								required> <br> 매매타입 : <select>
-								<c:forEach items="${dealList}" var="deal">
-									<option value="${deal.id}">${deal.value}</option>
-								</c:forEach>
-							</select> 매매가 : <input type="text" id="minprice"><br> 방 타입 :
-							<select>
-								<c:forEach items="${roomList}" var="room">
-									<option value="${room.id}">${room.value }</option>
-								</c:forEach>
-							</select> 방 크기 : <input type="text" id="area"><br>
-
-							<textarea id="summernote" name="content" required>
-            <c:if test="${house.content != null }"> ${house.content}</c:if>
-            </textarea>
-
-							<c:if test="${house.no != null }">
-								<input type="hidden" name="no" value="${house.boardNo}" required />
-							</c:if>
-
-							<button type="submit" onclick="inserthouse()">확인</button>
-							<button type="reset">취소</button>
-
+										<input type="hidden" name="mNo" value="${member.no}" />
+										<button type="submit" onclick="inserthouse()">확인</button>
+										<button type="reset">취소</button>
+										<c:if test="${house.no != null }">
+											<a href="${pageContext.request.contextPath}/info/house/delete.do?no=${house.boardNo}"><button type="button" >삭제하기</button></a>
+											<input type="hidden" name="no" value="${house.boardNo}" required />
+										</c:if>	
+									</td>
+								</tr>
+							</table>
 						</form>
-
 					</div>
 				</div>
 			</div>
-
 			<div class="section-right">
 				<c:import url="../../common/rightSection.jsp" />
 			</div>
@@ -108,8 +139,6 @@
     			}
     		});
     	}
-
-
     </script>
 </body>
 </html>

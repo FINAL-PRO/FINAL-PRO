@@ -111,5 +111,10 @@ public class GroupServiceImpl implements GroupService {
 		return groupDao.getGroupListData();
 	}
 
+	@Override
+	public List<Board> selectGroupList() {
+		return groupDao.selectGroupList();
+	}
+
 
 }

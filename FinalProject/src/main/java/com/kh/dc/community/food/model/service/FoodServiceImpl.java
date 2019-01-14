@@ -10,6 +10,7 @@ import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.BoardList;
 import com.kh.dc.community.food.model.dao.FoodDao;
 import com.kh.dc.community.food.model.vo.Food;
+import com.kh.dc.community.food.model.vo.FoodList;
 import com.kh.dc.community.food.model.vo.FoodPoint;
 
 @Service
@@ -24,7 +25,7 @@ public class FoodServiceImpl implements FoodService{
 	}
 
 	@Override
-	public BoardList selectOneFood(int bno) {
+	public FoodList selectOneFood(int bno) {
 		return foodDao.selectOneFood(bno);
 	}
 
@@ -32,15 +33,15 @@ public class FoodServiceImpl implements FoodService{
 	public int insertFood(Board board, Food food, FoodPoint foodPoint) {
 		return foodDao.insertBoard(board) * foodDao.insertFood(food) * foodDao.insertFoodPoint(foodPoint) ;
 	}
+	
+	@Override
+	public int foodUpdate(FoodList foodList) {
+		return foodDao.boardUpdate(foodList) * foodDao.foodUpdate(foodList) * foodDao.foodPointUpdate(foodList);
+	}
 
 	@Override
 	public int foodDelete(int bno) {
 		return foodDao.foodDelete(bno);
-	}
-
-	@Override
-	public int foodUpdate(Board board) {
-		return foodDao.foodUpdate(board);
 	}
 
 	@Override
@@ -68,6 +69,16 @@ public class FoodServiceImpl implements FoodService{
 	public List<Map<String, String>> likeSort(int cPage, int numberPage) {
 		return foodDao.likeSort(cPage, numberPage);
 	}
+
+/*	@Override
+	public int foodUpdate(Map<String, Object> map) {
+		return foodDao.boardUpdate(map);
+	}*/
+
+/*	@Override
+	public int foodUpdate(FoodList foodList) {
+		return foodDao.foodUpdate(foodList);
+	}*/
 
 	
 }

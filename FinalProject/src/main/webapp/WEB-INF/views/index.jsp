@@ -18,14 +18,14 @@
 					var result = "";
 						
 					if(data.length == 0){
-						result += "<tr style='height:200px'><td align='center'>";
+						result += "<tr style='height:200px'><td align='center' style='vertical-align:middle;'>";
 						result += "<span>불러온 데이터가 없습니다.</span>"
-						result += "<tr><td>";
+						result += "</tr></td>";
 					}else{
 						for(var i = 0 ; i < data.length; i++){
-							result += "<tr><td>";
-							result += "<a href='${pageContext.request.contextPath}/community/free/freeView.do?bno=" + data[i]['no'] + "'>" + data[i]['title'] + "</a>";
-							result += "</td></tr>";
+							result += "<div class='dc-tb-row'>";
+							result += "<a href='${pageContext.request.contextPath}/community/free/freeView.do?bno=" + data[i]['no'] + "'>● <span>" + data[i]['title'] + "</span></a>";
+							result += "</div>";
 						}
 					}
 					
@@ -44,14 +44,14 @@
 					var result = "";
 					
 					if(data.length == 0){
-						result += "<tr style='height:200px'><td align='center'>";
+						result += "<tr style='height:200px'><td align='center' style='vertical-align:middle;'>";
 						result += "<span>불러온 데이터가 없습니다.</span>"
-						result += "<tr><td>";
+						result += "</tr></td>";
 					}else{
 						for(var i = 0 ; i < data.length; i++){
-							result += "<tr><td>";
-							result += "<a href='${pageContext.request.contextPath}/community/free/freeView.do?bno=" + data[i]['no'] + "'>" + data[i]['title'] + "</a>";
-							result += "</td></tr>";
+							result += "<div class='dc-tb-row'>";
+							result += "<a href='${pageContext.request.contextPath}/community/free/freeView.do?bno=" + data[i]['no'] + "'>● <span>" + data[i]['title'] + "</span></a>";
+							result += "</div>";
 						}
 					}
 					
@@ -67,21 +67,22 @@
 				url : "sale/group/getListData.do",
 				success:function(data){
 					console.log("공동구매 가져오기 ajax 성공");
+					console.log(data);
 					var result = "";
 					
 					if(data.length == 0){
-						result += "<tr style='height:200px'><td align='center'>";
+						result += "<div style='height:200px'><div align='center' style='margin:auto;vertical-align:middle;align:center'>";
 						result += "<span>불러온 데이터가 없습니다.</span>"
-						result += "<tr><td>";
+						result += "</div></div>";
 					}else{
 						for(var i = 0 ; i < data.length; i++){
-							result += "<tr><td>";
-							result += "<a href='${pageContext.request.contextPath}/sale/group/groupView.do?boardNo=" + data[i]['no'] + "'>" + data[i]['title'] + "</a>";
-							result += "</td></tr>";
+							result += "<div class='main-img-div'><a href='#'><span><img src='" + data[i]['thumbnail'] + "' width='190'/>";
+							result += "</span><div class='img-text'><strong>" + data[i]['title'] + "</strong><br />";
+							result += "<span>" + data[i]['goodsCategory'] +"</span></div></a></div>"
 						}
 					}
 					
-					$("#groupTable").append(result);
+					$("#main-img-list").append(result);
 				},error : function(data){
 					console.log("공동구매 가져오기 ajax error");
 				},complete : function(){
@@ -135,44 +136,97 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-box">
-							<h4>
-								<span class="board-title">공지 게시판</span>
-							</h4>
-							<hr />
-							<table class="table">
-								<tbody id="noticeTable">
-									<div id="loadingNotice" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
-								</tbody>
-							</table>
+							<div class="dc-con-title">
+								<h4>
+									<span class="board-title">공지 게시판</span>
+								</h4>
+							</div>
+							<div class="dc-con-content">
+								<div class="dc-tb">
+									<div class="dc-tb-head">
+										<div class="dc-tb-row">
+											<!-- head -->
+										</div>										
+									</div>
+									<div id="noticeTable" class="dc-tb-body">
+										<div class="dc-tb-row">
+											<div id="loadingNotice" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
+						</div>
+						
 							<div class="dc-ad-box" style="height:100px;">
 								<!-- <h1>메인 광고(AD)</h1> -->
 								<div class="ad-main">
 									<img id="ad-main-img" src="" alt="" />
 								</div>
 							</div>
+							
 						<div class="dc-content-box">
-							<h4>
-								<span class="board-title">자유 게시판</span>
-							</h4>
-							<hr />
-							<table class="table">
-								<tbody id="freeTable">
-									<div id="loadingFree" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>							
-								</tbody>
-							</table>
+							<div class="dc-con-title">
+								<h4>
+									<span class="board-title">자유 게시판</span>
+								</h4>
+							</div>
+							
+							<div class="dc-con-content">
+								<table class="table">
+									<tbody id="freeTable">
+										<div id="loadingFree" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>							
+									</tbody>
+								</table>
+							</div>
 						</div>
 						
 						<div class="dc-content-box">
-							<h4>
-								<span class="board-title">공동구매 게시판</span>
-							</h4>
-							<hr />
-							<table class="table">
-								<tbody id="groupTable">
-									<div id="loadingGroup" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
-								</tbody>
-							</table>
+							<div class="dc-con-title">
+								<h4>
+									<span class="board-title">공동구매 게시판</span>
+								</h4>							
+							</div>
+							
+							<div class="dc-con-content">
+								<div class="dc-tb">
+									<div class="dc-tb-head">
+										<div class="dc-tb-row">
+											
+										</div>					
+									</div>
+									<div id="groupTable" class="dc-tb-body" style="">
+										<div id="main-img-list" class="main-img-list">
+												
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="dc-content-box">
+							<div class="dc-con-title">
+								<h4>
+									<span class="board-title">테스트 게시판</span>
+								</h4>							
+							</div>
+							
+							<div class="dc-con-content">
+								<div class="dc-tb">
+									<div class="dc-tb-head">
+										<div class="dc-tb-row">
+											<!-- head -->
+										</div>										
+									</div>
+									<div class="dc-tb-body">
+										<c:forEach begin="1" end="10">
+											<div class="dc-tb-row">
+												<a href="#">● <span><strong>[공지]</strong> 여러분 오늘 미세먼지가 매우 심합니다. 아이들 외출 자제해주세요. 좋은하루 되세요 ^_____^</span></a>
+											</div>
+										</c:forEach>
+									</div>
+								</div>							
+							</div>
 						</div>
 					</div>
 				</div>

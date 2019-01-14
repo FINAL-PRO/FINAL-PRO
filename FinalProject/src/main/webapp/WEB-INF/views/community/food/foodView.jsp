@@ -56,6 +56,21 @@
 		font-size: 12px;
 	}
 	
+	.address{
+		float: left;
+		display: inline-block;
+		line-height: 30px;
+		color: #a6a6a6;
+		font-size: 12px;
+	}
+	
+	.point{
+		float: left;
+		line-height: 30px;
+		color: #a6a6a6;
+		font-size: 12px;
+	}
+	
 	.text {
 		margin-top: 8px;
 		padding: 10px;
@@ -63,6 +78,13 @@
 		color: #292929;
 		font-size: 14px;
 		word-wrap: break-word;
+	}
+	
+	.category{
+		float: left;
+		line-height: 30px;
+		color: #a6a6a6;
+		font-size: 12px;
 	}
 	
 	.comment {
@@ -163,6 +185,7 @@
 	.starRev{
 		padding-top: 10px;
 		float: left;
+		display: inline-block;
 	}
 	
 	.starR1{
@@ -210,35 +233,59 @@
 							<div id="container2">
 								<div class="articlelist" style="border: solid 0.5px red">
 									<form name="boardFrm" method="post">
-										<input type="hidden" name="bno" value="${boardList.no}"/>
+										<input type="text" name="bno" value="${foodList.no}"/>
 										<input type="hidden" name="mno" value="${member.no}"/>
+										<input type="text" name="fno" value="${foodList.fno}"/>
 									</form>
 									<div class="group" style="border: solid 0.5px blue">
-										<p class="title">${boardList.title}</p>
+										<p class="title">${foodList.title}</p>
 										<div style="border: solid 0.5px gray"></div>
 										<p class="profile">
 											<img class="picture" src="https://cf-epi.campuspick.com/0.png"> 
-											<span class="nickname">${boardList.memberName}</span> 
-											<span class="count">조회수: ${boardList.viewCount}</span>
-											<p class="time"><fmt:formatDate value="${boardList.writeDate}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
+											<span class="nickname">${foodList.memberName}</span> 
+											<span class="count">조회수: ${foodList.viewCount}</span>
+											<p class="time"><fmt:formatDate value="${foodList.writeDate}" pattern="yyyy-MM-dd" /></p>
 										</p>
-										<div class="starRev" style="width: 100%;">
+										<p class="text">${foodList.content}</p>
+										<%-- <div class="starRev" style="width: 100%;">
+										  <p>${foodList.point}</p>
+										  <c:if test="${foodList.point == 0}">
 										  <span class="starR1 on">0</span>
+										  </c:if>
+										  <c:if test="${foodList.point == 1}">
 										  <span class="starR2">1</span>
+										  </c:if>
+										  <c:if test="${foodList.point == 1.5}">
 										  <span class="starR1">1.5</span>
+										  </c:if>
+										  <c:if test="${foodList.point == 2}">
 										  <span class="starR2">2</span>
+										  </c:if>
+										  <c:if test="${foodList.point == 2.5}">
 										  <span class="starR1">2.5</span>
+										  </c:if>
+										  <c:if test="${foodList.point == 3}">
 										  <span class="starR2">3</span>
+										  </c:if>
+										  <c:if test="${foodList.point == 3.5}">
 										  <span class="starR1">3.5</span>
+										  </c:if>
+										  <c:if test="${foodList.point == 4}">
 										  <span class="starR2">4</span>
+										  </c:if>
+										  <c:if test="${foodList.point == 4.5}">
 										  <span class="starR1">4.5</span>
+										  </c:if>
+										  <c:if test="${foodList.point == 5}">
 										  <span class="starR2">5</span>
-										</div>
+										  </c:if>
+										</div> --%>
 										<div>
-											주소: ${food.address}
+											<p class="category">카테고리: ${foodList.category}</p><br />
+											<p class="address">주소: ${foodList.address}</p>
 										</div>
-										<p class="text">${boardList.content}</p>
-										<div style="border: solid 0.5px lightgray"></div>
+										<div style="border: solid 0.5px lightgray"></div><br />
+										<p class="point">평가자 평점: ${foodList.point} 점</p>
 										<div>
 										<div style="height:12px;"></div>
 										<div class="status" style="border: solid 0.5px orange">
@@ -249,16 +296,16 @@
 											<span class="likecount">
 											<a href="#" class="likefunc">
 												<img src="/dc/resources/images/dislike.png" id="like_img" style="height: 17px; width: 17px;">
-												: <input type="text" value="${boardList.likeCount}" class="likecount2" readonly/>
+												: <input type="text" value="${foodList.likeCount}" class="likecount2" readonly/>
 											</a></span>
 											<input type="hidden" value="1" class="likecount3"/>
-											<span class="commentcount">댓글: ${boardList.commentCount}</span>
+											<span class="commentcount">댓글: ${foodList.commentCount}</span>
 										</div>
 										</div>
 										<script>
 										var bno = $('[name=bno]').val();
 										var mno = $('[name=mno]').val();
-											
+										
 										$(document).ready(function(){
 											
 											$.ajax({
@@ -358,23 +405,26 @@
 									             $('#myModal').hide();
 									        };
 									        
-									        $('.starRev span').click(function(){
+									     /*    $('.starRev span').click(function(){
 									        	  $(this).parent().children('span').removeClass('on');
 									        	  $(this).addClass('on').prevAll('span').addClass('on');
 									        	  
-									        	  var star = $(this).parent().children('span').val();
+									        	  var star = 0;
+									        	  
+									        	  star = Number($(this).text());
 									        	  
 									        	  console.log("별 값: "+star);
-									        	  return false;
-									        });
+									        
+									        	  $('#point').val(star);
+									        }); */
 											
 				                      		$("#btn_board_edit").click(function(){
-				                      			boardFrm.action="${pageContext.request.contextPath}/community/food/foodUpdateForm.do?no=${board.no}"
+				                      			boardFrm.action="${pageContext.request.contextPath}/community/food/foodUpdateForm.do?bno=${foodList.no}"
 				                      			boardFrm.submit();
 				                      		});
 				                      		
 				                      		$("#btn_board_delete").click(function(){
-				                      			boardFrm.action="${pageContext.request.contextPath}/community/food/foodDelete.do?no=${board.no}"
+				                      			boardFrm.action="${pageContext.request.contextPath}/community/food/foodDelete.do?bno=${foodList.no}"
 				                       			boardFrm.submit();
 				                      		});
 				                          	
@@ -389,8 +439,9 @@
 									<button class="btn_back" id="btn_back">Back</button> 
 									<script>
 					                    $("#btn_back").click(function(){
-					                    	boardFrm.action="${pageContext.request.contextPath}/community/food/list.do"
-					                    	boardFrm.submit();
+					                    	/* boardFrm.action="${pageContext.request.contextPath}/community/food/list.do"
+					                    	boardFrm.submit(); */
+					                    	location.href="${pageContext.request.contextPath}/community/food/list.do";
 					                    });
 				                    </script>
 								</div>

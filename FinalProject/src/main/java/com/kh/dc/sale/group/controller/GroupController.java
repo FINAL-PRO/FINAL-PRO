@@ -154,7 +154,7 @@ public class GroupController {
 	@RequestMapping("sale/group/getListData.do")
 	@ResponseBody
 	public List<Board> getListData(){
-		List<Board> groupList = groupService.getGroupListData();
+		List<Board> groupList = groupService.selectGroupList();
 		
 		return groupList;
 	}

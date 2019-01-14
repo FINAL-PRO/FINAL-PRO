@@ -11,15 +11,14 @@
 <c:import url="../common/header.jsp"/>
 	<style>
 		section {background-color: white;}
-		div#enroll-container{width:600px; margin:0 auto; text-align:center;}
+		div#enroll-container{width:600px; margin:0 auto; text-align:center; padding: 50px 0px 50px 0 ;}
 		div#enroll-container input, div#enroll-container select {margin-bottom:10px;}
 		div#enroll-container .col-md-3{text-align: right; padding-right:10px;}
 		
-		.dc-content-box{padding: 40px;}
 		.btn-container>.btn{width:100%}
 		.row label{width: 100%; text-align:left; font-size: 8px;}
 		
-		#modalBtn>button {width: 40%; text-align:center; margin-bottom: 10px;}
+		#modalBtn>button {width: 40%; text-emphasis: none; align:center; margin-bottom: 10px;}
 		
 		#modalPassword {width: 80%;}
 		

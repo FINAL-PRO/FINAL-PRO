@@ -9,20 +9,21 @@ public class Food extends Board implements Serializable{
 	private int no;
 	private int boardNo;
 	private String category;
-	
-	// DB join용 변수
 	private String address;
+	private String thumbnail;
+	
 	
 	public Food() {
 		super();
 	}
 
-	public Food(int no, int boardNo, String category, String address) {
+	public Food(int no, int boardNo, String category, String address, String thumbnail) {
 		super();
 		this.no = no;
 		this.boardNo = boardNo;
 		this.category = category;
 		this.address = address;
+		this.thumbnail = thumbnail;
 	}
 
 	public int getNo() {
@@ -57,9 +58,20 @@ public class Food extends Board implements Serializable{
 		this.address = address;
 	}
 
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+
 	@Override
 	public String toString() {
-		return "Food [no=" + no + ", boardNo=" + boardNo + ", category=" + category + ", address=" + address + "]";
+		return "Food [no=" + no + ", boardNo=" + boardNo + ", category=" + category + ", address=" + address
+				+ ", thumbnail=" + thumbnail + "]";
 	}
+
+	
 
 }

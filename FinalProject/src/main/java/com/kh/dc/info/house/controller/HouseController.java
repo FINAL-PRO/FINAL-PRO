@@ -30,7 +30,7 @@ public class HouseController {
 		return "info/house/list";
 	}
 	
-	@RequestMapping("info/house/selectOne.do")
+	@RequestMapping("info/house/view.do")
 	public String selectHouse(Model model, @RequestParam int no) {
 		House house = houseService.selectHouse(no);
 		model.addAttribute("house", house);
@@ -38,14 +38,14 @@ public class HouseController {
 		return "info/house/houseDetail";
 	}
 	
-	@RequestMapping(value= "info/house/insertHouse.do", method=RequestMethod.POST)
+	@RequestMapping(value= "info/house/insert.do", method=RequestMethod.POST)
 	public String insertHouse(House hs) {
 		int result = houseService.insertHouse(hs);
 		
-		return "redirect:/";
+		return "redirect:/info/house/list.do";
 	}
 	
-	@RequestMapping("info/house/insertHouseV.do")
+	@RequestMapping("info/house/insert/view.do")
 	public String insertHouseview(Model model) {
 		
 		List<Code> roomList = houseService.selectRoomList();
@@ -57,7 +57,7 @@ public class HouseController {
 		return "info/house/houseInsert";
 	}
 	
-	@RequestMapping("info/house/updateHouse.do")
+	@RequestMapping("info/house/update/view.do")
 	public String updateHouse(Model model, @RequestParam int no) {
 		House house = houseService.selectHouse(no);
 
@@ -71,18 +71,21 @@ public class HouseController {
 		return "info/house/houseInsert";
 	}
 	
-	@RequestMapping("info/house/updateHouseEnd.do")
+	@RequestMapping("info/house/update.do")
 	public String updateHouseEnd(House hs) {
+		
+		System.out.println("house : " + hs);
+		System.out.println("area : " + hs.getArea());
 		houseService.updateHouse(hs);
 		
-		return "info/house/houseDetail.do";
+		return "redirect:/info/house/view.do?no=" + hs.getNo();
 	}
 	
-	@RequestMapping("info/house/deleteHouse.do")
+	@RequestMapping("info/house/delete.do")
 	public String deleteHouse(@RequestParam int no) {
 		houseService.deleteHouse(no);
 		
-		return "info/house/list.do";
+		return "redirect:/info/house/list.do";
 	}
 }
 

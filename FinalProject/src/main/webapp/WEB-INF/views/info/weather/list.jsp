@@ -58,8 +58,8 @@
 								<h4 class="townName" style="margin: 0 0 0 10px;">현재 날씨</h4>
 								<div class="currentWeather" style="width:100%;">
 									<h3 id="currentWeatherLabel">현재 날씨를 불러오는 중입니다.</h3>
-									<div id="loadingTodayWeather"> 
-										<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" />
+									<div> 
+										<img class="loadingImg" id="loadingTodayWeather" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" />
 									</div>														
 								</div>
 								<hr />
@@ -68,10 +68,11 @@
 								<h4 style="margin: 0 0 0 10px;"> 주간 날씨</h4>
 								<div class="weekWeather-container" style="display: inline-block; margin-top:10px; width: 100%">	
 									<h3 id="weekWeatherLabel">주간 날씨를 불러오는 중입니다.</h3>
-									<div id="loadingWeekWeather">													
-										<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" />
+									<div>													
+										<img class="loadingImg" id="loadingWeekWeather" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" />
 									 </div>										
 								</div>	
+								
 													
 							</div>
 						</div>
@@ -134,6 +135,9 @@
 	        async: "false",
 	        success: function(data) {
 	        	
+	        	$("#loadingTodayWeather").hide();
+				$("#currentWeatherLabel").hide();        	
+	        	
 	            console.log(data);  
 	            var value1 = "";   	            
 	            var value2 = "";   	            
@@ -143,7 +147,7 @@
 	            	// 동네 이름 넣기
 	            	$('.townName').append(' : ' +$(this).find('category').text());
 	            	
-	            	value1 += '<div class="block" style="width:50px;">';						
+	            	value1 += '<div class="block" style="width:40px;">';						
 	            	value1 += '날짜<br>시간<br>'
 	            	value1 += '<div style="height:55px;">날씨</div><br>';						
 	            	value1 += '<span style="font-size: 8px;">최저온도</span><br>';
@@ -187,11 +191,11 @@
 	            		}
 	            		
 	             		
-	            		value2 += '<div class="block" style="width: 48px; text-align: center;">';
+	            		value2 += '<div class="block" style="width: 40px; text-align: center;">';
 	            		value2 += day + '<br>';
 	            		value2 += $(this).find('hour').text() + '시<br>';
 	            		value2 += sky + '<br>';	            		
-	            		value2 += '<div style="width: 48px; height: 30px;">' + $(this).find('wfKor').text() + '</div><br>';
+	            		value2 += '<div style="width: 40px; height: 30px;">' + $(this).find('wfKor').text() + '</div><br>';
 	            		value2 += mintemp + '<br>';            		
 	            		value2 += maxtemp  + '</label></div>';
 	     	            
@@ -203,9 +207,10 @@
       
 	        }, error:function(data){
 	        	console.log("날씨 ajax 실패");
-	        }, complete : function(){
-				$("#loadingTodayWeather").hide();
-				$("#currentWeatherLabel").hide();
+	        	$("#loadingTodayWeather").toggle();
+	        	
+	        }, complete : function(){				
+	        	
 			}
 	    });		
 		
@@ -221,6 +226,10 @@
 	        type: "GET",
 	        async: "false",
 	        success: function(data) {
+	        	
+	        	$("#loadingWeekWeather").hide();
+				$("#weekWeatherLabel").hide();
+				
 	            console.log(data);  
 	            var value1 = "";
 	            var value2 = "";
@@ -257,8 +266,8 @@
 			           		
 			           		if($(this).find('tmEf').text().substring(10) == today.substring(10)){
 	       				
-			           			value2 += '<div class="block"><label style="width:110px; text-align:center;">';
-			           			value2 += $(this).find("tmEf").text().substring(0,10) + '<br>'; 
+			           			value2 += '<div class="block"><label style="width:85px; text-align:center;">';
+			           			value2 += $(this).find("tmEf").text().substring(5,10) + '<br>'; 
 			           			value2 += sky + '<br>';	 
 			           			value2 += $(this).find("wf").text().substring(0,10) + '<br>'; 
 			           			value2 += $(this).find('tmn').text() + '<br>'; 
@@ -276,9 +285,10 @@
 	            });
 	        }, error : function(data){
 	        	console.log("주간 날씨 ajax 에러");
+	        	$("#loadingWeekWeather").toggle();
+	        	
 	        }, complete : function(){
-				$("#loadingWeekWeather").hide();
-				$("#weekWeatherLabel").hide();
+				
 			}
 	    });
 	    

@@ -19,6 +19,10 @@
 	<security:http security="none" pattern="/member/memberUpdate.do" />
 	
 	<security:http security="none" pattern="/community/free/freeInsertFormEnd.do" />
+	<security:http security="none" pattern="/info/region/insert.do" />
+	<security:http security="none" pattern="/info/house/insert.do" />
+	<security:http security="none" pattern="/info/house/update.do" />
+	<security:http security="none" pattern="/info/region/update.do" />
 	
 	<!-- <security:http security="none" pattern="/member/memberSearch.do" /> -->
 	<!-- <security:http security="none" pattern="/member/chkEmail.do" /> -->
@@ -28,6 +32,9 @@
 	<security:http security="none" pattern="/community/food/foodDelete.do" />
 	<security:http security="none" pattern="/community/food/foodUpdateForm.do" />
 	<security:http security="none" pattern="/job/jobBoard/insertJobBoard.do" />
+	<security:http security="none" pattern="/community/food/foodUpdateFormEnd.do" />
+	<security:http security="none" pattern="/sale/group/groupFormEnd.do" />
+
 	
 	<!-- 메시지 전송 -->
 	<security:http security="none" pattern="/message/messageInsert.do" />

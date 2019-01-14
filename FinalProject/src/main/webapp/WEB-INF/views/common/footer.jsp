@@ -72,7 +72,6 @@
 	</div>
 	<!--End Modal-->
 
-	<hr />
 	<div class="footer_bottom">
 		<p align="center">
 			<span class="footer-text">Copyright 2019. 1st All rights reserved.</span>

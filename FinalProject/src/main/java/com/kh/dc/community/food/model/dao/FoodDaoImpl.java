@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.BoardList;
 import com.kh.dc.community.food.model.vo.Food;
+import com.kh.dc.community.food.model.vo.FoodList;
 import com.kh.dc.community.food.model.vo.FoodPoint;
 
 @Repository
@@ -43,9 +44,8 @@ public class FoodDaoImpl implements FoodDao{
 	}
 
 	@Override
-	public BoardList selectOneFood(int bno) {
-		return sqlSession.selectOne("food_mapper.selectOneFood", bno);
-
+	public FoodList selectOneFood(int no) {
+		return sqlSession.selectOne("food_mapper.selectOneFood", no);
 	}
 
 	@Override
@@ -69,20 +69,41 @@ public class FoodDaoImpl implements FoodDao{
 	}
 
 	@Override
-	public int foodUpdate(Board board) {
-		return sqlSession.insert("food_mapper.updateFood", board);
+	public int boardUpdate(FoodList foodList) {
+		return sqlSession.insert("food_mapper.updateBoard", foodList);
+	}
+
+	@Override
+	public int foodUpdate(FoodList foodList) {
+		return sqlSession.insert("food_mapper.updateFood", foodList);
+	}
+
+	@Override
+	public int foodPointUpdate(FoodList foodList) {
+		return sqlSession.insert("food_mapper.updateFoodPoint", foodList);
 	}
 	
 	@Override
 	public int foodViewCount(int bno) {
 		return sqlSession.update("food_mapper.foodViewCount", bno);
-
+		
 	}
-
+	
 	@Override
 	public List<Board> selectFoodListData() {
 		return sqlSession.selectList("food_mapper.selectFoodListData");
 	}
+/*
+	@Override
+	public int boardUpdate(Map<String, Object> map) {
+		return sqlSession.insert("food_mapper.updateBoard", map);
+	}*/
+
+/*	@Override
+	public int foodUpdate(FoodList foodList) {
+		return sqlSession.insert("food_mapper.foodUpdate", foodList);
+	}*/
+
 
 
 }
