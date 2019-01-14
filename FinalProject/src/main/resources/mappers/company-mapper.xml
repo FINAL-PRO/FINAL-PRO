@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="company_mapper">
+
+	<select id="selectCompayTypeList" resultType="code">
+		SELECT * FROM DC_CODE_TB WHERE ATT='업체구분'
+	</select>
+	
+	<select id="selectCompanyList" parameterType="String" resultType="company">
+		SELECT C.*, CO.VALUE FROM DC_COMPANY_TB C
+		JOIN DC_CODE_TB CO ON C.STATUS = CO.ID
+		WHERE STATUS = #{companyType}
+	</select>
+	
+	<select id="selectCompanyOne" parameterType="_int" resultType="company">
+		SELECT C.*, CO.VALUE FROM DC_COMPANY_TB C
+		JOIN DC_CODE_TB CO ON C.STATUS = CO.ID
+		WHERE C.NO = #{companyNo}
+	</select>
+	
+	<insert id="insertCompany" parameterType="company">
+		INSERT INTO DC_COMPANY_TB VALUES(SEQ_COMPANY.NEXTVAL, #{name}, SYSDATE, #{address}, #{status})
+	</insert>
+	
+	<update id="updateCompany" parameterType="company">
+		UPDATE DC_COMPANY_TB SET NAME=#{name}, ADDRESS=#{address}, STATUS=#{status} WHERE NO = #{no}
+	</update>
+
+</mapper>
