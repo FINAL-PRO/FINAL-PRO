@@ -7,9 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <style>
-	section {background-color: white;}
 </style>
 </head>
 <body>
@@ -22,7 +20,7 @@
 							<a class="nav-link" href="${pageContext.request.contextPath}/member/memberView.do?no=${member.no}">내정보보기 </a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="${pageContext.request.contextPath}/mypage/myContentList.do?no=${member.no}">내가 쓴 글/댓글 </a>
+							<a class="nav-link" href="${pageContext.request.contextPath}/mypage/list.do?no=${member.no}">내가 쓴 글/댓글 </a>
 						</li>					
 					</ul>
 				</div>

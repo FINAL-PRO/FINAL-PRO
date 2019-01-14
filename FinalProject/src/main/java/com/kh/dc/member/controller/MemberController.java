@@ -41,13 +41,13 @@ public class MemberController {
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	// 회원가입 페이지 가져오기
-	@RequestMapping("/member/memberEnroll.do")
+	@RequestMapping("/member/memberInsert.do")
 	public String memberEnroll(Model model) {
 		List<Location> locationList = memberService.selectLocationList();
 		
 		model.addAttribute("locationList", locationList);
 		
-		return "member/memberEnroll";
+		return "member/memberInsert";
 		
 	}
 	
@@ -74,7 +74,7 @@ public class MemberController {
 	}
 	
 	// 회원가입 완료 - memberInsert
-	@RequestMapping("member/memberEnrollEnd.do")
+	@RequestMapping("member/memberEnroll.do")
 	public String memberEnrollEnd(HttpSession session, Member member, 
 			Model model, @RequestParam(value="file", required = false) MultipartFile mf) {
 		

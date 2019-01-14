@@ -8,13 +8,7 @@
 			<!-- default header name is X-CSRF-TOKEN -->
 <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 <!DOCTYPE html>
-<header>
-	<style>
-	 #searchWord{
-	 	border: 3px solid green;
-	 }
-	</style>
-	
+<header>	
 	<div id="header-container">
 		<div class="header_top" style="display:block;">
 			<div class="header_logo" style="display:inline-block;">				
@@ -25,8 +19,9 @@
 					</div>
 			</div>
 			<div class="header_search" style="display:inline-block; width: 40%">
-				<form class="" action="${pageContext.request.contextPath}/search/searchView.do?">
-					<input type="text" class="form-control" id="searchWord" name="searchWord" placeholder="검색어를 입력하세요.">
+				<form class="" action="${pageContext.request.contextPath}/search/list.do?">
+					<input type="text" class="form-control" id="searchWord" name="searchWord" 
+						style="border: 3px solid green;" placeholder="검색어를 입력하세요.">
 				</form>
 			</div>
 		</div>

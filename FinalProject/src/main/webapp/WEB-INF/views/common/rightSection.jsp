@@ -89,7 +89,7 @@
 				<sec:authorize access="isAnonymous()">
 					<ul>
 						<li><button class="btn btn-outline-success" onclick="location.href='${pageContext.request.contextPath}/member/memberSearch.do'">id/pw 찾기</button></li>
-						<li><button class="btn btn-outline-success" id="enrollBtn" type="button" onclick="location.href='/dc/member/memberEnroll.do'">회원가입</button></li>
+						<li><button class="btn btn-outline-success" id="enrollBtn" type="button" onclick="location.href='/dc/member/memberInsert.do'">회원가입</button></li>
 					</ul>
 				</sec:authorize>
 				

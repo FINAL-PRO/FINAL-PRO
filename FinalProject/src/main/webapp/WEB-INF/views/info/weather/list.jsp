@@ -9,33 +9,7 @@
 	<meta charset="UTF-8">
 	<title>동커</title>
 	<c:import url="../../common/header.jsp"/>
-	<style>
-		.block {
-			float: left;
-			height: auto;
-			width: auto;
-			/* border: 1px solid lightgray; */
-			text-align: center;
-		}
-		
-		.currentWeather{
-			display: inline-block; 
-			margin-top:10px; 
-			font-size:16px; 
-			text-align:center; 	
-			align : center;		
-		}
-		
-		.weekWeather-container{
-			display: inline-block; 
-			margin-top:10px; 
-			font-size:16px; 
-			text-align:center; 	
-			align : center;		
-		}
-		
-		.loadingImg { width:250px;height:250px }
-	</style>
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/info/weather/dc-info-weather.css" />
 </head>
 <body>
 	<c:import url="../../common/menubar.jsp"/>
@@ -49,7 +23,7 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>제목</h1>
+							<h3>날씨 페이지</h3>
 						</div>
 						<div class="dc-content-box">
 							<div class="weather-container" style="margin: 20px;">
@@ -57,19 +31,23 @@
 								<!-- 동네 이름 -->
 								<h4 class="townName" style="margin: 0 0 0 10px;">현재 날씨</h4>
 								<div class="currentWeather" style="width:100%;">
-									<h3 id="currentWeatherLabel">현재 날씨를 불러오는 중입니다.</h3>
-									<div> 
-										<img class="loadingImg" id="loadingTodayWeather" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" />
+									<div id="loadingTodayWeather"> 
+										<h3 id="currentWeatherLabel">현재 날씨를 불러오는 중입니다.</h3>
+										<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" />
 									</div>														
 								</div>
-								<hr />
 								
-								<!-- 주간 날씨 부분 -->
+								<div style="margin:50px 0px 50px 0px;">
+								<hr />
+								</div>
+								
+								
+								<!-- 주간 날씨 부분 <--></-->
 								<h4 style="margin: 0 0 0 10px;"> 주간 날씨</h4>
 								<div class="weekWeather-container" style="display: inline-block; margin-top:10px; width: 100%">	
-									<h3 id="weekWeatherLabel">주간 날씨를 불러오는 중입니다.</h3>
-									<div>													
-										<img class="loadingImg" id="loadingWeekWeather" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" />
+									<div id="loadingWeekWeather">													
+										<h3 id="weekWeatherLabel">주간 날씨를 불러오는 중입니다.</h3>
+										<img class="loadingImg" src="${pageContext.request.contextPath}/resources/images/loading1.gif" />
 									 </div>										
 								</div>	
 								
@@ -133,10 +111,7 @@
 			dataType: 'jsonp',
 	        type: "GET",
 	        async: "false",
-	        success: function(data) {
-	        	
-	        	$("#loadingTodayWeather").hide();
-				$("#currentWeatherLabel").hide();        	
+	        success: function(data) {    	
 	        	
 	            console.log(data);  
 	            var value1 = "";   	            
@@ -149,12 +124,12 @@
 	            	
 	            	value1 += '<div class="block" style="width:40px;">';						
 	            	value1 += '날짜<br>시간<br>'
-	            	value1 += '<div style="height:55px;">날씨</div><br>';						
+	            	value1 += '<div style="">날씨</div><br>';						
 	            	value1 += '<span style="font-size: 8px;">최저온도</span><br>';
 	            	value1 += '<span style="font-size: 8px;">최고온도</span><br>';
 	            	value1 += '</div>';
 					
-					$('.currentWeather').append(value1); 
+					$('.currentWeather').append(value1);
 	            	
 	            	$(this).find('data').each(function(){
 	            			            		
@@ -165,9 +140,9 @@
 	            		
 	            		// 날짜 구분
 	            		switch($(this).find('day').text()){
-	            		case '0': day = '<label style="background-color:lightblue; width:auto; margin-bottom: 0;">오늘'; break;
-	            		case '1': day = '<label style="background-color:lightpink; width:auto; margin-bottom: 0;">내일'; break;
-	            		case '2': day = '<label style="background-color:lightgray; width:auto; margin-bottom: 0;">모레'; break;	            		
+	            		case '0': day = '<label style="background-color:lightblue; width:65px; margin-bottom: 0;">오늘'; break;
+	            		case '1': day = '<label style="background-color:lightpink; width:65px; margin-bottom: 0;">내일'; break;
+	            		case '2': day = '<label style="background-color:lightgray; width:65px; margin-bottom: 0;">모레'; break;	            		
 	            		}
 
 	            		// 날씨 아이콘 넣기	            		
@@ -190,14 +165,18 @@
 	            			maxtemp = '-';
 	            		}
 	            		
+	            		if($(this).find('hour').text() == '6' || $(this).find('hour').text() == '12'
+	           				|| $(this).find('hour').text() == '18' || $(this).find('hour').text() == '24'){
 	             		
-	            		value2 += '<div class="block" style="width: 40px; text-align: center;">';
-	            		value2 += day + '<br>';
-	            		value2 += $(this).find('hour').text() + '시<br>';
-	            		value2 += sky + '<br>';	            		
-	            		value2 += '<div style="width: 40px; height: 30px;">' + $(this).find('wfKor').text() + '</div><br>';
-	            		value2 += mintemp + '<br>';            		
-	            		value2 += maxtemp  + '</label></div>';
+		            		value2 += '<div class="block" style="text-align: center;">';
+		            		value2 += day + '<br>';
+		            		value2 += $(this).find('hour').text() + '시<br>';
+		            		value2 += sky + '<br>';	            		
+		            		value2 += '<label style="font-size:14px;">' + $(this).find('wfKor').text() + '</label><br>';
+		            		value2 += mintemp + '<br>';            		
+		            		value2 += maxtemp  + '</label></div>';
+	            		
+	            		}
 	     	            
 	 	            });
 	            	
@@ -210,7 +189,7 @@
 	        	$("#loadingTodayWeather").toggle();
 	        	
 	        }, complete : function(){				
-	        	
+	        	$("#loadingTodayWeather").toggle();
 			}
 	    });		
 		
@@ -226,9 +205,6 @@
 	        type: "GET",
 	        async: "false",
 	        success: function(data) {
-	        	
-	        	$("#loadingWeekWeather").hide();
-				$("#weekWeatherLabel").hide();
 				
 	            console.log(data);  
 	            var value1 = "";
@@ -236,7 +212,7 @@
 	            
 	            value1 += '<div class="block" style="width:50px;">';
 	            value1 += '날짜<br>';
-	            value1 += '<div style="">날씨</div><br>	';
+	            value1 += '<div style="height: 40px;">날씨</div><br>	';
 	            value1 += '<span style="font-size: 8px;">최저온도</span><br>';
 	            value1 += '<span style="font-size: 8px;">최고온도</span><br>';
 	            value1 += '</div>';
@@ -254,21 +230,21 @@
 			           		//var time = $(this).find('tmEf').text().substring(10);
 			           	// 날씨 아이콘 넣기	            		
 		            		switch($(this).find('wf').text()){
-								case "맑음": sky='<i class="wi wi-day-sunny"></i>'; break;
-								case "구름조금": sky='<i class="wi wi-day-sunny-overcast"></i>'; break;
-								case "구름많음": sky='<i class="wi wi-day-cloudy"></i>'; break;
-								case "흐림": sky='<i class="wi wi-cloudy"></i>'; break;
-								case "비": sky='<i class="wi wi-rain"></i>'; break;
-								case "눈": sky='<i class="wi wi-snow"></i>'; break;
-								case "눈/비": sky='<i class="wi wi-hail"></i>'; break;
+								case "맑음": sky='<i class="wi wi-day-sunny week"></i>'; break;
+								case "구름조금": sky='<i class="wi wi-day-sunny-overcast week"></i>'; break;
+								case "구름많음": sky='<i class="wi wi-day-cloudy week"></i>'; break;
+								case "흐림": sky='<i class="wi wi-cloudy week"></i>'; break;
+								case "비": sky='<i class="wi wi-rain week"></i>'; break;
+								case "눈": sky='<i class="wi wi-snow week"></i>'; break;
+								case "눈/비": sky='<i class="wi wi-hail week"></i>'; break;
 		            		}			           		
 			           		
 			           		
 			           		if($(this).find('tmEf').text().substring(10) == today.substring(10)){
 	       				
 			           			value2 += '<div class="block"><label style="width:85px; text-align:center;">';
-			           			value2 += $(this).find("tmEf").text().substring(5,10) + '<br>'; 
-			           			value2 += sky + '<br>';	 
+			           			value2 += $(this).find("tmEf").text().substring(5,10) + '</label><br>'; 
+			           			value2 += sky + '<br><label style="width:85px; text-align:center;">';	 
 			           			value2 += $(this).find("wf").text().substring(0,10) + '<br>'; 
 			           			value2 += $(this).find('tmn').text() + '<br>'; 
 			           			value2 += $(this).find("tmx").text() + '</label></div>';		                				
@@ -288,7 +264,7 @@
 	        	$("#loadingWeekWeather").toggle();
 	        	
 	        }, complete : function(){
-				
+	        	$("#loadingWeekWeather").toggle();
 			}
 	    });
 	    
