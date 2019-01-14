@@ -15,7 +15,7 @@
 	
 	<!-- 회원가입 / 비번찾기 -->	
 	<!-- <security:http security="none" pattern="/member/memberEnroll.do" /> -->
-	<security:http security="none" pattern="/member/memberEnrollEnd.do" />
+	<security:http security="none" pattern="/member/memberEnroll.do" />
 	<security:http security="none" pattern="/member/memberUpdate.do" />
 	
 	<security:http security="none" pattern="/community/free/freeInsertFormEnd.do" />

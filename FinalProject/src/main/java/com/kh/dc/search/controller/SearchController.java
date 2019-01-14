@@ -21,7 +21,7 @@ public class SearchController {
 	@Autowired
 	private SearchService searchService;
 	
-	@RequestMapping("/search/searchView.do")
+	@RequestMapping("/search/list.do")
 	public String memberEnroll(@RequestParam String searchWord, Model model) {
 		
 		List<Board> searchResultList = searchService.searchResultList(searchWord);
@@ -47,7 +47,7 @@ public class SearchController {
 		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("searchResultList", searchResultList);
 		
-		return "/search/searchView";
+		return "/search/list";
 	}
 
 }

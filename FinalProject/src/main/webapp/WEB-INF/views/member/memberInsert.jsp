@@ -9,27 +9,7 @@
 <meta charset="UTF-8">
 <title>동커 회원가입</title>
 <c:import url="../common/header.jsp" />
-<style>
-
-		div#enroll-container{width:600px; margin:0 auto; text-align:center;}
-		div#enroll-container input, div#enroll-container select {margin-bottom:10px;}
-		div#enroll-container .col-md-3{text-align: right; padding-right:10px;}
-		
-		.btn-container>.btn{width:100%}
-		.row label{width: 100%; text-align:left; font-size: 8px;}
-		
-		#modalBtn>button {width: 40%; text-align:center; margin-bottom: 10px;}		
-		#modalPassword {width: 80%;}
-		
-		#file {display:none;}
-		#profileImg {
-			border-radius: 100px;
-		    border: 1px solid lightgray; 
-		    width: 150px; 
-		    height: 150px;
-		    margin-bottom: 15px;
-		}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/dc-member.css" />
 </head>
 <body>
 	<c:import url="../common/menubar.jsp" />
@@ -39,7 +19,6 @@
 			<div class="section-left">
 				<!-- 내용없음 -->
 			</div>
-
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
@@ -47,7 +26,7 @@
 					</div>
 					<div class="dc-content-box">
 						<div id="enroll-container">
-						<form name="memberEnrollFrm" id="memberEnroll" action="memberEnrollEnd.do" method="post" enctype="multipart/form-data">
+						<form name="memberEnrollFrm" id="memberEnroll" action="memberEnroll.do" method="post" enctype="multipart/form-data">
 							<div class="row profile-container" id="profile-container">
 								<div class="col-md-3">프로필</div>
 				  				<div class="col-md-6" align="center">
@@ -269,6 +248,7 @@
 					$("#submitButton").attr('disabled', true);
 				} else {
 					$("#pwdChkComment").text('');
+					$("#pwdChkComment2").text('');
 					$("#submitButton").attr('disabled', false);					
 				}
 			});
