@@ -96,14 +96,12 @@
 										<br>
 										<input type="hidden" id="mno" name="memberNo" value="${member.no}" required>
 										<div>
-											<!-- <div class="add" style="display:inline-block;">
-												<div style="height:150px; width:200px; border:1px solid lightgrey;">
+											<div class="add" style="display:inline-block;">
+												<div style="display:none;">
 													<img id="foodImg"/>
-													<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);" />
 													<input type="text" name="thumbnail" id="thumbnail" value="" />
 												</div>
-												<input type="button" id="foodThumbsnail" value="썸네일 등록" style="margin-top: 10px; margin-bottom: 10px;"/>
-											</div> -->
+											</div> 
 											<div class="table-div" style="display:inline-block; border:1px soild black;">
 												
 												<div class="tr-div">

@@ -52,6 +52,9 @@
 
 .point {
 	line-height: 1.2em;
+	color: lightslategray;
+	display: inline;
+	padding-left: 10px;
 }
 
 .address {
@@ -65,23 +68,21 @@
 }
 
 .nickname {
-	display: inline;
-	padding-left: 20px;
+	display: inline-block;
 	font-size: 0.8rem;
-	color: rgb(85, 85, 85);
+	color: lightslategray;
 }
 
 .categoryName{
 	display: inline;
-	padding-left: 20px;
+	color: lightslategray;
 	font-size: 0.8rem;
-	color: rgb(85, 85, 85);
 }
 .time {
 	display: inline;
-	padding-left: 20px;
+	padding-left: 10px;
 	font-size: 0.8rem;
-	color: rgb(85, 85, 85);
+	color: lightslategray;	
 }
 
 .count {
@@ -112,12 +113,18 @@
 	display: inline-block;
 	padding-left: 30px; 
 	padding-top: 10px; 
-	padding-right: 100px; 
+	padding-right: 30px; 
 	padding-bottom: 20px; 
 	height: 200px; 
 	width: 80%;
 	border: 1px solid navy; 
 	font-size: 0.8rem;
+}
+
+.table_review{
+	padding-top: 10px; 
+	padding-right: 30px; 
+	padding-bottom: 20px; 
 }
 
 .article{
@@ -130,6 +137,16 @@
 
 .article:hover{
 	opacity: 0.7;
+}
+
+p.profile>img.picture {
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+}
+
+.profile{
+	display: inline-block;
 }
 
 </style>
@@ -183,24 +200,31 @@
 											<li class="groupin" id="${b.no}">
 											<div class="article" onclick="location.href='${pageContext.request.contextPath}/community/food/foodView.do?bno=${b.no}';">
 											
-									          	<div class="imgtag" style="display:none;">
-									          		${b.content}
-									          	</div>
 												<div class="thumb_review">
 									            	<img id="center" class="center" src="${b.thumbnail}">
 									            
 									          	</div>
 												<div class="board_review">
 										            <span class="title"> <h3>${b.title}</h3></span>
+										            <p class="profile">
+											            <c:choose>
+															<c:when test="${!empty b.profile}">
+																<img class="picture" src="/dc/resources/upload/profile/${b.profile}" /> 
+															</c:when>
+															<c:otherwise>
+																<img class="picture" src="/dc/resources/upload/profile/profileDefaultImg.png" /> 
+															</c:otherwise>
+														</c:choose>
 										            <p class="nickname">${b.memberName}</p>
-										           	<p class="categoryName">카테고리: ${b.category}</p>
+										            <br>
+										           	<p class="categoryName">${b.category}</p>
+										            <p class="point">${b.point} 점</p>
+										            <p class="address">${b.address}</p>
 													<p class="time">
 														<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd" />
 													</p>
 										            <br>
-										            <strong class="point"><span>${b.point} 점</span></strong>
-										            <p class="address">${b.address}</p>
-										            <br><br>
+										            <div class="table_review">
 										            <c:choose>
 														<c:when test="${b.imageCheck eq 0}">
 															<span class="short_review">${b.content}</span>
@@ -209,7 +233,7 @@
 															<span class="content"><p>(이미지)</p></span>
 														</c:otherwise>
 													</c:choose>
-										            <br><br>
+													</div>
 										            <div class="count">조회수: ${b.viewCount}</div>&nbsp;&nbsp;
 										            <div class="count">댓글: ${b.commentCount}</div>&nbsp;&nbsp;
 										            <div class="count">좋아요: ${b.likeCount}</div>

@@ -22,12 +22,15 @@ public class Comment implements Serializable{
 	private String boardType;
 	private String boardTitle;
 	private int recnt;
+	private String profile;
+	
 	
 	public Comment() {
 		super();
 	}
 
-	public Comment(int no, String content, Date writeDate, int memberNo, int boardNo, String status) {
+	public Comment(int no, String content, Date writeDate, int memberNo, int boardNo, String status, String memberName,
+			String boardType, String boardTitle, int recnt, String profile) {
 		super();
 		this.no = no;
 		this.content = content;
@@ -35,6 +38,11 @@ public class Comment implements Serializable{
 		this.memberNo = memberNo;
 		this.boardNo = boardNo;
 		this.status = status;
+		this.memberName = memberName;
+		this.boardType = boardType;
+		this.boardTitle = boardTitle;
+		this.recnt = recnt;
+		this.profile = profile;
 	}
 
 	public int getNo() {
@@ -117,11 +125,19 @@ public class Comment implements Serializable{
 		this.recnt = recnt;
 	}
 
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
 	@Override
 	public String toString() {
 		return "Comment [no=" + no + ", content=" + content + ", writeDate=" + writeDate + ", memberNo=" + memberNo
 				+ ", boardNo=" + boardNo + ", status=" + status + ", memberName=" + memberName + ", boardType="
-				+ boardType + ", boardTitle=" + boardTitle + ", recnt=" + recnt + "]";
+				+ boardType + ", boardTitle=" + boardTitle + ", recnt=" + recnt + ", profile=" + profile + "]";
 	}
 	
 }
