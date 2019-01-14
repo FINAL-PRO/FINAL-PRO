@@ -56,4 +56,12 @@
 		AND L.NAME= #{adLocation}
 	</select>
 	
+	<select id="selectOne" resultType="ad">
+		SELECT * from DC_AD_TB
+		WHERE no = #{adNo}
+	</select>
+	
+	<update id="changeAdStatus" parameterType="map">
+		UPDATE DC_AD_TB SET STATUS = #{status} WHERE NO = #{no}
+	</update>
 </mapper>

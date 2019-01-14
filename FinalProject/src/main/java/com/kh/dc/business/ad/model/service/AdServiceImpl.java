@@ -64,4 +64,14 @@ public class AdServiceImpl implements AdService {
 		return adDao.getAd(params);
 	}
 
+	@Override
+	public Ad selectOne(int adNo) {
+		return adDao.selectOne(adNo);
+	}
+
+	@Override
+	public int changeAdStatus(Map<String, Object> param) {
+		return adDao.changeAdStatus(param);
+	}
+
 }

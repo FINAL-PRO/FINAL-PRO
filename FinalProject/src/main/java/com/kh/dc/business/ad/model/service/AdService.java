@@ -29,4 +29,8 @@ public interface AdService {
 
 	Ad getAd(Map<String, Object> params);
 
+	Ad selectOne(int adNo);
+
+	int changeAdStatus(Map<String, Object> param);
+
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scheduler_mapper">
+
+	<update id="adStatusStart">
+		UPDATE DC_AD_TB SET STATUS = 'ADSTATUS002' WHERE STARTDATE 
+		<![CDATA[ >= SYSDATE AND STATUS = 'ADSTATUS001' ]]>
+	</update>
+	
+	<update id="adStatusEnd">
+		UPDATE DC_AD_TB SET STATUS = 'ADSTATUS004' WHERE ENDDATE 
+		<![CDATA[ <= SYSDATE AND STATUS = 'ADSTATUS002' ]]>
+	</update>
+	
+</mapper>
