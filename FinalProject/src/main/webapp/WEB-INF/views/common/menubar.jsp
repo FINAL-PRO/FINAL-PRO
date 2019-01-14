@@ -8,25 +8,20 @@
 			<!-- default header name is X-CSRF-TOKEN -->
 <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 <!DOCTYPE html>
-<header>
-	<style>
-	 #searchWord{
-	 	border: 3px solid green;
-	 }
-	</style>
-	
+<header>	
 	<div id="header-container">
 		<div class="header_top" style="display:block;">
 			<div class="header_logo" style="display:inline-block;">				
-					<div>
+					<div style="margin-left: 10px;">
 					<a class="navbar-brand" href="/dc">
-						<img src="${pageContext.request.contextPath }/resources/images/logo.png" alt="로고" width="300px"/>
+						<img src="${pageContext.request.contextPath }/resources/images/logo1.PNG" alt="로고" width="120px;"/>
 					</a> 
 					</div>
 			</div>
-			<div class="header_search" style="display:inline-block; width: 40%">
-				<form class="" action="${pageContext.request.contextPath}/search/searchView.do?">
-					<input type="text" class="form-control" id="searchWord" name="searchWord" placeholder="검색어를 입력하세요.">
+			<div class="header_search" style="display:inline-block; margin-left: 50px; width: 50%">
+				<form class="" action="${pageContext.request.contextPath}/search/list.do?">
+					<input type="text" class="form-control" id="searchWord" name="searchWord" 
+						style="border: 4px solid rgb(248, 178, 106);" placeholder="검색어를 입력하세요.">
 				</form>
 			</div>
 		</div>

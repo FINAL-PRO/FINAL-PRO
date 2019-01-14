@@ -2,6 +2,7 @@
 
 body {
 	/* background-color : #f1f3f6; */
+	font-family:'Nanum Gothic', sans-serif;
 }
 
 header{
@@ -310,6 +311,7 @@ div[class^="ad-"]:hover {
 	/* background:red; */
 	margin:3px;
 }
+
 
 
 

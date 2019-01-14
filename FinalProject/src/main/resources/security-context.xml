@@ -15,7 +15,7 @@
 	
 	<!-- 회원가입 / 비번찾기 -->	
 	<!-- <security:http security="none" pattern="/member/memberEnroll.do" /> -->
-	<security:http security="none" pattern="/member/memberEnrollEnd.do" />
+	<security:http security="none" pattern="/member/memberEnroll.do" />
 	<security:http security="none" pattern="/member/memberUpdate.do" />
 	
 	<security:http security="none" pattern="/community/free/freeInsertFormEnd.do" />
@@ -31,6 +31,7 @@
 	<security:http security="none" pattern="/community/food/foodInsertFormEnd.do" />
 	<security:http security="none" pattern="/community/food/foodDelete.do" />
 	<security:http security="none" pattern="/community/food/foodUpdateForm.do" />
+	<security:http security="none" pattern="/job/jobBoard/insertJobBoard.do" />
 	<security:http security="none" pattern="/community/food/foodUpdateFormEnd.do" />
 	
 	<security:http security="none" pattern="/sale/group/groupFormEnd.do" />

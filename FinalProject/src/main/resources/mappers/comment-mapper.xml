@@ -5,11 +5,12 @@
 	<resultMap type="comment" id="resultComment">
 		<id property="no" column="no" />
 		<result property="memberName"  column="nickName" />
+		<result property="profile"  column="profile" /> 
 	</resultMap>
 	
 	<!-- 게시글의 댓글 전체 가져오기 -->
 	<select id="selectCommentList" resultMap="resultComment" parameterType="_int">
-		SELECT C.*, M.NICKNAME
+		SELECT C.*, M.NICKNAME, M.PROFILE profile
 		FROM DC_COMMENT_TB C
 		JOIN DC_MEMBER_TB M  ON C.MEMBERNO = M.NO
 		JOIN DC_BOARD_TB B ON C.BOARDNO = B.NO

@@ -9,28 +9,7 @@
 <meta charset="UTF-8">
 <title>회원 정보 페이지</title>
 <c:import url="../common/header.jsp"/>
-	<style>
-		section {background-color: white;}
-		div#enroll-container{width:600px; margin:0 auto; text-align:center; padding: 50px 0px 50px 0 ;}
-		div#enroll-container input, div#enroll-container select {margin-bottom:10px;}
-		div#enroll-container .col-md-3{text-align: right; padding-right:10px;}
-		
-		.btn-container>.btn{width:100%}
-		.row label{width: 100%; text-align:left; font-size: 8px;}
-		
-		#modalBtn>button {width: 40%; text-emphasis: none; align:center; margin-bottom: 10px;}
-		
-		#modalPassword {width: 80%;}
-		
-		#profileImg {
-			border-radius: 100px;
-		    border: 1px solid lightgray; 
-		    width: 150px; 
-		    height: 150px;
-		    margin-bottom: 15px;
-		}
-				
-	</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/dc-member.css" />
 </head>
 <body>
 	<c:import url="../common/menubar.jsp"/>
@@ -45,7 +24,7 @@
 					<div class="dc-content">
 					
 						<div class="dc-content-title">
-							<c:import url="../mypage/myPageMenu.jsp"/>
+							<c:import url="../mypage/myPageMenubar.jsp"/>
 						</div>
 						
 						<div class="dc-content-box">
@@ -171,7 +150,7 @@
 	
 	<script>
 	$("#memberUpdateView").on("click", function(){
-		location.href= "${pageContext.request.contextPath}/member/memberUpdateView.do";
+		location.href= "${pageContext.request.contextPath}/member/memberUpdateView.do?no=${member.no}";
 	});
 	
 	</script>

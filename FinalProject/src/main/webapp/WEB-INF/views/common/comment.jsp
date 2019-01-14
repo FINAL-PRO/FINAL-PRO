@@ -13,7 +13,7 @@
 	 	padding: 15px;
 	}
 	
-	.picture {
+	.CommentPicture {
 		display: inline-block;
 		width: 20px;
 		height: 20px;
@@ -71,7 +71,7 @@
 		margin-top: 4px;
 		float: right;
 	}
-	
+
 </style>
 </head>
 <body>
@@ -83,6 +83,7 @@
 				<input type="hidden" id="bno" name="bno" value="${boardList.no}" /> 
 				<input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요."/> 
 				<input type="hidden" id="mno" name="mno" value="${member.no}" /> 
+				<input type="hidden" id="profile" name="profile" value="${member.profile}"/>
 				<span class="input-group-btn">
 				<button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
 				</span>
@@ -130,7 +131,9 @@
      
    	function commentList(bno){
    		
-   		console.log(bno);
+   		console.log("bno:" + bno);
+   		
+
    		
    		$.ajax({
    			type: "get",
@@ -140,15 +143,27 @@
 
    	            var a =''; 
    	            
+   	            
    	            $.each(data, function(key, value){ 
+   	            	
+	   	    		var profile = value.profile;
+	   	    		
+	   	    		if(profile == null){
+	   	    			profile = "/dc/resources/upload/profile/profileDefaultImg.png";
+	   	    		}else{
+	   	    			profile = "/dc/resources/upload/profile/"+profile;
+	   	    			console.log("yestprofile: "+profile);
+	   	    		}
+	   	    		
    	                a += '<div class="commentArea" id="commentArea'+value.no+'">';
    	                a += '<p class="profile" style="display:inline;">';
-					a += '<img class="picture" src="https://cf-epi.campuspick.com/0.png">';
+					a += '<img class="picture" src="'+profile+'" />';
 					a += '<span class="nickname">'+value.memberName+'</span>';
 					a += '</p>';
    	                a += '<input type="hidden" name="bno" value="'+bno+'"/>';
 					a += '<input type="hidden" name="mno" value="'+mno+'"/>';
 					a += '<input type="hidden" name="cno"  value="'+value.no+'"/>';
+					a += '<input type="hidden" name="profile" value="'+value.profile+'"/>'
 					a += '<div class="btn_comment">';
    	                a += '<a href="#" onclick="commentUpdate('+value.no+',\''+value.content+'\');"> 수정 </a>';
    	                a += '<a href="#" onclick="commentDelete('+value.no+');"> 삭제 </a> </div>';

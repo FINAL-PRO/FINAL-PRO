@@ -24,7 +24,7 @@ public class MypageController {
 	@Autowired
 	private MypageService mypageService;
 	
-	@RequestMapping("/mypage/myContentList.do")
+	@RequestMapping("/mypage/list.do")
 	public String myContentList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, Member member, Model model) {
 		
 		int mNo = member.getNo();		
@@ -65,7 +65,7 @@ public class MypageController {
 		.addAttribute("numPerPage", numPerPage)
 		.addAttribute("commentPageBar", commentPageBar);				
 		
-		return "mypage/myContentList";
+		return "mypage/list";
 	}
 
 }

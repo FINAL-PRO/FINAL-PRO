@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>쪽지 상세페이지 입니다.</title>
 <c:import url="../common/header.jsp"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/msg/msgDetailCss.css" />
 </head>
 <body>
 	<h1>쪽지 상세페이지 입니다.</h1>
@@ -20,10 +21,10 @@
 	<div>${message.tomNick}</div>
 	<div>${message.status}</div>
 	
-	<c:if test="${'test2Nick' eq message.frommNick}">
+	<c:if test="${'알리미' eq message.frommNick}">
 		<input type="button" value="답장" id="btn-add" class="btn" disabled/>
 	</c:if>
-	<c:if test="${'test2Nick' ne message.frommNick}">
+	<c:if test="${'알리미' ne message.frommNick}">
 		<input type="button" value="답장" id="btn-add" class="btn" onclick="messageReply();"/>
 	</c:if>
 	<input type="button" value="목록" id="btn-add" class="btn" onclick="messageList();"/>
