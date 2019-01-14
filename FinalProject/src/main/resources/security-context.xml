@@ -33,8 +33,10 @@
 	<security:http security="none" pattern="/community/food/foodUpdateForm.do" />
 	<security:http security="none" pattern="/job/jobBoard/insertJobBoard.do" />
 	<security:http security="none" pattern="/community/food/foodUpdateFormEnd.do" />
+	
 	<security:http security="none" pattern="/sale/group/groupFormEnd.do" />
-
+	<security:http security="none" pattern="/sale/group/groupUpdateFormEnd.do" />
+	<security:http security="none" pattern="/sale/group/groupDelete.do" />
 	
 	<!-- 메시지 전송 -->
 	<security:http security="none" pattern="/message/messageInsert.do" />

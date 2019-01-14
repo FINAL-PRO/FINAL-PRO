@@ -39,4 +39,6 @@ public interface GroupService {
 	List<Board> getGroupListData();
 
 	List<Board> selectGroupList();
+
+	Object selectOneGroup2(int boardNo);
 }

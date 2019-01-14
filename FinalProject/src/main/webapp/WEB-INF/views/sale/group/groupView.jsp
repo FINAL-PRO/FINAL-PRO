@@ -11,20 +11,15 @@
 
 <style>
 
-.dc-content-box {
-	padding-left: 50px;
-	padding-right: 50px;
-	margin-bottom: 50px;
-}
-
 .title-box {
+	width: 100%;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
 .img-box {
-	height: 250px;
-	width: 250px;
+	height: 100%;
+	width: 100%;
 }
 
 .info {
@@ -58,6 +53,12 @@
 
 .current {
 	background: skyblue;
+}
+
+#title {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
 }	
 
 
@@ -77,81 +78,77 @@
 
 <div class="section-center">
 <div class="dc-content">
-<div class="dc-content-title"><h1>제목</h1></div>
+<div class="dc-content-title">
+	<h3>공동구매</h3>
+</div>
 		
 <div class="dc-content-box">
 <!-- ------------------- 내용 입력 ------------------- -->
 	
 <div class="title-box">
-	<label class="title-label" for="title">제목</label>
-	<span class="" id="title">${group.title }</span>
+	<p id="title">${group.title }</p>
 </div> <hr />
-	
-<div style="display:inline-block; width:100%;">
-	<div style="float:left; width:30%;">
+
+<div class="row">
+	<div class="col-md-4 img-box">
 		<div class="img-box" style="border:1px solid black;">
 			<img id="goodsImg" src="${group.goodsPicture}"/>
 		</div>
 	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-			<p class="info-label">물품명</p>
-			<p class="info-label">가격</p>
-		</div>
-		<div class="col-md-4">
-			<p>${group.goodsName}</p>
-			<p>${group.price}<span>원</span></p>
-		</div>
-		<div class="col-md-2">
-			<p class="info-label">모집인원</p>
-			<p class="info-label">거래방법</p>
-			<p class="info-label">마감일</p>
-		</div>
-		<div class="col-md-4">
-			<p>${group.maxCount}명 / ${group.currentCount}명</p>
-			<p>${group.dealType}</p>
-			<p>${group.endDate}</p>
-		</div>
+	<div class="col-md-2">
+		<p class="info-label">물품명</p>
+		<p class="info-label">가격</p>
+		<p class="info-label">모집인원</p>
+		<p class="info-label">거래방법</p>
+		<p class="info-label">마감일</p>
 	</div>
-	<div class="row">
-		<div class="col-md-2">
-			<p class="info-label">계좌번호</p>
-		</div>
-		<div class="col-md-6">
-			<p id="depMsg">모집 인원이 마감되면 공동구매 참여자에게만 보입니다.</p>
-			<p id="deposit" style="display:none;">${group.bank} ${group.deposit }</p>
-		</div>
-		<div class="col-md-4">
-			<c:if test="${!empty member and member.no ne group.memberNo}">
-			<input type="button" id="btnApply" value="참여신청" onClick="switchGroup(this);"/>
-			</c:if>
-		</div>
+	<div class="col-md-6">
+		<p>${group.goodsName}</p>
+		<p>${group.price}<span>원</span></p>
+		<p>${group.maxCount}명 / ${group.currentCount}명</p>
+		<p>${group.dealType}</p>
+		<p>${group.endDate}</p>
 	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-			<p class="info-label">진행상황</p>
-		</div>
-		<div class="col-md-10">
-			<c:forEach items="${statusList}" var="status">
-				<input type="button" class="status" name="status" id="${status.id}"
-					value="${status.value}" onClick="changeStatus(this);"/>
-			</c:forEach>
-			<p style="font-size:10px; color:lightgray;">공동구매 진행자는 진행상황을 클릭하여 변경할 수 있습니다.</p>
-		</div>
-	</div>
+</div> <hr />
 
+<div class="row">
+	<div class="col-md-2">
+		<p class="info-label">계좌번호</p>
+	</div>
+	<div class="col-md-8">
+		<p id="depMsg">모집 인원이 마감되면 공동구매 참여자에게만 보입니다.</p>
+		<p id="deposit" style="display:none;">${group.bank} ${group.deposit }</p>
+	</div>
+	<div class="col-md-2">
+		<c:if test="${!empty member and member.no ne group.memberNo}">
+		<input type="button" id="btnApply" value="참여신청" onClick="switchGroup(this);"/>
+		</c:if>
+	</div>
+</div>
+
+<div class="row flow-chart">
+	<div class="col-md-2">
+		<p class="info-label">진행상황</p>
+	</div>
+	<div class="col-md-10">
+		<c:forEach items="${statusList}" var="status">
+			<input type="button" class="status" name="status" id="${status.id}"
+				value="${status.value}" onClick="changeStatus(this);"/>
+		</c:forEach>
+		<p style="font-size:10px; color:lightgray;">공동구매 진행자는 진행상황을 클릭하여 변경할 수 있습니다.</p>
+	</div>
 </div> <hr />
 
 <c:if test="${!empty member and member.no eq group.memberNo}">
-<div class="row" id="ghBox" style="display:block;">
-	<p>-- 참여자 목록 --</p>
+<div class="group-list">
+	<p style="text-align:center;">-- 참여자 목록 --</p>
+	<p style="text-align:center;">
 	<c:forEach items="${ghList}" var="gh">
-		<span>${gh.nickName} </span>
+		<span> &lt; ${gh.nickName} &gt; </span>
 	</c:forEach>
-	<hr />
+	</p>
 </div>
+<hr />
 </c:if>
 	
 <div>
@@ -257,10 +254,14 @@
 	
 	function changeStatus(obj) {
 		var statusId = $(obj).attr("id");
+		var m = ${member.no}+0;
+		var w = ${group.memberNo}+0;
 		
-		if(${member.no}+0 != ${group.memberNo}) {
+		if(m != w) {
 			;
-		} else if(statusId == "GROUP003" || statusId == "GROUP004") {
+		} else if ('${group.status}' == '참여자모집') {
+			alert("모집인원이 마감된 후에 변경 가능합니다.");
+		}else if(statusId == "GROUP003" || statusId == "GROUP004") {
 			if(confirm("공동구매의 진행상황을 '"+$(obj).val()+"'로 변경하시겠습니까?")) {
 				$.ajax({
 					url : 'updateStatus.do',
