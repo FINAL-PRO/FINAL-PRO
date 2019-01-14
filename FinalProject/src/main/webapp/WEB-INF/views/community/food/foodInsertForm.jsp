@@ -143,7 +143,7 @@
 												<div class="tr-div">
 													<div class="td-div">주소</div>
 													<div class="td-div" style="text-align:left;">
-														<input type="text" id="address1" name="address" style="width: 500px;" required>
+														<input type="text" id="address1" name="address1" style="width: 500px;" required>
 													</div>
 												</div>
 												<div class="tr-div">
@@ -152,6 +152,7 @@
 														<input type="text" id="address2" name="address2" style="width: 500px;" required>
 													</div>
 												</div>
+												<input type="hidden" id="address" name="address" />
 											</div>
 										</div>
 										<div>
@@ -160,7 +161,20 @@
 												<textarea name="content" id="summernote"
 													class="form-control" rows="20" cols="70" required></textarea>
 												<script>
-					                                
+												
+													$('#address2').keyup(function(){
+													
+														var add1 = $('[name=address1]').val();
+														var add2 = $('[name=address2]').val();
+														
+														var address = add1 + add2;
+														
+														console.log("address: "+address);
+														
+														$('#address').attr('value', address);
+																							
+													}); 
+												
 					                                $('#summernote').summernote({
 					                            		height : 300,
 					                            		minHeight : 500,

@@ -63,7 +63,7 @@ public class AdminBoardController {
 		return "admin/board/noticeInsertView";
 	}
 	
-	@RequestMapping("admin/board/notice/write.do")
+	@RequestMapping("admin/board/notice/insert.do")
 	public String boardNoticeWrite(Board board) {
 		
 		System.out.println("받아온 정보 : " + board);

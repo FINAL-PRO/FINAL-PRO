@@ -23,14 +23,15 @@
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-						<h3>검색결과</h3>
+						
 					</div>
 					<div class="dc-content-box">
-						<div id="search-result-list">						
+						<div id="search-result-list">	
+						<h3>"${searchWord}" 에 대한 검색 결과</h3>					
 						<c:set value="${searchResultList}" var="result" />
 					    <c:if test="${!empty result}" >
 							<c:forEach items="${result}" var="result" varStatus="">
-							<div id="result" style="padding:10px;">
+							<div id="result" style="padding:10px; margin: 20px 0px 20px 0px;">
 							<c:choose>
 						    	<c:when test = "${result.boardType eq '자유게시판'}">
 						        	<a id="resultTitle" href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${result.no}">[${result.boardType}] ${result.title}</a>

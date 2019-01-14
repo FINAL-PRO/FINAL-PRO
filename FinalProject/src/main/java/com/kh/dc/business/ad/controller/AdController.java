@@ -132,7 +132,7 @@ public class AdController {
 			System.out.println("원래 이름 : " + originName);
 			System.out.println("바뀐 이름 : " + renamedName);
 			
-			ad.setAdContentPath(saveDir + "/" + renamedName);
+			ad.setAdContentPath("/dc/resources/upload/ad/" + renamedName);
 		}
 		
 		System.out.println("바뀐 ad : " + ad);
@@ -166,6 +166,19 @@ public class AdController {
 		System.out.println("가져온 광고 : " + ad);
 		
 		return ad;
+	}
+	
+	@RequestMapping("business/ad/status/change.do")
+	@ResponseBody
+	public int changeAdStatus(@RequestParam String status, @RequestParam int no) {
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("no", no);
+		param.put("status", status);
+		
+		int result = adService.changeAdStatus(param);
+		
+		return result;
 	}
 }
 
