@@ -99,13 +99,13 @@
 
 .thumb_review{
 	display: inline-block;
-	height: 200px; 
+	height: 180px; 
 	width: 200px; 
 	border: 1px solid green;
 }
 
 .thumb_review .center{
-	height: 199px; 
+	height: 180px; 
 	width: 200px; 
 }
 
@@ -114,8 +114,8 @@
 	padding-left: 30px; 
 	padding-top: 10px; 
 	padding-right: 30px; 
-	padding-bottom: 20px; 
-	height: 200px; 
+	padding-bottom: 10px; 
+	height: 180px; 
 	width: 80%;
 	border: 1px solid navy; 
 	font-size: 0.8rem;
@@ -129,7 +129,7 @@
 
 .article{
 	border: 1px solid red;
-	height: 200px; 
+	height: 180px; 
 	display: flex;
 	background:white;
   	opacity: 1.0;
@@ -137,6 +137,7 @@
 
 .article:hover{
 	opacity: 0.7;
+	cursor: pointer;
 }
 
 p.profile>img.picture {

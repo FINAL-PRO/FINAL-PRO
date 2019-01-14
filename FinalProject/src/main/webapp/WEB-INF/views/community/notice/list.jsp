@@ -10,6 +10,7 @@
 <title>동커</title>
 <c:import url="../../common/header.jsp" />
 <style>
+
 #container2 {
 	margin: 8px auto;
 }
@@ -18,6 +19,7 @@
 	font-size: 0;
 	background-color: #fff;
 	text-decoration: none;
+	height: 30px;
 }
 
 #container2 .article>p.profile>img.picture {
@@ -26,18 +28,7 @@
 	width: 20px;
 	height: 20px;
 	vertical-align: top;
-}
 
-#container2 .article>p.profile>span.nickname {
-	display: inline-block;
-	max-width: 60%;
-	line-height: 20px;
-	color: #292929;
-	font-size: 14px;
-	font-weight: bold;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
 #container2 .article>p.profile>span.title {
@@ -52,28 +43,49 @@
 	text-overflow: ellipsis;
 }
 
+#container2 .article>p.profile>span.nickname {
+	display: inline-block;
+	max-width: 60%;
+	line-height: 20px;
+	color: lightgray;
+	font-size: 14px;
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-right: 8px;
+	margin-left: 8px;
+	float: right;
+}
+
 #container2 .article>p.profile>span.count {
 	display: inline-block;
 	max-width: 60%;
 	line-height: 20px;
-	color: #292929;
-	font-size: 12px;
+	color: lightgray;
+	font-size: 14px;
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-right: 8px;
+	margin-left: 8px;
+	float: right;
 }
 
 .time {
 	float: right;
 	display: inline-block;
+	max-width: 60%;
 	line-height: 20px;
-	color: #a6a6a6;
-	font-size: 12px;
-}
-
-/* #container2 .article>p.text {
-	margin-top: 8px;
-	line-height: 18px;
-	color: #292929;
+	color: lightgray;
 	font-size: 14px;
-} */
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-left: 8px;
+}
 
 .content {
 	display: inline-block;
@@ -90,15 +102,6 @@
 	margin-top: 8px;
 }
  
-span {
-	display: inline-block;
-	margin-right: 8px;
-	line-height: 18px;
-	color: #a6a6a6;
-	font-size: 12px;
-	background-repeat: no-repeat;
-	background-size: 16px 16px;
-}
 
 p.attach {
 	display: inline-block;
@@ -125,13 +128,9 @@ a.article {
 	background-color: #f8f8f8;
 }
 
-.articlelist {
-	padding-top: 15px;
-}
-
 .group {
 	list-style: none;
-	padding: 20px;
+	padding: 0 20px 0 0;
 }
 
 hr {
@@ -146,6 +145,10 @@ hr {
 .notice_btn {
 	float: right;
 	padding-right: 20px;
+}
+
+.groupin{
+	height: 35px;
 }
 
 </style>
@@ -169,7 +172,7 @@ hr {
 						<div class="dc-content-box">
 							<div id="container2">
 								<div class="articlelist">
-									<ol class="group"></br>
+									<ol class="group">
 										<p>총 ${totalContents}건의 공지사항이 있습니다.</p>
 										
 										<c:forEach items="${nlist}" var="b">
@@ -180,7 +183,7 @@ hr {
 													</p>
 													<p class="profile">
 														<span class="title">${b.title}</span>
-														<span class="nickname">${b.memberName}</span> 
+														<span class="nickname">관리자</span> 
 														<span class="count">조회수: ${b.viewCount}</span>
 													</p>
 											</a></li>

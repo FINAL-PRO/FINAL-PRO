@@ -27,15 +27,10 @@
 	margin-botton: 5px;
 }
 
-#container2 .article>p.profile>span.nickname {
-	display: inline-block;
-	color: #292929;
-	font-size: 12px;
-}
-
 #container2 .article>p.profile>span.title {
 	display: inline-block;
 	max-width: 60%;
+	line-height: 20px;
 	color: #292929;
 	font-size: 14px;
 	font-weight: bold;
@@ -44,20 +39,62 @@
 	text-overflow: ellipsis;
 }
 
+#container2 .article>p.profile>span.nickname {
+	display: inline-block;
+	max-width: 60%;
+	line-height: 20px;
+	color: lightgray;
+	font-size: 14px;
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-right: 8px;
+	margin-left: 8px;
+}
+
 #container2 .article>p.profile>span.count {
 	display: inline-block;
+	max-width: 60%;
 	line-height: 20px;
-	color: #292929;
-	font-size: 12px;
+	color: lightgray;
+	font-size: 14px;
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-right: 8px;
+	margin-left: 8px;
+	float: right;
 }
 
 .time {
 	float: right;
 	display: inline-block;
+	max-width: 60%;
 	line-height: 20px;
+	color: lightgray;
+	font-size: 14px;
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-left: 8px;
+}
+ 
+img {
+  vertical-align: top;
+}
+
+.status span {
+	display: inline-block;
+	margin-right: 8px;
+	line-height: 18px;
 	color: #a6a6a6;
 	font-size: 12px;
-}
+	background-repeat: no-repeat;
+	background-size: 16px 16px;
+} 
 
 .content {
 	display: inline-block;
@@ -68,18 +105,14 @@
 	overflow:hidden;
 	text-overflow:ellipsis;
 	white-space:nowrap;
+	background-repeat: no-repeat;
+	background-size: 16px 16px;
 }
 
-#container2 .article>p.status {
-	margin-top: 8px;
-}
- 
-span {
-	display: inline-block;
-	margin-right: 8px;
-	line-height: 18px;
-	color: #a6a6a6;
-	font-size: 12px;
+.bcontent{
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
 }
@@ -102,7 +135,6 @@ a.article {
 	display: block;
 	padding: 12px 12px;
 	border-bottom: 1px solid #f2f2f2;
-	height: 140px;
 }
 
 #container2 div.articlelist>ol.group>li>a.article:hover {
@@ -115,7 +147,7 @@ a.article {
 
 .group {
 	list-style: none;
-	padding: 20px;
+	padding-left: 20px;
 }
 
 hr {
@@ -134,6 +166,11 @@ hr {
 
 .profile{
 	display: inline-block;
+	width: 100%;
+}
+
+.picture{
+	margin-left: 20px;
 }
 
 </style>
@@ -152,7 +189,7 @@ hr {
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>제목</h1>
+							<h1>자유게시판</h1>
 						</div>
 						<div class="dc-content-box">
 							<div id="container2">
@@ -182,14 +219,11 @@ hr {
 									</c:if>
 								</div>
 								<div class="articlelist">
-									<ol class="group"></br>
+									<ol class="group"><br>
 										<p>총 ${totalContents}건의 게시물이 있습니다.</p>
 										<c:forEach items="${list}" var="b">
 											<li class="groupin" id="${b.no}">
 											<a class="article" href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${b.no}">
-													<p class="time">
-														<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd" />
-													</p>
 													<p class="profile">
 														<span class="title">${b.title}</span> 
 														<c:choose>
@@ -202,6 +236,9 @@ hr {
 														</c:choose>
 														<span class="nickname">${b.memberName}</span> 
 														<span class="count">조회수: ${b.viewCount}</span>
+														<span class="time">
+															<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd" />
+														</span>
 													</p>
 													<c:choose>
 														<c:when test="${b.imageCheck eq 0}">
@@ -225,7 +262,6 @@ hr {
 													</p>
 											</a></li>
 										</c:forEach>
-			
 									</ol>
 									<c:out value="${pageBar}" escapeXml="false" />
 								</div>
