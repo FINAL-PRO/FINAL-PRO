@@ -15,6 +15,7 @@ public class Company implements Serializable {
 	private Date enrollDate;
 	private String address;
 	private String status;
+	private String value;
 
 	public Company() {
 		super();
@@ -27,6 +28,24 @@ public class Company implements Serializable {
 		this.enrollDate = enrollDate;
 		this.address = address;
 		this.status = status;
+	}
+
+	public Company(int no, String name, Date enrollDate, String address, String status, String value) {
+		super();
+		this.no = no;
+		this.name = name;
+		this.enrollDate = enrollDate;
+		this.address = address;
+		this.status = status;
+		this.value = value;
+	}
+	
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 	public int getNo() {
@@ -63,7 +82,7 @@ public class Company implements Serializable {
 	@Override
 	public String toString() {
 		return "Company [no=" + no + ", name=" + name + ", enrollDate=" + enrollDate + ", address=" + address
-				+ ", status=" + status + "]";
+				+ ", status=" + status + ", value=" + value + "]";
 	}
 
 }

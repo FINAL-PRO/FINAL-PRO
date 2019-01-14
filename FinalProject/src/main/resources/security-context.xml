@@ -26,6 +26,9 @@
 	
 	<security:http security="none" pattern="/business/ad/insert.do" />
 	<security:http security="none" pattern="/business/ad/update.do" />
+	<security:http security="none" pattern="/business/partnership/insert.do" />
+	<security:http security="none" pattern="/business/partnership/update.do" />
+	
 	<security:http security="none" pattern="/admin/board/notice/insert.do" />
 	
 	
