@@ -29,7 +29,7 @@
 							<div class="weather-container" style="margin: 20px;">
 								<!-- 오늘 내일 모레 날씨 -->
 								<!-- 동네 이름 -->
-								<h4 class="townName" style="margin: 0 0 0 10px;">현재 날씨</h4>
+								<p class="townName" style="margin: 0 0 0 10px; font-size:24px;">현재 날씨</p>
 								<div class="currentWeather" style="width:100%;">
 									<div id="loadingTodayWeather"> 
 										<h3 id="currentWeatherLabel">현재 날씨를 불러오는 중입니다.</h3>
@@ -122,7 +122,7 @@
 	            	// 동네 이름 넣기
 	            	$('.townName').append(' : ' +$(this).find('category').text());
 	            	
-	            	value1 += '<div class="block" style="width:40px;">';						
+	            	value1 += '<div class="block" style="width:50px;">';						
 	            	value1 += '날짜<br>시간<br>'
 	            	value1 += '<div style="">날씨</div><br>';						
 	            	value1 += '<span style="font-size: 8px;">최저온도</span><br>';
@@ -140,9 +140,9 @@
 	            		
 	            		// 날짜 구분
 	            		switch($(this).find('day').text()){
-	            		case '0': day = '<label style="background-color:lightblue; width:65px; margin-bottom: 0;">오늘'; break;
-	            		case '1': day = '<label style="background-color:lightpink; width:65px; margin-bottom: 0;">내일'; break;
-	            		case '2': day = '<label style="background-color:lightgray; width:65px; margin-bottom: 0;">모레'; break;	            		
+	            		case '0': day = '<label style="width:65px; margin-bottom: 0;">오늘'; break;
+	            		case '1': day = '<label style="width:65px; margin-bottom: 0;">내일'; break;
+	            		case '2': day = '<label style="width:65px; margin-bottom: 0;">모레'; break;	            		
 	            		}
 
 	            		// 날씨 아이콘 넣기	            		

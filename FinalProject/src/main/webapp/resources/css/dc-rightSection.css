@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.afterLogin{
+	width: 110px;	
+}
+.dc-profile-area-bottom ul li {
+	width: 120px;
+
+}
+
+.btn-warning{
+	color: white;	
+}
+
+.btn-warning:hover{
+	color: white;
+}
