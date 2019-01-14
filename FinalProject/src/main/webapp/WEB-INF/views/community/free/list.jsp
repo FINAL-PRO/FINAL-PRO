@@ -22,28 +22,20 @@
 
 #container2 .article>p.profile>img.picture {
 	display: inline-block;
-	margin-right: 6px;
 	width: 20px;
 	height: 20px;
-	vertical-align: top;
+	margin-botton: 5px;
 }
 
 #container2 .article>p.profile>span.nickname {
 	display: inline-block;
-	max-width: 60%;
-	line-height: 20px;
 	color: #292929;
-	font-size: 14px;
-	font-weight: bold;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+	font-size: 12px;
 }
 
 #container2 .article>p.profile>span.title {
 	display: inline-block;
 	max-width: 60%;
-	line-height: 20px;
 	color: #292929;
 	font-size: 14px;
 	font-weight: bold;
@@ -54,7 +46,6 @@
 
 #container2 .article>p.profile>span.count {
 	display: inline-block;
-	max-width: 60%;
 	line-height: 20px;
 	color: #292929;
 	font-size: 12px;
@@ -67,13 +58,6 @@
 	color: #a6a6a6;
 	font-size: 12px;
 }
-
-/* #container2 .article>p.text {
-	margin-top: 8px;
-	line-height: 18px;
-	color: #292929;
-	font-size: 14px;
-} */
 
 .content {
 	display: inline-block;
@@ -148,6 +132,10 @@ hr {
 	padding-right: 20px;
 }
 
+.profile{
+	display: inline-block;
+}
+
 </style>
 
 </head>
@@ -187,14 +175,15 @@ hr {
 									});
 									
 									</script>
+									<c:if test="${!empty member}">
 									<div class="free_btn">
 										<input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/free/freeInsertForm.do'" />
 									</div>
+									</c:if>
 								</div>
 								<div class="articlelist">
 									<ol class="group"></br>
 										<p>총 ${totalContents}건의 게시물이 있습니다.</p>
-										
 										<c:forEach items="${list}" var="b">
 											<li class="groupin" id="${b.no}">
 											<a class="article" href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${b.no}">
@@ -202,7 +191,15 @@ hr {
 														<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd" />
 													</p>
 													<p class="profile">
-														<span class="title">${b.title}</span> <img class="picture" src="https://cf-epi.campuspick.com/0.png" /> 
+														<span class="title">${b.title}</span> 
+														<c:choose>
+															<c:when test="${!empty b.profile}">
+																<img class="picture" src="/dc/resources/upload/profile/${b.profile}" /> 
+															</c:when>
+															<c:otherwise>
+																<img class="picture" src="/dc/resources/upload/profile/profileDefaultImg.png" /> 
+															</c:otherwise>
+														</c:choose>
 														<span class="nickname">${b.memberName}</span> 
 														<span class="count">조회수: ${b.viewCount}</span>
 													</p>

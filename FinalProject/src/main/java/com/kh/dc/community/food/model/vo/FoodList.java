@@ -25,13 +25,15 @@ public class FoodList extends Board implements Serializable{
 	private String address;
 	private int point;
 	private int imageCheck;
+	private String profile;
 	
 	public FoodList() {
 		super();
 	}
 
 	public FoodList(int no, int fno, int pno, String title, String content, String memberName, String thumbnail,
-			int commentCount, int likeCount, String category, String address, int point, int imageCheck) {
+			int commentCount, int likeCount, String category, String address, int point, int imageCheck,
+			String profile) {
 		super();
 		this.no = no;
 		this.fno = fno;
@@ -46,8 +48,8 @@ public class FoodList extends Board implements Serializable{
 		this.address = address;
 		this.point = point;
 		this.imageCheck = imageCheck;
+		this.profile = profile;
 	}
-
 
 	public int getNo() {
 		return no;
@@ -152,13 +154,21 @@ public class FoodList extends Board implements Serializable{
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
 
 	@Override
 	public String toString() {
 		return "FoodList [no=" + no + ", fno=" + fno + ", pno=" + pno + ", title=" + title + ", content=" + content
 				+ ", memberName=" + memberName + ", thumbnail=" + thumbnail + ", commentCount=" + commentCount
 				+ ", likeCount=" + likeCount + ", category=" + category + ", address=" + address + ", point=" + point
-				+ ", imageCheck=" + imageCheck + "]";
+				+ ", imageCheck=" + imageCheck + ", profile=" + profile + "]";
 	}
 
 }
