@@ -49,8 +49,11 @@ public class UsedController {
 		
 		Used used = usedService.selectOneUsed(boardNo);
 		
+		System.out.println("uh,, : " + usedService.selectOneUsedHistory(used.getNo()));
+		
 		model.addAttribute("used", used)
-			 .addAttribute("uh", usedService.selectOneUsedHistory(used.getNo()));
+			 .addAttribute("uh", usedService.selectOneUsedHistory(used.getNo()))
+			 .addAttribute("statusList", usedService.selectStatusList());
 		
 		return "sale/used/usedView";
 	}
@@ -63,6 +66,8 @@ public class UsedController {
 	
 	@RequestMapping("sale/used/usedFormEnd.do")
 	public String insertUsed(Used used, Model model) {
+		
+		System.out.println("used,,,, : " + used);
 		
 		if(usedService.insertUsed(used) > 0) {
 			model.addAttribute("used", usedService.selectOneUsed(used.getBoardNo()));

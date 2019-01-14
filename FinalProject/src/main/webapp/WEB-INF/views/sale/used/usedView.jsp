@@ -7,18 +7,20 @@
 <head>
 <meta charset="UTF-8">
 <title>동커</title>
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 <c:import url="../../common/header.jsp" />
 
 <style>
 
 .title-box {
+	width: 100%;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
 .img-box {
-	height: 250px;
-	width: 250px;
+	height: 100%;
+	width: 100%;
 }
 
 .info {
@@ -42,6 +44,24 @@
 	padding: 30px;
 	border: 1px solid lightgray;
 }
+
+.status {
+	height: auto;
+	width: auto;
+	background: white;
+	border: 1px solid black;
+}
+
+.current {
+	background: skyblue;
+}
+
+#title {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+}	
+
 
 </style>
 
@@ -79,30 +99,56 @@
 		<p class="info-label">가격</p>
 		<p class="info-label">거래방법</p>
 		<p class="info-label">판매상태</p> <br />
-		<c:if test="${!empty member and member.no ne used.memberNo}">
+		<c:if test="${member.no ne used.memberNo and used.dealType eq '안전거래'}">
 		<input type="button" value="바로구매" onclick="pay(${used.price});" />
 		</c:if>
-		<c:if test="${!empty member and member.no eq used.memberNo}">
+		<c:if test="${member.no eq used.memberNo}">
 		<input type="button" value="물품 판매완료" onclick="soldOut();"/>
 		</c:if>
 	</div>
 	<div class="col-md-6">
-		<p>${used.goodsName}</p>
-		<p>${used.price}<span>원</span></p>
+		<p id="goodsName">${used.goodsName}</p>
+		<p ><span id="price">${used.price}</span>원</p>
 		<p>${used.dealType}</p>
 		<p>${used.status}</p>
 	</div>
 </div> <hr />
 
-<c:if test="${member.no eq used.memberNo }">
+<c:if test="${member.no eq used.memberNo or member.no eq uh.memberNo}">
+<div class="row flow-chart">
+	<div class="col-md-2">
+		<p class="info-label">진행상황</p>
+	</div>
+	<div class="col-md-10">
+		<c:forEach items="${statusList}" var="status">
+			<input type="button" class="status" name="status" id="${status.id}" value="${status.value}" />
+		</c:forEach>
+	</div>
+</div>
 <div class="row">
-	
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-10">
+		<c:if test="${uh.status eq 'USEDHIT001' and member.no eq uh.memberNo}">
+			<span>구매자에게 물품을 보내셨습니까? </span>
+			<input type="button" value="물품인계" onclick="fn_status1();"/> <br />
+		</c:if>
+		<c:if test="${uh.status eq 'USEDHIT001'}">
+			<span>거래를 취소하시겠습니까? </span>
+			<input type="button" value="거래취소" onclick="fn_status2();" />
+		</c:if>
+		<c:if test="${uh.status eq 'USEDHIT002' and member.no eq uh.memberNo}">
+			<span>판매자로부터 물품을 받으셨습니까? </span>
+			<input type="button" value="인계확인" onclick="fn_status3();"/>
+			<input type="button" value="거래중지" onclick="fn_status4();"/>
+		</c:if>
+	</div>
 </div>
 <hr />
 </c:if>
 
 <div>
-	<div id="content">${group.content }</div>
+	<div id="content">${used.content }</div>
 </div>
 	
 <br /><br />
@@ -137,6 +183,8 @@
 		if(uh != "") {
 			$('#btnPay').attr("disabled", "disabled");
 		}
+		
+		$(('input[id="${uh.status}"]')).addClass('current');
 	});
 	
 	function goUsedList() {

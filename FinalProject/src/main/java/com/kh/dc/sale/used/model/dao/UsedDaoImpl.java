@@ -72,12 +72,6 @@ public class UsedDaoImpl implements UsedDao {
 	}
 
 	@Override
-	public List<Map<String, String>> selectUsedHistory(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Map<String, String> selectOneUsedHistory(int usedNo) {
 
 		return sqlSession.selectOne("used_mapper.selectOneUsedHistory", usedNo);
@@ -90,20 +84,14 @@ public class UsedDaoImpl implements UsedDao {
 	}
 
 	@Override
-	public int deleteUsedHistory(Map<String, String> uh) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public List<Map<String, String>> selectStatusList() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return sqlSession.selectList("used_mapper.selectStatusList");
 	}
 
 	@Override
 	public int updateStatus(Map<String, String> status) {
-		// TODO Auto-generated method stub
+
 		return sqlSession.update("used_mapper.updateUsedStatus", status);
 	}
 	

@@ -12,46 +12,50 @@
 
 <style>
 
-.product-box>div {
-	float: left;
-}
-
 .product-box {
-	width: 1000px;
 	height: 200px;
-	border: 1px solid black;
-	padding: 5px;
-	margin: 5px;
-}
-
-.product-info {
-	height: 100%;
+	border: 1px solid white;
 	padding: 10px;
-}
-
-.product-img {
-	width: 20%;
-}
-
-.product-text {
-	width: 60%;
-}
-
-.product-pro {
-	width: 20%;
+	margin: 10px;
 }
 
 a {
 	color: black;
 }
 
-.btn {
+.btn-write {
 	float: right;
+	margin-right: 10px;
 }
 
 #goodsPicture {
 	width: 100%;
 	height: 100%;
+}
+
+.pro {
+	padding-left: 0px;
+}
+
+.pro-con {
+	margin-top: 10px;
+}
+
+.title {
+	font-size: 20px;
+	padding-bottom: 10px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pro-info {
+	margin-top: 20px;
+}
+
+.product-box:hover {
+	background-color: #f8f8f8;
+	cursor: pointer;
 }
 
 </style>
@@ -69,8 +73,7 @@ a {
 <div class="section-center">
 <div class="dc-content">
 <div class="dc-content-title">
-	<span style="size:20px;">중고거래</span>
-	<button class="btn" onclick="goUsedForm();">글쓰기</button>
+	<h3>중고거래</h3>
 </div>
 		
 <div class="dc-content-box">
@@ -78,20 +81,30 @@ a {
 
 <c:set var="viewPath" value="${pageContext.request.contextPath}/sale/used/usedView.do?boardNo=" />
 
-<c:forEach items="${list}" var="u">
-<div class="product-box">
-	<div class="product-info product-img">
-		<a href="${viewPath}${u.boardNo}"><img id="goodsPicture" src="${u.goodsPicture}" /></a>
+<div class="row">
+	<div class="col-md-12">
+		<button class="btn btn-write" onclick="goUsedForm();">글쓰기</button>
 	</div>
-	<div class="product-info product-text">
-		<p class="title"><a href="${viewPath}${u.boardNo}">${u.title}</a></p>
-		<p><a href="${viewPath}${u.boardNo}">${u.goodsName}</a></p>
-		<span>${u.price}원</span> <br /> 
-		
-		<span>${u.writeDate}</span>
-		<span>조회수 ${u.viewCount}</span>
+</div> <hr />
+
+<c:forEach items="${list}" var="u">
+<div class="row product-box" onclick="location.href='${viewPath}${u.boardNo}'">
+	<div class="col-md-3 pro">
+		<img id="goodsPicture" src="${u.goodsPicture}" />
+	</div>
+	<div class="col-md-6 pro pro-con">
+		<p class="title">${u.title}</p>
+		<p class="pro-info">물품명 : ${u.goodsName}</p>	
+		<p class="pro-info">가격 : ${u.price} 원</p>
 	</div> 
-</div>
+	<div class="col-md-3 pro pro-con">
+		<br />
+		<p class="pro-info">${u.memberName} </p>
+		<br />
+		<span>${u.writeDate}</span>
+		<span style="float:right;">조회수 ${u.viewCount}</span>
+	</div>
+</div> <hr />
 </c:forEach>
 
 <c:out value="${pageBar}" escapeXml="false" />

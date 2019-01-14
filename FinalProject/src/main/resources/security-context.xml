@@ -38,6 +38,10 @@
 	<security:http security="none" pattern="/sale/group/groupUpdateFormEnd.do" />
 	<security:http security="none" pattern="/sale/group/groupDelete.do" />
 	
+	<security:http security="none" pattern="/sale/used/usedFormEnd.do" />
+	<security:http security="none" pattern="/sale/used/usedUpdateFormEnd.do" />
+	<security:http security="none" pattern="/sale/used/usedDelete.do" />
+	
 	<!-- 메시지 전송 -->
 	<security:http security="none" pattern="/message/messageInsert.do" />
 	

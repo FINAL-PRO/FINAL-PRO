@@ -12,12 +12,6 @@
 
 <style>
 
-.dc-content-box {
-	padding-left: 50px;
-	padding-right: 50px;
-	margin-bottom: 50px;
-}
-
 .title-box {
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -43,6 +37,7 @@
 	height: 100%;
 }
 
+
 </style>
 
 </head>
@@ -58,7 +53,9 @@
 
 <div class="section-center">
 <div class="dc-content">
-<div class="dc-content-title"><h1>제목</h1></div>
+<div class="dc-content-title">
+	<h3>중고거래</h3>
+</div>
 		
 <div class="dc-content-box">
 <!-- ------------------- 내용 입력 ------------------- -->
@@ -77,24 +74,22 @@
 		<div class="col-md-2"></div>
 	</div> <hr />
 	
-	<div style="display:inline-block; width:100%;">
-		<div style="float:left; width:30%;">
+	<div class="row">
+		<div class="col-md-4 img-box">
 			<div class="img-box" style="border:1px solid black;">
-				<span id="imgMsg">물품 사진을 등록해주세요.</span>
-				<img id="goodsImg"/>
+				<div class="img-box" style="border:1px solid black;">
+					<span id="imgMsg">물품 사진을 등록해주세요.</span>
+					<img id="goodsImg"/>
+				</div>
+				<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);"/>
+				<input type="hidden" id="goodsPicture" name="goodsPicture" />
+				<button type="button" style="width:250px;" id="btnPic">물품사진 등록하기</button>
 			</div>
-			<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);"/>
-			<input type="hidden" id="goodsPicture" name="goodsPicture" />
-			<button type="button" style="width:250px;" id="btnPic">물품사진 등록하기</button>
 		</div>
-		
-		<div>
-		<table class="product-info">
-		<colgroup>
-			<col width="200px"/>
-			<col width="400px"/>
-		</colgroup>
-		<tbody>
+		<div class="col-md-8">
+			<table class="product-info" style="width:100%;">
+			<colgroup><col width="30%"/><col width="70%"/></colgroup>
+			<tbody>
 			<tr>
 				<th><label class="info-label" for=goodsName>물품명</label></th>
 				<td><input type="text" class="info" name="goodsName" id="goodsName" /></td>
@@ -112,10 +107,10 @@
 				</td>
 			</tr>
 		</tbody>
-		</table>
+			</table>	
+	
 		</div>
-		
-	</div> <hr />
+	</div> <br /> <hr />	
 	
 	<div>
 		<textarea id="summernote" name="content"></textarea>
