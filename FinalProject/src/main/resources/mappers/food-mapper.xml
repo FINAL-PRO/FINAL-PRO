@@ -16,6 +16,7 @@
 		<result property="category" column="food_category"/>
 		<result property="address" column="food_address"/>
 		<result property="point" column="point"/>
+		<result property="profile" column="profile"/>
 	</resultMap>
 	
 	<resultMap type="boardList" id="resultBoardList">
@@ -30,7 +31,7 @@
 	<select id="foodrecentSort" resultMap="resultFoodList">
 		SELECT B.*, M.NICKNAME, NVL(L.like_count, 0) like_count, F.THUMBNAIL thumbnail,
 				NVl(C.comment_count,0) comment_count, F.NO foodNo,
-				C.VALUE food_category,
+				C.VALUE food_category, M.PROFILE profile,
 				F.ADDRESS food_address, P.POINT, INSTR(b.CONTENT, 'img') imageCheck
 		FROM DC_BOARD_TB B
 		INNER JOIN DC_MEMBER_TB M 
@@ -50,7 +51,7 @@
 	<select id="foodcommentSort" resultMap="resultFoodList">
 		SELECT B.*, M.NICKNAME, NVL(L.like_count, 0) like_count, F.THUMBNAIL thumbnail,
 				NVl(C.comment_count,0) comment_count, F.NO foodNo,
-				C.VALUE food_category,
+				C.VALUE food_category, M.PROFILE profile,
 				F.ADDRESS food_address, P.POINT, INSTR(b.CONTENT, 'img') imageCheck
 		FROM DC_BOARD_TB B
 		INNER JOIN DC_MEMBER_TB M 
@@ -69,8 +70,8 @@
 	
 	<select id="foodlikeSort" resultMap="resultFoodList">
 		SELECT B.*, M.NICKNAME, NVL(L.like_count, 0) like_count, F.THUMBNAIL thumbnail,
-				NVl(C.comment_count,0) comment_count, F.NO foodNo,
-				C.VALUE food_category,
+				NVl(C.comment_count,0) comment_count, F.NO foodNo, 
+				C.VALUE food_category, M.PROFILE profile,
 				F.ADDRESS food_address, P.POINT, INSTR(b.CONTENT, 'img') imageCheck
 		FROM DC_BOARD_TB B
 		INNER JOIN DC_MEMBER_TB M 

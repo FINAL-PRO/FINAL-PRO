@@ -22,7 +22,7 @@ public class BoardList implements Serializable {
 	
 	// DB join용 변수
 	private String memberName;
-	private String thumbnail;
+	private String profile;
 	private String boardType;
 	
 	// list용 개수 변수
@@ -35,7 +35,7 @@ public class BoardList implements Serializable {
 	}
 
 	public BoardList(int no, String title, Date writeDate, String content, int viewCount, String type, String status,
-			int memberNo, String category, String memberName, String thumbnail, String boardType, int commentCount,
+			int memberNo, String category, String memberName, String profile, String boardType, int commentCount,
 			int likeCount, int imageCheck) {
 		super();
 		this.no = no;
@@ -48,14 +48,12 @@ public class BoardList implements Serializable {
 		this.memberNo = memberNo;
 		this.category = category;
 		this.memberName = memberName;
-		this.thumbnail = thumbnail;
+		this.profile = profile;
 		this.boardType = boardType;
 		this.commentCount = commentCount;
 		this.likeCount = likeCount;
 		this.imageCheck = imageCheck;
 	}
-
-
 
 	public int getNo() {
 		return no;
@@ -137,12 +135,12 @@ public class BoardList implements Serializable {
 		this.memberName = memberName;
 	}
 
-	public String getThumbnail() {
-		return thumbnail;
+	public String getProfile() {
+		return profile;
 	}
 
-	public void setThumbnail(String thumbnail) {
-		this.thumbnail = thumbnail;
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 
 	public String getBoardType() {
@@ -181,7 +179,7 @@ public class BoardList implements Serializable {
 	public String toString() {
 		return "BoardList [no=" + no + ", title=" + title + ", writeDate=" + writeDate + ", content=" + content
 				+ ", viewCount=" + viewCount + ", type=" + type + ", status=" + status + ", memberNo=" + memberNo
-				+ ", category=" + category + ", memberName=" + memberName + ", thumbnail=" + thumbnail + ", boardType="
+				+ ", category=" + category + ", memberName=" + memberName + ", profile=" + profile + ", boardType="
 				+ boardType + ", commentCount=" + commentCount + ", likeCount=" + likeCount + ", imageCheck="
 				+ imageCheck + "]";
 	}

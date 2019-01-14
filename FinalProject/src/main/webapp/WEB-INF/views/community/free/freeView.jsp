@@ -10,155 +10,160 @@
 <title>동커</title>
 <c:import url="../../common/header.jsp" />
 <style>
-	#container2 {
-		margin: 8px auto;
-	}
-	
-	.article {
-		font-size: 0;
-		background-color: #fff;
-		text-decoration: none;
-	}
-	
-	.picture {
-		display: inline-block;
-		width: 20px;
-		height: 20px;
-		vertical-align: top;
-	}
-	
-	.nickname {
-		display: inline-block;
-		line-height: 20px;
-		color: #292929;
-		font-size: 12px;
-		font-weight: bold;
-		white-space: nowrap;
-		overflow: hidden;
-		float: left;
-	}
-	
-	.title {
-		display: inline-block;
-		line-height: 20px;
-		color: #292929;
-		font-size: 15px;
-		font-weight: bold;
-		white-space: nowrap;
-		overflow: hidden;
-	}
-	
-	.time {
-		float: right;
-		display: inline-block;
-		line-height: 20px;
-		color: #a6a6a6;
-		font-size: 12px;
-	}
-	
-	.text {
-		margin-top: 8px;
-		padding: 10px;
-		line-height: 500px;
-		color: #292929;
-		font-size: 14px;
-		word-wrap: break-word;
-	}
-	
-	.comment {
-		padding: 5px;
-		line-height: 20px;
-		color: #292929;
-		font-size: 14px;
-	}
-	
-	.status {
-		float: right;
-		padding: 10px;
-	}
-	
-	span {
-		display: inline-block;
-		margin-right: 8px;
-		padding-left: 5px;
-		line-height: 18px;
-		color: #a6a6a6;
-		font-size: 12px;
-		background-repeat: no-repeat;
-	}
-	
-	.attach {
-		float: right;
-		margin-top: 8px;
-	}
-	
-	.article {
-		display: block;
-		padding: 12px 12px;
-		border-bottom: 1px solid #f2f2f2;
-		height: 140px;
-	}
-	
-	.articlelist {
-		padding-top: 15px;
-	}
-	
-	.group {
-		list-style: none;
-		padding-top: 20px;
-		padding-left: 20px;
-		padding-right: 20px;
-	}
-	
-	.commentgroup {
-		padding: 20px;
-	}
-	
-	.commnetlist {
-		padding: 20px;
-	}
-	
-	.commentwriteboard {
-		padding: 15px 35px 10px 20px;
-	}
-	
-	.commentwrite {
-		width: 100%;
-	}
-	
-	.comment_textarea {
-		margin-right: 10px;
-		margin-left: 10px;
-	}
-	
-	hr {
-		border: 0.3px solid rgb(178, 182, 187);
-	}
-	
-	.category {
-		float: left;
-		padding-left: 20px;
-	}
-	
-	.btn_comment {
-		margin-top: 4px;
-		float: right;
-	}
-	
-	.both {
-		margin-top: 0px;
-		margin-bottom: 0px;
-		height: 1px;
-	}
-	
-	.commentbox{
-		border: 1px solid yellow;
-	}
-	
-	.likecount2{
-		border:none;
-		width: 10px;
-	}
+
+#container2 {
+	margin: 8px auto;
+}
+
+.article {
+	font-size: 0;
+	background-color: #fff;
+	text-decoration: none;
+}
+
+.picture {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	vertical-align: top;
+}
+
+.nickname {
+	display: inline-block;
+	line-height: 20px;
+	color: #292929;
+	font-size: 12px;
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+	float: left;
+}
+
+.title {
+	display: inline-block;
+	line-height: 20px;
+	color: #292929;
+	font-size: 15px;
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.time {
+	float: right;
+	display: inline-block;
+	line-height: 20px;
+	color: #a6a6a6;
+	font-size: 12px;
+}
+
+.text {
+	margin-top: 8px;
+	padding: 10px;
+	line-height: 500px;
+	color: #292929;
+	font-size: 14px;
+	word-wrap: break-word;
+}
+
+.comment {
+	padding: 5px;
+	line-height: 20px;
+	color: #292929;
+	font-size: 14px;
+}
+
+.status {
+	float: right;
+	padding: 10px;
+}
+
+span {
+	display: inline-block;
+	margin-right: 8px;
+	padding-left: 5px;
+	line-height: 18px;
+	color: #a6a6a6;
+	font-size: 12px;
+	background-repeat: no-repeat;
+}
+
+.attach {
+	float: right;
+	margin-top: 8px;
+}
+
+.article {
+	display: block;
+	padding: 12px 12px;
+	border-bottom: 1px solid #f2f2f2;
+	height: 140px;
+}
+
+.articlelist {
+	padding-top: 15px;
+}
+
+.group {
+	list-style: none;
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.commentgroup {
+	padding: 20px;
+}
+
+.commnetlist {
+	padding: 20px;
+}
+
+.commentwriteboard {
+	padding: 15px 35px 10px 20px;
+}
+
+.commentwrite {
+	width: 100%;
+}
+
+.comment_textarea {
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+hr {
+	border: 0.3px solid rgb(178, 182, 187);
+}
+
+.category {
+	float: left;
+	padding-left: 20px;
+}
+
+.btn_comment {
+	margin-top: 4px;
+	float: right;
+}
+
+.both {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	height: 1px;
+}
+
+.commentbox{
+	border: 1px solid yellow;
+}
+
+.likecount2{
+	border:none;
+	width: 10px;
+}
+
+.count{
+	display: inline-block;
+}
 	
 
 
@@ -190,18 +195,30 @@
 										<p class="title">${boardList.title}</p>
 										<div style="border: solid 0.5px gray"></div>
 										<p class="profile">
-											<img class="picture" src="https://cf-epi.campuspick.com/0.png"> 
+											<c:choose>
+												<c:when test="${!empty boardList.profile}">
+													<img class="picture" src="/dc/resources/upload/profile/${boardList.profile}" /> 
+												</c:when>
+												<c:otherwise>
+													<img class="picture" src="/dc/resources/upload/profile/profileDefaultImg.png" /> 
+												</c:otherwise>
+											</c:choose>
 											<span class="nickname">${boardList.memberName}</span> 
 											<span class="count">조회수: ${boardList.viewCount}</span>
-											<p class="time"><fmt:formatDate value="${boardList.writeDate}" pattern="yyyy-MM-dd" /></p>
+											<span class="time">
+												<fmt:formatDate value="${boardList.writeDate}" pattern="yyyy-MM-dd" />
+											</span>
 										</p>
 										<p class="text">${boardList.content}</p>
 										<div style="border: solid 0.5px lightgray"></div>
 										<div class="status" style="border: solid 0.5px orange">
+											<c:if test="${!empty member and member.no eq boardList.memberNo}">
 											<button class="btn_board_edit" id="btn_board_edit">수정</button>
 											<button class="btn_board_delete" id="btn_board_delete">삭제</button>
-											<!-- <button class="btn_report" id="btn_report">신고하기</button> -->
+											</c:if>
+											<c:if test="${!empty member and member.no ne boardList.memberNo}">
 											<input type="button" class="btn_report" id="btn_report" value="신고하기" onclick="javascript:btn_report();"/>
+											</c:if>
 											<span class="likecount">
 											<a href="#" class="likefunc">
 												<img src="/dc/resources/images/dislike.png" id="like_img" style="height: 17px; width: 17px;">
