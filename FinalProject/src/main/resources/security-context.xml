@@ -24,6 +24,10 @@
 	<security:http security="none" pattern="/info/house/update.do" />
 	<security:http security="none" pattern="/info/region/update.do" />
 	
+	<security:http security="none" pattern="/admin/board/notice/insert.do" />
+	
+	
+	
 	<!-- <security:http security="none" pattern="/member/memberSearch.do" /> -->
 	<!-- <security:http security="none" pattern="/member/chkEmail.do" /> -->
 	<!-- 이거 말고 좀 더 자세히 처리해야함 -->
@@ -33,8 +37,10 @@
 	<security:http security="none" pattern="/community/food/foodUpdateForm.do" />
 	<security:http security="none" pattern="/job/jobBoard/insertJobBoard.do" />
 	<security:http security="none" pattern="/community/food/foodUpdateFormEnd.do" />
+	
 	<security:http security="none" pattern="/sale/group/groupFormEnd.do" />
-
+	<security:http security="none" pattern="/sale/group/groupUpdateFormEnd.do" />
+	<security:http security="none" pattern="/sale/group/groupDelete.do" />
 	
 	<!-- 메시지 전송 -->
 	<security:http security="none" pattern="/message/messageInsert.do" />

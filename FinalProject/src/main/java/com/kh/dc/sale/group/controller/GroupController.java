@@ -50,15 +50,10 @@ public class GroupController {
 	public String selectOneGroup(@RequestParam int boardNo, Model model) {
 
 		Group group = groupService.selectOneGroup(boardNo);
-		
-		ArrayList<Map<String, String>> ghList = 
-				new ArrayList<Map<String, String>>(groupService.selectGroupHistory(group.getNo()));
-		
-		System.out.println("ghList : " + ghList);
-		
+
 		model.addAttribute("group", group)
 			 .addAttribute("statusList", groupService.selectStatusList())
-			 .addAttribute("ghList", ghList);
+			 .addAttribute("ghList", groupService.selectGroupHistory(group.getNo()));
 	
 		return "sale/group/groupView";
 	}
@@ -90,8 +85,8 @@ public class GroupController {
 	@RequestMapping("sale/group/groupUpdateForm.do")
 	public String updateGroupForm(@RequestParam int boardNo, Model model) {
 		
-		model.addAttribute("group", groupService.selectOneGroup(boardNo))
-			 .addAttribute("bankList", groupService.selectBankList());;
+		model.addAttribute("group", groupService.selectOneGroup2(boardNo))
+			 .addAttribute("bankList", groupService.selectBankList());
 	
 		return "sale/group/groupUpdate";
 	}
@@ -99,11 +94,14 @@ public class GroupController {
 	@RequestMapping("sale/group/groupUpdateFormEnd.do")
 	public String updateGroup(Group group, Model model) {
 		
-		int result = groupService.updateGroup(group);
-
-		model.addAttribute("group", groupService.selectOneGroup(group.getBoardNo()));
+		System.out.println("group31:" + group);
+		
+		String msg = (groupService.updateGroup(group)>0) ? "게시글을 수정하였습니다." : "게시글 수정에 실패하였습니다.";
+		
+		model.addAttribute("loc", "/sale/group/groupView.do?boardNo="+group.getBoardNo())
+			 .addAttribute("msg", msg);
 	
-		return "sale/group/groupView";
+		return "common/msg";
 	}
 	
 	@RequestMapping("sale/group/groupDelete.do")

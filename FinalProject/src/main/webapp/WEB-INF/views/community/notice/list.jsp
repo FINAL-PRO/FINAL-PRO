@@ -172,7 +172,7 @@ hr {
 									<ol class="group"></br>
 										<p>총 ${totalContents}건의 공지사항이 있습니다.</p>
 										
-										<c:forEach items="${list}" var="b">
+										<c:forEach items="${nlist}" var="b">
 											<li class="groupin" id="${b.no}">
 											<a class="article" href="${pageContext.request.contextPath}/community/notice/noticeView.do?bno=${b.no}">
 													<p class="time">

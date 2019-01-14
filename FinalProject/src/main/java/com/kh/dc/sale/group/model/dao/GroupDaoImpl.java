@@ -35,6 +35,12 @@ public class GroupDaoImpl implements GroupDao {
 		
 		return sqlSession.selectOne("group_mapper.selectOneGroup", boardNo);
 	}
+	
+	@Override
+	public Group selectOneGroup2(int boardNo) {
+		
+		return sqlSession.selectOne("group_mapper.selectOneGroup2", boardNo);
+	}
 
 	@Override
 	public int insertGroup(Group group) {

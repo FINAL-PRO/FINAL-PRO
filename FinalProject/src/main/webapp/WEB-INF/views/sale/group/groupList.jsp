@@ -12,46 +12,50 @@
 
 <style>
 
-.product-box>div {
-	float: left;
-}
-
 .product-box {
-	width: 1000px;
 	height: 200px;
-	border: 1px solid black;
-	padding: 5px;
-	margin: 5px;
-}
-
-.product-info {
-	height: 100%;
+	border: 1px solid white;
 	padding: 10px;
-}
-
-.product-img {
-	width: 20%;
-}
-
-.product-text {
-	width: 60%;
-}
-
-.product-pro {
-	width: 20%;
+	margin: 10px;
 }
 
 a {
 	color: black;
 }
 
-.btn {
+.btn-write {
 	float: right;
+	margin-right: 10px;
 }
 
 #goodsPicture {
 	width: 100%;
 	height: 100%;
+}
+
+.pro {
+	padding-left: 0px;
+}
+
+.pro-con {
+	margin-top: 10px;
+}
+
+.title {
+	font-size: 20px;
+	padding-bottom: 10px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pro-info {
+	margin-top: 20px;
+}
+
+.product-box:hover {
+	background-color: #f8f8f8;
+	cursor: pointer;
 }
 
 </style>
@@ -69,34 +73,38 @@ a {
 <div class="section-center">
 <div class="dc-content">
 <div class="dc-content-title">
-	<span style="size:20px;">공동구매</span>
-	<button class="btn" onclick="goGroupForm();">글쓰기</button>
+	<h3>공동구매</h3>
 </div>
 		
 <div class="dc-content-box">
 <!-- ------------------- 내용 입력 ------------------- -->
-
 <c:set var="viewPath" value="${pageContext.request.contextPath}/sale/group/groupView.do?boardNo=" />
 
-<c:forEach items="${list}" var="g">
-<div class="product-box">
-	<div class="product-info product-img">
-		<a href="${viewPath}${g.boardNo}"><img id="goodsPicture" src="${g.goodsPicture}" /></a>
+<div class="row">
+	<div class="col-md-12">
+		<button class="btn btn-write" onclick="goGroupForm();">글쓰기</button>
 	</div>
-	<div class="product-info product-text">
-		<p class="title"><a href="${viewPath}${g.boardNo}">${g.title}</a></p>
-		<p><a href="${viewPath}${g.boardNo}">${g.goodsName}</a></p>
-		<span>${g.price}원</span> <br /> 
-		
-		<span>${g.writeDate}</span>
-		<span>조회수 ${g.viewCount}</span>
+</div> <hr />
+
+<c:forEach items="${list}" var="g">
+<div class="row product-box" onclick="location.href='${viewPath}${g.boardNo}'">
+	<div class="col-md-3 pro">
+		<img id="goodsPicture" src="${g.goodsPicture}" />
+	</div>
+	<div class="col-md-6 pro pro-con">
+		<p class="title">${g.title}</p>
+		<p class="pro-info">물품명 : ${g.goodsName}</p>	
+		<p class="pro-info">가격 : ${g.price} 원</p>
 	</div> 
-	<div class="product-info product-pro">
+	<div class="col-md-3 pro pro-con">
 		<p>진행자 : ${g.memberName}</p>
 		<p>인원 : ${g.maxCount}명/${g.currentCount}명</p>
-		<p>마감일 : ${g.endDate}</p>
+		<p>마감일 : ${g.endDate}</p> <br />
+		<span>${g.writeDate}</span>
+		<span style="float:right;">조회수 ${g.viewCount}</span>
 	</div>
 </div>
+<hr />
 </c:forEach>
 
 <c:out value="${pageBar}" escapeXml="false" />
@@ -121,6 +129,9 @@ a {
 	function goGroupForm(){
 		location.href = "${pageContext.request.contextPath}/sale/group/groupForm.do";
 	}	
+
+	
+	
 
 </script>
 

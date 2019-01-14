@@ -26,7 +26,7 @@
 						</div>
 						<div class="dc-content-box">
 							<div class="table-form-content">
-								<form name="boardFrm" action="${pageContext.request.contextPath}/admin/board/notice/write.do" method="post">
+								<form name="boardFrm" action="${pageContext.request.contextPath}/admin/board/notice/insert.do" method="post">
 									<table class="table table-bordered">
 										<tbody>
 											<tr>
