@@ -78,15 +78,16 @@
 	padding: 10px;
 }
 
-span {
+.status span {
 	display: inline-block;
 	margin-right: 8px;
-	padding-left: 5px;
 	line-height: 18px;
 	color: #a6a6a6;
 	font-size: 12px;
 	background-repeat: no-repeat;
-}
+	background-size: 16px 16px;
+} 
+
 
 .attach {
 	float: right;

@@ -94,6 +94,7 @@ img {
 	font-size: 12px;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
+	font-weight: bold;
 } 
 
 .content {
@@ -173,6 +174,12 @@ hr {
 	margin-left: 20px;
 }
 
+.free_btn2{
+	background: rgb(225, 91, 100);
+    color: white;
+    cursor: pointer;
+}
+
 </style>
 
 </head>
@@ -214,7 +221,7 @@ hr {
 									</script>
 									<c:if test="${!empty member}">
 									<div class="free_btn">
-										<input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/free/freeInsertForm.do'" />
+										<input type="button" class="btn free_btn2" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/free/freeInsertForm.do'" />
 									</div>
 									</c:if>
 								</div>
@@ -249,8 +256,8 @@ hr {
 														</c:otherwise>
 													</c:choose>
 													<p class="status">
-														<span class="votecount">좋아요: ${b.likeCount}</span> 
-														<span class="commentcount">댓글: ${b.commentCount}</span>
+														<span class="votecount">좋아요: <span style="color:rgb(244, 126, 96);">${b.likeCount}</span></span> 
+														<span class="commentcount">댓글: <span style="color:rgb(244, 126, 96);">${b.commentCount}</span></span> 
 														<c:choose>
 															<c:when test="${b.imageCheck eq 0}">
 																<span class="attachcount"></span>
