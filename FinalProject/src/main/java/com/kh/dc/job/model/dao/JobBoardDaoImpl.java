@@ -81,16 +81,19 @@ public class JobBoardDaoImpl implements JobBoardDao {
 	}
 
 	@Override
+	public int endJobBoard(int boardNo) {
+		// 
+		
+		System.out.println("dao");
+		return sqlSession.update("jobBoard_mapper.endJobBoard", boardNo);
+	}
+	
+	@Override
 	public int deleteJobBoard(int boardNo) {
 		// 
 		return sqlSession.update("jobBoard_mapper.deleteJobBoard", boardNo);
 	}
-/*
-	@Override
-	public List<JobBoard> selectArrayType(int arrayType) {
-		return sqlSession.selectList("jobBoard_mapper.selectArrayType", arrayType);
-	}
-*/
+
 	@Override
 	public List<Code> selectJobBoardTypeList() {
 		return sqlSession.selectList("jobBoard_mapper.selectJobBoardTypeList");

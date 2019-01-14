@@ -96,7 +96,25 @@
 				<!-- 로그인 했을때 -->
 				<sec:authorize access="isAuthenticated()">
 					<ul>
-						<li><button class="btn btn-outline-success" onclick="msgPop();">쪽지 0</button></li>
+						<li><button type="button" class="btn btn-outline-success"> 
+						  <a href="" onclick="msgPop();">쪽지</a> <span class="badge badge-dark"><label id="countUnreadMSG"></label></span>
+						</button>
+						<script>
+							$(document).ready(function(){
+								countMsg();
+							});	
+							
+							function countMsg(){
+								$.ajax({
+									data : { memNo : ${member.no} },
+									url : "${pageContext.request.contextPath}/message/countUnreadMSG.do",
+									success : function(data){
+										$("#countUnreadMSG").text(data);
+									}
+								});
+							}
+						</script>
+						</li>
 						<li><button class="btn btn-outline-success" onclick="location.href='${pageContext.request.contextPath}/logout'">로그아웃</button></li>
 					</ul>
 				</sec:authorize>

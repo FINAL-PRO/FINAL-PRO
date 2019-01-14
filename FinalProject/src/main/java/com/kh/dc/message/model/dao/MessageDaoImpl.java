@@ -63,4 +63,15 @@ public class MessageDaoImpl implements MessageDao {
 		
 		return (Integer)hmap.get("result");
 	}
+
+	@Override
+	public int countUnreadMSG(int memNo) {
+		// 
+		return sqlSession.selectOne("message_mapper.countUnreadMSG", memNo);
+	}
+	@Override
+	public int replyMSG(int boardNo) {
+		// 
+		return sqlSession.insert("message_mapper.replyMSG", boardNo);
+	}
 }

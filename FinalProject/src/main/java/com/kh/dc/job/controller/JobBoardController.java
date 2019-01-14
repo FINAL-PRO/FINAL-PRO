@@ -168,7 +168,17 @@ public class JobBoardController {
 	
 		return "redirect:/job/jobBoard/jobBoardDetail.do?no="+ jobBoard.getNo();	
 	}
-	
+	@RequestMapping("/job/jobBoard/endJobBoard.do")
+	public String endJobBoard(@RequestParam int boardNo, Model model) {
+
+		String loc = "/job/jobBoard/jobBoardList.do";
+		System.out.println("boardNo : "+boardNo);
+		String msg = (jobBoardService.endJobBoard(boardNo)>0) ? "게시글을 마감하였습니다." : "게시글 마감에 실패하였습니다.";
+		System.out.println("옵니까");
+		model.addAttribute("loc", loc).addAttribute("msg", msg);
+		
+		return "common/msg";
+	}
 	
 	@RequestMapping("/job/jobBoard/deleteJobBoard.do")
 	public String deleteJobBoard(@RequestParam int boardNo, Model model) {
@@ -179,7 +189,8 @@ public class JobBoardController {
 
 		model.addAttribute("loc", loc).addAttribute("msg", msg);
 		
-		return "redirect:/job/jobBoard/jobBoardList.do";
+		
+		return "common/msg";
 	}
 
 }

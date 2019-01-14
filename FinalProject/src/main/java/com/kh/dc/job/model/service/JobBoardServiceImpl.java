@@ -124,7 +124,18 @@ public class JobBoardServiceImpl implements JobBoardService {
 			
 		return result;
 	}
-
+	
+	@Override
+	public int endJobBoard(int boardNo) {
+		// 
+		int result = jobBoardDao.endJobBoard(boardNo);
+		
+		System.out.println(result);
+		
+		if(result < Board_SERVICE_COMPLETE) throw new BoardException("게시글 마감 실패!");
+		
+		return result;
+	}
 
 	@Override
 	public int deleteJobBoard(int boardNo) {

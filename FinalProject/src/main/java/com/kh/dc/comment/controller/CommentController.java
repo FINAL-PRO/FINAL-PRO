@@ -60,7 +60,7 @@ public class CommentController {
         comment.setBoardNo(bno);
         comment.setContent(content);
         comment.setMemberNo(mno);
-        
+        System.out.println("comment : "+ comment);
         return commentService.commentInsert(comment);
     }
 

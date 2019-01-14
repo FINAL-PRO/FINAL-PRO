@@ -10,6 +10,13 @@
 <title>쪽지목록 페이지 입니다.</title>
 <c:import url="../common/header.jsp"/>
 	<style>
+	.msg-table{
+		border-collapse: collapse;
+		text-align: left;
+		line-height: 1.5;
+		
+		margin: 20px 10px;
+	}
     .columName  {
     	display: table-row;
     	border : 1px solid black;
@@ -30,19 +37,17 @@
 		<input type="hidden" value="${member.no}"/>
 		<div id="msg-table" class="msg-table">
 		<div class="columName bg-primary text-white">
-			<div id="check" class="cell"></div>
 			<div id="no" class="cell">번호</div>
 			<div id="content" class="cell">내용</div>
 			<div id="sendDate" class="cell">보낸날짜</div>
 			<div id="fromMember" class="cell">보낸사람</div>
 			<div id="statues" class="cell">상태</div>
+			<div id="delete" class="cell">삭제</div>
 		</div>
-
 		<c:forEach items="${list}" var="msgList">
 		<div id="${msgList.no}" class="row" onclick="">
-			<input type="checkbox" name="msgSelect" id="msgSelect"/>
 			<div id="noValue" class="cell">${msgList.no}</div>
-			<div id="contentValue" class="cell">
+			<div id="contentValue" class="cell" style="text-overflow: ellipsis;">
 			<a href="${pageContext.request.contextPath}/message/messageDetail.do?no=${msgList.no}">
 			${msgList.content}</a></div>
 			<div id="sendDateValue" class="cell">${msgList.sendDate}</div>
@@ -51,18 +56,18 @@
 			<a href="${pageContext.request.contextPath}/message/messageInsertForm.do?fromMember=${msgList.frommNick}">
 			${msgList.frommNick}</a></div>
 			<div id="statuesValue" class="cell">${msgList.status}</div>
+			<div id="check" class="cell"><a href="${pageContext.request.contextPath}/message/messageDelete.do?no=${msgList.no}&memNo=${member.no}">O</a></div>
 		</div>
 		</c:forEach>
 		</div>
 		<c:out value="${pageBar}" escapeXml="false"/>
 		<input type="button" value="쪽지쓰기" id="btn-add" class="btn" onclick="messageInsert();"/>
-		<input type="button" value="선택삭제" id="btn-add" class="btn" onclick="messageSelectDelete();"/>
 		<script>
 			function messageInsert(){
 				location.href = "${pageContext.request.contextPath}/message/messageInsertForm.do?no=${member.no}";
 			};
-			function messageSelectDelete(){
-				location.href = "${pageContext.request.contextPath}/message/messageDelete.do?no=${msgList.no}";
+			function msgDel(){
+				location.href = "${pageContext.request.contextPath}/message/messageDelete.do?no=${msgList.no}&memNo=${member.no}";
 			};
 		</script>
 </body>

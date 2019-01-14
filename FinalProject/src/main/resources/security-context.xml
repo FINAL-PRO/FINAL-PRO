@@ -27,6 +27,7 @@
 	<security:http security="none" pattern="/community/food/foodInsertFormEnd.do" />
 	<security:http security="none" pattern="/community/food/foodDelete.do" />
 	<security:http security="none" pattern="/community/food/foodUpdateForm.do" />
+	<security:http security="none" pattern="/job/jobBoard/insertJobBoard.do" />
 	
 	<!-- 메시지 전송 -->
 	<security:http security="none" pattern="/message/messageInsert.do" />

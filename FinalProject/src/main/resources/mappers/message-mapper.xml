@@ -20,7 +20,7 @@
         JOIN DC_CODE_TB C ON(C.ID = MSG.STATUS)
 		WHERE STATUS != 'MSGTYPE003'
 		AND MSG.TOMEMBER = #{no}
-		ORDER BY MSG.SENDDATE
+		ORDER BY MSG.STATUS, MSG.NO DESC
 	</select>
 	
 	<select id="selectMessageTotalContents" resultType="_int">
@@ -67,13 +67,20 @@
 			)
 		}
 	</select>
+
+	<select id="countUnreadMSG" resultType="_int">
+		SELECT COUNT(*) FROM DC_MESSAGE_TB
+		WHERE STATUS = 'MSGTYPE001'
+		AND TOMEMBER = #{memNo} 
+	</select>
 	
-<!-- 	<update>
-		UPDATE DC_MESSAGE_TB SET STATUS = 'N'
-		WHERE NO IN(
-		<foreach collection="list" item="no" separator=",">
-			#{no}
-		</foreach>
-		)
-	</update> -->
+	<insert id="replyMSG" parameterType="message">
+		INSERT INTO DC_MESSAGE_TB VALUES(
+		SEQ_MESSAGE.NEXTVAL, '게시글에 댓글이 달렸습니다.', SYSDATE,  
+		(SELECT NO FROM DC_MEMBER_TB 
+		WHERE NICKNAME = '알리미'), 
+		(SELECT MEMBERNO FROM DC_BOARD_TB
+		WHERE NO = #{boardNo}),
+		'MSGTYPE001')
+	</insert>
 </mapper>
