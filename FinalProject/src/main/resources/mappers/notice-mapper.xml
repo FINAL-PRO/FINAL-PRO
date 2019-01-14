@@ -3,7 +3,18 @@
 <mapper namespace="notice_mapper">
 	
 	<select id="selectNoticeListData" resultType="board">
-		SELECT * FROM DC_BOARD_TB WHERE STATUS = 'BSTATUS004' AND ROWNUM <![CDATA[ <= 5 ORDER BY NO ]]>
+		SELECT
+			B.*,
+		    CASE TYPE
+		    WHEN 'BOARD001' THEN '자유게시판'
+		    WHEN 'BOARD002' THEN '맛집'
+		    WHEN 'BOARD003' THEN '공동구매'
+		    WHEN 'BOARD004' THEN '중고거래'
+		    WHEN 'BOARD005' THEN '부동산'
+		    WHEN 'BOARD006' THEN '구인구직'
+		    WHEN 'BOARD007' THEN '지역정보'
+		    ELSE '기타' END BOARDTYPE
+		FROM DC_BOARD_TB B WHERE STATUS = 'BSTATUS004' AND ROWNUM <![CDATA[ <= 5 ORDER BY NO ]]>
 	</select>
 	
 	<resultMap type="boardList" id="resultBoardList">

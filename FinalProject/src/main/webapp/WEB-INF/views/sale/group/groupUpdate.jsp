@@ -12,17 +12,6 @@
 
 <style>
 
-.dc-content-box {
-	padding-left: 50px;
-	padding-right: 50px;
-	margin-bottom: 50px;
-}
-
-label.info-label {
-	margin-left: 30px;
-	padding-top: 10px;
-}
-
 .title-box {
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -63,85 +52,94 @@ label.info-label {
 
 <div class="section-center">
 <div class="dc-content">
-<div class="dc-content-title"><h1>제목</h1></div>
+<div class="dc-content-title">
+	<h3>공동구매</h3>
+</div>
 		
 <div class="dc-content-box">
 <!-- ------------------- 내용 입력 ------------------- -->
 
-<form name="boardForm" action="${pageContext.request.contextPath}/sale/group/groupFormEnd.do" method="post">
+<form id="boardForm" action="${pageContext.request.contextPath}/sale/group/groupUpdateFormEnd.do" method="post">
 	<input type="hidden" name="memberNo" value="${member.no}" required /> 
-	
-	<div class="title-box">
-		<label class="title-label" for="title">제목</label>
-		<input type="text" name="title" style="width:90%; float:right;" value="${group.title}" />
-		<p class="warn-msg">제목은 50글자를 넘을 수 없습니다.</p>
+	<input type="hidden" name="boardNo" value="${group.boardNo}" />
+
+	<div class="row title-box">
+		<div class="col-md-1">
+			<label class="title-label" for="title">제목</label>
+		</div>
+		<div class="col-md-9">
+			<input type="text" class="info" name="title" id="title" value="${group.title}"/>
+			<p class="warn-msg" id="titleMsg">제목은 50글자를 넘을 수 없습니다.</p>
+		</div>
+		<div class="col-md-2"></div>
 	</div> <hr />
 	
-	<div style="display:inline-block; width:100%;">
-		<div style="float:left; width:30%;">
+	<div class="row">
+		<div class="col-md-4 img-box">
 			<div class="img-box" style="border:1px solid black;">
-				<img id="goodsImg" src="${group.goodsPicture}"/>
+				<div class="img-box" style="border:1px solid black;">
+					<span id="imgMsg">물품 사진을 등록해주세요.</span>
+					<img id="goodsImg" src="${group.goodsPicture}"/>
+				</div>
+				<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);"/>
+				<input type="hidden" id="goodsPicture" name="goodsPicture" value="${group.goodsPicture}"/>
+				<button type="button" style="width:250px;" id="btnPic">물품사진 등록하기</button>
 			</div>
-			<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);"/>
-			<input type="hidden" id="goodsPicture" name="goodsPicture" />
-			<button type="button" style="width:250px;" id="btnPic">물품사진 등록하기</button>
 		</div>
-		
-		<div>
-		<table class="product-info">
-		<colgroup>
-			<col width="200px"/>
-			<col width="400px"/>
-		</colgroup>
-		<tbody>
-			<tr>
-				<th><label class="info-label" for=goodsName>물품명</label></th>
-				<td><input type="text" class="info" name="goodsName" value="${group.goodsName}" /></td>
-			</tr>
-			<tr>
-				<th><label class="info-label" for="price">가격</label></th>
-				<td><input type="text" class="info" name="price" value="${group.price}" disabled="disabled"/></td>
-			</tr>
-			<tr>
-				<th><label class="info-label" for="maxCount">모집인원</label></th>
-				<td><input type="text" class="info " name="maxCount" value="${group.maxCount}" disabled="disabled"/></td>
-			</tr>
-			<tr>
-				<th><label class="info-label" for="dealType">거래방법</label></th>
-				<td>직거래 <input type="radio" name="dealType" value="DEAL001" /> 
-				택배 <input type="radio" name="dealType" value="DEAL002" /></td>
-			</tr>
-			<tr>
-				<th><label class="info-label" for="deposit">계좌번호</label></th>
-				<td>
-					<select class="" name="bank" id="bank" style="padding: 0; width:30%;">
-						<c:forEach items="${bankList}" var="bank">
-							<option value="${bank.id}">${bank.value}</option>
-						</c:forEach>
-					</select> 
-					<input type="text" class="info" name="deposit" style="width:68%;" value="${group.deposit}" /> <br /> 
-					<p class="warn-msg">반드시 본인 명의의 계좌를 입력해 주세요.</p>
-				</td>
-			</tr>
-			<tr>
-				<th><label class="info-label" for=endDate>마감일</label></th>
-				<td><input type="date" class="info" name="endDate" value="${group.endDate}" /></td>
-			</tr>
-		</tbody>
-		</table>
-		</div>
-		
-	</div> <hr />
+		<div class="col-md-8">
+			<table class="product-info" style="width:100%;">
+			<colgroup><col width="30%"/><col width="70%"/></colgroup>
+			<tbody>
+				<tr>
+					<th><label class="info-label" for=goodsName>물품명</label></th>
+					<td><input type="text" class="info" name="goodsName" id="goodsName" value="${group.goodsName}" /></td>
+				</tr>
+				<tr>
+					<th><label class="info-label" for="price">가격</label></th>
+					<td><input type="text" class="info" name="price" id="price" value="${group.price}" disabled="disabled"/></td>
+				</tr>
+				<tr>
+					<th><label class="info-label" for="maxCount">모집인원</label></th>
+					<td>
+						<input type="text" class="info" name="maxCount" id="maxCount" value="${group.maxCount}" disabled="disabled"/>
+						<p class="warn-msg" id="maxCountMsg"></p>
+					</td>
+				</tr>
+				<tr>
+					<th><label class="info-label" for="dealType">거래방법</label></th>
+					<td>직거래 <input type="radio" name="dealType" value="DEAL001" /> 
+					택배 <input type="radio" name="dealType" value="DEAL002" /></td>
+				</tr>
+				<tr>
+					<th><label class="info-label" for="deposit">계좌번호</label></th>
+					<td>
+						<select name="bank" id="bank" style="padding: 0; width:30%;">
+							<c:forEach items="${bankList}" var="bank">
+								<option value="${bank.id}">${bank.value}</option>
+							</c:forEach>
+						</select> 
+						<input type="text" class="info" name="deposit" id="deposit" style="width:68%;" value="${group.deposit}"/> <br /> 
+						<p class="warn-msg">반드시 본인 명의의 계좌를 입력해 주세요.</p>
+					</td>
+				</tr>
+				<tr>
+					<th><label class="info-label" for=endDate>마감일</label></th>
+					<td><input type="date" class="info" name="endDate" id="endDate" value="${group.endDate}" /></td>
+				</tr>
+			</tbody>
+			</table>	
 	
+		</div>
+	</div> <br /> <hr />	
+
 	<div>
 		<textarea id="summernote" name="content">${group.content}</textarea>
 	</div>
-	
-	<br /><br />
-	<input type="submit" class="a" value="수정완료" />
-	<input type="button" class="a" value="수정취소" onclick="cancelUpdate();"/>
-	<br /><br />
+	<input type="submit" value="수정완료" id="dd"/>
 </form>
+
+
+<input type="button" value="수정취소" onclick="cancelUpdate();"/>
 
 <!-- -------------------------------------------- -->
 </div>
@@ -159,6 +157,11 @@ label.info-label {
 
 <!-------------------- Script -------------------->
 <script>
+
+	$(function() {
+		
+		$(('input[value="${group.dealType}"]')).attr("checked", true);
+	});
 
 	$('#summernote').summernote({
 		height : 500,
@@ -224,6 +227,9 @@ label.info-label {
 		location.href = "${pageContext.request.contextPath}/sale/group/groupView.do?boardNo="+${group.boardNo};
 	}	
 	
+	$('#btnSubmit').click(function(){
+		$('#boardForm').submit();
+	});
 	
 	// groupInsert랑 똑같은 정규식 처리
 	

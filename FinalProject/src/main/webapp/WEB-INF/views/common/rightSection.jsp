@@ -20,10 +20,12 @@
 			console.log(data);
 			
 			if(data == ""){
-				$(".ad-right").css("width", "258px").css("height", "290px").attr("background-position", "center")
+				/* $(".ad-right").css("width", "258px").css("height", "290px").attr("background-position", "center")
 				.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
 				.css("margin-right", "auto");
-				$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/260x280.png")');
+				$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/260x280.png")'); */
+				
+				$("#ad-right-img").attr("src","${pageContext.request.contextPath}/resources/upload/ad/right1.jpg");
 				$(".ad-right").attr("onclick", "window.open('" + "http://www.iei.or.kr/main/main.kh" + "');");
 			}else{
 				var img = data['adContentPath'].split("\\ad/");
@@ -63,7 +65,7 @@
 			<div class="dc-profile-area-top" style="background:white; padding:10px;">
 				<!-- 로그인 안 했을때 -->
 				<sec:authorize access="isAnonymous()">
-					<button style="width:90%;margin:10px;margin-top:15%" class="btn btn-outline-success" id="loginBtn" onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
+					<button style="width:90%;margin:10px;margin-top:15%" class="btn loginBtnSection" id="loginBtn" onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
 				</sec:authorize>
 				
 				<!-- 로그인 했을때 -->
@@ -79,7 +81,7 @@
 				<br />
 				<span>
 					<a href="${pageContext.request.contextPath}/member/memberView.do?no=${member.no}"
-						title="내정보보기" style="color: green; font-weight: bold; margin-bottom: 10px;">${member.nickName}</a> 님, 안녕하세요!
+						title="내정보보기" style="color: rgb(244, 126, 96); font-weight: bold; margin-bottom: 10px;">${member.nickName}</a> 님, 안녕하세요!
 				</span>
 
 				</sec:authorize>
@@ -90,15 +92,15 @@
 				<!-- 로그인 안했을때 -->
 				<sec:authorize access="isAnonymous()">
 					<ul>
-						<li><button class="btn btn-outline-success" onclick="location.href='${pageContext.request.contextPath}/member/memberSearch.do'">id/pw 찾기</button></li>
-						<li><button class="btn btn-outline-success" id="enrollBtn" type="button" onclick="location.href='/dc/member/memberInsert.do'">회원가입</button></li>
+						<li><button class="btn loginBtnSection" onclick="location.href='${pageContext.request.contextPath}/member/memberSearch.do'">id/pw 찾기</button></li>
+						<li><button class="btn loginBtnSection" id="enrollBtn" type="button" onclick="location.href='/dc/member/memberInsert.do'">회원가입</button></li>
 					</ul>
 				</sec:authorize>
 				
 				<!-- 로그인 했을 때 -->
 				<sec:authorize access="isAuthenticated()">
 					<ul class="afterLoginUl">
-						<li><button type="button" class="btn btn-warning afterLogin" onclick="msgPop();"> 
+						<li><button type="button" class="btn loginBtnSection" onclick="msgPop();"> 
 						  쪽지 <span class="badge" id="countUnreadMSG"></span>
 						</button>
 						<script>
@@ -117,7 +119,7 @@
 							}
 						</script>
 						</li>
-						<li><button class="btn btn-warning afterLogin" onclick="location.href='${pageContext.request.contextPath}/logout'">로그아웃</button></li>
+						<li><button class="btn btn-warning loginBtnSection" onclick="location.href='${pageContext.request.contextPath}/logout'">로그아웃</button></li>
 					</ul>
 				</sec:authorize>
 			</div>
@@ -154,7 +156,7 @@
 	<div class="dc-content-box dc-border">
 		<!-- <h1>광고(AD)</h1> -->
 		<div class="ad-right">
-			<img id="ad-right-img" src=""/>
+			<img id="ad-right-img" src="" width="258px" height="290px"/>
 		</div>
 	</div>
 </div>

@@ -12,12 +12,6 @@
 
 <style>
 
-.dc-content-box {
-	padding-left: 50px;
-	padding-right: 50px;
-	margin-bottom: 50px;
-}
-
 .title-box {
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -58,14 +52,16 @@
 
 <div class="section-center">
 <div class="dc-content">
-<div class="dc-content-title"><h1>제목</h1></div>
+<div class="dc-content-title">
+	<h3>공동구매</h3>
+</div>
 		
 <div class="dc-content-box">
 <!-- ------------------- 내용 입력 ------------------- -->
 
 <form name="boardForm" action="${pageContext.request.contextPath}/sale/group/groupFormEnd.do" method="post">
 	<input type="hidden" name="memberNo" value="${member.no}" required /> 
-	
+
 	<div class="row title-box">
 		<div class="col-md-1">
 			<label class="title-label" for="title">제목</label>
@@ -77,65 +73,64 @@
 		<div class="col-md-2"></div>
 	</div> <hr />
 	
-	<div style="display:inline-block; width:100%;">
-		<div style="float:left; width:30%;">
+	<div class="row">
+		<div class="col-md-4 img-box">
 			<div class="img-box" style="border:1px solid black;">
-				<span id="imgMsg">물품 사진을 등록해주세요.</span>
-				<img id="goodsImg"/>
+				<div class="img-box" style="border:1px solid black;">
+					<span id="imgMsg">물품 사진을 등록해주세요.</span>
+					<img id="goodsImg"/>
+				</div>
+				<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);"/>
+				<input type="hidden" id="goodsPicture" name="goodsPicture" />
+				<button type="button" style="width:250px;" id="btnPic">물품사진 등록하기</button>
 			</div>
-			<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);"/>
-			<input type="hidden" id="goodsPicture" name="goodsPicture" />
-			<button type="button" style="width:250px;" id="btnPic">물품사진 등록하기</button>
 		</div>
-		
-		<div>
-		<table class="product-info">
-		<colgroup>
-			<col width="200px"/>
-			<col width="400px"/>
-		</colgroup>
-		<tbody>
-			<tr>
-				<th><label class="info-label" for=goodsName>물품명</label></th>
-				<td><input type="text" class="info" name="goodsName" id="goodsName" /></td>
-			</tr>
-			<tr>
-				<th><label class="info-label" for="price">가격</label></th>
-				<td><input type="text" class="info" name="price" id="price" /></td>
-			</tr>
-			<tr>
-				<th><label class="info-label" for="maxCount">모집인원</label></th>
-				<td>
-					<input type="text" class="info" name="maxCount" id="maxCount" />
-					<p class="warn-msg" id="maxCountMsg"></p>
-				</td>
-			</tr>
-			<tr>
-				<th><label class="info-label" for="dealType">거래방법</label></th>
-				<td>직거래 <input type="radio" name="dealType" value="DEAL001" /> 
-				택배 <input type="radio" name="dealType" value="DEAL002" /></td>
-			</tr>
-			<tr>
-				<th><label class="info-label" for="deposit">계좌번호</label></th>
-				<td>
-					<select class="" name="bank" id="bank" style="padding: 0; width:30%;">
-						<c:forEach items="${bankList}" var="bank">
-							<option value="${bank.id}">${bank.value}</option>
-						</c:forEach>
-					</select> 
-					<input type="text" class="info" name="deposit" id="deposit" style="width:68%;"/> <br /> 
-					<p class="warn-msg">반드시 본인 명의의 계좌를 입력해 주세요.</p>
-				</td>
-			</tr>
-			<tr>
-				<th><label class="info-label" for=endDate>마감일</label></th>
-				<td><input type="date" class="info" name="endDate" id="endDate"/></td>
-			</tr>
-		</tbody>
-		</table>
+		<div class="col-md-8">
+			<table class="product-info" style="width:100%;">
+			<colgroup><col width="30%"/><col width="70%"/></colgroup>
+			<tbody>
+				<tr>
+					<th><label class="info-label" for=goodsName>물품명</label></th>
+					<td><input type="text" class="info" name="goodsName" id="goodsName" /></td>
+				</tr>
+				<tr>
+					<th><label class="info-label" for="price">가격</label></th>
+					<td><input type="text" class="info" name="price" id="price" /></td>
+				</tr>
+				<tr>
+					<th><label class="info-label" for="maxCount">모집인원</label></th>
+					<td>
+						<input type="text" class="info" name="maxCount" id="maxCount" />
+						<p class="warn-msg" id="maxCountMsg"></p>
+					</td>
+				</tr>
+				<tr>
+					<th><label class="info-label" for="dealType">거래방법</label></th>
+					<td>직거래 <input type="radio" name="dealType" value="DEAL001" /> 
+					택배 <input type="radio" name="dealType" value="DEAL002" /></td>
+				</tr>
+				<tr>
+					<th><label class="info-label" for="deposit">계좌번호</label></th>
+					<td>
+						<select class="" name="bank" id="bank" style="padding: 0; width:30%;">
+							<c:forEach items="${bankList}" var="bank">
+								<option value="${bank.id}">${bank.value}</option>
+							</c:forEach>
+						</select> 
+						<input type="text" class="info" name="deposit" id="deposit" style="width:68%;"/> <br /> 
+						<p class="warn-msg">반드시 본인 명의의 계좌를 입력해 주세요.</p>
+					</td>
+				</tr>
+				<tr>
+					<th><label class="info-label" for=endDate>마감일</label></th>
+					<td><input type="date" class="info" name="endDate" id="endDate"/></td>
+				</tr>
+			</tbody>
+			</table>	
+	
 		</div>
-		
-	</div> <hr />
+	</div> <br /> <hr />	
+
 	
 	<div>
 		<textarea id="summernote" name="content"></textarea>

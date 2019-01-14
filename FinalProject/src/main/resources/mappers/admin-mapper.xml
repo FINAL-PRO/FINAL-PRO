@@ -60,7 +60,7 @@
 	<!-- 공지글 등록하기 -->
 	<insert id="insertNotice" parameterType="board">
 		INSERT INTO DC_BOARD_TB VALUES
-		(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, #{type}, #{status}, #{memberNo}, NULL)
+		(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, #{type}, 'BSTATUS004', #{memberNo}, NULL)
 	</insert>
 	
 	<!-- 게시글 상태 변경하기 -->
