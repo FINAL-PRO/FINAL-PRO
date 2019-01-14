@@ -25,13 +25,9 @@ public interface UsedDao {
 	
 	int updateViewCount(int boardNo);
 	
-	List<Map<String, String>> selectUsedHistory(int boardNo);
-	
-	Map<String, String> selectOneUsedHistory(Map<String, String> uh);
+	Map<String, String> selectOneUsedHistory(int usedNo);
 
 	int insertUsedHistory(Map<String, String> uh);
-	
-	int deleteUsedHistory(Map<String, String> uh);
 	
 	List<Map<String, String>> selectStatusList();
 	

@@ -15,6 +15,7 @@ public class Used extends Board implements Serializable {
 	private String status;
 	private int goodsNo;
 	private String goodsName;
+	private String goodsPicture;
 	
 	// DB join용 변수
 	private String goodsCategory;
@@ -24,7 +25,7 @@ public class Used extends Board implements Serializable {
 	}
 
 	public Used(int no, int price, String dealType, int boardNo, String status, int goodsNo, String goodsName,
-			String goodsCategory) {
+			String goodsPicture, String goodsCategory) {
 		super();
 		this.no = no;
 		this.price = price;
@@ -33,6 +34,7 @@ public class Used extends Board implements Serializable {
 		this.status = status;
 		this.goodsNo = goodsNo;
 		this.goodsName = goodsName;
+		this.goodsPicture = goodsPicture;
 		this.goodsCategory = goodsCategory;
 	}
 
@@ -91,6 +93,14 @@ public class Used extends Board implements Serializable {
 	public void setGoodsName(String goodsName) {
 		this.goodsName = goodsName;
 	}
+	
+	public String getGoodsPicture() {
+		return goodsPicture;
+	}
+
+	public void setGoodsPicture(String goodsPicture) {
+		this.goodsPicture = goodsPicture;
+	}
 
 	public String getGoodsCategory() {
 		return goodsCategory;
@@ -100,11 +110,15 @@ public class Used extends Board implements Serializable {
 		this.goodsCategory = goodsCategory;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
 		return "Used [no=" + no + ", price=" + price + ", dealType=" + dealType + ", boardNo=" + boardNo + ", status="
 				+ status + ", goodsNo=" + goodsNo + ", goodsName=" + goodsName + ", goodsCategory=" + goodsCategory
-				+ ", Board=[" + super.toString() + "]";
+				+ ", goodsPicture=" + goodsPicture + ", Board=[" + super.toString() + "]";
 	}
 	
 }

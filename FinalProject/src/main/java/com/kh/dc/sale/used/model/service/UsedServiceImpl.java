@@ -17,92 +17,66 @@ public class UsedServiceImpl implements UsedService {
 
 	@Override
 	public List<Map<String, String>> selectUsedList(int cPage, int numPerPage) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return usedDao.selectUsedList(cPage, numPerPage);
 	}
 
 	@Override
 	public int selectUsedTotalContents() {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return usedDao.selectUsedTotalContents();
 	}
 
 	@Override
 	public Used selectOneUsed(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Used used = usedDao.selectOneUsed(boardNo);
+		
+		if(used != null) usedDao.updateViewCount(boardNo);
+			
+		return used;
 	}
 
 	@Override
 	public int insertUsed(Used used) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int insertBoard(Used used) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return usedDao.insertBoard(used)*usedDao.insertUsed(used);
 	}
 
 	@Override
 	public int updateUsed(Used used) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public int updateBoard(Used used) {
-		// TODO Auto-generated method stub
-		return 0;
+		return usedDao.updateBoard(used)*usedDao.updateUsed(used);
 	}
 
 	@Override
 	public int deleteUsed(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return usedDao.deleteUsed(boardNo);
 	}
 
 	@Override
-	public int updateViewCount(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public Map<String, String> selectOneUsedHistory(int usedNo) {
 
-	@Override
-	public List<Map<String, String>> selectUsedHistory(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<String, String> selectOneUsedHistory(Map<String, String> uh) {
-		// TODO Auto-generated method stub
-		return null;
+		return usedDao.selectOneUsedHistory(usedNo);
 	}
 
 	@Override
 	public int insertUsedHistory(Map<String, String> uh) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public int deleteUsedHistory(Map<String, String> uh) {
-		// TODO Auto-generated method stub
-		return 0;
+		return usedDao.insertUsedHistory(uh);
 	}
 
 	@Override
 	public List<Map<String, String>> selectStatusList() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return usedDao.selectStatusList();
 	}
 
 	@Override
 	public int updateStatus(Map<String, String> status) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return usedDao.updateStatus(status);
 	}
 		
 }

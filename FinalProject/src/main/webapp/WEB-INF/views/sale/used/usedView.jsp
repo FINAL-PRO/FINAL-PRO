@@ -7,24 +7,20 @@
 <head>
 <meta charset="UTF-8">
 <title>동커</title>
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 <c:import url="../../common/header.jsp" />
 
 <style>
 
-.dc-content-box {
-	padding-left: 50px;
-	padding-right: 50px;
-	margin-bottom: 50px;
-}
-
 .title-box {
+	width: 100%;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
 .img-box {
-	height: 250px;
-	width: 250px;
+	height: 100%;
+	width: 100%;
 }
 
 .info {
@@ -49,6 +45,24 @@
 	border: 1px solid lightgray;
 }
 
+.status {
+	height: auto;
+	width: auto;
+	background: white;
+	border: 1px solid black;
+}
+
+.current {
+	background: skyblue;
+}
+
+#title {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+}	
+
+
 </style>
 
 </head>
@@ -68,35 +82,73 @@
 		
 <div class="dc-content-box">
 <!-- ------------------- 내용 입력 ------------------- -->
-	
+
 <div class="title-box">
-	<label class="title-label" for="title">제목</label>
-	<span class="" id="title">${used.title }</span>
+	<p id="title">${used.title }</p>
 </div> <hr />
-	
-<div style="display:inline-block; width:100%;">
-	<div style="float:left; width:30%;">
+
+
+<div class="row">
+	<div class="col-md-4 img-box">
 		<div class="img-box" style="border:1px solid black;">
 			<img id="goodsImg" src="${used.goodsPicture}"/>
 		</div>
 	</div>
-	
-	<div class="row">
-		<div class="col-md-2">
-			<p class="info-label">물품명</p>
-			<p class="info-label">가격</p>
-			<p class="info-label">거래방법</p>
-		</div>
-		<div class="col-md-4">
-			<p>${used.goodsName}</p>
-			<p>${used.price}<span>원</span></p>
-			<p>${used.dealType}</p>
-		</div>
+	<div class="col-md-2">
+		<p class="info-label">물품명</p>
+		<p class="info-label">가격</p>
+		<p class="info-label">거래방법</p>
+		<p class="info-label">판매상태</p> <br />
+		<c:if test="${member.no ne used.memberNo and used.dealType eq '안전거래'}">
+		<input type="button" value="바로구매" onclick="pay(${used.price});" />
+		</c:if>
+		<c:if test="${member.no eq used.memberNo}">
+		<input type="button" value="물품 판매완료" onclick="soldOut();"/>
+		</c:if>
+	</div>
+	<div class="col-md-6">
+		<p id="goodsName">${used.goodsName}</p>
+		<p ><span id="price">${used.price}</span>원</p>
+		<p>${used.dealType}</p>
+		<p>${used.status}</p>
 	</div>
 </div> <hr />
-	
+
+<c:if test="${member.no eq used.memberNo or member.no eq uh.memberNo}">
+<div class="row flow-chart">
+	<div class="col-md-2">
+		<p class="info-label">진행상황</p>
+	</div>
+	<div class="col-md-10">
+		<c:forEach items="${statusList}" var="status">
+			<input type="button" class="status" name="status" id="${status.id}" value="${status.value}" />
+		</c:forEach>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-10">
+		<c:if test="${uh.status eq 'USEDHIT001' and member.no eq uh.memberNo}">
+			<span>구매자에게 물품을 보내셨습니까? </span>
+			<input type="button" value="물품인계" onclick="fn_status1();"/> <br />
+		</c:if>
+		<c:if test="${uh.status eq 'USEDHIT001'}">
+			<span>거래를 취소하시겠습니까? </span>
+			<input type="button" value="거래취소" onclick="fn_status2();" />
+		</c:if>
+		<c:if test="${uh.status eq 'USEDHIT002' and member.no eq uh.memberNo}">
+			<span>판매자로부터 물품을 받으셨습니까? </span>
+			<input type="button" value="인계확인" onclick="fn_status3();"/>
+			<input type="button" value="거래중지" onclick="fn_status4();"/>
+		</c:if>
+	</div>
+</div>
+<hr />
+</c:if>
+
 <div>
-	<div id="content">${group.content }</div>
+	<div id="content">${used.content }</div>
 </div>
 	
 <br /><br />
@@ -123,9 +175,16 @@
 
 <!-------------------- Script -------------------->
 <script>
-	
+		
 	$(function(){
-
+		IMP.init("imp48482584");
+		
+		var uh = "${uh}";
+		if(uh != "") {
+			$('#btnPay').attr("disabled", "disabled");
+		}
+		
+		$(('input[id="${uh.status}"]')).addClass('current');
 	});
 	
 	function goUsedList() {
@@ -138,6 +197,69 @@
 	
 	function deleteUsed() {
 		location.href = "${pageContext.request.contextPath}/sale/used/usedDelete.do?boardNo="+${used.boardNo};
+	}
+	
+	function pay(price) {
+		
+		$.ajax({
+	    	data : { usedNo : "${used.no}" },
+			url : "uHistoryCheck.do",
+			type : "post",
+			success : function(data) {
+				if(data == "success") {
+					IMP.request_pay({
+					    pg : 'html5_inicis',
+					    pay_method : 'card',
+					    merchant_uid : 'merchant_' + new Date().getTime(),
+					    name : $('#goodsName').text(),
+					    amount : parseInt($('#price').text()),
+					    buyer_email : "${member.email}",
+					    buyer_name : "${member.name}"
+					}, function(rsp) {
+					    if ( rsp.success ) {
+					    	$.ajax({
+					        	data : { usedNo : "${used.no}", memberNo : "${member.no}" },
+								url : "uHistoryInsert.do",
+								type : "post",
+								success : function(data) {
+									if(data == "success") {
+										alert("결제 성공하였습니다.");
+									} else {
+										alert("결제 실패하였습니다.");
+									}
+								}
+					        });
+					    } else alert("결제를 취소하였습니다.");
+					});
+				} else if (data == "fail") {
+					alert("거래가 진행중인 상품입니다..");
+				} else {
+					alert("구매 실패하였습니다.");
+				}
+			}
+	    });
+	}
+	
+	function soldOut() {
+		var status = "${used.status}";
+		
+		if(status == "판매완료") {
+			alert("이미 판매완료 처리된 상태입니다.");
+			
+		} else if(confirm("판매완료 처리하시겠습니까? 판매완료 처리 후 철회하실 수 없으니 신중히 선택해 주세요!")) {
+			$.ajax({
+	        	data : { usedNo : "${used.no}", status : "USED002" },
+				url : "uStatusUpdate.do",
+				type : "post",
+				success : function(data) {
+					if(data == "success") {
+						alert("해당 물품을 판매완료 처리하였습니다.");
+					} else {
+						alert("오류 발생!");
+					}
+				}
+	        });
+		}
 	}
 
 </script>

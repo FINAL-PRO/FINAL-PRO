@@ -2,5 +2,105 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="used_mapper">
 	
+	<resultMap id="resultUsed" type="used">
+		<id property="no" column="NO"/>
+		<result property="boardNo" column="BOARDNO"/>
+		<result property="price" column="PRICE"/>
+		<result property="goodsName" column="GOODSNAME"/>
+		<result property="goodsPicture" column="GOODSPICTURE"/>
+		<result property="title" column="TITLE"/>
+		<result property="content" column="CONTENT"/>
+		<result property="writeDate" column="WRITEDATE"/>
+		<result property="viewCount" column="VIEWCOUNT"/>
+		<result property="memberNo" column="MEMBERNO"/>
+		<result property="memberName" column="MEMBER"/>
+		<result property="goodsCategory" column="GOODSCATEGORY"/>
+		<result property="dealType" column="DEALTYPE"/>
+		<result property="status" column="USTATUS"/>
+	</resultMap>
+
+	<resultMap id="uhMap" type="java.util.HashMap">
+		<result property="no" column="NO"/>
+		<result property="usedNo" column="USEDNO"/>
+		<result property="dealDate" column="DEALDATE"/>
+		<result property="memberNo" column="MEMBERNO"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+	
+	<resultMap type="java.util.HashMap" id="codeList" >
+		<result property="id" column="id"/>
+		<result property="value" column="value"/>
+	</resultMap>
+
+	
+	<select id="selectUsedList" resultMap="resultUsed">
+		SELECT * FROM DC_BOARD_USED_VIEW WHERE STATUS='STATUS001'
+	</select>
+	
+	<select id="selectUsedTotalContents" resultType="_int">
+		SELECT COUNT(*) FROM DC_BOARD_TB WHERE TYPE= 'BOARD004' AND STATUS='STATUS001'
+	</select>
+	
+	<select id="selectOneUsed" parameterType="_int" resultMap="resultUsed">
+		SELECT * FROM DC_BOARD_USED_VIEW WHERE BOARDNO = #{boardNo} AND STATUS='STATUS001'
+	</select>
+	
+	<insert id="insertUsed" parameterType="used">
+		<selectKey keyProperty="boardNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_BOARD.CURRVAL FROM DUAL
+		</selectKey>
+		INSERT INTO DC_BOARD_USED_TB VALUES(SEQ_BOARD_USED.NEXTVAL, #{price}, #{dealType},
+			#{boardNo}, 'USED001', 1, #{goodsName}, #{goodsPicture})
+		
+	</insert>
+
+	<insert id="insertBoard" parameterType="used">
+		INSERT INTO DC_BOARD_TB VALUES(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE,
+			#{content}, 0, 'BOARD004', 'STATUS001', #{memberNo}, NULL)
+		<selectKey keyProperty="boardNo" resultType="_int" order="AFTER">
+			SELECT SEQ_BOARD.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+
+	<update id="updateUsed" parameterType="used">
+		UPDATE DC_BOARD_USED_TB SET GOODSNAME = #{goodsName}, GOODSPICTURE = #{goodsPicture} 
+		WHERE boardNo = #{boardNo}
+	</update>
+
+	<update id="updateBoard" parameterType="used">
+		UPDATE DC_BOARD_TB SET TITLE = #{title}, CONTENT = #{content}
+		WHERE NO = #{boardNo}
+	</update>
+
+	<update id="deleteUsed" parameterType="_int">
+		UPDATE DC_BOARD_TB SET STATUS='STATUS002' WHERE NO = #{boardNo}
+	</update>
+
+	<update id="updateViewCount" parameterType="_int">
+		UPDATE DC_BOARD_TB SET VIEWCOUNT = VIEWCOUNT + 1 WHERE NO = #{boardNo}
+	</update>
+
+	<select id="selectOneUsedHistory" parameterType="_int" resultMap="uhMap">
+		SELECT * FROM DC_USED_HISTORY_TB WHERE USEDNO = #{usedNo}
+	</select>
+
+	<insert id="insertUsedHistory" parameterType="map">
+		INSERT INTO DC_USED_HISTORY_TB VALUES(SEQ_USED_HISTORY.NEXTVAL, #{usedNo}, SYSDATE, #{memberNo}, 'USEDHIT001')
+	</insert>
+	
+	<select id="selectStatusList" resultMap="codeList">
+		SELECT * FROM DC_CODE_TB WHERE ID LIKE 'USEDHIT%'
+	</select>
+	
+	<update id="updateUsedStatus" parameterType="map">
+		UPDATE DC_BOARD_USED_TB SET STATUS = #{status} WHERE NO = #{usedNo}
+	</update>
+	
+	<update id="updateUsedHistoryStatus" parameterType="map">
+		UPDATE DC_USED_HISTORY_TB SET STATUS = #{status} WHERE NO = #{usedNo}
+	</update>
+
+
+
 	
 </mapper>
