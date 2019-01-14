@@ -116,7 +116,7 @@ footer{
 .dc-content{
 	background-color: ;
 	margin : 15px 5px;
-	min-height: 100vh;
+	/* min-height: 100vh; */
 	/* border : 1px solid #dee3eb; */
 }
 
@@ -311,6 +311,11 @@ div[class^="ad-"]:hover {
 	margin:3px;
 }
 
+
+.dc-none-data{
+	background-color: #f2f4f7;
+	height:150px;
+}
 
 
 

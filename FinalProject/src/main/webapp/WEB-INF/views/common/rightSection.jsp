@@ -18,10 +18,12 @@
 			console.log(data);
 			
 			if(data == ""){
-				$(".ad-right").css("width", "258px").css("height", "290px").attr("background-position", "center")
+				/* $(".ad-right").css("width", "258px").css("height", "290px").attr("background-position", "center")
 				.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
 				.css("margin-right", "auto");
-				$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/260x280.png")');
+				$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/260x280.png")'); */
+				
+				$("#ad-right-img").attr("src","${pageContext.request.contextPath}/resources/upload/ad/right1.jpg");
 				$(".ad-right").attr("onclick", "window.open('" + "http://www.iei.or.kr/main/main.kh" + "');");
 			}else{
 				var img = data['adContentPath'].split("\\ad/");
@@ -134,7 +136,7 @@
 	<div class="dc-content-box dc-border">
 		<!-- <h1>광고(AD)</h1> -->
 		<div class="ad-right">
-			<img id="ad-right-img" src=""/>
+			<img id="ad-right-img" src="" width="258px" height="290px"/>
 		</div>
 	</div>
 </div>
