@@ -27,6 +27,7 @@
 						<div class="dc-content-box">
 							<div class="table-form-content">
 								<form name="boardFrm" action="${pageContext.request.contextPath}/admin/board/notice/write.do" method="post">
+									<input type="text" id="memberNo" name="memberNo" value="${member.no}"/>
 									<table class="table table-bordered">
 										<tbody>
 											<tr>
