@@ -52,6 +52,7 @@
 										<th>광고타입</th>
 										<th>광고물타입</th>
 										<th>광고상태</th>
+										<th>광고예약</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -63,6 +64,13 @@
 											<td>${ad.adContentType}</td>
 											<td>${ad.adType}</td>
 											<td>${ad.status}</td>
+											<td>						
+												<select id="adStatus_${ad.no}">
+													<c:forEach items="${adStatusList}" var="code">
+														<option value="${code.id}" <c:if test="${code.id eq adStatus}">selected</c:if>>${code.value}</option>
+													</c:forEach>
+												</select>&nbsp;<a href="#" onclick="adStatusChange(${ad.no});">변경</a>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -94,6 +102,25 @@
 		location.href = "${pageContext.request.contextPath}/business/ad/list.do?adContent="
 			+ $("#adContentTypeNo").val() + "&adType=" + $("#adTypeNo").val() + "&adStatus=" + $("#adStatusNo").val();
 	});
+	
+	function adStatusChange(no){
+		var status = $("#adStatus_" + no).val(); 
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/business/ad/status/change.do",
+			data : {
+				"status" : status,
+				"no" : no
+			},
+			success : function(data){
+				console.log(data);
+				console.log("ajax 성공");
+			},error : function(data){
+				console.log(data);
+				console.log("ajax 실패");
+			}
+		});
+	}
 	</script>
 </body>
 </html>
