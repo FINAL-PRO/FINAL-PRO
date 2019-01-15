@@ -33,9 +33,9 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public int commentInsert(Comment comment) {
-		System.out.println("comment.getBoardNo() : " + comment.getBoardNo());
-		messageDao.replyMSG(comment.getBoardNo());
+	public int commentInsert(Comment comment, int bno) {
+		
+		messageDao.replyMSG(comment, bno);
 		
 		return commentDao.commentInsert(comment);
 	}
