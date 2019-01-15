@@ -157,15 +157,21 @@ public class AdController {
 		System.out.println(adPage + " : " + adSection + " : " + adLocation);
 		
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("adPage", adSection);
-		params.put("adSection", "우측");
-		params.put("adLocation", "하단");
+		params.put("adPage", adPage);
+		params.put("adSection", adSection);
+		params.put("adLocation", adLocation);
 		
-		Ad ad = adService.getAd(params);
+		System.out.println("params : " + params);
 		
-		System.out.println("가져온 광고 : " + ad);
-		
-		return ad;
+		List<Ad> ad = adService.getAd(params);
+	
+		if(ad.isEmpty()) {
+			return null;
+		}else {
+			int size = ad.size();
+			int rand = (int)(Math.random()*size);
+			return ad.get(rand);
+		}
 	}
 	
 	@RequestMapping("business/ad/status/change.do")
