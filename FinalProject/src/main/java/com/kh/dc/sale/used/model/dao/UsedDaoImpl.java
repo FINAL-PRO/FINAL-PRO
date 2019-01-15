@@ -94,6 +94,12 @@ public class UsedDaoImpl implements UsedDao {
 
 		return sqlSession.update("used_mapper.updateUsedStatus", status);
 	}
+
+	@Override
+	public int updateUsedHistroy(Map<String, String> uhMap) {
+
+		return sqlSession.update("used_mapper.updateUsedHistroy", uhMap);
+	}
 	
 
 	

@@ -130,9 +130,14 @@ public class UsedController {
 		return (usedService.insertUsedHistory(uhMap)>0) ? "success" : "fail";
 	}
 	
-	
-	
-	
+	@RequestMapping("sale/used/uhStatusUpdate.do")
+	@ResponseBody
+	public String updateUsedHistroy(@RequestParam Map<String, String> uhMap, Model model) {
+		
+		System.out.println("uhStatusUpdate uhMap : " + uhMap);
+		
+		return (usedService.updateUsedHistroy(uhMap) > 0) ? "success" : "fail";
+	}
 	
 	
 	
