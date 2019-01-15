@@ -100,7 +100,9 @@ public class FreeController {
 		int freeViewCount = freeService.freeViewCount(bno);
 		
 		model.addAttribute("boardList", freeService.selectOneFree(bno))
-		.addAttribute("freeViewCount", freeViewCount);
+		.addAttribute("freeViewCount", freeViewCount)
+		.addAttribute("bno", bno);
+		
 		
 		return "community/free/freeView";
 	}

@@ -115,10 +115,6 @@
 	height: 140px;
 }
 
-.articlelist {
-	padding-top: 15px;
-}
-
 .group {
 	list-style: none;
 	padding-top: 20px;
@@ -198,6 +194,7 @@ hr {
 	background: rgb(171, 187, 129);
     color: white;
     cursor: pointer;
+    margin-top: 5px;
 }
 
 
