@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.dc.common.vo.Comment;
 import com.kh.dc.common.vo.Message;
 import com.kh.dc.member.model.vo.Member;
 
@@ -25,5 +26,5 @@ public interface MessageDao {
 	
 	int countUnreadMSG(int memNo);
 	
-	int replyMSG(int boardNo);
+	int replyMSG(Comment comment, int bno);
 }

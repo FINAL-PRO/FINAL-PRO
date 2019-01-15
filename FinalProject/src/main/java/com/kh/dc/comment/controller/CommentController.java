@@ -55,13 +55,12 @@ public class CommentController {
     @RequestMapping("comment/commentWrite.do")
     @ResponseBody
     private int commentInsert(@RequestParam int bno, @RequestParam String content, @RequestParam int mno) throws Exception{
-        
         Comment comment = new Comment();
         comment.setBoardNo(bno);
         comment.setContent(content);
         comment.setMemberNo(mno);
         System.out.println("comment : "+ comment);
-        return commentService.commentInsert(comment);
+        return commentService.commentInsert(comment, bno);
     }
 
 	@RequestMapping(value="comment/commentDelete.do", method=RequestMethod.POST)
