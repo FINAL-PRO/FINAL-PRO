@@ -164,4 +164,18 @@ public class JobBoardServiceImpl implements JobBoardService {
 	public List<Code> selectJobBoardSalTypeList() {
 		return jobBoardDao.selectJobBoardSalTypeList();
 	}
+	
+	
+	@Override
+	public List<Map<String, String>> searchJobBoardList(Map<String, String> map, int cPage, int numPerPage) {
+		//
+		return jobBoardDao.searchJobBoardList(map, cPage, numPerPage);
+	}
+
+	@Override
+	public int searchJobBoardTotalContents() {
+		// 
+		return jobBoardDao.searchJobBoardTotalContents();
+	}
+
 }
