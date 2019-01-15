@@ -18,8 +18,13 @@
 }
 
 .img-box {
-	height: 100%;
+	height: 250px;
+	width: 250px;
+}
+
+#goodsImg {
 	width: 100%;
+	height: 100%;
 }
 
 .info {
@@ -30,11 +35,6 @@
 	color:red; 
 	font-size:12px; 
 	padding-top:3px;
-}
-
-#goodsImg {
-	width: 100%;
-	height: 100%;
 }
 
 #content {

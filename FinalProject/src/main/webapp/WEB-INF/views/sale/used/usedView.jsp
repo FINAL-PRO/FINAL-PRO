@@ -19,23 +19,23 @@
 }
 
 .img-box {
-	height: 100%;
-	width: 100%;
+	height: 230px;
+	width: 230px;
 }
 
-.info {
+#goodsImg {
 	width: 100%;
+	height: 100%;
+}
+
+.info-label {
+	font-weight: bold;
 }
 
 .warn-msg {
 	color:red; 
 	font-size:12px; 
 	padding-top:3px;
-}
-
-#goodsImg {
-	width: 100%;
-	height: 100%;
 }
 
 #content {
@@ -45,22 +45,27 @@
 	border: 1px solid lightgray;
 }
 
-.status {
-	height: auto;
-	width: auto;
-	background: white;
-	border: 1px solid black;
-}
-
-.current {
-	background: skyblue;
-}
-
 #title {
 	overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-all;
+    border-right: 1px solid lightgray;
 }	
+
+.status-box {
+	display: inline-block;
+	height: 40px;
+	width: 100px;
+	border-radius: .35rem;
+	background: white;
+	border: 2px solid rgb(244, 126, 96);
+}
+
+.status-txt {
+	font-weight: bold;
+	text-align: center;
+	padding-top: 6px;
+}
 
 
 </style>
@@ -83,9 +88,14 @@
 <div class="dc-content-box">
 <!-- ------------------- 내용 입력 ------------------- -->
 
-<div class="title-box">
-	<p id="title">${used.title }</p>
-</div> <hr />
+<div class="row title-box">
+	<div class="col-md-10">
+		<p id="title">${used.title }</p>
+	</div>
+	<div class="col-md-2">
+		<span id="memberName">${used.memberName }</span>
+	</div>
+</div> <hr style="margin-top:0px;"/>
 
 
 <div class="row">
@@ -103,7 +113,7 @@
 		<input type="button" value="바로구매" onclick="pay(${used.price});" />
 		</c:if>
 		<c:if test="${member.no eq used.memberNo}">
-		<input type="button" value="물품 판매완료" onclick="soldOut();"/>
+		<input type="button" value="물품 판매완료" class="btn" onclick="soldOut();"/>
 		</c:if>
 	</div>
 	<div class="col-md-6">
@@ -121,7 +131,9 @@
 	</div>
 	<div class="col-md-10">
 		<c:forEach items="${statusList}" var="status">
-			<input type="button" class="status" name="status" id="${status.id}" value="${status.value}" />
+			<div class="status-box" id="${status.id}">
+				<p class="status-txt">${status.value}</p>
+			</div>
 		</c:forEach>
 	</div>
 </div>
@@ -131,16 +143,16 @@
 	<div class="col-md-10">
 		<c:if test="${uh.status eq 'USEDHIT001' and member.no eq used.memberNo}">
 			<span>구매자에게 물품을 보내셨습니까? </span>
-			<input type="button" value="물품인계" onclick="updateUhStatus('USEDHIT002');"/> <br />
+			<input type="button" value="물품인계" class="btn" onclick="updateUhStatus('USEDHIT002');"/> <br />
 		</c:if>
 		<c:if test="${uh.status eq 'USEDHIT001'}">
 			<span>거래를 취소하시겠습니까? </span>
-			<input type="button" value="거래취소" onclick="updateUhStatus('USEDHIT005');" />
+			<input type="button" value="거래취소" class="btn" onclick="updateUhStatus('USEDHIT005');" />
 		</c:if>
 		<c:if test="${uh.status eq 'USEDHIT002' and member.no eq uh.memberNo}">
 			<span>판매자로부터 물품을 받으셨습니까? </span>
-			<input type="button" value="인계확인" onclick="updateUhStatus('USEDHIT003');"/>
-			<input type="button" value="거래중지" onclick="updateUhStatus('USEDHIT006');"/>
+			<input type="button" value="인계확인" class="btn" onclick="updateUhStatus('USEDHIT003');"/>
+			<input type="button" value="거래중지" class="btn" onclick="updateUhStatus('USEDHIT006');"/>
 		</c:if>
 	</div>
 </div>
@@ -152,11 +164,13 @@
 </div>
 	
 <br /><br />
-<input type="button" value="목록" class="" onclick="goUsedList();"/>
-<c:if test="${!empty member and member.no eq group.memberNo}">
-	<input type="button" value="수정하기" class="" onclick="updateUsed();"/>
-	<input type="button" value="삭제하기" class="" onclick="deleteUsed();"/>
-</c:if>
+<div style="display:flex; justify-content: center;">
+	<input type="button" value="목록" class="btn" onclick="goUsedList();" style="margin:auto;"/>
+	<c:if test="${!empty member and member.no eq group.memberNo}">
+		<input type="button" value="수정하기" class="btn" onclick="updateUsed();"/>
+		<input type="button" value="삭제하기" class="btn" onclick="deleteUsed();"/>
+	</c:if>
+</div>
 <br /><br />
 
 <!-- -------------------------------------------- -->
@@ -184,7 +198,7 @@
 			$('#btnPay').attr("disabled", "disabled");
 		}
 		
-		$(('input[id="${uh.status}"]')).addClass('current');
+		$(('div[id="${uh.status}"]')).css('background', 'rgb(248, 178, 106)');
 	});
 	
 	function goUsedList() {
