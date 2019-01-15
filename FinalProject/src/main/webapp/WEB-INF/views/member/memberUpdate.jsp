@@ -39,7 +39,7 @@
 						  		<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/profileDefaultImg.png"/>
 						  		<br/>						  		
 						  	</c:if>
-						  	<input type="button" class="btn btn-sm btn-outline-success" id="deleteProfileImg" value="프로필 사진 삭제">				  	
+						  	<input type="button" class="btnClass btn btn-sm" id="deleteProfileImg" value="프로필 사진 삭제">				  	
 					  		<input type="file" name="file" id="file" onchange="inputProfile(this);" multiple/>
 						</div>
 					  	<div class="col-md-3">
@@ -149,10 +149,8 @@
 				   
 				   <div class="row btn-container">
 				   <div class="col-md-3"></div>
-				   <div class="col-md-3 btn-container">
+				   <div class="col-md-6 btn-container">
 				   		<input type="button" class="btnClass btn" id="submitButton" value="수정">
-				   </div>
-				   <div class="col-md-3 btn-container">
 				   		<input type="button"  class="btnClass btn" 
 				   			data-toggle="modal" data-target="#modalDeleteMember" value="회원 탈퇴"></div>
 				   <div class="col-md-3" id=""></div>
@@ -181,8 +179,8 @@
 						  </div>
 				      </div>
 				      <div class="modal-footer" id="modalBtn" style=" display:inline; margin-bottom: 10px;">
-				        <button type="button" class="btn btn-outline-success" id="deleteBtn">회원 탈퇴</button>
-				        <button type="button" class="btn btn-outline-success" data-dismiss="modal">취소</button>
+				        <button type="button" class="btnClass btn" id="deleteBtn">회원 탈퇴</button>
+				        <button type="button" class="btnClass btn" data-dismiss="modal">취소</button>
 				      </div>
 					</form>
 				    </div>

@@ -21,8 +21,8 @@
 			</div>
 			<div class="section-center">
 				<div class="dc-content">
-					<div class="dc-content-title">
-						<h1>제목</h1>
+					<div class="dc-content-title" align="center">
+						<h3>동커 회원가입</h3>
 					</div>
 					<div class="dc-content-box">
 						<div id="enroll-container">
