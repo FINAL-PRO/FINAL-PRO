@@ -82,6 +82,17 @@ public class JobBoardController {
 		return "/job/jobBoard/jobBoardList";
 	}
 	
+	@RequestMapping("/job/jobBoard/searchJobBoard.do")
+	public String searchJobBoard(
+			@RequestParam(value="jb_Search", defaultValue="s-All", required=false) String jb_Search,
+			@RequestParam(value="searchCont", required=false) String searchCont,			
+			@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, 
+			Model model) {
+		
+		int numPerPage = 10;
+
+		return "/job/jobBoard/jobBoardList";
+	}
 	
 	@RequestMapping("job/jobBoard/jobBoardForm.do")
 	public void boardForm() {
@@ -89,8 +100,9 @@ public class JobBoardController {
 	}
 	@RequestMapping("job/jobBoard/jobBoardDetail.do")
 	public String selectOneBoard(@RequestParam int no, Model model) {
-		
-		model.addAttribute("jobBoard", jobBoardService.selectOneJobBoard(no));
+		JobBoard jobBoard = jobBoardService.selectOneJobBoard(no);
+		model.addAttribute("jobBoard", jobBoard);
+		model.addAttribute("bno", jobBoard.getBoardNo());
 		
 		return "job/jobBoard/jobBoardDetail";
 	}

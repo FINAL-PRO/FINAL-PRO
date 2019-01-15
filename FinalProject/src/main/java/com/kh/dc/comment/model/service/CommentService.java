@@ -12,7 +12,7 @@ public interface CommentService {
 
 	int commentDelete(int cno);
 
-	int commentInsert(Comment comment);
+	int commentInsert(Comment comment, int bno);
 
 	int commentUpdate(Comment comment);
 	

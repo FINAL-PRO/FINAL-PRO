@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dc.common.vo.Comment;
 import com.kh.dc.common.vo.Message;
 import com.kh.dc.member.model.vo.Member;
 
@@ -70,8 +71,10 @@ public class MessageDaoImpl implements MessageDao {
 		return sqlSession.selectOne("message_mapper.countUnreadMSG", memNo);
 	}
 	@Override
-	public int replyMSG(int boardNo) {
-		// 
-		return sqlSession.insert("message_mapper.replyMSG", boardNo);
+	public int replyMSG(Comment comment, int bno) {
+		
+		System.out.println("코멘트 :"+comment+", "+bno);
+		
+		return sqlSession.insert("message_mapper.replyMSG", bno);
 	}
 }

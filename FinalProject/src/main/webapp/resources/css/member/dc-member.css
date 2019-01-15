@@ -15,8 +15,27 @@ div#enroll-container .col-md-3 {
 	padding-right: 10px;
 }
 
-.btn-container>.btn {
-	width: 100%
+.dc-content-title>h3{
+	margin-top: 30px;
+	text-align:center; 
+	color: rgb(248, 178, 106);
+	font-weight: bold;
+}
+
+.dc-content-box{
+	/* padding-top: 10px; */
+}
+
+.btnClass {				
+	background: rgb(248, 178, 106);
+    color: white;
+    width: 48%;
+    margin: 0;
+}
+
+.btnClass:hover{
+	background: rgb(244, 126, 96);
+	color: white;
 }
 
 .row label {
@@ -46,4 +65,26 @@ div#enroll-container .col-md-3 {
 	height: 150px;
 	margin-bottom: 15px;
 }
+
+.memberTitleLabel{
+	color: gray;
+}
+
+.profileLabel{	
+	text-align:center; 
+	color: gray;	
+}
+
+.addressLabel{
+	color: gray;
+}
+
+#deleteProfileImg{
+	background-color:rgb(171, 187, 129);
+}
+
+#deleteProfileImg:hover{
+	background: rgb(248, 178, 106);
+}
+
 

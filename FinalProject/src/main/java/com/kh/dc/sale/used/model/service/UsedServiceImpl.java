@@ -78,5 +78,11 @@ public class UsedServiceImpl implements UsedService {
 
 		return usedDao.updateStatus(status);
 	}
+
+	@Override
+	public int updateUsedHistroy(Map<String, String> uhMap) {
+
+		return usedDao.updateUsedHistroy(uhMap);
+	}
 		
 }

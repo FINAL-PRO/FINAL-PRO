@@ -9,68 +9,85 @@
 <meta charset="UTF-8">
 <style>
 	
-	.commentFrm{
-	 	padding: 15px;
-	}
-	
-	.CommentPicture {
-		display: inline-block;
-		width: 20px;
-		height: 20px;
-		vertical-align: top;
-	}
-	
-	.nickname {
-		display: inline-block;
-		line-height: 20px;
-		color: #292929;
-		font-size: 12px;
-		font-weight: bold;
-		white-space: nowrap;
-		overflow: hidden;
-		float: left;
-	}
-	
-	.time {
-		float: right;
-		display: inline-block;
-		line-height: 20px;
-		color: #a6a6a6;
-		font-size: 12px;
-	}
-	
-	.comment {
-		padding: 5px;
-		line-height: 20px;
-		color: #292929;
-		font-size: 14px;
-	}
-	
-	.commentgroup {
-		padding: 20px;
-	}
-	
-	.commnetlist {
-		padding: 20px;
-	}
-	
-	.commentwriteboard {
-		padding: 15px 35px 10px 20px;
-	}
-	
-	.commentwrite {
-		width: 100%;
-	}
-	
-	.comment_textarea {
-		margin-right: 10px;
-		margin-left: 10px;
-	}
-	
-	.btn_comment {
-		margin-top: 4px;
-		float: right;
-	}
+.commentFrm{
+ 	padding: 15px;
+}
+
+.CommentPicture {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	vertical-align: top;
+}
+
+.Cnickname {
+	display: inline-block;
+	line-height: 20px;
+	color: #292929;
+	font-size: 12px;
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+	float: left;
+}
+
+.Ctime {
+	float: right;
+	display: inline-block;
+	line-height: 20px;
+	color: #a6a6a6;
+	font-size: 12px;
+}
+
+.form-control:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.Cprofile{
+	padding: 2px;
+}
+
+.comment {
+	padding: 5px;
+	line-height: 20px;
+	color: #292929;
+	font-size: 14px;
+}
+
+.commentgroup {
+	padding: 20px;
+}
+
+.commnetlist {
+	padding: 20px;
+}
+
+.commentwriteboard {
+	padding: 15px 35px 10px 20px;
+}
+
+.commentwrite {
+	width: 100%;
+}
+
+.comment_textarea {
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+.btn_comment {
+	float: right;
+	font-size: 12px;
+	padding: 2px;
+}
+
+#commentSubmit{
+	margin-left: 10px;
+	background: rgb(244, 126, 96);
+	color: white;
+}
 
 </style>
 </head>
@@ -80,29 +97,30 @@
 		<label for="content">comment</label>
 		<form name="commentInsertForm">
 			<div class="input-group">
-				<input type="hidden" id="bno" name="bno" value="${boardList.no}" /> 
+				<input type="hidden" id="bno" name="bno" value="${bno}" /> 
 				<input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요."/> 
 				<input type="hidden" id="mno" name="mno" value="${member.no}" /> 
 				<input type="hidden" id="profile" name="profile" value="${member.profile}"/>
 				<span class="input-group-btn">
-				<button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
+				<button class="btn btn-default" id="commentSubmit" type="button" name="commentInsertBtn">등록</button>
 				</span>
 			</div>
 		</form>
 	</div>
 	<div style="border: solid 0.5px gray"></div>
 	<form id="commentListFrm" name="commentListFrm" method="post">
-		<div class="commentList" id="commentList" style="border: 1px solid blue">
+		<div class="commentList" id="commentList">
 			<p class="both" style="clear: both;">&nbsp;</p>
 		</div>
 	</form>
-
+	<div style="border: solid 0.5px gray"></div>
 	<script>
 	/* 댓글 스크립트 */
 	
 	var mno = $('[name=mno]').val(); 									
-	var cno = $('[name=cno]').val(); 
 	var bno = $('[name=bno]').val();
+	
+	console.log("mno/bno: "+mno+", "+bno);
 		
 	commentList(bno);
 	
@@ -124,6 +142,8 @@
 	            if(data == 1) {
 	                commentList(bno); 
 	                $('[name=content]').val('');
+	            } else {
+	            	console.log("댓글 작성 ajax 실패");
 	            }
 	        }
 	    });
@@ -132,9 +152,7 @@
    	function commentList(bno){
    		
    		console.log("bno:" + bno);
-   		
 
-   		
    		$.ajax({
    			type: "get",
    			url: "${pageContext.request.contextPath}/comment/commentList.do",
@@ -143,10 +161,9 @@
 
    	            var a =''; 
    	            
-   	            
    	            $.each(data, function(key, value){ 
-   	            	
-	   	    		var profile = value.profile;
+
+   	            	var profile = value.profile;
 	   	    		
 	   	    		if(profile == null){
 	   	    			profile = "/dc/resources/upload/profile/profileDefaultImg.png";
@@ -155,18 +172,23 @@
 	   	    			console.log("yestprofile: "+profile);
 	   	    		}
 	   	    		
+	   	    	 	var hidden_commnet = "style='display:none;'";
+	   	    		if(mno == value.memberNo){
+	   	    			hidden_commnet = "";
+	   	    		} 
+	   	    		
    	                a += '<div class="commentArea" id="commentArea'+value.no+'">';
-   	                a += '<p class="profile" style="display:inline;">';
-					a += '<img class="picture" src="'+profile+'" />';
-					a += '<span class="nickname">'+value.memberName+'</span>';
+   	                a += '<p class="Cprofile" style="display:inline;">';
+					a += '<img class="CommentPicture" src="'+profile+'" />';
+					a += '<span class="Cnickname">'+value.memberName+'</span>';
 					a += '</p>';
    	                a += '<input type="hidden" name="bno" value="'+bno+'"/>';
 					a += '<input type="hidden" name="mno" value="'+mno+'"/>';
 					a += '<input type="hidden" name="cno"  value="'+value.no+'"/>';
 					a += '<input type="hidden" name="profile" value="'+value.profile+'"/>'
 					a += '<div class="btn_comment">';
-   	                a += '<a href="#" onclick="commentUpdate('+value.no+',\''+value.content+'\');"> 수정 </a>';
-   	                a += '<a href="#" onclick="commentDelete('+value.no+');"> 삭제 </a> </div>';
+   	                a += '<a href="#" onclick="commentUpdate('+value.no+',\''+value.content+'\');" '+hidden_commnet+'> 수정 </a>';
+   	                a += '<a href="#" onclick="commentDelete('+value.no+');" '+hidden_commnet+'> 삭제 </a> </div>';
    	                a += '</div>';
    	                a += '<div class="commentContent'+value.no+'"> <p class="comment">'+value.content +'</p>';
    	                a += '</div></div>';

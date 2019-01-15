@@ -31,7 +31,7 @@
 							<div id="enroll-container">
 							<form name="memberEnrollFrm" action="" method="post">
 								<div class="row profile-container" id="profile-container">
-									<div class="col-md-3">프로필</div>
+									<div class="col-md-3 memberTitleLabel">프로필</div>
 					  				<div class="col-md-6" align="center">
 					  					<c:if test="${!empty member.profile}">
 					  						<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/${member.profile}"/>					    				
@@ -43,7 +43,7 @@
 					  				<div class="col-md-3"></div>
 								</div>								 
 								<div class="row email-container" id="email-container">
-									<div class="col-md-3">이메일</div>
+									<div class="col-md-3 memberTitleLabel">이메일</div>
 									<div class="col-md-6"><input type="email" class="form-control" name="email" id="email" value="${member.email}" readonly></div>
 									<div class="col-md-3 comment" id="duplicateCheck">
 										<label class="guide1"></label>
@@ -52,7 +52,7 @@
 			
 							   <div class="row nickName-container" id="nickName-container">
 							   		<!-- 닉네임 2~10 글자 허용 -->
-							   		<div class="col-md-3">닉네임</div>
+							   		<div class="col-md-3 memberTitleLabel">닉네임</div>
 							   		<div class="col-md-6">
 							   			<input type="text" class="form-control" name="nickName" id="nickName" value="${member.nickName}" readonly>
 							   		</div>			   		
@@ -64,7 +64,7 @@
 							   
 							        
 							   <div class="row userName-container" id="userName-container">
-							   		<div class="col-md-3">이름</div>
+							   		<div class="col-md-3 memberTitleLabel">이름</div>
 							   		<div class="col-md-6">
 							   		<input type="text" class="form-control" name="name" id="userName" value="${member.name}" readonly>	
 							   		</div>	
@@ -73,7 +73,7 @@
 							   		</div>		   		
 							   </div>
 							   <div class="row address-container" id ="address-container">
-							   		<div class="col-md-3">주소</div>
+							   		<div class="col-md-3 memberTitleLabel">주소</div>
 							   		<div class="col-md-6">
 							   		<input type="text" class="form-control" placeholder="" name="" id="" readonly value="서울특별시">
 							   		</div>
@@ -97,7 +97,7 @@
 							   </div>
 							   
 							    <div class="row address-container" id="address-container">
-							   		<div class="col-md-3">상세 주소</div>
+							   		<div class="col-md-3 memberTitleLabel">상세 주소</div>
 							   		<div class="col-md-6">
 							   		<input type="text" class="form-control" name="address" id="address" value="${member.address}" readonly>	
 							   		</div>	
@@ -107,7 +107,7 @@
 							   </div>
 							   
 							    <div class="row deposit-container" id="deposit-container">
-							   		<div class="col-md-3">계좌번호</div>
+							   		<div class="col-md-3 memberTitleLabel">계좌번호</div>
 							   		<div class="col-md-2" style="padding-right:0;">	
 							   			<c:set var="selectedBank" value="${member.bank}"></c:set>
 								   		<select class="form-control" name="bank" id="bank" style="padding:0;" disabled>					   		
@@ -124,13 +124,16 @@
 							   		</div>		   		
 							   </div>
 							   <div class="row point-container">
-								   <div class="col-md-3">포인트</div>
+								   <div class="col-md-3 memberTitleLabel">포인트</div>
 								   <div class="col-md-6"><input type="text" class="form-control" name="point" id="point" value="${member.point}" readonly></div>				  
 								   <div class="col-md-3" id=""></div>
 								</div>							   							   						   
 							   <div class="row btn-container">
 								   <div class="col-md-3"></div>
-								   <div class="col-md-6 btn-container"><input type="button" id="memberUpdateView" class="btn btn-outline-success" value="회원정보 수정" onclick="${pageContext.request.contextPath}/member/memberUpdateView.do"></div>				  
+								   <div class="col-md-6 btn-container">
+								   		<input type="button" id="memberUpdateView" class="btnClass btn" value="회원정보 수정" 
+								   			style="width: 100%" onclick="${pageContext.request.contextPath}/member/memberUpdateView.do">
+								   	</div>				  
 								   <div class="col-md-3" id="">
 							   </div>
 							   </div>	
