@@ -26,6 +26,7 @@
 	width: 20px;
 	height: 20px;
 	vertical-align: top;
+	float: left;
 }
 
 .nickname {
@@ -49,12 +50,25 @@
 	overflow: hidden;
 }
 
+.count{
+	display: inline-block;
+	line-height: 20px;
+	color: #292929;
+	font-size: 12px;
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+	float: right;
+}
+
 .time {
 	float: right;
 	display: inline-block;
 	line-height: 20px;
-	color: #a6a6a6;
+	color: #292929;
 	font-size: 12px;
+	font-weight: bold;
+	margin-left: 10px;
 }
 
 .text {
@@ -82,7 +96,7 @@
 	display: inline-block;
 	margin-right: 8px;
 	line-height: 18px;
-	color: #a6a6a6;
+	color: #292929;
 	font-size: 12px;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
@@ -108,8 +122,8 @@
 .group {
 	list-style: none;
 	padding-top: 20px;
-	padding-left: 20px;
-	padding-right: 20px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 .commentgroup {
@@ -157,15 +171,34 @@ hr {
 	border: 1px solid yellow;
 }
 
+.likecount{
+	margin: 5px;
+}
+
 .likecount2{
 	border:none;
 	width: 10px;
+	color:rgb(244, 126, 96);
 }
 
-.count{
-	display: inline-block;
-}
+#btn_board_edit{
+	background: rgb(171, 187, 129);
+    color: white;
+    cursor: pointer;
 	
+}
+
+#btn_board_delete{
+	background: rgb(171, 187, 129);
+    color: white;
+    cursor: pointer;
+}
+
+#btn_back{
+	background: rgb(171, 187, 129);
+    color: white;
+    cursor: pointer;
+}
 
 
 </style>
@@ -187,12 +220,12 @@ hr {
 						</div>
 						<div class="dc-content-box">
 							<div id="container2">
-								<div class="articlelist" style="border: solid 0.5px red">
+								<div class="articlelist">
 									<form name="boardFrm" method="post">
 										<input type="hidden" id="bno" name="bno" value="${boardList.no}"/>
 										<input type="hidden" id="mno" name="mno" value="${member.no}"/>
 									</form>
-									<div class="group" style="border: solid 0.5px blue">
+									<div class="group">
 										<p class="title">${boardList.title}</p>
 										<div style="border: solid 0.5px gray"></div>
 										<p class="profile">
@@ -205,17 +238,17 @@ hr {
 												</c:otherwise>
 											</c:choose>
 											<span class="nickname">${boardList.memberName}</span> 
-											<span class="count">조회수: ${boardList.viewCount}</span>
 											<span class="time">
 												<fmt:formatDate value="${boardList.writeDate}" pattern="yyyy-MM-dd" />
 											</span>
+											<span class="count">조회수: ${boardList.viewCount}</span>
 										</p>
 										<p class="text">${boardList.content}</p>
 										<div style="border: solid 0.5px lightgray"></div>
-										<div class="status" style="border: solid 0.5px orange">
+										<div class="status">
 											<c:if test="${!empty member and member.no eq boardList.memberNo}">
-											<button class="btn_board_edit" id="btn_board_edit">수정</button>
-											<button class="btn_board_delete" id="btn_board_delete">삭제</button>
+											<button class="btn btn_board_edit btn-sm" id="btn_board_edit">수정</button>
+											<button class="btn btn_board_delete btn-sm" id="btn_board_delete">삭제</button>
 											</c:if>
 											<c:if test="${!empty member and member.no ne boardList.memberNo}">
 											<input type="button" class="btn_report" id="btn_report" value="신고하기" onclick="javascript:btn_report();"/>
@@ -223,10 +256,10 @@ hr {
 											<span class="likecount">
 											<a href="#" class="likefunc">
 												<img src="/dc/resources/images/dislike.png" id="like_img" style="height: 17px; width: 17px;">
-												: <input type="text" value="${boardList.likeCount}" class="likecount2" readonly/></span>
-											</a>
+												: <input type="text" value="${boardList.likeCount}" class="likecount2" readonly/>
+											</a></span>
 											<input type="hidden" value="1" class="likecount3"/>
-											<span class="commentcount">댓글: ${boardList.commentCount}</span>
+											<span class="commentcount">댓글: <span style="color:rgb(244, 126, 96);">${boardList.commentCount}</span></span>
 										</div>
 
 										<script>
@@ -352,11 +385,9 @@ hr {
 								    <div class="container3">
 								        <c:import url="../../common/comment.jsp" />
 									</div>
-									<button class="btn_back" id="btn_back">Back</button> 
+									<button class="btn btn_back btn-sm" id="btn_back">Back</button> 
 									<script>
 					                    $("#btn_back").click(function(){
-					                    	/* boardFrm.action="${pageContext.request.contextPath}/community/free/list.do"
-					                    	boardFrm.submit(); */
 					                    	location.href="${pageContext.request.contextPath}/community/free/list.do";
 					                    });
 				                    </script>

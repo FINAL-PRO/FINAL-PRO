@@ -16,26 +16,16 @@
 	margin: 20px;
 }
 
-.table-div {
-	display: table;
+.btn-save{
+	background: rgb(171, 187, 129);
+    color: white;
 }
 
-.tr-div {
-	display: table-row;
-	text-align: center;
+#btn_back{
+	background: rgb(171, 187, 129);
+    color: white;
 }
 
-.td-div {
-	display: table-cell;
-	text-align: center;
-	vertical-align: middle;
-	padding: 5px;
-}
-
-.th-div {
-	display: table-header-group;
-	text-align: center;
-}
 </style>
 
 </head>
@@ -60,79 +50,75 @@
 									<div>
 										<b>글쓰기</b>
 									</div>
-									<div class="table-div">
-										<br>
-										<div class="tr-div">
-											<div class="td-div">제목</div>
-											<div class="td-div">
+									<input type="hidden" id="mno" name="memberNo" value="${member.no}" required>
+									<div>
+										<div>제목</div>
+											<div>
 												<input type="text" name="title" id="title" style="width: 100%;" required>
 											</div>
-											<input type="hidden" id="mno" name="memberNo" value="${member.no}" required>
 										</div>
-										<div class="tr-div">
-											<div class="td-div">내용</div>
-											<div class="td-div">
-												<textarea name="content" id="summernote"
-													class="form-control" rows="20" cols="70" required></textarea>
-												<script>
-					                                
-					                                $('#summernote').summernote({
-					                            		height : 300,
-					                            		minHeight : 500,
-					                            		maxHeight : 500,
-					                            		focus : true,
-					                            		callbacks : {
-					                            			onImageUpload : function(files) {
-					                            				for (var i = files.length - 1; i >= 0; i--) {
-					                            					sendFile(files[i]);
-					                            		}}}
-					                            	});
-
-					                                
-					                                
-					                            	function sendFile(file) {
-					                            		var form_data = new FormData();
-					                            		form_data.append('file', file);
-
-					                            		$.ajax({
-					                            			url : '${pageContext.request.contextPath}/common/summernote/convertImage.do',
-					                            			data : form_data,
-					                            			type : "POST",
-					                            			cache : false,
-					                            			contentType : false,
-					                            			enctype : 'multipart/form-data',
-					                            			processData : false,
-					                            			success : function(url) {
-					                            				$('#summernote').summernote('editor.insertImage', url);
-					                            				console.log("url: "+url);
-					                            			},
-					                            			error : function() {
-					                            				console.log("이미지 업로드 실패");
-					                            			}
-					                            		});
-					                            	}
-					                            </script>
-											</div>
-										</div>
-										<div class="tr-div">
-											<input type="submit" class="btn btn-outline-success" value="Save">
-										</div>
+									<div>
+									<br>
+									<div>내용</div>
+									<div>
+										<textarea name="content" id="summernote"
+											class="form-control" rows="20" cols="70" required></textarea>
 									</div>
+									<script>
+					                                
+		                                $('#summernote').summernote({
+		                            		minHeight : 100,
+		                            		maxHeight : 500,
+		                            		focus : true,
+		                            		callbacks : {
+		                            			onImageUpload : function(files) {
+		                            				for (var i = files.length - 1; i >= 0; i--) {
+		                            					sendFile(files[i]);
+		                            		}}}
+		                            	});
+	
+		                            	function sendFile(file) {
+		                            		var form_data = new FormData();
+		                            		form_data.append('file', file);
+
+		                            		$.ajax({
+		                            			url : '${pageContext.request.contextPath}/common/summernote/convertImage.do',
+		                            			data : form_data,
+		                            			type : "POST",
+		                            			cache : false,
+		                            			contentType : false,
+		                            			enctype : 'multipart/form-data',
+		                            			processData : false,
+		                            			success : function(url) {
+		                            				$('#summernote').summernote('editor.insertImage', url);
+		                            				console.log("url: "+url);
+		                            			},
+		                            			error : function() {
+		                            				console.log("이미지 업로드 실패");
+		                            			}
+		                            		});
+		                            		
+		                            		}
+			                            	</script>
+										</div>
+										<div style="text-align: center; padding:10px;">
+											<input type="submit" class="btn btn-save btn-sm" value="Save">
+											<button class="btn btn_back btn-sm" id="btn_back">Back</button> 
+										</div>
 									<script>
 						                function save(){
 						                	location.href="${pageContext.request.contextPath}/community/free/freeInsertFormEnd.do";
 						                } 
 						                
-						                function back(){
+						                $("#btn_back").click(function(){
 						                    location.href="${pageContext.request.contextPath}/community/free/list.do";
-						                }
+						                });
 						            </script>
 								</form>
 							</div>
 						</div>
 					</div>
 				</div>
-				
 				<div class="section-right">
 					<c:import url="../../common/rightSection.jsp" />
 				</div>

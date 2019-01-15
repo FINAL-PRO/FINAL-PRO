@@ -20,14 +20,14 @@
 	text-decoration: none;
 }
 
-#container2 .article>p.profile>img.picture {
+.article>p.profile>img.picture {
 	display: inline-block;
 	width: 20px;
 	height: 20px;
 	margin-botton: 5px;
 }
 
-#container2 .article>p.profile>span.title {
+.title {
 	display: inline-block;
 	max-width: 60%;
 	line-height: 20px;
@@ -39,7 +39,7 @@
 	text-overflow: ellipsis;
 }
 
-#container2 .article>p.profile>span.nickname {
+.nickname {
 	display: inline-block;
 	max-width: 60%;
 	line-height: 20px;
@@ -53,7 +53,7 @@
 	margin-left: 8px;
 }
 
-#container2 .article>p.profile>span.count {
+.count {
 	display: inline-block;
 	max-width: 60%;
 	line-height: 20px;
@@ -76,13 +76,10 @@
 	color: lightgray;
 	font-size: 14px;
 	font-weight: bold;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
 	margin-left: 8px;
 }
  
-img {
+.picture {
   vertical-align: top;
 }
 
@@ -92,8 +89,6 @@ img {
 	line-height: 18px;
 	color: #a6a6a6;
 	font-size: 12px;
-	background-repeat: no-repeat;
-	background-size: 16px 16px;
 	font-weight: bold;
 } 
 
@@ -124,7 +119,7 @@ p.attach {
 	margin-top: 8px;
 }
 
-span.attachcount {
+.attachcount {
 	display: inline-block;
 	line-height: 18px;
 	color: #ffa81f;
@@ -134,7 +129,7 @@ span.attachcount {
 
 a.article {
 	display: block;
-	padding: 12px 12px;
+	padding: 5px 5px;
 	border-bottom: 1px solid #f2f2f2;
 }
 
@@ -155,14 +150,14 @@ hr {
 	border: 0.3px solid lightgrey;
 }
 
-.category {
+.category1 {
 	float: left;
 	padding-left: 20px;
 }
 
 .free_btn {
 	float: right;
-	padding-right: 20px;
+	padding-right: 5px;
 }
 
 .profile{
@@ -178,6 +173,10 @@ hr {
 	background: rgb(225, 91, 100);
     color: white;
     cursor: pointer;
+}
+
+.totalCount{
+	font-size:13px; 
 }
 
 </style>
@@ -201,7 +200,7 @@ hr {
 						<div class="dc-content-box">
 							<div id="container2">
 								<div class="free_top">
-									<div class="category">
+									<div class="category1">
 										<select id="tList"> 
 											<option value="" selected disabled hidden>정렬</option>
 											<option value="1">최신 순 정렬</option>
@@ -221,13 +220,13 @@ hr {
 									</script>
 									<c:if test="${!empty member}">
 									<div class="free_btn">
-										<input type="button" class="btn free_btn2" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/free/freeInsertForm.do'" />
+										<input type="button" class="btn free_btn2 btn-sm" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/free/freeInsertForm.do'" />
 									</div>
 									</c:if>
 								</div>
 								<div class="articlelist">
 									<ol class="group"><br>
-										<p>총 ${totalContents}건의 게시물이 있습니다.</p>
+										<p class="totalCount">총 ${totalContents}건의 게시물이 있습니다.</p>
 										<c:forEach items="${list}" var="b">
 											<li class="groupin" id="${b.no}">
 											<a class="article" href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${b.no}">

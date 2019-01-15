@@ -22,15 +22,6 @@
 	height: 30px;
 }
 
-#container2 .article>p.profile>img.picture {
-	display: inline-block;
-	margin-right: 6px;
-	width: 20px;
-	height: 20px;
-	vertical-align: top;
-
-}
-
 #container2 .article>p.profile>span.title {
 	display: inline-block;
 	max-width: 60%;
@@ -81,28 +72,13 @@
 	color: lightgray;
 	font-size: 14px;
 	font-weight: bold;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
 	margin-left: 8px;
-}
-
-.content {
-	display: inline-block;
-	color: #292929;
-	font-size: 12px;
-	width:80%;
-	padding:0.5px;
-	overflow:hidden;
-	text-overflow:ellipsis;
-	white-space:nowrap;
 }
 
 #container2 .article>p.status {
 	margin-top: 8px;
 }
  
-
 p.attach {
 	display: inline-block;
 	float: right;
@@ -137,11 +113,6 @@ hr {
 	border: 0.3px solid lightgrey;
 }
 
-.category {
-	float: left;
-	padding-left: 20px;
-}
-
 .notice_btn {
 	float: right;
 	padding-right: 20px;
@@ -149,6 +120,12 @@ hr {
 
 .groupin{
 	height: 35px;
+	margin-bottom: 2px;
+}
+
+.totalCount{
+	font-size:13px; 
+	padding-left:10px;
 }
 
 </style>
@@ -173,7 +150,7 @@ hr {
 							<div id="container2">
 								<div class="articlelist">
 									<ol class="group">
-										<p>총 ${totalContents}건의 공지사항이 있습니다.</p>
+										<p class="totalCount">총 ${totalContents}건의 공지사항이 있습니다.</p>
 										
 										<c:forEach items="${nlist}" var="b">
 											<li class="groupin" id="${b.no}">
