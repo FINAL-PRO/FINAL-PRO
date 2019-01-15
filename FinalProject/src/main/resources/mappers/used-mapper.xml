@@ -34,15 +34,15 @@
 
 	
 	<select id="selectUsedList" resultMap="resultUsed">
-		SELECT * FROM DC_BOARD_USED_VIEW WHERE STATUS='STATUS001'
+		SELECT * FROM DC_BOARD_USED_VIEW WHERE STATUS='BSTATUS001' ORDER BY NO DESC
 	</select>
 	
 	<select id="selectUsedTotalContents" resultType="_int">
-		SELECT COUNT(*) FROM DC_BOARD_TB WHERE TYPE= 'BOARD004' AND STATUS='STATUS001'
+		SELECT COUNT(*) FROM DC_BOARD_TB WHERE TYPE= 'BOARD004' AND STATUS='BSTATUS001'
 	</select>
 	
 	<select id="selectOneUsed" parameterType="_int" resultMap="resultUsed">
-		SELECT * FROM DC_BOARD_USED_VIEW WHERE BOARDNO = #{boardNo} AND STATUS='STATUS001'
+		SELECT * FROM DC_BOARD_USED_VIEW WHERE BOARDNO = #{boardNo} AND STATUS='BSTATUS001'
 	</select>
 	
 	<insert id="insertUsed" parameterType="used">
@@ -56,7 +56,7 @@
 
 	<insert id="insertBoard" parameterType="used">
 		INSERT INTO DC_BOARD_TB VALUES(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE,
-			#{content}, 0, 'BOARD004', 'STATUS001', #{memberNo}, NULL)
+			#{content}, 0, 'BOARD004', 'BSTATUS001', #{memberNo}, NULL)
 		<selectKey keyProperty="boardNo" resultType="_int" order="AFTER">
 			SELECT SEQ_BOARD.CURRVAL FROM DUAL
 		</selectKey>
@@ -73,7 +73,7 @@
 	</update>
 
 	<update id="deleteUsed" parameterType="_int">
-		UPDATE DC_BOARD_TB SET STATUS='STATUS002' WHERE NO = #{boardNo}
+		UPDATE DC_BOARD_TB SET STATUS='BSTATUS002' WHERE NO = #{boardNo}
 	</update>
 
 	<update id="updateViewCount" parameterType="_int">
