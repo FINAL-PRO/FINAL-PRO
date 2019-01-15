@@ -11,7 +11,7 @@
 <c:import url="../../common/header.jsp" />
 <style>
 
-.category {
+.category1 {
 	float: left;
 	padding-top: 10px;
 	padding-left: 20px;
@@ -158,6 +158,10 @@ p.profile>img.picture {
     cursor: pointer;
 }
 
+.totalCount{
+	font-size:13px; 
+}
+
 </style>
 
 </head>
@@ -179,7 +183,7 @@ p.profile>img.picture {
 						<div class="dc-content-box">
 							<div id="container2">
 								<div class="food_top">
-									<div class="category">
+									<div class="category1">
 										<select id="tList"> 
 											<option value="" selected disabled hidden>정렬</option>
 											<option value="1">최신 순 정렬</option>
@@ -198,12 +202,12 @@ p.profile>img.picture {
 									
 									</script>
 									<div class="food_btn">
-										<input class="btn food_btn2" type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/food/foodInsertForm.do'" />
+										<input class="btn food_btn2 btn-sm" type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/food/foodInsertForm.do'" />
 									</div>
 								</div>
 								<div class="articlelist">
 									<ol class="group"><br><br>
-										<p>총 ${totalContents}건의 게시물이 있습니다.</p>
+										<p class="totalCount">총 ${totalContents}건의 게시물이 있습니다.</p>
 										
 										<c:forEach items="${flist}" var="b">
 											<li class="groupin" id="${b.no}">
@@ -230,7 +234,7 @@ p.profile>img.picture {
 													</p>
 										            <br>
 										           	<p class="categoryName">${b.category}</p>
-										            <p class="point"><span style="color:rgb(244, 126, 96);">${b.point}</span>/5</p>
+										            <p class="point">${b.point}/5</p>
 										            <p class="address">${b.address}</p>
 										            <br>
 										            <div class="table_review">
