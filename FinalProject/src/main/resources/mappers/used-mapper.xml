@@ -96,8 +96,8 @@
 		UPDATE DC_BOARD_USED_TB SET STATUS = #{status} WHERE NO = #{usedNo}
 	</update>
 	
-	<update id="updateUsedHistoryStatus" parameterType="map">
-		UPDATE DC_USED_HISTORY_TB SET STATUS = #{status} WHERE NO = #{usedNo}
+	<update id="updateUsedHistroy" parameterType="map">
+		UPDATE DC_USED_HISTORY_TB SET STATUS = #{status} WHERE USEDNO = #{usedNo}
 	</update>
 
 

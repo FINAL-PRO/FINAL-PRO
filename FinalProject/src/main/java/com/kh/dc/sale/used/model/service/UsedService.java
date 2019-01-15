@@ -27,5 +27,7 @@ public interface UsedService {
 	
 	int updateStatus(Map<String, String> status);
 
+	int updateUsedHistroy(Map<String, String> uhMap);
+
 		
 }

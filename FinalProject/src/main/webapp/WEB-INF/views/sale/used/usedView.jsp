@@ -129,18 +129,18 @@
 	<div class="col-md-2">
 	</div>
 	<div class="col-md-10">
-		<c:if test="${uh.status eq 'USEDHIT001' and member.no eq uh.memberNo}">
+		<c:if test="${uh.status eq 'USEDHIT001' and member.no eq used.memberNo}">
 			<span>구매자에게 물품을 보내셨습니까? </span>
-			<input type="button" value="물품인계" onclick="fn_status1();"/> <br />
+			<input type="button" value="물품인계" onclick="updateUhStatus('USEDHIT002');"/> <br />
 		</c:if>
 		<c:if test="${uh.status eq 'USEDHIT001'}">
 			<span>거래를 취소하시겠습니까? </span>
-			<input type="button" value="거래취소" onclick="fn_status2();" />
+			<input type="button" value="거래취소" onclick="updateUhStatus('USEDHIT005');" />
 		</c:if>
 		<c:if test="${uh.status eq 'USEDHIT002' and member.no eq uh.memberNo}">
 			<span>판매자로부터 물품을 받으셨습니까? </span>
-			<input type="button" value="인계확인" onclick="fn_status3();"/>
-			<input type="button" value="거래중지" onclick="fn_status4();"/>
+			<input type="button" value="인계확인" onclick="updateUhStatus('USEDHIT003');"/>
+			<input type="button" value="거래중지" onclick="updateUhStatus('USEDHIT006');"/>
 		</c:if>
 	</div>
 </div>
@@ -254,6 +254,36 @@
 				success : function(data) {
 					if(data == "success") {
 						alert("해당 물품을 판매완료 처리하였습니다.");
+					} else {
+						alert("오류 발생!");
+					}
+				}
+	        });
+		}
+	}
+	
+	function updateUhStatus(st) {
+		
+		var msg = "";
+		
+		if(st == 'USEDHIT002') {
+			msg = "구매자에게 물품을 보내셨습니까?";
+		} else if(st == 'USEDHIT003') {
+			msg = "판매자로부터 물품을 확실히 받으셨습니까?";
+		} else if(st == 'USEDHIT005') {
+			msg = "거래를 취소하시겠습니까?";
+		} else if(st == 'USEDHIT006') {
+			msg = "판매자로부터 물품을 받지 못하여 거래를 중지합니다. 동의하십니까?";
+		}
+		
+		if(confirm(msg)) {
+			$.ajax({
+	        	data : { usedNo : "${used.no}", status : st },
+				url : "uhStatusUpdate.do",
+				type : "post",
+				success : function(data) {
+					if(data == "success") {
+						location.reload();
 					} else {
 						alert("오류 발생!");
 					}
