@@ -12,6 +12,7 @@
 	
 
 	<c:import url="../../common/header.jsp"/>
+	
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/jobBoard/jobBoardListCss.css" />
 </head>
 <body>
@@ -22,7 +23,7 @@
 			<div class="section-left">
 				<!-- 내용없음 -->
 			</div>
-			
+		
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
@@ -54,15 +55,25 @@
 							<c:forEach items="${salTypeList}" var="sal">
 								<option value="${sal.id}" <c:if test="${sal.id eq salType}">selected</c:if>>${sal.value}</option>
 							</c:forEach>
-						</select>												
+						</select>	
+																
 						<!-- 검색창 <--><br/>
-						<select class="cArray" id="jb-Search" name="jb-Search">
+						<form action="action="${pageContext.request.contextPath}/job/jobBoard/searchJobBoard.do">
+						<div class="searchArea">
+						<select class="cArray" id="jb_Search" name="jb_Search">
 							<option value="s-All">전체</option>
 							<option value="s-Title">제목</option>
 							<option value="s-Nick">작성자</option>
-							<option value="s-TitNick">제목 + 작성자</option>
+							<option value="s-Content">내용</option>
+							<option value="s-TitCon">제목 + 내용</option>
 						</select>
-						<input type="text" /><button>검색</button>
+						<input type="search" id ="searchContent" name="searchCont" placeholder="검색어입력"/>
+						<button type="submit">검색</button>
+						</div>
+						</form>
+						
+
+						
 					</div>
 						<div class="job-board table">
 							<div class="columName">
@@ -81,7 +92,14 @@
 								<div class="cell" style="width:50px">${jb.no}</div>
 								<div class="cell">
 									<a href="${pageContext.request.contextPath}/job/jobBoard/jobBoardDetail.do?no=${jb.no}">${jb.title}</a></div>
-								<div class="cell"><a href="" onclick="sendMsg();">${jb.nickName}</a></div>
+								<div class="cell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<a href="#">${jb.nickName}</a> 
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									    <a class="dropdown-item" href="#">작성글 검색</a>
+									    <a class="dropdown-item" href="" onclick="sendMsg();">쪽지보내기</a>
+									    <a class="dropdown-item">---------------</a>
+									</div>
+								</div>
 								<div class="cell">${jb.writeDate}</div>
 								<div class="cell">${jb.salary} / ${jb.salType}</div>
 								<div class="cell">${jb.dday}일 남음</div>
@@ -96,7 +114,7 @@
 								<div class="cell jbEnd" style="width:50px">${jb.no}</div>
 								<div class="cell jbEnd">
 									<a class="jbEnd" href="javascript:void(0);">${jb.title}</a></div>
-								<div class="cell jbEnd"><a class="jbEnd" href="javascript:void(0);">${jb.nickName}</a></div>
+								<div class="cell jbEnd">${jb.nickName}</div>
 								<div class="cell jbEnd">${jb.writeDate}</div>
 								<div class="cell jbEnd">${jb.salary} / ${jb.salType}</div>
 								<div class="cell jbEnd">${jb.dday}일 남음</div>
@@ -124,6 +142,7 @@
 		function jobBoardInsert(){
 			location.href = "${pageContext.request.contextPath}/job/jobBoard/jobBoardInsertForm.do?no=${member.no}";
 		};
+		
 		$("#arrayType").on('change',function() {
 			location.href = "${pageContext.request.contextPath}/job/jobBoard/jobBoardList.do?arrayType="
 					+ $("#arrayType").val() 
@@ -154,7 +173,13 @@
 		});
 		function sendMsg() {
 			window.open("${pageContext.request.contextPath}/message/messageInsertForm.do?fromMember=${jobBoard.nickName}", "msgPop", "width=700, height=600");
-		}		
+		}
+		/* 
+		function jb_Search() {
+			location.href = "${pageContext.request.contextPath}/job/jobBoard/searchJobBoard.do?jb_Search=$("#jb_Search").val() 
+					+ "$searchContent=" + $("#searchContent").val();
+		}
+		 */
 	</script>
 </body>
 </html>
