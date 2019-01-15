@@ -114,7 +114,7 @@
 	</div>
 </div> <hr />
 
-<c:if test="${member.no eq used.memberNo or member.no eq uh.memberNo}">
+<c:if test="${!empty uh and member.no eq used.memberNo or member.no eq uh.memberNo}">
 <div class="row flow-chart">
 	<div class="col-md-2">
 		<p class="info-label">진행상황</p>
