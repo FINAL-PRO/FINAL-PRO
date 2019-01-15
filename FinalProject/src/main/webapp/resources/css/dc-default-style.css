@@ -316,3 +316,14 @@ div[class^="ad-"]:hover {
 	background-color: #f2f4f7;
 	height:150px;
 }
+
+#login{
+	width: 100%;
+	background: rgb(248, 178, 106);
+    color: white;
+}
+
+#login:hover{
+	background: rgb(244, 126, 96);
+	color: white;
+}
