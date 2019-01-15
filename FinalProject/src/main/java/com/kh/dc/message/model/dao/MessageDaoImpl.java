@@ -72,7 +72,9 @@ public class MessageDaoImpl implements MessageDao {
 	}
 	@Override
 	public int replyMSG(Comment comment, int bno) {
-		// 
+		
+		System.out.println("코멘트 :"+comment+", "+bno);
+		
 		return sqlSession.insert("message_mapper.replyMSG", bno);
 	}
 }
