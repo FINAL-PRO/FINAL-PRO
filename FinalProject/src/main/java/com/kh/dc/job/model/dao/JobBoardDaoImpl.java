@@ -107,5 +107,18 @@ public class JobBoardDaoImpl implements JobBoardDao {
 		return sqlSession.selectList("jobBoard_mapper.selectJobBoardSalTypeList");
 	}
 
+	
+	@Override
+	public List<Map<String, String>> searchJobBoardList(Map<String, String> map, int cPage, int numPerPage) {
+		// 
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("jobBoard_mapper.searchJobBoardList", map, rowBounds);
+	}
+
+	@Override
+	public int searchJobBoardTotalContents() {
+		// 
+		return sqlSession.selectOne("jobBoard_mapper.selectJobBoardTotalContents");
+	}
 
 }

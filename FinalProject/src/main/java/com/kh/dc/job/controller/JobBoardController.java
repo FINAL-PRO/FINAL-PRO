@@ -58,11 +58,7 @@ public class JobBoardController {
 /*		for(JobBoard jb : arrayJobBoard) {
 			System.out.println(jb.getNo() + " : " + jb.getJobType() + " : " + jb.getSalType() + " : " + jb.getType());
 		}*/
-		
-		for(Code t : typeList) {
-			System.out.println(t);
-		}
-		
+	
 		int totalContents = jobBoardService.selectJobBoardTotalContents();
 		
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "jobBoardList.do");
@@ -83,7 +79,7 @@ public class JobBoardController {
 	}
 	
 	@RequestMapping("/job/jobBoard/searchJobBoard.do")
-	public String searchJobBoard(
+	public String searchJobBoardList(
 			@RequestParam(value="jb_Search", defaultValue="s-All", required=false) String jb_Search,
 			@RequestParam(value="searchCont", required=false) String searchCont,			
 			@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, 
@@ -91,6 +87,28 @@ public class JobBoardController {
 		
 		int numPerPage = 10;
 
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("jb_Search", jb_Search);
+		map.put("searchCont", searchCont);
+		
+		System.out.println("map : "+ map);
+		
+		
+		ArrayList<Map<String, String>> list = 
+				new  ArrayList<Map<String, String>>(
+						jobBoardService.searchJobBoardList(map, cPage, numPerPage));
+		
+		int totalContents = jobBoardService.searchJobBoardTotalContents();
+		
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "jobBoardList.do");
+		
+		model.addAttribute("list", list)
+		.addAttribute("jb_Search", jb_Search)
+		.addAttribute("searchCont", searchCont)
+		.addAttribute("totalContents", totalContents)
+		.addAttribute("numPerPage", numPerPage)
+		.addAttribute("pageBar", pageBar);
+		
 		return "/job/jobBoard/jobBoardList";
 	}
 	
