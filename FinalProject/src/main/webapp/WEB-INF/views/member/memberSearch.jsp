@@ -29,39 +29,38 @@
 						<div class="center" style="display: inline-block; margin-left:12%;">
 							<div class="block" style="border-right: 1px solid lightgray">
 								<div class="emailArea" align="center">
-									<label >이메일 찾기</label>
+									<label class="searchTitleLabel">이메일 찾기</label>
 									<form>
-										<input type="text" class="form-control"
-											id="nickname_emailArea" name="nickName"
-											placeholder="닉네임을 입력하세요." required> <input
-											type="text" class="form-control" id="name_emailArea" name=""
-											placeholder="이름을 입력하세요." required> <input
-											type="button" class="btn btn-outline-success emailSearchBtn"
+										<input type="text" class="form-control" id="nickname_emailArea" name="nickName"
+											placeholder="닉네임을 입력하세요." required> 
+										<input type="text" class="form-control" id="name_emailArea" name=""
+											placeholder="이름을 입력하세요." required> 
+										<input type="button" class="btnClass btn emailSearchBtn"
 											onclick="searchEmail();" value="Go!">
 									</form>
 								</div>
 								
 
 								<div class="nickNameArea" align="center">
-									<label>닉네임 찾기</label>
+									<label class="searchTitleLabel">닉네임 찾기</label>
 									<form>
 										<input type="email" class="form-control"
 											id="email_nickNameArea" name="" placeholder="이메일을 입력하세요.">
 										<input type="button"
-											class="btn btn-outline-success nickNameSearchBtn"
+											class="btnClass btn nickNameSearchBtn"
 											onclick="searchNickName();" value="Go!">
 									</form>
 								</div>
 							</div>
 
 							<div class="block passwordArea"  align="center">
-								<label>비밀번호 찾기</label>
+								<label class="searchTitleLabel">비밀번호 찾기</label>
 								<form action="sendPwd.do" method="post" id="sendPwd">
 									<input type="email" class="form-control" id="email_pwdArea"
 										name="email" placeholder="이메일을 입력하세요."> <input
 										type="text" class="form-control" id="name_pwdArea" name="name"
 										placeholder="이름을 입력하세요."> <input type="button"
-										class="btn btn-outline-success passwordSearchBtn"
+										class="btnClass btn passwordSearchBtn"
 										onclick="searchPwd();" value="임시 비밀번호 발급받기!">
 								</form>
 							</div>
