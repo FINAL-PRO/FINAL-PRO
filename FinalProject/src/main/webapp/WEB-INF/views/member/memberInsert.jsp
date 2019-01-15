@@ -21,87 +21,86 @@
 			</div>
 			<div class="section-center">
 				<div class="dc-content">
-					<div class="dc-content-title">
-						<h1>제목</h1>
+					<div class="dc-content-title" align="center">
+						<h3>동커 회원가입</h3>
 					</div>
 					<div class="dc-content-box">
 						<div id="enroll-container">
 						<form name="memberEnrollFrm" id="memberEnroll" action="memberEnroll.do" method="post" enctype="multipart/form-data">
 							<div class="row profile-container" id="profile-container">
-								<div class="col-md-3">프로필</div>
+								<div class="col-md-3 memberTitleLabel">프로필</div>
 				  				<div class="col-md-6" align="center">
 				  					<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/profileDefaultImg.png"/>
 				    				<input type="file" name="file" id="file" onchange="inputProfile(this);" multiple/>
 				  				</div>
 				  				
 				  				<div class="col-md-3">
-				  					<label class="profileLabel">기본 이미지를 누르면</label>
-				  					<label class="profileLabel">프로필사진을 변경할 수 있습니다.</label>
+				  					<br><br>
+				  					<label class="profileLabel">이미지를 누르면 <br>프로필 사진을 <br> 변경할 수 있습니다.</label>
 				  				</div>
 							</div>	
 																				
 							<div class="row email-container" id="email-container">
-								<div class="col-md-3">이메일</div>
+								<div class="col-md-3 memberTitleLabel">이메일</div>
 								<div class="col-md-6">
 									<input type="email" class="form-control" name="email"
-										id="email" required>
+										id="email" placeholder="이메일을 입력하세요." required>
 								</div>
 								<div class="col-md-3 comment" id="duplicateCheck">
-									<label class="guide1">이메일을 입력하세요.</label>
+									<label class="guide1"></label>
 								</div>
 							</div>
 
 							<div class="row password-container" id="password-container">
-								<div class="col-md-3">패스워드</div>
+								<div class="col-md-3 memberTitleLabel">패스워드</div>
 								<div class="col-md-6">
 									<input type="password" class="form-control" name="password"
-										id="password_" required>
+										id="password_" placeholder="비밀번호를 입력하세요." required>
 								</div>
 								<div class="col-md-3 comment" id="">
-									<label class="pwdChkComment" id="pwdChkComment">비밀번호을 입력하세요.</label>
+									<label class="pwdChkComment" id="pwdChkComment"></label>
 								</div>
 							</div>
 
 							<div class="row password-container" id="password2-container">
-								<div class="col-md-3">패스워드 확인</div>
+								<div class="col-md-3 memberTitleLabel">패스워드 확인</div>
 								<div class="col-md-6">
 									<input type="password" class="form-control" id="password2"
-										required>
+										 placeholder="비밀번호 확인을 입력하세요."	required>
 								</div>
 								<div class="col-md-3 comment" id="pwd2ChkComment">
-									<label class="pwdChkComment" id="pwdChkComment2">비밀번호을
-										입력하세요.</label>
+									<label class="pwdChkComment" id="pwdChkComment2"></label>
 								</div>
 							</div>
 
 							<div class="row nickName-container" id="nickName-container">
 								<!-- 닉네임 2~10 글자 허용 -->
-								<div class="col-md-3">닉네임</div>
+								<div class="col-md-3 memberTitleLabel">닉네임</div>
 								<div class="col-md-6">
 									<input type="text" class="form-control" name="nickName"
-										id="nickName">
+										placeholder="닉네임을 입력하세요." id="nickName">
 								</div>
 								<div class="col-md-3 duplicateCheck" id="duplicateCheck2">
 									<!-- 닉네임 중복 검사 -->
-									<label class="guide">닉네임을 입력하세요.</label>
+									<label class="guide"></label>
 								</div>
 							</div>
 
 
 							<div class="row userName-container" id="userName-container">
-								<div class="col-md-3">이름</div>
+								<div class="col-md-3 memberTitleLabel">이름</div>
 								<div class="col-md-6">
 									<input type="text" class="form-control" name="name"
-										id="userName" required>
+										id="userName" placeholder="이름을 입력하세요." required>
 								</div>
 								<div class="col-md-3" id="">
 									<label class=""></label>
 								</div>
 							</div>
 							<div class="row address-container" id="address-container">
-								<div class="col-md-3">주소</div>
+								<div class="col-md-3 memberTitleLabel">주소</div>
 								<div class="col-md-6">
-									<input type="text" class="form-control" placeholder="" name=""
+									<input type="text" class="form-control addressLabel" placeholder="" name=""
 										id="" readonly value="서울특별시">
 								</div>
 								<div class="col-md-3 " id=""></div>
@@ -110,7 +109,7 @@
 							<div class="row address-container" id="address-container2">
 								<div class="col-md-3"></div>
 								<div class="col-md-6">
-									<select class="form-control" name="locationNo" id="address">
+									<select class="form-control addressLabel" name="locationNo" id="address">
 										<c:forEach items="${locationList}" var="location">
 											<option value="${location.no}">${location.location}</option>
 										</c:forEach>
@@ -121,11 +120,9 @@
 
 							<div class="row btn-container">
 								<div class="col-md-3"></div>
-								<div class="col-md-3 btn-container">
-									<input type="button" class="btn btn-outline-success" id="submitButton" value="가입">
-								</div>
-								<div class="col-md-3 btn-container">
-									<input type="reset" class="btn btn-outline-danger" value="취소">
+								<div class="col-md-6 btn-container" style="display: inline-block;">
+									<input type="button" class="btnClass btn" id="submitButton" value="가입">
+									<input type="reset" class="btnClass btn" value="취소">
 								</div>
 								<div class="col-md-3" id=""></div>
 							</div>
@@ -148,8 +145,8 @@
 			
 			var emailChk = false;
 			var pwdChk = false;
-			var nickNameChk = false;
-			
+			var nickNameChk = false;			
+			var nameChk = false;			
 
 			/* 이메일 중복검사 이벤트 추가 */
 			$("#email").on("keyup",function() {
@@ -231,6 +228,18 @@
 					});
 				}
 			});
+			
+			$("#userName").on("keyup", function() {
+				var userName = $(this).val().trim();
+
+				if (userName == "") {
+					$("#submitButton").attr('disabled', true);
+					return;
+				} else if (userName != null	&& nickName.length > 1) {
+					$("#submitButton").attr('disabled', false);
+					nameChk = true;
+				} 
+			});
 
 			$("#password_").on("keyup", function() {
 
@@ -249,7 +258,8 @@
 				} else {
 					$("#pwdChkComment").text('');
 					$("#pwdChkComment2").text('');
-					$("#submitButton").attr('disabled', false);					
+					$("#submitButton").attr('disabled', false);	
+					pwdChk = true;
 				}
 			});
 
@@ -271,7 +281,7 @@
 			
 			$("#submitButton").on("click", function() {
 		
-				if(emailChk == true && nickNameChk == true && pwdChk == true){
+				if(emailChk == true && nickNameChk == true && pwdChk == true && nameChk == true){
 					$("#memberEnroll").submit();
 				} else if(emailChk == false){
 					alert("이메일을 다시 입력해주세요.");
@@ -282,8 +292,10 @@
 				} else if(pwdChk == false){
 					alert("비밀번호를 다시 입력해주세요.");
 					return;
-				}
-			
+				} else if(nameChk == false){
+					alert("이름을 입력해주세요.");
+					return;
+				} 		
 			});						
 			
 		});

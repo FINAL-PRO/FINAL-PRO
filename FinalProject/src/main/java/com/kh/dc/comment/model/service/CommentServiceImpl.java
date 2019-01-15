@@ -36,8 +36,11 @@ public class CommentServiceImpl implements CommentService{
 	public int commentInsert(Comment comment, int bno) {
 		
 		messageDao.replyMSG(comment, bno);
+		int result = commentDao.commentInsert(comment);
 		
-		return commentDao.commentInsert(comment);
+		System.out.println("코멘트 insert:"+result);
+		
+		return result;
 	}
 
 	@Override

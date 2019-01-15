@@ -16,7 +16,7 @@
 		FROM DC_BOARD_TB B
 		JOIN DC_MEMBER_TB M ON (B.MEMBERNO = M.NO)
 		JOIN DC_CODE_TB C ON (B.TYPE = C.ID)
-		WHERE TITLE LIKE '%'||#{searchWord}||'%' OR CONTENT LIKE '%'||#{searchWord}||'%' OR M.NICKNAME LIKE '%'||#{searchWord}||'%'
+		WHERE B.STATUS = 'BSTATUS001' AND (TITLE LIKE '%'||#{searchWord}||'%' OR CONTENT LIKE '%'||#{searchWord}||'%' OR M.NICKNAME LIKE '%'||#{searchWord}||'%')
 	</select>	
 	
 </mapper>
