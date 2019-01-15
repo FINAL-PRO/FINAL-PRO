@@ -9,68 +9,81 @@
 <meta charset="UTF-8">
 <style>
 	
-	.commentFrm{
-	 	padding: 15px;
-	}
-	
-	.CommentPicture {
-		display: inline-block;
-		width: 20px;
-		height: 20px;
-		vertical-align: top;
-	}
-	
-	.nickname {
-		display: inline-block;
-		line-height: 20px;
-		color: #292929;
-		font-size: 12px;
-		font-weight: bold;
-		white-space: nowrap;
-		overflow: hidden;
-		float: left;
-	}
-	
-	.time {
-		float: right;
-		display: inline-block;
-		line-height: 20px;
-		color: #a6a6a6;
-		font-size: 12px;
-	}
-	
-	.comment {
-		padding: 5px;
-		line-height: 20px;
-		color: #292929;
-		font-size: 14px;
-	}
-	
-	.commentgroup {
-		padding: 20px;
-	}
-	
-	.commnetlist {
-		padding: 20px;
-	}
-	
-	.commentwriteboard {
-		padding: 15px 35px 10px 20px;
-	}
-	
-	.commentwrite {
-		width: 100%;
-	}
-	
-	.comment_textarea {
-		margin-right: 10px;
-		margin-left: 10px;
-	}
-	
-	.btn_comment {
-		margin-top: 4px;
-		float: right;
-	}
+.commentFrm{
+ 	padding: 15px;
+}
+
+.CommentPicture {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	vertical-align: top;
+}
+
+.Cnickname {
+	display: inline-block;
+	line-height: 20px;
+	color: #292929;
+	font-size: 12px;
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+	float: left;
+}
+
+.Ctime {
+	float: right;
+	display: inline-block;
+	line-height: 20px;
+	color: #a6a6a6;
+	font-size: 12px;
+}
+
+.form-control:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+
+.comment {
+	padding: 5px;
+	line-height: 20px;
+	color: #292929;
+	font-size: 14px;
+}
+
+.commentgroup {
+	padding: 20px;
+}
+
+.commnetlist {
+	padding: 20px;
+}
+
+.commentwriteboard {
+	padding: 15px 35px 10px 20px;
+}
+
+.commentwrite {
+	width: 100%;
+}
+
+.comment_textarea {
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+.btn_comment {
+	margin-top: 4px;
+	float: right;
+}
+
+#commentSubmit{
+	margin-left: 10px;
+	background: rgb(244, 126, 96);
+	color: white;
+}
 
 </style>
 </head>
@@ -81,11 +94,11 @@
 		<form name="commentInsertForm">
 			<div class="input-group">
 				<input type="hidden" id="bno" name="bno" value="${boardList.no}" /> 
-				<input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요."/> 
+				<input type="text" class="form-control" id="Ccontent" name="content" placeholder="내용을 입력하세요."/> 
 				<input type="hidden" id="mno" name="mno" value="${member.no}" /> 
 				<input type="hidden" id="profile" name="profile" value="${member.profile}"/>
 				<span class="input-group-btn">
-				<button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
+				<button class="btn btn-default" id="commentSubmit" type="button" name="commentInsertBtn">등록</button>
 				</span>
 			</div>
 		</form>
@@ -157,8 +170,8 @@
 	   	    		
    	                a += '<div class="commentArea" id="commentArea'+value.no+'">';
    	                a += '<p class="profile" style="display:inline;">';
-					a += '<img class="picture" src="'+profile+'" />';
-					a += '<span class="nickname">'+value.memberName+'</span>';
+					a += '<img class="CommentPicture" src="'+profile+'" />';
+					a += '<span class="Cnickname">'+value.memberName+'</span>';
 					a += '</p>';
    	                a += '<input type="hidden" name="bno" value="'+bno+'"/>';
 					a += '<input type="hidden" name="mno" value="'+mno+'"/>';
