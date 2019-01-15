@@ -244,42 +244,11 @@
 											<img class="picture" src="https://cf-epi.campuspick.com/0.png"> 
 											<span class="nickname">${foodList.memberName}</span> 
 											<span class="count">조회수: ${foodList.viewCount}</span>
-											<p class="time"><fmt:formatDate value="${foodList.writeDate}" pattern="yyyy-MM-dd" /></p>
+											<span class="time">
+												<fmt:formatDate value="${foodList.writeDate}" pattern="yyyy-MM-dd" />
+											</span>
 										</p>
 										<p class="text">${foodList.content}</p>
-										<%-- <div class="starRev" style="width: 100%;">
-										  <p>${foodList.point}</p>
-										  <c:if test="${foodList.point == 0}">
-										  <span class="starR1 on">0</span>
-										  </c:if>
-										  <c:if test="${foodList.point == 1}">
-										  <span class="starR2">1</span>
-										  </c:if>
-										  <c:if test="${foodList.point == 1.5}">
-										  <span class="starR1">1.5</span>
-										  </c:if>
-										  <c:if test="${foodList.point == 2}">
-										  <span class="starR2">2</span>
-										  </c:if>
-										  <c:if test="${foodList.point == 2.5}">
-										  <span class="starR1">2.5</span>
-										  </c:if>
-										  <c:if test="${foodList.point == 3}">
-										  <span class="starR2">3</span>
-										  </c:if>
-										  <c:if test="${foodList.point == 3.5}">
-										  <span class="starR1">3.5</span>
-										  </c:if>
-										  <c:if test="${foodList.point == 4}">
-										  <span class="starR2">4</span>
-										  </c:if>
-										  <c:if test="${foodList.point == 4.5}">
-										  <span class="starR1">4.5</span>
-										  </c:if>
-										  <c:if test="${foodList.point == 5}">
-										  <span class="starR2">5</span>
-										  </c:if>
-										</div> --%>
 										<div>
 											<p class="category">카테고리: ${foodList.category}</p><br />
 											<p class="address">주소: ${foodList.address}</p>

@@ -9,87 +9,13 @@
 	<meta charset="UTF-8">
 	<title>동커</title>
 	<c:import url="common/header.jsp"/>
+	<style>
+	div#header-container{
+		padding : 35px;
+	}
+	</style>
 	<script>
 		$(function(){
-			$.ajax({
-				url : "${pageContext.request.contextPath}/community/notice/getListData.do",
-				success:function(data){
-					console.log("공지사항 가져오기 ajax 성공");
-					var result = "";
-						
-					if(data.length == 0){
-						result += "<tr style='height:200px'><td align='center' style='vertical-align:middle;'>";
-						result += "<span>불러온 데이터가 없습니다.</span>"
-						result += "</tr></td>";
-					}else{
-						for(var i = 0 ; i < data.length; i++){
-							result += "<div class='dc-tb-row'>";
-							result += "<a href='${pageContext.request.contextPath}/community/free/freeView.do?bno=" + data[i]['no'] + "'>● <span>" + data[i]['title'] + "</span></a>";
-							result += "</div>";
-						}
-					}
-					
-					$("#noticeTable").append(result);
-				},error : function(data){
-					console.log("공지사항 가져오기 ajax error");	
-				},complete : function(){
-					$("#loadingNotice").hide();
-				}
-			});
-			
-			$.ajax({
-				url : "community/free/getListData.do",
-				success:function(data){
-					console.log("자유게시판 가져오기 ajax 성공");
-					var result = "";
-					
-					if(data.length == 0){
-						result += "<tr style='height:200px'><td align='center' style='vertical-align:middle;'>";
-						result += "<span>불러온 데이터가 없습니다.</span>"
-						result += "</tr></td>";
-					}else{
-						for(var i = 0 ; i < data.length; i++){
-							result += "<div class='dc-tb-row'>";
-							result += "<a href='${pageContext.request.contextPath}/community/free/freeView.do?bno=" + data[i]['no'] + "'>● <span>" + data[i]['title'] + "</span></a>";
-							result += "</div>";
-						}
-					}
-					
-					$("#freeTable").append(result);
-				},error : function(data){
-					console.log("자유게시판 가져오기 ajax error");
-				},complete : function(){
-					$("#loadingFree").hide();
-				}
-			});
-			
-			$.ajax({
-				url : "sale/group/getListData.do",
-				success:function(data){
-					console.log("공동구매 가져오기 ajax 성공");
-					console.log(data);
-					var result = "";
-					
-					if(data.length == 0){
-						result += "<div style='height:200px'><div align='center' style='margin:auto;vertical-align:middle;align:center'>";
-						result += "<span>불러온 데이터가 없습니다.</span>"
-						result += "</div></div>";
-					}else{
-						for(var i = 0 ; i < data.length; i++){
-							result += "<div class='main-img-div'><a href='#'><span><img src='" + data[i]['thumbnail'] + "' width='190'/>";
-							result += "</span><div class='img-text'><strong>" + data[i]['title'] + "</strong><br />";
-							result += "<span>" + data[i]['goodsCategory'] +"</span></div></a></div>"
-						}
-					}
-					
-					$("#main-img-list").append(result);
-				},error : function(data){
-					console.log("공동구매 가져오기 ajax error");
-				},complete : function(){
-					$("#loadingGroup").hide();
-				}
-			});
-			
 			$.ajax({
 				url : "business/ad/getAd.do",
 				data : { adPage : "main",
@@ -100,24 +26,27 @@
 					console.log(data);
 					
 					if(data == ""){
-						$(".ad-main").css("width", "798px").css("height", "100%").attr("background-position", "center")
+/* 						$(".ad-main").css("width", "798px").css("height", "100%").attr("background-position", "center")
 						.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
 						.css("margin-right", "auto");
-						$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/1200x120.png")');
+						$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/main2.png")'); */
+						
+						$("#ad-main-img").attr("src","${pageContext.request.contextPath}/resources/upload/ad/main2.jpg");
+						$("#ad-main-img2").attr("src","${pageContext.request.contextPath}/resources/upload/ad/main1.jpg");
 						
 						$(".ad-main").attr("onclick", "window.open('" + "http://www.iei.or.kr/main/main.kh" + "');");
 					}else{
 						$(".ad-main").css("width", "798px").css("height", "100%").attr("background-position", "center")
 						.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
 						.css("margin-right", "auto");
-						$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/1200x120.png")');						
+						$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/lostark.jpg")');						
 					}
 				}, error : function(error){
 					console.log("메인 광고 ajax 에러");
 					$(".ad-main").css("width", "798px").css("height", "100%").attr("background-position", "center")
 					.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
 					.css("margin-right", "auto");
-					$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/1200x120.png")');
+					$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/lostark.jpg")');
 				}
 			});
 		});
@@ -149,22 +78,34 @@
 										</div>										
 									</div>
 									<div id="noticeTable" class="dc-tb-body">
-										<div class="dc-tb-row">
-											<div id="loadingNotice" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>
-										</div>
+										<c:if test="${!empty noticeList}">
+											<c:forEach items="${noticeList}" var="item">
+												<div class="dc-tb-row">
+													<a href="${pageContext.request.contextPath}/community/notice/noticeView.do?bno=${item.no}">● <strong>[${item.boardType}] </strong><span>${item.title}</span></a>
+												</div>
+											</c:forEach>
+										</c:if>
+										
+										<c:if test="${empty noticeList}">
+											<div class="dc-none-data">
+												<div align="center">
+													<span>게시물 없음</span>
+												</div>
+											</div>
+										</c:if>
 									</div>
 								</div>
 							</div>
 						</div>
-						</div>
-						
+						<br>
 							<div class="dc-ad-box" style="height:100px;">
 								<!-- <h1>메인 광고(AD)</h1> -->
 								<div class="ad-main">
-									<img id="ad-main-img" src="" alt="" />
+									<img id="ad-main-img" src="" alt="" width="798px" height="100px" />
 								</div>
 							</div>
 							
+							<br>
 						<div class="dc-content-box">
 							<div class="dc-con-title">
 								<h4>
@@ -173,14 +114,33 @@
 							</div>
 							
 							<div class="dc-con-content">
-								<table class="table">
-									<tbody id="freeTable">
-										<div id="loadingFree" style="background-image: url(${pageContext.request.contextPath}/resources/images/loading.gif);width:250px;height:250px"/>							
-									</tbody>
-								</table>
+								<div class="dc-tb">
+									<div class="dc-tb-head">
+										<div class="dc-tb-row">
+											<!-- head -->
+										</div>										
+									</div>
+									<div id="freeTable" class="dc-tb-body">
+										<c:if test="${!empty freeList}">
+											<c:forEach items="${freeList}" var="item">
+												<div class="dc-tb-row">
+													<a href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${item.no}">● <span>${item.title}</span></a>
+												</div>
+											</c:forEach>
+										</c:if>
+										<c:if test="${empty freeList}">
+											<div class="dc-none-data">
+												<div align="center">
+													<span>게시물 없음</span>
+												</div>
+											</div>
+										</c:if>
+									</div>
+								</div>
 							</div>
 						</div>
 						
+						<br>
 						<div class="dc-content-box">
 							<div class="dc-con-title">
 								<h4>
@@ -197,12 +157,41 @@
 									</div>
 									<div id="groupTable" class="dc-tb-body" style="">
 										<div id="main-img-list" class="main-img-list">
-												
+											<c:if test="${!empty groupList}">
+												<c:forEach items="${groupList}" var="item">
+													<div class="main-img-div">
+														<a href="/dc/sale/group/groupView.do?boardNo=${item.boardNo}">
+															<span>
+																<%-- <img src="${item.thumbnail}" width="190"/> --%>
+																<img src="https://wstatic.dcinside.com/main/main2011/2019/01/10/3731839588_a4c4449a.jpg_s" width="190"/>
+															</span>
+															<div class="img-text">
+																<strong>${item.title}</strong><br />
+																<span>${item.goodsCategory }</span>
+															</div>
+													</a></div>
+												</c:forEach>
+											</c:if>
+											<c:if test="${empty groupList}">
+												<div class="dc-none-data">
+													<div align="center">
+														<span>게시물 없음</span>
+													</div>
+												</div>
+											</c:if>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						<br>
+						<div class="dc-ad-box" style="height:100px;">
+								<!-- <h1>메인 광고(AD)</h1> -->
+								<div class="ad-main">
+									<img id="ad-main-img2" src="" alt="" width="798px" height="100px" />
+								</div>
+								
+							</div>
 						
 						<div class="dc-content-box">
 							<div class="dc-con-title">

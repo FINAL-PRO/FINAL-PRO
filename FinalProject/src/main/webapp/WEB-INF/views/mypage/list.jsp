@@ -22,7 +22,7 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<c:import url="myPageMenu.jsp"/>
+							<c:import url="myPageMenubar.jsp"/>
 						</div>
 						<div class="dc-content-box">
 							<div class="boardList" style="width: 800px; min-height: 300px; margin: auto;">
@@ -135,9 +135,7 @@
 					        		</c:if>					              						            
 						            </thead>
 					        	</table>
-					        	<c:out value="${commentPageBar}" escapeXml="false"/>
-					        	
-					        	
+					        	<c:out value="${commentPageBar}" escapeXml="false"/>				        	
 					        	
 					        </div>
 						</div>

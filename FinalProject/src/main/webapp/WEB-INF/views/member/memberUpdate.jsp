@@ -9,28 +9,7 @@
 <meta charset="UTF-8">
 <title>회원 정보 페이지</title>
 <c:import url="../common/header.jsp"/>
-	<style>
-		section {background-color: white;}
-		div#enroll-container{width:600px; margin:0 auto; text-align:center;}
-		div#enroll-container input, div#enroll-container select {margin-bottom:10px;}
-		div#enroll-container .col-md-3{text-align: right; padding-right:10px;}
-		
-		.btn-container>.btn{width:100%}
-		.row label{width: 100%; text-align:left; font-size: 8px;}
-		
-		#modalBtn>button {width: 40%; text-align:center; margin-bottom: 10px;}		
-		#modalPassword {width: 80%;}
-		
-		#file {display:none;}
-		#profileImg {
-			border-radius: 100px;
-		    border: 1px solid lightgray; 
-		    width: 150px; 
-		    height: 150px;
-		    margin-bottom: 15px;
-		}
-				
-	</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/dc-member.css" />
 </head>
 <body>
 	<c:import url="../common/menubar.jsp"/>
@@ -44,7 +23,7 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<c:import url="../mypage/myPageMenu.jsp"/>
+							<c:import url="../mypage/myPageMenubar.jsp"/>
 						</div>
 						<div class="dc-content-box">
 							<div id="enroll-container">
@@ -285,6 +264,7 @@
 					$("#submitButton").attr('disabled', true);
 				} else {
 					$("#pwdChkComment").text('');
+					$("#pwdChkComment2").text('');
 					$("#submitButton").attr('disabled', false);					
 				}
 			});
@@ -362,14 +342,8 @@
 					return;
 				}
 			
-			});		
-			
-			
-			
-			
-		});
-			
-			
+			});							
+		});			
 			
 		// 프로필 이미지 클릭시 파일 태그 클릭 효과
 		$('#profileImg').click(() => { $('#file').click(); });

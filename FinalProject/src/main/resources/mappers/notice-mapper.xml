@@ -3,7 +3,18 @@
 <mapper namespace="notice_mapper">
 	
 	<select id="selectNoticeListData" resultType="board">
-		SELECT * FROM DC_BOARD_TB WHERE STATUS = 'BSTATUS004' AND ROWNUM <![CDATA[ <= 5 ORDER BY NO ]]>
+		SELECT
+			B.*,
+		    CASE TYPE
+		    WHEN 'BOARD001' THEN '자유게시판'
+		    WHEN 'BOARD002' THEN '맛집'
+		    WHEN 'BOARD003' THEN '공동구매'
+		    WHEN 'BOARD004' THEN '중고거래'
+		    WHEN 'BOARD005' THEN '부동산'
+		    WHEN 'BOARD006' THEN '구인구직'
+		    WHEN 'BOARD007' THEN '지역정보'
+		    ELSE '기타' END BOARDTYPE
+		FROM DC_BOARD_TB B WHERE STATUS = 'BSTATUS004' AND ROWNUM <![CDATA[ <= 5 ORDER BY NO ]]>
 	</select>
 	
 	<resultMap type="boardList" id="resultBoardList">
@@ -18,21 +29,20 @@
 		INNER JOIN DC_MEMBER_TB M 
 		ON B.MEMBERNO = M.NO
 		  LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB WHERE STATUS = 'BSTATUS001' GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
-		WHERE B.TYPE = 'BSTATUS004' AND B.STATUS = 'BSTATUS001'
+		WHERE B.STATUS = 'BSTATUS001'
 		ORDER BY B.WRITEDATE DESC, B.NO DESC
 	</select>
 	
 	<select id="selectNoticeTotalContents" resultType="_int">
-		SELECT COUNT(*) FROM DC_BOARD_TB WHERE TYPE = 'BSTATUS004' AND STATUS = 'BSTATUS001'
+		SELECT COUNT(*) FROM DC_BOARD_TB WHERE STATUS = 'BSTATUS004'
 	</select>
 	
 	<select id="selectOneNotice" parameterType="_int" resultMap="resultBoardList">
 		SELECT B.*, M.NICKNAME, NVl(C.comment_count,0) comment_count
 		FROM DC_BOARD_TB B
-		INNER JOIN DC_MEMBER_TB M 
-		ON B.MEMBERNO = M.NO
-		LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB WHERE STATUS = 'STATUS001' GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
-		WHERE B.TYPE = 'BSTATUS004' AND B.NO = #{bno}  AND B.STATUS = 'BSTATUS001'
+		LEFT JOIN DC_MEMBER_TB M ON B.MEMBERNO = M.NO
+        LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB WHERE STATUS = 'STATUS001' GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
+		WHERE B.NO = #{bno}  AND B.STATUS = 'BSTATUS004'
 		ORDER BY B.WRITEDATE DESC, B.NO DESC
 	</select>
 	

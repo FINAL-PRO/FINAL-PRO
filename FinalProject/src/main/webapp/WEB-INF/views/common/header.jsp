@@ -27,6 +27,9 @@
 <!-- 기상청 날씨 받아오기 위한 크로스도메인 해결 플러그인 -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.ajax-cross-origin.min.js"></script>
 
+<!-- 폰트 -->
+<link href="https://fonts.googleapis.com/css?family=Gugi|Nanum+Gothic" rel="stylesheet">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="${pageContext.request.contextPath }/resources/icons/favicon.ico">
 <style>

@@ -1,8 +1,7 @@
 package com.kh.dc;
 
 import java.security.Principal;
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -14,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.kh.dc.community.free.model.service.FreeService;
+import com.kh.dc.community.notice.model.service.NoticeService;
 import com.kh.dc.member.model.service.MemberService;
 import com.kh.dc.member.model.vo.Member;
+import com.kh.dc.sale.group.model.service.GroupService;
+import com.kh.dc.common.vo.Board;
 
 /**
  * Handles requests for the application home page.
@@ -26,40 +29,53 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "index";
-	}
+	@Autowired
+	NoticeService noticeService;
+	@Autowired
+	private FreeService freeService;
+	@Autowired
+	private GroupService groupService;
 	
 	@Autowired
 	private MemberService memberService;
+	
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Locale locale, Model model, Principal principal) {
+		
+		if(principal != null) {
+			System.out.println(principal.getName());
+			Member m = memberService.selectOne(principal.getName());
+			model.addAttribute("member", m);
+		}
+		
+		List<Board> noticeList = noticeService.selectNoticeListData();
+		List<Board> freeList = freeService.selectFreeListData();
+		List<Board> groupList = groupService.selectGroupList();
+		
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("freeList", freeList);
+		model.addAttribute("groupList", groupList);
+		
+		return "index";
+	}
 	
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
 	public String index(Locale locale, Model model, Principal principal) {
 		
 		if(principal != null) {
 			System.out.println(principal.getName());
-			
 			Member m = memberService.selectOne(principal.getName());
-			
-			System.out.println("로그인 멤버 : " + m);
-			
 			model.addAttribute("member", m);
 		}
 		
-		logger.info("index.do {}.", locale);
+		List<Board> noticeList = noticeService.selectNoticeListData();
+		List<Board> freeList = freeService.selectFreeListData();
+		List<Board> groupList = groupService.selectGroupList();
+		
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("freeList", freeList);
+		model.addAttribute("groupList", groupList);
 		
 		return "index";
 	}

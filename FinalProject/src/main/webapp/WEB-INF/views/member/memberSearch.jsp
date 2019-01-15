@@ -9,46 +9,7 @@
 <meta charset="UTF-8">
 <title>아이디 비밀번호 찾기</title>
 <c:import url="../common/header.jsp" />
-<style>
-section {
-	background-color: white;
-}
-
-.block {
-	float: left;
-	height: auto;
-	width: 300px;
-	/* margin: 50px 10px 50px 10px; */
-	/* margin-left: 50px; */
-}
-
-form>input {
-	width: 100%;
-	margin-bottom: 5px;
-}
-
-.emailArea{
-	margin-right: 20px;
-}
-
-.nickNameArea{
-	margin-top: 20px;
-	margin-right: 20px;
-}
-
-.passwordArea {
-	margin-left: 20px;
-}
-
-.idArea {
-	margin-bottom: 50px;
-}
-
-#content {
-	width: 100%;
-	text-align: center;
-}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/dc-memberSearch.css" />
 </head>
 <body>
 	<c:import url="../common/menubar.jsp" />

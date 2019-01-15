@@ -36,20 +36,26 @@
 	
 	
 	<select id="selectGroupList" resultMap="resultGroup">
-		SELECT * FROM DC_BOARD_GROUP_VIEW WHERE STATUS='STATUS001'
+		SELECT * FROM DC_BOARD_GROUP_VIEW WHERE STATUS='BSTATUS001'
 	</select>
 	
 	<select id="selectGroupTotalContents" resultType="_int">
-		SELECT COUNT(*) FROM DC_BOARD_GROUP_VIEW WHERE STATUS='STATUS001'
+		SELECT COUNT(*) FROM DC_BOARD_GROUP_VIEW WHERE STATUS='BSTATUS001'
 	</select>
 	
 	<select id="selectOneGroup" parameterType="_int" resultMap="resultGroup">
-		SELECT * FROM DC_BOARD_GROUP_VIEW WHERE STATUS='STATUS001' AND BOARDNO = #{boardNo}
+		SELECT * FROM DC_BOARD_GROUP_VIEW WHERE STATUS='BSTATUS001' AND BOARDNO = #{boardNo}
+	</select>
+	
+	<select id="selectOneGroup2" parameterType="_int" resultType="group">
+		SELECT G.*, B.TITLE, B.CONTENT 
+		FROM DC_BOARD_GROUP_TB G JOIN DC_BOARD_TB B ON (G.BOARDNO = B.NO)
+		WHERE BOARDNO = #{boardNo}
 	</select>
 	
 	<insert id="insertBoard" parameterType="group">
 		INSERT INTO DC_BOARD_TB VALUES(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE,
-			#{content}, 0, 'BOARD003', 'STATUS001', #{memberNo}, NULL)
+			#{content}, 0, 'BOARD003', 'BSTATUS001', #{memberNo}, NULL)
 		<selectKey keyProperty="boardNo" resultType="_int" order="AFTER">
 			SELECT SEQ_BOARD.CURRVAL FROM DUAL
 		</selectKey>
@@ -69,7 +75,7 @@
 	</update>
 
 	<update id="updateGroup" parameterType="group">
-		UPDATE DC_BOARD_GROUP_TB SET DEALTYPE = #{dealType}, GOODSNO = #{goodsNo}, DEPOSIT = #{deposit},
+		UPDATE DC_BOARD_GROUP_TB SET DEALTYPE = #{dealType}, DEPOSIT = #{deposit},
 			BANK=#{bank}, ENDDATE = #{endDate}, GOODSNAME = #{goodsName}, GOODSPICTURE = #{goodsPicture}
 		WHERE BOARDNO = #{boardNo}
 	</update>
@@ -79,7 +85,7 @@
 	</update>
 	
 	<update id="deleteGroup" parameterType="_int">
-		UPDATE DC_BOARD_TB SET STATUS='STATUS002' WHERE NO = #{boardNo}
+		UPDATE DC_BOARD_TB SET STATUS='BSTATUS002' WHERE NO = #{boardNo}
 	</update>
 	
 	<select id="selectBankList" resultMap="codeList">

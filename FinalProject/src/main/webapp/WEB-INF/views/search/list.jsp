@@ -7,14 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title></title>
 <c:import url="../common/header.jsp" />
-<style>
-	#resultTitle{font-size : 20px; color: darkgreen;}
-	#resultContent{padding: 10px 0px 10px 0px; margin-bottom:0;}
-	#resultMemberName{color: green;}
-	#resultWriteDate{color: lightgray;}	
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/search/dc-search.css" />
 </head>
 <body>
 	<c:import url="../common/menubar.jsp" />
@@ -28,14 +23,15 @@
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-						<h3>검색결과</h3>
+						
 					</div>
 					<div class="dc-content-box">
-						<div id="search-result-list">						
+						<div id="search-result-list">	
+						<h3>"${searchWord}" 에 대한 검색 결과</h3>					
 						<c:set value="${searchResultList}" var="result" />
 					    <c:if test="${!empty result}" >
 							<c:forEach items="${result}" var="result" varStatus="">
-							<div id="result" style="padding:10px;">
+							<div id="result" style="padding:10px; margin: 20px 0px 20px 0px;">
 							<c:choose>
 						    	<c:when test = "${result.boardType eq '자유게시판'}">
 						        	<a id="resultTitle" href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${result.no}">[${result.boardType}] ${result.title}</a>
@@ -56,8 +52,10 @@
 									<a href="#">${board.title}</a>
 								</c:when>							                	
 							</c:choose>
-
-								<p id="resultContent">${result.content}</p> <br>
+							<p id="resultContent">
+								<c:if test="${empty result.content}">내용 없음</c:if>
+								<c:if test="${!empty result.content}">${result.content}</c:if>
+							</p>
 								<a href="#" id="resultMemberName">${result.memberName}</a> &nbsp;&nbsp;&nbsp;
 								<span id="resultWriteDate">${result.writeDate}</span><br>
 							</div>						

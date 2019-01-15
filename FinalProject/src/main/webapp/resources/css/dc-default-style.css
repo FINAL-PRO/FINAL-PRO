@@ -2,6 +2,7 @@
 
 body {
 	/* background-color : #f1f3f6; */
+	font-family:'Nanum Gothic', sans-serif;
 }
 
 header{
@@ -116,7 +117,7 @@ footer{
 .dc-content{
 	background-color: ;
 	margin : 15px 5px;
-	min-height: 100vh;
+	/* min-height: 100vh; */
 	/* border : 1px solid #dee3eb; */
 }
 
@@ -309,6 +310,12 @@ div[class^="ad-"]:hover {
 	width : 190px;
 	/* background:red; */
 	margin:3px;
+}
+
+
+.dc-none-data{
+	background-color: #f2f4f7;
+	height:150px;
 }
 
 
