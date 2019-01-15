@@ -7,6 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage/dc-mypage-list.css" />
 	<title>내가 쓴 글/댓글 List</title>	
 	<c:import url="../common/header.jsp"/>
 </head>
@@ -21,13 +22,13 @@
 				
 				<div class="section-center">
 					<div class="dc-content">
-						<div class="dc-content-title">
+						<div class="dc-content-title" >
 							<c:import url="myPageMenubar.jsp"/>
 						</div>
 						<div class="dc-content-box">
 							<div class="boardList" style="width: 800px; min-height: 300px; margin: auto;">
-								<label>내가 쓴 글</label>
-					            <table border="1" style="border-spacing:0; text-align:center; border-collapse:collapse; color: #fff; line-height:1.5; border:none;">					        	
+								<label class="mypageListTitleLabel"># 내가 쓴 글</label>
+					            <table>					        	
 						            <thead class="listcol" style="border-color: white;  color: gray;">   						                    
 						            <tr style="color:gray;">
 						                <th scope="col" style="width:50px;">#</th>
@@ -74,15 +75,17 @@
 						              </c:if>
 						            </thead>
 					        	</table>
+					        	<br>
 					        	<c:out value="${boardPageBar}" escapeXml="false"/>				        	
 					        </div>
 					        
-					        <hr/>
+
 					        
 					        <div class="commentList" style="width: 800px; min-height: 300px; margin: auto;">
-					        	<label>내가 쓴 댓글</label>					        	
+					        	<label class="mypageListTitleLabel"># 내가 쓴 댓글</label>					        	
 					        	
-					            <table border="1" style="border-spacing:0; text-align:center; border-collapse:collapse; color: #fff; line-height:1.5; border:none;">					        	
+					        	
+					            <table>					        	
 						            <thead class="listcol" style="border-color: white;  color: gray;">   						                    
 						            <tr style="color:gray;">
 						                <th scope="col" style="width:50px;">#</th>
@@ -135,6 +138,7 @@
 					        		</c:if>					              						            
 						            </thead>
 					        	</table>
+					        	<br>
 					        	<c:out value="${commentPageBar}" escapeXml="false"/>				        	
 					        	
 					        </div>

@@ -127,14 +127,14 @@
 	</div>
 	<div class="dc-content-box dc-border" align="center">
 		<h4 style="margin: 10px 0px 10px 0px;">
-			<span class="board-title">현재 날씨</span>
+			<span class="board-title">현재 우리동네 날씨</span>
 		</h4>
 		<hr style="margin:0;">	
 		<div class="" style="text-align: center">
 			<label id="village" style="margin-bottom: 10px;"></label><br>
 			<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" style="width:100px; height: 100px;"/>
-			<i class="" id="weatherIcon" style="font-size: 50px; margin-bottom: 10px;"></i> <br>
-			<label id="sky"></label>
+			<i class="" id="weatherIcon" style="font-size: 50px; margin: 10px 0px 15px 0px;"></i> <br>
+			<b><label class="weatherLabal" style="margin-bottom:0px;" id="sky"></label></b>
 		
 		<hr />
 		
@@ -214,9 +214,9 @@
 				}
 				
 				$("#sky").text(sky); 
-				output += '현재 기온 :	<label id="tc">'+ tc +'</label><br>';
-				output += '최저 기온 :	<label id="tmin">'+ tmin +'</label><br>';
-				output += '최고 기온 :	<label id="tmax">'+ tmax +'</label>';
+				output += '현재 기온 :	<label class="weatherLabal" id="tc">'+ tc +'</label><br>';
+				output += '최저 기온 :	<label class="weatherLabal" id="tmin">'+ tmin +'</label><br>';
+				output += '최고 기온 :	<label class="weatherLabal" id="tmax">'+ tmax +'</label>';
 				
 				$('.nowWeather-container').append(output);
 				

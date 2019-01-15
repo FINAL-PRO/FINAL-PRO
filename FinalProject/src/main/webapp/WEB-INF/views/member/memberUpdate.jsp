@@ -29,7 +29,7 @@
 							<div id="enroll-container">
 				<form action="memberUpdate.do" id="memberUpdate" method="post" enctype="multipart/form-data">								 
 					<div class="row profile-container" id="profile-container">
-						<div class="col-md-3">프로필</div>
+						<div class="col-md-3 memberTitleLabel">프로필</div>
 					  	<div class="col-md-6" align="center">
 						  	<c:if test="${!empty member.profile}">
 						  		<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/${member.profile}"/>	
@@ -39,16 +39,16 @@
 						  		<img id="profileImg" src="${pageContext.request.contextPath}/resources/upload/profile/profileDefaultImg.png"/>
 						  		<br/>						  		
 						  	</c:if>
-						  	<input type="button" class="btn btn-sm btn-outline-success" id="deleteProfileImg" value="프로필 사진 삭제">				  	
+						  	<input type="button" class="btnClass btn btn-sm" id="deleteProfileImg" value="프로필 사진 삭제">				  	
 					  		<input type="file" name="file" id="file" onchange="inputProfile(this);" multiple/>
 						</div>
 					  	<div class="col-md-3">
 					  		<br><br>
-					  		<label class="profileLabel" style="text-align:center;">이미지를 누르면 <br>프로필 사진을 <br> 변경할 수 있습니다.</label>
+					  		<label class="profileLabel">이미지를 누르면 <br>프로필 사진을 <br> 변경할 수 있습니다.</label>
 					  	</div>
 					</div>	
 					<div class="row email-container" id="email-container">
-						<div class="col-md-3">이메일</div>
+						<div class="col-md-3 memberTitleLabel">이메일</div>
 						<div class="col-md-6"><input type="email" class="form-control" name="email" id="email" value="${member.email}" readonly></div>
 						<div class="col-md-3 comment" id="duplicateCheck">
 							<label class="guide1"></label>
@@ -56,7 +56,7 @@
 					</div>				
 				   
 				   <div class="row password-container" id="password-container">
-				   		<div class="col-md-3">패스워드</div>
+				   		<div class="col-md-3 memberTitleLabel">패스워드</div>
 				   		<div class="col-md-6">
 				   			<input type="password" class="form-control" name="password" id="password_" required>
 				   		</div>	
@@ -66,7 +66,7 @@
 				   </div>
    
 				   <div class="row password-container" id="password2-container">
-				   		<div class="col-md-3">패스워드 확인</div>
+				   		<div class="col-md-3 memberTitleLabel">패스워드 확인</div>
 				   		<div class="col-md-6">
 				   			<input type="password" class="form-control" id="password2" required>
 				   		</div>
@@ -77,7 +77,7 @@
 
 				   <div class="row nickName-container" id="nickName-container">
 				   		<!-- 닉네임 2~10 글자 허용 -->
-				   		<div class="col-md-3">닉네임</div>
+				   		<div class="col-md-3 memberTitleLabel">닉네임</div>
 				   		<div class="col-md-6">
 				   			<input type="text" class="form-control" name="nickName" id="nickName" value="${member.nickName}" required>
 				   		</div>			   		
@@ -89,7 +89,7 @@
 				   
 				        
 				   <div class="row userName-container" id="userName-container">
-				   		<div class="col-md-3">이름</div>
+				   		<div class="col-md-3 memberTitleLabel">이름</div>
 				   		<div class="col-md-6">
 				   		<input type="text" class="form-control" name="name" id="userName" value="${member.name}" required>	
 				   		</div>	
@@ -98,7 +98,7 @@
 				   		</div>		   		
 				   </div>
 				   <div class="row address-container" id ="address-container">
-				   		<div class="col-md-3">주소</div>
+				   		<div class="col-md-3 memberTitleLabel">주소</div>
 				   		<div class="col-md-6">
 				   		<input type="text" class="form-control" placeholder="" name="" id="" readonly value="서울특별시">
 				   		</div>
@@ -119,7 +119,7 @@
 				   </div>
 				   
 				    <div class="row address-container" id="address-container">
-				   		<div class="col-md-3">상세 주소</div>
+				   		<div class="col-md-3 memberTitleLabel">상세 주소</div>
 				   		<div class="col-md-6">
 				   		<input type="text" class="form-control" name="address" id="address" value="${member.address}">	
 				   		</div>	
@@ -129,7 +129,7 @@
 				   </div>
 				   
 				    <div class="row deposit-container" id="deposit-container">
-				   		<div class="col-md-3">계좌번호</div>
+				   		<div class="col-md-3 memberTitleLabel">계좌번호</div>
 				   		<div class="col-md-2" style="padding-right:0;">
 				   			<c:set var="selectedBank" value="${member.bank}"></c:set>
 					   		<select class="form-control" name="bank" id="bank" style="padding:0;">					   		
@@ -149,11 +149,9 @@
 				   
 				   <div class="row btn-container">
 				   <div class="col-md-3"></div>
-				   <div class="col-md-3 btn-container">
-				   		<input type="button" class="btn btn-outline-success" id="submitButton" value="수정">
-				   </div>
-				   <div class="col-md-3 btn-container">
-				   		<input type="button"  class="btn btn-outline-danger" 
+				   <div class="col-md-6 btn-container">
+				   		<input type="button" class="btnClass btn" id="submitButton" value="수정">
+				   		<input type="button"  class="btnClass btn" 
 				   			data-toggle="modal" data-target="#modalDeleteMember" value="회원 탈퇴"></div>
 				   <div class="col-md-3" id=""></div>
 				   </div>	
@@ -181,8 +179,8 @@
 						  </div>
 				      </div>
 				      <div class="modal-footer" id="modalBtn" style=" display:inline; margin-bottom: 10px;">
-				        <button type="button" class="btn btn-outline-success" id="deleteBtn">회원 탈퇴</button>
-				        <button type="button" class="btn btn-outline-success" data-dismiss="modal">취소</button>
+				        <button type="button" class="btnClass btn" id="deleteBtn">회원 탈퇴</button>
+				        <button type="button" class="btnClass btn" data-dismiss="modal">취소</button>
 				      </div>
 					</form>
 				    </div>
