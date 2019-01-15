@@ -77,10 +77,12 @@
 	<insert id="replyMSG" parameterType="message">
 		INSERT INTO DC_MESSAGE_TB VALUES(
 		SEQ_MESSAGE.NEXTVAL, '게시글에 댓글이 달렸습니다.', SYSDATE,  
-		(SELECT NO FROM DC_MEMBER_TB 
-		WHERE NICKNAME = '알리미'), 
-		(SELECT MEMBERNO FROM DC_BOARD_TB
-		WHERE NO = #{boardNo}),
+		(SELECT NO 
+		 FROM DC_MEMBER_TB 
+		 WHERE NICKNAME = '알리미'), 
+		(SELECT MEMBERNO 
+		 FROM DC_BOARD_TB
+		 WHERE NO = #{bno}),
 		'MSGTYPE001')
 	</insert>
 </mapper>

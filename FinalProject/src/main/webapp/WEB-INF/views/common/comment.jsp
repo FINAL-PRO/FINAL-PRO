@@ -13,7 +13,7 @@
 	 	padding: 15px;
 	}
 	
-	.CommentPicture {
+	.picture {
 		display: inline-block;
 		width: 20px;
 		height: 20px;
@@ -80,7 +80,7 @@
 		<label for="content">comment</label>
 		<form name="commentInsertForm">
 			<div class="input-group">
-				<input type="hidden" id="bno" name="bno" value="${boardList.no}" /> 
+				<input type="hidden" id="bno" name="bno" value="${bno}" /> 
 				<input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요."/> 
 				<input type="hidden" id="mno" name="mno" value="${member.no}" /> 
 				<input type="hidden" id="profile" name="profile" value="${member.profile}"/>

@@ -100,8 +100,9 @@ public class JobBoardController {
 	}
 	@RequestMapping("job/jobBoard/jobBoardDetail.do")
 	public String selectOneBoard(@RequestParam int no, Model model) {
-		
-		model.addAttribute("jobBoard", jobBoardService.selectOneJobBoard(no));
+		JobBoard jobBoard = jobBoardService.selectOneJobBoard(no);
+		model.addAttribute("jobBoard", jobBoard);
+		model.addAttribute("bno", jobBoard.getBoardNo());
 		
 		return "job/jobBoard/jobBoardDetail";
 	}
