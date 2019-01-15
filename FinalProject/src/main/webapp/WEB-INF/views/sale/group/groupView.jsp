@@ -18,8 +18,8 @@
 }
 
 .img-box {
-	height: 250px;
-	width: 250px;
+	height: 230px;
+	width: 230px;
 }
 
 #goodsImg {
@@ -27,8 +27,8 @@
 	height: 100%;
 }
 
-.info {
-	width: 100%;
+.info-label {
+	font-weight: bold;
 }
 
 .warn-msg {
@@ -44,23 +44,37 @@
 	border: 1px solid lightgray;
 }
 
-.status {
-	height: auto;
-	width: auto;
-	background: white;
-	border: 1px solid black;
-}
-
-.current {
-	background: skyblue;
-}
-
 #title {
 	overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-all;
+    border-right: 1px solid lightgray;
 }	
 
+.status-box {
+	display: inline-block;
+	height: 40px;
+	width: 100px;
+	border-radius: .35rem;
+	background: white;
+	border: 2px solid rgb(244, 126, 96);
+}
+
+.status-box:hover {
+	cursor: pointer;
+}
+
+.status-txt {
+	font-weight: bold;
+	text-align: center;
+	padding-top: 6px;
+}
+
+.btn {
+	background: rgb(248, 178, 106);
+	margin: 5px;
+	margin-left: 0px;
+}
 
 
 </style>
@@ -84,10 +98,17 @@
 		
 <div class="dc-content-box">
 <!-- ------------------- 내용 입력 ------------------- -->
-	
-<div class="title-box">
-	<p id="title">${group.title }</p>
-</div> <hr />
+
+<div class="row title-box">
+	<div class="col-md-10">
+		<p id="title">${group.title }</p>
+	</div>
+	<div class="col-md-2">
+		<span id="memberName">${group.memberName }</span>
+	</div>
+</div> <hr style="margin-top:0px;"/>
+
+
 
 <div class="row">
 	<div class="col-md-4 img-box">
@@ -132,8 +153,9 @@
 	</div>
 	<div class="col-md-10">
 		<c:forEach items="${statusList}" var="status">
-			<input type="button" class="status" name="status" id="${status.id}"
-				value="${status.value}" onClick="changeStatus(this);"/>
+			<div class="status-box" id="${status.id}" value="${status.value}" onclick="changeStatus(this);">
+				<p class="status-txt">${status.value}</p>
+			</div>	
 		</c:forEach>
 		<p style="font-size:10px; color:lightgray;">공동구매 진행자는 진행상황을 클릭하여 변경할 수 있습니다.</p>
 	</div>
@@ -141,7 +163,7 @@
 
 <c:if test="${!empty member and member.no eq group.memberNo}">
 <div class="group-list">
-	<p style="text-align:center;">-- 참여자 목록 --</p>
+	<p class="info-label" style="text-align:center;">-- 참여자 목록 --</p>
 	<p style="text-align:center;">
 	<c:forEach items="${ghList}" var="gh">
 		<span> &lt; ${gh.nickName} &gt; </span>
@@ -154,13 +176,15 @@
 <div>
 	<div id="content">${group.content }</div>
 </div>
-	
+
 <br /><br />
-<input type="button" value="목록" class="" onclick="goGroupList();"/>
-<c:if test="${!empty member and member.no eq group.memberNo}">
-	<input type="button" value="수정하기" class="" onclick="updateGroup();"/>
-	<input type="button" value="삭제하기" class="" onclick="deleteGroup();"/>
-</c:if>
+<div style="display:flex; justify-content: center;">
+	<c:if test="${!empty member and member.no eq group.memberNo}">
+		<input type="button" value="수정하기" class="btn" onclick="updateGroup();"/>
+		<input type="button" value="삭제하기" class="btn" onclick="deleteGroup();"/>
+	</c:if> 
+	<input type="button" value="목록" class="btn" onclick="goGroupList();"/>
+</div>
 <br /><br />
 
 <!-- -------------------------------------------- -->
@@ -211,7 +235,7 @@
 		    }
 		});	
 		
-		$(('input[value="${group.status}"]')).addClass('current');
+		$(('div[value="${group.status}"]')).css('background', 'rgb(248, 178, 106)');
 	});
 	
 	// 참여신청 버튼 클릭

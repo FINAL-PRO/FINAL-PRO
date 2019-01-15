@@ -67,6 +67,12 @@
 	padding-top: 6px;
 }
 
+.btn {
+	background: rgb(248, 178, 106);
+	margin: 5px;
+	margin-left: 0px;
+}
+
 
 </style>
 
@@ -165,11 +171,11 @@
 	
 <br /><br />
 <div style="display:flex; justify-content: center;">
-	<input type="button" value="목록" class="btn" onclick="goUsedList();" style="margin:auto;"/>
-	<c:if test="${!empty member and member.no eq group.memberNo}">
+	<c:if test="${!empty member and member.no eq used.memberNo}">
 		<input type="button" value="수정하기" class="btn" onclick="updateUsed();"/>
 		<input type="button" value="삭제하기" class="btn" onclick="deleteUsed();"/>
-	</c:if>
+	</c:if> 
+	<input type="button" value="목록" class="btn" onclick="goUsedList();"/>
 </div>
 <br /><br />
 
