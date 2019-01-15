@@ -28,11 +28,6 @@ public class FoodController {
 	@Autowired
 	private FoodService foodService;
 	
-/*	@RequestMapping("community/food/list.do")
-	public String foodList() {
-		return "community/food/list";
-	}*/
-	
 	@RequestMapping("community/food/list.do")
 	public String selectFoodList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, 
 			@RequestParam(value="tList", required=false, defaultValue="1") int tList, Model model, HttpServletRequest request) {
@@ -58,24 +53,6 @@ public class FoodController {
 		
 		// 3. 페이지 계산 후 작성할 HTML 추가
 		String pageBar = Utils.getPageBar(totalContents, cPage, numberPage, "list.do");
-/*		
-		// 이미지 태그 제거하는 정규식
-		Pattern pattern  =  Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
-		 
-		// 추출할 내용
-		String content = toString();
-		 
-		// 내용 중에서 이미지 태그를 찾아라!
-		Matcher match = pattern.matcher(content);
-		 
-		String imgTag = null;
-		 
-		if(match.find()){ // 이미지 태그를 찾았다면,,
-		    imgTag = match.group(0); // 글 내용 중에 첫번째 이미지 태그를 뽑아옴.
-		}
-		 
-		// 결과값은 name1.jpg
-		System.out.println("imgTag : " + imgTag);*/	
 		
 		model.addAttribute("flist", flist)
 		.addAttribute("totalContents", totalContents)
@@ -113,7 +90,8 @@ public class FoodController {
 		int foodViewCount = foodService.foodViewCount(bno);
 		
 		model.addAttribute("foodList", foodService.selectOneFood(bno))
-		.addAttribute("foodViewCount", foodViewCount);
+		.addAttribute("foodViewCount", foodViewCount)
+		.addAttribute("bno", bno);
 		
 		System.out.println("foodViewCount: "+foodViewCount);
 		
