@@ -73,6 +73,10 @@
 	margin-left: 0px;
 }
 
+.btn-sm {
+	background: rgb(171, 187, 129);
+}
+
 
 </style>
 
@@ -149,16 +153,16 @@
 	<div class="col-md-10">
 		<c:if test="${uh.status eq 'USEDHIT001' and member.no eq used.memberNo}">
 			<span>구매자에게 물품을 보내셨습니까? </span>
-			<input type="button" value="물품인계" class="btn" onclick="updateUhStatus('USEDHIT002');"/> <br />
+			<input type="button" value="확인" class="btn btn-sm" onclick="updateUhStatus('USEDHIT002');"/> <br />
 		</c:if>
 		<c:if test="${uh.status eq 'USEDHIT001'}">
 			<span>거래를 취소하시겠습니까? </span>
-			<input type="button" value="거래취소" class="btn" onclick="updateUhStatus('USEDHIT005');" />
+			<input type="button" value="확인" class="btn btn-sm" onclick="updateUhStatus('USEDHIT005');" />
 		</c:if>
 		<c:if test="${uh.status eq 'USEDHIT002' and member.no eq uh.memberNo}">
 			<span>판매자로부터 물품을 받으셨습니까? </span>
-			<input type="button" value="인계확인" class="btn" onclick="updateUhStatus('USEDHIT003');"/>
-			<input type="button" value="거래중지" class="btn" onclick="updateUhStatus('USEDHIT006');"/>
+			<input type="button" value="인계확인" class="btn btn-sm" onclick="updateUhStatus('USEDHIT003');"/>
+			<input type="button" value="거래중지" class="btn btn-sm" onclick="updateUhStatus('USEDHIT006');"/>
 		</c:if>
 	</div>
 </div>
