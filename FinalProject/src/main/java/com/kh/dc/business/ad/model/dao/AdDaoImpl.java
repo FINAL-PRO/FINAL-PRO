@@ -60,13 +60,8 @@ public class AdDaoImpl implements AdDao{
 	}
 
 	@Override
-	public Ad getAd(Map<String, Object> params) {
-		return sqlSession.selectOne("ad_mapper.getAd", params);
-	}
-
-	@Override
-	public Ad selectOne(int adNo) {
-		return sqlSession.selectOne("ad_mapper.selectOne", adNo);
+	public List<Ad> getAd(Map<String, Object> params) {
+		return sqlSession.selectList("ad_mapper.getAd", params);
 	}
 
 	@Override
