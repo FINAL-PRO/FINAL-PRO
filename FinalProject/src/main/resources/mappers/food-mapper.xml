@@ -15,6 +15,7 @@
 		<result property="likeCount" column="like_count"/>
 		<result property="imageCheck" column="imageCheck"/>
 		<result property="category" column="food_category"/>
+		<result property="categoryId" column="categoryId" />
 		<result property="address" column="food_address"/>
 		<result property="point" column="point"/>
 		<result property="profile" column="profile"/>
@@ -31,7 +32,7 @@
 	
 	<select id="foodrecentSort" resultMap="resultFoodList">
 		SELECT B.*, M.NICKNAME, NVL(L.like_count, 0) like_count, F.THUMBNAIL thumbnail,
-				NVl(C.comment_count,0) comment_count, F.NO foodNo,
+				NVl(C.comment_count,0) comment_count, F.NO foodNo, C.ID categoryId,
 				C.VALUE food_category, M.PROFILE profile,
 				F.ADDRESS food_address, P.POINT, INSTR(b.CONTENT, 'img') imageCheck
 		FROM DC_BOARD_TB B

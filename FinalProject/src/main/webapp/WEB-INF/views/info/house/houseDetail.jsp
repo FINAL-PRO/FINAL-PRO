@@ -75,6 +75,9 @@
 								</td>
 							</tr>
 						</table>
+						<div class="container3">
+							<c:import url="../../common/comment.jsp" />
+						</div>	
 					</div>
 				</div>
 			</div>

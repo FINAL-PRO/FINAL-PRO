@@ -62,7 +62,7 @@ public class RegionController {
 		
 		model.addAttribute("region", region);
 		model.addAttribute("likeCount", likeCount);
-		
+		model.addAttribute("bno", no);
 		
 		System.out.println("likeCount : "  + likeCount);
 		
