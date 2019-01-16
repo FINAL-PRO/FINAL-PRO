@@ -446,16 +446,4 @@ public class MemberController {
 		return "mypage/myContentList";
 	}
 	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-
-
 }
