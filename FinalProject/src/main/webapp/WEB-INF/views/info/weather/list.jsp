@@ -28,7 +28,7 @@
 							<div class="weather-container" style="margin: 20px;">
 								<!-- 오늘 내일 모레 날씨 -->
 								<!-- 동네 이름 -->
-								<p class="townName" style="margin: 0 0 0 10px; font-size:24px; border-bottom: 2px solid lightgray;">
+								<p class="townName" style="margin: 0 0 0 10px; font-size:24px; border-bottom: 2px solid lightgray; font-weight: bold;">
 									우리동네 <span style="color:rgb(171, 187, 129);">오늘</span> / 
 									<span style="color:rgb(248, 178, 106);">내일</span> / 
 									<span style="color:rgb(244, 126, 96);">모레</span> 날씨</p>
@@ -43,7 +43,7 @@
 								</div>
 																
 								<!-- 주간 날씨 부분 -->
-								<p style="margin: 0 0 0 10px; font-size:24px; border-bottom: 2px solid lightgray;"> 우리동네 주간 날씨</p>
+								<p style="margin: 0 0 0 10px; font-size:24px; border-bottom: 2px solid lightgray; font-weight: bold;"> 우리동네 주간 날씨</p>
 								<div class="weekWeather-container" style="display: inline-block; margin-top:10px; width: 100%">	
 									<div id="loadingWeekWeather">													
 										<h3 id="weekWeatherLabel">주간 날씨를 불러오는 중입니다.</h3>
