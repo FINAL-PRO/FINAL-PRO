@@ -6,76 +6,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>동커</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/sale/dc-sale-style.css" />
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+<title>동커</title>
 <c:import url="../../common/header.jsp" />
-
-<style>
-
-.title-box {
-	width: 100%;
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-.img-box {
-	height: 230px;
-	width: 230px;
-}
-
-#goodsImg {
-	width: 100%;
-	height: 100%;
-}
-
-.info-label {
-	font-weight: bold;
-}
-
-.warn-msg {
-	color:red; 
-	font-size:12px; 
-	padding-top:3px;
-}
-
-#used-content {
-	width: 100%;
-	height: auto;
-	padding: 30px;
-	border: 1px solid lightgray;
-}
-
-#title {
-	overflow: hidden;
-    text-overflow: ellipsis;
-    word-break: break-all;
-    border-right: 1px solid lightgray;
-}	
-
-.status-box {
-	display: inline-block;
-	height: 40px;
-	width: 100px;
-	border-radius: .35rem;
-	background: white;
-	border: 2px solid rgb(244, 126, 96);
-}
-
-.status-txt {
-	font-weight: bold;
-	text-align: center;
-	padding-top: 6px;
-}
-
-.btn {
-	background: rgb(248, 178, 106);
-	margin: 5px;
-	margin-left: 0px;
-}
-
-
-</style>
-
 </head>
 
 <body>
@@ -119,7 +53,7 @@
 		<input type="button" value="바로구매" onclick="pay(${used.price});" />
 		</c:if>
 		<c:if test="${member.no eq used.memberNo}">
-		<input type="button" value="물품 판매완료" class="btn" onclick="soldOut();"/>
+		<input type="button" value="물품 판매완료" class="btn btnGroup" onclick="soldOut();"/>
 		</c:if>
 	</div>
 	<div class="col-md-6">
@@ -149,16 +83,16 @@
 	<div class="col-md-10">
 		<c:if test="${uh.status eq 'USEDHIT001' and member.no eq used.memberNo}">
 			<span>구매자에게 물품을 보내셨습니까? </span>
-			<input type="button" value="물품인계" class="btn" onclick="updateUhStatus('USEDHIT002');"/> <br />
+			<input type="button" value="물품인계" class="btn btnGroup" onclick="updateUhStatus('USEDHIT002');"/> <br />
 		</c:if>
 		<c:if test="${uh.status eq 'USEDHIT001'}">
 			<span>거래를 취소하시겠습니까? </span>
-			<input type="button" value="거래취소" class="btn" onclick="updateUhStatus('USEDHIT005');" />
+			<input type="button" value="거래취소" class="btn btnGroup" onclick="updateUhStatus('USEDHIT005');" />
 		</c:if>
 		<c:if test="${uh.status eq 'USEDHIT002' and member.no eq uh.memberNo}">
 			<span>판매자로부터 물품을 받으셨습니까? </span>
-			<input type="button" value="인계확인" class="btn" onclick="updateUhStatus('USEDHIT003');"/>
-			<input type="button" value="거래중지" class="btn" onclick="updateUhStatus('USEDHIT006');"/>
+			<input type="button" value="인계확인" class="btn btnGroup" onclick="updateUhStatus('USEDHIT003');"/>
+			<input type="button" value="거래중지" class="btn btnGroup" onclick="updateUhStatus('USEDHIT006');"/>
 		</c:if>
 	</div>
 </div>
@@ -166,15 +100,15 @@
 </c:if>
 
 <div>
-	<div id="used-content">${used.content }</div>
-</div>
-	
+	<div class="sale-content">${used.content }</div>
+</div> <br />
+
 <div style="display:flex; justify-content: center;">
 	<c:if test="${!empty member and member.no eq used.memberNo}">
-		<input type="button" value="수정하기" class="btn" onclick="updateUsed();"/>
-		<input type="button" value="삭제하기" class="btn" onclick="deleteUsed();"/>
+		<input type="button" value="수정하기" class="btn btnGroup" onclick="updateUsed();"/>
+		<input type="button" value="삭제하기" class="btn btnGroup" onclick="deleteUsed();"/>
 	</c:if> 
-	<input type="button" value="목록" class="btn" onclick="goUsedList();"/>
+	<input type="button" value="목록" class="btn btnGroup" onclick="goUsedList();"/>
 </div>
 
 <div class="container3">

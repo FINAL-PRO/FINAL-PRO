@@ -7,61 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/sale/dc-sale-style.css" />
 <title>동커</title>
 <c:import url="../../common/header.jsp" />
-
-<style>
-
-.title-box {
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-.img-box {
-	height: 250px;
-	width: 250px;	
-}
-
-.info {
-	width: 100%;
-}
-
-.warn-msg {
-	color:red; 
-	font-size:12px; 
-	padding-top:3px;
-}
-
-#goodsImg {
-	width: 100%;
-	height: 230px;
-	border-radius: 10px;
-	border: 1px solid lightgray;
-	margin-bottom: 5px;	
-}
-
-th{
-	text-align: center;
-}
-
-.btnGroup{
-	background: rgb(248, 178, 106);
-    color: white;
-}
-
-.btnGroup:hover{
-	background: rgb(244, 126, 96);
-	color: white;
-}
-
-#btnSubmit{
-	float: right;
-	width: 110px;
-}
-
-
-</style>
-
 </head>
 
 <body>
@@ -85,21 +33,18 @@ th{
 <form name="boardForm" action="${pageContext.request.contextPath}/sale/group/groupFormEnd.do" method="post">
 	<input type="hidden" name="memberNo" value="${member.no}" required /> 
 
-	<div class="title-box">
-		
-	<input type="text" class="info form-control" name="title" id="title" placeholder="제목을 입력하세요."/>
-	<!-- <p class="warn-msg" id="titleMsg">제목은 50글자를 넘을 수 없습니다.</p> -->
-		
+	<div class="title-box">		
+		<input type="text" class="info form-control" name="title" id="title" 
+			placeholder="제목을 입력하세요."/>
+		<!-- <p class="warn-msg" id="titleMsg">제목은 50글자를 넘을 수 없습니다.</p> -->	
 	</div>
 	
 	<div class="row">
-		<div class="col-md-4 img-box" style="padding-left:20px;">
-						
-				<img id="goodsImg"/>				
-				<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);"/>
-				<input type="hidden" id="goodsPicture" name="goodsPicture" />
-				<input type="button" class="btn btnGroup" style="width:100%;" id="btnPic" value="물품사진 등록하기">
-			
+		<div class="col-md-4 img-box" style="padding-left:20px;">		
+			<img class="goodsImg-box" id="goodsImg"/>				
+			<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);"/>
+			<input type="hidden" id="goodsPicture" name="goodsPicture" />
+			<input type="button" class="btn btnGroup" style="width:100%;" id="btnPic" value="물품사진 등록하기">		
 		</div>
 		<div class="col-md-8">
 			<table class="product-info" style="width:100%;">
@@ -146,7 +91,6 @@ th{
 				</tr>
 			</tbody>
 			</table>	
-	
 		</div>
 	</div> <br />	
 

@@ -6,79 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/sale/dc-sale-style.css" />
 <title>동커</title>
 <c:import url="../../common/header.jsp" />
-
-<style>
-
-.title-box {
-	width: 100%;
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-.img-box {
-	height: 230px;
-	width: 230px;
-}
-
-#goodsImg {
-	width: 100%;
-	height: 100%;
-}
-
-.info-label {
-	font-weight: bold;
-}
-
-.warn-msg {
-	color:red; 
-	font-size:12px; 
-	padding-top:3px;
-}
-
-#group-content {
-	width: 100%;
-	height: auto;
-	padding: 30px;
-	border: 1px solid lightgray;
-}
-
-#title {
-	overflow: hidden;
-    text-overflow: ellipsis;
-    word-break: break-all;
-    border-right: 1px solid lightgray;
-}	
-
-.status-box {
-	display: inline-block;
-	height: 40px;
-	width: 100px;
-	border-radius: .35rem;
-	background: white;
-	border: 2px solid rgb(244, 126, 96);
-}
-
-.status-box:hover {
-	cursor: pointer;
-}
-
-.status-txt {
-	font-weight: bold;
-	text-align: center;
-	padding-top: 6px;
-}
-
-.btn {
-	background: rgb(248, 178, 106);
-	margin: 5px;
-	margin-left: 0px;
-}
-
-
-</style>
-
 </head>
 
 <body>
@@ -162,7 +92,7 @@
 </div> <hr />
 
 <c:if test="${!empty member and member.no eq group.memberNo}">
-<div class="group-list">
+<div class="group-list" style="height: 100px;">
 	<p class="info-label" style="text-align:center;">-- 참여자 목록 --</p>
 	<p style="text-align:center;">
 	<c:forEach items="${ghList}" var="gh">
@@ -174,15 +104,15 @@
 </c:if>
 	
 <div>
-	<div id="group-content">${group.content }</div>
-</div>
+	<div class="sale-content">${group.content }</div>
+</div> <br />
 
 <div style="display:flex; justify-content: center;">
 	<c:if test="${!empty member and member.no eq group.memberNo}">
-		<input type="button" value="수정하기" class="btn" onclick="updateGroup();"/>
-		<input type="button" value="삭제하기" class="btn" onclick="deleteGroup();"/>
+		<input type="button" value="수정하기" class="btn btnGroup" onclick="updateGroup();"/>
+		<input type="button" value="삭제하기" class="btn btnGroup" onclick="deleteGroup();"/>
 	</c:if> 
-	<input type="button" value="목록" class="btn" onclick="goGroupList();"/>
+	<input type="button" value="목록" class="btn btnGroup" onclick="goGroupList();"/>
 </div>
 
 <div class="container3">

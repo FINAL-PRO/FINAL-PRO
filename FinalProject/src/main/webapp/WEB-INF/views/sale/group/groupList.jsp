@@ -7,55 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/sale/dc-sale-style.css" />
 <title>동커</title>
 <c:import url="../../common/header.jsp" />
-
-<style>
-
-.product-box {
-	height: 200px;
-	border: 1px solid white;
-	padding: 10px;
-	margin: 10px;
-}
-
-.btn-write {
-	float: right;
-	margin-right: 10px;
-}
-
-#goodsPicture {
-	width: 100%;
-	height: 100%;
-}
-
-.pro {
-	padding-left: 0px;
-}
-
-.pro-con {
-	margin-top: 10px;
-}
-
-.title {
-	font-size: 20px;
-	padding-bottom: 10px;
-	overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.pro-info {
-	margin-top: 20px;
-}
-
-.product-box:hover {
-	background-color: #f8f8f8;
-	cursor: pointer;
-}
-
-</style>
-
 </head>
 <body>
 
@@ -78,14 +32,14 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<button class="btn btn-write" onclick="goGroupForm();">글쓰기</button>
+		<button class="btn btnGroup" id="btnSubmit" onclick="goGroupForm();">글쓰기</button>
 	</div>
 </div> <hr />
 
 <c:forEach items="${list}" var="g">
 <div class="row product-box" onclick="location.href='${viewPath}${g.boardNo}'">
 	<div class="col-md-3 pro">
-		<img id="goodsPicture" src="${g.goodsPicture}" />
+		<img class="goodsPicture" src="${g.goodsPicture}" />
 	</div>
 	<div class="col-md-6 pro pro-con">
 		<p class="title">${g.title}</p>
