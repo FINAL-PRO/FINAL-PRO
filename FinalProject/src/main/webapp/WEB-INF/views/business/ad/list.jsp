@@ -24,7 +24,7 @@
 						<div class="dc-content-title">
 							<div>
 								<span class="dc-list-title">광고 신청 게시판</span>
-								<button class="btn dc-btn dc-btn-right" onclick="insertAd();">업체 등록</button>
+								<button class="btn dc-btn dc-btn-right" onclick="insertAd();">광고 등록</button>
 							</div>
 							<br />
 							
