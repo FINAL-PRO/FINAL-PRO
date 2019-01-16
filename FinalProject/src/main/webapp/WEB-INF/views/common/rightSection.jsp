@@ -179,7 +179,7 @@
 			default : url="&city=서울&county=강남구&village=역삼1동"; village="역삼동"; break;
 		}
 
-		 $.ajax({
+		/*  $.ajax({
 			type: "GET",
 			url: "https://api2.sktelecom.com/weather/current/minutely?appKey=a294c267-b2de-41f1-99ee-1a4894a40fdf" + url,
 			header:{
@@ -229,7 +229,7 @@
 				$(".loadingImg").toggle();
 			}
 			
-		}); 
+		});  */
 		
 	});
 
