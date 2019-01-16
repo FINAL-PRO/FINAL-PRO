@@ -49,11 +49,14 @@ public class GroupController {
 	@RequestMapping("sale/group/view.do")
 	public String selectOneGroup(@RequestParam int boardNo, Model model) {
 
+		System.out.println("공동구매 셀렉트 했다~~~~");
+		
 		Group group = groupService.selectOneGroup(boardNo);
 
 		model.addAttribute("group", group)
 			 .addAttribute("statusList", groupService.selectStatusList())
-			 .addAttribute("ghList", groupService.selectGroupHistory(group.getNo()));
+			 .addAttribute("ghList", groupService.selectGroupHistory(group.getNo()))
+			 .addAttribute("bno", boardNo);
 	
 		return "sale/group/groupView";
 	}

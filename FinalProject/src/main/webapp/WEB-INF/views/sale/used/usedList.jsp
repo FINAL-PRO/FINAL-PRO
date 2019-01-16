@@ -7,56 +7,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/sale/dc-sale-style.css" />
 <title>동커</title>
 <c:import url="../../common/header.jsp" />
-
-<style>
-
-.product-box {
-	height: 200px;
-	border: 1px solid white;
-	padding: 10px;
-	margin: 10px;
-}
-
-.btn-write {
-	float: right;
-	margin-right: 10px;
-}
-
-#goodsPicture {
-	width: 100%;
-	height: 100%;
-}
-
-.pro {
-	padding-left: 0px;
-}
-
-.pro-con {
-	margin-top: 10px;
-}
-
-.title {
-	font-size: 20px;
-	padding-bottom: 10px;
-	overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.pro-info {
-	margin-top: 20px;
-}
-
-.product-box:hover {
-	background-color: #f8f8f8;
-	cursor: pointer;
-}
-
-</style>
-
 </head>
+
 <body>
 
 <c:import url="../../common/menubar.jsp" />
@@ -77,29 +32,31 @@
 
 <c:set var="viewPath" value="${pageContext.request.contextPath}/sale/used/view.do?boardNo=" />
 
-<div class="row">
-	<div class="col-md-10">
-		
-	</div>
-	<div class="col-md-2">
-		<button class="btn btn-write" onclick="goUsedForm();">글쓰기</button>
-	</div>
+<div style="height:40px;">
+	<button class="btn btnGroup" id="btnSubmit" onclick="goUsedForm();">글쓰기</button>
 </div> <hr />
 
 <c:forEach items="${list}" var="u">
 <div class="row product-box" onclick="location.href='${viewPath}${u.boardNo}'">
-	<div class="col-md-3 pro">
-		<img id="goodsPicture" src="${u.goodsPicture}" />
+	<div class="col-md-3" style="position: relative;">
+		<div class="pro-img">
+			<img class="goodsPicture" src="${u.goodsPicture}" />
+		</div>
+		<c:if test="${'판매완료' eq u.status}">
+			<div class="pro-img" style="background-color:rgba(0,0,0,.5);">
+				<div class="sold-text"><span>판매<br />완료</span></div>
+			</div>
+		</c:if>
 	</div>
-	<div class="col-md-6 pro pro-con">
+	<div class="col-md-6 pro-con">
 		<p class="title">${u.title}</p>
 		<p class="pro-info">물품명 : ${u.goodsName}</p>	
 		<p class="pro-info">가격 : ${u.price} 원</p>
 	</div> 
-	<div class="col-md-3 pro pro-con">
-
+	<div class="col-md-3 pro-con">
 		<p class="pro-info">${u.memberName} </p>
-
+		<p class="pro-info">거래방법 : ${u.dealType}</p>
+		<p class="pro-info">판매상태 : ${u.status}</p>
 		<span>${u.writeDate}</span>
 		<span style="float:right;">조회수 ${u.viewCount}</span>
 	</div>

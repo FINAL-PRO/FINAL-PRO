@@ -7,43 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/sale/dc-sale-style.css" />
 <title>동커</title>
 <c:import url="../../common/header.jsp" />
-
-<style>
-
-label.info-label {
-	margin-left: 30px;
-	padding-top: 10px;
-}
-
-.title-box {
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-.img-box {
-	height: 250px;
-	width: 250px;
-}
-
-.info {
-	width: 100%;
-}
-
-.warn-msg {
-	color:red; 
-	font-size:12px; 
-	padding-top:3px;
-}
-
-#goodsImg {
-	width: 100%;
-	height: 100%;
-}
-
-</style>
-
 </head>
 
 <body>
@@ -66,36 +32,31 @@ label.info-label {
 	<input type="hidden" name="memberNo" value="${member.no}" required /> 
 	<input type="hidden" name="boardNo" value="${used.boardNo}" />
 	
-	<div class="title-box">
-		<label class="title-label" for="title">제목</label>
-		<input type="text" name="title" style="width:90%; float:right;" value="${used.title}" />
-		<p class="warn-msg">제목은 50글자를 넘을 수 없습니다.</p>
-	</div> <hr />
+	<div class="title-box">		
+		<input type="text" class="info form-control" name="title" id="title" value="${used.title}" />
+		<!-- <p class="warn-msg" id="titleMsg">제목은 50글자를 넘을 수 없습니다.</p> -->	
+	</div>
 	
-	<div style="display:inline-block; width:100%;">
-		<div style="float:left; width:30%;">
-			<div class="img-box" style="border:1px solid black;">
-				<img id="goodsImg" src="${used.goodsPicture}"/>
-			</div>
+	<div class="row">
+		<div class="col-md-4 img-box" style="padding-left:20px;">		
+			<img class="goodsImg-box" id="goodsImg" src="${used.goodsPicture}"/>				
 			<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);"/>
 			<input type="hidden" id="goodsPicture" name="goodsPicture" value="${used.goodsPicture}"/>
-			<button type="button" style="width:250px;" id="btnPic">물품사진 등록하기</button>
+			<input type="button" class="btn btnGroup" style="width:100%;" id="btnPic" value="물품사진 등록하기">		
 		</div>
-		
-		<div>
-		<table class="product-info">
-		<colgroup>
-			<col width="200px"/>
-			<col width="400px"/>
-		</colgroup>
-		<tbody>
+		<div class="col-md-8">
+			<table class="product-info" style="width:100%;">
+			<colgroup><col width="30%"/><col width="70%"/></colgroup>
+			<tbody>
 			<tr>
 				<th><label class="info-label" for=goodsName>물품명</label></th>
-				<td><input type="text" class="info" name="goodsName" value="${used.goodsName}" /></td>
+				<td><input type="text" class="info form-control" name="goodsName" id="goodsName"
+						value="${used.goodsName}"  /></td>
 			</tr>
 			<tr>
 				<th><label class="info-label" for="price">가격</label></th>
-				<td><input type="text" class="info" name="price" value="${used.price}" disabled="disabled"/></td>
+				<td><input type="text" class="info form-control" name="price" id="price" 
+						value="${used.price}" disabled="disabled"/></td>
 			</tr>
 			<tr>
 				<th><label class="info-label" for="dealType">거래방법</label></th>
@@ -105,19 +66,19 @@ label.info-label {
 					안전거래 <input type="radio" name="dealType" value="DEAL003" />
 				</td>
 			</tr>
-		</tbody>
-		</table>
+			</tbody>
+			</table>	
 		</div>
-		
-	</div> <hr />
+	</div> <br /><br /> <hr />	
 	
 	<div>
 		<textarea id="summernote" name="content">${used.content}</textarea>
-	</div>
+	</div> <br />
 	
-	<br /><br />
-	<input type="submit" class="a" value="수정완료" />
-	<input type="button" class="a" value="수정취소" onclick="cancelUpdate();"/>
+	<div style="display:flex; justify-content: center;">
+		<input type="submit" class="btn btnGroup" value="수정완료" />
+		<input type="button" class="btn btnGroup" value="수정취소" onclick="cancelUpdate();"/>
+	</div>
 	<br /><br />
 </form>
 
