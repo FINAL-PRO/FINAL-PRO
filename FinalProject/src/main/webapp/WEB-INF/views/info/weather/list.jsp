@@ -30,7 +30,7 @@
 								<!-- 오늘 내일 모레 날씨 -->
 								<!-- 동네 이름 -->
 								<p class="townName" style="margin: 0 0 0 10px; font-size:24px;">현재 날씨</p>
-								<div class="currentWeather" style="width:100%;">
+								<div class="currentWeather" style="width:100%;"> 
 									<div id="loadingTodayWeather"> 
 										<h3 id="currentWeatherLabel">현재 날씨를 불러오는 중입니다.</h3>
 										<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" />
@@ -40,9 +40,8 @@
 								<div style="margin:50px 0px 50px 0px;">
 								<hr />
 								</div>
-								
-								
-								<!-- 주간 날씨 부분 <--></-->
+																
+								<!-- 주간 날씨 부분 -->
 								<h4 style="margin: 0 0 0 10px;"> 주간 날씨</h4>
 								<div class="weekWeather-container" style="display: inline-block; margin-top:10px; width: 100%">	
 									<div id="loadingWeekWeather">													

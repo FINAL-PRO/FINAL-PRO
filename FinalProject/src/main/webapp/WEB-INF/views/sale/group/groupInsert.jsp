@@ -266,13 +266,15 @@
 	
 	// 모집인원 --> 정규식처리:1~20 사이 숫자만
 	$("#maxCount").on("keyup", function() {
-		var maxCount = $("#maxCount").val().trim();
-		var regPwd = /^[0-9]$/g;
+		var maxCount = $("#maxCount").val();
+		var regPwd = /^[0-9]{1,2}$/;
+		
+		console.log(maxCount);
 
-		if (title == "") {
+		if (maxCount == "") {
 			$("#maxCountMsg").text('');
-		} else if (!regPwd.test(title)) {
-			$("#maxCountMsg").text('숫자만 입력해 주세요.');
+		} else if (!regPwd.test(maxCount)) {
+			$("#maxCountMsg").text('1~20 사이의 숫자를 입력해 주세요.');
 		} else {
 			$("#maxCountMsg").text('ok!');
 		}

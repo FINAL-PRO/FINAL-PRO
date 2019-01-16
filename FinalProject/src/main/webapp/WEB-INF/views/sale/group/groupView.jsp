@@ -316,7 +316,9 @@
 	}
 	
 	function deleteGroup() {
-		location.href = "${pageContext.request.contextPath}/sale/group/groupDelete.do?boardNo="+${group.boardNo};
+		if(confirm("삭제하시겠습니까?")) {
+			location.href = "${pageContext.request.contextPath}/sale/group/groupDelete.do?boardNo="+${group.boardNo};
+		}
 	}
 
 </script>

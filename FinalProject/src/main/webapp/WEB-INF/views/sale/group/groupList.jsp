@@ -78,7 +78,7 @@ a {
 		
 <div class="dc-content-box">
 <!-- ------------------- 내용 입력 ------------------- -->
-<c:set var="viewPath" value="${pageContext.request.contextPath}/sale/group/groupView.do?boardNo=" />
+<c:set var="viewPath" value="${pageContext.request.contextPath}/sale/group/view.do?boardNo=" />
 
 <div class="row">
 	<div class="col-md-12">
