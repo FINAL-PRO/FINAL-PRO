@@ -13,7 +13,6 @@
 <style>
 .board_area {
 	padding: 20px;
-	margin: 20px;
 }
 
 .btn-save{
@@ -24,6 +23,14 @@
 #btn_back{
 	background: rgb(171, 187, 129);
     color: white;
+}
+
+.bcontentBox{
+	margin-top: 5px;
+}
+
+.btitleBox{
+	margin-top: 7px;
 }
 
 </style>
@@ -51,23 +58,17 @@
 										<b>글쓰기</b>
 									</div>
 									<input type="hidden" id="mno" name="memberNo" value="${member.no}" required>
-									<div>
-										<div>제목</div>
-											<div>
-												<input type="text" name="title" id="title" style="width: 100%;" required>
-											</div>
-										</div>
-									<div>
-									<br>
-									<div>내용</div>
-									<div>
+									<div class="btitleBox">
+										<input type="text" name="title" id="title" style="width: 100%;" required>
+									</div>
+									<div class="bcontentBox">
 										<textarea name="content" id="summernote"
 											class="form-control" rows="20" cols="70" required></textarea>
 									</div>
 									<script>
 					                                
 		                                $('#summernote').summernote({
-		                            		minHeight : 100,
+		                            		minHeight : 200,
 		                            		maxHeight : 500,
 		                            		focus : true,
 		                            		callbacks : {
@@ -76,13 +77,12 @@
 		                            					sendFile(files[i]);
 		                            		}}},
 		                            		toolbar: [
-		                            		    // [groupName, [list of button]]
 		                            		    ['style', ['bold', 'italic', 'underline', 'clear']],
-		                            		    ['font', ['strikethrough', 'superscript', 'subscript']],
 		                            		    ['fontsize', ['fontsize']],
 		                            		    ['color', ['color']],
 		                            		    ['para', ['ul', 'ol', 'paragraph']],
-		                            		    ['height', ['height']]
+		                            		    ['height', ['height']],
+		                            		    ['picture', ['picture', 'video']]
 		                            		  ]
 		                            	});
 	
@@ -127,9 +127,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
 				<div class="section-right">
 					<c:import url="../../common/rightSection.jsp" />
+				</div>
 				</div>
 			</section>
 			</main>

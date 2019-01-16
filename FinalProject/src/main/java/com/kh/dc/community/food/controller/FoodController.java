@@ -110,6 +110,7 @@ public class FoodController {
 	public String foodUpdate(FoodList foodList) {
 		
 		foodService.foodUpdate(foodList);
+		System.out.println("주소컨트롤러: " + foodList.getAddress());
 		
 		return "redirect:/community/food/list.do";
 	}
