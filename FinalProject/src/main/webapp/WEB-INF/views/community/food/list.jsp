@@ -67,6 +67,7 @@
 	display: inline-block;
 	padding-left: 10px;
 	font-weight: bold;
+	font-size: 10px;
 }
 
 .short_review {
