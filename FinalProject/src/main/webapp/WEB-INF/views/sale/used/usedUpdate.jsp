@@ -12,12 +12,6 @@
 
 <style>
 
-.dc-content-box {
-	padding-left: 50px;
-	padding-right: 50px;
-	margin-bottom: 50px;
-}
-
 label.info-label {
 	margin-left: 30px;
 	padding-top: 10px;
@@ -142,6 +136,11 @@ label.info-label {
 
 <!-------------------- Script -------------------->
 <script>
+
+	$(function() {
+		
+		$(('input[value="${used.dealType}"]')).attr("checked", true);
+	});
 
 	$('#summernote').summernote({
 		height : 500,

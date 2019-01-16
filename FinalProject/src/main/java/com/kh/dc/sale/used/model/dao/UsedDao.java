@@ -13,6 +13,8 @@ public interface UsedDao {
 	
 	Used selectOneUsed(int boardNo);
 	
+	Used selectOneUsed2(int boardNo);
+	
 	int insertUsed(Used used);
 	
 	int insertBoard(Used used);

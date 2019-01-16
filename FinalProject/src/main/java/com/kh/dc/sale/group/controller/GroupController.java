@@ -46,7 +46,7 @@ public class GroupController {
 		return "sale/group/groupList";
 	}
 	
-	@RequestMapping("sale/group/groupView.do")
+	@RequestMapping("sale/group/view.do")
 	public String selectOneGroup(@RequestParam int boardNo, Model model) {
 
 		Group group = groupService.selectOneGroup(boardNo);
@@ -71,15 +71,12 @@ public class GroupController {
 	
 	@RequestMapping("sale/group/groupFormEnd.do")
 	public String insertGroup(Group group,  Model model) {
-		
-		String loc = "sale/group/groupView";
 	
-		if(groupService.insertGroup(group) > 0) {
-			model.addAttribute("group", groupService.selectOneGroup(group.getBoardNo()))
-				 .addAttribute("statusList", groupService.selectStatusList());
-		}
+		groupService.insertGroup(group);
+		
+		System.out.println("&&&&&&&&&&&&&&&&&&&&& ~인서트인서트~ &&&&&&&&&&&&&&&&&&&&&&");
 				
-		return loc;
+		return "redirect:/sale/group/list.do";
 	}
 	
 	@RequestMapping("sale/group/groupUpdateForm.do")
@@ -87,6 +84,8 @@ public class GroupController {
 		
 		model.addAttribute("group", groupService.selectOneGroup2(boardNo))
 			 .addAttribute("bankList", groupService.selectBankList());
+		
+		System.out.println("&&&&&&&&&&&&&&&&&&&&& ~업뎃폼~ &&&&&&&&&&&&&&&&&&&&&&");
 	
 		return "sale/group/groupUpdate";
 	}
@@ -94,26 +93,20 @@ public class GroupController {
 	@RequestMapping("sale/group/groupUpdateFormEnd.do")
 	public String updateGroup(Group group, Model model) {
 		
-		System.out.println("group31:" + group);
+		groupService.updateGroup(group);
+		model.addAttribute("boardNo", group.getBoardNo());
 		
-		String msg = (groupService.updateGroup(group)>0) ? "게시글을 수정하였습니다." : "게시글 수정에 실패하였습니다.";
-		
-		model.addAttribute("loc", "/sale/group/groupView.do?boardNo="+group.getBoardNo())
-			 .addAttribute("msg", msg);
+		System.out.println("&&&&&&&&&&&&&&&&&&&&& ~업뎃끝~ &&&&&&&&&&&&&&&&&&&&&&");
 	
-		return "common/msg";
+		return "redirect:/sale/group/view.do";
 	}
 	
 	@RequestMapping("sale/group/groupDelete.do")
 	public String deleteGroup(@RequestParam int boardNo, Model model) {
 
-		String loc = "/sale/group/list.do";
-		System.out.println("boardNo : "+boardNo);
-		String msg = (groupService.deleteGroup(boardNo)>0) ? "게시글을 삭제하였습니다." : "게시글 삭제에 실패하였습니다.";
-
-		model.addAttribute("loc", loc).addAttribute("msg", msg);
+		groupService.deleteGroup(boardNo);
 		
-		return "common/msg";
+		return "redirect:/sale/group/list.do";
 	}
 	
 	@RequestMapping("sale/group/settingGroup.do")

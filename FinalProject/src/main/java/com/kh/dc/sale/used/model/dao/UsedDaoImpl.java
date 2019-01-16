@@ -34,6 +34,12 @@ public class UsedDaoImpl implements UsedDao {
 
 		return sqlSession.selectOne("used_mapper.selectOneUsed", boardNo);
 	}
+	
+	@Override
+	public Used selectOneUsed2(int boardNo) {
+
+		return sqlSession.selectOne("used_mapper.selectOneUsed2", boardNo);
+	}
 
 	@Override
 	public int insertUsed(Used used) {

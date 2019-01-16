@@ -220,7 +220,9 @@
 	}
 	
 	function deleteUsed() {
-		location.href = "${pageContext.request.contextPath}/sale/used/usedDelete.do?boardNo="+${used.boardNo};
+		if(confirm("삭제하시겠습니까?")) {
+			location.href = "${pageContext.request.contextPath}/sale/used/usedDelete.do?boardNo="+${used.boardNo};
+		}
 	}
 	
 	function pay(price) {

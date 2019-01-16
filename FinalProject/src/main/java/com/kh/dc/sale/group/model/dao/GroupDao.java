@@ -46,6 +46,6 @@ public interface GroupDao {
 
 	List<Board> selectGroupList();
 
-	Object selectOneGroup2(int boardNo);
+	Group selectOneGroup2(int boardNo);
 		
 }
