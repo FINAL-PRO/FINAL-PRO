@@ -99,7 +99,7 @@
 											<div class="add" style="display:inline-block;">
 												<div style="display:none;">
 													<img id="foodImg"/>
-													<input type="text" name="thumbnail" id="thumbnail" value="" />
+													<input type="text" name="thumbnail" id="thumbnail" value="" required/>
 												</div>
 											</div> 
 											<div class="table-div" style="display:inline-block; border:1px soild black;">
@@ -184,7 +184,8 @@
 					                            			onImageUpload : function(files) {
 					                            				for (var i = files.length - 1; i >= 0; i--) {
 					                            					sendFile(files[i]);
-					                            		}}}
+					                            		}}},
+					                            		placeholder: '이미지를 반드시 입력해주세요.'
 					                            	});
 													
 					                            	function sendFile(file) {

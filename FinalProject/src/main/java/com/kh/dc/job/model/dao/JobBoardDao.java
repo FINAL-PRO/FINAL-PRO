@@ -40,4 +40,8 @@ public interface JobBoardDao {
 
 	List<Code> selectJobBoardSalTypeList();
 
+	List<Map<String, String>> searchJobBoardList(Map<String, String> map, int cPage, int numPerPage);
+
+	int searchJobBoardTotalContents();
+
 }

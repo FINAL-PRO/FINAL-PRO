@@ -1,5 +1,6 @@
 package com.kh.dc.job.model.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,10 @@ public interface JobBoardService {
 	List<Code> selectJobBoardJobTypeList();
 
 	List<Code> selectJobBoardSalTypeList();
+
+	List<Map<String, String>> searchJobBoardList(Map<String, String> map, int cPage, int numPerPage);
+
+	int searchJobBoardTotalContents();
 
 	
 }

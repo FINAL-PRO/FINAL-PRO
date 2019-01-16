@@ -58,14 +58,14 @@
 						</select>	
 																
 						<!-- 검색창 <--><br/>
-						<form action="action="${pageContext.request.contextPath}/job/jobBoard/searchJobBoard.do">
+						<form action="${pageContext.request.contextPath}/job/jobBoard/searchJobBoard.do">
 						<div class="searchArea">
 						<select class="cArray" id="jb_Search" name="jb_Search">
-							<option value="s-All">전체</option>
-							<option value="s-Title">제목</option>
-							<option value="s-Nick">작성자</option>
-							<option value="s-Content">내용</option>
-							<option value="s-TitCon">제목 + 내용</option>
+							<option value="s_All">전체</option>
+							<option value="s_Title">제목</option>
+							<option value="s_Nick">작성자</option>
+							<option value="s_Content">내용</option>
+							<option value="s_TitCon">제목 + 내용</option>
 						</select>
 						<input type="search" id ="searchContent" name="searchCont" placeholder="검색어입력"/>
 						<button type="submit">검색</button>
@@ -95,7 +95,7 @@
 								<div class="cell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<a href="#">${jb.nickName}</a> 
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									    <a class="dropdown-item" href="#">작성글 검색</a>
+									    <a class="dropdown-item" href="" id="writeNick" onclick="writeNick();">작성글 검색</a>
 									    <a class="dropdown-item" href="" onclick="sendMsg();">쪽지보내기</a>
 									    <a class="dropdown-item">---------------</a>
 									</div>
@@ -174,12 +174,9 @@
 		function sendMsg() {
 			window.open("${pageContext.request.contextPath}/message/messageInsertForm.do?fromMember=${jobBoard.nickName}", "msgPop", "width=700, height=600");
 		}
-		/* 
-		function jb_Search() {
-			location.href = "${pageContext.request.contextPath}/job/jobBoard/searchJobBoard.do?jb_Search=$("#jb_Search").val() 
-					+ "$searchContent=" + $("#searchContent").val();
+		function writeNick(){
+			location.href = "${pageContext.request.contextPath}/job/jobBoard/searchJobBoard.do?jb_Search=s_Nick&searchCont=${jb.nickName}";
 		}
-		 */
 	</script>
 </body>
 </html>

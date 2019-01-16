@@ -74,7 +74,16 @@
 		                            			onImageUpload : function(files) {
 		                            				for (var i = files.length - 1; i >= 0; i--) {
 		                            					sendFile(files[i]);
-		                            		}}}
+		                            		}}},
+		                            		toolbar: [
+		                            		    // [groupName, [list of button]]
+		                            		    ['style', ['bold', 'italic', 'underline', 'clear']],
+		                            		    ['font', ['strikethrough', 'superscript', 'subscript']],
+		                            		    ['fontsize', ['fontsize']],
+		                            		    ['color', ['color']],
+		                            		    ['para', ['ul', 'ol', 'paragraph']],
+		                            		    ['height', ['height']]
+		                            		  ]
 		                            	});
 	
 		                            	function sendFile(file) {

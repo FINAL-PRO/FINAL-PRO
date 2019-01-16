@@ -29,6 +29,7 @@
 	white-space: nowrap;
 	overflow: hidden;
 	float: left;
+	padding-left: 5px;
 }
 
 .Ctime {
