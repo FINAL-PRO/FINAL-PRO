@@ -25,20 +25,20 @@
 						<h1>어드민 업체 상세보기</h1>
 					</div>
 					<div class="dc-content-box">
-						<div>
-							<div class="row table-row">
-								<div class="col column">번호</div>
-								<div class="col column">업체명</div>
-								<div class="col column">등록일</div>
-							</div>
-
-							<div class="row table-row">
-								<div class="col column">${company.no}</div>
-								<div class="col column">${company.name}</div>
-								<div class="col column">${company.enrollDate}</div>
-							</div>
-							<div class="table" style="background: red"></div>
-						</div>
+						<table class="table">
+							<thead>
+								<th>#</th>
+								<th>업체명</th>
+								<th>등록일</th>
+							</thead>
+							<tbody>
+							<tr>
+								<th>${company.no}</th>
+								<th>${company.name}</th>
+								<th>${company.enrollDate}</th>
+							</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>

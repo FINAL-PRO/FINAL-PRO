@@ -32,12 +32,29 @@ public class AdminBoardController {
 		List<Code> boardTypeList = boardService.selectBoardTypeList();
 		List<Code> boardStatusList = boardService.selectBoardStatusList();
 		
-		System.out.println("어드민 보드 리스트 : " + boardList);
+		String boardUrl = null;
+		
+		switch (boardType) {
+			case "BOARD001": boardUrl = "community/free"; break;
+			case "BOARD002": boardUrl = "community/food"; break;
+			case "BOARD003": boardUrl = "sale/group"; break;
+			case "BOARD004": boardUrl = "sale/used"; break;
+			case "BOARD005": boardUrl = "info/house"; break;
+			case "BOARD006": boardUrl = "job/jobBoard"; break;
+			case "BOARD007": boardUrl = "info/region"; break;
+			
+		}
+		
+		if(boardStatus.equals("BSTATUS004")) {
+			boardUrl = "community/notice";
+		}
+		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardType", boardType);
 		model.addAttribute("boardStatus", boardStatus);
 		model.addAttribute("boardTypeList", boardTypeList);
 		model.addAttribute("boardStatusList", boardStatusList);
+		model.addAttribute("boardUrl", boardUrl);
 		
 		return "admin/board/list";
 	}
@@ -46,14 +63,12 @@ public class AdminBoardController {
 	public String boardDetailView(@RequestParam int boardNo, Model model) {
 		Board board = boardService.selectBoardOne(boardNo);
 		
-		System.out.println("어드민 보드 확인 [ 게시글 번호 : " + boardNo + ", 게시글 : " + board);
-		
 		model.addAttribute("board", board);
 		
 		return "admin/board/detailView";
 	}
 	
-	@RequestMapping("admin/board/notice/writeView.do")
+	@RequestMapping("admin/board/notice/insert/view.do")
 	public String boardNoticeWriteView(Model model) {
 		
 		List<Code> boardTypeList = boardService.selectBoardTypeList();

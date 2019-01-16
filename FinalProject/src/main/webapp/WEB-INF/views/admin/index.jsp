@@ -22,23 +22,45 @@
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-						<h1>어드민 인덱스</h1>
+						<h1>관리자 페이지</h1>
 					</div>
 					<div class="dc-content-box">
+						<table class="table">
+							<thead>
+								<th>#</th>
+								<th>연결 목록</th>
+							</thead>
+							<tbody>
+							<tr>
+								<td>#</td>
+								<td>
+									<a href="${pageContext.request.contextPath}/admin/member/list.do">회원 리스트 확인</a>
+								</td>
+							</tr>
+							<tr>
+								<td>#</td>
+								<td>
+									<a href="${pageContext.request.contextPath}/admin/board/list.do">게시글 리스트 확인</a>
+								</td>
+							</tr>
+							<tr>
+								<td>#</td>
+								<td>
+									<a href="${pageContext.request.contextPath}/admin/company/list.do">업체 리스트 확인</a>
+								</td>
+							</tr>
+							</tbody>
+						</table>
 						<h2>
-							<a href="${pageContext.request.contextPath}/admin/member/list.do">멤버
-								리스트</a>
+							
 						</h2>
 						<br />
 						<h2>
-							<a href="${pageContext.request.contextPath}/admin/board/list.do">게시글
-								리스트</a>
+							
 						</h2>
 						<br />
 						<h2>
-							<a
-								href="${pageContext.request.contextPath}/admin/company/list.do">업체
-								리스트</a>
+							
 						</h2>
 					</div>
 				</div>

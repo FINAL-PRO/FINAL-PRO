@@ -19,15 +19,15 @@
 	
 	<!--   log4jdbc-remix 관련 logger 시작 
 	  Query Loggers 쿼리전용  -->
-	<logger name="jdbc.sqlonly" additivity="false">
+<!-- 	<logger name="jdbc.sqlonly" additivity="false">
 	<level value="INFO"/>
 	<appender-ref ref="sqlLogger"/>
 	</logger>
-	<!-- 결과셋 -->
+	결과셋
 	<logger name="jdbc.resultsettable" additivity="false">
 	<level value="INFO"/>
 	<appender-ref ref="sqlLogger"/>
-	</logger>	
+	</logger>	 -->
 	
 	
 	<!-- Application Loggers -->
