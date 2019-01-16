@@ -33,19 +33,23 @@ public class SearchController {
 	
 				String resultContent = "";
 				String originContent = searchResultList.get(i).getContent();	
-				/*System.out.println("originContent" + i + " : " + originContent);*/
-				String patterString = "(&lt;img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*&gt;|<img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*>|<p>|</p>|<br>|&lt;p&gt;|&lt;/p&gt;)";
-	
-	
-				Pattern pattern = Pattern.compile(patterString);	
-				Matcher matcher = pattern.matcher(originContent);
+				/*System.out.println("#####originContent" + i + " : " + originContent);*/				
+				
+				if(originContent.contains("<p>")) {
 					
-				while(matcher.find()) {
-					resultContent = matcher.replaceAll("");
+					String patterString = "(&lt;img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*&gt;|<img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*>|<p>|</p>|<br>|&lt;p&gt;|&lt;/p&gt;)";	
+					Pattern pattern = Pattern.compile(patterString);	
+					Matcher matcher = pattern.matcher(originContent);
+						
+					while(matcher.find()) {
+						resultContent = matcher.replaceAll("");
+					}
+				} else {
+					resultContent = originContent;
 				}
 	
 				searchResultList.get(i).setContent(resultContent);
-				/*System.out.println(i + " : " + searchResultList.get(i).getContent());*/			
+				/*System.out.println("#####" + i + " : " + searchResultList.get(i).getContent());	*/	
 			}
 								
 		} else {

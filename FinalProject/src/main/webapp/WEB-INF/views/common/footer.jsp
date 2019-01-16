@@ -47,6 +47,13 @@
 		padding-top: 10px;
 	}
 	
+	.footerAnchor{
+		
+		margin-left: 20px;
+		align: center;
+		
+	}
+	
 
 </style>
 <footer>
@@ -73,8 +80,18 @@
 	<!--End Modal-->
 
 	<div class="footer_bottom">
-		<p align="center">
-			<span class="footer-text">Copyright 2019. 1st All rights reserved.</span>
-		</p>
+	
+	<div align="center">
+		<a href="#" class="footerAnchor">회사소개</a>
+		<a href="#" class="footerAnchor">인재채용</a>
+		<a href="#" class="footerAnchor">제휴안내</a>
+		<a href="#" class="footerAnchor">광고안내</a>
+		<a href="#" class="footerAnchor">이용약관</a>
+		<a href="#" class="footerAnchor">개인정보처리방침</a>
+		<a href="#" class="footerAnchor">청소년보호정책</a>
+		<br/><br/>
+		<span class="footer-text">Copyright 2019. 1st All rights reserved.</span>
+	</div>
+		
 	</div>
 </footer>
