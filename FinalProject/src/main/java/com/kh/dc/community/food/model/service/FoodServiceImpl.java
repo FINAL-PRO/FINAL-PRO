@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.BoardList;
+import com.kh.dc.common.vo.Code;
 import com.kh.dc.community.food.model.dao.FoodDao;
 import com.kh.dc.community.food.model.vo.Food;
 import com.kh.dc.community.food.model.vo.FoodList;
@@ -69,21 +70,6 @@ public class FoodServiceImpl implements FoodService{
 	public List<Map<String, String>> likeSort(int cPage, int numberPage) {
 		return foodDao.likeSort(cPage, numberPage);
 	}
-
-	@Override
-	public List<FoodList> categoryList(int bno) {
-		return foodDao.categoryList(bno);
-	}
-
-/*	@Override
-	public int foodUpdate(Map<String, Object> map) {
-		return foodDao.boardUpdate(map);
-	}*/
-
-/*	@Override
-	public int foodUpdate(FoodList foodList) {
-		return foodDao.foodUpdate(foodList);
-	}*/
 
 	
 }

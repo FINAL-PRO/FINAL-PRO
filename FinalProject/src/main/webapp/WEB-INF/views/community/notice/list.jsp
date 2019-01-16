@@ -128,6 +128,26 @@ hr {
 	padding-left:10px;
 }
 
+.mypageListTitleLabel {
+	font-weight: bold;
+	font-size: 16px;
+	color: gray;
+	width: 100%;
+	padding: 5px 20px 5px 10px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: center;
+	background: #f6f6f6;
+}
+
+th, td {
+	border-bottom: 1px solid lightgray;
+	padding: 10px;
+}
+
 </style>
 
 </head>
@@ -149,24 +169,36 @@ hr {
 						<div class="dc-content-box">
 							<div id="container2">
 								<div class="articlelist">
-									<ol class="group">
-										<p class="totalCount">총 ${totalContents}건의 공지사항이 있습니다.</p>
+								<p class="totalCount">총 ${totalContents}건의 공지사항이 있습니다.</p>
 										
-										<c:forEach items="${nlist}" var="b">
-											<li class="groupin" id="${b.no}">
-											<a class="article" href="${pageContext.request.contextPath}/community/notice/noticeView.do?bno=${b.no}">
-													<p class="time">
-														<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd" />
-													</p>
-													<p class="profile">
-														<span class="title">${b.title}</span>
-														<span class="nickname">관리자</span> 
-														<span class="count">조회수: ${b.viewCount}</span>
-													</p>
-											</a></li>
-										</c:forEach>
-			
-									</ol>
+								<div class="boardList" style="width: 800px; min-height: 300px; margin: auto;">
+						            <table>					        	
+							            <thead class="listcol" style="border-color: white;  color: gray;">   						                    
+							            <tr style="color:gray;">
+							                <th scope="col" style="width:50px;">#</th>
+							                <th scope="col" style="width:150px;">게시판 종류</th>
+							                <th scope="col" style="width:200px;">제목</th>
+							                <th scope="col" style="width:200px;">작성일</th>
+							                <th scope="col" style="width:150px;">조회수</th>						
+							            </tr>    
+						        		<c:if test="${!empty nlist}" >
+							            <c:forEach items="${nlist}" var="b">
+							            <tr style="background-color:#FFFFFF; cursor:pointer; color:gray;" onclick="location.href='${pageContext.request.contextPath}/community/notice/noticeView.do?bno=${b.no}'">
+							                <th scope="row"> ${bo.index + 1} </th>
+							                <td>${b.boardType}</td>
+							                <td>${b.title}</td>
+							                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${b.writeDate}" /></td>
+							                <td>${b.viewCount}</td>
+							            </tr>
+							            </c:forEach>
+							            </c:if>
+							              <c:if test="${empty nlist}"> 
+							              	<th colspan="5" style="width:auto; text-align:center;">작성된 게시물이 없습니다.</th>
+							              </c:if>
+							            </thead>
+						        	</table>
+						        	<br>
+						        </div>
 									<c:out value="${pageBar}" escapeXml="false" />
 								</div>
 							</div>

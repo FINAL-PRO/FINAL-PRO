@@ -25,7 +25,7 @@
 .food_btn {
 	padding-top: 10px;
 	float: right;
-	padding-right: 20px;
+	padding-right: 5px;
 }
 
 .review {

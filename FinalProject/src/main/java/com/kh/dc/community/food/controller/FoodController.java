@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.dc.common.util.Utils;
 import com.kh.dc.common.vo.Board;
+import com.kh.dc.common.vo.Code;
 import com.kh.dc.community.food.model.service.FoodService;
 import com.kh.dc.community.food.model.vo.Food;
 import com.kh.dc.community.food.model.vo.FoodList;
@@ -102,11 +103,9 @@ public class FoodController {
 	public String foodUpdateView(@RequestParam int bno, Model model) {
 
 		FoodList foodList = foodService.selectOneFood(bno);
-		List<FoodList> categoryList = foodService.categoryList(bno);
 		
-		model.addAttribute("foodList", foodList)
-		.addAttribute("categoryList", categoryList);
-		
+		model.addAttribute("foodList", foodList);
+				
 		return "community/food/foodUpdateForm";
 	}
 	

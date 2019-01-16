@@ -124,18 +124,16 @@
 										<div>
 											<div class="bcategoryBox">
 												<div style="display:inline-block;">카테고리</div>
-											<!-- 	<select id="category" name="category"> 
+												<select id="category" name="category"> 
 													<option value="FOOD001">한식</option>
 													<option value="FOOD002">일식</option>
 													<option value="FOOD003">중식</option>
 													<option value="FOOD004">양식</option>
 													<option value="FOOD005">카페</option>
 													<option value="FOOD006">디저트</option>
-												</select> -->
-												<input type="hidden" id="categoryCheck" name="categoryCheck" value="${foodList.category}" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/>
-												<c:forEach items="${categoryList}" var="cl" >						   			
-										   			<option value="${cl.id}">${cl.value}</option>
-										   		</c:forEach>
+												</select>
+												<input type="hidden" id="categoryCheck" name="categoryCheck" value="${foodList.category}"/>
+												<input type="hidden" id="categoryValue" name="categoryValue" value="${foodList.categoryId}"/>
 											</div>
 									
 											<div class="bscoreBox">
@@ -181,7 +179,7 @@
 										<div class="bcontentBox">
 											<textarea name="content" id="summernote"
 												class="form-control" rows="20" cols="70" required>
-											${foodList.content}
+												${foodList.content}
 											</textarea>
 										</div>
 										<script>
@@ -197,10 +195,13 @@
 									    		  $('.starRev span').eq(i).addClass('on');
 									    	  }
 
-									    	 /*  var categoryCheck = $('[name=categoryCheck]').val();
+									    	  var categoryCheck = $('[name=categoryCheck]').val();
 									    	  console.log("categoryCheck: "+categoryCheck);
 									    	  
-									    	  $('#category option[value=categoryCheck]').attr("selected", "selected"); */
+									    	  var categoryValue = $('[name=categoryValue]').val();
+									    	  console.log("categoryValue: "+categoryValue);
+									    	  
+									    	  $("#category option[value=" + categoryValue + "]").prop("selected",true);
 									    	  
 									    	  var address = $('[name=address]').val();
 											  console.log("address: "+address);
@@ -209,13 +210,16 @@
 											  var add1 = address.split("  ").slice(1, -1);
 											  var add2 = address.split("  ").slice(2);
 											  
-											  console.log("add0: "+add0);
+											 /*  console.log("add0: "+add0);
 											  console.log("add1: "+add1);
-											  console.log("add2: "+add2);
+											  console.log("add2: "+add2); */
 											  
 											  $('#zipCode').attr('value', add0); 
 											  $('#address1').attr('value', add1); 
 											  $('#address2').attr('value', add2); 
+											  
+											  var cList = $('.cList').val();
+											  console.log("cList: "+cList);
 									          	  
 											});
 											

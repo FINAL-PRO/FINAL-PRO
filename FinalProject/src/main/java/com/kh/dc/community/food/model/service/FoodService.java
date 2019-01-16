@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.BoardList;
+import com.kh.dc.common.vo.Code;
 import com.kh.dc.community.food.model.vo.Food;
 import com.kh.dc.community.food.model.vo.FoodList;
 import com.kh.dc.community.food.model.vo.FoodPoint;
@@ -23,18 +24,12 @@ public interface FoodService {
 	
 	int insertFood(Board board, Food food, FoodPoint foodPoint);
 
-	//int foodUpdate(Board board, Food food, FoodPoint foodPoint);
-	
 	int foodDelete(int bno);
 	
 	int foodViewCount(int bno);
 
 	List<Board> selectFoodListData();
 
-	// int foodUpdate(Map<String, Object> map);
-
 	int foodUpdate(FoodList foodList);
-
-	List<FoodList> categoryList(int bno);
 	
 }

@@ -24,11 +24,13 @@
 	</resultMap>
 	
 	<select id="noticerecentSort" resultMap="resultBoardList">
-		SELECT B.*, M.NICKNAME, NVl(C.comment_count,0) comment_count
+		SELECT B.*, M.NICKNAME, NVl(C.comment_count,0) comment_count, C.value boardType
 		FROM DC_BOARD_TB B
 		INNER JOIN DC_MEMBER_TB M 
 		ON B.MEMBERNO = M.NO
 		  LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB WHERE STATUS = 'BSTATUS001' GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
+        JOIN DC_CODE_TB C
+		ON (B.TYPE = C.id)
 		WHERE B.STATUS = 'BSTATUS004'
 		ORDER BY B.WRITEDATE DESC, B.NO DESC
 	</select>

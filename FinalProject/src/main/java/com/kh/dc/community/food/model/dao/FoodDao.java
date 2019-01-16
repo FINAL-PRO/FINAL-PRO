@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.BoardList;
+import com.kh.dc.common.vo.Code;
 import com.kh.dc.community.food.model.vo.Food;
 import com.kh.dc.community.food.model.vo.FoodList;
 import com.kh.dc.community.food.model.vo.FoodPoint;
@@ -39,10 +40,5 @@ public interface FoodDao {
 
 	List<Map<String, String>> likeSort(int cPage, int numberPage);
 
-	List<FoodList> categoryList(int bno);
-
-	// int boardUpdate(Map<String, Object> map);
-
-	//int foodUpdate(FoodList foodList);
 	
 }

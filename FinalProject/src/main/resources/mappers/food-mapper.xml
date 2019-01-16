@@ -158,8 +158,4 @@
 		AND STATUS = 'BSTATUS001' AND ROWNUM <![CDATA[ <= 5 ORDER BY NO ]]>
 	</select>
 	
-	<select id="categoryList" parameterType="_int" resultMap="resultFoodList">
-		SELECT * FROM DC_CODE_TB WHERE ID LIKE 'FOOD%'
-	</select>
-	
 </mapper>
