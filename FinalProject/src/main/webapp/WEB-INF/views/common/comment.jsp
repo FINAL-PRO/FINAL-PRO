@@ -96,10 +96,10 @@
 	<!--  댓글  -->
 	<div class="commentFrm">
 		<label for="content">comment</label>
-		<form name="commentInsertForm">
+		<form class="commentInsertForm" name="commentInsertForm">
 			<div class="input-group">
 				<input type="hidden" id="bno" name="bno" value="${bno}" /> 
-				<input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요."/> 
+				<input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요." /> 
 				<input type="hidden" id="mno" name="mno" value="${member.no}" /> 
 				<input type="hidden" id="profile" name="profile" value="${member.profile}"/>
 				<span class="input-group-btn">
@@ -124,10 +124,19 @@
 	console.log("mno/bno: "+mno+", "+bno);
 		
 	commentList(bno);
-	
+ 	
 	$('[name=commentInsertBtn]').click(function(){ 
 	    var insertData = $('[name=commentInsertForm]').serialize(); 
 	    commentInsert(insertData);
+	}); 
+	
+	$('input[type="text"]').keydown(function() {
+	    if (event.keyCode === 13) {
+	        event.preventDefault();
+	        
+	        var insertData = $('[name=commentInsertForm]').serialize(); 
+	        commentInsert(insertData);
+	    }
 	});
 	
 	//댓글 등록
@@ -228,7 +237,7 @@
 			$('.commentContent' + cno).html(a);
 
 		}
-
+		
 		//댓글 수정
 		function commentUpdateProc(cno) {
 			

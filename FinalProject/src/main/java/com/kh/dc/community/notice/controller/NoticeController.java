@@ -78,7 +78,8 @@ public class NoticeController {
 		int noticeViewCount = noticeService.noticeViewCount(bno);
 		
 		model.addAttribute("boardList", noticeService.selectOneNotice(bno))
-		.addAttribute("noticeViewCount", noticeViewCount);
+		.addAttribute("noticeViewCount", noticeViewCount)
+		.addAttribute("bno", bno);
 		
 		return "community/notice/noticeView";
 	}

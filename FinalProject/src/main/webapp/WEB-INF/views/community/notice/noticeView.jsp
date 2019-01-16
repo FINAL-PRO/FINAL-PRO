@@ -177,6 +177,7 @@ hr {
 	background: rgb(171, 187, 129);
     color: white;
     cursor: pointer;
+    margin-top: 5px;
 }
 
 </style>
@@ -206,7 +207,7 @@ hr {
 										<p class="title">${boardList.title}</p>
 										<div style="border: solid 0.5px gray"></div>
 										<p class="profile">
-											<span class="nickname">${boardList.memberName}</span> 
+											<span class="nickname">관리자</span> 
 											<span class="time">
 												<fmt:formatDate value="${boardList.writeDate}" pattern="yyyy-MM-dd" />
 											</span>

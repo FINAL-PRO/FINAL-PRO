@@ -117,7 +117,7 @@
 										<div>
 											<div class="bcategoryBox">
 												<div style="display:inline-block;">카테고리</div>
-												<select id="category" name="category"> 
+												<select id="category" name="category" required> 
 													<option value="" selected disabled hidden>카테고리 선택</option>
 													<option value="FOOD001">한식</option>
 													<option value="FOOD002">일식</option>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.common.vo.BoardList;
+import com.kh.dc.common.vo.Code;
 import com.kh.dc.community.food.model.vo.Food;
 import com.kh.dc.community.food.model.vo.FoodList;
 import com.kh.dc.community.food.model.vo.FoodPoint;
@@ -93,17 +94,6 @@ public class FoodDaoImpl implements FoodDao{
 	public List<Board> selectFoodListData() {
 		return sqlSession.selectList("food_mapper.selectFoodListData");
 	}
-/*
-	@Override
-	public int boardUpdate(Map<String, Object> map) {
-		return sqlSession.insert("food_mapper.updateBoard", map);
-	}*/
-
-/*	@Override
-	public int foodUpdate(FoodList foodList) {
-		return sqlSession.insert("food_mapper.foodUpdate", foodList);
-	}*/
-
 
 
 }
