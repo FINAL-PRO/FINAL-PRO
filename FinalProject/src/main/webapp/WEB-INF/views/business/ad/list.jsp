@@ -60,26 +60,35 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${adList}" var="ad">
-										<tr>
-											<td>${ad.no}</td>
-											<td>${ad.userName}</td>
-											<td>${ad.pageName} / ${ad.sectionName} / ${ad.locationName}</td>
-											<td>${ad.adContentType}</td>
-											<td>${ad.adType}</td>
-											<td>${ad.status}</td>
-											<td>
-												<div class="form-inline">						
-													<select id="adStatus_${ad.no}" class="form-control">
-														<c:forEach items="${adStatusList}" var="code">
-															<option value="${code.id}" <c:if test="${code.id eq adStatus}">selected</c:if>>${code.value}</option>
-														</c:forEach>
-													</select>
-													<button class="btn dc-btn" onclick="adStatusChange(${ad.no});">변경</button>
-												</div>
-											</td>
-										</tr>
-									</c:forEach>
+									<c:if test="${!empty adList}">
+										<c:forEach items="${adList}" var="ad">
+											<tr>
+												<td>${ad.no}</td>
+												<td>${ad.userName}</td>
+												<td>${ad.pageName} / ${ad.sectionName} / ${ad.locationName}</td>
+												<td>${ad.adContentType}</td>
+												<td>${ad.adType}</td>
+												<td>${ad.status}</td>
+												<td>
+													<div class="form-inline">						
+														<select id="adStatus_${ad.no}" class="form-control">
+															<c:forEach items="${adStatusList}" var="code">
+																<option value="${code.id}" <c:if test="${code.id eq adStatus}">selected</c:if>>${code.value}</option>
+															</c:forEach>
+														</select>
+														<button class="btn dc-btn" onclick="adStatusChange(${ad.no});">변경</button>
+													</div>
+												</td>
+											</tr>
+										</c:forEach>
+									</c:if>
+									<c:if test="${empty adList}">
+										<td colspan="7">
+											<div class="dc-none-data">
+												<span class="dc-none-data-text">데이터가 없습니다.</span>
+											</div>
+										</td>
+									</c:if>
 								</tbody>
 							</table>
 						</div>

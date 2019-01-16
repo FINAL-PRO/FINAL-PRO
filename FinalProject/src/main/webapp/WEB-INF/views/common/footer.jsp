@@ -99,5 +99,9 @@
 		function historyGoBack(){
 			history.go(-1);
 		}
+		
+		function goAdminIndex(){
+			location.href = "${pageContext.request.contextPath}/admin/index.do?no=${memberNo}";
+		}
 	</script>
 </footer>

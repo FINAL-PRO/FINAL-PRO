@@ -22,51 +22,69 @@
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-						<h1>어드민 멤버 리스트</h1>
-						<select id="authNo">
-							<c:forEach items="${memberAuthList}" var="auth">
-								<option value="${auth.no}"
-									<c:if test="${auth.no eq authNo}">selected</c:if>>${auth.content}</option>
-							</c:forEach>
-						</select>
-						<select id="memberStatusNo">
-							<c:forEach items="${memberStatusList}" var="status">
-									<option value="${status.id}" <c:if test="${status.id eq memberStatus}">selected</c:if>>${status.value}</option>
-							</c:forEach>
-						</select>
+						<div>
+							<span class="dc-list-title">전체 회원 리스트</span>
+						</div>
+						<br />
+						
+						<div class="form-inline">
+							<select class="form-control" id="authNo">
+								<c:forEach items="${memberAuthList}" var="auth">
+									<option value="${auth.no}"
+										<c:if test="${auth.no eq authNo}">selected</c:if>>${auth.content}</option>
+								</c:forEach>
+							</select>
+							<select class="form-control" id="memberStatusNo">
+								<c:forEach items="${memberStatusList}" var="status">
+										<option value="${status.id}" <c:if test="${status.id eq memberStatus}">selected</c:if>>${status.value}</option>
+								</c:forEach>
+							</select>
+						</div>
 					</div>
 					<div class="dc-content-box">
-
-						<div>
-							<div class="row table-row">
-								<div class="col column">번호</div>
-								<div class="col column">이름</div>
-								<div class="col column">가입일</div>
-								<div class="col column">상태</div>
-							</div>
-
-							<c:forEach var="member" items="${memberList}">
-								<div class="row table-row">
-									<div class="col column">${member.no}</div>
-									<div class="col column">
-										<a
-											href="${pageContext.request.contextPath}/admin/member/detailView.do?memberNo=${member.no}">${member.name}</a>
-									</div>
-									<div class="col column">${member.enrollDate}</div>
-									<div class="col column">
-										<select id="${member.no}_changeStatusNo">
-											<c:forEach items="${memberStatusList}" var="status">
-												<c:if test="${memberStatus ne status.id}">
-													<option value="${status.id}">${status.value}</option>
-												</c:if>
-											</c:forEach>
-										</select>
-									<button onclick="changeMemberStatus(${member.no});">상태변경</button>
-									</div>
-								</div>
-							</c:forEach>
-							<div class="table" style="background: red"></div>
-						</div>
+						<table class="table">
+							<thead>
+								<th>#</th>
+								<th>이름</th>
+								<th>가입일</th>
+								<th>상태</th>
+							</thead>
+							<tbody>
+								<c:if test="${!empty memberList }">
+									<c:forEach var="member" items="${memberList}">
+										<tr>
+											<td>${member.no}</td>
+											<td>
+												<a href="${pageContext.request.contextPath}/admin/member/detailView.do?memberNo=${member.no}">${member.name}</a>
+											</td>
+											<td>${member.enrollDate}</td>
+											<td>
+												<div class="form-inline">
+													<select class="form-control" id="${member.no}_changeStatusNo">
+														<c:forEach items="${memberStatusList}" var="status">
+															<c:if test="${memberStatus ne status.id}">
+																<option value="${status.id}">${status.value}</option>
+															</c:if>
+														</c:forEach>
+													</select>
+													<button class="btn dc-btn" onclick="changeMemberStatus(${member.no});">상태변경</button>
+												</div>
+											</td>
+										</tr>
+									</c:forEach>
+								</c:if>
+								<c:if test="${empty memberList }">
+									<tr>
+										<td colspan="4">
+											<div class="dc-none-data">
+												<span class="dc-none-data-text">데이터가 없습니다.</span>
+											</div>
+										</td>
+									</tr>
+								</c:if>
+							</tbody>
+						</table>
+						<button class="btn dc-btn" onclick="goAdminIndex();">전체 목록</button>
 					</div>
 				</div>
 			</div>
