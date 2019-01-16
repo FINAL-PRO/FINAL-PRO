@@ -31,7 +31,7 @@
 <link href="https://fonts.googleapis.com/css?family=Gugi|Nanum+Gothic" rel="stylesheet">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="${pageContext.request.contextPath }/resources/icons/favicon.ico">
+<link rel="icon" href="${pageContext.request.contextPath }/resources/icons/favicon.png">
 <style>
 	section{background-color: white;}
 /* 	header {

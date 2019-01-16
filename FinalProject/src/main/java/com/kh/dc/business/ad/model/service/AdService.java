@@ -27,9 +27,7 @@ public interface AdService {
 
 	int insertAd(Ad ad);
 
-	Ad getAd(Map<String, Object> params);
-
-	Ad selectOne(int adNo);
+	List<Ad> getAd(Map<String, Object> params);
 
 	int changeAdStatus(Map<String, Object> param);
 
