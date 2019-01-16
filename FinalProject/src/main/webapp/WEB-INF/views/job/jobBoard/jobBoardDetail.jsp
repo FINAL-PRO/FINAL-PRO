@@ -38,7 +38,7 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="">작성글 보기</a>&nbsp;|&nbsp;<span onclick="sendMsg();"><a href="">쪽지보내기</a></span></div>
+						<a href="${pageContext.request.contextPath}/job/jobBoard/searchJobBoard.do?jb_Search=s_Nick&searchCont=${jobBoard.nickName}">작성글 보기</a>&nbsp;|&nbsp;<span onclick="sendMsg();"><a href="${pageContext.request.contextPath}/job/jobBoard/searchJobBoard.do?jb_Search=s_Nick&searchCont=${jobBoard.nickName}">쪽지보내기</a></span></div>
 						</div></div>
 						<div class="float">
 						<label class="inlie-t">

@@ -12,7 +12,7 @@
 	<div id="header-container">
 		<div class="header_top" style="display:block;">
 			<div class="header_logo" style="display:inline-block;">				
-					<div style="margin-left: 10px;">
+					<div style="margin-left: 16px;">
 					<a class="navbar-brand" href="/dc">
 						<img src="${pageContext.request.contextPath }/resources/images/logo2.PNG" alt="로고" width="160px;"/>
 					</a> 

@@ -1,7 +1,9 @@
 package com.kh.dc.info.region.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,36 +18,27 @@ public class RegionDaoImpl implements RegionDao {
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<Region> regionList(){
-		return sqlSession.selectList("region_mapper.selectList");
-	}
-	
-	@Override
-	public int insertRegion(Region rg) {
-		return sqlSession.insert("region_mapper.insertRegion", rg);
+	public int insertRegion(Region region) {
+		return sqlSession.insert("region_mapper.insertRegion", region);
 	}
 
 	@Override
 	public Region selectRegion(int no) {
-		System.out.println("Dao No : " + no);
 		return sqlSession.selectOne("region_mapper.selectOne", no);
 	}
 
 	@Override
-	public int updateRegion(Region rg) {
-		System.out.println("수정 dao rg : " + rg);
-		return sqlSession.update("region_mapper.updateRegion", rg);
+	public int updateRegion(Region region) {
+		return sqlSession.update("region_mapper.updateRegion", region);
 	}
 	
 	@Override
 	public int deleteRegionLike(int no) {
-		System.out.println("deleteLike : " + no);
 		return sqlSession.update("region_mapper.deleteRegionLike", no);
 	}
 
 	@Override
 	public int deleteRegion(int no) {
-		System.out.println("deleteRegion : " + no);
 		return sqlSession.update("region_mapper.deleteRegion", no);
 	}
 
@@ -68,6 +61,18 @@ public class RegionDaoImpl implements RegionDao {
 	@Override
 	public int regionLikeCountView(int no) {
 		return sqlSession.selectOne("region_mapper.regionLikeCountView", no);
+	}
+
+	@Override
+	public List<Map<String, String>> regionList(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		
+		return sqlSession.selectList("region_mapper.selectList",null, rowBounds);
+	}
+
+	@Override
+	public int selectRegionTotalContents() {
+		return sqlSession.selectOne("region_mapper.selectTotalContent");
 	}
 
 

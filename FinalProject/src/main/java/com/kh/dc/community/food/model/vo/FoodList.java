@@ -23,6 +23,7 @@ public class FoodList extends Board implements Serializable{
 	private int commentCount;
 	private int likeCount;
 	private String category;
+	private String categoryId;
 	private String address;
 	private int point;
 	private int imageCheck;
@@ -33,8 +34,8 @@ public class FoodList extends Board implements Serializable{
 	}
 
 	public FoodList(int no, int fno, int pno, String title, String content, String memberName, int memberNo,
-			String thumbnail, int commentCount, int likeCount, String category, String address, int point,
-			int imageCheck, String profile) {
+			String thumbnail, int commentCount, int likeCount, String category, String categoryId, String address,
+			int point, int imageCheck, String profile) {
 		super();
 		this.no = no;
 		this.fno = fno;
@@ -47,6 +48,7 @@ public class FoodList extends Board implements Serializable{
 		this.commentCount = commentCount;
 		this.likeCount = likeCount;
 		this.category = category;
+		this.categoryId = categoryId;
 		this.address = address;
 		this.point = point;
 		this.imageCheck = imageCheck;
@@ -172,14 +174,23 @@ public class FoodList extends Board implements Serializable{
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
+	
+	public String getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
+	}
 
 	@Override
 	public String toString() {
 		return "FoodList [no=" + no + ", fno=" + fno + ", pno=" + pno + ", title=" + title + ", content=" + content
 				+ ", memberName=" + memberName + ", memberNo=" + memberNo + ", thumbnail=" + thumbnail
 				+ ", commentCount=" + commentCount + ", likeCount=" + likeCount + ", category=" + category
-				+ ", address=" + address + ", point=" + point + ", imageCheck=" + imageCheck + ", profile=" + profile
-				+ "]";
+				+ ", categoryId=" + categoryId + ", address=" + address + ", point=" + point + ", imageCheck="
+				+ imageCheck + ", profile=" + profile + "]";
 	}
 
+	
 }

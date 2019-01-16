@@ -23,14 +23,16 @@
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-						<h1>지역정보 게시판</h1>
-						<a href="${pageContext.request.contextPath}/info/region/insert/view.do">글쓰기</a>
+						<div>
+							<span class="dc-list-title">지역정보 게시판</span>
+							<button class="btn dc-btn dc-btn-right" onclick="location.href='${pageContext.request.contextPath}/info/region/insert/view.do'">글쓰기</button>
+						</div>
 					</div>
 					<div class="dc-content-box">
-						<table class="table table-striped">
+						<table class="table">
 							<thead>
 								<tr>
-									<th>번호</th>
+									<th>#</th>
 									<th>제목</th>
 									<th>작성자</th>
 									<th>작성일</th>
@@ -50,6 +52,7 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						<c:out value="${pageBar}" escapeXml="false"/>
 					</div>
 				</div>
 			</div>

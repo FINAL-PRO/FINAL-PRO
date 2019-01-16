@@ -31,7 +31,7 @@
 		SELECT NO, C.VALUE, TITLE, WRITEDATE, VIEWCOUNT
 		FROM DC_BOARD_TB B
 		JOIN DC_CODE_TB C ON (B.TYPE = C.ID)
-		WHERE MEMBERNO = #{no}
+		WHERE MEMBERNO = #{no} AND B.STATUS = 'BSTATUS001'
 	</select>
 	
 	<select id="selectTotalMyBoard" parameterType="_int" resultType="_int">
@@ -47,7 +47,7 @@
 		FROM DC_COMMENT_TB CO
 		JOIN DC_BOARD_TB B ON CO.BOARDNO = B.NO
 		JOIN DC_CODE_TB C ON  C.ID = B.TYPE
-		WHERE CO.MEMBERNO = #{mNo}
+		WHERE CO.MEMBERNO = #{mNo} AND B.STATUS = 'BSTATUS001'
 	</select>
 	
 	<select id="selectTotalMyComment" parameterType="_int" resultType="_int">

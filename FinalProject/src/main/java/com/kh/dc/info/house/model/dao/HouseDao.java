@@ -10,7 +10,7 @@ public interface HouseDao {
 
 	public House selectHouse(int no);
 
-	public List<House> houseList();
+	public List<House> houseList(Map<String, Object> params);
 
 	public int insertHouse(House hs);
 

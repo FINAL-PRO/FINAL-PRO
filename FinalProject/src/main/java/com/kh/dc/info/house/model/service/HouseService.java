@@ -10,7 +10,7 @@ import com.kh.dc.info.house.model.vo.House;
 public interface HouseService {
 
 	public House selectHouse(int no);
-	public List<House> houseList();
+	public List<House> houseList(Map<String, Object> params);
 	public int insertHouse(House hs);
 	public int  updateHouse(House hs);
 	public int deleteHouse(int no);

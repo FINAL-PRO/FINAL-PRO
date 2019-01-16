@@ -239,6 +239,18 @@ hr {
     margin-top: 5px;
 }
 
+#btn_board_edit{
+	background: rgb(171, 187, 129);
+    color: white;
+    cursor: pointer;
+}
+
+#btn_board_delete{
+	background: rgb(171, 187, 129);
+    color: white;
+    cursor: pointer;
+}
+
 </style>
 </head>
 <body>
@@ -291,8 +303,8 @@ hr {
 										<div style="border: solid 0.5px lightgray"></div>
 										<div class="status">
 											<c:if test="${!empty member and member.no eq foodList.memberNo}">
-											<button class="btn_board_edit" id="btn_board_edit">수정</button>
-											<button class="btn_board_delete" id="btn_board_delete">삭제</button>
+											<button class="btn btn_board_edit btn-sm" id="btn_board_edit">수정</button>
+											<button class="btn btn_board_delete btn-sm" id="btn_board_delete">삭제</button>
 											</c:if>
 											<c:if test="${!empty member and member.no ne foodList.memberNo}">
 											<input type="button" class="btn btn_report btn-sm" id="btn_report" value="신고하기" onclick="btn_report();"/>

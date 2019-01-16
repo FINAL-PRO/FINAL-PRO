@@ -69,12 +69,16 @@
 							</tr>
 							<tr>
 								<td colspan="3">
-									[<a class="" href="${pageContext.request.contextPath}/info/house/list.do" title="목록">목록</a>]
-									[<a class="" href="#" accesskey="t" title="상단이동">맨 위로</a>]
-									[<a href="${pageContext.request.contextPath}/info/house/update/view.do?no=${house.boardNo}">수정하기</a>]
+									<button class="btn dc-btn" onclick="goList()" title="목록">목록</button>
+									<c:if test="${member.no ==  house.memberNo}">
+										<button class="btn dc-btn" onclick ="updateHouse()" title="수정하기">수정하기</button>
+									</c:if>
 								</td>
 							</tr>
 						</table>
+						<div class="container3">
+							<c:import url="../../common/comment.jsp" />
+						</div>	
 					</div>
 				</div>
 			</div>
@@ -86,5 +90,20 @@
 		</main>
 	</div>
 	<c:import url="../../common/footer.jsp" />
+	
+<script>
+
+	function updateHouse(){
+		location.href="${pageContext.request.contextPath}/info/house/update/view.do?no=${house.boardNo}";
+	}
+	
+	function deleteHouse(){
+		location.href="${pageContext.request.contextPath}/info/house/delete.do?no=${house.boardNo}";
+	}
+	
+	function goList(){
+		location.href="${pageContext.request.contextPath}/info/house/list.do";
+	}
+</script>
 </body>
 </html>

@@ -26,7 +26,7 @@
 							<c:import url="myPageMenubar.jsp"/>
 						</div>
 						<div class="dc-content-box">
-							<div class="boardList" style="width: 800px; min-height: 300px; margin: auto;">
+							<div class="boardList" style="width: 100%; min-height: 300px; margin: auto;">
 								<label class="mypageListTitleLabel"># 내가 쓴 글</label>
 					            <table>					        	
 						            <thead class="listcol" style="border-color: white;  color: gray;">   						                    
@@ -52,16 +52,16 @@
 								          	<a href="${pageContext.request.contextPath}/community/food/foodView.do?bno=${board.no}">${board.title}</a>
 								         	</c:when>
 								         	<c:when test = "${board.boardType eq '공동구매'}">
-								          	<a href="#">${board.title}</a>
+								          	<a href="${pageContext.request.contextPath}/sale/group/view.do?boardNo=${board.no}">${board.title}</a>
 								        	 </c:when>
 								        	 <c:when test = "${board.boardType eq '중고거래'}">
-								          	<a href="#">${board.title}</a>
+								          	<a href="${pageContext.request.contextPath}/sale/used/view.do?boardNo=${board.no}">${board.title}</a>
 								         	</c:when>
 								         	<c:when test = "${board.boardType eq '부동산'}">
-								          	<a href="#">${board.title}</a>
+								          	<a href="${pageContext.request.contextPath}/info/house/view.do?no=${board.no}">${board.title}</a>
 								        	 </c:when>
 								         	<c:when test = "${board.boardType eq '구인구직'}">
-								          	<a href="#">${board.title}</a>
+								          	<a href="${pageContext.request.contextPath}/job/jobBoard/jobBoardDetail.do?no=${board.no}">${board.title}</a>
 								         	</c:when>							                	
 						                </c:choose>
 						                </td>
@@ -71,7 +71,9 @@
 						            </c:forEach>
 						            </c:if>
 						              <c:if test="${empty boardList}"> 
-						              	<th colspan="5" style="width:auto; text-align:center;">작성된 게시물이 없습니다.</th>
+						              	<tr style="background-color:#FFFFFF; color:gray;">
+						                <th colspan="5" style="width:auto; text-align:center;">작성된 게시물이 없습니다.</th>						               
+						            	</tr>
 						              </c:if>
 						            </thead>
 					        	</table>
@@ -81,7 +83,7 @@
 					        
 
 					        
-					        <div class="commentList" style="width: 800px; min-height: 300px; margin: auto;">
+					        <div class="commentList" style="width: 100%; min-height: 300px; margin: auto;">
 					        	<label class="mypageListTitleLabel"># 내가 쓴 댓글</label>					        	
 					        	
 					        	
@@ -108,25 +110,25 @@
 						                	<a href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${comment.boardNo}">${comment.boardTitle}</a>
 						                	</c:when>
 											<c:when test = "${comment.boardType eq '맛집'}">
-								          	<a href="#">${board.title}</a>
+								          	<a href="${pageContext.request.contextPath}/community/food/foodView.do?bno=${comment.boardNo}">${comment.boardTitle}</a>
 								         	</c:when>
 								         	<c:when test = "${comment.boardType eq '공동구매'}">
-								          	<a href="#}">${comment.boardTitle}</a>
+								          	<a href="${pageContext.request.contextPath}/sale/group/view.do?boardNo=${comment.boardNo}">${comment.boardTitle}</a>
 								        	 </c:when>
 								        	 <c:when test = "${comment.boardType eq '중고거래'}">
-								          	<a href="#">${board.title}</a>
+								          	<a href="${pageContext.request.contextPath}/sale/used/view.do?boardNo=${comment.boardNo}">${comment.boardTitle}</a>
 								         	</c:when>
 								         	<c:when test = "${comment.boardType eq '부동산'}">
-								          	<a href="#">${board.title}</a>
+								          	<a href="${pageContext.request.contextPath}/info/house/view.do?no=${comment.boardNo}">${comment.boardTitle}</a>
 								        	 </c:when>
 								         	<c:when test = "${comment.boardType eq '구인구직'}">
-								          	<a href="#">${board.title}</a>
+								          	<a href="${pageContext.request.contextPath}/job/jobBoard/jobBoardDetail.do?no=${comment.boardNo}">${comment.boardTitle}</a>
 								         	</c:when>							                	
 						                </c:choose>
 						                </td>
-						                <td><a href="#" onclick="goComment(${comment.boardNo},${comment.no});" id="commentContent">${comment.content}</a></td>
+						                <td><a href="#" onclick="goComment('${comment.boardType}', ${comment.boardNo}, ${comment.no})" id="commentContent">${comment.content}</a></td>
 						                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${comment.writeDate}" /></td>
-						                
+						               
 						            	</tr>
 						            </c:forEach>	
 						            </c:if>						            
@@ -155,8 +157,33 @@
 	<c:import url="../common/footer.jsp"/>
 	
 	<script type="text/javascript">		
-		function goComment(bno, cno){
-			location.href="${pageContext.request.contextPath}/community/free/freeView.do?bno="+ bno+"#commentArea"+ cno;
+		function goComment(bType, bno, cno){
+			
+			var bType = bType;
+			var bno = bno;
+			var bno = bno;
+			
+			switch(bType){
+			case '자유게시판' : 
+				location.href="${pageContext.request.contextPath}/community/free/freeView.do?bno="+ bno+"#commentArea"+ cno;
+				break;
+			case '맛집' : 
+				location.href="${pageContext.request.contextPath}/community/food/foodView.do?bno="+ bno+"#commentArea"+ cno;
+				break;
+			case "공동구매" : 
+				location.href="${pageContext.request.contextPath}/sale/group/view.do?boardNo="+ bno+"#commentArea"+ cno;
+				break;
+			case "중고거래" : 
+				location.href="$${pageContext.request.contextPath}/sale/used/view.do?boardNo="+ bno+"#commentArea"+ cno;
+				break;
+			case "부동산" : 
+				location.href="${pageContext.request.contextPath}/info/house/view.do?no="+ bno+"#commentArea"+ cno;
+				break;
+			case "구인구직" : 
+				location.href="${pageContext.request.contextPath}/job/jobBoard/jobBoardDetail.do?no="+ bno+"#commentArea"+ cno;
+				break;			
+			}
+			
 		}
 
 	</script>

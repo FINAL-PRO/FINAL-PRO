@@ -32,7 +32,7 @@
 		
 	<script>
 		function messageReply(){
-			location.href = "${pageContext.request.contextPath}/message/messageInsertForm.do?no=${member.no}&fromMember=${message.fromMember}";
+			location.href = "${pageContext.request.contextPath}/message/messageInsertForm.do?no=${member.no}&fromMember=${message.frommNick}";
 		}
 	
 		function messageList(){

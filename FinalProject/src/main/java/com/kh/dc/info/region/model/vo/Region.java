@@ -15,8 +15,7 @@ public class Region implements java.io.Serializable{
 	private String status;
 	private String userName;
 	private String category;
-	
-	
+	private int memberNo;
 	
 	
 	public Region() {
@@ -121,6 +120,14 @@ public class Region implements java.io.Serializable{
 		return "Region [no=" + no + ", title=" + title + ", writeDate=" + writeDate + ", content=" + content
 				+ ", viewcount=" + viewcount + ", type=" + type + ", status=" + status + ", userName=" + userName
 				+ ", category=" + category + "]";
+	}
+
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
 	
 	

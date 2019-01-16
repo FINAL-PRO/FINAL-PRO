@@ -23,31 +23,45 @@ public class SearchController {
 	
 	@RequestMapping("/search/list.do")
 	public String memberEnroll(@RequestParam String searchWord, Model model) {
+		List<Board> searchResultList;
 		
-		List<Board> searchResultList = searchService.searchResultList(searchWord);
+		if(!(searchWord.equals(""))) {
 		
-							
-		for(int i = 0; i < searchResultList.size(); i++) {
-
-			String resultContent = "";
-			String originContent = searchResultList.get(i).getContent();			
-			String patterString = "(&lt;img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*&gt;|<p>|</p>|<br>)";
-
-				Pattern pattern = Pattern.compile(patterString);	
-				Matcher matcher = pattern.matcher(originContent);
+			searchResultList = searchService.searchResultList(searchWord);				
+								
+			for(int i = 0; i < searchResultList.size(); i++) {
+	
+				String resultContent = "";
+				String originContent = searchResultList.get(i).getContent();	
+				/*System.out.println("#####originContent" + i + " : " + originContent);*/				
 				
-				while(matcher.find()) {
-					resultContent = matcher.replaceAll("");
+				if(originContent.contains("<p>")) {
+					
+					String patterString = "(&lt;img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*&gt;|<img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*>|<p>|</p>|<br>|&lt;p&gt;|&lt;/p&gt;)";	
+					Pattern pattern = Pattern.compile(patterString);	
+					Matcher matcher = pattern.matcher(originContent);
+						
+					while(matcher.find()) {
+						resultContent = matcher.replaceAll("");
+					}
+				} else {
+					resultContent = originContent;
 				}
-
-			searchResultList.get(i).setContent(resultContent);		
-		
+	
+				searchResultList.get(i).setContent(resultContent);
+				/*System.out.println("#####" + i + " : " + searchResultList.get(i).getContent());	*/	
+			}
+								
+		} else {
+			searchResultList = null;
 		}
+		
 		
 		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("searchResultList", searchResultList);
 		
 		return "/search/list";
 	}
+	
 
 }
