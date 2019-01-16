@@ -55,7 +55,8 @@ public class GroupController {
 
 		model.addAttribute("group", group)
 			 .addAttribute("statusList", groupService.selectStatusList())
-			 .addAttribute("ghList", groupService.selectGroupHistory(group.getNo()));
+			 .addAttribute("ghList", groupService.selectGroupHistory(group.getNo()))
+			 .addAttribute("bno", boardNo);
 	
 		return "sale/group/groupView";
 	}

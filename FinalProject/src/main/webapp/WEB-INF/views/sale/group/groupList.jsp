@@ -19,10 +19,6 @@
 	margin: 10px;
 }
 
-a {
-	color: black;
-}
-
 .btn-write {
 	float: right;
 	margin-right: 10px;
@@ -127,12 +123,10 @@ a {
 <script>
 
 	function goGroupForm(){
+		
 		location.href = "${pageContext.request.contextPath}/sale/group/groupForm.do";
 	}	
-
 	
-	
-
 </script>
 
 </body>

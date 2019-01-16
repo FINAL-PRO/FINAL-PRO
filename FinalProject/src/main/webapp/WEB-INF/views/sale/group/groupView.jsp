@@ -185,7 +185,11 @@
 	</c:if> 
 	<input type="button" value="목록" class="btn" onclick="goGroupList();"/>
 </div>
-<br /><br />
+
+<div class="container3">
+	<c:import url="../../common/comment.jsp" />
+</div>
+
 
 <!-- -------------------------------------------- -->
 </div>

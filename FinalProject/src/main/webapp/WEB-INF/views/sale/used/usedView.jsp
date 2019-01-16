@@ -179,6 +179,10 @@
 </div>
 <br /><br />
 
+<div class="container3">
+	<c:import url="../../common/comment.jsp" />
+</div>
+
 <!-- -------------------------------------------- -->
 </div>
 </div>

@@ -267,14 +267,12 @@
 	// 모집인원 --> 정규식처리:1~20 사이 숫자만
 	$("#maxCount").on("keyup", function() {
 		var maxCount = $("#maxCount").val();
-		var regPwd = /^[0-9]{1,2}$/;
+		var regPwd =  /^[0-9]{1,2}$/g;
 		
-		console.log(maxCount);
-
 		if(maxCount == "") {
 			$("#maxCountMsg").text('');
 		} else if (!regPwd.test(maxCount)) {
-			$("#maxCountMsg").text('숫자만 입력해 주세요.');
+			$("#maxCountMsg").text('1~20 사이의 숫자를 입력해 주세요.');
 		} else if (maxCount>20 || maxCount<1) {
 			$("#maxCountMsg").text('1~20 사이의 숫자를 입력해 주세요.');
 		} else {

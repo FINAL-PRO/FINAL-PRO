@@ -51,7 +51,8 @@ public class UsedController {
 		
 		model.addAttribute("used", used)
 			 .addAttribute("uh", usedService.selectOneUsedHistory(used.getNo()))
-			 .addAttribute("statusList", usedService.selectStatusList());
+			 .addAttribute("statusList", usedService.selectStatusList())
+			 .addAttribute("bno", boardNo);;
 		
 		return "sale/used/usedView";
 	}
