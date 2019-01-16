@@ -124,18 +124,18 @@
 										<div>
 											<div class="bcategoryBox">
 												<div style="display:inline-block;">카테고리</div>
-												<select id="category" name="category"> 
+											<!-- 	<select id="category" name="category"> 
 													<option value="FOOD001">한식</option>
 													<option value="FOOD002">일식</option>
 													<option value="FOOD003">중식</option>
 													<option value="FOOD004">양식</option>
 													<option value="FOOD005">카페</option>
 													<option value="FOOD006">디저트</option>
-												</select>
+												</select> -->
 												<input type="hidden" id="categoryCheck" name="categoryCheck" value="${foodList.category}" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/>
-												<%-- <c:forEach items="${foodList}" var="f" >						   			
-										   			<option value="${foodList.categoryId}">${foodList.category}</option>
-										   		</c:forEach> --%>
+												<c:forEach items="${categoryList}" var="cl" >						   			
+										   			<option value="${cl.id}">${cl.value}</option>
+										   		</c:forEach>
 											</div>
 									
 											<div class="bscoreBox">

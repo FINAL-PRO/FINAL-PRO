@@ -101,7 +101,11 @@ public class FoodController {
 	@RequestMapping("community/food/foodUpdateForm.do")
 	public String foodUpdateView(@RequestParam int bno, Model model) {
 
-		model.addAttribute("foodList", foodService.selectOneFood(bno));
+		FoodList foodList = foodService.selectOneFood(bno);
+		List<FoodList> categoryList = foodService.categoryList(bno);
+		
+		model.addAttribute("foodList", foodList)
+		.addAttribute("categoryList", categoryList);
 		
 		return "community/food/foodUpdateForm";
 	}

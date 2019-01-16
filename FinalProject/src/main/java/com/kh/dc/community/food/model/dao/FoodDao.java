@@ -39,6 +39,8 @@ public interface FoodDao {
 
 	List<Map<String, String>> likeSort(int cPage, int numberPage);
 
+	List<FoodList> categoryList(int bno);
+
 	// int boardUpdate(Map<String, Object> map);
 
 	//int foodUpdate(FoodList foodList);

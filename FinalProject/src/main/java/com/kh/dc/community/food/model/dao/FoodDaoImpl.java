@@ -99,6 +99,11 @@ public class FoodDaoImpl implements FoodDao{
 		return sqlSession.insert("food_mapper.updateBoard", map);
 	}*/
 
+	@Override
+	public List<FoodList> categoryList(int bno) {
+		return sqlSession.selectList("food_mapper.categoryList");
+	}
+
 /*	@Override
 	public int foodUpdate(FoodList foodList) {
 		return sqlSession.insert("food_mapper.foodUpdate", foodList);

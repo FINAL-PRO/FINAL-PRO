@@ -34,5 +34,7 @@ public interface FoodService {
 	// int foodUpdate(Map<String, Object> map);
 
 	int foodUpdate(FoodList foodList);
+
+	List<FoodList> categoryList(int bno);
 	
 }

@@ -70,6 +70,11 @@ public class FoodServiceImpl implements FoodService{
 		return foodDao.likeSort(cPage, numberPage);
 	}
 
+	@Override
+	public List<FoodList> categoryList(int bno) {
+		return foodDao.categoryList(bno);
+	}
+
 /*	@Override
 	public int foodUpdate(Map<String, Object> map) {
 		return foodDao.boardUpdate(map);
