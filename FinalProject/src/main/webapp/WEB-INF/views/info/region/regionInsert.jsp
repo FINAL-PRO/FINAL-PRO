@@ -53,8 +53,10 @@
 									<td colspan="2">
 										<c:if test="${region.no != null }">
 											<input type="hidden" name="no" value="${region.no}" required />
+											
 										</c:if>
-			
+										
+										<input type="hidden" name="memberNo" value="${member.no}" required />
 										<button type="submit" onclick="insertRegion()">확인</button>
 										<button type="reset">취소</button>									
 									</td>

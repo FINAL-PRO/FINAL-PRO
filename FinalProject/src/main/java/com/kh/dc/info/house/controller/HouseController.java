@@ -1,6 +1,7 @@
 package com.kh.dc.info.house.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,11 +23,24 @@ public class HouseController {
 	private HouseService houseService;
 	
 	@RequestMapping("info/house/list.do")
-	public String houseList(Model model) {
-		List<House> list = houseService.houseList();
-		model.addAttribute("list", list);
+	public String houseList(Model model,
+			@RequestParam(value="dealType", defaultValue="HUSDEAL001") String dealType,
+			@RequestParam(value="hType", defaultValue="HUSTYP001") String hType) {
 		
-		System.out.println("list hType : " + list);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("dealType", dealType);
+		params.put("hType", hType);
+		
+		List<House> list = houseService.houseList(params);
+		List<Code> dealList = houseService.selectDealList();
+		List<Code> roomList = houseService.selectRoomList();
+		
+		model.addAttribute("list", list);
+		model.addAttribute("roomList", roomList);
+		model.addAttribute("dealList", dealList);
+		model.addAttribute("dealType", dealType);
+		model.addAttribute("hType", hType);
+		
 		return "info/house/list";
 	}
 	
@@ -40,8 +54,8 @@ public class HouseController {
 	}
 	
 	@RequestMapping(value= "info/house/insert.do", method=RequestMethod.POST)
-	public String insertHouse(House hs) {
-		int result = houseService.insertHouse(hs);
+	public String insertHouse(House house) {
+		int result = houseService.insertHouse(house);
 		
 		return "redirect:/info/house/list.do";
 	}
@@ -73,13 +87,11 @@ public class HouseController {
 	}
 	
 	@RequestMapping("info/house/update.do")
-	public String updateHouseEnd(House hs) {
+	public String updateHouseEnd(House house) {
 		
-		System.out.println("house : " + hs);
-		System.out.println("area : " + hs.getArea());
-		houseService.updateHouse(hs);
+		houseService.updateHouse(house);
 		
-		return "redirect:/info/house/view.do?no=" + hs.getNo();
+		return "redirect:/info/house/view.do?no=" + house.getNo();
 	}
 	
 	@RequestMapping("info/house/delete.do")
