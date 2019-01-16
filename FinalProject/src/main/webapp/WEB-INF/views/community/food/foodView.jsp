@@ -201,7 +201,7 @@ hr {
 }
 
 .starR1{
-       background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
+    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
     background-size: auto 100%;
     width: 15px;
     height: 30px;
@@ -236,9 +236,9 @@ hr {
 	background: rgb(171, 187, 129);
     color: white;
     cursor: pointer;
+    margin-top: 5px;
 }
 
-	
 </style>
 </head>
 <body>
@@ -438,9 +438,9 @@ hr {
 							</div>
 						</div>
 					</div>
-				</div>
 				<div class="section-right">
 					<c:import url="../../common/rightSection.jsp" />
+				</div>
 				</div>
 			</section>
 			</main>

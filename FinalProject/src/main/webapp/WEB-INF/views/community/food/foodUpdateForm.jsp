@@ -94,14 +94,6 @@
 												<input type="text" name="title" id="title" value="${foodList.title}" style="width: 100%;" required>
 											</div>
 										</div>
-										
-								<%-- 	<div class="add" style="display:inline-block;">
-											<div style="height:150px; width:200px; border:1px solid lightgrey;">
-												<img id="foodImg" value="${foodList.thumbnail}"/>
-												<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);" />
-												<input type="hidden" name="thumbnail" id="thumbnail" />
-											</div>
-										</div> --%>
 										<div class="table-div" style="display:inline-block; border:1px soild black;">
 											<div class="tr-div">
 													<div class="td-div">카테고리</div>
@@ -192,7 +184,8 @@
 					                            			onImageUpload : function(files) {
 					                            				for (var i = files.length - 1; i >= 0; i--) {
 					                            					sendFile(files[i]);
-					                            		}}}
+					                            		}}},
+					                            		placeholder: '이미지를 반드시 입력해주세요.'
 					                            	});
 			                                
 					                            	function sendFile(file) {
