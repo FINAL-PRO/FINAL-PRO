@@ -13,7 +13,7 @@
 	<div class="dc-menubar">
 		<div class="dc-manebar-main" align="center" style="padding: 12px;">		
 			<div class="" id="navbarNav" style="margin: auto;">
-					<a class="mypageMenuItem" href="${pageContext.request.contextPath}/member/memberView.do?no=${member.no}">내정보보기 </a>
+					<a class="mypageMenuItem" href="${pageContext.request.contextPath}/member/memberView.do?no=${member.no}">내 정보 보기 </a>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<a class="mypageMenuItem" href="${pageContext.request.contextPath}/mypage/list.do?no=${member.no}">내가 쓴 글/댓글 </a>
 			</div>
