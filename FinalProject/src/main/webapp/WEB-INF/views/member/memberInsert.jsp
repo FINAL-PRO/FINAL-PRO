@@ -235,7 +235,7 @@
 				if (userName == "") {
 					$("#submitButton").attr('disabled', true);
 					return;
-				} else if (userName != null	&& nickName.length > 1) {
+				} else if (userName != null) {
 					$("#submitButton").attr('disabled', false);
 					nameChk = true;
 				} 
