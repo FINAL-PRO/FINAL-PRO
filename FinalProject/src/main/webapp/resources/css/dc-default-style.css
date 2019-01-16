@@ -87,9 +87,9 @@ section{
 footer{
 	clear:both;
 	display:block;
-	background-color: #fff;
-	border-top : 1px solid #e3e7ee;
-	padding-top : 40px;
+	/* background-color:rgb(248, 178, 106); */
+	border-top : 2px solid #e3e7ee;
+	padding-top : 30px;
 }
 
 .footer_bottom{
@@ -225,8 +225,8 @@ tr{
 }
 
 .footer-text{
-	font-size : 30px;
-	font-weight : bold;
+	/* font-size : 20px;
+	font-weight : bold; */
 }
 
 a{
