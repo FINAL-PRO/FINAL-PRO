@@ -2,7 +2,8 @@
 
 .resultTitle {
 	font-size: 20px;
-	color: darkgreen;
+	color:darkgreen;
+	text-decoration: underline;
 }
 
 #resultContent {	
@@ -12,7 +13,7 @@
 }
 
 #resultMemberName {
-	color: #03cf5d;
+	color:rgb(225, 91, 100);
 }
 
 #resultWriteDate {

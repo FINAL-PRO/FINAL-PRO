@@ -149,6 +149,7 @@ footer{
 	float:left;
 	min-height: 100vh;
 	width:75%;
+	padding: 8px 16px 8px 16px;
 	
 }
 .section-left{
@@ -339,8 +340,6 @@ div[class^="ad-"]:hover {
 	background: rgb(244, 126, 96);
 	color: white;
 }
-
-
 
 #logo{
 	width: 220px;

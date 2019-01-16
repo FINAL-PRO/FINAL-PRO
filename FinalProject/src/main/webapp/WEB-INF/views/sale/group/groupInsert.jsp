@@ -19,7 +19,7 @@
 
 .img-box {
 	height: 250px;
-	width: 250px;
+	width: 250px;	
 }
 
 .info {
@@ -34,8 +34,31 @@
 
 #goodsImg {
 	width: 100%;
-	height: 100%;
+	height: 230px;
+	border-radius: 10px;
+	border: 1px solid lightgray;
+	margin-bottom: 5px;	
 }
+
+th{
+	text-align: center;
+}
+
+.btnGroup{
+	background: rgb(248, 178, 106);
+    color: white;
+}
+
+.btnGroup:hover{
+	background: rgb(244, 126, 96);
+	color: white;
+}
+
+#btnSubmit{
+	float: right;
+	width: 110px;
+}
+
 
 </style>
 
@@ -62,28 +85,21 @@
 <form name="boardForm" action="${pageContext.request.contextPath}/sale/group/groupFormEnd.do" method="post">
 	<input type="hidden" name="memberNo" value="${member.no}" required /> 
 
-	<div class="row title-box">
-		<div class="col-md-1">
-			<label class="title-label" for="title">제목</label>
-		</div>
-		<div class="col-md-9">
-			<input type="text" class="info" name="title" id="title" />
-			<p class="warn-msg" id="titleMsg">제목은 50글자를 넘을 수 없습니다.</p>
-		</div>
-		<div class="col-md-2"></div>
-	</div> <hr />
+	<div class="title-box">
+		
+	<input type="text" class="info form-control" name="title" id="title" placeholder="제목을 입력하세요."/>
+	<!-- <p class="warn-msg" id="titleMsg">제목은 50글자를 넘을 수 없습니다.</p> -->
+		
+	</div>
 	
 	<div class="row">
-		<div class="col-md-4 img-box">
-			<div class="img-box" style="border:1px solid black;">
-				<div class="img-box" style="border:1px solid black;">
-					<span id="imgMsg">물품 사진을 등록해주세요.</span>
-					<img id="goodsImg"/>
-				</div>
+		<div class="col-md-4 img-box" style="padding-left:20px;">
+						
+				<img id="goodsImg"/>				
 				<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);"/>
 				<input type="hidden" id="goodsPicture" name="goodsPicture" />
-				<button type="button" style="width:250px;" id="btnPic">물품사진 등록하기</button>
-			</div>
+				<input type="button" class="btn btnGroup" style="width:100%;" id="btnPic" value="물품사진 등록하기">
+			
 		</div>
 		<div class="col-md-8">
 			<table class="product-info" style="width:100%;">
@@ -91,17 +107,18 @@
 			<tbody>
 				<tr>
 					<th><label class="info-label" for=goodsName>물품명</label></th>
-					<td><input type="text" class="info" name="goodsName" id="goodsName" /></td>
+					<td><input type="text" class="info form-control" name="goodsName" id="goodsName" /></td>
 				</tr>
 				<tr>
 					<th><label class="info-label" for="price">가격</label></th>
-					<td><input type="text" class="info" name="price" id="price" /></td>
+					<td><input type="text" class="info form-control" name="price" id="price" /></td>
 				</tr>
 				<tr>
 					<th><label class="info-label" for="maxCount">모집인원</label></th>
 					<td>
-						<input type="text" class="info" name="maxCount" id="maxCount" />
-						<p class="warn-msg" id="maxCountMsg"></p>
+						<input type="text" class="info form-control" name="maxCount" id="maxCount" 
+								placeholder="1~20 사이의 숫자를 입력해주세요."/>
+						<!-- <p class="warn-msg" id="maxCountMsg"></p> -->
 					</td>
 				</tr>
 				<tr>
@@ -110,34 +127,36 @@
 					택배 <input type="radio" name="dealType" value="DEAL002" /></td>
 				</tr>
 				<tr>
-					<th><label class="info-label" for="deposit">계좌번호</label></th>
+					<th valign="top"><label class="info-label" for="deposit">계좌번호</label></th>
 					<td>
-						<select class="" name="bank" id="bank" style="padding: 0; width:30%;">
+						<div class="row" style="margin: 0px;">
+						<select class="col-md-4 form-control" name="bank" id="bank" style="display: inline-block;">
 							<c:forEach items="${bankList}" var="bank">
 								<option value="${bank.id}">${bank.value}</option>
 							</c:forEach>
 						</select> 
-						<input type="text" class="info" name="deposit" id="deposit" style="width:68%;"/> <br /> 
-						<p class="warn-msg">반드시 본인 명의의 계좌를 입력해 주세요.</p>
+						<input type="text" class="col-md-8 info form-control" name="deposit" id="deposit" style="display: inline-block;"/> <br /> 
+						</div>
+						<p class="warn-msg" style="float: right;">반드시 본인 명의의 계좌를 입력해 주세요.</p>
 					</td>
 				</tr>
 				<tr>
 					<th><label class="info-label" for=endDate>마감일</label></th>
-					<td><input type="date" class="info" name="endDate" id="endDate"/></td>
+					<td><input type="date" class="info form-control" name="endDate" id="endDate"/></td>
 				</tr>
 			</tbody>
 			</table>	
 	
 		</div>
-	</div> <br /> <hr />	
+	</div> <br />	
 
 	
 	<div>
 		<textarea id="summernote" name="content"></textarea>
 	</div>
 	
-	<br /><br />
-	<input type="button" class="a" value="글쓰기" onClick="submitForm();"/>
+	<br />
+	<input type="button" class="btn btnGroup" id="btnSubmit" value="글쓰기" onClick="submitForm();"/>
 	<br /><br />
 </form>
 

@@ -22,10 +22,10 @@
 				
 				<div class="section-center">
 					<div class="dc-content">
-						<div class="dc-content-title">
-						</div>
+						<!-- <div class="dc-content-title">
+						</div> -->
 						<div class="dc-content-box">
-							<div class="weather-container" style="margin: 20px;">
+							<div class="weather-container" style="">
 								<!-- 오늘 내일 모레 날씨 -->
 								<!-- 동네 이름 -->
 								<p class="townName" style="margin: 0 0 0 10px; font-size:24px; border-bottom: 2px solid lightgray; font-weight: bold;">
