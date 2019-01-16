@@ -22,36 +22,44 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>업체 등록 게시판</h1>
+							<div>
+								<span class="dc-list-title">업체 등록 게시판</span>
+								<button class="btn dc-btn dc-btn-right" onclick="insertCompany();">업체 등록</button>
+							</div>
 							<br />
-							<a href="${pageContext.request.contextPath}/business/partnership/insert/view.do">업체 등록</a>
-							
-						<select id="companyTypeNo">
-							<c:forEach items="${companyTypeList}" var="code">
-								<option value="${code.id}" <c:if test="${code.id eq companyType}">selected</c:if>>${code.value}</option>
-							</c:forEach>
-						</select>
+							<div class="form-inline">
+								<select id="companyTypeNo" class="form-control">
+									<c:forEach items="${companyTypeList}" var="code">
+										<option value="${code.id}" <c:if test="${code.id eq companyType}">selected</c:if>>${code.value}</option>
+									</c:forEach>
+								</select>
+							</div>
 						</div>
 						<div class="dc-content-box">
-							<div class="table">
-								<div class="row">
-									<div class="col col-1">번호</div>
-									<div class="col col-2">업체명</div>
-									<div class="col col-3">주소</div>
-									<div class="col col-2">등록일</div>
-									<div class="col col-2">업체구분</div>
-								</div>
+							<table class="table">
+								<thead>
+									<th>#</th>
+									<th>업체명</th>
+									<th>주소</th>
+									<th>등록일</th>
+									<th>업체구분</th>
+								</thead>
+								<tbody>
 									<c:if test="${!empty companyList}">
 										<c:forEach items="${companyList}"  var="company">
-											<a href="#" onclick="detailView(${company.no});">
-												<div class="row">
-													<div class="col col-1">${company.no}</div>
-													<div class="col col-2">${company.name}</div>
-													<div class="col col-3">${company.address}</div>
-													<div class="col col-2">${company.enrollDate}</div>
-													<div class="col col-2">${company.value}</div>
-												</div>
-											</a>
+												<tr>
+													<td>${company.no}</td>
+													<td>
+														<a href="#" onclick="detailView(${company.no});">
+															${company.name}
+														</a>
+													</td>
+													<td>${company.address}</td>
+													<td>
+														<fmt:formatDate value="${company.enrollDate}" pattern="yyyy.MM.dd"/>
+													</td>
+													<td>${company.value}</td>
+												</tr>
 										</c:forEach>
 									</c:if>
 									<c:if test="${empty companyList}">
@@ -61,7 +69,8 @@
 											</div>
 										</div>
 									</c:if>
-							</div>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -82,6 +91,10 @@
 	
 	function detailView(no){
 		location.href = "${pageContext.request.contextPath}/business/partnership/view.do?companyNo=" + no;
+	}
+	
+	function insertCompany(){
+		location.href = "${pageContext.request.contextPath}/business/partnership/insert/view.do";
 	}
 	</script>
 </body>
