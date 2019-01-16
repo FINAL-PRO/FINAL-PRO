@@ -62,8 +62,9 @@ label.info-label {
 <div class="dc-content-box">
 <!-- ------------------- 내용 입력 ------------------- -->
 
-<form name="boardForm" action="${pageContext.request.contextPath}/sale/used/usedFormEnd.do" method="post">
+<form name="boardForm" action="${pageContext.request.contextPath}/sale/used/update.do" method="post">
 	<input type="hidden" name="memberNo" value="${member.no}" required /> 
+	<input type="hidden" name="boardNo" value="${used.boardNo}" />
 	
 	<div class="title-box">
 		<label class="title-label" for="title">제목</label>
@@ -77,7 +78,7 @@ label.info-label {
 				<img id="goodsImg" src="${used.goodsPicture}"/>
 			</div>
 			<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);"/>
-			<input type="hidden" id="goodsPicture" name="goodsPicture" />
+			<input type="hidden" id="goodsPicture" name="goodsPicture" value="${used.goodsPicture}"/>
 			<button type="button" style="width:250px;" id="btnPic">물품사진 등록하기</button>
 		</div>
 		
@@ -203,7 +204,7 @@ label.info-label {
 	}
 
 	function cancelUpdate(){
-		location.href = "${pageContext.request.contextPath}/sale/used/usedView.do?boardNo="+${used.boardNo};
+		location.href = "${pageContext.request.contextPath}/sale/used/view.do?boardNo="+${used.boardNo};
 	}	
 	
 	

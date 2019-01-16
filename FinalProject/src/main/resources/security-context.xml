@@ -54,9 +54,9 @@
 	<security:http security="none" pattern="/sale/group/groupFormEnd.do" />
 	<security:http security="none" pattern="/sale/group/groupUpdateFormEnd.do" />
 	<security:http security="none" pattern="/sale/group/groupDelete.do" />
-	<security:http security="none" pattern="/sale/used/usedFormEnd.do" />
-	<security:http security="none" pattern="/sale/used/usedUpdateFormEnd.do" />
-	<security:http security="none" pattern="/sale/used/usedDelete.do" />
+	<security:http security="none" pattern="/sale/used/insert.do" />
+	<security:http security="none" pattern="/sale/used/update.do" />
+	<security:http security="none" pattern="/sale/used/delete.do" />
 	
 	<!-- 메시지 전송 -->
 	<security:http security="none" pattern="/message/messageInsert.do" />

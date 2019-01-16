@@ -51,7 +51,7 @@ public class UsedServiceImpl implements UsedService {
 
 	@Override
 	public int updateUsed(Used used) {
-
+		
 		return usedDao.updateBoard(used)*usedDao.updateUsed(used);
 	}
 

@@ -55,7 +55,7 @@ public class UsedDaoImpl implements UsedDao {
 
 	@Override
 	public int updateUsed(Used used) {
-
+		
 		return sqlSession.update("used_mapper.updateUsed", used);
 	}
 

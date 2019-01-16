@@ -56,44 +56,38 @@ public class UsedController {
 		return "sale/used/usedView";
 	}
 
-	@RequestMapping("sale/used/usedForm.do")
+	@RequestMapping("sale/used/insertForm.do")
 	public String insertUsedForm(Model model) {
 		
 		return "sale/used/usedInsert";
 	}
 	
-	@RequestMapping("sale/used/usedFormEnd.do")
+	@RequestMapping("sale/used/insert.do")
 	public String insertUsed(Used used, Model model) {
 		
 		usedService.insertUsed(used);
 		
-		System.out.println("&&&&&&&&&&&&&&&&&&&&& ~인서트인서트~ &&&&&&&&&&&&&&&&&&&&&&");
-		
 		return "redirect:/sale/used/list.do";
 	}
 	
-	@RequestMapping("sale/used/usedUpdateForm.do")
+	@RequestMapping("sale/used/updateForm.do")
 	public String updateUsedForm(@RequestParam int boardNo, Model model) {
 		
 		model.addAttribute("used", usedService.selectOneUsed2(boardNo));
 		
-		System.out.println("&&&&&&&&&&&&&&&&&&&&& ~업뎃폼~ &&&&&&&&&&&&&&&&&&&&&&");
-		
 		return "sale/used/usedUpdate";
 	}
 	
-	@RequestMapping("sale/used/usedUpdateFormEnd.do")
+	@RequestMapping("sale/used/update.do")
 	public String updateUsed(Used used, Model model) {
 		
 		usedService.updateUsed(used);
-		//model.addAttribute("boardNo", used.getBoardNo());
-		
-		System.out.println("&&&&&&&&&&&&&&&&&&&&& ~업뎃끝~ &&&&&&&&&&&&&&&&&&&&&&");
+		model.addAttribute("boardNo", used.getBoardNo());
 		
 		return "redirect:/sale/used/view.do";
 	}
 	
-	@RequestMapping("sale/used/usedDelete.do")
+	@RequestMapping("sale/used/delete.do")
 	public String deleteUsed(@RequestParam int boardNo, Model model) {
 		
 		usedService.deleteUsed(boardNo);

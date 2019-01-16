@@ -126,7 +126,7 @@
 <script>
 
 	function goUsedForm(){
-		location.href = "${pageContext.request.contextPath}/sale/used/usedForm.do";
+		location.href = "${pageContext.request.contextPath}/sale/used/insertForm.do";
 	}	
 
 </script>

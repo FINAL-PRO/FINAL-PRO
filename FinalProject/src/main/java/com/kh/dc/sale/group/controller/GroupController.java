@@ -73,8 +73,6 @@ public class GroupController {
 	public String insertGroup(Group group,  Model model) {
 	
 		groupService.insertGroup(group);
-		
-		System.out.println("&&&&&&&&&&&&&&&&&&&&& ~인서트인서트~ &&&&&&&&&&&&&&&&&&&&&&");
 				
 		return "redirect:/sale/group/list.do";
 	}
@@ -84,8 +82,6 @@ public class GroupController {
 		
 		model.addAttribute("group", groupService.selectOneGroup2(boardNo))
 			 .addAttribute("bankList", groupService.selectBankList());
-		
-		System.out.println("&&&&&&&&&&&&&&&&&&&&& ~업뎃폼~ &&&&&&&&&&&&&&&&&&&&&&");
 	
 		return "sale/group/groupUpdate";
 	}
@@ -95,8 +91,6 @@ public class GroupController {
 		
 		groupService.updateGroup(group);
 		model.addAttribute("boardNo", group.getBoardNo());
-		
-		System.out.println("&&&&&&&&&&&&&&&&&&&&& ~업뎃끝~ &&&&&&&&&&&&&&&&&&&&&&");
 	
 		return "redirect:/sale/group/view.do";
 	}
