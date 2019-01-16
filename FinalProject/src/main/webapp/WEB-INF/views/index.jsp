@@ -9,39 +9,45 @@
 	<meta charset="UTF-8">
 	<title>동커</title>
 	<c:import url="common/header.jsp"/>
-	<script>
+<script>
 		$(function(){
 			$.ajax({
-				url : "business/ad/getAd.do",
-				data : { adPage : "main",
-					adSection : "main",
-					adLocation : "하단"},
+				url : "business/ad/getAd.do?adPage=메인&adSection=중앙&adLocation=상단",
 				success : function(data){
 					console.log("메인 광고 ajax 성공");
 					console.log(data);
 					
 					if(data == ""){
-/* 						$(".ad-main").css("width", "798px").css("height", "100%").attr("background-position", "center")
-						.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
-						.css("margin-right", "auto");
-						$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/main2.png")'); */
-						
-						$("#ad-main-img").attr("src","${pageContext.request.contextPath}/resources/upload/ad/main2.jpg");
-						$("#ad-main-img2").attr("src","${pageContext.request.contextPath}/resources/upload/ad/main1.jpg");
-						
-						$(".ad-main").attr("onclick", "window.open('" + "http://www.iei.or.kr/main/main.kh" + "');");
+						$("#ad-main-middle-img").attr("src","${pageContext.request.contextPath}/resources/upload/ad/main1.jpg");
+						$(".ad-main-middle").attr("onclick", "window.open('" + "http://www.iei.or.kr/main/main.kh" + "');");
 					}else{
-						$(".ad-main").css("width", "798px").css("height", "100%").attr("background-position", "center")
-						.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
-						.css("margin-right", "auto");
-						$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/lostark.jpg")');						
+						$("#ad-main-middle-img").attr("src",data['adContentPath']);
+						$(".ad-main-middle").attr("onclick", "window.open('" + data['landingPage'] + "');");
 					}
 				}, error : function(error){
 					console.log("메인 광고 ajax 에러");
-					$(".ad-main").css("width", "798px").css("height", "100%").attr("background-position", "center")
-					.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
-					.css("margin-right", "auto");
-					$(".ad-main").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/lostark.jpg")');
+					$("#ad-main-middle-img").attr("src","${pageContext.request.contextPath}/resources/upload/ad/main1.jpg");
+					$(".ad-main-middle").attr("onclick", "window.open('" + "http://www.iei.or.kr/main/main.kh" + "');");
+				}
+			});
+			
+			$.ajax({
+				url : "business/ad/getAd.do?adPage=메인&adSection=중앙&adLocation=하단",
+				success : function(data){
+					console.log("메인2 광고 ajax 성공");
+					console.log(data);
+					
+					if(data == ""){
+						$("#ad-main-bottom-img").attr("src","${pageContext.request.contextPath}/resources/upload/ad/main1.jpg");
+						$(".ad-main-bottom").attr("onclick", "window.open('" + "http://www.iei.or.kr/main/main.kh" + "');");
+					}else{
+						$("#ad-main-bottom-img").attr("src",data['adContentPath']);
+						$(".ad-main-bottom").attr("onclick", "window.open('" + data['landingPage'] + "');");
+					}
+				}, error : function(error){
+					console.log("메인 광고 ajax 에러");
+					$("#ad-main-bottom-img").attr("src","${pageContext.request.contextPath}/resources/upload/ad/main1.jpg");
+					$(".ad-main-bottom").attr("onclick", "window.open('" + "http://www.iei.or.kr/main/main.kh" + "');");
 				}
 			});
 		});
@@ -95,12 +101,56 @@
 						<br>
 							<div class="dc-ad-box" style="height:100px;">
 								<!-- <h1>메인 광고(AD)</h1> -->
-								<div class="ad-main">
-									<img id="ad-main-img" src="" alt="" width="798px" height="100px" />
+								<div class="ad-main-middle">
+									<img id="ad-main-middle-img" src="" alt="" width="798px" height="100px" />
 								</div>
 							</div>
 							
 							<br>
+							
+							<div class="dc-content-box">
+							<div class="dc-con-title">
+								<h4>
+									<span class="board-title" onclick="location.href='${pageContext.request.contextPath}/sale/group/list.do'">공동구매 게시판</span>
+								</h4>							
+							</div>
+							
+							<div class="dc-con-content">
+								<div class="dc-tb">
+									<div class="dc-tb-head">
+										<div class="dc-tb-row">
+											
+										</div>					
+									</div>
+									<div id="groupTable" class="dc-tb-body" style="">
+										<div id="main-img-list" class="main-img-list">
+											<c:if test="${!empty groupList}">
+												<c:forEach items="${groupList}" var="item">
+													<div class="main-img-div">
+														<a href="/dc/sale/group/groupView.do?boardNo=${item.boardNo}">
+															<span>
+																<img src="${item.goodsPicture}" width="190" />
+															</span>
+															<div class="img-text">
+																<strong>${item.title}</strong><br />
+																<span>${item.goodsCategory }</span>
+															</div>
+													</a></div>
+												</c:forEach>
+											</c:if>
+											<c:if test="${empty groupList}">
+												<div class="dc-none-data">
+													<div align="center">
+														<span>게시물 없음</span>
+													</div>
+												</div>
+											</c:if>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<br />
 						<div class="dc-content-box">
 							<div class="dc-con-title">
 								<h4>
@@ -136,54 +186,10 @@
 						</div>
 						
 						<br>
-						<div class="dc-content-box">
-							<div class="dc-con-title">
-								<h4>
-									<span class="board-title" onclick="location.href='${pageContext.request.contextPath}/sale/group/list.do'">공동구매 게시판</span>
-								</h4>							
-							</div>
-							
-							<div class="dc-con-content">
-								<div class="dc-tb">
-									<div class="dc-tb-head">
-										<div class="dc-tb-row">
-											
-										</div>					
-									</div>
-									<div id="groupTable" class="dc-tb-body" style="">
-										<div id="main-img-list" class="main-img-list">
-											<c:if test="${!empty groupList}">
-												<c:forEach items="${groupList}" var="item">
-													<div class="main-img-div">
-														<a href="/dc/sale/group/groupView.do?boardNo=${item.boardNo}">
-															<span>
-																<%-- <img src="${item.thumbnail}" width="190"/> --%>
-																<img src="https://wstatic.dcinside.com/main/main2011/2019/01/10/3731839588_a4c4449a.jpg_s" width="190"/>
-															</span>
-															<div class="img-text">
-																<strong>${item.title}</strong><br />
-																<span>${item.goodsCategory }</span>
-															</div>
-													</a></div>
-												</c:forEach>
-											</c:if>
-											<c:if test="${empty groupList}">
-												<div class="dc-none-data">
-													<div align="center">
-														<span>게시물 없음</span>
-													</div>
-												</div>
-											</c:if>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<br>
 						<div class="dc-ad-box" style="height:100px;">
 								<!-- <h1>메인 광고(AD)</h1> -->
-								<div class="ad-main">
-									<img id="ad-main-img2" src="" alt="" width="798px" height="100px" />
+								<div class="ad-main-bottom">
+									<img id="ad-main-bottom-img" src="" alt="" width="798px" height="100px" />
 								</div>
 								
 							</div>
