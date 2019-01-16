@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>동커</title>
 <c:import url="../../common/header.jsp" />
+
 </head>
 <body>
 	<script type="text/javascript">//<![CDATA[
@@ -77,7 +78,10 @@
 									[<a onclick="deleteRegion()" href="#" title="삭제">삭제하기</a>]
 								</td>
 							</tr>
-						</table>	
+						</table>
+							<div class="container3">
+								<c:import url="../../common/comment.jsp" />
+							</div>	
 					</div>
 				</div>
 				<!-- content box end -->

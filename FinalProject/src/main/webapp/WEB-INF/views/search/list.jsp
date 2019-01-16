@@ -7,9 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/search/dc-search.css" />
 <title></title>
 <c:import url="../common/header.jsp" />
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/search/dc-search.css" />
 </head>
 <body>
 	<c:import url="../common/menubar.jsp" />
@@ -34,27 +34,29 @@
 							<div id="result" style="padding:10px; margin: 20px 0px 20px 0px;">
 							<c:choose>
 						    	<c:when test = "${result.boardType eq '자유게시판'}">
-						        	<a id="resultTitle" href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${result.no}">[${result.boardType}] ${result.title}</a>
+						        	<a class="resultTitle" href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${result.no}">[${result.boardType}] ${result.title}</a>
 						        </c:when>
 								<c:when test = "${result.boardType eq '맛집'}">
-									<a href="#">${board.title}</a>
+									<a class="resultTitle" href="#">[${result.boardType}] ${result.title}</a>
 								</c:when>
 								<c:when test = "${result.boardType eq '공동구매'}">
-									<a href="#}">${comment.boardTitle}</a>
+									<a class="resultTitle" href="#">[${result.boardType}] ${result.title}</a>
 								</c:when>
 								<c:when test = "${result.boardType eq '중고거래'}">
-									<a href="#">${board.title}</a>
+									<a class="resultTitle" href="#">[${result.boardType}] ${result.title}</a>
 								</c:when>
 								<c:when test = "${result.boardType eq '부동산'}">
-									<a href="#">${board.title}</a>
+									<a class="resultTitle" href="#">[${result.boardType}] ${result.title}</a>
 								</c:when>
 								<c:when test = "${result.boardType eq '구인구직'}">
-									<a href="#">${board.title}</a>
+									<a class="resultTitle" href="#">[${result.boardType}] ${result.title}</a>
 								</c:when>							                	
 							</c:choose>
 							<p id="resultContent">
-								<c:if test="${empty result.content}">내용 없음</c:if>
-								<c:if test="${!empty result.content}">${result.content}</c:if>
+								<c:choose>
+								<c:when test="${empty result.content}">내용 없음</c:when>
+								<c:when test="${!empty result.content}">${result.content}</c:when>
+								</c:choose>
 							</p>
 								<a href="#" id="resultMemberName">${result.memberName}</a> &nbsp;&nbsp;&nbsp;
 								<span id="resultWriteDate">${result.writeDate}</span><br>
@@ -69,7 +71,8 @@
 							var reg = /${searchWord}/g;
 							var searchWord = "${searchWord}";							
 							var replaced = $("#search-result-list").html().replace(/${searchWord}/gi, '<b>'+ searchWord +'</b>');
-							$("#search-result-list").html(replaced);															    							    
+							$("#search-result-list").html(replaced);	
+														
 						});
 
 						</script>

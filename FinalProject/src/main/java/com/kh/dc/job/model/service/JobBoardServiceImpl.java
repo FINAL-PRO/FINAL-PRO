@@ -84,12 +84,14 @@ public class JobBoardServiceImpl implements JobBoardService {
 		// 
 		JobBoard jobBoard = jobBoardDao.selectOneJobBoard(no);
 		
-		System.out.println(jobBoard);
-		
-		if(jobBoard != null) jobBoardDao.updateViewCount(no);
+		//System.out.println(jobBoard);
 		
 		return jobBoard;
 		
+	}
+	
+	public void updateViewCount(int no) {
+		jobBoardDao.updateViewCount(no);
 	}
 
 	@Override

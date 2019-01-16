@@ -10,8 +10,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="description" content="">
 <meta name="author" content="">
-<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
-<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dc-default-style.css" />
 <title>로그인 페이지</title>
 <c:import url="../common/header.jsp" />
@@ -30,7 +28,7 @@
 					<input type="password" id="password" name="password" class="form-control"
 						placeholder="비밀번호를 입력하세요." required="">
 				</p>
-				<input name="_csrf" type="hidden" value="${_csrf}">
+				<input name="_csrf" type="hidden" value="${_csrf.token}">
 				<button class="btn" id="login" type="submit">로그인</button>
 			</form>
 		</div>

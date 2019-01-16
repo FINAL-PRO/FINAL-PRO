@@ -115,7 +115,7 @@
 							}
 						</script>
 						</li>
-						<li><button class="btn btn-warning loginBtnSection" onclick="location.href='${pageContext.request.contextPath}/logout'">로그아웃</button></li>
+						<li><button class="btn btn-warning loginBtnSection" onclick="location.href='${pageContext.request.contextPath}/logout.do'">로그아웃</button></li>
 					</ul>
 				</sec:authorize>
 			</div>

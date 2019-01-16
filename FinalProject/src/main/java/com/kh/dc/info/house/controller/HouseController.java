@@ -34,6 +34,7 @@ public class HouseController {
 	public String selectHouse(Model model, @RequestParam int no) {
 		House house = houseService.selectHouse(no);
 		model.addAttribute("house", house);
+		model.addAttribute("bno", no);
 		
 		return "info/house/houseDetail";
 	}

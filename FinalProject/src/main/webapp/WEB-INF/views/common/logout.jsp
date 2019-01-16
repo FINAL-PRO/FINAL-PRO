@@ -18,7 +18,7 @@
 		<div class="" style="width: 350px; margin-top: 200px;">
       		<form class="form-signin" method="post" action="/dc/logout">
 	        	<img id="logo" alt="메인으로" src="${pageContext.request.contextPath }/resources/images/logo3.png" onclick="toMain();">
-				<input name="_csrf" type="hidden" value="58cec766-dfe7-4e53-a080-b0a0cd6a686e">
+				<input name="_csrf" type="hidden" value="${_csrf.token}">
 	        	<button class="btn" id="logout" type="submit">로그아웃</button>
       		</form>
     	</div>
