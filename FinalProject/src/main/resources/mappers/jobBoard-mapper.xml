@@ -39,10 +39,10 @@
 		AND JB.SALTYPE = #{salType}
 		</if>
 		<if test="arrayType == 'B.VIEWCOUNT'">
-			ORDER BY JB.TYPE, VIEWCOUNT, JB.NO DESC
+			ORDER BY JB.TYPE ASC, B.VIEWCOUNT DESC, JB.NO DESC
 		</if>
 		<if test="arrayType != 'B.VIEWCOUNT'">
-			ORDER BY JB.TYPE, JB.NO DESC
+			ORDER BY JB.TYPE ASC, B.WRITEDATE DESC, JB.NO DESC
 		</if>
 	</select>
 	
@@ -84,7 +84,7 @@
 		<if test="jb_Search == 's-TitCon'">
 			AND (B.TITLE || B.CONTENT) LIKE '%'||#{searchCont}||'%'
 		</if>
-		ORDER BY JB.TYPE, JB.NO DESC
+		ORDER BY JB.TYPE ASC, B.VIEWCOUNT DESC, JB.NO DESC
 	</select>
 	
 	<select id="searchJobBoardTotalContents" parameterType="HashMap" resultType="_int">
@@ -259,9 +259,12 @@
 	</update>
 	
 	<update id="updateViewCount" parameterType="_int">
-		UPDATE DC_BOARD_TB SET VIEWCOUNT = VIEWCOUNT + 1 
+		UPDATE DC_BOARD_TB 
+		SET VIEWCOUNT = VIEWCOUNT + 1 
 		WHERE TYPE='BOARD006'
-		AND NO = #{no}
+		AND NO = (SELECT BOARDNO 
+				  FROM DC_BOARD_JOB_TB 
+				  WHERE NO = #{no})
 	</update>
 	
 	<update id="endJobBoard" parameterType="_int">

@@ -9,26 +9,10 @@
 <head>
 <meta charset="UTF-8">
 	<c:import url="../../common/header.jsp"/>
-	<title>업체조회</title>
-	
-	<style>
-    .columName  {
-    	display: table-row;
-    	background: lightgreen;
-    	border : 1px solid black;
-      }
-    .row {
-    	display: table-row;
-    	border : 1px solid black;
-    }  
-    .cell {
-      display: table-cell;
-      border : 1px solid black;
-      }
-    </style>
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/jobBoard/jobBoardComPopCss.css" />
 </head>
-<body>
-	<h2> 업체조회</h2>
+<body class="c-List">
+	<h3> 업체조회</h3>
 	<div id="c-table" class="c-table">
 		<div class="columName">
 			<div id="no" class="cell">번호</div>
@@ -37,7 +21,7 @@
 		</div>
 
 		<c:forEach items="${list}" var="jc">
-		<div id="${jc.no}" class="row" onclick="setComInfo(this);">
+		<div id="${jc.no}" class="row colum" onclick="setComInfo(this);">
 			<div id="noValue" class="noValue cell">${jc.no}</div>
 			<div id="nameValue" class="nameValue cell">${jc.name}</div>
 			<div id="addressValue" class="addressValue cell">${jc.address}</div>

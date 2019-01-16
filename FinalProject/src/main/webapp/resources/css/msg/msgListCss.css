@@ -1,48 +1,69 @@
 @charset "UTF-8";
 
-	.msgBody{
+	.msgBody {
 		margin: 5%;
 	}
+	
 	.msg-table{
 		border-collapse: collapse;
 		line-height: 1.5;
 	}
-    .columName  {
+	.columName  {
     	text-align:center; 
-    	vertical-align:middle;
+    	vertical-align: middle;
     	display: table-row;
-    	border : 1px solid black;
     	margin: 2px;
-    	background: skyblue;
+    	background: gray;
     	font-weight: bold;
-    	font-size: 15px;
-    	height: 30px;
+    	font-size: 18px;
+    	height: 40px;
 		color: #fff;
+    	
     }
+	 
+    .row {
+    	display: table-row;
+    }        
+    .cell {
+	    display: table-cell;
+    }
+    .mini{
+    	top: 50%;
+    	width:50px;
+    	text-align: center;
+    }    
+        
 	.colum {
+		
 		text-align:center; 
-    	vertical-align:middle;
+    	vertical-align: middle;
 		height: 30px;
 		display: table-row;
 		width: 10%;
 		padding: 10px;
 		vertical-align: top;
-	}  
-	 
-    .row {
-    	
-    	display: table-row;
-    	border : 1px solid black;
-    }        
-    .cell {
-	      display: table-cell;
-	      border : 1px solid black;
-    }
-        #msgIcon {
+	} 
+	.colum:hover{
+		background: lightgray;
+	}
+	.mini{
+		width:50px;
+		text-align: center;
+	}
+	.mid{
+		width:80px;
+		text-align: center;
+	}
+    #msgIcon {
     	width:30px;
+    	text-align: center;
+    	
     }
-    .mini{
-    	top: 50%;
-    	width:50px;
+    #content, #contentValue{
+    	width:300px;
+    }
+    
+    #sendDate, #sendDateValue{
+    	width:130px;
     	text-align: center;
     }

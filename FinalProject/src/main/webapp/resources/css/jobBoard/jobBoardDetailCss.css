@@ -5,6 +5,7 @@
 		background:white;
 		font-weight:bold;
 		font-size:x-large;
+		border-bottom: 1px solid lightgray;
 	}
 	.dc-content-detail{
 		margin: 20px;
