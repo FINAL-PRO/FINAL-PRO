@@ -70,13 +70,13 @@
 														<li>
 															<strong>
 																<span>크기 </span> :
-															</strong> 
-																<span>${house.area } <strong>㎡</strong></span> <br>
+																<span>${house.area } ㎡</span> <br>
+															</strong>
 															<strong>
 																<span>매매가 </span> :
-															</strong> 
-															<span>${house.minprice} &nbsp;원</span> <br> 
-															<span>${house.hType} &nbsp;/&nbsp; ${house.dealType}</span>
+																<span>${house.minprice} &nbsp;원</span> <br> 
+																<%-- <span>${house.hType} &nbsp;/&nbsp; ${house.dealType}</span> --%>
+															</strong>
 														</li>
 													</ul>
 												</div>
