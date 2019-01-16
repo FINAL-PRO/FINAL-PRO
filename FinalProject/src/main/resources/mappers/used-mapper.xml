@@ -45,6 +45,12 @@
 		SELECT * FROM DC_BOARD_USED_VIEW WHERE BOARDNO = #{boardNo} AND STATUS='BSTATUS001'
 	</select>
 	
+	<select id="selectOneUsed2" parameterType="_int" resultType="used">
+		SELECT U.*, B.TITLE, B.CONTENT 
+		FROM DC_BOARD_USED_TB U JOIN DC_BOARD_TB B ON (U.BOARDNO = B.NO)
+		WHERE BOARDNO = #{boardNo}
+	</select>
+	
 	<insert id="insertUsed" parameterType="used">
 		<selectKey keyProperty="boardNo" resultType="_int" order="BEFORE">
 			SELECT SEQ_BOARD.CURRVAL FROM DUAL

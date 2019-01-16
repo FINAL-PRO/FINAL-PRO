@@ -75,7 +75,7 @@
 <div class="dc-content-box">
 <!-- ------------------- 내용 입력 ------------------- -->
 
-<c:set var="viewPath" value="${pageContext.request.contextPath}/sale/used/usedView.do?boardNo=" />
+<c:set var="viewPath" value="${pageContext.request.contextPath}/sale/used/view.do?boardNo=" />
 
 <div class="row">
 	<div class="col-md-10">
@@ -126,7 +126,7 @@
 <script>
 
 	function goUsedForm(){
-		location.href = "${pageContext.request.contextPath}/sale/used/usedForm.do";
+		location.href = "${pageContext.request.contextPath}/sale/used/insertForm.do";
 	}	
 
 </script>
