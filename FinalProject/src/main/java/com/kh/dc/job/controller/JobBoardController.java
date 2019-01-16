@@ -23,7 +23,7 @@ public class JobBoardController {
 	
 	@Autowired
 	private JobBoardService jobBoardService;  
-	
+
 	@RequestMapping("/job/jobBoard/jobBoardList.do")
 	public String jobBoardList(
 			@RequestParam(value="arrayType", required=false, defaultValue="B.WRITEDATE")String arrayType,
@@ -119,6 +119,9 @@ public class JobBoardController {
 	@RequestMapping("job/jobBoard/jobBoardDetail.do")
 	public String selectOneBoard(@RequestParam int no, Model model) {
 		JobBoard jobBoard = jobBoardService.selectOneJobBoard(no);
+		
+		if(jobBoard != null) jobBoardService.updateViewCount(jobBoard.getNo());
+		
 		model.addAttribute("jobBoard", jobBoard);
 		model.addAttribute("bno", jobBoard.getBoardNo());
 		
@@ -174,9 +177,10 @@ public class JobBoardController {
 
 	@RequestMapping("/job/jobBoard/updateJobBoardForm.do")
 	public String updateJobBoardForm(@RequestParam int no, Model model) {
+		JobBoard jobBoard = jobBoardService.selectOneJobBoard(no);
 		
-		model.addAttribute("jobBoard", jobBoardService.selectOneJobBoard(no));
-		System.out.println(jobBoardService.selectOneJobBoard(no));
+		model.addAttribute("jobBoard", jobBoard);
+		
 		return "job/jobBoard/jobBoardUpdate";
 	}
 	

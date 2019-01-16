@@ -5,32 +5,33 @@
 			border-collapse: collapse;
 			text-align: left;
 			line-height: 1.5;
-			
 			margin: 20px 10px;
+			
 		}
 	    .columName  {
 	    
 			margin: 2px;
 	    	display: table-row;
-	    	background: skyblue;
+	    	background: #f6f6f6;
 	    	font-weight: bold;
-	    	font-size: 15px;
 	    	height: 30px;
-			vertical-align: bottom;
-			color: #fff;
+			vertical-align: middle;
+			color: gray;
 	      }
 	    .colum {
 		    height: 30px;
 	    	display: table-row;
 	    	width: 10%;
 		    padding: 10px;
-		    vertical-align: top;
+		    vertical-align: middle;
 	    }  
 	 
 	    .cell {
 		    display: table-cell;
-		    
+		    border-bottom: 1px solid lightgray;
 		    width: auto;
+		    height: 37px;
+		    vertical-align: middle;
 		}
 		.colum:hover{
 			background: lightgray;
@@ -59,7 +60,6 @@
 		   white-space: nowrap;
 		   width: 100px;
 		}
-		
 			select.cArray-color {
 		   color: #fff;
 		   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#779126, #779126 40%, #779126);
@@ -78,5 +78,8 @@
 		}
 		#no, #viewCount, #hide-work {
 			width:5%; 
+		}
+		.mini{
+			width:50px;
 		}
 	

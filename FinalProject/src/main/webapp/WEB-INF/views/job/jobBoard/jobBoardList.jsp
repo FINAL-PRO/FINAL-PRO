@@ -30,7 +30,10 @@
 						<h3>구인구직 게시판</h3>
 					</div>
 					<div class="dc-content-box">
+					
+					
 					<div class="arrayType" >
+						<c:if test="${searchCont eq null}">
 						<!-- 날짜/조회순 정렬 -->
 						<select class="cArray" id="arrayType" name="arrayType">
 							<option value="B.WRITEDATE" <c:if test="${arrayType == B.WRITEDATE}">selected</c:if>>최신순</option>
@@ -56,7 +59,8 @@
 								<option value="${sal.id}" <c:if test="${sal.id eq salType}">selected</c:if>>${sal.value}</option>
 							</c:forEach>
 						</select>	
-																
+						</c:if>
+															
 						<!-- 검색창 <--><br/>
 						<form action="${pageContext.request.contextPath}/job/jobBoard/searchJobBoard.do">
 						<div class="searchArea">
@@ -71,59 +75,73 @@
 						<button type="submit">검색</button>
 						</div>
 						</form>
-						
 
-						
 					</div>
-						<div class="job-board table">
-							<div class="columName">
-								<div id="no" class="cell">번호</div>
-								<div id="title" class="cell">제목</div>
-								<div id="nickName" class="cell">작성자</div>
-								<div id="writeDate" class="cell">작성일</div>
-								<div id="salInfo" class="cell">급여</div>
-								<div id="endJobDday" class="cell">마감일</div>
-								<div id="viewCount" class="cell">조회</div>
-								<div id="hide-work" class="cell">상태</div>	
-							</div>
+						<table class="job-board table">
+							<tr>
+								<th id="no" class="cell">번호</th>
+								<th id="title" class="cell">제목</th>
+								<th id="nickName" class="cell">작성자</th>
+								<th id="writeDate" class="cell">작성일</th>
+								<th id="salInfo" class="cell">급여</th>
+								<th id="endJobDday" class="cell">마감일</th>
+								<th id="viewCount" class="cell">조회</th>
+								<th id="hide-work" class="cell">상태</th>	
+							</tr>
 							<c:forEach items="${list}" var="jb">
-							<c:if test="${0 < jb.dday}">
-							<div id="${jb.no}" class="colum"> 
-								<div class="cell" style="width:50px">${jb.no}</div>
-								<div class="cell">
+							<c:if test="${0 < jb.dday && jb.type ne '마감'}">
+							<tr id="${jb.no}" class="colum"> 
+								<td class="cell" style="width:50px">${jb.no}</td>
+								<td class="cell">
 									<a href="${pageContext.request.contextPath}/job/jobBoard/jobBoardDetail.do?no=${jb.no}">${jb.title}</a></div>
-								<div class="cell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<a href="#">${jb.nickName}</a> 
+								<td class="cell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<a id="sendNick" href="#">${jb.nickName}</a> 
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 									    <a class="dropdown-item" href="" id="writeNick" onclick="writeNick();">작성글 검색</a>
 									    <a class="dropdown-item" href="" onclick="sendMsg();">쪽지보내기</a>
 									    <a class="dropdown-item">---------------</a>
 									</div>
-								</div>
-								<div class="cell">${jb.writeDate}</div>
-								<div class="cell">${jb.salary} / ${jb.salType}</div>
-								<div class="cell">${jb.dday}일 남음</div>
-								<div class="cell">${jb.viewCount}</div>
-								<div class="cell">${jb.type}</div>		
-							</div>
-							
+								</td>
+								<td class="cell">${jb.writeDate}</td>
+								<td class="cell">${jb.salary} / ${jb.salType}</td>
+								<td class="cell">${jb.dday}일 남음</td>
+								<td class="cell mini">${jb.viewCount}</td>
+								<td class="cell mini">${jb.type}</td>		
+							</tr>
 							</c:if>
-							<!-- 마감된것들 -->
+							</c:forEach>
+							
+							<c:forEach items="${list}" var="jb">
+							<!-- D-Day 지난것들 -->
 							<c:if test="${0 > jb.dday}">
-							<div id="${jb.no}" class="colum"> 
-								<div class="cell jbEnd" style="width:50px">${jb.no}</div>
-								<div class="cell jbEnd">
-									<a class="jbEnd" href="javascript:void(0);">${jb.title}</a></div>
-								<div class="cell jbEnd">${jb.nickName}</div>
-								<div class="cell jbEnd">${jb.writeDate}</div>
-								<div class="cell jbEnd">${jb.salary} / ${jb.salType}</div>
-								<div class="cell jbEnd">${jb.dday}일 남음</div>
-								<div class="cell jbEnd">${jb.viewCount}</div>
-								<div class="cell jbEnd">${jb.type}</div>		
-							</div>
+							<tr id="${jb.no}" class="colum"> 
+								<td class="cell jbEnd mini" style="width:50px">${jb.no}</td>
+								<td class="cell jbEnd">
+									<a class="jbEnd" href="javascript:void(0);">${jb.title}</a></td>
+								<td class="cell jbEnd">${jb.nickName}</td>
+								<td class="cell jbEnd">${jb.writeDate}</td>
+								<td class="cell jbEnd">${jb.salary} / ${jb.salType}</td>
+								<td class="cell jbEnd">${jb.dday}일 남음</td>
+								<td class="cell jbEnd mini">${jb.viewCount}</td>
+								<td class="cell jbEnd mini">${jb.type}</td>		
+							</tr>
+							</c:if>
+							
+							<c:if test="${'마감' eq jb.type}">
+							<tr id="${jb.no}" class="colum"> 
+								<td class="cell jbEnd mini" style="width:50px">${jb.no}</td>
+								<td class="cell jbEnd">
+									<a class="jbEnd" href="javascript:void(0);">${jb.title}</a></td>
+								<td class="cell jbEnd">${jb.nickName}</td>
+								<td class="cell jbEnd">${jb.writeDate}</td>
+								<td class="cell jbEnd">${jb.salary} / ${jb.salType}</td>
+								<td class="cell jbEnd">${jb.dday}일 남음</td>
+								<td class="cell jbEnd mini">${jb.viewCount}</td>
+								<td class="cell jbEnd mini">${jb.type}</td>		
+							</tr>
 							</c:if>
 							</c:forEach>				
-						</div>
+						</table>
 						&nbsp;&nbsp;<input type="button" value="글쓰기" id="btn-add" class="btn" onclick="jobBoardInsert();"/><br/><br/>
 
 						<c:out value="${pageBar}" escapeXml="false"/>
@@ -172,10 +190,10 @@
 					+ "&salType=" + $("#salType").val();
 		});
 		function sendMsg() {
-			window.open("${pageContext.request.contextPath}/message/messageInsertForm.do?fromMember=${jobBoard.nickName}", "msgPop", "width=700, height=600");
+			window.open("${pageContext.request.contextPath}/message/messageInsertForm.do?fromMember="+ $("#sendNick").text(), "msgPop", "width=700, height=600");
 		}
 		function writeNick(){
-			location.href = "${pageContext.request.contextPath}/job/jobBoard/searchJobBoard.do?jb_Search=s_Nick&searchCont=${jb.nickName}";
+			location.href = "${pageContext.request.contextPath}/job/jobBoard/searchJobBoard.do?jb_Search=s_Nick&searchCont="+ $("#sendNick").text();
 		}
 	</script>
 </body>
