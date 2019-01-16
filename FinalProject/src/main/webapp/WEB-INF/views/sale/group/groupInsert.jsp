@@ -271,22 +271,17 @@
 		
 		console.log(maxCount);
 
-		if (maxCount == "") {
+		if(maxCount == "") {
 			$("#maxCountMsg").text('');
 		} else if (!regPwd.test(maxCount)) {
+			$("#maxCountMsg").text('숫자만 입력해 주세요.');
+		} else if (maxCount>20 || maxCount<1) {
 			$("#maxCountMsg").text('1~20 사이의 숫자를 입력해 주세요.');
 		} else {
-			$("#maxCountMsg").text('ok!');
+			$("#maxCountMsg").text('');
 		}
 	});
 	
-	// 마감일 --> 과거선택x, 오늘부터 10일
-	$("#endDate").on("keyup", function() {
-		var endDate = $("#endDate").val().trim();
-		var regPwd = /^[0-9]$/g;
-		
-		console.log(endDate);
-	});
 	
 
 	
