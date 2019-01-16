@@ -1,6 +1,7 @@
 package com.kh.dc.info.region.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,64 +14,67 @@ import com.kh.dc.info.region.model.vo.RegionRe;
 public class RegionserviceImpl implements RegionService {
 
 	@Autowired
-	private RegionDao rd;
-	
-	@Override
-	public List<Region> regionList() {
-		return rd.regionList();
-	}
+	private RegionDao regionDao;
 	
 	@Override
 	public int insertRegion(Region rg) {
-		return rd.insertRegion(rg);
+		return regionDao.insertRegion(rg);
 	}
 
 	@Override
 	public Region selectRegion(int no) {
 		System.out.println("service No : " + no);
-		return rd.selectRegion(no);
+		return regionDao.selectRegion(no);
 		
 	}
 
 	@Override
 	public int updateRegion(Region rg) {
-		return rd.updateRegion(rg);
+		return regionDao.updateRegion(rg);
 		
 	}
 
 	@Override
 	public int deleteRegion(int no) {
-		return rd.deleteRegion(no); 
+		return regionDao.deleteRegion(no); 
 		
 	}
 
 	@Override
 	public int reInsertRegion(RegionRe rre) {
-		System.out.println("service rre : " + rre);
-		return rd.reInsertRegion(rre);
+		return regionDao.reInsertRegion(rre);
 	}
 
 	@Override
 	public int updateCountRegion(int no) {
 		System.out.println("조회수 증가 svs : " + no);
-		return rd.updateCountRegion(no);
+		return regionDao.updateCountRegion(no);
 	}
 
 	@Override
 	public int regionLikeCount(int no) {
-		System.out.println("좋아요한 글번호 : " + no );
 	
-		return rd.regionLikeCount(no);
+		return regionDao.regionLikeCount(no);
 	}
 
 	@Override
 	public int regionLikeCountView(int no) {
-		return rd.regionLikeCountView(no);
+		return regionDao.regionLikeCountView(no);
 	}
 
 	@Override
 	public int deleteRegionLike(int no) {
-		return rd.deleteRegionLike(no);
+		return regionDao.deleteRegionLike(no);
+	}
+
+	@Override
+	public List<Map<String, String>> regionList(int cPage, int numPerPage) {
+		return regionDao.regionList(cPage, numPerPage);
+	}
+
+	@Override
+	public int selectRegionTotalContents() {
+		return regionDao.selectRegionTotalContents();
 	}
 
 }

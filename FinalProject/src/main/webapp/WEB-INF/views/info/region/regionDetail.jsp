@@ -72,10 +72,11 @@
 							</tr>
 							<tr>
 								<td colspan="3">
-									[<a class="" href="${pageContext.request.contextPath}/info/region/list.do" title="목록">목록</a>]
-									[<a class="" href="#" accesskey="t" title="상단이동">맨 위로</a>]
-									[<a onclick="updateRegion()" href="#" title="수정">수정하기</a>]
-									[<a onclick="deleteRegion()" href="#" title="삭제">삭제하기</a>]
+									<button class="btn dc-btn" onclick="goList()" title="목록">목록</button>
+									<c:if test="${member.no ==  region.memberNo}">
+										<button class="btn dc-btn" onclick ="updateRegion()" title="수정하기">수정하기</button>
+										<button class="btn dc-btn" onclick ="deleteRegion()" title="삭제하기">삭제하기</button>
+									</c:if>
 								</td>
 							</tr>
 						</table>
@@ -97,11 +98,15 @@
 	<script>
 
 	function updateRegion(){
-		location.href="${pageContext.request.contextPath}/info/region/update/view.do?no="+${region.no};
+		location.href="${pageContext.request.contextPath}/info/region/update/view.do?no=${region.no}";
 	}
 	
 	function deleteRegion(){
-		location.href="${pageContext.request.contextPath}/info/region/delete.do?no="+${region.no};
+		location.href="${pageContext.request.contextPath}/info/region/delete.do?no=${region.no}";
+	}
+	
+	function goList(){
+		location.href="${pageContext.request.contextPath}/info/region/list.do";
 	}
 </script>
 

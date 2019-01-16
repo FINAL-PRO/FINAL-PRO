@@ -23,18 +23,13 @@ public class HouseDaoImpl implements HouseDao {
 	}
 
 	@Override
-	public List<House> houseList() {
-		return sqlSession.selectList("house_mapper.selectList");
+	public int insertHouse(House house) {
+		return sqlSession.insert("house_mapper.insertBoard", house)*sqlSession.insert("house_mapper.insertHouse", house);
 	}
 
 	@Override
-	public int insertHouse(House hs) {
-		return sqlSession.insert("house_mapper.insertBoard", hs)*sqlSession.insert("house_mapper.insertHouse", hs);
-	}
-
-	@Override
-	public int updateHouse(House hs) {
-		return sqlSession.update("house_mapper.updateBoard", hs)*sqlSession.update("house_mapper.updateHouse", hs);
+	public int updateHouse(House house) {
+		return sqlSession.update("house_mapper.updateBoard", house)*sqlSession.update("house_mapper.updateHouse", house);
 	}
 
 	@Override
@@ -50,6 +45,11 @@ public class HouseDaoImpl implements HouseDao {
 	@Override
 	public List<Code> selectDealList() {
 		return sqlSession.selectList("house_mapper.selectDealList");
+	}
+
+	@Override
+	public List<House> houseList(Map<String, Object> params) {
+		return sqlSession.selectList("house_mapper.selectList", params);
 	}
 
 

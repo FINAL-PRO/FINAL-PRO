@@ -22,7 +22,7 @@
 	</select>
 	
 	<insert id="insertRegion" parameterType="region">
-		INSERT INTO DC_BOARD_TB VALUES(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 1, 'BOARD007','BSTATUS001', 1,NULL)
+		INSERT INTO DC_BOARD_TB VALUES(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0 , 'BOARD007','BSTATUS001', ${memberNo},NULL)
 	</insert>
 	
 	<update id="updateRegion" parameterType="region">
@@ -52,5 +52,13 @@
 	<update id="updateCountRegion" parameterType="region">
 		UPDATE DC_BOARD_TB SET VIEWCOUNT = VIEWCOUNT + 1 WHERE NO = #{no}
 	</update>
+	
+		
+	<select id="selectTotalContent" resultType="_int">
+		SELECT COUNT(*) FROM 
+		DC_BOARD_TB
+		WHERE STATUS != 'BSTATUS002'
+        AND TYPE = 'BOARD007'
+	</select>
 	
 </mapper>

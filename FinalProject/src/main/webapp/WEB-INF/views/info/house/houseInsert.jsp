@@ -85,11 +85,11 @@
 									<td colspan="2">
 
 										<input type="hidden" name="mNo" value="${member.no}" />
-										<button type="submit" onclick="inserthouse()">확인</button>
-										<button type="reset">취소</button>
-										<c:if test="${house.no != null }">
-											<a href="${pageContext.request.contextPath}/info/house/delete.do?no=${house.boardNo}"><button type="button" >삭제하기</button></a>
+										<button class="btn dc-btn" type="submit">확인</button>
+										<button class="btn dc-btn" type="reset" onclick="goBack();">취소</button>
+										<c:if test="${house.boardNo != null }">
 											<input type="hidden" name="no" value="${house.boardNo}" required />
+											<button class="btn dc-btn" onclick ="deleteHouse()" title="삭제하기">삭제하기</button>
 										</c:if>	
 									</td>
 								</tr>
@@ -138,6 +138,14 @@
     				console.log("이미지 업로드 실패");						
     			}
     		});
+    	}
+    	
+    	function deleteHouse(){
+    		location.href="${pageContext.request.contextPath}/info/house/delete.do?no=${house.boardNo}";
+    	}
+    	
+    	function goBack(){
+    		history.go(-1);
     	}
     </script>
 </body>
