@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dc-rightSection.css" />
 	
 <script>
-
 	var uris = "${pageContext.request.requestURI}".split("/");
 	console.log(uris);
 	var adPage = "메인";
@@ -20,7 +19,6 @@
 	}else if(uris.length < 7){
 		adPage = "관리자";
 	}
-
 	$.ajax({
 		url : "${pageContext.request.contextPath}/business/ad/getAd.do?adPage=" + adPage + "&adSection=" + adSection + "&adLocation=" + adLocation,
 		success : function(data){
@@ -28,11 +26,6 @@
 			console.log(data);
 			
 			if(data == ""){
-				/* $(".ad-right").css("width", "258px").css("height", "290px").attr("background-position", "center")
-				.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
-				.css("margin-right", "auto");
-				$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/260x280.png")'); */
-				
 				$("#ad-right-bottm-img").attr("src","${pageContext.request.contextPath}/resources/upload/ad/adright.gif");
 				$(".ad-right-bottm").attr("onclick", "window.open('" + "http://www.iei.or.kr/main/main.kh" + "');");
 			}else{
@@ -67,7 +60,8 @@
 			<div class="dc-profile-area-top" style="background:white; padding:10px;">
 				<!-- 로그인 안 했을때 -->
 				<sec:authorize access="isAnonymous()">
-					<button style="width:90%;margin:10px;margin-top:15%" class="btn loginBtnSection" id="loginBtn" onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
+					<button style="width:90%;margin:10px;" class="btn loginBtnSection" id="loginBtn" onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
+					<span style="font-size: 12px; color: rgb(171, 187, 129); line-height: 0.5;">동커를 더 다양하고 편리하게 <br> 사용하시려면 <b style="color:rgb(244, 126, 96);">로그인</b>해주세요.</span>
 				</sec:authorize>
 				
 				<!-- 로그인 했을때 -->
