@@ -46,15 +46,10 @@ public class AdController {
 		adParams.put("adType", adType);
 		adParams.put("adStatus", adStatus);
 		
-		System.out.println("정렬 : " + adParams);
-		
-		
 		List<Code> adContentTypeList = adService.selectAdContentList();
 		List<Code> adTypeList = adService.selectAdTypeList();
 		List<Code> adStatusList = adService.selectAdStatusList();
 		List<Ad> adList = adService.selectAdList(adParams);
-		
-		System.out.println("adList : " + adList);
 		
 		model.addAttribute("adList", adList);
 		
@@ -105,13 +100,11 @@ public class AdController {
 		
 		Ad ad = new Ad(startDate, endDate, memberNo, pageNo, sectionNo, locationNo, adContentType, adType, status, landingPage);
 		
-		System.out.println("받은 ad : " + ad);
-		
 		String saveDir = session.getServletContext()
 				.getRealPath("/resources/upload/ad");
 		
 		File dir = new File(saveDir);
-		System.out.println("폴더 생성 여부 : " + dir.exists());
+		/*System.out.println("폴더 생성 여부 : " + dir.exists());*/
 		if(dir.exists() == false) dir.mkdirs();
 		
 		if(!adContentPath.isEmpty()) {
@@ -129,14 +122,11 @@ public class AdController {
 				e.printStackTrace();
 			}
 			
-			System.out.println("원래 이름 : " + originName);
-			System.out.println("바뀐 이름 : " + renamedName);
+			/*System.out.println("원래 이름 : " + originName);
+			System.out.println("바뀐 이름 : " + renamedName)*/;
 			
 			ad.setAdContentPath("/dc/resources/upload/ad/" + renamedName);
 		}
-		
-		System.out.println("바뀐 ad : " + ad);
-		
 		
 		int result = adService.insertAd(ad);
 		
@@ -154,14 +144,10 @@ public class AdController {
 			@RequestParam(value="adSection", defaultValue="우측") String adSection,
 			@RequestParam(value="adLocation", defaultValue="하단") String adLocation) {
 		
-		System.out.println(adPage + " : " + adSection + " : " + adLocation);
-		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("adPage", adPage);
 		params.put("adSection", adSection);
 		params.put("adLocation", adLocation);
-		
-		System.out.println("params : " + params);
 		
 		List<Ad> ad = adService.getAd(params);
 	

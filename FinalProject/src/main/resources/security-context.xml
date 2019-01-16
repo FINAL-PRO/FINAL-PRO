@@ -79,6 +79,7 @@
 			
 		<security:form-login
 			default-target-url="/index.do"
+			login-page="/login/loginForm.do"
 			always-use-default-target="true"/>
 
 		<!-- <security:form-login
