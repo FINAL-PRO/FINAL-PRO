@@ -22,7 +22,9 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>공지글 작성폼</h1>
+							<div>
+								<span class="dc-list-title">공지</span>
+							</div>
 						</div>
 						<div class="dc-content-box">
 							<div class="table-form-content">
@@ -53,6 +55,7 @@
 											<tr>
 												<td colspan="2" align="center">
 													<button class="btn dc-btn" type="submit">등록</button>
+													<button class="btn dc-btn" onclick="goAdminBoardList();">취소</button>
 												</td>
 											</tr>
 										</tbody>					
@@ -80,6 +83,10 @@
 				lang: 'ko-KR'
 			}); 
 		});
+		
+		function goAdminBoardList(){
+			location.href = "${pageContext.request.contextPath}/admin/board/list.do";
+		}
 
 	</script>	 
 </body>

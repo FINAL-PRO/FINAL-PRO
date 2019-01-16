@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dc-default-style.css" />
-<title>404 Page not found.</title>
+<title>페이지 접근 권한이 없습니다.</title>
 <c:import url="../common/header.jsp" />
 </head>
 <body>
@@ -19,11 +19,10 @@
 	
 	<div align="center" style="margin: 0 auto; ">
 		<div class="" style="width: 300px; margin-top: 200px;">
-      		<form class="form-signin" method="post" action="/dc/logout">
+      		<form class="form-signin" method="post" action="#">
 	        	<img id="logo" alt="메인으로" src="${pageContext.request.contextPath }/resources/images/logo3.png" onclick="toMain();">
-	        	<h1 style="margin-bottom: 20px;">권한이 없습니다.</h1>
-				<input name="_csrf" type="hidden" value="58cec766-dfe7-4e53-a080-b0a0cd6a686e">
-	        	<button class="btn" id="logout" onclick="toMain();">메인으로</button>
+	        	<h1 style="margin-bottom: 20px;">페이지 접근 권한이 없습니다.</h1>
+	        	<button class="btn" id="logout" type="button" onclick="toMain();">메인으로</button>
       		</form>
     	</div>
     </div>

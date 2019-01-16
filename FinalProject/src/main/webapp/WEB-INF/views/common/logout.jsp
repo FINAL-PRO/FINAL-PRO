@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/dc-default-style.css" />
-<title>로그인 페이지</title>
+<title>로그아웃</title>
 <c:import url="../common/header.jsp" />
 
 </head>
