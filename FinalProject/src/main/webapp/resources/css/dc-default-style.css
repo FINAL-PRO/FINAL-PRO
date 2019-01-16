@@ -327,3 +327,24 @@ div[class^="ad-"]:hover {
 	background: rgb(244, 126, 96);
 	color: white;
 }
+
+#logout{
+	width: 100%;
+	background: rgb(248, 178, 106);
+    color: white;
+}
+
+#logout:hover{
+	background: rgb(244, 126, 96);
+	color: white;
+}
+
+
+
+#logo{
+	width: 220px;
+	margin-bottom: 15px;
+	cursor: pointer;
+}
+
+
