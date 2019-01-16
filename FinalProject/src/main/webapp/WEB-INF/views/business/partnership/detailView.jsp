@@ -25,25 +25,25 @@
 						<h1>업체 상세보기</h1>
 					</div>
 					<div class="dc-content-box">
-					<form action="${pageContext.request.contextPath}/business/partnership/update/view.do">
-						<div>
-							<div class="row table-row">
-								<div class="col">번호</div>
-								<div class="col">제목</div>
-								<div class="col">내용</div>
-							</div>
-
-							<div class="row table-row">
-								<div class="col column">${company.no}</div>
-								<div class="col column">${company.name}</div>
-								<div class="col column">${company.address}</div>
-							</div>
-							<div class="table" style="background: red"></div>
-							
-							<input type="hidden" name="companyNo" value="${company.no}" />
-							<button type="submit">수정하기</button>
-						</div>
-					</form>
+						<form action="${pageContext.request.contextPath}/business/partnership/update/view.do">
+							<table class="table">
+								<thead>
+									<th>#</th>
+									<th>제목</th>
+									<th>내용</th>
+								</thead>
+								<tbody>
+									<tr>
+										<td>${company.no}</td>
+										<td>${company.name}</td>
+										<td>${company.address}</td>
+									</tr>
+									<input type="hidden" name="companyNo" value="${company.no}" />
+								</tbody>
+							</table>
+							<button class="btn dc-btn" type="submit">수정하기</button>
+							<button class="btn dc-btn" onclick="historyGoBack();">뒤로</button>
+						</form>
 					</div>
 				</div>
 			</div>

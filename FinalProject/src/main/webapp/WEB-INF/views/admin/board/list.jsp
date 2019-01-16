@@ -22,49 +22,69 @@
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-						<h1>어드민 보드 리스트</h1>
-						<a href="${pageContext.request.contextPath}/admin/board/notice/writeView.do">공지글 쓰기</a>
+						<div>
+							<span class="dc-list-title">전체 게시글 리스트</span>
+							<button class="btn dc-btn dc-btn-right" onclick="insertNotice();">공지 작성</button>
+						</div>
 						<br />
-						<select id="boardTypeNo">
-							<c:forEach items="${boardTypeList}" var="type">
-								<option value="${type.id}" <c:if test="${type.id eq boardType}">selected</c:if>>${type.value}</option>
-							</c:forEach>
-						</select>
-						<select id="boardStatusNo">
-							<c:forEach items="${boardStatusList}" var="status">
-								<option value="${status.id}" <c:if test="${status.id eq boardStatus}">selected</c:if>>${status.value}</option>
-							</c:forEach>
-						</select>
+						<div class="form-inline">
+							<select class="form-control" id="boardTypeNo">
+								<c:forEach items="${boardTypeList}" var="type">
+									<option value="${type.id}" <c:if test="${type.id eq boardType}">selected</c:if>>${type.value}</option>
+								</c:forEach>
+							</select>
+							<select class="form-control" id="boardStatusNo">
+								<c:forEach items="${boardStatusList}" var="status">
+									<option value="${status.id}" <c:if test="${status.id eq boardStatus}">selected</c:if>>${status.value}</option>
+								</c:forEach>
+							</select>
+						</div>
 					</div>
 					<div class="dc-content-box">
 
-						<div class="row table-row">
-							<div class="col column">번호</div>
-							<div class="col column">이름</div>
-							<div class="col column">작성일</div>
-							<div class="col column">상태</div>
-						</div>
-						<c:forEach var="board" items="${boardList}">
-							<div class="row table-row" id="comment_${board.no}">
-								<div class="col column">${board.no}</div>
-								<div class="col column">
-									<a
-										href="${pageContext.request.contextPath}/admin/board/detailView.do?boardNo=${board.no}">${board.title}</a>
-								</div>
-								<div class="col column">${board.writeDate}</div>
-								<div class="col column">
-									<select id="${board.no}_changeStatusNo">
-										<c:forEach items="${boardStatusList}" var="status">
-											<c:if test="${boardStatus ne status.id}">
-												<option value="${status.id}">${status.value}</option>
-											</c:if>
-											
-										</c:forEach>
-									</select>
-									<button onclick="changeBoardStatus(${board.no});">상태변경</button>
-								</div>
-							</div>
-						</c:forEach>
+						<table class="table">
+							<thead>
+								<th>#</th>
+								<th>제목</th>
+								<th>작성일</th>
+								<th>상태</th>
+							</thead>
+							<tbody>
+								<c:if test="${!empty boardList }">
+									<c:forEach var="board" items="${boardList}">
+										<tr id="comment_${board.no}">
+											<td>${board.no}</td>
+											<td>
+												<a href="${pageContext.request.contextPath}/${boardUrl}/view.do?no=${board.no}">${board.title}</a>
+											</td>
+											<td>${board.writeDate}</td>
+											<td>
+												<div class="form-inline">
+													<select class="form-control" id="${board.no}_changeStatusNo">
+														<c:forEach items="${boardStatusList}" var="status">
+															<c:if test="${boardStatus ne status.id}">
+																<option value="${status.id}">${status.value}</option>
+															</c:if>
+														</c:forEach>
+													</select>
+													<button class="btn dc-btn" onclick="changeBoardStatus(${board.no});">상태변경</button>
+												</div>
+											</td>
+										</tr>
+									</c:forEach>
+								</c:if>
+								<c:if test="${empty boardList }">
+									<tr>
+										<td colspan="4">
+											<div class="dc-none-data">
+												<span class="dc-none-data-text">데이터가 없습니다.</span>
+											</div>
+										</td>
+									</tr>
+								</c:if>
+							</tbody>
+						</table>
+						<button class="btn dc-btn" onclick="goAdminIndex();">전체 목록</button>
 					</div>
 				</div>
 			</div>
@@ -104,6 +124,10 @@
 					alert("error");
 				}
 			});
+		}
+		
+		function insertNotice(){
+			location.href = "${pageContext.request.contextPath}/admin/board/notice/insert/view.do";
 		}
 	</script>
 </body>

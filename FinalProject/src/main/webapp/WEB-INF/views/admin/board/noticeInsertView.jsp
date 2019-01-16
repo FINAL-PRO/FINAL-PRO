@@ -27,13 +27,13 @@
 						<div class="dc-content-box">
 							<div class="table-form-content">
 								<form name="boardFrm" action="${pageContext.request.contextPath}/admin/board/notice/insert.do" method="post">
-									<input type="text" id="memberNo" name="memberNo" value="${member.no}"/>
-									<table class="table table-bordered">
+									<input type="hidden" id="memberNo" name="memberNo" value="${member.no}"/>
+									<table class="table">
 										<tbody>
 											<tr>
 												<td>게시판 타입</td>
 												<td>						
-													<select id="boardTypeNo" name="type">
+													<select class="form-control" id="boardTypeNo" name="type">
 														<c:forEach items="${boardTypeList}" var="type">
 															<option value="${type.id}"
 																<c:if test="${type.id eq boardType}">selected</c:if>>${type.value}</option>
@@ -43,7 +43,7 @@
 											</tr>
 											<tr>
 												<td>제목</td>
-												<td><input type="text" name="title" required="required"/></td>
+												<td><input class="form-control" type="text" name="title" required="required"/></td>
 											</tr>
 											<tr>
 												<td colspan="2">
@@ -52,7 +52,7 @@
 											</tr>
 											<tr>
 												<td colspan="2" align="center">
-													<button type="submit">등록</button>
+													<button class="btn dc-btn" type="submit">등록</button>
 												</td>
 											</tr>
 										</tbody>					
