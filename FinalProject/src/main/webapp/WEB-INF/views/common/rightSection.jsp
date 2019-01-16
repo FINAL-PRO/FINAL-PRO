@@ -10,32 +10,27 @@
 <script>
 	var uris = "${pageContext.request.requestURI}".split("/");
 	console.log(uris);
+	var adPage = "메인";
+	var adSection = "우측";
+	var adLocation = "하단";
+	
+	if(uris.length < 6){
+		adPage = "메인";
+	}else if(uris.length < 7){
+		adPage = "관리자";
+	}
 	$.ajax({
-		url : "${pageContext.request.contextPath}/business/ad/getAd.do",
-		data : {adPage : uris[4],
-				adSection : uris[5],
-				adLocation : uris[6]},
+		url : "${pageContext.request.contextPath}/business/ad/getAd.do?adPage=" + adPage + "&adSection=" + adSection + "&adLocation=" + adLocation,
 		success : function(data){
 			console.log("우측 섹션 광고 ajax 성공");
 			console.log(data);
 			
 			if(data == ""){
-				/* $(".ad-right").css("width", "258px").css("height", "290px").attr("background-position", "center")
-				.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
-				.css("margin-right", "auto");
-				$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/260x280.png")'); */
-				
-				$("#ad-right-img").attr("src","${pageContext.request.contextPath}/resources/upload/ad/right1.jpg");
-				$(".ad-right").attr("onclick", "window.open('" + "http://www.iei.or.kr/main/main.kh" + "');");
+				$("#ad-right-bottm-img").attr("src","${pageContext.request.contextPath}/resources/upload/ad/adright.gif");
+				$(".ad-right-bottm").attr("onclick", "window.open('" + "http://www.iei.or.kr/main/main.kh" + "');");
 			}else{
-				var img = data['adContentPath'].split("\\ad/");
-				
-				$(".ad-right").css("width", "258px").css("height", "290px").attr("background-position", "center")
-				.css("background-repeat", "no-repeat").css("background-size", "cover").css("margin-left", "auto")
-				.css("margin-right", "auto");
-				$(".ad-right").css("background-image", 'url("${pageContext.request.contextPath}/resources/upload/ad/' + img[1] + '")');
-				
-				$(".ad-right").attr("onclick", "window.open('" + data['landingPage'] + "');");
+				$("#ad-right-bottom-img").attr("src",data['adContentPath']);
+				$(".ad-right-bottm").attr("onclick", "window.open('" + data['landingPage'] + "');");
 			}
 			
 		}, error : function(){
@@ -156,8 +151,8 @@
 	</div>
 	<div class="dc-content-box dc-border">
 		<!-- <h1>광고(AD)</h1> -->
-		<div class="ad-right">
-			<img id="ad-right-img" src="" width="258px" height="290px"/>
+		<div class="ad-right-bottom">
+			<img id="ad-right-bottom-img" src="" width="258px" height="290px"/>
 		</div>
 	</div>
 </div>
