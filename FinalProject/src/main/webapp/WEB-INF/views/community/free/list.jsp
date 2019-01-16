@@ -170,7 +170,7 @@ hr {
 }
 
 .free_btn2{
-	background: rgb(225, 91, 100);
+	background: rgb(171, 187, 129);
     color: white;
     cursor: pointer;
 }

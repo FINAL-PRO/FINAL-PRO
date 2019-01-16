@@ -96,7 +96,7 @@
 	
 	<select id="selectOneFood" parameterType="_int" resultMap="resultFoodList">
 		SELECT B.*, F.NO foodNo, P.NO pointNo, M.NICKNAME, NVL(L.like_count, 0) like_count, NVl(C.comment_count,0) comment_count,
-				C.VALUE food_category, F.ADDRESS food_address, P.POINT
+				C.VALUE food_category, F.ADDRESS food_address, P.POINT, C.ID categoryId
 		FROM DC_BOARD_TB B
 		INNER JOIN DC_MEMBER_TB M 
 		ON B.MEMBERNO = M.NO
