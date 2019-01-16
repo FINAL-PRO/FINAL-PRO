@@ -48,19 +48,19 @@
 						                	<c:when test = "${board.boardType eq '자유게시판'}">
 						                	<a href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${board.no}">${board.title}</a>
 						                	</c:when>
-											<c:when test = "${board.title eq '맛집'}">
-								          	<a href="#">${board.title}</a>
+											<c:when test = "${board.boardType eq '맛집'}">
+								          	<a href="${pageContext.request.contextPath}/community/food/foodView.do?bno=${board.no}">${board.title}</a>
 								         	</c:when>
-								         	<c:when test = "${board.title eq '공동구매'}">
+								         	<c:when test = "${board.boardType eq '공동구매'}">
 								          	<a href="#">${board.title}</a>
 								        	 </c:when>
-								        	 <c:when test = "${board.title eq '중고거래'}">
+								        	 <c:when test = "${board.boardType eq '중고거래'}">
 								          	<a href="#">${board.title}</a>
 								         	</c:when>
-								         	<c:when test = "${board.title eq '부동산'}">
+								         	<c:when test = "${board.boardType eq '부동산'}">
 								          	<a href="#">${board.title}</a>
 								        	 </c:when>
-								         	<c:when test = "${board.title eq '구인구직'}">
+								         	<c:when test = "${board.boardType eq '구인구직'}">
 								          	<a href="#">${board.title}</a>
 								         	</c:when>							                	
 						                </c:choose>
