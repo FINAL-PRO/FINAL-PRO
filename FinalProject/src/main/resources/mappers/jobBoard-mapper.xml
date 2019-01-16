@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jobBoard_mapper">
 	
-	<resultMap type="JobBoard" id="jobBoardMap">
-		<result column="nickName" property="nickName"/>
-		<result column="writeDate" property="writeDate"/>
-		<result column="jobtype" property="jobType"/>
-		<result column="saltype" property="salType"/>
-		<result column="status" property="status"/>
-		<result column="dday" property="dday"/>
+	<resultMap type="jobBoard" id="jobBoardMap">
+		<result column="NICKNAME" property="nickName"/>
+		<result column="WRITEDATE" property="writeDate"/>
+		<result column="JOBTYPE" property="jobType"/>
+		<result column="SALTYPE" property="salType"/>
+		<result column="STATUS" property="status"/>
+		<result column="DDAY" property="dday"/>
 	</resultMap>
 	
 	<select id="selectJobBoardList" parameterType="HashMap" resultMap="jobBoardMap">
@@ -30,7 +30,7 @@
 		WHERE B.STATUS != 'STATUS002'
 		AND B.TYPE = 'BOARD006'
 		<if test="type != 'selAll'">
-			AND JB.TYPE = #{type}
+		AND JB.TYPE = #{type}
 		</if>
 		<if test="jobType != 'selAllJob'">
 		AND JB.JOBTYPE = #{jobType}
@@ -38,12 +38,21 @@
 		<if test="salType != 'selAllSel'">
 		AND JB.SALTYPE = #{salType}
 		</if>
-		ORDER BY JB.TYPE, JB.NO DESC
-		
+		<if test="arrayType == 'B.VIEWCOUNT'">
+			ORDER BY JB.TYPE, VIEWCOUNT, JB.NO DESC
+		</if>
+		<if test="arrayType != 'B.VIEWCOUNT'">
+			ORDER BY JB.TYPE, JB.NO DESC
+		</if>
 	</select>
 	
-	
-	<select id="selectJobBoardSearch" parameterType="HashMap" resultMap="jobBoardMap">
+	<select id="selectJobBoardTotalContents" resultType="_int">
+		SELECT COUNT(*) FROM DC_BOARD_JOB_TB JB
+		JOIN DC_BOARD_TB B ON(B.NO = JB.BOARDNO)
+		WHERE B.STATUS != 'STATUS002'
+	</select>
+	<!-- 검색 -->
+	<select id="searchJobBoardList" parameterType="map" resultMap="jobBoardMap">
 		SELECT JB.NO, TITLE, NICKNAME, WRITEDATE, STARTDATE, ENDDATE, 
                 FLOOR(ENDDATE - SYSDATE) "DDAY",
                 STARTJOB, ENDJOB, SALARY, 
@@ -60,25 +69,47 @@
 		JOIN DC_CODE_TB CD4 ON(CD4.ID = B.STATUS)
 		WHERE B.STATUS != 'STATUS002'
 		AND B.TYPE = 'BOARD006'
-
-        <if test="jb_search == s-All">
-        	AND (B.TITLE || B.CONTENT || NICKNAME) LIKE '%#{jb-Search}%'
+        <if test='jb_Search == "s_All"'>
+        	AND (B.TITLE || B.CONTENT || NICKNAME) LIKE '%'||#{searchCont}||'%'
         </if>
-        <if test="jb_search == s-Title">    	
-        	AND B.TITLE LIKE '%#{jb-Search}%'
+        <if test="jb_Search == 's_Title'">    	
+        	AND B.TITLE LIKE '%'||#{searchCont}||'%'
         </if>
-		<if test="jb_search == s-Title">
-			AND B.CONTENT LIKE '%#{jb-Search}%'
+		<if test="jb_Search == 's_Content'">
+			AND B.CONTENT LIKE '%'||#{searchCont}||'%'
 		</if>
-		<if test="jb_search == s-Content">
-			AND NICKNAME LIKE '%#{jb-Search}%'
+		<if test="jb_Search == 's_Nick'">
+			AND NICKNAME LIKE '%'||#{searchCont}||'%'
 		</if>
-		<if test="jb_search == s-TitCon">
-			AND (B.TITLE || B.CONTENT) LIKE '%#{jb-Search}%'
+		<if test="jb_Search == 's-TitCon'">
+			AND (B.TITLE || B.CONTENT) LIKE '%'||#{searchCont}||'%'
 		</if>
- 
+		ORDER BY JB.TYPE, JB.NO DESC
 	</select>
 	
+	<select id="searchJobBoardTotalContents" parameterType="HashMap" resultType="_int">
+		SELECT COUNT(*)
+		FROM DC_BOARD_JOB_TB JB
+		JOIN DC_BOARD_TB B ON(B.NO = JB.BOARDNO)
+		WHERE B.STATUS != 'STATUS002'
+
+        <if test="jb_search == s-All">
+        	AND (B.TITLE || B.CONTENT || NICKNAME) LIKE '%'||#{searchCont}||'%'
+        </if>
+        <if test="jb_search == s-Title">    	
+        	AND B.TITLE LIKE '%'||#{searchCont}||'%'
+        </if>
+		<if test="jb_search == s-Title">
+			AND B.CONTENT LIKE '%'||#{searchCont}||'%'
+		</if>
+		<if test="jb_search == s-Content">
+			AND NICKNAME LIKE '%'||#{searchCont}||'%'
+		</if>
+		<if test="jb_search == s-TitCon">
+			AND (B.TITLE || B.CONTENT) LIKE '%'||#{searchCont}||'%'
+		</if>
+	</select>
+
 	<select id="selectJobBoardSelType" parameterType="HashMap" resultMap="jobBoardMap">
 		SELECT JB.NO, TITLE, NICKNAME, WRITEDATE, STARTDATE, ENDDATE, 
                 FLOOR(ENDDATE - SYSDATE) "DDAY",
@@ -106,12 +137,6 @@
         	AND NICKNAME = #{nickName}
         </if>
 	</select>
-	
-	<select id="selectJobBoardTotalContents" resultType="_int">
-		SELECT COUNT(*) FROM DC_BOARD_JOB_TB JB
-		JOIN DC_BOARD_TB B ON(B.NO = JB.BOARDNO)
-		WHERE B.STATUS != 'STATUS002'
-	</select>
 
 	<select id="selectWriteJobBoard" resultMap="jobBoardMap">
 		<!-- 작성자 게시글 보기 -->
@@ -135,7 +160,6 @@
 		ORDER BY JB.TYPE, JB.NO DESC
 	</select>
 
-	
 	<select id="selectOneJobBoard" parameterType="_int" resultType="jobBoard">
 		<!-- 게시물 상세조회 -->
 		SELECT JB.NO, TITLE, NICKNAME, CONTENT, 
@@ -203,7 +227,6 @@
 		SELECT COUNT(*) FROM DC_COMPANY_TB
 		WHERE STATUS = 'COMTYPE001'
 	</select>
-	
 	
 	<update id="updateBoard" parameterType="JobBoard">
 		UPDATE DC_BOARD_TB SET 
@@ -282,11 +305,11 @@
 	<select id="selectJobBoardTypeList" resultType="code">
 		SELECT * FROM DC_CODE_TB WHERE ATT = '구인구직타입'
 	</select>
-
+	<!-- 정규 / 비정규 -->
 	<select id="selectJobBoardJobTypeList" resultType="code">
 		SELECT * FROM DC_CODE_TB WHERE ATT = '근무타입구분'
 	</select>
-	
+	<!-- 급여종류 -->
 	<select id="selectJobBoardSalTypeList" resultType="code">
 		SELECT * FROM DC_CODE_TB WHERE ATT = '급여타입'
 	</select>	

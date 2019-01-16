@@ -19,10 +19,6 @@
 	margin: 10px;
 }
 
-a {
-	color: black;
-}
-
 .btn-write {
 	float: right;
 	margin-right: 10px;
@@ -82,7 +78,10 @@ a {
 <c:set var="viewPath" value="${pageContext.request.contextPath}/sale/used/usedView.do?boardNo=" />
 
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-10">
+		
+	</div>
+	<div class="col-md-2">
 		<button class="btn btn-write" onclick="goUsedForm();">글쓰기</button>
 	</div>
 </div> <hr />
@@ -98,9 +97,9 @@ a {
 		<p class="pro-info">가격 : ${u.price} 원</p>
 	</div> 
 	<div class="col-md-3 pro pro-con">
-		<br />
+
 		<p class="pro-info">${u.memberName} </p>
-		<br />
+
 		<span>${u.writeDate}</span>
 		<span style="float:right;">조회수 ${u.viewCount}</span>
 	</div>

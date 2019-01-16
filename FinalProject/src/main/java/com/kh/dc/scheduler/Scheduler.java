@@ -34,6 +34,12 @@ public class Scheduler {
 		System.out.println("광고 스케줄러 실행 : end : " + end);
 	}
     
+	@Scheduled(cron="0 0 0 * * *")
+	public void checkGroupDday() {
+		
+		
+	}
+    
     
     
 }

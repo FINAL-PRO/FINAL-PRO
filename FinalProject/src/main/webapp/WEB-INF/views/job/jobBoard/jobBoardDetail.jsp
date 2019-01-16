@@ -48,15 +48,22 @@
 						<label class="inlie-t">조회수</label><div class="inline">
 						${jobBoard.viewCount}</div><br />
 						<label class="inlie-t">근무장소</label><div class="inline"> 
-						<a href="">${jobBoard.location}</a>&nbsp;&nbsp;<span onclick="locPop();"><a href="">[위치찾기]</a></span> </div>
-						<label class="inlie-t">구인구직타입</label><div class="inline">
-						<a href="">${jobBoard.type}</a></div><br />	
+						${jobBoard.location}&nbsp;&nbsp;<span onclick="locPop();"><a href="">
+						<img src="${pageContext.request.contextPath}/resources/icons/locSearch.png" id="msgIcon"/>
+						</a></span> </div>
+						<label class="inlie-t">구인구직타입</label><div class="inline">${jobBoard.type}</div><br />	
 						<!-- 모집시작/마감일 -->
 						<label class="inlie-t">모집시작/마감일 </label><div class="inline"> ${jobBoard.startDate} ~ ${jobBoard.endDate}</div>
 						<!-- 근무시작/종료일 -->
 						<label class="inlie-t">근무시작/종료일</label><div class="inline"> ${jobBoard.startJob} ~ ${jobBoard.endJob}</div><br />
 						<!-- 급여/급여타입 -->
-						<label class="inlie-t">급여/급여타입</label><div class="inline"> ${jobBoard.salary} / ${jobBoard.salType}</div>
+						<label class="inlie-t">급여/급여타입</label><div class="inline"> ${jobBoard.salary} / 
+						<c:if test="${'SALTYPE001' eq jobBoard.salType}">시급</c:if>
+						<c:if test="${'SALTYPE002' eq jobBoard.salType}">일급</c:if>
+						<c:if test="${'SALTYPE003' eq jobBoard.salType}">주급</c:if>
+						<c:if test="${'SALTYPE004' eq jobBoard.salType}">월급</c:if>
+						<c:if test="${'SALTYPE005' eq jobBoard.salType}">연봉</c:if>
+						</div>
 						
 						<label class="inlie-t">마감일</label><div class="inline">${jobBoard.dday}일 남음</div>
 						</div>
