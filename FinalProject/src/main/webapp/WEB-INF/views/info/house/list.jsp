@@ -24,8 +24,8 @@
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-						<h1>부동산 리스트</h1>
-						<button onclick="insertHouse();">글쓰기</button>
+						<span class="dc-list-title">부동산 리스트</span>
+						<button class="btn dc-btn dc-btn-right" onclick="insertHouse();">글쓰기</button>
 					</div>
 					<div class="dc-content-box">
 						<div style="display:block">
@@ -35,7 +35,7 @@
 								<a onclick="selectHouse(${house.boardNo})" href="#">
 									<div class="dc-house-item-box">
 										<div class="dc-house-thumbnail">
-											<img src="" id="" alt="" />img 삽입될 곳 <span class="wish"></span>
+											<img src="${house.houseImg}" id="" alt="" width="200px" height="220px"/>
 										</div>
 										<div class="dc-house-description">
 											<strong class="name"> 
@@ -61,12 +61,14 @@
 						</c:forEach>
 						</div>
 					</div>
+					
 				</div>
 			</div>
 
 			<div class="section-right">
 				<c:import url="../../common/rightSection.jsp" />
 			</div>
+
 		</section>
 		</main>
 	</div>

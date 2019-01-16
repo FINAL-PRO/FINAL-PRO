@@ -26,7 +26,6 @@ public class HouseController {
 		List<House> list = houseService.houseList();
 		model.addAttribute("list", list);
 		
-		System.out.println("list hType : " + list);
 		return "info/house/list";
 	}
 	
@@ -40,8 +39,8 @@ public class HouseController {
 	}
 	
 	@RequestMapping(value= "info/house/insert.do", method=RequestMethod.POST)
-	public String insertHouse(House hs) {
-		int result = houseService.insertHouse(hs);
+	public String insertHouse(House house) {
+		int result = houseService.insertHouse(house);
 		
 		return "redirect:/info/house/list.do";
 	}
@@ -73,13 +72,11 @@ public class HouseController {
 	}
 	
 	@RequestMapping("info/house/update.do")
-	public String updateHouseEnd(House hs) {
+	public String updateHouseEnd(House house) {
 		
-		System.out.println("house : " + hs);
-		System.out.println("area : " + hs.getArea());
-		houseService.updateHouse(hs);
+		houseService.updateHouse(house);
 		
-		return "redirect:/info/house/view.do?no=" + hs.getNo();
+		return "redirect:/info/house/view.do?no=" + house.getNo();
 	}
 	
 	@RequestMapping("info/house/delete.do")
