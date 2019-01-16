@@ -37,7 +37,7 @@
 	padding-top:3px;
 }
 
-#content {
+#group-content {
 	width: 100%;
 	height: auto;
 	padding: 30px;
@@ -155,7 +155,7 @@
 		<c:forEach items="${statusList}" var="status">
 			<div class="status-box" id="${status.id}" value="${status.value}" onclick="changeStatus(this);">
 				<p class="status-txt">${status.value}</p>
-			</div>	
+			</div>
 		</c:forEach>
 		<p style="font-size:10px; color:lightgray;">공동구매 진행자는 진행상황을 클릭하여 변경할 수 있습니다.</p>
 	</div>
@@ -174,10 +174,9 @@
 </c:if>
 	
 <div>
-	<div id="content">${group.content }</div>
+	<div id="group-content">${group.content }</div>
 </div>
 
-<br /><br />
 <div style="display:flex; justify-content: center;">
 	<c:if test="${!empty member and member.no eq group.memberNo}">
 		<input type="button" value="수정하기" class="btn" onclick="updateGroup();"/>

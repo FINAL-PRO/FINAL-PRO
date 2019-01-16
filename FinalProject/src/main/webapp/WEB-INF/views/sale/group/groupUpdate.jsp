@@ -78,7 +78,6 @@
 		<div class="col-md-4 img-box">
 			<div class="img-box" style="border:1px solid black;">
 				<div class="img-box" style="border:1px solid black;">
-					<span id="imgMsg">물품 사진을 등록해주세요.</span>
 					<img id="goodsImg" src="${group.goodsPicture}"/>
 				</div>
 				<input type="file" id="inputFile" style="display:none;" onchange="inputPicture(this);"/>

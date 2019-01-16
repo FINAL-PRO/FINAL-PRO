@@ -38,7 +38,7 @@
 	padding-top:3px;
 }
 
-#content {
+#used-content {
 	width: 100%;
 	height: auto;
 	padding: 30px;
@@ -166,10 +166,9 @@
 </c:if>
 
 <div>
-	<div id="content">${used.content }</div>
+	<div id="used-content">${used.content }</div>
 </div>
 	
-<br /><br />
 <div style="display:flex; justify-content: center;">
 	<c:if test="${!empty member and member.no eq used.memberNo}">
 		<input type="button" value="수정하기" class="btn" onclick="updateUsed();"/>
@@ -177,7 +176,6 @@
 	</c:if> 
 	<input type="button" value="목록" class="btn" onclick="goUsedList();"/>
 </div>
-<br /><br />
 
 <div class="container3">
 	<c:import url="../../common/comment.jsp" />

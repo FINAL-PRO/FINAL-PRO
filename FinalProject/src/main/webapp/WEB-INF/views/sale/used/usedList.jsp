@@ -39,14 +39,14 @@
 
 .title {
 	font-size: 20px;
-	padding-bottom: 10px;
+	padding-bottom: 30px;
 	overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 .pro-info {
-	margin-top: 20px;
+	margin-bottom: 15px;
 }
 
 .product-box:hover {
@@ -97,9 +97,9 @@
 		<p class="pro-info">가격 : ${u.price} 원</p>
 	</div> 
 	<div class="col-md-3 pro pro-con">
-
 		<p class="pro-info">${u.memberName} </p>
-
+		<p class="pro-info">거래방법 : ${u.dealType}</p>
+		<p class="pro-info">판매상태 : ${u.status}</p>
 		<span>${u.writeDate}</span>
 		<span style="float:right;">조회수 ${u.viewCount}</span>
 	</div>

@@ -23,8 +23,8 @@ label.info-label {
 }
 
 .img-box {
-	height: 250px;
-	width: 250px;
+	height: 230px;
+	width: 230px;
 }
 
 .info {
