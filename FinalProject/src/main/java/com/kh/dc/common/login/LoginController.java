@@ -25,7 +25,7 @@ public class LoginController {
 		return "common/accessDenied";
 	}
 	
-	@RequestMapping("/login/logout.do")
+	@RequestMapping("/logout.do")
 	public String logout() {
 		return "common/logout";
 	}
