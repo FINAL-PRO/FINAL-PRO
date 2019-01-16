@@ -36,6 +36,12 @@ public class UsedServiceImpl implements UsedService {
 			
 		return used;
 	}
+	
+	@Override
+	public Used selectOneUsed2(int boardNo) {
+
+		return usedDao.selectOneUsed2(boardNo);
+	}
 
 	@Override
 	public int insertUsed(Used used) {
@@ -45,7 +51,7 @@ public class UsedServiceImpl implements UsedService {
 
 	@Override
 	public int updateUsed(Used used) {
-
+		
 		return usedDao.updateBoard(used)*usedDao.updateUsed(used);
 	}
 
