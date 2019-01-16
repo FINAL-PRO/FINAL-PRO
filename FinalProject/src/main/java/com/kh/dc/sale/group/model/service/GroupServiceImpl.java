@@ -41,7 +41,7 @@ public class GroupServiceImpl implements GroupService {
 	}
 	
 	@Override
-	public Object selectOneGroup2(int boardNo) {
+	public Group selectOneGroup2(int boardNo) {
 
 		return groupDao.selectOneGroup2(boardNo);
 	}

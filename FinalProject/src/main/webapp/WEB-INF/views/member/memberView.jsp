@@ -44,7 +44,10 @@
 								</div>								 
 								<div class="row email-container" id="email-container">
 									<div class="col-md-3 memberTitleLabel">이메일</div>
-									<div class="col-md-6"><input type="email" class="form-control" name="email" id="email" value="${member.email}" readonly></div>
+									<div class="col-md-6">
+										<input type="email" class="form-control" name="email" id="email" 
+												value="${member.email}" readonly>
+									</div>
 									<div class="col-md-3 comment" id="duplicateCheck">
 										<label class="guide1"></label>
 							    	</div>

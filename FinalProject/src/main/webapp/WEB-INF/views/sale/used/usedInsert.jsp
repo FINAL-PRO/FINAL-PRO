@@ -60,7 +60,7 @@
 <div class="dc-content-box">
 <!-- ------------------- 내용 입력 ------------------- -->
 
-<form name="boardForm" action="${pageContext.request.contextPath}/sale/used/usedFormEnd.do" method="post">
+<form name="boardForm" action="${pageContext.request.contextPath}/sale/used/insert.do" method="post">
 	<input type="hidden" name="memberNo" value="${member.no}" required /> 
 	
 	<div class="row title-box">

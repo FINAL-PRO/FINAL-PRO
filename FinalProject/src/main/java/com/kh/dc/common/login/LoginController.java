@@ -24,6 +24,12 @@ public class LoginController {
 	public String accessDenied() {
 		return "common/accessDenied";
 	}
+	
+	@RequestMapping("/login/logout.do")
+	public String logout() {
+		return "common/logout";
+	}
+	
 /*
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	public String loginPage(@RequestParam(value = "error", required = false) String error,

@@ -212,11 +212,13 @@
 	}
 	
 	function updateUsed() {
-		location.href = "${pageContext.request.contextPath}/sale/used/usedUpdateForm.do?boardNo="+${used.boardNo};
+		location.href = "${pageContext.request.contextPath}/sale/used/updateForm.do?boardNo="+${used.boardNo};
 	}
 	
 	function deleteUsed() {
-		location.href = "${pageContext.request.contextPath}/sale/used/usedDelete.do?boardNo="+${used.boardNo};
+		if(confirm("삭제하시겠습니까?")) {
+			location.href = "${pageContext.request.contextPath}/sale/used/delete.do?boardNo="+${used.boardNo};
+		}
 	}
 	
 	function pay(price) {

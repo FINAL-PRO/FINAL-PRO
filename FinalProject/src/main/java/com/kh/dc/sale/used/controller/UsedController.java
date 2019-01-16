@@ -44,12 +44,10 @@ public class UsedController {
 		return "sale/used/usedList";
 	}
 
-	@RequestMapping("sale/used/usedView.do")
+	@RequestMapping("sale/used/view.do")
 	public String selectOneUsed(@RequestParam int boardNo, Model model) {
 		
 		Used used = usedService.selectOneUsed(boardNo);
-		
-		System.out.println("uh,, : " + usedService.selectOneUsedHistory(used.getNo()));
 		
 		model.addAttribute("used", used)
 			 .addAttribute("uh", usedService.selectOneUsedHistory(used.getNo()))
@@ -58,55 +56,43 @@ public class UsedController {
 		return "sale/used/usedView";
 	}
 
-	@RequestMapping("sale/used/usedForm.do")
+	@RequestMapping("sale/used/insertForm.do")
 	public String insertUsedForm(Model model) {
 		
 		return "sale/used/usedInsert";
 	}
 	
-	@RequestMapping("sale/used/usedFormEnd.do")
+	@RequestMapping("sale/used/insert.do")
 	public String insertUsed(Used used, Model model) {
 		
-		System.out.println("used,,,, : " + used);
+		usedService.insertUsed(used);
 		
-		if(usedService.insertUsed(used) > 0) {
-			model.addAttribute("used", usedService.selectOneUsed(used.getBoardNo()));
-		}
-		
-		return "sale/used/usedView";
+		return "redirect:/sale/used/list.do";
 	}
 	
-	@RequestMapping("sale/used/usedUpdateForm.do")
+	@RequestMapping("sale/used/updateForm.do")
 	public String updateUsedForm(@RequestParam int boardNo, Model model) {
 		
-		model.addAttribute("used", usedService.selectOneUsed(boardNo));
+		model.addAttribute("used", usedService.selectOneUsed2(boardNo));
 		
 		return "sale/used/usedUpdate";
 	}
 	
-	@RequestMapping("sale/used/usedUpdateFormEnd.do")
+	@RequestMapping("sale/used/update.do")
 	public String updateUsed(Used used, Model model) {
 		
-		int result = usedService.updateUsed(used);
+		usedService.updateUsed(used);
+		model.addAttribute("boardNo", used.getBoardNo());
 		
-		System.out.println("글번호.. : " + used.getBoardNo());
-		System.out.println("유즈드.. : " + usedService.selectOneUsed(used.getBoardNo()));
-		
-		model.addAttribute("used", usedService.selectOneUsed(used.getBoardNo()));
-		
-		return "sale/used/usedView";
+		return "redirect:/sale/used/view.do";
 	}
 	
-	@RequestMapping("sale/used/usedDelete.do")
+	@RequestMapping("sale/used/delete.do")
 	public String deleteUsed(@RequestParam int boardNo, Model model) {
 		
-		String loc = "/sale/used/list.do";
-		System.out.println("boardNo : "+boardNo);
-		String msg = (usedService.deleteUsed(boardNo)>0) ? "게시글을 삭제하였습니다." : "게시글 삭제에 실패하였습니다.";
-
-		model.addAttribute("loc", loc).addAttribute("msg", msg);
+		usedService.deleteUsed(boardNo);
 		
-		return "common/msg";
+		return "redirect:/sale/used/list.do";
 	}
 	
 	@RequestMapping("sale/used/uStatusUpdate.do")

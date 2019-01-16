@@ -11,11 +11,12 @@ header{
 
 div#header-container{
 	background-color : #fff;
-	padding : 15px;
+	padding : 20px;
 }
 
 .dc-menubar{
 	/* background-color : #03cf5d; */
+	/* background-color: #ffffe0; */
 }
 
 nav{
@@ -124,9 +125,9 @@ footer{
 /* main 제목 div */
 .dc-content-title{
 	display:block;
-	margin:10px;
+	padding: 8px 16px 8px 16px;
 	/* background-color: gray; */
-	min-height: 7vh;ㅋ
+	min-height: 7vh;
 	/* border : 1px solid #dee3eb; */	
 }
 
@@ -204,7 +205,6 @@ footer{
 }
 
 .board-title{
-	color : ;
 	font-weight : bold;
 }
 
@@ -281,8 +281,9 @@ div[class^="ad-"]:hover {
 }
 
 .dc-con-title{
-	border-bottom:2px solid black;
-	padding:10px;
+	border-bottom: 1px solid lightgray;
+	padding: 8px 16px 8px 16px;
+	cursor: pointer;
 }
 
 .dc-con-content{
@@ -294,7 +295,7 @@ div[class^="ad-"]:hover {
 }
 
 .dc-con-title span{
-	color : #03cf5d;
+	color: rgb(244, 126, 96);
 }
 
 .dc-con-content a span{
@@ -327,3 +328,24 @@ div[class^="ad-"]:hover {
 	background: rgb(244, 126, 96);
 	color: white;
 }
+
+#logout{
+	width: 100%;
+	background: rgb(248, 178, 106);
+    color: white;
+}
+
+#logout:hover{
+	background: rgb(244, 126, 96);
+	color: white;
+}
+
+
+
+#logo{
+	width: 220px;
+	margin-bottom: 15px;
+	cursor: pointer;
+}
+
+
