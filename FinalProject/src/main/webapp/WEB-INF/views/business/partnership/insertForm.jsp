@@ -22,7 +22,7 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>업체 등록 게시판</h1>
+							<h1>업체 등록</h1>
 						</div>
 						<div class="dc-content-box">
 							<form method="post" enctype="multipart/form-data"
@@ -32,19 +32,19 @@
 								<tr>
 									<td>업체명</td>
 									<td>
-										<input type="text" name="name" value="${company.name}"/>	
+										<input class="form-control" type="text" name="name" value="${company.name}" required="required"/>	
 									</td>
 								</tr>
 								<tr>
 									<td>주소</td>
 									<td>
-										<input type="text" name="address" value="${company.address}" />
+										<input class="form-control" type="text" name="address" value="${company.address}" required="required"/>
 									</td>
 								</tr>
 								<tr>
 									<td>업체구분</td>
 									<td>
-										<select name="status" id="">
+										<select class="form-control" name="status" id="">
 											<c:forEach items="${companyTypeList}" var="code">
 												<option value="${code.id}">${code.value}</option>
 											</c:forEach>
@@ -54,11 +54,12 @@
 								<tr>
 									<td colspan="2">
 										<c:if test="${empty company}">
-											<button type="submit">업체 등록</button>
+											<button class="btn dc-btn" type="submit">업체 등록</button>
 										</c:if>
 										<c:if test="${!empty company}">
-											<button type="submit">업체 수정</button>
+											<button class="btn dc-btn" type="submit">업체 수정</button>
 										</c:if>
+										<button class="btn dc-btn" onclick="historyGoBack();">취소</button>
 									</td>
 								</tr>		
 							</table>

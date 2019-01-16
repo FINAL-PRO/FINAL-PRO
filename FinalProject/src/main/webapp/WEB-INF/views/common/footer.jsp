@@ -94,4 +94,10 @@
 	</div>
 		
 	</div>
+	
+	<script>
+		function historyGoBack(){
+			history.go(-1);
+		}
+	</script>
 </footer>
