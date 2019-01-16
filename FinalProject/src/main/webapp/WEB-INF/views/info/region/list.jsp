@@ -23,8 +23,10 @@
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-						<span class="dc-list-title">지역정보 게시판</span>
-						<button class="btn dc-btn dc-btn-right" onclick="location.href='${pageContext.request.contextPath}/info/region/insert/view.do'">글쓰기</button>
+						<div>
+							<span class="dc-list-title">지역정보 게시판</span>
+							<button class="btn dc-btn dc-btn-right" onclick="location.href='${pageContext.request.contextPath}/info/region/insert/view.do'">글쓰기</button>
+						</div>
 					</div>
 					<div class="dc-content-box">
 						<table class="table">

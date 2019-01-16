@@ -14,42 +14,42 @@ import com.kh.dc.info.house.model.vo.House;
 public class HouseServiceImpl implements HouseService {
 	
 	@Autowired
-	private HouseDao hd;
+	private HouseDao houseDao;
 	
 	
 	@Override
 	public House selectHouse(int no) {
-		return hd.selectHouse(no);
-	}
-
-	@Override
-	public List<House> houseList() {
-		return hd.houseList();
+		return houseDao.selectHouse(no);
 	}
 
 	@Override
 	public int insertHouse(House hs) {
-		return hd.insertHouse(hs);
+		return houseDao.insertHouse(hs);
 	}
 
 	@Override
 	public int updateHouse(House hs) {
-		return hd.updateHouse(hs);
+		return houseDao.updateHouse(hs);
 	}
 
 	@Override
 	public int deleteHouse(int no) {
-		return hd.deleteHoust(no);
+		return houseDao.deleteHoust(no);
 	}
 
 	@Override
 	public List<Code> selectRoomList() {
-		return hd.selectRoomList();
+		return houseDao.selectRoomList();
 	}
 
 	@Override
 	public List<Code> selectDealList() {
-		return hd.selectDealList();
+		return houseDao.selectDealList();
+	}
+
+	@Override
+	public List<House> houseList(Map<String, Object> params) {
+		return houseDao.houseList(params);
 	}
 
 

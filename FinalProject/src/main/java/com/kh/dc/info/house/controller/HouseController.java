@@ -1,6 +1,7 @@
 package com.kh.dc.info.house.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,9 +23,23 @@ public class HouseController {
 	private HouseService houseService;
 	
 	@RequestMapping("info/house/list.do")
-	public String houseList(Model model) {
-		List<House> list = houseService.houseList();
+	public String houseList(Model model,
+			@RequestParam(value="dealType", defaultValue="HUSDEAL001") String dealType,
+			@RequestParam(value="hType", defaultValue="HUSTYP001") String hType) {
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("dealType", dealType);
+		params.put("hType", hType);
+		
+		List<House> list = houseService.houseList(params);
+		List<Code> dealList = houseService.selectDealList();
+		List<Code> roomList = houseService.selectRoomList();
+		
 		model.addAttribute("list", list);
+		model.addAttribute("roomList", roomList);
+		model.addAttribute("dealList", dealList);
+		model.addAttribute("dealType", dealType);
+		model.addAttribute("hType", hType);
 		
 		return "info/house/list";
 	}

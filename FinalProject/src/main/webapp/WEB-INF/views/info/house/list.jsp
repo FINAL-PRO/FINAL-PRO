@@ -24,44 +24,74 @@
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-						<span class="dc-list-title">부동산 리스트</span>
-						<button class="btn dc-btn dc-btn-right" onclick="insertHouse();">글쓰기</button>
+						<div>
+							<span class="dc-list-title">부동산 리스트</span>
+							<button class="btn dc-btn dc-btn-right" onclick="insertHouse();">글쓰기</button>
+						</div>
+						<br />
+						<div class="form-inline">
+							<select id="dealType" name="dealType" class="form-control">
+								<c:forEach items="${dealList}" var="deal">
+								<option value="${deal.id}"
+								<c:if test="${dealType eq deal.id}">selected</c:if>
+									>${deal.value}</option>
+								</c:forEach>
+							</select>
+							<select id="hType" name="hType" class="form-control">
+								<c:forEach items="${roomList}" var="room">
+									<option value="${room.id}"
+										<c:if test="${hType eq room.id}">selected</c:if>
+									>${room.value}</option>
+								</c:forEach>
+							</select>
+							<select name="" id="" class="form-control">
+								<option value="">크기</option>
+							</select>
+							<select name="" id="" class="form-control">
+								<option value="">가격</option>
+							</select>
+						</div>
 					</div>
 					<div class="dc-content-box">
 						<div style="display:block">
-
-						<c:forEach items="${list}" var="house" varStatus="hvs">
-							<li id="hlist" class="" style="padding-left: 10px; padding-top: 10px;">
-								<a onclick="selectHouse(${house.boardNo})" href="#">
-									<div class="dc-house-item-box">
-										<div class="dc-house-thumbnail">
-											<img src="${house.houseImg}" id="" alt="" width="200px" height="220px"/>
-										</div>
-										<div class="dc-house-description">
-											<strong class="name"> 
-												<span>${house.title}</span>
-											</strong>
-											<ul>
-												<li>
-													<strong>
-														<span>크기 </span> :
-													</strong> 
-														<span>${house.area }</span> <br>
-													<strong>
-														<span>매매가 </span> :
-													</strong> 
-													<span>${house.minprice} &nbsp;원</span> <br> 
-													<span>${house.hType} &nbsp;/&nbsp; ${house.dealType}</span>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</a>
-							</li>
-						</c:forEach>
+							<c:if test="${!empty list}">
+								<c:forEach items="${list}" var="house" varStatus="hvs">
+									<li id="hlist" class="" style="padding-left: 10px; padding-top: 10px;">
+										<a onclick="selectHouse(${house.boardNo})" href="#">
+											<div class="dc-house-item-box">
+												<div class="dc-house-thumbnail">
+													<img src="${house.houseImg}" id="" alt="" width="200px" height="220px"/>
+												</div>
+												<div class="dc-house-description">
+													<strong class="name"> 
+														<span>${house.title}</span>
+													</strong>
+													<ul>
+														<li>
+															<strong>
+																<span>크기 </span> :
+															</strong> 
+																<span>${house.area } <strong>㎡</strong></span> <br>
+															<strong>
+																<span>매매가 </span> :
+															</strong> 
+															<span>${house.minprice} &nbsp;원</span> <br> 
+															<span>${house.hType} &nbsp;/&nbsp; ${house.dealType}</span>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</a>
+									</li>
+								</c:forEach>
+							</c:if>
+							<c:if test="${empty list}">
+								<div class="dc-none-data">
+									<span class="dc-none-data-text">데이터가 없습니다.</span>
+								</div>
+							</c:if>
 						</div>
 					</div>
-					
 				</div>
 			</div>
 
@@ -75,6 +105,17 @@
 	<c:import url="../../common/footer.jsp" />
 
 	<script>
+	$(function(){
+		$("#hType").on('change',function() {
+			location.href = "${pageContext.request.contextPath}/info/house/list.do?hType="
+				+ $("#hType").val() + "&dealType=" + $("#dealType").val();
+		});
+		
+		$("#dealType").on('change',function() {
+			location.href = "${pageContext.request.contextPath}/info/house/list.do?hType="
+				+ $("#hType").val() + "&dealType=" + $("#dealType").val();
+		});
+	});
 		function selectHouse(no){
 			location.href="${pageContext.request.contextPath}/info/house/view.do?no="+no;
 		}
