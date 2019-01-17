@@ -52,7 +52,6 @@
 		   background-repeat: no-repeat;
 		   border: 1px solid #AAA;
 		   color: #555;
-		   font-size: inherit;
 		   margin: 5px;
 		   overflow: hidden;
 		   padding: 5px 10px;
@@ -60,7 +59,7 @@
 		   white-space: nowrap;
 		   width: 100px;
 		}
-			select.cArray-color {
+		select.cArray-color {
 		   color: #fff;
 		   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#779126, #779126 40%, #779126);
 		   background-color: #779126;
@@ -69,15 +68,20 @@
 		   border-radius: 20px;
 		   padding-left: 15px;
 		}
-		#title {width:25%;}
-		#writeDate{
-			width:12%;
+		.title {
+			width:150px;
 		}
-		#nickName, #salInfo, #endJobDday{
-			width:10%; 
+		.writeDate{
+			width:80px;
 		}
-		#no, #viewCount, #hide-work {
-			width:5%; 
+		.nickName, , .endJobDday{
+			width:50px;
+		}
+		.salInfo{
+			width:100px; 
+		}
+		.no, .viewCount, .hide-work {
+			width:50px; 
 		}
 		.mini{
 			width:50px;

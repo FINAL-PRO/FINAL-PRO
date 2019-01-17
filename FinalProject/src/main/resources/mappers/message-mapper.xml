@@ -85,4 +85,27 @@
 		 WHERE NO = #{bno}),
 		'MSGTYPE001')
 	</insert>
+
+	<select id="sendMsg" resultMap="messageMap">
+		SELECT MSG.NO, MSG.CONTENT, MSG.SENDDATE, 
+		MSG.FROMMEMBER, MSG.TOMEMBER, 
+        C.VALUE "STATUS",
+        FROMM.NICKNAME "FROMMNICK",
+        TOM.NICKNAME "TOMNICK"
+		FROM DC_MESSAGE_TB MSG
+		JOIN DC_MEMBER_TB M ON(M.NO = MSG.TOMEMBER)
+		JOIN DC_MEMBER_TB FROMM ON(FROMM.NO = MSG.FROMMEMBER)
+		JOIN DC_MEMBER_TB TOM ON(TOM.NO = MSG.TOMEMBER)
+        JOIN DC_CODE_TB C ON(C.ID = MSG.STATUS)
+		AND MSG.FROMMEMBER = #{fromMember}
+		ORDER BY MSG.NO DESC
+	</select>
+	
+	<select id="sendMsgTotalContents" resultType="_int">
+		SELECT COUNT(*) 
+		FROM DC_MESSAGE_TB MSG
+		JOIN DC_MEMBER_TB M ON(M.NO = MSG.TOMEMBER)
+		WHERE STATUS != 'MSGTYPE003'
+		AND MSG.FROMMEMBER = #{fromMember}
+	</select>
 </mapper>

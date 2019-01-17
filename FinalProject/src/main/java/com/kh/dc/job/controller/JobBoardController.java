@@ -123,7 +123,8 @@ public class JobBoardController {
 		if(jobBoard != null) jobBoardService.updateViewCount(jobBoard.getNo());
 		
 		model.addAttribute("jobBoard", jobBoard);
-		model.addAttribute("bno", jobBoard.getBoardNo());
+		model.addAttribute("bno", jobBoard.getNo());
+		//model.addAttribute("bno", jobBoard.getBoardNo());
 		
 		return "job/jobBoard/jobBoardDetail";
 	}
@@ -143,13 +144,15 @@ public class JobBoardController {
 		
 		if(result > 0) {
 			msg = "게시글 등록 성공!";
+			//loc = "/jobBoard/jobBoardDetail.do?no="+ jobBoard.getBoardNo();
 			loc = "/jobBoard/jobBoardDetail.do?no="+ jobBoard.getNo();
 		} else {
 			msg = "게시글 등록 실패!";
 		}
 		model.addAttribute("loc", loc).addAttribute("msg", msg);
 		
-		return "redirect:/job/jobBoard/jobBoardDetail.do?no="+ jobBoard.getNo();	
+//		return "redirect:/job/jobBoard/jobBoardDetail.do?no="+ jobBoard.getBoardNo();
+		return "redirect:/job/jobBoard/jobBoardDetail.do?no="+ jobBoard.getNo();
 	}
 
 	@RequestMapping("/job/jobBoard/jobBoardComPop.do")
@@ -194,13 +197,15 @@ public class JobBoardController {
 		
 		if(result > 0) {
 			msg = "게시글 수정 성공!";
+			//loc = "/jobBoard/jobBoardDetail.do?no="+ jobBoard.getBoardNo();
 			loc = "/jobBoard/jobBoardDetail.do?no="+ jobBoard.getNo();
 		} else {
 			msg = "게시글 수정 실패!";
 		}
 		model.addAttribute("loc", loc).addAttribute("msg", msg);
 	
-		return "redirect:/job/jobBoard/jobBoardDetail.do?no="+ jobBoard.getNo();	
+		//return "redirect:/job/jobBoard/jobBoardDetail.do?no="+ jobBoard.getBoardNo();
+		return "redirect:/job/jobBoard/jobBoardDetail.do?no="+ jobBoard.getNo();
 	}
 	@RequestMapping("/job/jobBoard/endJobBoard.do")
 	public String endJobBoard(@RequestParam int boardNo, Model model) {
