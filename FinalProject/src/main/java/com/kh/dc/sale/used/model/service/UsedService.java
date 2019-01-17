@@ -3,6 +3,7 @@ package com.kh.dc.sale.used.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.dc.common.vo.Board;
 import com.kh.dc.sale.used.model.vo.Used;
 
 public interface UsedService {
@@ -30,6 +31,8 @@ public interface UsedService {
 	int updateStatus(Map<String, String> status);
 
 	int updateUsedHistroy(Map<String, String> uhMap);
+
+	List<Board> selectMainUsedList();
 
 		
 }

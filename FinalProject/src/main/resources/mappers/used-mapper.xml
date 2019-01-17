@@ -105,6 +105,10 @@
 	<update id="updateUsedHistroy" parameterType="map">
 		UPDATE DC_USED_HISTORY_TB SET STATUS = #{status} WHERE USEDNO = #{usedNo}
 	</update>
+	
+	<select id="selectMainUsedList" resultMap="resultUsed">
+	 	SELECT * FROM DC_BOARD_USED_VIEW
+	</select>
 
 
 
