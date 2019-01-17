@@ -63,6 +63,8 @@
 	
 	<!-- 메시지 전송 -->
 	<security:http security="none" pattern="/message/messageInsert.do" />
+	<security:http security="none" pattern="/message/insert.do" />
+	
 	
 	<!-- 중복로그인 처리 -->
 	<security:http security="none" pattern="/login_duplicate.do" />

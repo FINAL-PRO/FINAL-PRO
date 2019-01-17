@@ -150,9 +150,55 @@
 								</div>
 							</div>
 						</div>
+						
+												
+						
+						<br />
+						<div class="dc-content-box">
+							<div class="dc-con-title">
+								<h4>
+									<span class="board-title" onclick="location.href='${pageContext.request.contextPath}/community/free/list.do'">자유 게시판</span>
+								</h4>
+							</div>
+							
+							<div class="dc-con-content">
+								<div class="dc-tb">
+									<div class="dc-tb-head">
+										<div class="dc-tb-row">
+											<!-- head -->
+										</div>										
+									</div>
+									<div id="freeTable" class="dc-tb-body">
+										<c:if test="${!empty freeList}">
+											<c:forEach items="${freeList}" var="item">
+												<div class="dc-tb-row">
+													<a href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${item.no}">● <span>${item.title}</span></a>
+												</div>
+											</c:forEach>
+										</c:if>
+										<c:if test="${empty freeList}">
+											<div class="dc-none-data">
+												<div align="center">
+													<span>게시물 없음</span>
+												</div>
+											</div>
+										</c:if>
+									</div>
+								</div>
+							</div>
+						</div>
+						
 						<br />
 						
-													<div class="dc-content-box">
+							<div class="dc-ad-box" style="height:100px;">
+								<!-- <h1>메인 광고(AD)</h1> -->
+								<div class="ad-main-bottom">
+									<img id="ad-main-bottom-img" src="" alt="" width="798px" height="100px" />
+								</div>
+								
+							</div>
+						
+						<div class="dc-content-box">
 							<div class="dc-con-title">
 								<h4>
 									<span class="board-title" onclick="location.href='${pageContext.request.contextPath}/sale/used/list.do'">중고거래 게시판</span>
@@ -195,51 +241,16 @@
 							</div>
 						</div>
 						
-						
-						<br />
-						<div class="dc-content-box">
+						<br>
 							<div class="dc-con-title">
 								<h4>
-									<span class="board-title" onclick="location.href='${pageContext.request.contextPath}/community/free/list.do'">자유 게시판</span>
-								</h4>
+									[<span class="board-title" onclick="location.href='${pageContext.request.contextPath}/community/food/list.do'">맛집 게시판</span>]
+									[<span class="board-title" onclick="location.href='${pageContext.request.contextPath}/info/region/list.do'">지역정보</span>]
+									[<span class="board-title" onclick="location.href='${pageContext.request.contextPath}/info/weather/list.do'">날씨</span>]
+									[<span class="board-title" onclick="location.href='${pageContext.request.contextPath}/info/house/list.do'">부동산</span>]
+									[<span class="board-title" onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/list.do'">구인구직</span>]
+								</h4>							
 							</div>
-							
-							<div class="dc-con-content">
-								<div class="dc-tb">
-									<div class="dc-tb-head">
-										<div class="dc-tb-row">
-											<!-- head -->
-										</div>										
-									</div>
-									<div id="freeTable" class="dc-tb-body">
-										<c:if test="${!empty freeList}">
-											<c:forEach items="${freeList}" var="item">
-												<div class="dc-tb-row">
-													<a href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${item.no}">● <span>${item.title}</span></a>
-												</div>
-											</c:forEach>
-										</c:if>
-										<c:if test="${empty freeList}">
-											<div class="dc-none-data">
-												<div align="center">
-													<span>게시물 없음</span>
-												</div>
-											</div>
-										</c:if>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<br>
-						<div class="dc-ad-box" style="height:100px;">
-								<!-- <h1>메인 광고(AD)</h1> -->
-								<div class="ad-main-bottom">
-									<img id="ad-main-bottom-img" src="" alt="" width="798px" height="100px" />
-								</div>
-								
-							</div>
-
 					</div>
 				</div>
 				
