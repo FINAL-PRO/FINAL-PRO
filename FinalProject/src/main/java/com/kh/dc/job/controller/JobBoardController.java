@@ -24,7 +24,7 @@ public class JobBoardController {
 	@Autowired
 	private JobBoardService jobBoardService;  
 
-	@RequestMapping("/job/jobBoard/jobBoardList.do")
+	@RequestMapping("/job/jobBoard/list.do")
 	public String jobBoardList(
 			@RequestParam(value="arrayType", required=false, defaultValue="B.WRITEDATE")String arrayType,
 			@RequestParam(value="type", defaultValue="selAll", required=false) String type,
@@ -61,7 +61,7 @@ public class JobBoardController {
 	
 		int totalContents = jobBoardService.selectJobBoardTotalContents();
 		
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "jobBoardList.do");
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "list.do");
 		
 		model.addAttribute("list", list)
 		.addAttribute("arrayType", arrayType)
@@ -78,7 +78,7 @@ public class JobBoardController {
 		return "/job/jobBoard/jobBoardList";
 	}
 	
-	@RequestMapping("/job/jobBoard/searchJobBoard.do")
+	@RequestMapping("/job/jobBoard/search.do")
 	public String searchJobBoardList(
 			@RequestParam(value="jb_Search", defaultValue="s-All", required=false) String jb_Search,
 			@RequestParam(value="searchCont", required=false) String searchCont,			
@@ -100,7 +100,7 @@ public class JobBoardController {
 		
 		int totalContents = jobBoardService.searchJobBoardTotalContents();
 		
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "jobBoardList.do");
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "list.do");
 		
 		model.addAttribute("list", list)
 		.addAttribute("jb_Search", jb_Search)
@@ -112,11 +112,11 @@ public class JobBoardController {
 		return "/job/jobBoard/jobBoardList";
 	}
 	
-	@RequestMapping("job/jobBoard/jobBoardForm.do")
+	@RequestMapping("job/jobBoard/form.do")
 	public void boardForm() {
 		
 	}
-	@RequestMapping("job/jobBoard/jobBoardDetail.do")
+	@RequestMapping("job/jobBoard/view.do")
 	public String selectOneBoard(@RequestParam int no, Model model) {
 		JobBoard jobBoard = jobBoardService.selectOneJobBoard(no);
 		
@@ -129,32 +129,32 @@ public class JobBoardController {
 		return "job/jobBoard/jobBoardDetail";
 	}
 	
-	@RequestMapping("job/jobBoard/jobBoardInsertForm.do")
+	@RequestMapping("job/jobBoard/insertForm.do")
 	public void jobBoardInsertForm () {
 		
 	}
 	
-	@RequestMapping(value="job/jobBoard/insertJobBoard.do", method=RequestMethod.POST)
+	@RequestMapping(value="job/jobBoard/insert.do", method=RequestMethod.POST)
 	public String insertJobBoard(JobBoard jobBoard, Model model, HttpSession session) {
 		
 		int result = jobBoardService.insertJobBoard(jobBoard);
-		String loc = "/job/jobBoard/jobBoardList.do";
+		String loc = "/job/jobBoard/list.do";
 		String msg = "";
 		
 		if(result > 0) {
 			msg = "게시글 등록 성공!";
 			//loc = "/jobBoard/jobBoardDetail.do?no="+ jobBoard.getBoardNo();
-			loc = "/jobBoard/jobBoardDetail.do?no="+ jobBoard.getNo();
+			loc = "/jobBoard/view.do?no="+ jobBoard.getNo();
 		} else {
 			msg = "게시글 등록 실패!";
 		}
 		model.addAttribute("loc", loc).addAttribute("msg", msg);
 		
 //		return "redirect:/job/jobBoard/jobBoardDetail.do?no="+ jobBoard.getBoardNo();
-		return "redirect:/job/jobBoard/jobBoardDetail.do?no="+ jobBoard.getNo();
+		return "/common/msg";
 	}
 
-	@RequestMapping("/job/jobBoard/jobBoardComPop.do")
+	@RequestMapping("/job/jobBoard/comPop.do")
 	public String jobBoardComPop(
 			@RequestParam(value="cPage", required=false, defaultValue="1")
 			int cPage, 
@@ -177,7 +177,7 @@ public class JobBoardController {
 		return "job/jobBoard/jobBoardComPop";
 	}
 
-	@RequestMapping("/job/jobBoard/updateJobBoardForm.do")
+	@RequestMapping("/job/jobBoard/updateForm.do")
 	public String updateJobBoardForm(@RequestParam int no, Model model) {
 		JobBoard jobBoard = jobBoardService.selectOneJobBoard(no);
 		
@@ -186,30 +186,31 @@ public class JobBoardController {
 		return "job/jobBoard/jobBoardUpdate";
 	}
 	
-	@RequestMapping(value="job/jobBoard/jobBoardUpdate.do", method=RequestMethod.POST)
+	@RequestMapping(value="job/jobBoard/update.do", method=RequestMethod.POST)
 	public String updateJobBoard(JobBoard jobBoard, Model model) {
 		
 		int result = jobBoardService.updateJobBoard(jobBoard);
 	
-		String loc = "/job/jobBoard/jobBoardList.do";
+		String loc = "/job/jobBoard/list.do";
 		String msg = "";
 		
 		if(result > 0) {
 			msg = "게시글 수정 성공!";
 			//loc = "/jobBoard/jobBoardDetail.do?no="+ jobBoard.getBoardNo();
-			loc = "/jobBoard/jobBoardDetail.do?no="+ jobBoard.getNo();
+			loc = "/jobBoard/view.do?no="+ jobBoard.getNo();
 		} else {
 			msg = "게시글 수정 실패!";
 		}
 		model.addAttribute("loc", loc).addAttribute("msg", msg);
 	
 		//return "redirect:/job/jobBoard/jobBoardDetail.do?no="+ jobBoard.getBoardNo();
-		return "redirect:/job/jobBoard/jobBoardDetail.do?no="+ jobBoard.getNo();
+		return "redirect:/job/jobBoard/view.do?no="+ jobBoard.getNo();
 	}
-	@RequestMapping("/job/jobBoard/endJobBoard.do")
+	
+	@RequestMapping("/job/jobBoard/end.do")
 	public String endJobBoard(@RequestParam int boardNo, Model model) {
 
-		String loc = "/job/jobBoard/jobBoardList.do";
+		String loc = "/job/jobBoard/list.do";
 		System.out.println("boardNo : "+boardNo);
 		String msg = (jobBoardService.endJobBoard(boardNo)>0) ? "게시글을 마감하였습니다." : "게시글 마감에 실패하였습니다.";
 		System.out.println("옵니까");
@@ -218,10 +219,10 @@ public class JobBoardController {
 		return "common/msg";
 	}
 	
-	@RequestMapping("/job/jobBoard/deleteJobBoard.do")
+	@RequestMapping("/job/jobBoard/delete.do")
 	public String deleteJobBoard(@RequestParam int boardNo, Model model) {
 
-		String loc = "/job/jobBoard/jobBoardList.do";
+		String loc = "/job/jobBoard/list.do";
 		System.out.println("boardNo : "+boardNo);
 		String msg = (jobBoardService.deleteJobBoard(boardNo)>0) ? "게시글을 삭제하였습니다." : "게시글 삭제에 실패하였습니다.";
 

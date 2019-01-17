@@ -20,7 +20,7 @@
 	<div class="msgTitle">&nbsp;&nbsp;쪽지쓰기</div>
 	<form id="msgIns" method="post" 
 	oninput="checkNick();"
-	action="${pageContext.request.contextPath}/message/messageInsert.do">
+	action="${pageContext.request.contextPath}/message/insert.do">
 		<input type="hidden" name="fromMember" value="${member.no}" readonly/>
 		<label class="msgLabel">작성자</label>  ${member.nickName}
 		<input type="hidden" name="frommNick" value="${member.nickName}" readonly/>
@@ -82,7 +82,7 @@
 		}		
 		
 		function cancel(){
-			location.href = "${pageContext.request.contextPath}/message/messageList.do?no=${member.no}";
+			location.href = "${pageContext.request.contextPath}/message/list.do?no=${member.no}";
 		}
 	</script>
 </body>

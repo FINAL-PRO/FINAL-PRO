@@ -56,14 +56,14 @@
 	</div>		
 		<script>
 			function messageReply(){
-				location.href = "${pageContext.request.contextPath}/message/messageInsertForm.do?no=${member.no}&fromMember=${message.frommNick}";
-			}
+				location.href = "${pageContext.request.contextPath}/message/insertForm.do?no=${member.no}&fromMember=${message.frommNick}";
+			};
 		
 			function messageList(){
-				location.href = "${pageContext.request.contextPath}/message/messageList.do?no=${member.no}";
+				location.href = "${pageContext.request.contextPath}/message/list.do?no=${member.no}";
 			};
-			function sendMsg(){
-				location.href = "${pageContext.request.contextPath}/message/messageDelete.do?fromNo=${message.no}&memNo=${member.no}";
+			function messageDelete(){
+				location.href = "${pageContext.request.contextPath}/message/delete.do?no=${message.no}&memNo=${member.no}";
 			};
 		</script>
 		

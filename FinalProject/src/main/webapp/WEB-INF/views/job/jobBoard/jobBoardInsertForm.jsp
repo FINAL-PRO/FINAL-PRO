@@ -25,7 +25,7 @@
 				<div class="dc-content-title">
 					<span class="dc-title-text">구인구직</span>
 				</div>
-				<form id="jInsForm" method="post" action="${pageContext.request.contextPath}/job/jobBoard/insertJobBoard.do">
+				<form id="jInsForm" method="post" action="${pageContext.request.contextPath}/job/jobBoard/insert.do">
 				<div class="dc-content-box">
 				
 
