@@ -15,14 +15,11 @@ public class ReportController {
 	@Autowired
 	private ReportService reportService;
 	
-/*	@RequestMapping("/report/reportView.do")
-	public void reportForm() {
-			
-	}*/
-	
 	@RequestMapping("/report/reportInsert.do")
 	@ResponseBody
 	public int reportInsert(@RequestParam int bno, @RequestParam int mno, @RequestParam int reCheck) {
+		
+		System.out.println("bno report: "+bno);
 		
 		Report report = new Report();
 		report.setBoardNo(bno);
@@ -31,7 +28,7 @@ public class ReportController {
 		
 		int result = reportService.reportInsert(report);
 		
-		System.out.println("신고");
+		System.out.println("신고: " + result);
 		
 		return result;
 		

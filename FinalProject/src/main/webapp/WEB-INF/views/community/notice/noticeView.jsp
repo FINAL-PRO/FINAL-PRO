@@ -16,9 +16,12 @@
 }
 
 .article {
-	font-size: 0;
 	background-color: #fff;
 	text-decoration: none;
+	display: block;
+	padding: 12px 12px;
+	border-bottom: 1px solid #f2f2f2;
+	height: 140px;
 }
 
 /* .npicture {
@@ -55,6 +58,10 @@
 	font-weight: bold;
 }
 
+.ntitle p{
+	magin: 0px;
+}
+
 .ntime {
 	float: right;
 	display: inline-block;
@@ -66,7 +73,7 @@
 }
 
 .ntext {
-	margin-top: 10x;
+	margin-top: 10px;
 	padding: 10px;
 	line-height: 500px;
 	color: #292929;
@@ -100,12 +107,6 @@
 	margin-top: 8px;
 }
 
-.article {
-	display: block;
-	padding: 12px 12px;
-	border-bottom: 1px solid #f2f2f2;
-	height: 140px;
-}
 
 .articlelist {
 	padding-top: 15px;

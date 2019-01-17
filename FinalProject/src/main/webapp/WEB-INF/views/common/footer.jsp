@@ -125,11 +125,11 @@
 		$('#myModal').show();
 	}
 	
-	var reportData = $('[name=reportForm]').serialize();
-	console.log("reportData: "+reportData);
+	function reportInsert(){
 	
-	function reportInsert(reportData){
-	
+		var reportData = $('[name=reportForm]').serialize();
+		console.log("reportData: "+reportData);
+
 		var reCheck = $('input:radio[name=category]:checked').val();
 		console.log("reCheck: "+reCheck);
 		
@@ -140,7 +140,7 @@
    					mno: mno,
    					reCheck: reCheck},
    			success: function(result){
-   				
+   				console.log("?");
 			if(reCheck == undefined){
 			    alert('옵션을 선택해주세요.');
 			} else {

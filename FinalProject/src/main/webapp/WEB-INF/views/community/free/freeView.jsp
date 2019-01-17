@@ -26,38 +26,42 @@
 	height: 20px;
 	vertical-align: top;
 	float: left;
+	margin-top: 5px;
 }
 
 .nickname {
 	display: inline-block;
 	line-height: 20px;
 	color: #292929;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	white-space: nowrap;
 	overflow: hidden;
 	float: left;
+	margin-top: 5px;
 }
 
 .title {
 	display: inline-block;
-	line-height: 20px;
 	color: #292929;
-	font-size: 15px;
+	font-size: 16px;
 	font-weight: bold;
-	white-space: nowrap;
-	overflow: hidden;
+}
+
+.title p{
+	magin: 0px;
 }
 
 .count{
 	display: inline-block;
 	line-height: 20px;
 	color: #292929;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	white-space: nowrap;
 	overflow: hidden;
 	float: right;
+	margin-top: 5px;
 }
 
 .time {
@@ -65,9 +69,10 @@
 	display: inline-block;
 	line-height: 20px;
 	color: #292929;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	margin-left: 10px;
+	margin-top: 5px;
 }
 
 .text {
@@ -96,9 +101,10 @@
 	margin-right: 8px;
 	line-height: 18px;
 	color: #292929;
-	font-size: 12px;
+	font-size: 14px;
 	background-repeat: no-repeat;
 	background-size: 16px 16px;
+	font-weight: bold;
 } 
 
 
@@ -119,27 +125,6 @@
 	padding-top: 20px;
 	padding-left: 5px;
 	padding-right: 5px;
-}
-
-.commentgroup {
-	padding: 20px;
-}
-
-.commnetlist {
-	padding: 20px;
-}
-
-.commentwriteboard {
-	padding: 15px 35px 10px 20px;
-}
-
-.commentwrite {
-	width: 100%;
-}
-
-.comment_textarea {
-	margin-right: 10px;
-	margin-left: 10px;
 }
 
 hr {
@@ -174,6 +159,7 @@ hr {
 	border:none;
 	width: 10px;
 	color:rgb(244, 126, 96);
+	font-weight: bold;
 }
 
 #btn_board_edit{
@@ -196,6 +182,11 @@ hr {
     margin-top: 5px;
 }
 
+#btn_report{
+	background: rgb(171, 187, 129);
+    color: white;
+    cursor: pointer;
+}
 
 </style>
 </head>
@@ -247,7 +238,7 @@ hr {
 											<button class="btn btn_board_delete btn-sm" id="btn_board_delete">삭제</button>
 											</c:if>
 											<c:if test="${!empty member and member.no ne boardList.memberNo}">
-											<input type="button" class="btn_report" id="btn_report" value="신고하기" onclick="javascript:btn_report();"/>
+											<input type="button" class="btn btn_report btn-sm" id="btn_report" value="신고하기" onclick="javascript:btn_report();"/>
 											</c:if>
 											<span class="likecount">
 											<a href="#" class="likefunc">

@@ -228,7 +228,7 @@ hr {
 										<p class="btotalCount">총 <span style="color:rgb(244, 126, 96);">${totalContents}</span>건의 게시물이 있습니다.</p>
 										<c:forEach items="${list}" var="b">
 											<li class="groupin" id="${b.no}">
-											<a class="article" href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${b.no}">
+											<a class="article" href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${b.no}" style="text-decoration:none;">
 													<p class="bprofile">
 														<span class="btitle">${b.title}</span> 
 														<c:choose>
@@ -254,8 +254,8 @@ hr {
 														</c:otherwise>
 													</c:choose>
 													<p class="bstatus">
-														<span class="bvotecount">좋아요: <span style="color:rgb(244, 126, 96);">${b.likeCount}</span></span> 
-														<span class="bcommentcount">댓글: <span style="color:rgb(244, 126, 96);">${b.commentCount}</span></span> 
+														<span class="bvotecount">좋아요: <span style="color:rgb(244, 126, 96);">${b.likeCount}</span></span>
+														<span class="bcommentcount">댓글: <span style="color:rgb(244, 126, 96);">${b.commentCount}</span></span>
 														<c:choose>
 															<c:when test="${b.imageCheck eq 0}">
 																<span class="battachcount"></span>
