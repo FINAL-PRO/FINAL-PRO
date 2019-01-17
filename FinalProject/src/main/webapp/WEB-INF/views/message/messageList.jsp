@@ -18,9 +18,17 @@
 <body>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/msg/msgListCss.css" />
 	<div class="msgBody">
-	<div class="nav" style="background-color:gray">&nbsp;&nbsp;
-		<a class="navList" href="${pageContext.request.contextPath}/message/messageList.do?no=${member.no}">받은메세지</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-		<a class="navList" href="${pageContext.request.contextPath}/message/sendMsg.do?fromMember=${member.no}">보낸메세지 </a>&nbsp;&nbsp;
+	<div class="nav">&nbsp;&nbsp;
+		<c:if test="${param.no != null}">
+			<a class="navList" style="font-weight: bold" href="${pageContext.request.contextPath}/message/messageList.do?no=${member.no}">
+			받은메세지</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a class="navList" href="${pageContext.request.contextPath}/message/sendMsg.do?fromMember=${member.no}">
+			보낸메세지 </a>&nbsp;&nbsp;
+		</c:if>
+		<c:if test="${param.fromMember != null}">
+			<a class="navList" href="${pageContext.request.contextPath}/message/messageList.do?no=${member.no}">받은메세지</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a class="navList" style="font-weight: bold" href="${pageContext.request.contextPath}/message/sendMsg.do?fromMember=${member.no}">보낸메세지</a>&nbsp;&nbsp;
+		</c:if>
 	</div>
 	
 		<input type="hidden" value="${member.no}"/>
@@ -29,8 +37,9 @@
 		<!-- 받은메세지 -->
 		<c:if test="${param.no != null}">
 		<div class="navbar">
-		<label>받은메세지</label>
-		<label>TotalContents : ${totalContents}</label></div>
+			<label></label>
+			<label>TotalContents : ${totalContents}</label>
+		</div>
 		<div class="columName text-white">
 			<div id="no" class="cell mini">번호</div>
 			<div id="content" class="cell">내용</div>
@@ -39,9 +48,9 @@
 			<div id="statues" class="cell mid">상태</div>
 			<div id="delete" class="cell mini">삭제</div>
 		</div>
-		<c:forEach items="${list}" var="msgList">
+		<c:forEach items="${list}" var="msgList" varStatus="bo">
 		<div id="${msgList.no}" class="row" onclick="">
-			<div id="noValue" class="cell mini">${msgList.no}</div>
+			<div id="noValue" class="cell mini">${bo.index +1}</div>
 			
 			<div id="contentValue" class="cell contentValue">
 			<a href="${pageContext.request.contextPath}/message/messageDetail.do?no=${msgList.no}">
@@ -72,7 +81,8 @@
 		<c:if test="${param.fromMember != null}">
 		<div class="navbar">
 		<label>보낸메세지</label>
-		<label>Total : ${total}</label></div>
+		<label>Total : ${total}</label>
+		</div>
 		<div class="columName text-white">
 			<div id="no" class="cell mini">번호</div>
 			<div id="content" class="cell">내용</div>
@@ -81,9 +91,9 @@
 			<div id="statues" class="cell mid">상태</div>
 			<div id="delete" class="cell mini">기타</div>
 		</div>
-		<c:forEach items="${list}" var="msgList">
+		<c:forEach items="${list}" var="msgList" varStatus="">
 		<div id="${msgList.no}" class="row" onclick="">
-			<div id="noValue" class="cell mini">${msgList.no}</div>
+			<div id="noValue" class="cell mini">${bo.index +1}</div>
 			
 			<div id="contentValue" class="cell contentValue">
 			${fn:substring(msgList.content, 0, 12)}</div>

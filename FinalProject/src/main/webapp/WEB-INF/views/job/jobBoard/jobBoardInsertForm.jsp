@@ -34,7 +34,6 @@
 				<label class="insLabel">작성자&nbsp;</label>${member.nickName}
 				<input type="text" class="" value="${member.nickName}" hidden required/><br />
 				<input type="hidden" class="" name="memberNo" id="memberNo" value="${member.no}" readonly required/>
-				
 				 
 				<label class="insLabel">구인구직여부&nbsp;</label>
 				<input type="radio" name = "type" value = "JTYPE001" checked><label> 구인 </label>&nbsp;&nbsp;&nbsp;
@@ -83,8 +82,6 @@
 			</div>
 			<button class="btn btn-outline-info" type="submit">게시글 등록</button>
 			</form>
-			
-
 			
 		</div>
 			</div>

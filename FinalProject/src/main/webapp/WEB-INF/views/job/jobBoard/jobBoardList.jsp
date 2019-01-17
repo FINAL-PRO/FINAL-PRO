@@ -143,7 +143,7 @@
 									<td class="cell jbEnd">D-${jb.dday}</td>
 								</c:if>
 								<c:if test="${jb.dday < 0 }">
-									<td class="cell jbEnd">D${jb.dday}</td>
+									<td class="cell jbEnd">${jb.dday}</td>
 								</c:if>
 								<td class="cell jbEnd mini">${jb.viewCount}</td>
 								<td class="cell jbEnd mini">${jb.type}</td>		

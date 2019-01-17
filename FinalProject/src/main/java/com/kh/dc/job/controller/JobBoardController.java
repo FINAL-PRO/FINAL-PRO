@@ -138,7 +138,6 @@ public class JobBoardController {
 	public String insertJobBoard(JobBoard jobBoard, Model model, HttpSession session) {
 		
 		int result = jobBoardService.insertJobBoard(jobBoard);
-		
 		String loc = "/job/jobBoard/jobBoardList.do";
 		String msg = "";
 		

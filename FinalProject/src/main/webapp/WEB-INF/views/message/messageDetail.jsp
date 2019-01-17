@@ -8,34 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
-	.msgBody {
-		margin: 5%;
-	}
-	.msgLabel{
-		width: 100px;
-		font-weight: bold;
-	}
-	.msgCont{
-		width: 150px;
-	}
-	.msgContent{
-		border: 2px solid rgb(244, 126, 96);;
-		width: 500px;
-		height: 200px;
-		border-style: dotted;
-	}
-	.msgTitle{
-		border: 2px solid rgb(244, 126, 96);
-		width: 500px;
-		display: inline-block;
-    	vertical-align: baseline;
-		font-weight: bold;
-   		background: rgb(244, 126, 96);
-   		font-size: 18px;
-    	height: 40px;
-    	margin: 2px;
-    	color: #fff;
-    }	
+
 </style>
 
 <c:import url="../common/header.jsp"/>

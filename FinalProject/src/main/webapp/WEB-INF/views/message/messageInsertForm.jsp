@@ -9,40 +9,11 @@
 <meta charset="UTF-8">
 <title>쪽지 입력페이지 입니다.</title>
 <style>
-	.msgBody {
-		margin: 5%;
-	}
-	.msgContent{
-		width: 500px;
-		height: 150px;
-		padding: 12px 20px;
-		box-sizing: border-box;
-		border: 2px solid #ccc;
-		border-radius: 4px;
-		background-color: #f8f8f8;
-		font-size: 16px;
-		resize: none;
-	}
-	.msgLabel{
-		width: 100px;
-		font-weight: bold;
-	}
-	.msgTitle{
-		border: 2px solid gray;
-		width: 500px;
-		display: inline-block;
-    	vertical-align: baseline;
-		font-weight: bold;
-   		background: gray;
-   		font-size: 18px;
-    	height: 40px;
-    	margin: 2px;
-    	color: #fff;
-	}	
+
 </style>
 
 <c:import url="../common/header.jsp"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/msg/msgDetailCss.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/msg/msgInsertCss.css" />
 </head>
 <body>
 	<div class="msgBody">
