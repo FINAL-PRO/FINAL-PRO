@@ -34,10 +34,12 @@ public class Scheduler {
 		System.out.println("광고 스케줄러 실행 : end : " + end);
 	}
     
-	@Scheduled(cron="0 0 0 * * *")
+	@Scheduled(cron="5 0 0 * * *")
 	public void checkGroupDday() {
 		
+		sqlSession.update("scheduler_mapper.adStatusStart");
 		
+		System.out.println("공동구매 기간만료 전환 완료");
 	}
     
     

@@ -12,4 +12,12 @@
 		<![CDATA[ <= SYSDATE AND STATUS = 'ADSTATUS002' ]]>
 	</update>
 	
+	<update id="checkGroupDday">
+		<![CDATA[
+		UPDATE (SELECT * FROM DC_BOARD_GROUP_TB WHERE STATUS='GROUP001' 
+		AND TRUNC(ENDDATE-SYSDATE, 5)<0) G 
+		SET G.STATUS = 'GROUP005' 
+		]]>
+	</update>
+	
 </mapper>

@@ -169,7 +169,16 @@
 		    }
 		});	
 		
+		if('${group.status}' == '기간만료') {
+			$('#btnApply').attr({
+				"value" : "모집마감",
+				"disabled" : "disabled"
+			});
+			$('#depMsg').html("기간이 만료되어 참여 신청이 마감되었습니다.");
+		}
+		
 		$(('div[value="${group.status}"]')).css('background', 'rgb(248, 178, 106)');
+		
 	});
 	
 	// 참여신청 버튼 클릭
@@ -220,7 +229,7 @@
 		} else if ('${group.status}' == '참여자모집') {
 			alert("인원 모집이 마감된 후에 변경 가능합니다.");
 		} else {
-			if(confirm("공동구매의 진행상황을 '"+$(this).val()+"'로 변경하시겠습니까?")) {
+			if(confirm("공동구매의 진행상황을 '"+$(this).attr('value')+"'로 변경하시겠습니까?")) {
 				$.ajax({
 					url : 'updateStatus.do',
 				    type : 'get',
