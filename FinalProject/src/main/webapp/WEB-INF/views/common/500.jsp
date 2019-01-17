@@ -7,13 +7,50 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+	p{
+		font-family: 'Gugi', cursive;
+	}
+	
+	img{
+		/* height: 20%;
+		widht: 20%; */
+		size: 80%;
+	}
+
+	body{
+		background-color: rgb(245, 234, 219);
+	}
+
+	span{
+		color: gray;
+	}
+	
+	.btn-main{
+		width: 300px;
+	}
+</style>
 <title>500 Internal Server Error.</title>
 </head>
 <body>
-	<h1>500 Internal Server Error.</h1>
-	<a href="${pageContext.request.contextPath }">메인 페이지로</a>
-	<h2>
-		Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-	</h2>
+
+	<div class="500_center" align="center" style="margin: 0 auto; ">
+		<div class="" style="width: 500px; margin-top: 200px;">
+      		<form class="form-signin" method="post" action="#">
+	        	<img id="logo" alt="메인으로" src="${pageContext.request.contextPath }/resources/images/logo3.png" onclick="toMain();"> 
+				<p style="font-size: 50px; font-weight: bold;">500 ERROR :(</p>
+				<span style="font-size: 25px; font-weight: bold;">Sorry, Internal Server Error</span>
+				<div style="heigth:20px;"></div><br>
+				<button class="btn btn-main btn-sm" style="width: 300px;" id="logout" type="button" onclick="toMain();">메인으로</button>
+			</form>
+    	</div>
+    </div>
+    
+    <script>
+		function toMain() {
+			location.href="/dc";
+		}
+	</script>
+	
 </body>
 </html>
