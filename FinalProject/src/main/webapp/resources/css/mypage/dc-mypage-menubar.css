@@ -6,6 +6,6 @@
 }
 
 .mypageMenuItem:hover{
-	color:rgb(171, 187, 129) !important;
-	text-decoration: none
+	color:rgb(171, 187, 129);
+	text-decoration: none;
 }

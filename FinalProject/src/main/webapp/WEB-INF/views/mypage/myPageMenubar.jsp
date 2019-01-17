@@ -17,8 +17,11 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<a class="mypageMenuItem" href="${pageContext.request.contextPath}/mypage/list.do?no=${member.no}">내가 쓴 글/댓글 </a>
 			</div>
-
 		</div>	
 	</div>
+	
+	<script type="text/javascript">
+
+	</script>
 </body>
 </html>
