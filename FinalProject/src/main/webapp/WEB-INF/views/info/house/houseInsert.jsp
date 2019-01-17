@@ -50,7 +50,7 @@
 								<tr>
 									<td>매매가 : </td>
 									<td>
-										<input class="form-control" type="text" name="minprice" id="minprice" value="${house.minprice}">
+										<input class="form-control" type="number" name="minprice" id="minprice" value="${house.minprice}">
 									</td>
 								</tr>
 								<tr>
@@ -70,7 +70,7 @@
 								<tr>
 									<td>방 크기 : </td>
 									<td>
-										<input class="form-control" type="text" name="area" id="area" value="${house.area}">
+										<input class="form-control" type="number" name="area" id="area" value="${house.area}">
 									</td>
 								</tr>
 								<tr>
@@ -88,7 +88,7 @@
 											<button class="btn dc-btn" type="reset" onclick="historyGoBack();">취소</button>
 											<c:if test="${house.boardNo != null }">
 												<input type="hidden" name="no" value="${house.boardNo}" required />
-												<button class="btn dc-btn dc-btn-right" onclick ="deleteHouse()" title="삭제하기">삭제하기</button>
+												<button class="btn dc-btn" onclick ="deleteHouse()" title="삭제하기">삭제하기</button>
 											</c:if>
 										</div>	
 									</td>

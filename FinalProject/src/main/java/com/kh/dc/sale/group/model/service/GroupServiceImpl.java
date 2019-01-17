@@ -23,9 +23,9 @@ public class GroupServiceImpl implements GroupService {
 	}
 
 	@Override
-	public int selectGroupTotalContents() {
+	public int selectGroupTotalContents(int locationNo) {
 		
-		return groupDao.selectGroupTotalContents();
+		return groupDao.selectGroupTotalContents(locationNo);
 	}
  
 	@Override

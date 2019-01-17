@@ -85,7 +85,7 @@
 	
 	<select id="selectFreeListData" resultType="board">
 		SELECT * FROM DC_BOARD_TB WHERE TYPE='BOARD001' 
-		AND STATUS = 'BSTATUS001' AND ROWNUM <![CDATA[ <= 5 ORDER BY NO ]]>
+		AND STATUS = 'BSTATUS001' AND ROWNUM <![CDATA[ <= 5 ORDER BY NO  DESC]]>
 	</select>
 	
 </mapper>

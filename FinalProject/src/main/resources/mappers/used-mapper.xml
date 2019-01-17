@@ -37,8 +37,8 @@
 		SELECT * FROM DC_BOARD_USED_VIEW WHERE STATUS='BSTATUS001' AND LOCATIONNO = #{locationNo} ORDER BY NO DESC
 	</select>
 	
-	<select id="selectUsedTotalContents" resultType="_int">
-		SELECT COUNT(*) FROM DC_BOARD_TB WHERE TYPE= 'BOARD004' AND STATUS='BSTATUS001'
+	<select id="selectUsedTotalContents" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM DC_BOARD_USED_VIEW WHERE STATUS='BSTATUS001' AND LOCATIONNO = #{locationNo} 
 	</select>
 	
 	<select id="selectOneUsed" parameterType="_int" resultMap="resultUsed">
@@ -107,7 +107,8 @@
 	</update>
 	
 	<select id="selectMainUsedList" resultMap="resultUsed">
-	 	SELECT * FROM DC_BOARD_USED_VIEW
+	 	SELECT * FROM DC_BOARD_USED_VIEW WHERE STATUS='BSTATUS001'
+		AND ROWNUM <![CDATA[ <= 8 ORDER BY NO DESC ]]>
 	</select>
 
 

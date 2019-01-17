@@ -97,6 +97,8 @@
 <!-------------------- Script -------------------->
 <script>
 
+	var priceChk = false;
+
 	$('#summernote').summernote({
 		height : 500,
 		minHeight : 500,
@@ -173,13 +175,12 @@
 		} else if ($('input[name="dealType"]:checked').val() == null ) {
 			alert("거래 방법을 선택해 주세요.");
 		} else if ($('#summernote').val() == "" ) {
-			alert("물품 내용을 등록해주세요.");
+			alert("글 내용을 등록해주세요.");
 		} else {
 			$('form').submit();
 		}
 	}
-	
-	var priceChk = false;
+
 	// 가격 --> 정규식처리:100~1000000 (백원~백만원)
 	$("#price").on("keyup", function() {
 		var price = $("#price").val().trim();

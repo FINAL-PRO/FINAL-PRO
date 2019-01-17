@@ -10,7 +10,7 @@ public interface UsedDao {
 
 	List<Map<String, String>> selectUsedList(int cPage, int numPerPage, int locationNo);
 	
-	int selectUsedTotalContents();
+	int selectUsedTotalContents(int locationNo);
 	
 	Used selectOneUsed(int boardNo);
 	

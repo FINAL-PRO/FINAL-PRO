@@ -76,10 +76,50 @@
 	
 	<script>
 		$(document).ready(function() {
-			$('#summernote').summernote({
-				height: 300,
-				lang: 'ko-KR'
-			}); 
+            
+            $('#summernote').summernote({
+        		minHeight : 200,
+        		maxHeight : 500,
+        		focus : true,
+        		callbacks : {
+        			onImageUpload : function(files) {
+        				for (var i = files.length - 1; i >= 0; i--) {
+        					sendFile(files[i]);
+        		}}},
+        		toolbar: [
+        		    ['style', ['bold', 'italic', 'underline', 'clear']],
+        		    ['fontsize', ['fontsize']],
+        		    ['color', ['color']],
+        		    ['para', ['ul', 'ol', 'paragraph']],
+        		    ['height', ['height']],
+        		    ['picture', ['picture', 'video']]
+        		  ]
+        	});
+
+        	function sendFile(file) {
+        		var form_data = new FormData();
+        		form_data.append('file', file);
+
+        		$.ajax({
+        			url : '${pageContext.request.contextPath}/common/summernote/convertImage.do',
+        			data : form_data,
+        			type : "POST",
+        			cache : false,
+        			contentType : false,
+        			enctype : 'multipart/form-data',
+        			processData : false,
+        			success : function(url) {
+        				$('#summernote').summernote('editor.insertImage', url);
+        				console.log("url: "+url);
+        			},
+        			error : function() {
+        				console.log("이미지 업로드 실패");
+        			}
+        		});
+        		
+        		}
+			
+			
 		});
 		
 		function goAdminBoardList(){

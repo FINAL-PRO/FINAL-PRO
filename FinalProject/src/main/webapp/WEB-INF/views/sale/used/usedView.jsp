@@ -52,10 +52,10 @@
 		<p class="info-label">거래방법</p>
 		<p class="info-label">판매상태</p> <br />
 		<c:if test="${member.no ne used.memberNo and used.dealType eq '안전거래'}">
-		<input type="button" value="바로구매" onclick="pay(${used.price});" />
+		<input type="button" class="btn btnGroup" value="바로구매" onclick="pay(${used.price});" />
 		</c:if>
 		<c:if test="${member.no eq used.memberNo}">
-		<input type="button" value="물품 판매완료" class="btn btnGroup" onclick="soldOut();"/>
+		<input type="button" class="btn btnGroup" value="물품 판매완료"  onclick="soldOut();"/>
 		</c:if>
 	</div>
 	<div class="col-md-6">

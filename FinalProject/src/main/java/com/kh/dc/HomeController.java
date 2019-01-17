@@ -48,13 +48,13 @@ public class HomeController {
 		
 		return "index";
 	}
-	/*
+	
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
 	public String index(Locale locale, Model model, Principal principal) {
 		model = loginProcess(model, principal);
 
 		return "index";
-	}*/
+	}
 	
 	public Model loginProcess(Model model, Principal principal) {
 		

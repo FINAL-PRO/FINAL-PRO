@@ -39,8 +39,8 @@
 		SELECT * FROM DC_BOARD_GROUP_VIEW WHERE STATUS='BSTATUS001' AND LOCATIONNO = #{locationNo} ORDER BY NO DESC
 	</select>
 	
-	<select id="selectGroupTotalContents" resultType="_int">
-		SELECT COUNT(*) FROM DC_BOARD_GROUP_VIEW WHERE STATUS='BSTATUS001'
+	<select id="selectGroupTotalContents" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM DC_BOARD_GROUP_VIEW WHERE STATUS='BSTATUS001' AND LOCATIONNO = #{locationNo}
 	</select>
 	
 	<select id="selectOneGroup" parameterType="_int" resultMap="resultGroup">
@@ -128,7 +128,7 @@
 	
 	<select id="selectSumGroupList" resultMap="resultGroup">
 		SELECT * FROM DC_BOARD_GROUP_VIEW WHERE STATUS='BSTATUS001'
-		AND ROWNUM <![CDATA[ <= 5 ORDER BY NO ]]>
+		AND ROWNUM <![CDATA[ <= 8 ORDER BY NO DESC ]]>
 	</select>
 
 	
