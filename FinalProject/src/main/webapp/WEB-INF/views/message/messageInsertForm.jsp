@@ -9,47 +9,18 @@
 <meta charset="UTF-8">
 <title>쪽지 입력페이지 입니다.</title>
 <style>
-	.msgBody {
-		margin: 5%;
-	}
-	.msgContent{
-		width: 500px;
-		height: 150px;
-		padding: 12px 20px;
-		box-sizing: border-box;
-		border: 2px solid #ccc;
-		border-radius: 4px;
-		background-color: #f8f8f8;
-		font-size: 16px;
-		resize: none;
-	}
-	.msgLabel{
-		width: 100px;
-		font-weight: bold;
-	}
-	.msgTitle{
-		border: 2px solid gray;
-		width: 500px;
-		display: inline-block;
-    	vertical-align: baseline;
-		font-weight: bold;
-   		background: gray;
-   		font-size: 18px;
-    	height: 40px;
-    	margin: 2px;
-    	color: #fff;
-	}	
+
 </style>
 
 <c:import url="../common/header.jsp"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/msg/msgDetailCss.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/msg/msgInsertCss.css" />
 </head>
 <body>
 	<div class="msgBody">
 	<div class="msgTitle">&nbsp;&nbsp;쪽지쓰기</div>
 	<form id="msgIns" method="post" 
 	oninput="checkNick();"
-	action="${pageContext.request.contextPath}/message/messageInsert.do">
+	action="${pageContext.request.contextPath}/message/insert.do">
 		<input type="hidden" name="fromMember" value="${member.no}" readonly/>
 		<label class="msgLabel">작성자</label>  ${member.nickName}
 		<input type="hidden" name="frommNick" value="${member.nickName}" readonly/>
@@ -111,7 +82,7 @@
 		}		
 		
 		function cancel(){
-			location.href = "${pageContext.request.contextPath}/message/messageList.do?no=${member.no}";
+			location.href = "${pageContext.request.contextPath}/message/list.do?no=${member.no}";
 		}
 	</script>
 </body>

@@ -38,7 +38,7 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="${pageContext.request.contextPath}/job/jobBoard/searchJobBoard.do?jb_Search=s_Nick&searchCont=${jobBoard.nickName}">작성글 보기</a>&nbsp;|&nbsp;<span onclick="sendMsg();"><a href="${pageContext.request.contextPath}/job/jobBoard/searchJobBoard.do?jb_Search=s_Nick&searchCont=${jobBoard.nickName}">쪽지보내기</a></span></div>
+						<a href="${pageContext.request.contextPath}/job/jobBoard/search.do?jb_Search=s_Nick&searchCont=${jobBoard.nickName}">작성글 보기</a>&nbsp;|&nbsp;<span onclick="sendMsg();"><a href="${pageContext.request.contextPath}/job/jobBoard/search.do?jb_Search=s_Nick&searchCont=${jobBoard.nickName}">쪽지보내기</a></span></div>
 						</div></div>
 						<div class="float">
 						<label class="inlie-t">
@@ -71,15 +71,15 @@
 						<c:import url="../../common/comment.jsp" />
 					
 						<br /><button class="btn btn-outline-info" 
-							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/jobBoardList.do'">목록</button>
+							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/list.do'">목록</button>
 						
 						<c:if test="${member.no eq jobBoard.memberNo}">
 						<button class="btn btn-outline-info" type="button" 
-							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/updateJobBoardForm.do?no=${jobBoard.no}'">수정</button>
+							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/updateForm.do?no=${jobBoard.no}'">수정</button>
 						<button class="btn btn-outline-info" type="button" 
-							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/endJobBoard.do?boardNo=${jobBoard.boardNo}'">조기마감</button>
+							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/end.do?boardNo=${jobBoard.boardNo}'">조기마감</button>
 						<button class="btn btn-outline-info" type="button" 
-							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/deleteJobBoard.do?boardNo=${jobBoard.boardNo}'">삭제</button>
+							onclick="location.href='${pageContext.request.contextPath}/job/jobBoard/delete.do?boardNo=${jobBoard.boardNo}'">삭제</button>
 						</c:if>	
 					</div>
 					</div>

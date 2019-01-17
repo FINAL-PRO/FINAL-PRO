@@ -25,7 +25,7 @@
 						<div class="dc-content-title">
 							<h1>구인구직 게시판 업데이트</h1>
 						</div>
-						<form id="jUpdForm" method="post" action="${pageContext.request.contextPath}/job/jobBoard/jobBoardUpdate.do">
+						<form id="jUpdForm" method="post" action="${pageContext.request.contextPath}/job/jobBoard/update.do">
 						<div class="dc-content-box"><br />
 						<div class="jb-margin">
 						<input type="hidden" name="no" value="${jobBoard.no}"/></p>
@@ -96,7 +96,7 @@
 <script>
 	function selectCompany() {
 		window.name = "jobBoardInsertForm";	
-		var childWindow = window.open("jobBoardComPop.do", "popup01", "width=500, height=400");
+		var childWindow = window.open("comPop.do", "popup01", "width=500, height=400");
 	}
 	$('#summernote').summernote({
 		height : 500,

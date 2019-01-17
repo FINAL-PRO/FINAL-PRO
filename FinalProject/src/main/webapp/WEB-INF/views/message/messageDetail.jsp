@@ -8,34 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
-	.msgBody {
-		margin: 5%;
-	}
-	.msgLabel{
-		width: 100px;
-		font-weight: bold;
-	}
-	.msgCont{
-		width: 150px;
-	}
-	.msgContent{
-		border: 2px solid rgb(244, 126, 96);;
-		width: 500px;
-		height: 200px;
-		border-style: dotted;
-	}
-	.msgTitle{
-		border: 2px solid rgb(244, 126, 96);
-		width: 500px;
-		display: inline-block;
-    	vertical-align: baseline;
-		font-weight: bold;
-   		background: rgb(244, 126, 96);
-   		font-size: 18px;
-    	height: 40px;
-    	margin: 2px;
-    	color: #fff;
-    }	
+
 </style>
 
 <c:import url="../common/header.jsp"/>
@@ -83,14 +56,14 @@
 	</div>		
 		<script>
 			function messageReply(){
-				location.href = "${pageContext.request.contextPath}/message/messageInsertForm.do?no=${member.no}&fromMember=${message.frommNick}";
-			}
+				location.href = "${pageContext.request.contextPath}/message/insertForm.do?no=${member.no}&fromMember=${message.frommNick}";
+			};
 		
 			function messageList(){
-				location.href = "${pageContext.request.contextPath}/message/messageList.do?no=${member.no}";
+				location.href = "${pageContext.request.contextPath}/message/list.do?no=${member.no}";
 			};
-			function sendMsg(){
-				location.href = "${pageContext.request.contextPath}/message/messageDelete.do?fromNo=${message.no}&memNo=${member.no}";
+			function messageDelete(){
+				location.href = "${pageContext.request.contextPath}/message/delete.do?no=${message.no}&memNo=${member.no}";
 			};
 		</script>
 		

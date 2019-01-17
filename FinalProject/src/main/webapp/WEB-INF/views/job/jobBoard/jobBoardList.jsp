@@ -69,7 +69,7 @@
 															
 						<!-- 검색창 <--><br/>
 						<div class="form-inline">
-							<form action="${pageContext.request.contextPath}/job/jobBoard/searchJobBoard.do">
+							<form action="${pageContext.request.contextPath}/job/jobBoard/search.do">
 							<select class="form-control" id="jb_Search" name="jb_Search">
 								<option value="s_All">전체</option>
 								<option value="s_Title">제목</option>
@@ -101,9 +101,9 @@
 							<tr id="${jb.no}" style="background-color:#FFFFFF; color:gray;">
 								<td>${jb.no}</td>
 								<td>
-									<a href="${pageContext.request.contextPath}/job/jobBoard/jobBoardDetail.do?no=${jb.no}">
+									<a href="${pageContext.request.contextPath}/job/jobBoard/view.do?no=${jb.no}">
 									${fn:substring(jb.title, 0, 20)}</a></div>
-									<%-- <a href="${pageContext.request.contextPath}/job/jobBoard/jobBoardDetail.do?no=${jb.boardNo}">${jb.title}</a></div> --%>
+									
 								<td class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<a id="sendNick" href="#">${jb.nickName}</a> 
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -150,7 +150,9 @@
 									<td>D-${jb.dday}</td>
 								</c:if>
 								<c:if test="${jb.dday < 0 }">
+
 									<td>D${jb.dday}</td>
+
 								</c:if>
 								<td>${jb.viewCount}</td>
 								<td>${jb.type}</td>		
@@ -174,42 +176,42 @@
 	</div>
 		<script>
 		function jobBoardInsert(){
-			location.href = "${pageContext.request.contextPath}/job/jobBoard/jobBoardInsertForm.do?no=${member.no}";
+			location.href = "${pageContext.request.contextPath}/job/jobBoard/insertForm.do?no=${member.no}";
 		};
 		
 		$("#arrayType").on('change',function() {
-			location.href = "${pageContext.request.contextPath}/job/jobBoard/jobBoardList.do?arrayType="
+			location.href = "${pageContext.request.contextPath}/job/jobBoard/list.do?arrayType="
 					+ $("#arrayType").val() 
 					+ "&type=" + $("#type").val() 
 					+ "&jobType=" + $("#jobType").val()
 					+ "&salType=" + $("#salType").val();
 		});
 		$("#type").on('change',function() {
-			location.href = "${pageContext.request.contextPath}/job/jobBoard/jobBoardList.do?arrayType="
+			location.href = "${pageContext.request.contextPath}/job/jobBoard/list.do?arrayType="
 					+ $("#arrayType").val() 
 					+ "&type=" + $("#type").val() 
 					+ "&jobType=" + $("#jobType").val()
 					+ "&salType=" + $("#salType").val();
 		});
 		$("#jobType").on('change',function() {
-			location.href = "${pageContext.request.contextPath}/job/jobBoard/jobBoardList.do?arrayType="
+			location.href = "${pageContext.request.contextPath}/job/jobBoard/list.do?arrayType="
 					+ $("#arrayType").val() 
 					+ "&type=" + $("#type").val() 
 					+ "&jobType=" + $("#jobType").val()
 					+ "&salType=" + $("#salType").val();
 		});
 		$("#salType").on('change',function() {
-			location.href = "${pageContext.request.contextPath}/job/jobBoard/jobBoardList.do?arrayType="
+			location.href = "${pageContext.request.contextPath}/job/jobBoard/list.do?arrayType="
 					+ $("#arrayType").val() 
 					+ "&type=" + $("#type").val() 
 					+ "&jobType=" + $("#jobType").val()
 					+ "&salType=" + $("#salType").val();
 		});
 		function sendMsg() {
-			window.open("${pageContext.request.contextPath}/message/messageInsertForm.do?fromMember="+ $("#sendNick").text(), "msgPop", "width=700, height=600");
+			window.open("${pageContext.request.contextPath}/message/insertForm.do?fromMember="+ $("#sendNick").text(), "msgPop", "width=700, height=600");
 		}
 		function writeNick(){
-			location.href = "${pageContext.request.contextPath}/job/jobBoard/searchJobBoard.do?jb_Search=s_Nick&searchCont="+ $("#sendNick").text();
+			location.href = "${pageContext.request.contextPath}/job/jobBoard/search.do?jb_Search=s_Nick&searchCont="+ $("#sendNick").text();
 		}
 	</script>
 </body>
