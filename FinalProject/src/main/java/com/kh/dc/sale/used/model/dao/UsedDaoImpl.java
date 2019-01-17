@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dc.common.vo.Board;
 import com.kh.dc.sale.used.model.vo.Used;
 
 @Repository
@@ -105,6 +106,11 @@ public class UsedDaoImpl implements UsedDao {
 	public int updateUsedHistroy(Map<String, String> uhMap) {
 
 		return sqlSession.update("used_mapper.updateUsedHistroy", uhMap);
+	}
+
+	@Override
+	public List<Board> selectMainUsedList() {
+		return sqlSession.selectList("used_mapper.selectMainUsedList");
 	}
 	
 

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.dc.common.vo.Board;
 import com.kh.dc.sale.used.model.dao.UsedDao;
 import com.kh.dc.sale.used.model.vo.Used;
 
@@ -89,6 +90,11 @@ public class UsedServiceImpl implements UsedService {
 	public int updateUsedHistroy(Map<String, String> uhMap) {
 
 		return usedDao.updateUsedHistroy(uhMap);
+	}
+
+	@Override
+	public List<Board> selectMainUsedList() {
+		return usedDao.selectMainUsedList();
 	}
 		
 }

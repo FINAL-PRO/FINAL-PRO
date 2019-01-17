@@ -9,7 +9,7 @@
 		B.TITLE, B.CONTENT, B.VIEWCOUNT,
 		B.TYPE, B.STATUS, B.MEMBERNO, B.CATEGORY,
 		H.MINPRICE, H.MAXPRICE, H.AREA, H.TYPE hType, 
-		NVL(substr(CONTENT, INSTR(CONTENT, 'src="', 1,1)+5, INSTR(CONTENT, '">', 1,1)-INSTR(CONTENT, 'src="', 1,1)-5), '/dc/resources/images/no-image.png') houseImg,
+		NVL(substr(CONTENT, INSTR(CONTENT, 'src="', 1,1)+5, INSTR(CONTENT, '"', 1,1)-INSTR(CONTENT, 'src="', 1,1)-5), '/dc/resources/images/no-image.png') houseImg,
 		H.DEALTYPE
 		FROM DC_BOARD_TB B 
 		JOIN DC_BOARD_HOUSE_TB H ON B.NO = H.BOARDNO

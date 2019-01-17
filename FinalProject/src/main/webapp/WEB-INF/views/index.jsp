@@ -127,7 +127,7 @@
 											<c:if test="${!empty groupList}">
 												<c:forEach items="${groupList}" var="item">
 													<div class="main-img-div">
-														<a href="/dc/sale/group/groupView.do?boardNo=${item.boardNo}">
+														<a href="${pageContext.request.contextPath}/sale/group/groupView.do?boardNo=${item.boardNo}">
 															<span>
 																<img src="${item.goodsPicture}" width="190" />
 															</span>
@@ -150,6 +150,52 @@
 								</div>
 							</div>
 						</div>
+						<br />
+						
+													<div class="dc-content-box">
+							<div class="dc-con-title">
+								<h4>
+									<span class="board-title" onclick="location.href='${pageContext.request.contextPath}/sale/used/list.do'">중고거래 게시판</span>
+								</h4>							
+							</div>
+							
+							<div class="dc-con-content">
+								<div class="dc-tb">
+									<div class="dc-tb-head">
+										<div class="dc-tb-row">
+											
+										</div>					
+									</div>
+									<div id="groupTable" class="dc-tb-body" style="">
+										<div id="main-img-list2" class="main-img-list">
+											<c:if test="${!empty usedList}">
+												<c:forEach items="${usedList}" var="item">
+													<div class="main-img-div">
+														<a href="${pageContext.request.contextPath}/sale/used/usedView.do?boardNo=${item.boardNo}">
+															<span>
+																<img src="${item.goodsPicture}" width="190" />
+															</span>
+															<div class="img-text">
+																<strong>${item.title}</strong><br />
+																<span>${item.goodsCategory }</span>
+															</div>
+													</a></div>
+												</c:forEach>
+											</c:if>
+											<c:if test="${empty usedList}">
+												<div class="dc-none-data">
+													<div align="center">
+														<span>게시물 없음</span>
+													</div>
+												</div>
+											</c:if>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
 						<br />
 						<div class="dc-content-box">
 							<div class="dc-con-title">
