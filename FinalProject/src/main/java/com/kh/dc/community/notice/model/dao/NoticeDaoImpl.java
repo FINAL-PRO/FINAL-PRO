@@ -18,14 +18,14 @@ public class NoticeDaoImpl implements NoticeDao {
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<Map<String, String>> recentSort(int cPage, int numberPage) {
+	public List<Map<String, String>> recentSort(int cPage, int numberPage, int locationNo) {
 		RowBounds rowBounds = new RowBounds((cPage-1)*numberPage, numberPage);
-		return sqlSession.selectList("notice_mapper.noticerecentSort", null, rowBounds);
+		return sqlSession.selectList("notice_mapper.noticerecentSort", locationNo, rowBounds);
 	}
 	
 	@Override
-	public int selectNoticeTotalContents() {
-		return sqlSession.selectOne("notice_mapper.selectNoticeTotalContents");
+	public int selectNoticeTotalContents(int locationNo) {
+		return sqlSession.selectOne("notice_mapper.selectNoticeTotalContents", locationNo);
 	}
 
 	@Override

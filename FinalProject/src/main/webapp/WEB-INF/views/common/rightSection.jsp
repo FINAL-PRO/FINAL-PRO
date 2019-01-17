@@ -106,7 +106,7 @@
 							
 							function countMsg(){
 								$.ajax({
-									data : { memNo : ${member.no} },
+									data : { memNo : "${member.no}" },
 									url : "${pageContext.request.contextPath}/message/countUnreadMSG.do",
 									success : function(data){
 										$("#countUnreadMSG").text(data);

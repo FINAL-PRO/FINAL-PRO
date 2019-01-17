@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -21,16 +20,10 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
 
-<script src="${pageContext.request.contextPath }/resources/js/sweetalert2.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/sweetalert2.min.css"/>
-
-<!-- 기상청 날씨 받아오기 위한 크로스도메인 해결 플러그인 -->
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.ajax-cross-origin.min.js"></script>
-
 <!-- 폰트 -->
 <link href="https://fonts.googleapis.com/css?family=Gugi|Nanum+Gothic" rel="stylesheet">
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="icon" href="${pageContext.request.contextPath }/resources/icons/favicon.png">
 <style>
 	section{background-color: white;}
@@ -61,5 +54,9 @@
 		margin-left:auto;
 		margin-right:auto;
 	} */
+	
+	body{
+		font-size: 14px;
+	}
 </style>
 

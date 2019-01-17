@@ -18,26 +18,26 @@ public class FreeDaoImpl implements FreeDao{
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<Map<String, String>> recentSort(int cPage, int numberPage) {
+	public List<Map<String, String>> recentSort(int cPage, int numberPage, int locationNo) {
 		RowBounds rowBounds = new RowBounds((cPage-1)*numberPage, numberPage);
-		return sqlSession.selectList("free_mapper.recentSort", null, rowBounds);
+		return sqlSession.selectList("free_mapper.recentSort", locationNo, rowBounds);
 	}
 
 	@Override
-	public List<Map<String, String>> commentSort(int cPage, int numberPage) {
+	public List<Map<String, String>> commentSort(int cPage, int numberPage, int locationNo) {
 		RowBounds rowBounds = new RowBounds((cPage-1)*numberPage, numberPage);
-		return sqlSession.selectList("free_mapper.commentSort", null, rowBounds);
+		return sqlSession.selectList("free_mapper.commentSort", locationNo, rowBounds);
 	}
 
 	@Override
-	public List<Map<String, String>> likeSort(int cPage, int numberPage) {
+	public List<Map<String, String>> likeSort(int cPage, int numberPage, int locationNo) {
 		RowBounds rowBounds = new RowBounds((cPage-1)*numberPage, numberPage);
-		return sqlSession.selectList("free_mapper.likeSort", null, rowBounds);
+		return sqlSession.selectList("free_mapper.likeSort", locationNo, rowBounds);
 	}
 	
 	@Override
-	public int selectFreeTotalContents() {
-		return sqlSession.selectOne("free_mapper.selectFreeTotalContents");
+	public int selectFreeTotalContents(int locationNo) {
+		return sqlSession.selectOne("free_mapper.selectFreeTotalContents", locationNo);
 	}
 
 	@Override

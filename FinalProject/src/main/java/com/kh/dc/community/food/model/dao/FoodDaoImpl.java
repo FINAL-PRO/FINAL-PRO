@@ -22,26 +22,26 @@ public class FoodDaoImpl implements FoodDao{
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<Map<String, String>> recentSort(int cPage, int numberPage) {
+	public List<Map<String, String>> recentSort(int cPage, int numberPage, int locationNo) {
 		RowBounds rowBounds = new RowBounds((cPage-1)*numberPage, numberPage);
-		return sqlSession.selectList("food_mapper.foodrecentSort", null, rowBounds);
+		return sqlSession.selectList("food_mapper.foodrecentSort", locationNo, rowBounds);
 	}
 
 	@Override
-	public List<Map<String, String>> commentSort(int cPage, int numberPage) {
+	public List<Map<String, String>> commentSort(int cPage, int numberPage, int locationNo) {
 		RowBounds rowBounds = new RowBounds((cPage-1)*numberPage, numberPage);
-		return sqlSession.selectList("food_mapper.foodcommentSort", null, rowBounds);
+		return sqlSession.selectList("food_mapper.foodcommentSort", locationNo, rowBounds);
 	}
 
 	@Override
-	public List<Map<String, String>> likeSort(int cPage, int numberPage) {
+	public List<Map<String, String>> likeSort(int cPage, int numberPage, int locationNo) {
 		RowBounds rowBounds = new RowBounds((cPage-1)*numberPage, numberPage);
-		return sqlSession.selectList("food_mapper.foodlikeSort", null, rowBounds);
+		return sqlSession.selectList("food_mapper.foodlikeSort", locationNo, rowBounds);
 	}
 	
 	@Override
-	public int selectFoodTotalContents() {
-		return sqlSession.selectOne("food_mapper.selectFoodTotalContents");
+	public int selectFoodTotalContents(int locationNo) {
+		return sqlSession.selectOne("food_mapper.selectFoodTotalContents", locationNo);
 	}
 
 	@Override

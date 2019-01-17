@@ -21,8 +21,8 @@ public class FoodServiceImpl implements FoodService{
 	FoodDao foodDao;
 
 	@Override
-	public int selectFoodTotalContents() {
-		return foodDao.selectFoodTotalContents();
+	public int selectFoodTotalContents(int locationNo) {
+		return foodDao.selectFoodTotalContents(locationNo);
 	}
 
 	@Override
@@ -57,18 +57,18 @@ public class FoodServiceImpl implements FoodService{
 	}
 
 	@Override
-	public List<Map<String, String>> recentSort(int cPage, int numberPage) {
-		return foodDao.recentSort(cPage, numberPage);
+	public List<Map<String, String>> recentSort(int cPage, int numberPage, int locationNo) {
+		return foodDao.recentSort(cPage, numberPage, locationNo);
 	}
 
 	@Override
-	public List<Map<String, String>> commentSort(int cPage, int numberPage) {
-		return foodDao.commentSort(cPage, numberPage);
+	public List<Map<String, String>> commentSort(int cPage, int numberPage, int locationNo) {
+		return foodDao.commentSort(cPage, numberPage, locationNo);
 	}
 
 	@Override
-	public List<Map<String, String>> likeSort(int cPage, int numberPage) {
-		return foodDao.likeSort(cPage, numberPage);
+	public List<Map<String, String>> likeSort(int cPage, int numberPage, int locationNo) {
+		return foodDao.likeSort(cPage, numberPage, locationNo);
 	}
 
 	

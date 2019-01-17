@@ -17,8 +17,8 @@ public class FreeServiceImpl implements FreeService{
 	FreeDao freeDao;
 
 	@Override
-	public int selectFreeTotalContents() {
-		return freeDao.selectFreeTotalContents();
+	public int selectFreeTotalContents(int locationNo) {
+		return freeDao.selectFreeTotalContents(locationNo);
 	}
 
 	@Override
@@ -53,18 +53,18 @@ public class FreeServiceImpl implements FreeService{
 	}
 
 	@Override
-	public List<Map<String, String>> recentSort(int cPage, int numberPage) {
-		return freeDao.recentSort(cPage, numberPage);
+	public List<Map<String, String>> recentSort(int cPage, int numberPage, int locationNo) {
+		return freeDao.recentSort(cPage, numberPage, locationNo);
 	}
 
 	@Override
-	public List<Map<String, String>> commentSort(int cPage, int numberPage) {
-		return freeDao.commentSort(cPage, numberPage);
+	public List<Map<String, String>> commentSort(int cPage, int numberPage, int locationNo) {
+		return freeDao.commentSort(cPage, numberPage, locationNo);
 	}
 
 	@Override
-	public List<Map<String, String>> likeSort(int cPage, int numberPage) {
-		return freeDao.likeSort(cPage, numberPage);
+	public List<Map<String, String>> likeSort(int cPage, int numberPage, int locationNo) {
+		return freeDao.likeSort(cPage, numberPage, locationNo);
 	}
 
 	

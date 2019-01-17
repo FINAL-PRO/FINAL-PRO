@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.community.notice.model.service.NoticeService;
+import com.kh.dc.member.model.vo.Member;
 import com.kh.dc.common.util.Utils;
 
 @Controller
@@ -30,18 +31,19 @@ public class NoticeController {
 	
 	@RequestMapping("community/notice/list.do")
 	public String selectFoodList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, 
-		Model model, HttpServletRequest request) {
+		Model model, HttpServletRequest request, Member member) {
 	
 		int numberPage = 10; // 한 페이지당 게시글 수
+		int locationNo = member.getLocationNo();
 
 		ArrayList<Map<String, String>> nlist = null;
 
-		nlist = new ArrayList<Map<String, String>>(noticeService.recentSort(cPage, numberPage));
+		nlist = new ArrayList<Map<String, String>>(noticeService.recentSort(cPage, numberPage, locationNo));
 
 		System.out.println("nlist: "+nlist);
 		
 		// 2. 전체 게시글 개수 가져오기
-		int totalContents = noticeService.selectNoticeTotalContents();
+		int totalContents = noticeService.selectNoticeTotalContents(locationNo);
 		
 		// 3. 페이지 계산 후 작성할 HTML 추가
 		String pageBar = Utils.getPageBar(totalContents, cPage, numberPage, "list.do");
