@@ -46,6 +46,7 @@
 	<security:http security="none" pattern="/community/free/freeDelete.do" /> 
 	<security:http security="none" pattern="/community/free/freeUpdateForm.do" />
 	<security:http security="none" pattern="/community/free/freeUpdateFormEnd.do" />
+	<security:http security="none" pattern="/community/free/freeView.do" />
 	
 	<security:http security="none" pattern="/job/jobBoard/insertJobBoard.do" />
 	
@@ -58,6 +59,8 @@
 	<security:http security="none" pattern="/sale/used/insert.do" />
 	<security:http security="none" pattern="/sale/used/update.do" />
 	<security:http security="none" pattern="/sale/used/delete.do" />
+	
+	<security:http security="none" pattern="/common/comment/commentUpdate.do" />
 	
 	<!-- 메시지 전송 -->
 	<security:http security="none" pattern="/message/messageInsert.do" />

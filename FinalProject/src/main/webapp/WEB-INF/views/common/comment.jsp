@@ -84,10 +84,20 @@
 	padding: 2px;
 }
 
+.btn-Cedit{
+	background: rgb(248, 178, 106);
+	color: white;
+	margin-left: 3px;
+}
+
 #commentSubmit{
 	margin-left: 10px;
 	background: rgb(244, 126, 96);
 	color: white;
+}
+
+.input-group{
+	padding: 5px;
 }
 
 </style>
@@ -229,19 +239,30 @@
 
 			var a = '';
 
+			a += '<form class="commentEditForm" name="commentEditForm">';
 			a += '<div class="input-group">';
-			a += '<input type="text" class="form-control" name="content_'+cno+'" value="'+content+'"/>';
-			a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+ cno + ');">수정</button> </span>';
-			a += '</div>';
+			a += '<input type="text" class="content_ form-control" name="content_'+cno+'" value="'+content+'" onkeydown="JavaScript:commentUpdateContent('+ cno + ')"/>';
+			a += '<span class="input-group-btn"><button class="btn btn-Cedit btn-sm" type="button" onclick="commentUpdateProc('+ cno + ');">수정</button> </span>';
+			a += '</div>'
+			a += '</form>';
 
 			$('.commentContent' + cno).html(a);
 
+		}
+		
+		function commentUpdateContent(cno){
+			
+			if(event.keyCode == 13){
+				commentUpdateProc(cno);  // 실행할 이벤트
+				alert("이게머야");
+		    }
 		}
 		
 		//댓글 수정
 		function commentUpdateProc(cno) {
 			
 			var updateContent = $('[name=content_' + cno + ']').val();
+			console.log("updateContent: "+updateContent);
 
 			$.ajax({
 				url : '${pageContext.request.contextPath}/comment/commentUpdate.do',
