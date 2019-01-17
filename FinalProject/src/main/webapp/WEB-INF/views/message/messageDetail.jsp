@@ -7,40 +7,92 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>쪽지 상세페이지 입니다.</title>
+<style>
+	.msgBody {
+		margin: 5%;
+	}
+	.msgLabel{
+		width: 100px;
+		font-weight: bold;
+	}
+	.msgCont{
+		width: 150px;
+	}
+	.msgContent{
+		border: 2px solid rgb(244, 126, 96);;
+		width: 500px;
+		height: 200px;
+		border-style: dotted;
+	}
+	.msgTitle{
+		border: 2px solid rgb(244, 126, 96);
+		width: 500px;
+		display: inline-block;
+    	vertical-align: baseline;
+		font-weight: bold;
+   		background: rgb(244, 126, 96);
+   		font-size: 18px;
+    	height: 40px;
+    	margin: 2px;
+    	color: #fff;
+    }	
+</style>
+
 <c:import url="../common/header.jsp"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/msg/msgDetailCss.css" />
+
 </head>
 <body>
-	<h1>쪽지 상세페이지 입니다.</h1>
-
-	<div>${message.no}</div>
-	내용 : <div>${message.content}</div>
-	<div>${message.sendDate}</div>
-	보낸사람 : <div>${message.frommNick}</div>
-	<div>${message.tomNick}</div>
-	<div>${message.status}</div>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/msg/msgDetailCss.css" />
+	<div class="msgBody">
 	
-	<c:if test="${'알리미' eq message.frommNick}">
-		<input type="button" value="답장" id="btn-add" class="btn" disabled/>
-	</c:if>
-	<c:if test="${'알리미' ne message.frommNick}">
-		<input type="button" value="답장" id="btn-add" class="btn" onclick="messageReply();"/>
-	</c:if>
-	<input type="button" value="목록" id="btn-add" class="btn" onclick="messageList();"/>
-	<input type="button" value="삭제" id="btn-add" class="btn" onclick="messageDelete();"/>
+		<div class="msgTitle">${message.frommNick}님이 보낸 쪽지</div><br />
+		<label class="msgLabel">번호</label>
+		<label class="msgCont">${message.no}</label>
 		
-	<script>
-		function messageReply(){
-			location.href = "${pageContext.request.contextPath}/message/messageInsertForm.do?no=${member.no}&fromMember=${message.frommNick}";
-		}
-	
-		function messageList(){
-			location.href = "${pageContext.request.contextPath}/message/messageList.do?no=${member.no}";
-		};
-		function messageDelete(){
-			location.href = "${pageContext.request.contextPath}/message/messageDelete.do?no=${message.no}&memNo=${member.no}";
-		};
-	</script>	
+		<label class="msgLabel">수신자</label>
+		<label class="msgCont">${message.tomNick}</label><br />
+		
+		<label class="msgLabel">상태</label>	
+		<c:if test="${message.status eq 'MSGTYPE001'}">
+		<label class="msgCont">읽지않음</label>
+		</c:if>
+		<c:if test="${message.status eq 'MSGTYPE002'}">
+		<label class="msgCont">읽음</label>
+		</c:if>
+		<c:if test="${message.status eq 'MSGTYPE003'}">
+		<label class="msgCont">삭제</label>
+		</c:if>
+		
+		<label class="msgLabel">작성일</label>
+		<label class="msgCont">${message.sendDate}</label><br />
+			
+		<label class="msgContent">${message.content}</label>
+
+
+		
+		
+		<br /><br />
+		<c:if test="${'알리미' eq message.frommNick}">
+			<input type="button" value="답장" id="btn-add" class="btn" disabled/>
+		</c:if>
+		<c:if test="${'알리미' ne message.frommNick}">
+			<input type="button" value="답장" id="btn-add" class="btn" onclick="messageReply();"/>
+		</c:if>
+		<input type="button" value="목록" id="btn-add" class="btn" onclick="messageList();"/>
+		<input type="button" value="삭제" id="btn-add" class="btn" onclick="messageDelete();"/>
+	</div>		
+		<script>
+			function messageReply(){
+				location.href = "${pageContext.request.contextPath}/message/messageInsertForm.do?no=${member.no}&fromMember=${message.frommNick}";
+			}
+		
+			function messageList(){
+				location.href = "${pageContext.request.contextPath}/message/messageList.do?no=${member.no}";
+			};
+			function sendMsg(){
+				location.href = "${pageContext.request.contextPath}/message/messageDelete.do?fromNo=${message.no}&memNo=${member.no}";
+			};
+		</script>
+		
 </body>
 </html>

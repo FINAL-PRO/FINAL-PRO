@@ -19,7 +19,7 @@
 					</div>
 			</div>
 			<div class="header_search" style="display:inline-block; margin-left: 50px; width: 50%">
-				<form class="" action="${pageContext.request.contextPath}/search/list.do?">
+				<form class="" id="searchSubmit" onkeyup="enterkey();" action="${pageContext.request.contextPath}/search/list.do?">
 					<input type="text" class="form-control" id="searchWord" name="searchWord" 
 						style="border: 4px solid rgb(248, 178, 106);" placeholder="검색어를 입력하세요.">
 				</form>
@@ -116,5 +116,14 @@
 	    	xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
 	    });
 	});
+	
+	function enterkey() {
+        if (window.event.keyCode == 13) { 
+             // 엔터키가 눌렸을 때 실행할 내용
+             $('#searchSubmit').submit();
+        }
+}
+
+
 	</script>
 </header>
