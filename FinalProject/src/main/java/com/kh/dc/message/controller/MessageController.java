@@ -25,7 +25,7 @@ public class MessageController {
 	@Autowired
 	private MessageService messageService;
 	
-	@RequestMapping("/message/messageList.do")
+	@RequestMapping("/message/list.do")
 	public String messageList(
 			Message message, 
 			@RequestParam int no,
@@ -40,7 +40,7 @@ public class MessageController {
 		
 		int totalContents = messageService.selectMessageTotalContents(no);
 		
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "messageList.do", no);
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "list.do", no);
 		
 		model.addAttribute("list", list)
 		.addAttribute("totalContents", totalContents)
@@ -66,7 +66,7 @@ public class MessageController {
 		int total = messageService.sendMsgTotalContents(fromMember);
 		System.out.println("total con : "+ total);
 		
-		String pageBar = Utils.getPageBar(total, cPage, numPerPage, "messageList.do", fromMember);
+		String pageBar = Utils.getPageBar(total, cPage, numPerPage, "list.do", fromMember);
 		
 		model.addAttribute("list", list)
 		.addAttribute("total", total)
@@ -77,32 +77,32 @@ public class MessageController {
 	}	
 	
 	
-	@RequestMapping(value="/message/messageInsertForm.do")
+	@RequestMapping(value="/message/insertForm.do")
 	public void insertMessageForm() {
 		
 	}
 	
-	@RequestMapping(value="/message/messageInsert.do")
+	@RequestMapping(value="/message/insert.do")
 	public String insertMessage(Message message, Model model, HttpSession session) {
 		
 		String res;
-		String loc = "/message/messageList.do";
+		String loc = "/message/list.do";
 		String msg = "";
 		
 		//String replyNick = messageService.replyNick();
 		if(message.getFrommNick().equals(message.getTomNick())) {
 			msg = "작성자가 받는사람과 같습니다.";
-			loc = "/message/messageList.do?no="+ message.getFromMember();
+			loc = "/message/list.do?no="+ message.getFromMember();
 			res = "/common/msg";
 		} else {
 			int result = messageService.insertMessage(message);
 			if(result > 0) {
 				msg = "게시글 등록 성공!";
-				loc = "/message/messageList.do?no="+ message.getFromMember();
+				loc = "/message/list.do?no="+ message.getFromMember();
 				res = "/common/msg";
 			} else {
 				msg = "게시글 등록 실패!";
-				loc = "/message/messageList.do?no="+ message.getFromMember();
+				loc = "/message/list.do?no="+ message.getFromMember();
 				res = "/common/msg";
 			}
 		}	
@@ -113,7 +113,7 @@ public class MessageController {
 		return res;
 	}
 	
-	@RequestMapping("/message/messageDetail.do")
+	@RequestMapping("/message/view.do")
 	public String selectOneMessage(@RequestParam int no, Model model) {
 		
 		model.addAttribute("message", messageService.selectOneMessage(no));
@@ -121,10 +121,10 @@ public class MessageController {
 		return "message/messageDetail";
 	}
 	
-	@RequestMapping("/message/messageDelete.do")
+	@RequestMapping("/message/delete.do")
 	public String deleteMessage(@RequestParam int no, @RequestParam int memNo, Model model) {
 		
-		String loc = "/message/messageList.do?no="+ memNo;
+		String loc = "/message/list.do?no="+ memNo;
 		
 		String msg = (messageService.deleteMessage(no)>0) ? "쪽지를 삭제하였습니다." : "쪽지삭제에 실패하였습니다.";
 		

@@ -14,7 +14,7 @@
     	vertical-align: middle;
     	display: table-row;
     	margin: 2px;
-    	background: gray;
+    	background: rgb(244, 126, 96);
     	font-weight: bold;
     	height: 40px;
 		color: #fff;
@@ -43,8 +43,8 @@
 		padding: 10px;
 		vertical-align: top;
 	} 
-	.colum:hover{
-		background: lightgray;
+	.row:hover{
+		background: rgb(248, 178, 106);
 	}
 	.mini{
 		width:50px;
@@ -71,12 +71,11 @@
     	text-align: center;
     }
     .nav{
-		border: 2px solid gray;
+		border: 2px solid rgb(244, 126, 96);
 		width: 500px;
 		display: inline-block;
     	vertical-align: baseline;
-		font-weight: bold;
-	   	background: gray;
+	   	background: rgb(244, 126, 96);
 	   	font-size: 18px;
     	height: 40px;
     	margin: 2px;
@@ -86,7 +85,6 @@
 		width: 500px;
 	}
 	.navList{
-		font-weight: bold;
 		color:white;
 		vertical-align: middle;
 	}

@@ -91,7 +91,7 @@
 							aria-expanded="false"> <span>구인 / 구직 </span></a>
 							<div class="dropdown-menu dc-user-menu" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item"
-									href="${pageContext.request.contextPath}/job/jobBoard/jobBoardList.do"><span>구인구직</span></a>
+									href="${pageContext.request.contextPath}/job/jobBoard/list.do"><span>구인구직</span></a>
 							</div></li>
 						<li class="nav-item dropdown dc-admin-menu">
 							<sec:authorize access="hasRole('ROLE_ADMIN')">

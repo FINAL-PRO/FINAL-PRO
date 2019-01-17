@@ -1,1 +1,31 @@
 @charset "UTF-8";
+	.msgBody {
+		margin: 5%;
+	}
+	.msgContent{
+		width: 500px;
+		height: 150px;
+		padding: 12px 20px;
+		box-sizing: border-box;
+		border: 2px solid #ccc;
+		border-radius: 4px;
+		background-color: #f8f8f8;
+		font-size: 16px;
+		resize: none;
+	}
+	.msgLabel{
+		width: 100px;
+		font-weight: bold;
+	}
+	.msgTitle{
+		border: 2px solid gray;
+		width: 500px;
+		display: inline-block;
+    	vertical-align: baseline;
+		font-weight: bold;
+   		background: rgb(244, 126, 96);
+   		font-size: 18px;
+    	height: 40px;
+    	margin: 2px;
+    	color: #fff;
+	}	

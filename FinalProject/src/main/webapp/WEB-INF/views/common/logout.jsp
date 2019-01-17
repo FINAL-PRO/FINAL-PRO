@@ -13,7 +13,7 @@
 <c:import url="../common/header.jsp" />
 
 </head>
-<body>	
+<body style="background-color: rgb(245, 234, 219);">	
 	<div align="center" style="margin: 0 auto; ">
 		<div class="" style="width: 300px; margin-top: 200px;">
       		<form class="form-signin" method="post" action="/dc/logout">
