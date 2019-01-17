@@ -22,12 +22,7 @@
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-						<c:if test="${house.no != null }">
-							<h2>글 수정</h2>
-						</c:if>
-						<c:if test="${house.no == null }">
-							<h2>글쓰기</h2>
-						</c:if>
+						<span class="dc-title-text">부동산</span>
 					</div>
 					<div class="dc-content-box">
 						<form id="insertFrm" method="post"
@@ -87,13 +82,15 @@
 								</tr>
 								<tr>
 									<td colspan="2">
-										<input type="hidden" name="mNo" value="${member.no}" />
-										<button class="btn dc-btn" type="submit">확인</button>
-										<button class="btn dc-btn" type="reset" onclick="historyGoBack();">취소</button>
-										<c:if test="${house.boardNo != null }">
-											<input type="hidden" name="no" value="${house.boardNo}" required />
-											<button class="btn dc-btn" onclick ="deleteHouse()" title="삭제하기">삭제하기</button>
-										</c:if>	
+										<div class="dc-btn-right">
+											<input type="hidden" name="mNo" value="${member.no}" />
+											<button class="btn dc-btn" type="submit">확인</button>
+											<button class="btn dc-btn" type="reset" onclick="historyGoBack();">취소</button>
+											<c:if test="${house.boardNo != null }">
+												<input type="hidden" name="no" value="${house.boardNo}" required />
+												<button class="btn dc-btn dc-btn-right" onclick ="deleteHouse()" title="삭제하기">삭제하기</button>
+											</c:if>
+										</div>	
 									</td>
 								</tr>
 							</table>
