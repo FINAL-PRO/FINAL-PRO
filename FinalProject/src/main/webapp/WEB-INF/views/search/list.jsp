@@ -43,6 +43,9 @@
 								<c:when test = "${result.boardType eq '중고거래'}">
 									<a class="resultTitle" href="#">[${result.boardType}] ${result.title}</a>
 								</c:when>
+								<c:when test = "${result.boardType eq '지역정보'}">
+									<a class="resultTitle" href="#">[${result.boardType}] ${result.title}</a>
+								</c:when>
 								<c:when test = "${result.boardType eq '부동산'}">
 									<a class="resultTitle" href="#">[${result.boardType}] ${result.title}</a>
 								</c:when>
