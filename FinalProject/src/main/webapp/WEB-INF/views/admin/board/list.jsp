@@ -22,25 +22,27 @@
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-						<div>
-							<span class="dc-list-title">전체 게시글 리스트</span>
-							<button class="btn dc-btn dc-btn-right" onclick="insertNotice();">공지 작성</button>
-						</div>
-						<br />
-						<div class="form-inline">
-							<select class="form-control" id="boardTypeNo">
-								<c:forEach items="${boardTypeList}" var="type">
-									<option value="${type.id}" <c:if test="${type.id eq boardType}">selected</c:if>>${type.value}</option>
-								</c:forEach>
-							</select>
-							<select class="form-control" id="boardStatusNo">
-								<c:forEach items="${boardStatusList}" var="status">
-									<option value="${status.id}" <c:if test="${status.id eq boardStatus}">selected</c:if>>${status.value}</option>
-								</c:forEach>
-							</select>
-						</div>
+						<span class="dc-title-text">전체 게시글</span>
 					</div>
 					<div class="dc-content-box">
+						<div class="form-inline">
+							<div style="width:50%">
+								<select class="form-control" id="boardTypeNo">
+									<c:forEach items="${boardTypeList}" var="type">
+										<option value="${type.id}" <c:if test="${type.id eq boardType}">selected</c:if>>${type.value}</option>
+									</c:forEach>
+								</select>
+								<select class="form-control" id="boardStatusNo">
+									<c:forEach items="${boardStatusList}" var="status">
+										<option value="${status.id}" <c:if test="${status.id eq boardStatus}">selected</c:if>>${status.value}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div style="width:50%">
+								<button class="btn dc-btn dc-btn-right" onclick="insertNotice();">공지 작성</button>
+							</div>
+						</div>
+						<br />
 
 						<table class="table">
 							<thead>

@@ -26,8 +26,12 @@
 						<span class="dc-title-text">지역정보</span>
 					</div>
 					<div class="dc-content-box">
-						<div>
-							<button class="btn dc-btn dc-btn-right" onclick="location.href='${pageContext.request.contextPath}/info/region/insert/view.do'">글쓰기</button>
+						<div class="form-inline">
+							<div style="width:50%">
+							</div>
+							<div style="width:50%">
+								<button class="btn dc-btn dc-btn-right" onclick="location.href='${pageContext.request.contextPath}/info/region/insert/view.do'">글쓰기</button>
+							</div>
 						</div>
 						<br />
 						<table class="table">

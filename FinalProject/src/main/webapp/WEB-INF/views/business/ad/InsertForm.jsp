@@ -22,7 +22,7 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>광고신청 게시판</h1>
+							<span class="dc-title-text">광고</span>
 						</div>
 						<div class="dc-content-box">
 							<form method="post" enctype="multipart/form-data"
