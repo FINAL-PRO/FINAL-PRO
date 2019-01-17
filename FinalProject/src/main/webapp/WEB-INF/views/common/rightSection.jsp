@@ -43,7 +43,7 @@
 	});
 	
 	function msgPop() {
-		window.open("${pageContext.request.contextPath}/message/messageList.do?no=${member.no}", "msgPop", "width=700, height=600");
+		window.open("${pageContext.request.contextPath}/message/messageList.do?no=${member.no}", "msgPop", "width=600px;, height=400px;");
 	}
 </script>	
 

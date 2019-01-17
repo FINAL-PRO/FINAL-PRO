@@ -50,6 +50,33 @@ public class MessageController {
 		return "/message/messageList";
 	}
 
+	@RequestMapping("/message/sendMsg.do")
+	public String sendMsg(
+			Message message, 
+			@RequestParam int fromMember,
+			@RequestParam(value="cPage", required=false, defaultValue="1")
+			int cPage, 
+			Model model) {
+		
+		int numPerPage = 5;
+		
+		ArrayList<Map<String, String>> list = 
+				new  ArrayList<Map<String, String>>(messageService.sendMsg(fromMember, cPage, numPerPage));
+		
+		int total = messageService.sendMsgTotalContents(fromMember);
+		System.out.println("total con : "+ total);
+		
+		String pageBar = Utils.getPageBar(total, cPage, numPerPage, "messageList.do", fromMember);
+		
+		model.addAttribute("list", list)
+		.addAttribute("total", total)
+		.addAttribute("numPerPage", numPerPage)
+		.addAttribute("pageBar", pageBar);
+		
+		return "/message/messageList";
+	}	
+	
+	
 	@RequestMapping(value="/message/messageInsertForm.do")
 	public void insertMessageForm() {
 		

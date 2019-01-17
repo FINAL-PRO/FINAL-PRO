@@ -79,21 +79,23 @@
 					</div>
 						<table class="job-board table">
 							<tr>
-								<th id="no" class="cell">번호</th>
-								<th id="title" class="cell">제목</th>
-								<th id="nickName" class="cell">작성자</th>
-								<th id="writeDate" class="cell">작성일</th>
-								<th id="salInfo" class="cell">급여</th>
-								<th id="endJobDday" class="cell">마감일</th>
-								<th id="viewCount" class="cell">조회</th>
-								<th id="hide-work" class="cell">상태</th>	
+								<th id="no" class="cell no">번호</th>
+								<th id="title" class="cell title">제목</th>
+								<th id="nickName" class="cell nickName">작성자</th>
+								<th id="writeDate" class="cell writeDate">작성일</th>
+								<th id="salInfo" class="cell salInfo">급여</th>
+								<th id="endJobDday" class="cell endJobDday">마감일</th>
+								<th id="viewCount" class="cell viewCount">조회</th>
+								<th id="hide-work" class="cell hide-work">상태</th>	
 							</tr>
 							<c:forEach items="${list}" var="jb">
 							<c:if test="${0 < jb.dday && jb.type ne '마감'}">
 							<tr id="${jb.no}" class="colum"> 
 								<td class="cell" style="width:50px">${jb.no}</td>
 								<td class="cell">
-									<a href="${pageContext.request.contextPath}/job/jobBoard/jobBoardDetail.do?no=${jb.no}">${jb.title}</a></div>
+									<a href="${pageContext.request.contextPath}/job/jobBoard/jobBoardDetail.do?no=${jb.no}">
+									${fn:substring(jb.title, 0, 20)}</a></div>
+									<%-- <a href="${pageContext.request.contextPath}/job/jobBoard/jobBoardDetail.do?no=${jb.boardNo}">${jb.title}</a></div> --%>
 								<td class="cell dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<a id="sendNick" href="#">${jb.nickName}</a> 
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -102,9 +104,9 @@
 									    <a class="dropdown-item">---------------</a>
 									</div>
 								</td>
-								<td class="cell">${jb.writeDate}</td>
+								<td class="cell writeDate">${fn:substring(jb.writeDate, 5, 10)}</td>
 								<td class="cell">${jb.salary} / ${jb.salType}</td>
-								<td class="cell">${jb.dday}일 남음</td>
+								<td class="cell">D-${jb.dday}</td>
 								<td class="cell mini">${jb.viewCount}</td>
 								<td class="cell mini">${jb.type}</td>		
 							</tr>
@@ -115,13 +117,15 @@
 							<!-- D-Day 지난것들 -->
 							<c:if test="${0 > jb.dday}">
 							<tr id="${jb.no}" class="colum"> 
-								<td class="cell jbEnd mini" style="width:50px">${jb.no}</td>
+								<td class="cell jbEnd mini " style="width:50px">${jb.no}</td>
 								<td class="cell jbEnd">
-									<a class="jbEnd" href="javascript:void(0);">${jb.title}</a></td>
+									<a class="jbEnd" href="javascript:void(0);">
+									${fn:substring(jb.title, 0, 20)}</a></td>
 								<td class="cell jbEnd">${jb.nickName}</td>
-								<td class="cell jbEnd">${jb.writeDate}</td>
+								<td class="cell jbEnd writeDate">
+									${fn:substring(jb.writeDate, 5, 10)}</td>
 								<td class="cell jbEnd">${jb.salary} / ${jb.salType}</td>
-								<td class="cell jbEnd">${jb.dday}일 남음</td>
+								<td class="cell jbEnd">D${jb.dday}</td>
 								<td class="cell jbEnd mini">${jb.viewCount}</td>
 								<td class="cell jbEnd mini">${jb.type}</td>		
 							</tr>
@@ -131,11 +135,16 @@
 							<tr id="${jb.no}" class="colum"> 
 								<td class="cell jbEnd mini" style="width:50px">${jb.no}</td>
 								<td class="cell jbEnd">
-									<a class="jbEnd" href="javascript:void(0);">${jb.title}</a></td>
+									<a class="jbEnd" href="javascript:void(0);">${fn:substring(jb.title, 0, 20)}</a></td>
 								<td class="cell jbEnd">${jb.nickName}</td>
-								<td class="cell jbEnd">${jb.writeDate}</td>
+								<td class="cell jbEnd writeDate">${fn:substring(jb.writeDate, 5, 10)}</td>
 								<td class="cell jbEnd">${jb.salary} / ${jb.salType}</td>
-								<td class="cell jbEnd">${jb.dday}일 남음</td>
+								<c:if test="${jb.dday > 0 }">
+									<td class="cell jbEnd">D-${jb.dday}</td>
+								</c:if>
+								<c:if test="${jb.dday < 0 }">
+									<td class="cell jbEnd">D${jb.dday}</td>
+								</c:if>
 								<td class="cell jbEnd mini">${jb.viewCount}</td>
 								<td class="cell jbEnd mini">${jb.type}</td>		
 							</tr>

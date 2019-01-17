@@ -27,4 +27,8 @@ public interface MessageDao {
 	int countUnreadMSG(int memNo);
 	
 	int replyMSG(Comment comment, int bno);
+	
+	List<Map<String, String>> sendMsg(int fromMember, int cPage, int numPerPage);
+	
+	int sendMsgTotalContents(int fromMember);
 }

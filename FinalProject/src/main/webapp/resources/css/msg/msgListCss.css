@@ -10,12 +10,12 @@
 	}
 	.columName  {
     	text-align:center; 
+    	display: inline-block;
     	vertical-align: middle;
     	display: table-row;
     	margin: 2px;
     	background: gray;
     	font-weight: bold;
-    	font-size: 18px;
     	height: 40px;
 		color: #fff;
     	
@@ -26,15 +26,15 @@
     }        
     .cell {
 	    display: table-cell;
+	    vertical-align: middle;
     }
     .mini{
     	top: 50%;
-    	width:50px;
+    	width:40px;
     	text-align: center;
     }    
         
 	.colum {
-		
 		text-align:center; 
     	vertical-align: middle;
 		height: 30px;
@@ -59,11 +59,34 @@
     	text-align: center;
     	
     }
-    #content, #contentValue{
-    	width:300px;
+    .contentValue{
+    	overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap; 
+		width: 130px;
     }
     
     #sendDate, #sendDateValue{
-    	width:130px;
+    	width:80px;
     	text-align: center;
     }
+    .nav{
+		border: 2px solid gray;
+		width: 500px;
+		display: inline-block;
+    	vertical-align: baseline;
+		font-weight: bold;
+	   	background: gray;
+	   	font-size: 18px;
+    	height: 40px;
+    	margin: 2px;
+    	color: #fff;
+	}
+	.navbar{
+		width: 500px;
+	}
+	.navList{
+		font-weight: bold;
+		color:white;
+		vertical-align: middle;
+	}

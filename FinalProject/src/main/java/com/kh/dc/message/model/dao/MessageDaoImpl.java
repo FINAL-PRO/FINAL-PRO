@@ -51,6 +51,7 @@ public class MessageDaoImpl implements MessageDao {
 		// 
 		return sqlSession.update("message_mapper.readMessage", no);
 	}
+
 	@Override
 	public int deleteMessage(int no) {
 		// 
@@ -70,11 +71,25 @@ public class MessageDaoImpl implements MessageDao {
 		// 
 		return sqlSession.selectOne("message_mapper.countUnreadMSG", memNo);
 	}
+
 	@Override
 	public int replyMSG(Comment comment, int bno) {
 		
 		System.out.println("코멘트 :"+comment+", "+bno);
 		
 		return sqlSession.insert("message_mapper.replyMSG", bno);
+	}
+
+	@Override
+	public List<Map<String, String>> sendMsg(int fromMember, int cPage, int numPerPage) {
+		// 
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("message_mapper.sendMsg", fromMember, rowBounds);
+	}
+
+	@Override
+	public int sendMsgTotalContents(int fromMember) {
+		// 
+		return sqlSession.selectOne("message_mapper.sendMsgTotalContents", fromMember);
 	}
 }
