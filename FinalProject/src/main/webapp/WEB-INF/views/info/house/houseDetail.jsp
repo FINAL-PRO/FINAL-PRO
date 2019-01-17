@@ -39,10 +39,12 @@
 							</tr>
 							<tr>
 								<td colspan="3">
-									<button class="btn dc-btn" onclick="goList()" title="목록">목록</button>
-									<c:if test="${member.no ==  house.mNo}">
-										<button class="btn dc-btn" onclick ="updateHouse()" title="수정하기">수정하기</button>
-									</c:if>
+									<div class="dc-btn-right">
+										<button class="btn dc-btn" onclick="goList()" title="목록">목록</button>
+										<c:if test="${member.no ==  house.mNo}">
+											<button class="btn dc-btn" onclick ="updateHouse()" title="수정하기">수정하기</button>
+										</c:if>
+									</div>
 								</td>
 							</tr>
 						</table>

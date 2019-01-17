@@ -9,6 +9,13 @@
 <title>지역 list</title>
 <c:import url="../../common/header.jsp" />
 <style>
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    background: #f6f6f6;
+}
+
 </style>
 </head>
 <body>
@@ -43,19 +50,24 @@
 									<th>작성일</th>
 									<th>조회수</th>
 								</tr>
+								<c:if test="${!empty list}">
+									<c:forEach items="${list}" var="region" varStatus="vs">
+										<tr style="background-color:#FFFFFF; color:gray;">
+											<th>${region.no}</th>
+											<th><a href="${pageContext.request.contextPath}/info/region/view.do?no=${region.no}">${region.title}</a></th>
+											<th>${region.userName }</th>
+											<th>${region.writeDate}</th>
+											<th>${region.viewcount }</th>
+										</tr>
+										<%-- <c:forEach items="${Region.regionLang}" var="lang" varStatus="vs">${vs.index!=0?",":""} ${lang}</c:forEach> --%>
+									</c:forEach>
+								</c:if>
+								<c:if test="${empty list }">
+										<tr style="background-color:#FFFFFF; color:gray;">
+						                	<th colspan="5" style="width:auto; text-align:center;">작성된 게시물이 없습니다.</th>						               
+						            	</tr>
+								</c:if>
 							</thead>
-							<tbody>
-								<c:forEach items="${list}" var="region" varStatus="vs">
-									<tr>
-										<th>${region.no}</th>
-										<th><a href="${pageContext.request.contextPath}/info/region/view.do?no=${region.no}">${region.title}</a></th>
-										<th>${region.userName }</th>
-										<th>${region.writeDate}</th>
-										<th>${region.viewcount }</th>
-									</tr>
-									<%-- <c:forEach items="${Region.regionLang}" var="lang" varStatus="vs">${vs.index!=0?",":""} ${lang}</c:forEach> --%>
-								</c:forEach>
-							</tbody>
 						</table>
 						<c:out value="${pageBar}" escapeXml="false"/>
 					</div>

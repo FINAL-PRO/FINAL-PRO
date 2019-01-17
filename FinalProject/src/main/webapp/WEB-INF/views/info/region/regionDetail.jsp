@@ -10,6 +10,15 @@
 <title>동커</title>
 <c:import url="../../common/header.jsp" />
 
+<style>
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    background: #f6f6f6;
+}
+
+</style>
 </head>
 <body>
 	<c:import url="../../common/menubar.jsp" />

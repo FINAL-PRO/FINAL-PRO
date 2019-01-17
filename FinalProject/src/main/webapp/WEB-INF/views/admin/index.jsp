@@ -22,7 +22,7 @@
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-						<h1>관리자 페이지</h1>
+						<span class="dc-title-text">관리자 페이지</span>
 					</div>
 					<div class="dc-content-box">
 						<table class="table">

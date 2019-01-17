@@ -9,6 +9,15 @@
 	<meta charset="UTF-8">
 	<title>동커</title>
 	<c:import url="../../common/header.jsp"/>
+	<style>
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    background: #f6f6f6;
+}
+
+</style>
 </head>
 <body>
 	<c:import url="../../common/menubar.jsp"/>
@@ -23,7 +32,6 @@
 					<div class="dc-content">
 						<div class="dc-content-title">
 							<span class="dc-title-text">제휴</span>
-							<br />
 						</div>
 						<div class="dc-content-box">
 							<div class="form-inline">
@@ -46,11 +54,9 @@
 									<th>주소</th>
 									<th>등록일</th>
 									<th>업체구분</th>
-								</thead>
-								<tbody>
 									<c:if test="${!empty companyList}">
 										<c:forEach items="${companyList}"  var="company">
-												<tr>
+												<tr style="background-color:#FFFFFF; color:gray;">
 													<td>${company.no}</td>
 													<td>
 														<a href="#" onclick="detailView(${company.no});">
@@ -66,13 +72,11 @@
 										</c:forEach>
 									</c:if>
 									<c:if test="${empty companyList}">
-										<div class="dc-none-data col">
-											<div align="center">
-												<span>게시물 없음</span>
-											</div>
-										</div>
+										<tr style="background-color:#FFFFFF; color:gray;">
+						                	<th colspan="5" style="width:auto; text-align:center;">작성된 게시물이 없습니다.</th>						               
+						            	</tr>
 									</c:if>
-								</tbody>
+								</thead>
 							</table>
 						</div>
 					</div>

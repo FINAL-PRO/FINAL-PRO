@@ -22,11 +22,9 @@
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-						<div>
-							<span class="dc-list-title">전체 업체 리스트</span>
-						</div>
-						<br />
-						
+						<span class="dc-title-text">전체 업체 리스트</span>
+					</div>
+					<div class="dc-content-box">
 						<div class="form-inline">
 							<select class="form-control" id="companyTypeNo">
 								<c:forEach items="${companyTypeList}" var="company">
@@ -35,8 +33,7 @@
 								</c:forEach>
 							</select>
 						</div>
-					</div>
-					<div class="dc-content-box">
+						<br />
 						<table class="table">
 							<thead>
 								<th>#</th>
