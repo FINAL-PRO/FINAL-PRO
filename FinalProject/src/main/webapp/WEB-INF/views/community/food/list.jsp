@@ -209,7 +209,6 @@ p.profile>img.picture {
 								<div class="articlelist">
 									<ol class="group"><br><br>
 										<p class="totalCount">총 ${totalContents}건의 게시물이 있습니다.</p>
-										<input type="text" value="${member.no}" />
 										
 										<c:forEach items="${flist}" var="b">
 											<li class="groupin" id="${b.no}">

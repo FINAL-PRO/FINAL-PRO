@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.dc.common.util.Utils;
 import com.kh.dc.common.vo.Board;
@@ -24,6 +25,7 @@ import com.kh.dc.community.food.model.vo.FoodList;
 import com.kh.dc.community.food.model.vo.FoodPoint;
 import com.kh.dc.member.model.vo.Member;
 
+@SessionAttributes(value= {"member"})
 @Controller
 public class FoodController {
 	
