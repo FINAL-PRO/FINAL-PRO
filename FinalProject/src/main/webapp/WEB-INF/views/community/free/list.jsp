@@ -195,7 +195,7 @@ hr {
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>자유게시판</h1>
+							<span class="dc-title-text">자유게시판</span>
 						</div>
 						<div class="dc-content-box">
 							<div id="container2">
@@ -283,6 +283,7 @@ hr {
 			</section>
 			</main>
 		</div>
-		<c:import url="../../common/footer.jsp" />
+			<c:import url="../../common/footer.jsp" />
+		</div>
 </body>
 </html>

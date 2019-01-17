@@ -10,7 +10,6 @@
 <title>동커</title>
 <c:import url="../../common/header.jsp" />
 <style>
-
 #container2 {
 	margin: 8px auto;
 }

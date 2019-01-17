@@ -17,13 +17,13 @@ public class NoticeServiceImpl implements NoticeService {
 	NoticeDao noticeDao;
 
 	@Override
-	public List<Map<String, String>> recentSort(int cPage, int numberPage) {
-		return noticeDao.recentSort(cPage, numberPage);
+	public List<Map<String, String>> recentSort(int cPage, int numberPage, int locationNo) {
+		return noticeDao.recentSort(cPage, numberPage, locationNo);
 	}
 	
 	@Override
-	public int selectNoticeTotalContents() {
-		return noticeDao.selectNoticeTotalContents();
+	public int selectNoticeTotalContents(int locationNo) {
+		return noticeDao.selectNoticeTotalContents(locationNo);
 	}
 
 	@Override

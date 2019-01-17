@@ -24,12 +24,12 @@
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-						<div>
-							<span class="dc-list-title">부동산 리스트</span>
-							<button class="btn dc-btn dc-btn-right" onclick="insertHouse();">글쓰기</button>
-						</div>
+						<span class="dc-title-text">부동산</span>
 						<br />
+					</div>
+					<div class="dc-content-box">
 						<div class="form-inline">
+							<div style="width:50%">
 							<select id="dealType" name="dealType" class="form-control">
 								<c:forEach items="${dealList}" var="deal">
 								<option value="${deal.id}"
@@ -50,9 +50,14 @@
 							<select name="" id="" class="form-control">
 								<option value="">가격</option>
 							</select>
+							</div>
+							<div style="width:50%">
+								<button class="btn dc-btn dc-btn-right" onclick="insertHouse();">글쓰기</button>
+							</div>
 						</div>
-					</div>
-					<div class="dc-content-box">
+						
+						<br />
+					
 						<div style="display:block">
 							<c:if test="${!empty list}">
 								<c:forEach items="${list}" var="house" varStatus="hvs">

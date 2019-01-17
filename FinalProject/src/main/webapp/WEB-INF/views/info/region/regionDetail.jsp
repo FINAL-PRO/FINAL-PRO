@@ -42,11 +42,13 @@
 							</tr>
 							<tr>
 								<td colspan="3">
-									<button class="btn dc-btn" onclick="goList()" title="목록">목록</button>
-									<c:if test="${member.no ==  region.memberNo}">
-										<button class="btn dc-btn" onclick ="updateRegion()" title="수정하기">수정하기</button>
-										<button class="btn dc-btn" onclick ="deleteRegion()" title="삭제하기">삭제하기</button>
-									</c:if>
+									<div class="dc-btn-right">
+										<button class="btn dc-btn" onclick="goList()" title="목록">목록</button>
+										<c:if test="${member.no ==  region.memberNo}">
+											<button class="btn dc-btn" onclick ="updateRegion()" title="수정하기">수정하기</button>
+											<button class="btn dc-btn" onclick ="deleteRegion()" title="삭제하기">삭제하기</button>
+										</c:if>
+									</div>
 								</td>
 							</tr>
 						</table>

@@ -12,7 +12,7 @@ import com.kh.dc.community.food.model.vo.FoodPoint;
 
 public interface FoodDao {
 	
-	int selectFoodTotalContents();
+	int selectFoodTotalContents(int locationNo);
 	
 	FoodList selectOneFood(int no);
 
@@ -34,11 +34,11 @@ public interface FoodDao {
 
 	List<Board> selectFoodListData();
 
-	List<Map<String, String>> recentSort(int cPage, int numberPage);
+	List<Map<String, String>> recentSort(int cPage, int numberPage, int locationNo);
 
-	List<Map<String, String>> commentSort(int cPage, int numberPage);
+	List<Map<String, String>> commentSort(int cPage, int numberPage, int locationNo);
 
-	List<Map<String, String>> likeSort(int cPage, int numberPage);
+	List<Map<String, String>> likeSort(int cPage, int numberPage, int locationNo);
 
 	
 }

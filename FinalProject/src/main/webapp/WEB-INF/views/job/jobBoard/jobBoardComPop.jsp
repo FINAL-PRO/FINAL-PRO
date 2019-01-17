@@ -66,15 +66,6 @@
             // 2. 창닫기
             this.close();
 		}
-		var cenBtn = function() {
-			   var W = $(window).width();
-			   var H = $(window).height();
-			   var BtnW = insert button width;
-			   var BtnH = insert button height;
-			   var LeftOff = (W / 2) - (BtnW / 2);
-			   var TopOff = (H / 2) - (BtnH /2);
-			       $("#closeBtn").css({left: LeftOff, top: TopOff});
-		};
 		</script>
 </body>
 </html>
