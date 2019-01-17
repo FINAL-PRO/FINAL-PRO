@@ -54,6 +54,24 @@
 		
 	}
 	
+	.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: rgb(248, 178, 106);
+    border-color: rgb(248, 178, 106);
+	}
+	
+	.page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: rgb(248, 178, 106);
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+	}
+	
 
 </style>
 <footer>
