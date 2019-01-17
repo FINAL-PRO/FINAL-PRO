@@ -69,19 +69,19 @@
 
 .address{
 	color: #292929;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 }
 
 .point{
 	color: #292929;
-	font-size: 12px;
+	font-size: 13px;
 	font-weight: bold;
 }
 
 .category1{
 	color: #292929;
-	font-size: 12px;
+	font-size: 13px;
 	font-weight: bold;
 }
 
@@ -90,7 +90,7 @@
 	padding: 10px;
 	line-height: 500px;
 	color: #292929;
-	font-size: 14px;
+	font-size: 13px;
 	word-wrap: break-word;
 	padding-left:10px;
 }

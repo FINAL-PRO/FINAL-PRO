@@ -171,7 +171,7 @@ th, td {
 								<div class="articlelist">
 								<p class="totalCount">총 ${totalContents}건의 공지사항이 있습니다.</p>
 										
-								<div class="boardList" style="width: 800px; min-height: 300px; margin: auto;">
+								<div class="boardList" style="width: 100%; min-height: 300px; margin: auto;">
 						            <table>					        	
 							            <thead class="listcol" style="border-color: white;  color: gray;">   						                    
 							            <tr style="color:gray;">
@@ -182,7 +182,7 @@ th, td {
 							                <th scope="col" style="width:150px;">조회수</th>						
 							            </tr>    
 						        		<c:if test="${!empty nlist}" >
-							            <c:forEach items="${nlist}" var="b">
+							            <c:forEach items="${nlist}" var="b" varStatus="bo" >
 							            <tr style="background-color:#FFFFFF; cursor:pointer; color:gray;" onclick="location.href='${pageContext.request.contextPath}/community/notice/noticeView.do?bno=${b.no}'">
 							                <th scope="row"> ${bo.index + 1} </th>
 							                <td>${b.boardType}</td>
