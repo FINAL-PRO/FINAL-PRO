@@ -184,7 +184,7 @@ th, td {
 						        		<c:if test="${!empty nlist}" >
 							            <c:forEach items="${nlist}" var="b" varStatus="bo" >
 							            <tr style="background-color:#FFFFFF; cursor:pointer; color:gray;" onclick="location.href='${pageContext.request.contextPath}/community/notice/noticeView.do?bno=${b.no}'">
-							                <th scope="row"> ${bo.index + 1} </th>
+							                <th scope="row"> ${fn:length(nlist)-bo.index}</th>
 							                <td>${b.boardType}</td>
 							                <td>${b.title}</td>
 							                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${b.writeDate}" /></td>
