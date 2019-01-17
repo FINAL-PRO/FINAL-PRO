@@ -89,7 +89,7 @@ span.attachcount {
 	display: inline-block;
 	line-height: 18px;
 	color: #ffa81f;
-	font-size: 12px;
+	font-size: 14px;
 	background-size: 16px 16px;
 }
 
@@ -124,7 +124,7 @@ hr {
 }
 
 .totalCount{
-	font-size:13px; 
+	font-size:14px; 
 	padding-left:10px;
 }
 

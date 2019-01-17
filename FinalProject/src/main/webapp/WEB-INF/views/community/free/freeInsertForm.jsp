@@ -57,9 +57,9 @@
 									<div>
 										<b>글쓰기</b>
 									</div>
-									<input type="hidden" id="mno" name="memberNo" value="${member.no}" required>
+									<input type="hidden" class="form-control" id="mno" name="memberNo" value="${member.no}" required>
 									<div class="btitleBox">
-										<input type="text" name="title" id="title" style="width: 100%;" required>
+										<input type="text" class="form-control" name="title" id="title" style="width: 100%;" required>
 									</div>
 									<div class="bcontentBox">
 										<textarea name="content" id="summernote"
