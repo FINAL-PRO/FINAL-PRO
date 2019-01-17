@@ -102,7 +102,7 @@
 								<td>${jb.no}</td>
 								<td>
 									<a href="${pageContext.request.contextPath}/job/jobBoard/view.do?no=${jb.no}">
-									${fn:substring(jb.title, 0, 20)}</a></div>
+									${fn:substring(jb.title, 0, 20)}</a>
 									
 								<td class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<a id="sendNick" href="#">${jb.nickName}</a> 
@@ -133,11 +133,12 @@
 								<td>
 									${fn:substring(jb.writeDate, 5, 10)}</td>
 								<td>${jb.salary} / ${jb.salType}</td>
-								<td>D${jb.dday}</td>
+								<td>${jb.dday}</td>
 								<td>${jb.viewCount}</td>
 								<td>${jb.type}</td>		
 							</tr>
 							</c:if>
+							
 							<c:if test="${'마감' eq jb.type}">
 							<tr id="${jb.no}" class="colum"> 
 								<td>${jb.no}</td>
@@ -149,9 +150,10 @@
 								<c:if test="${jb.dday > 0 }">
 									<td>D-${jb.dday}</td>
 								</c:if>
+								
 								<c:if test="${jb.dday < 0 }">
 
-									<td>D${jb.dday}</td>
+									<td>${jb.dday}</td>
 
 								</c:if>
 								<td>${jb.viewCount}</td>
