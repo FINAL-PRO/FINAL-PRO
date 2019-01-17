@@ -126,15 +126,15 @@
 			<span class="board-title">현재 우리동네 날씨</span>
 		</h4>
 		<hr style="margin:0;">	
-		<div class="" style="text-align: center">
+		<div class="" style="text-align: center;">
 			<label id="village" style="margin-bottom: 10px;"></label><br>
 			<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" style="width:100px; height: 100px;"/>
-			<i class="" id="weatherIcon" style="font-size: 50px; margin: 10px 0px 15px 0px;"></i> <br>
-			<b><label class="weatherLabal" style="margin-bottom:0px;" id="sky"></label></b>
+			<i class="" id="weatherIcon" style="font-size: 50px; margin: 10px 0px 15px 0px; color: rgb(244, 126, 96);"></i> <br>
+			<b><label class="weatherLabal" style="margin-bottom:0px; color:rgb(244, 126, 96);" id="sky"></label></b>
 		
 		<hr />
 		
-		<div class="nowWeather-container" style="display: inline-block; ">	
+		<div class="nowWeather-container" style="display: inline-block; font-weight: bold; margin-bottom: 10px;">	
 			<!-- <div class="block" style="text-align: center; width: auto;">
 				현재 기온 :	<label id="tc"></label><br>
 				최저 기온 :	<label id="tmin"></label><br>
@@ -173,7 +173,7 @@
 			default : url="&city=서울&county=강남구&village=역삼1동"; village="역삼동"; break;
 		}
 
-		/*  $.ajax({
+		/* $.ajax({
 			type: "GET",
 			url: "https://api2.sktelecom.com/weather/current/minutely?appKey=a294c267-b2de-41f1-99ee-1a4894a40fdf" + url,
 			header:{
@@ -223,7 +223,7 @@
 				$(".loadingImg").toggle();
 			}
 			
-		});  */
+		}); */
 		
 	});
 

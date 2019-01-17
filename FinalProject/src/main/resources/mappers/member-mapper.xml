@@ -32,6 +32,7 @@
 		FROM DC_BOARD_TB B
 		JOIN DC_CODE_TB C ON (B.TYPE = C.ID)
 		WHERE MEMBERNO = #{no} AND B.STATUS = 'BSTATUS001'
+		ORDER BY 4 DESC
 	</select>
 	
 	<select id="selectTotalMyBoard" parameterType="_int" resultType="_int">
@@ -48,6 +49,7 @@
 		JOIN DC_BOARD_TB B ON CO.BOARDNO = B.NO
 		JOIN DC_CODE_TB C ON  C.ID = B.TYPE
 		WHERE CO.MEMBERNO = #{mNo} AND B.STATUS = 'BSTATUS001'
+		ORDER BY 6 DESC
 	</select>
 	
 	<select id="selectTotalMyComment" parameterType="_int" resultType="_int">
@@ -76,7 +78,7 @@
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO DC_MEMBER_TB VALUES(
 			SEQ_MEMBER.NEXTVAL, #{email}, #{nickName}, 
-			#{password}, SYSDATE, 0, #{locationNo}, 1, 'STATUS001', null, #{name}, null, null, #{profile}
+			#{password}, SYSDATE, 0, #{locationNo}, 1, 'MSTATUS001', null, #{name}, null, null, #{profile}
 		)
 	</insert>
 	
@@ -99,11 +101,9 @@
 	</update>
 	
 	<!-- 회원 삭제 -->
-	<delete id="deleteMember" parameterType="_int">
-		DELETE FROM DC_MEMBER_TB WHERE no = #{no}
-	</delete>
-	
-		
+	<update id="deleteMember" parameterType="_int">
+		UPDATE DC_MEMBER_TB SET CODEID = 'MSTATUS004' WHERE no = #{no}
+	</update>			
 
 </mapper>
 
