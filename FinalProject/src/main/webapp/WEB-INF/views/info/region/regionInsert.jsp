@@ -39,7 +39,7 @@
 								<tr>
 									<td>제목</td>
 									<td>
-										<input type="text" id="title" name="title" value='<c:if test="${region.title != null }">${region.title }</c:if>' required>
+										<input class="form-control" type="text" id="title" name="title" value='<c:if test="${region.title != null }">${region.title }</c:if>' required>
 									</td>
 								</tr>		
 								<tr>
@@ -57,8 +57,8 @@
 										</c:if>
 										
 										<input type="hidden" name="memberNo" value="${member.no}" required />
-										<button type="submit" onclick="insertRegion()">확인</button>
-										<button type="reset">취소</button>									
+										<button class="btn dc-btn" type="submit" onclick="insertRegion()">확인</button>
+										<button class="btn dc-btn" type="reset" onclick="historyGoBack();">취소</button>									
 									</td>
 								</tr>				
 							</table>

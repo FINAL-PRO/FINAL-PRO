@@ -27,7 +27,7 @@ public class House  implements java.io.Serializable{
 	private String userName;
 	private String category;
 	
-	private String memberNo;
+	private String mNo;
 	private String houseImg;
 	
 	
@@ -35,18 +35,18 @@ public class House  implements java.io.Serializable{
 		super();
 	}
 
-	public String getmemberNo() {
-		return memberNo;
+	public String getmNo() {
+		return mNo;
 	}
 
 
-	public void setmemberNo(String memberNo) {
-		this.memberNo = memberNo;
+	public void setmNo(String mNo) {
+		this.mNo = mNo;
 	}
 
 	public House(int hno, int minprice, int maxprice, int area, int boardNo, String hType, String dealType, int no,
 			String title, Date writeDate, String content, int viewcount, String type, String status, String userName,
-			String category, String memberNo) {
+			String category, String mNo) {
 		super();
 		this.hno = hno;
 		this.minprice = minprice;
@@ -64,7 +64,7 @@ public class House  implements java.io.Serializable{
 		this.status = status;
 		this.userName = userName;
 		this.category = category;
-		this.memberNo = memberNo;
+		this.mNo = mNo;
 	}
 
 
@@ -233,7 +233,7 @@ public class House  implements java.io.Serializable{
 		return "House [hno=" + hno + ", minprice=" + minprice + ", maxprice=" + maxprice + ", area=" + area
 				+ ", boardNo=" + boardNo + ", hType=" + hType + ", dealType=" + dealType + ", no=" + no + ", title="
 				+ title + ", writeDate=" + writeDate + ", content=" + content + ", viewcount=" + viewcount + ", type="
-				+ type + ", status=" + status + ", userName=" + userName + ", category=" + category + ", memberNo =" + memberNo + ", houseImg" + houseImg+"]" ;
+				+ type + ", status=" + status + ", userName=" + userName + ", category=" + category + ", mNo =" + mNo + ", houseImg" + houseImg+"]" ;
 	}
 
 

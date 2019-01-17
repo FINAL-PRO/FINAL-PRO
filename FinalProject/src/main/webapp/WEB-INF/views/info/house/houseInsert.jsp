@@ -35,43 +35,47 @@
 							 <c:if test="${house.boardNo==null}">${pageContext.request.contextPath}/info/house/insert.do</c:if>">
 							<table class="table">
 								<tr>
-									<td>제목 : </td>
-									<td><input type="text" id="title" name="title" value='<c:if test="${house.title != null }">${house.title }</c:if>' required></td>
+									<td>제목</td>
+									<td><input class="form-control" type="text" id="title" name="title" value='<c:if test="${house.title != null }">${house.title }</c:if>' required></td>
 								</tr>
 								<tr>
 									<td>매매타입 :</td>
 									<td>
-										<select name="dealType">
-											<c:forEach items="${dealList}" var="deal">
-												<option value="${deal.id}"
-													<c:if test="${house.dealType eq deal.id}">selected</c:if>
-												>${deal.value}</option>
-											</c:forEach>
-										</select>
+										<div class="form-inline">
+											<select class="form-control" name="dealType">
+												<c:forEach items="${dealList}" var="deal">
+													<option value="${deal.id}"
+														<c:if test="${house.dealType eq deal.id}">selected</c:if>
+													>${deal.value}</option>
+												</c:forEach>
+											</select>
+										</div>
 									</td>
 								</tr>
 								<tr>
 									<td>매매가 : </td>
 									<td>
-										<input type="text" name="minprice" id="minprice" value="${house.minprice}">
+										<input class="form-control" type="text" name="minprice" id="minprice" value="${house.minprice}">
 									</td>
 								</tr>
 								<tr>
 									<td>방 타입 :</td>
 									<td>
-										<select name="hType">
-											<c:forEach items="${roomList}" var="room">
-												<option value="${room.id}"
-													<c:if test="${house.hType eq room.id}">selected</c:if>
-												>${room.value}</option>
-											</c:forEach>
-										</select>
+										<div class="form-inline">
+											<select name="hType" class="form-control">
+												<c:forEach items="${roomList}" var="room">
+													<option value="${room.id}"
+														<c:if test="${house.hType eq room.id}">selected</c:if>
+													>${room.value}</option>
+												</c:forEach>
+											</select>
+										</div>
 									</td>
 								</tr>
 								<tr>
 									<td>방 크기 : </td>
 									<td>
-										<input type="text" name="area" id="area" value="${house.area}">
+										<input class="form-control" type="text" name="area" id="area" value="${house.area}">
 									</td>
 								</tr>
 								<tr>
@@ -83,10 +87,9 @@
 								</tr>
 								<tr>
 									<td colspan="2">
-
 										<input type="hidden" name="mNo" value="${member.no}" />
 										<button class="btn dc-btn" type="submit">확인</button>
-										<button class="btn dc-btn" type="reset" onclick="goBack();">취소</button>
+										<button class="btn dc-btn" type="reset" onclick="historyGoBack();">취소</button>
 										<c:if test="${house.boardNo != null }">
 											<input type="hidden" name="no" value="${house.boardNo}" required />
 											<button class="btn dc-btn" onclick ="deleteHouse()" title="삭제하기">삭제하기</button>
@@ -142,10 +145,6 @@
     	
     	function deleteHouse(){
     		location.href="${pageContext.request.contextPath}/info/house/delete.do?no=${house.boardNo}";
-    	}
-    	
-    	function goBack(){
-    		history.go(-1);
     	}
     </script>
 </body>

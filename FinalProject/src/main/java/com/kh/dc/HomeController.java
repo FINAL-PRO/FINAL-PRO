@@ -18,6 +18,7 @@ import com.kh.dc.community.notice.model.service.NoticeService;
 import com.kh.dc.member.model.service.MemberService;
 import com.kh.dc.member.model.vo.Member;
 import com.kh.dc.sale.group.model.service.GroupService;
+import com.kh.dc.sale.used.model.service.UsedService;
 import com.kh.dc.common.vo.Board;
 
 /**
@@ -35,33 +36,27 @@ public class HomeController {
 	private FreeService freeService;
 	@Autowired
 	private GroupService groupService;
-	
+	@Autowired
+	private UsedService usedService;
 	@Autowired
 	private MemberService memberService;
-	
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, Principal principal) {
 		
-		if(principal != null) {
-			System.out.println(principal.getName());
-			Member m = memberService.selectOne(principal.getName());
-			model.addAttribute("member", m);
-		}
-		
-		List<Board> noticeList = noticeService.selectNoticeListData();
-		List<Board> freeList = freeService.selectFreeListData();
-		List<Board> groupList = groupService.selectGroupList();
-		
-		model.addAttribute("noticeList", noticeList);
-		model.addAttribute("freeList", freeList);
-		model.addAttribute("groupList", groupList);
+		model = loginProcess(model, principal);
 		
 		return "index";
 	}
 	
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
 	public String index(Locale locale, Model model, Principal principal) {
+		model = loginProcess(model, principal);
+
+		return "index";
+	}
+	
+	public Model loginProcess(Model model, Principal principal) {
 		
 		if(principal != null) {
 			System.out.println(principal.getName());
@@ -72,12 +67,16 @@ public class HomeController {
 		List<Board> noticeList = noticeService.selectNoticeListData();
 		List<Board> freeList = freeService.selectFreeListData();
 		List<Board> groupList = groupService.selectGroupList();
+		List<Board> usedList = usedService.selectMainUsedList();
+		
+		System.out.println("used : " + usedList);
 		
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("freeList", freeList);
 		model.addAttribute("groupList", groupList);
+		model.addAttribute("usedList", usedList);
 		
-		return "index";
+		return model;
 	}
 	
 }
