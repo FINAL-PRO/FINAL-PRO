@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>구인구직 게시판 업데이트</title>
+	<title>동커</title>
 	<c:import url="../../common/header.jsp"/>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jobBoard/jobBoardUpdCss.css" />
 </head>

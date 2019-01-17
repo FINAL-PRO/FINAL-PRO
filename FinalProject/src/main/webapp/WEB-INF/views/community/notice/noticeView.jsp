@@ -16,62 +16,64 @@
 }
 
 .article {
-	font-size: 0;
 	background-color: #fff;
 	text-decoration: none;
+	display: block;
+	padding: 12px 12px;
+	border-bottom: 1px solid #f2f2f2;
+	height: 140px;
 }
 
-.picture {
+/* .npicture {
 	display: inline-block;
 	width: 20px;
 	height: 20px;
 	vertical-align: top;
-}
+} */
 
-.nickname {
+.nnickname {
 	display: inline-block;
 	line-height: 20px;
 	color: #292929;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
-	white-space: nowrap;
-	overflow: hidden;
 	float: left;
 }
 
-.count{
+.ncount{
 	display: inline-block;
 	line-height: 20px;
 	color: #292929;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	white-space: nowrap;
 	overflow: hidden;
 	float: right;
 }
 
-.title {
+.ntitle {
 	display: inline-block;
-	line-height: 18px;
 	color: #292929;
-	font-size: 15px;
+	font-size: 16px;
 	font-weight: bold;
-	white-space: nowrap;
-	overflow: hidden;
 }
 
-.time {
+.ntitle p{
+	magin: 0px;
+}
+
+.ntime {
 	float: right;
 	display: inline-block;
 	line-height: 20px;
 	color: #292929;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	margin-left: 10px;
 }
 
-.text {
-	margin-top: 8px;
+.ntext {
+	margin-top: 10px;
 	padding: 10px;
 	line-height: 500px;
 	color: #292929;
@@ -79,38 +81,32 @@
 	word-wrap: break-word;
 }
 
-.comment {
+.ncomment {
 	padding: 5px;
 	line-height: 20px;
 	color: #292929;
 	font-size: 14px;
+	font-weight: bold;
 }
 
-.status {
+.nstatus {
 	float: right;
 }
 
-.status span {
+.nstatus span {
 	display: inline-block;
 	margin-right: 8px;
 	line-height: 18px;
 	color: #292929;
-	font-size: 12px;
-	background-repeat: no-repeat;
-	background-size: 16px 16px;
+	font-size: 14px;
+	font-weight: bold;
 } 
 
-.attach {
+.nattach {
 	float: right;
 	margin-top: 8px;
 }
 
-.article {
-	display: block;
-	padding: 12px 12px;
-	border-bottom: 1px solid #f2f2f2;
-	height: 140px;
-}
 
 .articlelist {
 	padding-top: 15px;
@@ -121,31 +117,6 @@
 	padding-top: 20px;
 	padding-left: 5px;
 	padding-right: 5px;
-}
-
-.commentgroup {
-	padding: 20px;
-}
-
-.commnetlist {
-	padding: 20px;
-}
-
-.commentwriteboard {
-	padding: 15px 35px 10px 20px;
-}
-
-.commentwrite {
-	width: 100%;
-}
-
-.comment_textarea {
-	margin-right: 10px;
-	margin-left: 10px;
-}
-
-hr {
-	border: 0.3px solid rgb(178, 182, 187);
 }
 
 .category {
@@ -204,18 +175,18 @@ hr {
 										<input type="hidden" id="bno" name="bno" value="${boardList.no}"/>
 									</form>
 									<div class="group">
-										<p class="title">${boardList.title}</p>
+										<p class="ntitle">${boardList.title}</p>
 										<div style="border: solid 0.5px gray"></div>
-										<p class="profile">
-											<span class="nickname">관리자</span> 
-											<span class="time">
+										<p class="nprofile">
+											<span class="nnickname">관리자</span> 
+											<span class="ntime">
 												<fmt:formatDate value="${boardList.writeDate}" pattern="yyyy-MM-dd" />
 											</span>
-											<span class="count">조회수: ${boardList.viewCount}</span>
+											<span class="ncount">조회수: ${boardList.viewCount}</span>
 										</p>
-										<p class="text">${boardList.content}</p>
+										<p class="ntext">${boardList.content}</p>
 										<div style="border: solid 0.5px lightgray"></div>
-										<div class="status">
+										<div class="nstatus">
 											<c:if test="${boardList.memberName eq 'admin'}">
 												<button class="btn_board_edit" id="btn_board_edit">수정</button>
 												<button class="btn_board_delete" id="btn_board_delete">삭제</button>
@@ -225,13 +196,11 @@ hr {
 
 										<script>			
 				                      		$("#btn_board_edit").click(function(){
-				                      			boardFrm.action="${pageContext.request.contextPath}/community/notice/noticeUpdateForm.do?no=${board.no}"
-				                      			boardFrm.submit();
+				                      			location.href="${pageContext.request.contextPath}/community/notice/noticeUpdateForm.do?no=${board.no}"
 				                      		});
 				                      		
 				                      		$("#btn_board_delete").click(function(){
-				                      			boardFrm.action="${pageContext.request.contextPath}/community/notice/noticeDelete.do?no=${board.no}"
-				                       			boardFrm.submit();
+				                      			location.href="${pageContext.request.contextPath}/community/notice/noticeDelete.do?no=${board.no}"
 				                      		});
 				                          	
 				                       </script>
@@ -245,8 +214,7 @@ hr {
 									<button class="btn btn_back btn-sm" id="btn_back">목록</button> 
 									<script>
 					                    $("#btn_back").click(function(){
-					                    	boardFrm.action="${pageContext.request.contextPath}/community/notice/list.do"
-					                    	boardFrm.submit();
+					                    	location.href="${pageContext.request.contextPath}/community/notice/list.do"
 					                    });
 				                    </script>
 								</div>

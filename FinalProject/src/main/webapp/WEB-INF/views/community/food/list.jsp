@@ -30,88 +30,86 @@
 .review {
 	float: left;
 }
- 
-.article{
-	list-style: none;
-}
 
-.title {
+.ftitle {
 	color: #000000;
-	line-height: 1.4em;
 	overflow: hidden;
 	font-size: 16px;
 	vertical-align: middle;
 	display: inline-block;
 	font-weight: bold;
+	width: 100%;
 }
 
-.title a {
+.ftitle a {
 	text-decoration: none;
 	color: rgb(85, 85, 85);
 }
 
-.title a h3 {
-	font-size: inherit;
-	display: inline;
+.ftitle p {
+	magin: 0px;
 }
 
-.point {
+.fpoint {
 	line-height: 1.2em;
-	display: inline;
-	padding-left: 10px;
-	font-weight: bold;
-	font-size: 14px;
-}
-
-.address {
 	display: inline-block;
 	padding-left: 10px;
 	font-weight: bold;
 	font-size: 14px;
 }
 
-.short_review {
+.faddress {
+	font-weight: bold;
+	font-size: 14px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 100%;
+}
+
+.fshort_review {
 	display: inline-block;
 }
 
-.nickname {
+.fnickname {
 	display: inline-block;
-	font-size: 1rem;
+	font-size: 14px;
 	color: rgb(85, 85, 85);
 	padding-left: 5px;
 	font-weight: bold;
 }
 
-.categoryName{
-	display: inline;
+.fcategoryName{
+	display: inline-block;
 	color:rgb(244, 126, 96);
-	font-size: 0.8rem;
+	font-size: 14px;
 	font-weight: bold;
 }
-.time {
+.ftime {
 	display: inline;
 	padding-left: 10px;
-	font-size: 0.8rem;
+	font-size: 14px;
 	font-weight: bold;
 }
 
-.count {
+.fcount {
 	display: inline-block;
 	max-width: 60%;
 	line-height: 20px;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
+	margin-top: 5px;
 }
 
 .thumb_review{
 	display: inline-block;
-	height: 180px; 
+	height: 170px; 
 	width: 200px; 
 }
 
 .thumb_review .center{
-	height: 180px; 
-	width: 200px; 
+	height: 170px; 
+	width: 200px;  
 }
 
 .board_review{
@@ -119,23 +117,23 @@
 	padding-left: 30px; 
 	padding-top: 10px; 
 	padding-right: 30px; 
-	padding-bottom: 10px; 
+	padding-bottom: 20px; 
 	height: 180px; 
-	width: 80%;
-	font-size: 0.8rem;
+	font-size: 14px;
 }
 
 .table_review{
-	padding-top: 10px; 
+	padding-top: 20px; 
 	padding-right: 30px; 
 	padding-bottom: 20px; 
 }
 
 .article{
-	height: 180px; 
+	height: 170px; 
 	display: flex;
 	background:white;
   	opacity: 1.0;
+	list-style: none;  	
 }
 
 .article:hover{
@@ -143,14 +141,15 @@
 	cursor: pointer;
 }
 
-p.profile>img.picture {
+p.fprofile>img.fpicture {
 	width: 20px;
 	height: 20px;
 	display: inline-block;
 }
 
-.profile{
+.fprofile{
 	display: inline-block;
+	margin-top: 10px;
 }
 
 .food_btn2{
@@ -184,16 +183,22 @@ p.profile>img.picture {
 						<div class="dc-content-box">
 							<div id="container2">
 								<div class="food_top">
-									<div class="category1">
-										<select class="form-control input-sm" id="tList"> 
-											<option value="" selected disabled hidden>정렬</option>
-											<option value="1">최신 순 정렬</option>
-											<option value="2">댓글 많은 순 정렬</option>
-											<option value="3">좋아요 순 정렬</option>
-										</select>
+									<div class="form-inline">
+										<div style="width:50%">
+											<select class="form-control input-sm" id="tList"> 
+												<option value="" selected disabled hidden>정렬</option>
+												<option value="1">최신 순 정렬</option>
+												<option value="2">댓글 많은 순 정렬</option>
+												<option value="3">좋아요 순 정렬</option>
+											</select>
+										</div>
+										<div style="width:50%">
+											<div class="food_btn">
+												<input class="btn dc-btn dc-btn-right" type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/food/foodInsertForm.do'" />
+											</div>
+										</div>
 									</div>
 									<script>
-									
 									
 									$("#tList").change(function(){
 										var tList = $(this).val();
@@ -202,9 +207,7 @@ p.profile>img.picture {
 									});
 									
 									</script>
-									<div class="food_btn">
-										<input class="btn food_btn2 btn-sm" type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/food/foodInsertForm.do'" />
-									</div>
+
 								</div>
 								<div class="articlelist">
 									<ol class="group"><br><br>
@@ -218,38 +221,37 @@ p.profile>img.picture {
 									            
 									          	</div>
 												<div class="board_review">
-										            <span class="title"> <h3>${b.title}</h3></span>
-										            <p class="profile">
+										            <span class="ftitle">${b.title}</span>
+										            <p class="fprofile">
 											            <c:choose>
 															<c:when test="${!empty b.profile}">
-																<img class="picture" src="/dc/resources/upload/profile/${b.profile}" /> 
+																<img class="fpicture" src="/dc/resources/upload/profile/${b.profile}" /> 
 															</c:when>
 															<c:otherwise>
-																<img class="picture" src="/dc/resources/upload/profile/profileDefaultImg.png" /> 
+																<img class="fpicture" src="/dc/resources/upload/profile/profileDefaultImg.png" /> 
 															</c:otherwise>
 														</c:choose>
-										            <p class="nickname">${b.memberName}</p>
-													<p class="time">
+										            <p class="fnickname">${b.memberName}</p>
+													<p class="ftime">
 														<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd" />
 													</p>
 										            <br>
-										           	<p class="categoryName">${b.category}</p>
-										            <p class="point">${b.point}/5</p>
-										            <p class="address">${b.address}</p>
-										            <br>
-										            <div class="table_review">
+										           	<p class="fcategoryName">${b.category}</p>
+										            <p class="fpoint">${b.point}/5</p>
+										            <p class="faddress">${b.address}</p>
+										     <%--        <div class="table_review">
 										            <c:choose>
 														<c:when test="${b.imageCheck eq 0}">
-															<span class="short_review">${b.content}</span>
+															<span class="fshort_review">${b.content}</span>
 														</c:when>
 														<c:otherwise>
-															<span class="content"><p>(이미지)</p></span>
+															<span class="fcontent"><p>(이미지)</p></span>
 														</c:otherwise>
 													</c:choose>
-													</div>
-										            <div class="count">조회수: <span style="color:rgb(244, 126, 96);">${b.viewCount}</span></div>&nbsp;&nbsp;
-										            <div class="count">댓글: <span style="color:rgb(244, 126, 96);">${b.commentCount}</span></div>&nbsp;&nbsp;
-										            <div class="count">좋아요: <span style="color:rgb(244, 126, 96);">${b.likeCount}</span></div>
+													</div> --%>
+										            <div class="fcount">조회수: <span style="color:rgb(244, 126, 96);">${b.viewCount}</span></div>&nbsp;&nbsp;
+										            <div class="fcount">댓글: <span style="color:rgb(244, 126, 96);">${b.commentCount}</span></div>&nbsp;&nbsp;
+										            <div class="fcount">좋아요: <span style="color:rgb(244, 126, 96);">${b.likeCount}</span></div>
 												</div>
 											</div>
 											<div style="margin-top: 10px; margin-bottom: 10px; border: solid 0.5px gray"></div>												

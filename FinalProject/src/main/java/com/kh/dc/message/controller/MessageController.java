@@ -78,8 +78,8 @@ public class MessageController {
 	
 	
 	@RequestMapping(value="/message/insertForm.do")
-	public void insertMessageForm() {
-		
+	public String insertMessageForm() {
+		return "message/messageInsertForm";
 	}
 	
 	@RequestMapping(value="/message/insert.do")

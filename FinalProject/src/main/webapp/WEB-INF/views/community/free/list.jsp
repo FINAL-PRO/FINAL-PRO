@@ -14,36 +14,36 @@
 	margin: 8px auto;
 }
 
-#container2 .article {
+#container2 .barticle {
 	font-size: 0;
 	background-color: #fff;
 	text-decoration: none;
 }
 
-.article>p.profile>img.picture {
+.article>p.bprofile>img.bpicture {
 	display: inline-block;
 	width: 20px;
 	height: 20px;
 	margin-botton: 5px;
 }
 
-.title {
+.btitle {
 	display: inline-block;
 	max-width: 60%;
 	line-height: 20px;
 	color: #292929;
-	font-size: 14px;
+	font-size: 15px;
 	font-weight: bold;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
-.nickname {
+.bnickname {
 	display: inline-block;
 	max-width: 60%;
 	line-height: 20px;
-	color: lightgray;
+	color: gray;
 	font-size: 14px;
 	font-weight: bold;
 	white-space: nowrap;
@@ -53,11 +53,11 @@
 	margin-left: 8px;
 }
 
-.count {
+.bcount {
 	display: inline-block;
 	max-width: 60%;
 	line-height: 20px;
-	color: lightgray;
+	color: gray;
 	font-size: 14px;
 	font-weight: bold;
 	white-space: nowrap;
@@ -68,58 +68,57 @@
 	float: right;
 }
 
-.time {
+.btime {
 	float: right;
 	display: inline-block;
 	max-width: 60%;
 	line-height: 20px;
-	color: lightgray;
+	color: gray;
 	font-size: 14px;
 	font-weight: bold;
 	margin-left: 8px;
 }
  
-.picture {
+.bpicture {
   vertical-align: top;
 }
 
-.status span {
+.bstatus span {
 	display: inline-block;
 	margin-right: 8px;
 	line-height: 18px;
-	color: #a6a6a6;
-	font-size: 12px;
+	color: gray;
+	font-size: 14px;
 	font-weight: bold;
 } 
 
-.content {
+.bcontent {
 	display: inline-block;
 	color: #292929;
-	font-size: 12px;
+	font-size: 14px;
 	width:80%;
+	height: 28px;
 	padding:0.5px;
 	overflow:hidden;
 	text-overflow:ellipsis;
 	white-space:nowrap;
-	background-repeat: no-repeat;
-	background-size: 16px 16px;
 }
 
-.bcontent{
+.bcontent p{
 	overflow:hidden;
 	text-overflow:ellipsis;
 	white-space:nowrap;
-	background-repeat: no-repeat;
-	background-size: 16px 16px;
+	width:80%;
+  	height: 28px;
 }
 
-p.attach {
+p.battach {
 	display: inline-block;
 	float: right;
 	margin-top: 8px;
 }
 
-.attachcount {
+.battachcount {
 	display: inline-block;
 	line-height: 18px;
 	color: #ffa81f;
@@ -160,12 +159,12 @@ hr {
 	padding-right: 5px;
 }
 
-.profile{
+.bprofile{
 	display: inline-block;
 	width: 100%;
 }
 
-.picture{
+.bpicture{
 	margin-left: 20px;
 }
 
@@ -175,8 +174,9 @@ hr {
     cursor: pointer;
 }
 
-.totalCount{
-	font-size:13px; 
+.btotalCount{
+	font-size:14px; 
+	font-weight: bold;
 }
 
 </style>
@@ -200,16 +200,25 @@ hr {
 						<div class="dc-content-box">
 							<div id="container2">
 								<div class="free_top">
-									<div class="category1">
-										<select id="tList"> 
-											<option value="" selected disabled hidden>정렬</option>
-											<option value="1">최신 순 정렬</option>
-											<option value="2">댓글 많은 순 정렬</option>
-											<option value="3">좋아요 순 정렬</option>
-										</select>
+									<div class="form-inline">
+										<div style="width:50%">
+											<select class="form-control" id="tList"> 
+												<option value="" selected disabled hidden>정렬</option>
+												<option value="1">최신 순 정렬</option>
+												<option value="2">댓글 많은 순 정렬</option>
+												<option value="3">좋아요 순 정렬</option>
+											</select>
+										</div>
+										
+										<div style="width:50%">
+											<c:if test="${!empty member}">
+												<div class="free_btn">
+													<input type="button" class="btn dc-btn dc-btn-right" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/free/freeInsertForm.do'" />
+												</div>
+											</c:if>
+										</div>
 									</div>
 									<script>
-									
 									
 									$("#tList").change(function(){
 										var tList = $(this).val();
@@ -218,51 +227,47 @@ hr {
 									});
 									
 									</script>
-									<c:if test="${!empty member}">
-									<div class="free_btn">
-										<input type="button" class="btn free_btn2 btn-sm" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/free/freeInsertForm.do'" />
-									</div>
-									</c:if>
+
 								</div>
 								<div class="articlelist">
-									<ol class="group"><br>
-										<p class="totalCount">총 ${totalContents}건의 게시물이 있습니다.</p>
+									<ol class="group"><br><br>
+										<p class="btotalCount">총 <span style="color:rgb(244, 126, 96);">${totalContents}</span>건의 게시물이 있습니다.</p>
 										<c:forEach items="${list}" var="b">
 											<li class="groupin" id="${b.no}">
-											<a class="article" href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${b.no}">
-													<p class="profile">
-														<span class="title">${b.title}</span> 
+											<a class="article" href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${b.no}" style="text-decoration:none;">
+													<p class="bprofile">
+														<span class="btitle">${b.title}</span> 
 														<c:choose>
 															<c:when test="${!empty b.profile}">
-																<img class="picture" src="/dc/resources/upload/profile/${b.profile}" /> 
+																<img class="bpicture" src="/dc/resources/upload/profile/${b.profile}" /> 
 															</c:when>
 															<c:otherwise>
-																<img class="picture" src="/dc/resources/upload/profile/profileDefaultImg.png" /> 
+																<img class="bpicture" src="/dc/resources/upload/profile/profileDefaultImg.png" /> 
 															</c:otherwise>
 														</c:choose>
-														<span class="nickname">${b.memberName}</span> 
-														<span class="count">조회수: ${b.viewCount}</span>
-														<span class="time">
+														<span class="bnickname">${b.memberName}</span> 
+														<span class="bcount">조회수: ${b.viewCount}</span>
+														<span class="btime">
 															<fmt:formatDate value="${b.writeDate}" pattern="yyyy-MM-dd" />
 														</span>
 													</p>
 													<c:choose>
 														<c:when test="${b.imageCheck eq 0}">
-															<span class="content">${b.content}</span>
+															<div class="bcontent">${b.content}</div>
 														</c:when>
 														<c:otherwise>
-															<span class="content"><p>(이미지)</p></span>
+															<span class="bcontent"><p>(이미지)</p></span>
 														</c:otherwise>
 													</c:choose>
-													<p class="status">
-														<span class="votecount">좋아요: <span style="color:rgb(244, 126, 96);">${b.likeCount}</span></span> 
-														<span class="commentcount">댓글: <span style="color:rgb(244, 126, 96);">${b.commentCount}</span></span> 
+													<p class="bstatus">
+														<span class="bvotecount">좋아요: <span style="color:rgb(244, 126, 96);">${b.likeCount}</span></span>
+														<span class="bcommentcount">댓글: <span style="color:rgb(244, 126, 96);">${b.commentCount}</span></span>
 														<c:choose>
 															<c:when test="${b.imageCheck eq 0}">
-																<span class="attachcount"></span>
+																<span class="battachcount"></span>
 															</c:when>
 															<c:otherwise>
-																<span class="attachcount"><img src="/dc/resources/images/images.png" style="height: 17px; width: 17px;"></span>
+																<span class="battachcount"><img src="/dc/resources/images/images.png" style="height: 17px; width: 17px;"></span>
 															</c:otherwise>
 														</c:choose>
 													</p>

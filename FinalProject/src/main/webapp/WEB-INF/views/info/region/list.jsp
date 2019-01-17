@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>지역 list</title>
+<title>동커</title>
 <c:import url="../../common/header.jsp" />
 <style>
 .table {

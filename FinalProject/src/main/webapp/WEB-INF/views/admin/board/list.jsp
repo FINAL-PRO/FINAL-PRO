@@ -57,7 +57,7 @@
 										<tr id="comment_${board.no}">
 											<td>${board.no}</td>
 											<td>
-												<a href="${pageContext.request.contextPath}/${boardUrl}/view.do?no=${board.no}">${board.title}</a>
+												<a href="${pageContext.request.contextPath}/${boardUrl}${board.no}">${board.title}</a>
 											</td>
 											<td>${board.writeDate}</td>
 											<td>
