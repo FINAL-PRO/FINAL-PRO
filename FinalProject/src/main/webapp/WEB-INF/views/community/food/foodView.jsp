@@ -21,88 +21,89 @@
 	text-decoration: none;
 }
 
-.picture {
+.fpicture {
 	display: inline-block;
 	width: 20px;
 	height: 20px;
 	vertical-align: top;
 }
 
-.count{
+.fcount{
 	float: right;
 	display: inline-block;
 	line-height: 20px;
 	color: #292929;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 }
 
-.nickname {
+.fnickname {
 	display: inline-block;
 	line-height: 20px;
 	color: #292929;
-	font-size: 12px;
+	font-size: 14px;
 	white-space: nowrap;
 	overflow: hidden;
 	float: left;
 	font-weight: bold;
 }
 
-.title {
+.ftitle {
 	display: inline-block;
 	line-height: 20px;
 	color: #292929;
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: bold;
 	white-space: nowrap;
 	overflow: hidden;
 }
 
-.time {
+.ftime {
 	float: right;
 	display: inline-block;
 	color: #292929;
-	font-size: 12px;
+	font-size: 14px;
 	margin-right:10px;
 	font-weight: bold;
 }
 
-.address{
+.faddress{
 	color: #292929;
 	font-size: 14px;
 	font-weight: bold;
 }
 
-.point{
+.fpoint{
 	color: #292929;
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: bold;
 }
 
 .category1{
+	margin-top: 10px;
 	color: #292929;
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: bold;
 }
 
-.text {
+.ftext {
 	margin-top: 8px;
 	padding: 10px;
 	line-height: 500px;
 	color: #292929;
-	font-size: 13px;
+	font-size: 14px;
 	word-wrap: break-word;
 	padding-left:10px;
 }
 
-.comment {
+.fcomment {
 	padding: 5px;
 	line-height: 20px;
 	color: #292929;
 	font-size: 14px;
 }
 
-.status {
+.fstatus {
 	float: right;
 	font-weight: bold;
 	color: #292929;
@@ -133,27 +134,6 @@
 	padding-right: 20px;
 }
 
-.commentgroup {
-	padding: 20px;
-}
-
-.commnetlist {
-	padding: 20px;
-}
-
-.commentwriteboard {
-	padding: 15px 35px 10px 20px;
-}
-
-.commentwrite {
-	width: 100%;
-}
-
-.comment_textarea {
-	margin-right: 10px;
-	margin-left: 10px;
-}
-
 hr {
 	border: 0.3px solid rgb(178, 182, 187);
 }
@@ -162,10 +142,6 @@ hr {
 	float: left;
 }
 
-.btn_comment {
-	margin-top: 4px;
-	float: right;
-}
 
 .both {
 	margin-top: 0px;
@@ -173,7 +149,7 @@ hr {
 	height: 1px;
 }
 
-.commentbox{
+.fcommentbox{
 	border: 1px solid yellow;
 }
 
@@ -182,7 +158,7 @@ hr {
 	width: 10px;
 }
 
-.profile{
+.fprofile{
 	display: inline-block;
 	width: 100%;
 }
@@ -266,7 +242,7 @@ hr {
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>맛집게시판</h1>
+							<span class="dc-title-text">맛집게시판</span>
 						</div>
 						<div class="dc-content-box">
 							<div id="container2">
@@ -277,31 +253,31 @@ hr {
 										<input type="hidden" name="fno" value="${foodList.fno}"/>
 									</form>
 									<div class="group">
-										<span class="title">${foodList.title}</span>
+										<span class="ftitle">${foodList.title}</span>
 										<div style="border: solid 0.5px gray"></div>
-										<p class="profile">
+										<p class="fprofile">
 											<c:choose>
 												<c:when test="${!empty foodList.profile}">
-													<img class="picture" src="/dc/resources/upload/profile/${foodList.profile}" /> 
+													<img class="fpicture" src="/dc/resources/upload/profile/${foodList.profile}" /> 
 												</c:when>
 												<c:otherwise>
-													<img class="picture" src="/dc/resources/upload/profile/profileDefaultImg.png" /> 
+													<img class="fpicture" src="/dc/resources/upload/profile/profileDefaultImg.png" /> 
 												</c:otherwise>
 											</c:choose>
-											<span class="nickname">${foodList.memberName}</span> 
-											<span class="count">조회수: ${foodList.viewCount}</span>
-											<span class="time">
+											<span class="fnickname">${foodList.memberName}</span> 
+											<span class="fcount">조회수: ${foodList.viewCount}</span>
+											<span class="ftime">
 												<fmt:formatDate value="${foodList.writeDate}" pattern="yyyy-MM-dd" />
 											</span>
 										</p>
 										
 										<p class="category1">카테고리: ${foodList.category}</p>
-										<p class="address">주소: ${foodList.address}</p>
-										<p class="point">평가자 평점: ${foodList.point} 점</p>
+										<p class="faddress">주소: ${foodList.address}</p>
+										<p class="fpoint">평가자 평점: ${foodList.point} 점</p>
 										
-										<p class="text">${foodList.content}</p>
+										<p class="ftext">${foodList.content}</p>
 										<div style="border: solid 0.5px lightgray"></div>
-										<div class="status">
+										<div class="fstatus">
 											<c:if test="${!empty member and member.no eq foodList.memberNo}">
 											<button class="btn btn_board_edit btn-sm" id="btn_board_edit">수정</button>
 											<button class="btn btn_board_delete btn-sm" id="btn_board_delete">삭제</button>
@@ -309,14 +285,14 @@ hr {
 											<c:if test="${!empty member and member.no ne foodList.memberNo}">
 											<input type="button" class="btn btn_report btn-sm" id="btn_report" value="신고하기" onclick="btn_report();"/>
 											</c:if>
-											<span class="likecount">
+											<span class="flikecount">
 											<a href="#" class="likefunc">
 												<img src="/dc/resources/images/dislike.png" id="like_img" style="height: 17px; width: 17px;">
 												: <input type="text" value="${foodList.likeCount}" class="likecount2" readonly/>
 											</a>
 											</span>
 											<input type="hidden" value="1" class="likecount3"/>
-											<span class="commentcount">댓글: <span style="color:rgb(244, 126, 96);">${foodList.commentCount}</span></span>
+											<span class="fcommentcount">댓글: <span style="color:rgb(244, 126, 96);">${foodList.commentCount}</span></span>
 										</div>
 										</div>
 										<script>

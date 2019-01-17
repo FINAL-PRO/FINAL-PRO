@@ -325,42 +325,7 @@ hr {
 											
 											})
 										
-											function btn_report(){
-												$('#myModal').show();
-											}
 											
-											function reportInsert(){
-											
-												var reCheck = $('input:radio[name=category]:checked').val();
-												console.log("reCheck: "+reCheck);
-												
-												$.ajax({
-													type: "post",
-										   			url: "${pageContext.request.contextPath}/report/reportInsert.do",
-										   			data: { bno: bno,
-										   					mno: mno,
-										   					reCheck: reCheck},
-										   			success: function(result){
-										   				
-													if(reCheck == undefined){
-													    alert('옵션을 선택해주세요.');
-													} else {
-													    alert("신고 되었습니다.");
-													    
-													    if(result == 1){
-													    	$('#myModal').hide();
-													    }
-													} 
-													
-												}
-												
-											});
-												
-											}
-										
-											function close_box(flag) {
-									             $('#myModal').hide();
-									        };
 
 											
 				                      		$("#btn_board_edit").click(function(){

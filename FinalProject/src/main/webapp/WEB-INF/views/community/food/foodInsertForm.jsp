@@ -14,6 +14,7 @@
 .board_area {
 	margin-left: 10px;
 	margin-right: 10px;
+	font-size: 14px;
 }
 
 #zipCode{
@@ -46,27 +47,30 @@
 }
 
 .bcategoryBox{
-	margin-top: 6px;
+	margin-top: 10px;
+	width: 200px;
+	display: inline-block;
 }
 
 .bscoreBox{
-	margin-top: 6px;
+	margin-top: 10px;
 }
 
 .bzipCodeBox{
-	margin-top: 6px;
+	margin-top: 10px;
+	display: inline-block;
 }
 
 .baddress1Box{
-	margin-top: 6px;
+	margin-top: 8px;
 }
 
 .baddress2Box{
-	margin-top: 6px;
+	margin-top: 8px;
 }
 
 .bcontentBox{
-	margin-top: 7px;
+	margin-top: 10px;
 }
 
 .bSaveBox{
@@ -95,7 +99,7 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>맛집게시판</h1>
+							<span class="dc-title-text">맛집게시판</span>
 						</div>
 						<div class="dc-content-box">
 							<div class="board_area">
@@ -104,20 +108,20 @@
 										<b>글쓰기</b>
 									</div>
 									<div class="btitleBox">
-										<input type="text" name="title" id="title" style="width: 100%;" required>
+										<input type="text" class="form-control" name="title" id="title" style="width: 100%;" required>
 									</div>
-									<input type="hidden" id="mno" name="memberNo" value="${member.no}" required>
+									<input type="hidden" id="mno" class="form-control" name="memberNo" value="${member.no}" required>
 									
 										<div class="add">
 											<div style="display:none;">
 												<img id="foodImg"/>
-												<input type="hidden" name="thumbnail" id="thumbnail" value="" required/>
+												<input type="hidden" class="form-control" name="thumbnail" id="thumbnail" value="" required/>
 											</div>
 										</div> 
 										<div>
 											<div class="bcategoryBox">
-												<div style="display:inline-block;">카테고리</div>
-												<select id="category" name="category" required> 
+												<!-- <div style="display:inline-block;">카테고리</div> -->
+												<select id="category" class="form-control" name="category" required> 
 													<option value="" selected disabled hidden>카테고리 선택</option>
 													<option value="FOOD001">한식</option>
 													<option value="FOOD002">일식</option>
@@ -129,7 +133,7 @@
 											</div>
 									
 											<div class="bscoreBox">
-												<div style="display:inline-block; width:61px;"">평점</div>
+												<div style="display:inline-block; width:55px;">평점</div>
 												<div style="text-align:left; display:inline-block;">
 													<div class="starRev">
 													  <span class="starR on">1</span>
@@ -137,7 +141,7 @@
 													  <span class="starR">3</span>
 													  <span class="starR">4</span>
 													  <span class="starR">5</span>
-													<input type="text" id="point" name="point" value="0" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/>
+													<input type="hidden" id="point" name="point" value="0" style="border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"/>
 													</div>
 												</div>
 											</div>
@@ -145,25 +149,25 @@
 											<div class="bzipCodeBox">
 												<div style="display:inline-block;">우편번호</div>
 												<div style="display:inline-block;">
-													<input type="text" id="zipCode" name="zipCode" style="width: 100px;" required>
-													<input type="button" id="ckZip" onclick="addrSearch();" value="검색"/>
+													<input type="text" class="form-control" id="zipCode" name="zipCode" style="width: 100px; display:inline-block;" required>
+													<input type="button" class="form-control" id="ckZip" onclick="addrSearch();" value="검색" style="width: 100px; display:inline-block;"/>
 												</div>
 											<div>
 											
 											<div class="baddress1Box">
-												<div style="display:inline-block; width:61px;">주소</div>
+												<div style="display:inline-block; width:54px;">주소</div>
 												<div style="text-align:left; display:inline-block;">
-													<input type="text" id="address1" name="address1" style="width: 500px;" required>
+													<input type="text" id="address1" class="form-control" name="address1" style="width: 500px;" required>
 												</div>
 											</div>
 											
 											<div class="baddress2Box">
 												<div style="display:inline-block;">상세주소</div>
 												<div style="text-align:left; display:inline-block;">
-													<input type="text" id="address2" name="address2" style="width: 500px;" required>
+													<input type="text" id="address2" class="form-control" name="address2" style="width: 500px;" required>
 												</div>
 											</div>	
-											<input type="hidden" id="address" name="address" />
+											<input type="hidden" id="address" class="form-control" name="address" />
 										</div>
 									</div>
 									<div>
