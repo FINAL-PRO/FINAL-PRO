@@ -159,9 +159,8 @@
 	
 	// 폼 미입력시 입력하라는 알림창 띄움
 	function submitForm() {
-		if($('input[name="memberNo"]').val() == 0 ) {
-			alert("로그인이 필요한 기능입니다.");
-		} else if($('input[name="title"]').val() == "" ) {
+		
+		if($('input[name="title"]').val() == "" ) {
 			alert("제목을 입력해 주세요.");
 		} else if ($('input[name="goodsPicture"]').val() == "" ) {
 			alert("물품 사진을 등록해주세요.");
@@ -169,32 +168,32 @@
 			alert("물품명을 입력해 주세요.");
 		} else if ($('input[name="price"]').val() == "" ) {
 			alert("물품 가격을 입력해 주세요.");
-		} else if ($('input[name="dealType"]').val() == "" ) {
+		} else if (priceChk != true){
+			alert("가격은 100원~100만원 사이만 가능합니다.");
+		} else if ($('input[name="dealType"]:checked').val() == null ) {
 			alert("거래 방법을 선택해 주세요.");
+		} else if ($('#summernote').val() == "" ) {
+			alert("물품 내용을 등록해주세요.");
 		} else {
 			$('form').submit();
 		}
 	}
 	
-	// 제목 100바이트 넘지 않게 정규식 처리
-	$("#title").on("keyup", function() {
-		var title = $("#maxCount").val().trim();
-		var regPwd = /^[0-9]$/g;
-
-	});
-	
-	// 물품명 100바이트 넘지 않게 정규식 처리
-	$("#goodsName").on("keyup", function() {
-		var goodsName = $("#goodsName").val().trim();
-		var regPwd = /^[0-9]$/g;
-
-	});
-	
+	var priceChk = false;
 	// 가격 --> 정규식처리:100~1000000 (백원~백만원)
 	$("#price").on("keyup", function() {
 		var price = $("#price").val().trim();
-		var regPwd = /^[0-9]$/g;
+		var regPwd = /^[0-9]{1,7}$/g;
 		
+		if(price == "") {
+			priceChk = false;
+		} else if (!regPwd.test(price)) {
+			priceChk = false;
+		} else if (price>1000000 || price<100) {
+			priceChk = false;
+		} else {
+			priceChk = true;
+		}
 	});
 	
 </script>

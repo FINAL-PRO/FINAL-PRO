@@ -206,13 +206,6 @@
 		}
 	}
 	
-	// 제목 100바이트 넘지 않게 정규식 처리
-	$("#title").on("keyup", function() {
-		var title = $("#maxCount").val().trim();
-		var regPwd = /^[0-9]$/g;
-
-	});
-	
 	// 물품명 100바이트 넘지 않게 정규식 처리
 	$("#goodsName").on("keyup", function() {
 		var goodsName = $("#goodsName").val().trim();
