@@ -121,6 +121,9 @@
 								        	 <c:when test = "${comment.boardType eq '중고거래'}">
 								          	<a href="${pageContext.request.contextPath}/sale/used/view.do?boardNo=${comment.boardNo}">${comment.boardTitle}</a>
 								         	</c:when>
+								         	<c:when test = "${comment.boardType eq '지역정보'}">
+								          	<a href="${pageContext.request.contextPath}/info/region/view.do?no=${comment.boardNo}">${comment.boardTitle}</a>
+								        	 </c:when>
 								         	<c:when test = "${comment.boardType eq '부동산'}">
 								          	<a href="${pageContext.request.contextPath}/info/house/view.do?no=${comment.boardNo}">${comment.boardTitle}</a>
 								        	 </c:when>
@@ -129,8 +132,9 @@
 								         	</c:when>							                	
 						                </c:choose>
 						                </td>
-						                <td><a href="#" onclick="goComment('${comment.boardType}', ${comment.boardNo}, ${comment.no})" id="commentContent"
-						                >${comment.content}</a><input type="hidden" id="cContent" value="${comment.content}"/> </td>
+						                <td>
+						                	<a href="#" onclick="goComment('${comment.boardType}', ${comment.boardNo}, ${comment.no})" id="commentContent"></a>
+						                	<input type="hidden" id="cContent" value="${comment.content}"/></td>
 						                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${comment.writeDate}" /></td>
 						                    
 						            	</tr>
