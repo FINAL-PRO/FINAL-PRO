@@ -22,7 +22,7 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>업체 등록</h1>
+							<span class="dc-title-text">제휴</span>
 						</div>
 						<div class="dc-content-box">
 							<form method="post" enctype="multipart/form-data"
