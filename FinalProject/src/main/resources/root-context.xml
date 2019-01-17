@@ -8,12 +8,12 @@
 	<!-- DataSource : 연결하고자 하는 DB설정을 담당하는 객체 -->
 	<bean id="realDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
       <property name="driverClassName" value="oracle.jdbc.OracleDriver" />
-      <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+<!--       <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
       <property name="username" value="DCDB"/>
-      <property name="password" value="DCDB"/> 
-     <!--  <property name="url" value="jdbc:oracle:thin:@finaloracle.c73nnglgyy2t.ap-northeast-2.rds.amazonaws.com:1521:ORCL"/>
+      <property name="password" value="DCDB"/>  -->
+     <property name="url" value="jdbc:oracle:thin:@finaloracle.c73nnglgyy2t.ap-northeast-2.rds.amazonaws.com:1521:ORCL"/>
       <property name="username" value="root"/>
-      <property name="password" value="aktmxjdkagh"/> -->
+      <property name="password" value="aktmxjdkagh"/>
    </bean>
 
    <!-- log4jdbc용 연결 객체 -->
