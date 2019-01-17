@@ -25,10 +25,10 @@
 				<div class="dc-content">
 					<div class="dc-content-title">
 						<c:if test="${region.no != null }">
-							<h2>글 수정</h2>
+							<span class="dc-title-text">글 수정</span>
 						</c:if>
 						<c:if test="${region.no == null }">
-							<h2>글쓰기</h2>
+							<span class="dc-title-text">글 쓰기</span>
 						</c:if>
 					</div>
 					<div class="dc-content-box">
@@ -56,9 +56,11 @@
 											
 										</c:if>
 										
-										<input type="hidden" name="memberNo" value="${member.no}" required />
-										<button class="btn dc-btn" type="submit" onclick="insertRegion()">확인</button>
-										<button class="btn dc-btn" type="reset" onclick="historyGoBack();">취소</button>									
+										<div class="dc-btn-right">
+											<input type="hidden" name="memberNo" value="${member.no}" required />
+											<button class="btn dc-btn" type="submit" onclick="insertRegion()">확인</button>
+											<button class="btn dc-btn" type="reset" onclick="historyGoBack();">취소</button>
+										</div>									
 									</td>
 								</tr>				
 							</table>

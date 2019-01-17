@@ -59,8 +59,6 @@
 										<th>광고상태</th>
 										<th>광고상태 변경</th>
 									</tr>
-								</thead>
-								<tbody>
 									<c:if test="${!empty adList}">
 										<c:forEach items="${adList}" var="ad">
 											<tr>
@@ -84,13 +82,11 @@
 										</c:forEach>
 									</c:if>
 									<c:if test="${empty adList}">
-										<td colspan="7">
-											<div class="dc-none-data">
-												<span class="dc-none-data-text">데이터가 없습니다.</span>
-											</div>
-										</td>
+										<tr style="background-color:#FFFFFF; color:gray;">
+						                	<th colspan="7" style="width:auto; text-align:center;">작성된 게시물이 없습니다.</th>						               
+						            	</tr>
 									</c:if>
-								</tbody>
+								</thead>
 							</table>
 						</div>
 					</div>
