@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>부동산</title>
+<title>동커</title>
 <c:import url="../../common/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/info/house/dc-info-house.css" />
 </head>
