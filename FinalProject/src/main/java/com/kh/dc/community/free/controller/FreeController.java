@@ -13,13 +13,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.dc.community.free.model.service.FreeService;
+import com.kh.dc.member.model.vo.Member;
 import com.kh.dc.sale.group.model.vo.Group;
 import com.kh.dc.common.util.Utils;
 
 import com.kh.dc.common.vo.Board;
 
+@SessionAttributes(value= {"member"})
 @Controller
 public class FreeController {
 	
@@ -28,9 +31,11 @@ public class FreeController {
 	
 	@RequestMapping("community/free/list.do")
 	public String selectFreeList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, 
-			@RequestParam(value="tList", required=false, defaultValue="1") int tList, Model model, HttpServletRequest request) {
+			@RequestParam(value="tList", required=false, defaultValue="1") int tList, 
+			Model model, HttpServletRequest request, Member member) {
 		
 		int numberPage = 10; // 한 페이지당 게시글 수
+		int locationNo = member.getLocationNo();
 
 		ArrayList<Map<String, String>> list = null;
 		
@@ -40,17 +45,17 @@ public class FreeController {
 		System.out.println("tList:"+tList);
 		
 		if(tList == 1) {
-			list = new ArrayList<Map<String, String>>(freeService.recentSort(cPage, numberPage));
+			list = new ArrayList<Map<String, String>>(freeService.recentSort(cPage, numberPage, locationNo));
 		}else if(tList == 2){
-			list = new ArrayList<Map<String, String>>(freeService.commentSort(cPage, numberPage));
+			list = new ArrayList<Map<String, String>>(freeService.commentSort(cPage, numberPage, locationNo));
 		}else if(tList == 3){
-			list = new ArrayList<Map<String, String>>(freeService.likeSort(cPage, numberPage));
+			list = new ArrayList<Map<String, String>>(freeService.likeSort(cPage, numberPage, locationNo));
 		}
 		
 		System.out.println("list: "+list);
 		
 		// 2. 전체 게시글 개수 가져오기
-		int totalContents = freeService.selectFreeTotalContents();
+		int totalContents = freeService.selectFreeTotalContents(locationNo);
 		
 		// 3. 페이지 계산 후 작성할 HTML 추가
 		String pageBar = Utils.getPageBar(totalContents, cPage, numberPage, "list.do");
@@ -83,15 +88,12 @@ public class FreeController {
 	@RequestMapping("community/free/freeView.do")
 	public String selectOneFree(@RequestParam int bno, Model model) {
 		
-		System.out.println("bno:"+bno);
-		
 		// 조회수 증가
 		int freeViewCount = freeService.freeViewCount(bno);
 		
 		model.addAttribute("boardList", freeService.selectOneFree(bno))
 		.addAttribute("freeViewCount", freeViewCount)
 		.addAttribute("bno", bno);
-		
 		
 		return "community/free/freeView";
 	}

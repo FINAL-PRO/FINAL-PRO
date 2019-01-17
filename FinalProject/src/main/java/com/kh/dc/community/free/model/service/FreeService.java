@@ -8,13 +8,13 @@ import com.kh.dc.common.vo.BoardList;
 
 public interface FreeService {
 	
-	List<Map<String,String>> recentSort(int cPage, int numberPage);
+	List<Map<String,String>> recentSort(int cPage, int numberPage, int locationNo);
 	
-	List<Map<String,String>> commentSort(int cPage, int numberPage);
+	List<Map<String,String>> commentSort(int cPage, int numberPage, int locationNo);
 	
-	List<Map<String,String>> likeSort(int cPage, int numberPage);
+	List<Map<String,String>> likeSort(int cPage, int numberPage, int locationNo);
 	
-	int selectFreeTotalContents();
+	int selectFreeTotalContents(int locationNo);
 	
 	BoardList selectOneFree(int bno);
 	

@@ -10,9 +10,9 @@ public interface NoticeService {
 
 	List<Board> selectNoticeListData();
 	
-	List<Map<String,String>> recentSort(int cPage, int numberPage);
+	List<Map<String,String>> recentSort(int cPage, int numberPage, int locationNo);
 	
-	int selectNoticeTotalContents();
+	int selectNoticeTotalContents(int locationNo);
 	
 	BoardList selectOneNotice(int bno);
 	

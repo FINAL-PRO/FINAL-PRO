@@ -8,6 +8,11 @@
 			<!-- default header name is X-CSRF-TOKEN -->
 <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 <!DOCTYPE html>
+<style>
+	.dc-manebar-main span{
+		font-size: 17px;
+	}
+</style>
 <header>	
 	<div id="header-container">
 		<div class="header_top" style="display:block;">

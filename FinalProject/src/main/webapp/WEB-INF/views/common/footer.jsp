@@ -72,6 +72,16 @@
     border: 1px solid #dee2e6;
 	}
 	
+	a:hover {
+    color: rgb(248, 178, 106);
+    text-decoration: underline;
+	}
+	
+	.dc-user-menu span:hover {
+    color: rgb(248, 178, 106);
+    font-weight: bold;
+	}
+	
 
 </style>
 <footer>

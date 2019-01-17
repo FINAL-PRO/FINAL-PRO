@@ -9,6 +9,10 @@
 	<meta charset="UTF-8">
 	<title>동커</title>
 	<c:import url="../../common/header.jsp"/>
+	
+	<!-- 기상청 날씨 받아오기 위한 크로스도메인 해결 플러그인 -->
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.ajax-cross-origin.min.js"></script>
+
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/info/weather/dc-info-weather.css" />
 </head>
 <body>
