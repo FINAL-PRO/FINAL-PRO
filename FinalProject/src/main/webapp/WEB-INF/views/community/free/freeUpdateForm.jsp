@@ -69,7 +69,6 @@
 										$('#summernote').summernote({
 											minHeight : 100,
 		                            		maxHeight : 500,
-		                            		maxHeight : 500,
 		                            		focus : true,
 		                            		callbacks : {
 		                            			onImageUpload : function(files) {
