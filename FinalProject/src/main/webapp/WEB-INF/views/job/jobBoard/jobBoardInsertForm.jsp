@@ -23,68 +23,128 @@
 		<div class="section-center">
 			<div class="dc-content">
 				<div class="dc-content-title">
-				<h1>구인구직 게시판 작성페이지</h1>
+					<span class="dc-title-text">구인구직</span>
 				</div>
 				<form id="jInsForm" method="post" action="${pageContext.request.contextPath}/job/jobBoard/insertJobBoard.do">
-				<div class="dc-content-box"><br />
-				<div class="jb-margin">
-				<label class="insLabel">제목&nbsp;</label>
-				<input type="text" class="insTitle" placeholder="제목" name="title" id="title" required/><br />
+				<div class="dc-content-box">
 				
-				<label class="insLabel">작성자&nbsp;</label>${member.nickName}
-				<input type="text" class="" value="${member.nickName}" hidden required/><br />
-				<input type="hidden" class="" name="memberNo" id="memberNo" value="${member.no}" readonly required/>
-				
-				 
-				<label class="insLabel">구인구직여부&nbsp;</label>
-				<input type="radio" name = "type" value = "JTYPE001" checked><label> 구인 </label>&nbsp;&nbsp;&nbsp;
-				<input type="radio" name = "type" value = "JTYPE002"><label> 구직 </label><br />
-				
-				
-				<label class="insLabel">구인일&nbsp;</label>
-				<input type="date" name="startDate"/> ~
-				<input type="date" name="endDate"/> <br />
-				
-				 
-				<label class="insLabel">근무기간&nbsp;</label>
-				<input type="date" name="startJob"/> ~
-				<input type="date" name="endJob"/> <br />
-				
-				 
-				<label class="insLabel">근무시간&nbsp;</label>
-				<input type="time" name="startTime" id="startTime"> ~
-				<input type="time" name="endTime" id="endTime"><br />
+				<table class="table">
+					<tbody>
+					<tr>
+						<td>
+							제목	
+						</td>
+						<td>
+							<input type="text" class="form-control" placeholder="제목" name="title" id="title" required/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							작성자
+						</td>
+						<td>
+							<input type="text" class="form-control" value="${member.nickName}" readonly="readonly" required/>
+							<input type="hidden" class="" name="memberNo" id="memberNo" value="${member.no}" readonly required/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							구인구직여부
+						</td>
+						<td>
+							<input type="radio" name = "type" value = "JTYPE001" checked><label> 구인 </label>
+							<input type="radio" name = "type" value = "JTYPE002"><label> 구직 </label>
+						</td>
+					</tr>	
+					<tr>
+						<td>
+							구인일
+						</td>
+						<td>
+							<div class="form-inline">
+								<input class="form-control" type="date" name="startDate"/>&nbsp; ~ &nbsp;
+								<input class="form-control" type="date" name="endDate"/>
+							</div> 
+						</td>
+					</tr>	
+					<tr>
+						<td>
+							근무기간
+						</td>
+						<td>
+							<div class="form-inline">
+								<input class="form-control" type="date" name="startJob"/>&nbsp; ~ &nbsp;
+								<input class="form-control" type="date" name="endJob"/>
+							</div>
+						</td>
+					</tr>	
+					<tr>
+						<td>
+							근무시간
+						</td>
+						<td>
+							<div class="form-inline">
+								<input class="form-control" type="time" name="startTime" id="startTime">&nbsp; ~ &nbsp;
+								<input class="form-control" type="time" name="endTime" id="endTime">
+							</div>
+						</td>
+					</tr>	
+					<tr>
+						<td>
+							상호명
+						</td>
+						<td>
+							<div class="form-inline">
+								<input type="hidden" class="" id="companyNo" name="companyNo"/>
+								<input type="text" class="form-control" placeholder="상호명" id="companyName" onclick="selectCompany();" readonly required/>
+								&nbsp;&nbsp;<input type="text" class="form-control" placeholder="근무장소" name="location" id="location"/>
+							</div>
+						</td>
+					</tr>	
+					<tr>
+						<td>
+							고용형태
+						</td>
+						<td>
+							<div class="form-inline">
+								<select class="form-control" name="jobType" id="jobType" size="1">
+									<option name="JOBTYPE001" value="JOBTYPE001" selected>정규직</option>
+									<option value="JOBTYPE002">비정규직</option>
+									<option value="JOBTYPE003">파트타임</option>
+								</select>
+							</div>
+						</td>
+					</tr>	
+					<tr>
+									<label class="insLabel">급여형태&nbsp;</label>
 
-				
-				<label class="insLabel">상호명&nbsp;</label>
-				<input type="hidden" class="" id="companyNo" name="companyNo"/>
-				<input type="text" class="" placeholder="상호명" id="companyName" onclick="selectCompany();" readonly required/>
-				<input type="text" class="" placeholder="근무장소" name="location" id="location"/>
-				<br/>
-				
-				<label class="insLabel">고용형태&nbsp;</label>
-				<select name="jobType" id="jobType" size="1">
-					<option name="JOBTYPE001" value="JOBTYPE001" selected>정규직</option>
-					<option value="JOBTYPE002">비정규직</option>
-					<option value="JOBTYPE003">파트타임</option>
-				</select><br/>
-				
-				<label class="insLabel">급여형태&nbsp;</label>
-				<input type="number" min="0"  class="" placeholder="급여" name="salary" id="salary" required/>원
-				<select name="salType" id="salType" size="1">
-					<option name="salType" value="SALTYPE001" selected>시급</option>
-					<option name="salType" value="SALTYPE002">일급</option>
-					<option name="salType" value="SALTYPE003">주급</option>
-					<option name="salType" value="SALTYPE004">월급</option>
-					<option name="salType" value="SALTYPE005">연봉</option>
-				</select><br/><hr />
-			<textarea id="summernote" name="content"></textarea> <br />
-			</div>
-			</div>
-			<button class="btn btn-outline-info" type="submit">게시글 등록</button>
-			</form>
+						<td>
+							급여형태
+						</td>
+						<td>
+							<div class="form-inline">
+								<input class="form-control" type="number" min="0"  class="" placeholder="급여" name="salary" id="salary" required/>원
+								&nbsp;&nbsp;&nbsp;<select class="form-control" name="salType" id="salType" size="1">
+									<option name="salType" value="SALTYPE001" selected>시급</option>
+									<option name="salType" value="SALTYPE002">일급</option>
+									<option name="salType" value="SALTYPE003">주급</option>
+									<option name="salType" value="SALTYPE004">월급</option>
+									<option name="salType" value="SALTYPE005">연봉</option>
+								</select>
+							</div>
+						</td>
+					</tr>	
+					<tr>
+						<td colspan="2">
+							<textarea id="summernote" name="content"></textarea> <br />
+							<button class="btn dc-btn dc-btn-right" type="submit">게시글 등록</button>
+						</td>
+					</tr>	
+					</tbody>
 			
-
+				</table>
+				</form>
+				</div>
 			
 		</div>
 			</div>

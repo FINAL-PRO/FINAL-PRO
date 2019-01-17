@@ -22,20 +22,23 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<div>
-								<span class="dc-list-title">업체 등록 게시판</span>
-								<button class="btn dc-btn dc-btn-right" onclick="insertCompany();">업체 등록</button>
-							</div>
+							<span class="dc-title-text">제휴</span>
 							<br />
-							<div class="form-inline">
-								<select id="companyTypeNo" class="form-control">
-									<c:forEach items="${companyTypeList}" var="code">
-										<option value="${code.id}" <c:if test="${code.id eq companyType}">selected</c:if>>${code.value}</option>
-									</c:forEach>
-								</select>
-							</div>
 						</div>
 						<div class="dc-content-box">
+							<div class="form-inline">
+								<div style="width:50%">
+									<select id="companyTypeNo" class="form-control">
+										<c:forEach items="${companyTypeList}" var="code">
+											<option value="${code.id}" <c:if test="${code.id eq companyType}">selected</c:if>>${code.value}</option>
+										</c:forEach>
+									</select>
+								</div>
+								<div style="width:50%">
+									<button class="btn dc-btn dc-btn-right" onclick="insertCompany();">업체 등록</button>
+								</div>
+							</div>
+							<br />
 							<table class="table">
 								<thead>
 									<th>#</th>
