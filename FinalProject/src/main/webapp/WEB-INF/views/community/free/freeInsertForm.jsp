@@ -21,8 +21,8 @@
 }
 
 #btn_back{
-	background: rgb(171, 187, 129);
-    color: white;
+	/* background: rgb(171, 187, 129); */
+    /* color: white; */
 }
 
 .bcontentBox{
@@ -49,7 +49,7 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>자유게시판</h1>
+							<span class="dc-title-text">자유게시판</span>
 						</div>
 						<div class="dc-content-box">
 							<div class="board_area">
@@ -111,8 +111,8 @@
 			                            	</script>
 										</div>
 										<div style="text-align: center; padding:10px;">
-											<input type="submit" class="btn btn-save btn-sm" value="Save">
-											<button class="btn btn_back btn-sm" id="btn_back">Back</button> 
+											<input type="submit" class="btn dc-btn" value="확인">
+											<button class="btn dc-btn" id="btn_back">취소</button> 
 										</div>
 									<script>
 						                function save(){

@@ -138,7 +138,10 @@
 					<tr>
 						<td colspan="2">
 							<textarea id="summernote" name="content"></textarea> <br />
-							<button class="btn dc-btn dc-btn-right" type="submit">게시글 등록</button>
+							<div class="dc-btn-right">
+								<button class="btn dc-btn" type="submit">확인</button>
+								<button class="btn dc-btn" type="reset" onclick="historyGoBack();">취소</button>
+							</div>
 						</td>
 					</tr>	
 					</tbody>
