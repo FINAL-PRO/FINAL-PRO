@@ -141,8 +141,7 @@
 	<c:import url="../common/footer.jsp" />
 
 	<script>
-		$(function() {
-			
+		$(function() {			
 			var emailChk = false;
 			var pwdChk = false;
 			var nickNameChk = false;			
@@ -279,10 +278,10 @@
 
 			});
 			
-			$("#submitButton").on("click", function() {
-		
-				if(emailChk == true && nickNameChk == true && pwdChk == true && nameChk == true){
-					$("#memberEnroll").submit();
+			$("#submitButton").on("click", function() {		
+				if(emailChk == true && nickNameChk == true 
+						&& pwdChk == true && nameChk == true){
+					$("#memberEnroll").submit();					
 				} else if(emailChk == false){
 					alert("이메일을 다시 입력해주세요.");
 					return;

@@ -129,9 +129,10 @@
 								         	</c:when>							                	
 						                </c:choose>
 						                </td>
-						                <td><a href="#" onclick="goComment('${comment.boardType}', ${comment.boardNo}, ${comment.no})" id="commentContent">${comment.content}</a></td>
+						                <td><a href="#" onclick="goComment('${comment.boardType}', ${comment.boardNo}, ${comment.no})" id="commentContent"
+						                >${comment.content}</a><input type="hidden" id="cContent" value="${comment.content}"/> </td>
 						                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${comment.writeDate}" /></td>
-						               
+						                    
 						            	</tr>
 						            </c:forEach>	
 						            </c:if>						            
@@ -188,6 +189,14 @@
 			}
 			
 		}
+		
+ 		$(document).ready(function(){
+			
+			var content = $('#cContent').val();			
+			$('#commentContent').text(content.substring(0, 10) + '...');
+			
+		}) 
+		
 
 	</script>
 
