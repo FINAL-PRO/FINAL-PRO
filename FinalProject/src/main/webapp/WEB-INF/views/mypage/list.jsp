@@ -57,6 +57,9 @@
 								        	 <c:when test = "${board.boardType eq '중고거래'}">
 								          	<a href="${pageContext.request.contextPath}/sale/used/view.do?boardNo=${board.no}">${board.title}</a>
 								         	</c:when>
+								         	<c:when test = "${board.boardType eq '지역정보'}">
+								          	<a href="${pageContext.request.contextPath}/info/region/view.do?no=${board.no}">${board.title}</a>
+								        	 </c:when>
 								         	<c:when test = "${board.boardType eq '부동산'}">
 								          	<a href="${pageContext.request.contextPath}/info/house/view.do?no=${board.no}">${board.title}</a>
 								        	 </c:when>
