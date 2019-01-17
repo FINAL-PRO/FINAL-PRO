@@ -35,8 +35,8 @@
 	</resultMap>
 	
 	
-	<select id="selectGroupList" resultMap="resultGroup">
-		SELECT * FROM DC_BOARD_GROUP_VIEW WHERE STATUS='BSTATUS001' ORDER BY NO DESC
+	<select id="selectGroupList" parameterType="_int" resultMap="resultGroup">
+		SELECT * FROM DC_BOARD_GROUP_VIEW WHERE STATUS='BSTATUS001' AND LOCATIONNO = #{locationNo} ORDER BY NO DESC
 	</select>
 	
 	<select id="selectGroupTotalContents" resultType="_int">

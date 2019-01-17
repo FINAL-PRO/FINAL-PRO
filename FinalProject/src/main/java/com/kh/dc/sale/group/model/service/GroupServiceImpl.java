@@ -17,11 +17,9 @@ public class GroupServiceImpl implements GroupService {
 	GroupDao groupDao;
 	
 	@Override
-	public List<Map<String, String>> selectGroupList(int cPage, int numPerPage) {
+	public List<Map<String, String>> selectGroupList(int cPage, int numPerPage, int locationNo) {
 		
-		List list = groupDao.selectGroupList(cPage, numPerPage);
-		
-		return list;
+		return groupDao.selectGroupList(cPage, numPerPage, locationNo);
 	}
 
 	@Override
@@ -34,9 +32,7 @@ public class GroupServiceImpl implements GroupService {
 	public Group selectOneGroup(int boardNo) {
 		
 		Group group = groupDao.selectOneGroup(boardNo);
-		
-		System.out.println("카운트,,증가,,,,,,,,,,,,,~~~~~~~~~~~~~~~~");
-		
+	
 		if(group != null) groupDao.updateViewCount(boardNo);
 		
 		return group;

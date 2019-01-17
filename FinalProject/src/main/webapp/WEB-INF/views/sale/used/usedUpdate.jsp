@@ -23,7 +23,9 @@
 
 <div class="section-center">
 <div class="dc-content">
-<div class="dc-content-title"><h1>제목</h1></div>
+<div class="dc-content-title">
+	<span class="dc-title-text">중고거래</span>
+</div>
 		
 <div class="dc-content-box">
 <!-- ------------------- 내용 입력 ------------------- -->

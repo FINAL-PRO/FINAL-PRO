@@ -10,12 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.dc.common.util.Utils;
 import com.kh.dc.common.vo.Board;
+import com.kh.dc.member.model.vo.Member;
 import com.kh.dc.sale.group.model.service.GroupService;
 import com.kh.dc.sale.group.model.vo.Group;
 
+@SessionAttributes(value= {"member"})
 @Controller
 public class GroupController {
 
@@ -23,14 +26,15 @@ public class GroupController {
 	private GroupService groupService;
 	
 	@RequestMapping("sale/group/list.do")
-	public String selectGroupList(Model model, 
+	public String selectGroupList(Model model, Member member,
 			@RequestParam(value="cPage", required=false, defaultValue="1") int cPage) {
 		
 		int numPerPage = 10; // 한 페이지당 게시글 수
+		int locationNo = member.getLocationNo();
 		
 		// 1. 현재 페이지 게시글 목록 가져오기
 		ArrayList<Map<String, String>> list = 
-				new ArrayList<Map<String, String>>(groupService.selectGroupList(cPage, numPerPage));
+				new ArrayList<Map<String, String>>(groupService.selectGroupList(cPage, numPerPage, locationNo));
 		
 		// 2. 전체 게시글 개수 가져오기
 		int totalContents = groupService.selectGroupTotalContents();
@@ -48,8 +52,6 @@ public class GroupController {
 	
 	@RequestMapping("sale/group/view.do")
 	public String selectOneGroup(@RequestParam int boardNo, Model model) {
-
-		System.out.println("공동구매 셀렉트 했다~~~~");
 		
 		Group group = groupService.selectOneGroup(boardNo);
 
@@ -118,9 +120,6 @@ public class GroupController {
 	public String switchGroupHistroy(@RequestParam Map<String, String> ghMap) {
 		
 		int result = 0;
-		
-		System.out.println("GroupHistory : " + ghMap);
-		
 		int remain = groupService.selectRemainCount(Integer.parseInt(ghMap.get("groupNo")));
 		
 		if(ghMap.get("req").equals("in")) {

@@ -39,11 +39,11 @@ th {
 }
 
 .pro-img {
-	width: 100%;
-	height: 100%;
+	width: 172px;
+	height: 180px;
 	position: absolute;
 	top: 0;
-	left: 0;
+	left: 10;
 	overflow: hidden;
 }
 
@@ -70,6 +70,7 @@ th {
 .sale-content {
 	width: 100%;
 	height: auto;
+	min-height: 400px;
 	padding: 30px;
 	border: 1px solid lightgray;
 }
@@ -94,7 +95,7 @@ th {
 	border: 2px solid rgb(244, 126, 96);
 }
 
-.status-box:hover {
+.status-box.active:hover {
 	cursor: pointer;
 }
 
@@ -148,6 +149,8 @@ th {
     text-overflow: ellipsis;
     word-break: break-all;
     border-right: 1px solid lightgray;
+    font-weight: bold;
+    font-size: 20px;
 }	
 
 

@@ -23,7 +23,7 @@
 <div class="section-center">
 <div class="dc-content">
 <div class="dc-content-title">
-	<h3>공동구매</h3>
+	<span class="dc-title-text">공동구매</span>
 </div>
 		
 <div class="dc-content-box">
@@ -72,7 +72,7 @@
 	</div>
 	<div class="col-md-2">
 		<c:if test="${!empty member and member.no ne group.memberNo}">
-		<input type="button" id="btnApply" value="참여신청" onClick="switchGroup(this);"/>
+		<input type="button" class="btn btnGroup" id="btnApply" value="참여신청" onClick="switchGroup(this);"/>
 		</c:if>
 	</div>
 </div>
@@ -83,7 +83,8 @@
 	</div>
 	<div class="col-md-10">
 		<c:forEach items="${statusList}" var="status">
-			<div class="status-box" id="${status.id}" value="${status.value}" onclick="changeStatus(this);">
+			<div class="status-box ${(status.id eq 'GROUP003' or status.id eq 'GROUP004')?'active':''}" 
+				id="${status.id}" value="${status.value}" >
 				<p class="status-txt">${status.value}</p>
 			</div>
 		</c:forEach>
@@ -209,17 +210,17 @@
 		}
 	}
 	
-	function changeStatus(obj) {
-		var statusId = $(obj).attr("id");
+	$('.status-box.active').click(function() {
+		var statusId = $(this).attr("id");
 		var m = ${member.no}+0;
 		var w = ${group.memberNo}+0;
 		
 		if(m != w) {
-			;
+			alert("공동구매 진행자만 변경 가능합니다.");
 		} else if ('${group.status}' == '참여자모집') {
-			alert("모집인원이 마감된 후에 변경 가능합니다.");
-		}else if(statusId == "GROUP003" || statusId == "GROUP004") {
-			if(confirm("공동구매의 진행상황을 '"+$(obj).val()+"'로 변경하시겠습니까?")) {
+			alert("인원 모집이 마감된 후에 변경 가능합니다.");
+		} else {
+			if(confirm("공동구매의 진행상황을 '"+$(this).val()+"'로 변경하시겠습니까?")) {
 				$.ajax({
 					url : 'updateStatus.do',
 				    type : 'get',
@@ -235,10 +236,8 @@
 				    }
 				});	
 			}
-		} else {
-			alert("해당 진행상황으로는 변경할 수 없습니다.");
 		}
-	}
+	});
 
 	function goGroupList() {
 		location.href = "${pageContext.request.contextPath}/sale/group/list.do";
