@@ -195,7 +195,7 @@
 	}
 
 	function cancelUpdate(){
-		location.href = "${pageContext.request.contextPath}/sale/group/groupView.do?boardNo="+${group.boardNo};
+		location.href = "${pageContext.request.contextPath}/sale/group/view.do?boardNo="+${group.boardNo};
 	}	
 	
 	$('#btnSubmit').click(function(){
