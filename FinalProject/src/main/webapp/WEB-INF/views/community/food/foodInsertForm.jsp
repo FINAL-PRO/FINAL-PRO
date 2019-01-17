@@ -328,7 +328,8 @@
 				                            </script>
 									</div>
 									<div class="bSaveBox">
-										<input type="submit" class="btn btn-save btn-sm" value="Save">
+										<input type="submit" class="btn dc-btn" value="확인">
+										<button class="btn dc-btn" id="btn_back" onclick="back();">취소</button>
 									</div>
 								</div>
 								<script>

@@ -200,13 +200,23 @@ hr {
 						<div class="dc-content-box">
 							<div id="container2">
 								<div class="free_top">
-									<div class="category1">
-										<select class="form-control" id="tList"> 
-											<option value="" selected disabled hidden>정렬</option>
-											<option value="1">최신 순 정렬</option>
-											<option value="2">댓글 많은 순 정렬</option>
-											<option value="3">좋아요 순 정렬</option>
-										</select>
+									<div class="form-inline">
+										<div style="width:50%">
+											<select class="form-control" id="tList"> 
+												<option value="" selected disabled hidden>정렬</option>
+												<option value="1">최신 순 정렬</option>
+												<option value="2">댓글 많은 순 정렬</option>
+												<option value="3">좋아요 순 정렬</option>
+											</select>
+										</div>
+										
+										<div style="width:50%">
+											<c:if test="${!empty member}">
+												<div class="free_btn">
+													<input type="button" class="btn dc-btn dc-btn-right" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/free/freeInsertForm.do'" />
+												</div>
+											</c:if>
+										</div>
 									</div>
 									<script>
 									
@@ -217,11 +227,7 @@ hr {
 									});
 									
 									</script>
-									<c:if test="${!empty member}">
-									<div class="free_btn">
-										<input type="button" class="btn free_btn2 btn-sm" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/free/freeInsertForm.do'" />
-									</div>
-									</c:if>
+
 								</div>
 								<div class="articlelist">
 									<ol class="group"><br><br>

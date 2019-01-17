@@ -25,10 +25,10 @@
 				<div class="dc-content">
 					<div class="dc-content-title">
 						<c:if test="${region.no != null }">
-							<span class="dc-title-text">글 수정</span>
+							<span class="dc-title-text">정보</span>
 						</c:if>
 						<c:if test="${region.no == null }">
-							<span class="dc-title-text">글 쓰기</span>
+							<span class="dc-title-text">정보</span>
 						</c:if>
 					</div>
 					<div class="dc-content-box">

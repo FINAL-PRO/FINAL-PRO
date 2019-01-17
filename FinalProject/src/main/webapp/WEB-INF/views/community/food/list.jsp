@@ -187,13 +187,20 @@ p.fprofile>img.fpicture {
 						<div class="dc-content-box">
 							<div id="container2">
 								<div class="food_top">
-									<div class="category1">
-										<select class="form-control input-sm" id="tList"> 
-											<option value="" selected disabled hidden>정렬</option>
-											<option value="1">최신 순 정렬</option>
-											<option value="2">댓글 많은 순 정렬</option>
-											<option value="3">좋아요 순 정렬</option>
-										</select>
+									<div class="form-inline">
+										<div style="width:50%">
+											<select class="form-control input-sm" id="tList"> 
+												<option value="" selected disabled hidden>정렬</option>
+												<option value="1">최신 순 정렬</option>
+												<option value="2">댓글 많은 순 정렬</option>
+												<option value="3">좋아요 순 정렬</option>
+											</select>
+										</div>
+										<div style="width:50%">
+											<div class="food_btn">
+												<input class="btn dc-btn dc-btn-right" type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/food/foodInsertForm.do'" />
+											</div>
+										</div>
 									</div>
 									<script>
 									
@@ -204,9 +211,7 @@ p.fprofile>img.fpicture {
 									});
 									
 									</script>
-									<div class="food_btn">
-										<input class="btn food_btn2 btn-sm" type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/food/foodInsertForm.do'" />
-									</div>
+
 								</div>
 								<div class="articlelist">
 									<ol class="group"><br><br>
