@@ -33,7 +33,7 @@ public class SearchController {
 	
 				String resultContent = "";
 				String originContent = searchResultList.get(i).getContent();	
-				/*System.out.println("#####originContent" + i + " : " + originContent);*/				
+				/*System.out.println("#####originContent" + i + " : " + originContent);	*/		
 				
 				if(originContent.contains("<p>")) {
 					
@@ -44,12 +44,22 @@ public class SearchController {
 					while(matcher.find()) {
 						resultContent = matcher.replaceAll("");
 					}
-				} else {
+					
+				} else if(originContent.contains("&lt;p&gt;")){
+					String patterString = "(&lt;img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*&gt;|&lt;p&gt;|&lt;/p&gt;)";	
+					Pattern pattern = Pattern.compile(patterString);	
+					Matcher matcher = pattern.matcher(originContent);
+						
+					while(matcher.find()) {
+						resultContent = matcher.replaceAll("");
+					}
+					
+				}else {
 					resultContent = originContent;
 				}
 	
 				searchResultList.get(i).setContent(resultContent);
-				/*System.out.println("#####" + i + " : " + searchResultList.get(i).getContent());	*/	
+				/*System.out.println("#####" + i + " : " + searchResultList.get(i).getContent());*/
 			}
 								
 		} else {

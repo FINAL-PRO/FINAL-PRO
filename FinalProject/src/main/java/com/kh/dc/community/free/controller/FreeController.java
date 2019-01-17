@@ -69,18 +69,7 @@ public class FreeController {
 	public void freeInsertForm() {
 		
 	}
-	
-	/*
-	@RequestMapping("community/free/freeInsertFormEnd.do")
-	public String insertFree(Board board) {
-		
-		System.out.println("받아온 정보 : " + board);
-		
-		int result = freeService.insertFree(board);
-		System.out.println("insert 결과 : " + result);
-		
-		return "redirect:/community/free/list.do";
-	}*/
+
 	
 	@RequestMapping("community/free/freeInsertFormEnd.do")
 	public String insertFree(Board board,  Model model) {
