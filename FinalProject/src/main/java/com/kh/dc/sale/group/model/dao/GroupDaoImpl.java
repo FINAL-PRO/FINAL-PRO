@@ -18,10 +18,10 @@ public class GroupDaoImpl implements GroupDao {
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<Map<String, String>> selectGroupList(int cPage, int numPerPage) {
+	public List<Map<String, String>> selectGroupList(int cPage, int numPerPage, int locationNo) {
 		
 		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
-		return sqlSession.selectList("group_mapper.selectGroupList", null, rowBounds);
+		return sqlSession.selectList("group_mapper.selectGroupList", locationNo, rowBounds);
 	}
 
 	@Override
