@@ -22,7 +22,7 @@
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-						<h1>업체 상세보기</h1>
+						<span class="dc-title-text">제휴</span>
 					</div>
 					<div class="dc-content-box">
 						<form action="${pageContext.request.contextPath}/business/partnership/update/view.do">

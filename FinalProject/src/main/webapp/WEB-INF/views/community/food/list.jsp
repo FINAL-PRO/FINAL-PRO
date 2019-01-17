@@ -13,7 +13,6 @@
 
 .category1 {
 	float: left;
-	padding-top: 10px;
 	padding-left: 20px;
 }
 
@@ -179,13 +178,13 @@ p.profile>img.picture {
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>맛집게시판</h1>
+							<span class="dc-title-text">맛집게시판</span>
 						</div>
 						<div class="dc-content-box">
 							<div id="container2">
 								<div class="food_top">
 									<div class="category1">
-										<select id="tList"> 
+										<select class="form-control input-sm" id="tList"> 
 											<option value="" selected disabled hidden>정렬</option>
 											<option value="1">최신 순 정렬</option>
 											<option value="2">댓글 많은 순 정렬</option>

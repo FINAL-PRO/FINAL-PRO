@@ -22,6 +22,7 @@ import com.kh.dc.community.food.model.service.FoodService;
 import com.kh.dc.community.food.model.vo.Food;
 import com.kh.dc.community.food.model.vo.FoodList;
 import com.kh.dc.community.food.model.vo.FoodPoint;
+import com.kh.dc.member.model.vo.Member;
 
 @Controller
 public class FoodController {
@@ -31,26 +32,28 @@ public class FoodController {
 	
 	@RequestMapping("community/food/list.do")
 	public String selectFoodList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, 
-			@RequestParam(value="tList", required=false, defaultValue="1") int tList, Model model, HttpServletRequest request) {
+			@RequestParam(value="tList", required=false, defaultValue="1") int tList, 
+			Model model, HttpServletRequest request, Member member) {
 		
 		int numberPage = 10; // 한 페이지당 게시글 수
+		int locationNo = member.getLocationNo();
 
 		ArrayList<Map<String, String>> flist = null;
 
 		System.out.println("tList:"+tList);
 		
 		if(tList == 1) {
-			flist = new ArrayList<Map<String, String>>(foodService.recentSort(cPage, numberPage));
+			flist = new ArrayList<Map<String, String>>(foodService.recentSort(cPage, numberPage, locationNo));
 		}else if(tList == 2){
-			flist = new ArrayList<Map<String, String>>(foodService.commentSort(cPage, numberPage));
+			flist = new ArrayList<Map<String, String>>(foodService.commentSort(cPage, numberPage, locationNo));
 		}else if(tList == 3){
-			flist = new ArrayList<Map<String, String>>(foodService.likeSort(cPage, numberPage));
+			flist = new ArrayList<Map<String, String>>(foodService.likeSort(cPage, numberPage, locationNo));
 		}
 		
 		System.out.println("flist: "+flist);
 		
 		// 2. 전체 게시글 개수 가져오기
-		int totalContents = foodService.selectFoodTotalContents();
+		int totalContents = foodService.selectFoodTotalContents(locationNo);
 		
 		// 3. 페이지 계산 후 작성할 HTML 추가
 		String pageBar = Utils.getPageBar(totalContents, cPage, numberPage, "list.do");
