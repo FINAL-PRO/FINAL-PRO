@@ -120,6 +120,8 @@
 
 <!-------------------- Script -------------------->
 <script>
+	
+	var priceChk = false;
 
 	$('#summernote').summernote({
 		height : 500,
@@ -183,9 +185,7 @@
 	
 	// 폼 미입력시 입력하라는 알림창 띄움
 	function submitForm() {
-		if($('input[name="memberNo"]').val() == 0 ) {
-			alert("로그인이 필요한 기능입니다.");
-		} else if($('input[name="title"]').val() == "" ) {
+		if($('input[name="title"]').val() == "" ) {
 			alert("제목을 입력해 주세요.");
 		} else if ($('input[name="goodsPicture"]').val() == "" ) {
 			alert("물품 사진을 등록해주세요.");

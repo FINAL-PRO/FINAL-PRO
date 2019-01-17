@@ -8,7 +8,7 @@ import com.kh.dc.sale.used.model.vo.Used;
 
 public interface UsedService {
 
-	List<Map<String, String>> selectUsedList(int cPage, int numPerPage);
+	List<Map<String, String>> selectUsedList(int cPage, int numPerPage, int locationNo);
 	
 	int selectUsedTotalContents();
 	

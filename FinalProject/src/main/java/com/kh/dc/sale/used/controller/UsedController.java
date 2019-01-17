@@ -9,11 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.dc.common.util.Utils;
+import com.kh.dc.member.model.vo.Member;
 import com.kh.dc.sale.used.model.service.UsedService;
 import com.kh.dc.sale.used.model.vo.Used;
 
+@SessionAttributes(value= {"member"})
 @Controller
 public class UsedController {
 
@@ -21,14 +24,15 @@ public class UsedController {
 	private UsedService usedService;
 
 	@RequestMapping("sale/used/list.do")
-	public String selectUsedList(Model model, 
+	public String selectUsedList(Model model, Member member,
 			@RequestParam(value="cPage", required=false, defaultValue="1") int cPage) {
 		
 		int numPerPage = 10; // 한 페이지당 게시글 수
+		int locationNo = member.getLocationNo();
 		
 		// 1. 현재 페이지 게시글 목록 가져오기
 		ArrayList<Map<String, String>> list = 
-				new ArrayList<Map<String, String>>(usedService.selectUsedList(cPage, numPerPage));
+				new ArrayList<Map<String, String>>(usedService.selectUsedList(cPage, numPerPage, locationNo));
 		
 		// 2. 전체 게시글 개수 가져오기
 		int totalContents = usedService.selectUsedTotalContents();

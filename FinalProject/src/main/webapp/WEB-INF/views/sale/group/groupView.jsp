@@ -72,7 +72,7 @@
 	</div>
 	<div class="col-md-2">
 		<c:if test="${!empty member and member.no ne group.memberNo}">
-		<input type="button" id="btnApply" value="참여신청" onClick="switchGroup(this);"/>
+		<input type="button" class="btn btnGroup" id="btnApply" value="참여신청" onClick="switchGroup(this);"/>
 		</c:if>
 	</div>
 </div>

@@ -32,9 +32,7 @@ public class GroupServiceImpl implements GroupService {
 	public Group selectOneGroup(int boardNo) {
 		
 		Group group = groupDao.selectOneGroup(boardNo);
-		
-		System.out.println("카운트,,증가,,,,,,,,,,,,,~~~~~~~~~~~~~~~~");
-		
+	
 		if(group != null) groupDao.updateViewCount(boardNo);
 		
 		return group;

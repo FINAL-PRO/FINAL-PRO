@@ -150,7 +150,11 @@
 	}
 	
 	function updateUsed() {
-		location.href = "${pageContext.request.contextPath}/sale/used/updateForm.do?boardNo="+${used.boardNo};
+		if('${used.status}' == '판매완료') {
+			alert("판매완료 처리된 글은 수정할 수 없습니다.");
+		} else {
+			location.href = "${pageContext.request.contextPath}/sale/used/updateForm.do?boardNo="+${used.boardNo};
+		}
 	}
 	
 	function deleteUsed() {
@@ -206,7 +210,7 @@
 		if(status == "판매완료") {
 			alert("이미 판매완료 처리된 상태입니다.");
 			
-		} else if(confirm("판매완료 처리하시겠습니까? 판매완료 처리 후 철회하실 수 없으니 신중히 선택해 주세요!")) {
+		} else if(confirm("판매완료 처리하시겠습니까? 판매완료 처리 후 철회하실 수 없으니 신중히 선택해 주세요! 판매완료 처리 후에는 글을 수정할 수 없습니다.")) {
 			$.ajax({
 	        	data : { usedNo : "${used.no}", status : "USED002" },
 				url : "uStatusUpdate.do",
