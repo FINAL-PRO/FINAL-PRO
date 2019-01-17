@@ -69,7 +69,7 @@
 												</div>
 												<div class="dc-house-description">
 													<strong class="name"> 
-														<span>${house.title}</span>
+														<span>${fn:substring(house.title, 0, 10)}..</span>
 													</strong>
 													<ul>
 														<li>
@@ -78,8 +78,8 @@
 																<span>${house.area } ㎡</span> <br>
 															</strong>
 															<strong>
-																<span>매매가 </span> :
-																<span>${house.minprice} &nbsp;원</span> <br> 
+																<span>가격 </span> :
+																<span><fmt:formatNumber value="${house.minprice }" pattern="#,###" />원</span> <br> 
 																<%-- <span>${house.hType} &nbsp;/&nbsp; ${house.dealType}</span> --%>
 															</strong>
 														</li>
