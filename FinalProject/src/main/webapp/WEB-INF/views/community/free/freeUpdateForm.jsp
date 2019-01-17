@@ -49,12 +49,12 @@
 								<form name="boardFrm" action="${pageContext.request.contextPath}/community/free/freeUpdateFormEnd.do?no=${board.no}" method="post">
 									<div>
 										<b>글쓰기</b>
-										<input type="hidden" id="bno" name="bno" value="${board.no}" readonly="readonly" />
+										<input type="hidden" class="form-control" id="bno" name="bno" value="${board.no}" readonly="readonly" />
 									</div>
 									<div>
 										<div>제목</div>
 											<div>
-												<input type="text" name="title" id="title" value="${board.title}" style="width: 100%;" required>
+												<input type="text" class="form-control" name="title" id="title" value="${board.title}" style="width: 100%;" required>
 											</div>
 										</div>
 									<div>
