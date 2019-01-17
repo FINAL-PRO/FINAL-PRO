@@ -14,7 +14,7 @@
 		    WHEN 'BOARD006' THEN '구인구직'
 		    WHEN 'BOARD007' THEN '지역정보'
 		    ELSE '기타' END BOARDTYPE
-		FROM DC_BOARD_TB B WHERE STATUS = 'BSTATUS004' AND ROWNUM <![CDATA[ <= 5 ORDER BY NO ]]>
+		FROM DC_BOARD_TB B WHERE STATUS = 'BSTATUS004' AND ROWNUM <![CDATA[ <= 5 ORDER BY NO DESC ]]>
 	</select>
 	
 	<resultMap type="boardList" id="resultBoardList">
