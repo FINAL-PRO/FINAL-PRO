@@ -43,7 +43,7 @@
 						            <tr style="background-color:#FFFFFF; color:gray;">
 						                <th scope="row"> ${bo.index + 1} </th>
 						                <td>${board.boardType}</td>
-						                <td>
+						                <td style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
 						                <c:choose>
 						                	<c:when test = "${board.boardType eq '자유게시판'}">
 						                	<a href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${board.no}">${board.title}</a>
@@ -107,7 +107,7 @@
 						            	<tr style="background-color:#FFFFFF; color:gray;">				            	
 						                <th scope="row"> ${co.index + 1}</th>
 						                <td>${comment.boardType}</td>
-						                <td>
+						                <td style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
 						                <c:choose>
 						                	<c:when test = "${comment.boardType eq '자유게시판'}">
 						                	<a href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${comment.boardNo}">${comment.boardTitle}</a>

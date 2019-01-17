@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .resultTitle {
-	font-size: 20px;
+	font-size: 18px;
 	color:darkgreen;
 	text-decoration: underline;
 }
@@ -18,8 +18,4 @@
 
 #resultWriteDate {
 	color: gray;
-}
-
-#result{
-	
 }
