@@ -107,7 +107,8 @@
 	</update>
 	
 	<select id="selectMainUsedList" resultMap="resultUsed">
-	 	SELECT * FROM DC_BOARD_USED_VIEW
+	 	SELECT * FROM DC_BOARD_USED_VIEW WHERE STATUS='BSTATUS001'
+		AND ROWNUM <![CDATA[ <= 8 ORDER BY NO DESC ]]>
 	</select>
 
 

@@ -242,7 +242,7 @@ hr {
 								    <div class="container3">
 								        <c:import url="../../common/comment.jsp" />
 									</div>
-									<button class="btn btn_back btn-sm" id="btn_back">Back</button> 
+									<button class="btn btn_back btn-sm" id="btn_back">목록</button> 
 									<script>
 					                    $("#btn_back").click(function(){
 					                    	boardFrm.action="${pageContext.request.contextPath}/community/notice/list.do"

@@ -129,11 +129,11 @@
 													<div class="main-img-div">
 														<a href="${pageContext.request.contextPath}/sale/group/view.do?boardNo=${item.boardNo}">
 															<span>
-																<img src="${item.goodsPicture}" width="190" />
+																<img src="${item.goodsPicture}" width="190px" height="190px"/>
 															</span>
 															<div class="img-text">
 																<strong>${item.title}</strong><br />
-																<span>${item.goodsCategory }</span>
+																<span>${item.goodsName }</span>
 															</div>
 													</a></div>
 												</c:forEach>
@@ -173,11 +173,11 @@
 													<div class="main-img-div">
 														<a href="${pageContext.request.contextPath}/sale/used/view.do?boardNo=${item.boardNo}">
 															<span>
-																<img src="${item.goodsPicture}" width="190" />
+																<img src="${item.goodsPicture}" width="190px" height="190px"/>
 															</span>
 															<div class="img-text">
 																<strong>${item.title}</strong><br />
-																<span>${item.goodsCategory }</span>
+																<span>${item.goodsName }</span>
 															</div>
 													</a></div>
 												</c:forEach>
@@ -239,31 +239,7 @@
 								</div>
 								
 							</div>
-						
-						<div class="dc-content-box">
-							<div class="dc-con-title">
-								<h4>
-									<span class="board-title">테스트 게시판</span>
-								</h4>							
-							</div>
-							
-							<div class="dc-con-content">
-								<div class="dc-tb">
-									<div class="dc-tb-head">
-										<div class="dc-tb-row">
-											<!-- head -->
-										</div>										
-									</div>
-									<div class="dc-tb-body">
-										<c:forEach begin="1" end="10">
-											<div class="dc-tb-row">
-												<a href="#">● <span><strong>[공지]</strong> 여러분 오늘 미세먼지가 매우 심합니다. 아이들 외출 자제해주세요. 좋은하루 되세요 ^_____^</span></a>
-											</div>
-										</c:forEach>
-									</div>
-								</div>							
-							</div>
-						</div>
+
 					</div>
 				</div>
 				

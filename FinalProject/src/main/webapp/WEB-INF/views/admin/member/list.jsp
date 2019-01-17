@@ -22,11 +22,9 @@
 			<div class="section-center">
 				<div class="dc-content">
 					<div class="dc-content-title">
-						<div>
-							<span class="dc-list-title">전체 회원 리스트</span>
-						</div>
-						<br />
-						
+						<span class="dc-title-text">전체 회원 리스트</span>
+					</div>
+					<div class="dc-content-box">
 						<div class="form-inline">
 							<select class="form-control" id="authNo">
 								<c:forEach items="${memberAuthList}" var="auth">
@@ -40,16 +38,14 @@
 								</c:forEach>
 							</select>
 						</div>
-					</div>
-					<div class="dc-content-box">
+						<br />
+					
 						<table class="table">
-							<thead>
+							<thead class="listcol" style="border-color: white;  color: gray;">   
 								<th>#</th>
 								<th>이름</th>
 								<th>가입일</th>
 								<th>상태</th>
-							</thead>
-							<tbody>
 								<c:if test="${!empty memberList }">
 									<c:forEach var="member" items="${memberList}">
 										<tr>
@@ -74,15 +70,11 @@
 									</c:forEach>
 								</c:if>
 								<c:if test="${empty memberList }">
-									<tr>
-										<td colspan="4">
-											<div class="dc-none-data">
-												<span class="dc-none-data-text">데이터가 없습니다.</span>
-											</div>
-										</td>
-									</tr>
+										<tr style="background-color:#FFFFFF; color:gray;">
+						                	<th colspan="4" style="width:auto; text-align:center;">작성된 게시물이 없습니다.</th>						               
+						            	</tr>
 								</c:if>
-							</tbody>
+							</thead>
 						</table>
 						<button class="btn dc-btn" onclick="goAdminIndex();">전체 목록</button>
 					</div>
