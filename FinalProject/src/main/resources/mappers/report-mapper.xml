@@ -2,19 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="report_mapper">
 
-	<select id="likeCount" resultType="_int" parameterType="like">
-		SELECT NVL(COUNT(*), 0) 
-		FROM DC_LIKE_TB
-		WHERE BOARDNO = #{boardNo}
-		AND MEMBERNO = #{memberNo}
-	</select>
- 
 	<insert id="reportInsert" parameterType="Report">
 		INSERT INTO DC_REPORT_TB VALUES (SEQ_REPORT.NEXTVAL, #{boardNo}, #{rcNo}, #{memberNo}, SYSDATE, 'STATUS006')
 	</insert>
-
-	<delete id="likeDelete" parameterType="like">
-		DELETE FROM DC_LIKE_TB WHERE BOARDNO = #{boardNo} AND MEMBERNO = #{memberNo}
-	</delete>
 
 </mapper>

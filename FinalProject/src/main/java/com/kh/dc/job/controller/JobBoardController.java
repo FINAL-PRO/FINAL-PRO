@@ -120,18 +120,22 @@ public class JobBoardController {
 	public String selectOneBoard(@RequestParam int no, Model model) {
 		JobBoard jobBoard = jobBoardService.selectOneJobBoard(no);
 		
+		System.out.println("jobboard view no : " + no);
+		
 		if(jobBoard != null) jobBoardService.updateViewCount(jobBoard.getNo());
 		
 		model.addAttribute("jobBoard", jobBoard);
-		model.addAttribute("bno", jobBoard.getNo());
+		model.addAttribute("bno", jobBoard.getBoardNo());
 		//model.addAttribute("bno", jobBoard.getBoardNo());
+		
+		System.out.println("jobboard view jobBoard : " + jobBoard);
 		
 		return "job/jobBoard/jobBoardDetail";
 	}
 	
 	@RequestMapping("job/jobBoard/insertForm.do")
-	public void jobBoardInsertForm () {
-		
+	public String jobBoardInsertForm () {
+		return "job/jobBoard/jobBoardInsertForm";
 	}
 	
 	@RequestMapping(value="job/jobBoard/insert.do", method=RequestMethod.POST)
@@ -144,14 +148,14 @@ public class JobBoardController {
 		if(result > 0) {
 			msg = "게시글 등록 성공!";
 			//loc = "/jobBoard/jobBoardDetail.do?no="+ jobBoard.getBoardNo();
-			loc = "/jobBoard/view.do?no="+ jobBoard.getNo();
+			loc = "/jobBoard/list.do";
 		} else {
 			msg = "게시글 등록 실패!";
 		}
 		model.addAttribute("loc", loc).addAttribute("msg", msg);
 		
 //		return "redirect:/job/jobBoard/jobBoardDetail.do?no="+ jobBoard.getBoardNo();
-		return "/common/msg";
+		return "redirect:/job/jobBoard/list.do";
 	}
 
 	@RequestMapping("/job/jobBoard/comPop.do")

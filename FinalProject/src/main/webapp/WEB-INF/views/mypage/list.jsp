@@ -41,7 +41,7 @@
 					        		<c:if test="${!empty boardList}" >
 						            <c:forEach items="${boardList}" var="board" varStatus="bo">
 						            <tr style="background-color:#FFFFFF; color:gray;">
-						                <th scope="row"> ${bo.index + 1} </th>
+						                <th scope="row"> ${fn:length(boardList)-bo.index}</th>
 						                <td>${board.boardType}</td>
 						                <td style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
 						                <c:choose>
@@ -105,7 +105,7 @@
 						            <c:if test="${!empty commentList}" >
 						            <c:forEach items="${commentList}" var="comment" varStatus="co">						            
 						            	<tr style="background-color:#FFFFFF; color:gray;">				            	
-						                <th scope="row"> ${co.index + 1}</th>
+						                <th scope="row"> ${fn:length(commentList)-co.index}</th>
 						                <td>${comment.boardType}</td>
 						                <td style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
 						                <c:choose>
@@ -121,6 +121,9 @@
 								        	 <c:when test = "${comment.boardType eq '중고거래'}">
 								          	<a href="${pageContext.request.contextPath}/sale/used/view.do?boardNo=${comment.boardNo}">${comment.boardTitle}</a>
 								         	</c:when>
+								         	<c:when test = "${comment.boardType eq '지역정보'}">
+								          	<a href="${pageContext.request.contextPath}/info/region/view.do?no=${comment.boardNo}">${comment.boardTitle}</a>
+								        	 </c:when>
 								         	<c:when test = "${comment.boardType eq '부동산'}">
 								          	<a href="${pageContext.request.contextPath}/info/house/view.do?no=${comment.boardNo}">${comment.boardTitle}</a>
 								        	 </c:when>
@@ -129,8 +132,9 @@
 								         	</c:when>							                	
 						                </c:choose>
 						                </td>
-						                <td><a href="#" onclick="goComment('${comment.boardType}', ${comment.boardNo}, ${comment.no})" id="commentContent"
-						                >${comment.content}</a><input type="hidden" id="cContent" value="${comment.content}"/> </td>
+						                <td>
+						                	<a href="#" onclick="goComment('${comment.boardType}', ${comment.boardNo}, ${comment.no})" id="commentContent">${comment.content}</a>
+						                	<!-- <input type="hidden" id="cContent" value=""/></td> -->
 						                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${comment.writeDate}" /></td>
 						                    
 						            	</tr>
@@ -190,12 +194,6 @@
 			
 		}
 		
- 		$(document).ready(function(){
-			
-			var content = $('#cContent').val();			
-			$('#commentContent').text(content.substring(0, 10) + '...');
-			
-		}) 
 		
 
 	</script>

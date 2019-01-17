@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>구인구직 게시판 작성페이지</title>
+	<title>동커</title>
 	<c:import url="../../common/header.jsp"/>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jobBoard/jobBoardInsCss.css" />
 </head>
@@ -138,7 +138,10 @@
 					<tr>
 						<td colspan="2">
 							<textarea id="summernote" name="content"></textarea> <br />
-							<button class="btn dc-btn dc-btn-right" type="submit">게시글 등록</button>
+							<div class="dc-btn-right">
+								<button class="btn dc-btn" type="submit">확인</button>
+								<button class="btn dc-btn" type="reset" onclick="historyGoBack();">취소</button>
+							</div>
 						</td>
 					</tr>	
 					</tbody>
@@ -159,7 +162,7 @@
 <script>
 	function selectCompany() {
 		window.name = "jobBoardInsertForm";	
-		var childWindow = window.open("jobBoardComPop.do", "comPop", "width=500, height=400");
+		var childWindow = window.open("comPop.do", "comPop", "width=500, height=400");
 	}
 	$('#summernote').summernote({
 		height : 500,

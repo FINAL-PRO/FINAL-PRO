@@ -24,7 +24,7 @@ public class Scheduler {
 	
 	/*광고 상태 변경*/
 	/*매일 0시 0분 0초 실행*/
-	@Scheduled(cron="0 0 0 * * *")
+	/*@Scheduled(cron="0 0 0 * * *")*/
 	public void adStatusChange() {
 		
 		int start = sqlSession.update("scheduler_mapper.adStatusStart");
@@ -34,6 +34,14 @@ public class Scheduler {
 		System.out.println("광고 스케줄러 실행 : end : " + end);
 	}
     
+	// (크론 = 초 분 시 일 월 요일)
+	/*게시글 삭제 */
+	/*매시 1분 0초 실행*/
+	/*@Scheduled(cron="0 0 * * * *")*/
+	public void deletBoardList() {
+		
+	}
+	
 	@Scheduled(cron="5 0 0 * * *")
 	public void checkGroupDday() {
 		

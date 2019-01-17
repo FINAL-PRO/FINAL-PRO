@@ -190,7 +190,7 @@
 	 	게시글번호 / 게시글제목 / 작성일 / 게시글내용 / 조회수 / 게시판유형 / 게시글상태 / 회원번호 / 자유게시판 카테고리 
 		-->
 		INSERT INTO DC_BOARD_TB VALUES(
-			SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, 'BOARD006', 'STATUS001', #{memberNo}, NULL
+			SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, 'BOARD006', 'BSTATUS001', #{memberNo}, NULL
 		)
 		<selectKey keyProperty="boardNo" resultType="_int" order="AFTER"> 
 			SELECT SEQ_BOARD.CURRVAL FROM DUAL

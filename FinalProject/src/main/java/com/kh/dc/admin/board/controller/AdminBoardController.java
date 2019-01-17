@@ -35,18 +35,18 @@ public class AdminBoardController {
 		String boardUrl = null;
 		
 		switch (boardType) {
-			case "BOARD001": boardUrl = "community/free"; break;
-			case "BOARD002": boardUrl = "community/food"; break;
-			case "BOARD003": boardUrl = "sale/group"; break;
-			case "BOARD004": boardUrl = "sale/used"; break;
-			case "BOARD005": boardUrl = "info/house"; break;
-			case "BOARD006": boardUrl = "job/jobBoard"; break;
-			case "BOARD007": boardUrl = "info/region"; break;
+			case "BOARD001": boardUrl = "community/free/freeView.do?bno="; break;
+			case "BOARD002": boardUrl = "community/food/foodView.do?bno="; break;
+			case "BOARD003": boardUrl = "sale/group/view.do?boardNo="; break;
+			case "BOARD004": boardUrl = "sale/used/view.do?boardNo="; break;
+			case "BOARD005": boardUrl = "info/house/view.do?no="; break;
+			case "BOARD006": boardUrl = "job/jobBoard/view.do?no="; break;
+			case "BOARD007": boardUrl = "info/region/view.do?no="; break;
 			
 		}
 		
 		if(boardStatus.equals("BSTATUS004")) {
-			boardUrl = "community/notice";
+			boardUrl = "community/notice/noticeView.do?bno=";
 		}
 		
 		model.addAttribute("boardList", boardList);

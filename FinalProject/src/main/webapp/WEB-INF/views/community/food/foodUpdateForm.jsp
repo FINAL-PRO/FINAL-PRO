@@ -22,27 +22,30 @@
 }
 
 .bcategoryBox{
-	margin-top: 6px;
+	margin-top: 10px;
+	width: 200px;
+	display: inline-block;
 }
 
 .bscoreBox{
-	margin-top: 6px;
+	margin-top: 10px;
 }
 
 .bzipCodeBox{
-	margin-top: 6px;
+	margin-top: 10px;
+	display: inline-block;
 }
 
 .baddress1Box{
-	margin-top: 6px;
+	margin-top: 8px;
 }
 
 .baddress2Box{
-	margin-top: 6px;
+	margin-top: 8px;
 }
 
 .bcontentBox{
-	margin-top: 7px;
+	margin-top: 10px;
 }
 
 .bSaveBox{
@@ -111,7 +114,7 @@
 									<input type="hidden" id="fno" name="fno" value="${foodList.fno}" readonly="readonly" />
 									<input type="hidden" id="pno" name="pno" value="${foodList.pno}" readonly="readonly"/>
 									<div class="btitleBox">
-										<input type="text" name="title" id="title" style="width: 100%;" value="${foodList.title}" required>
+										<input type="text" class="form-control" name="title" id="title" style="width: 100%;" value="${foodList.title}" required>
 									</div>
 									<input type="hidden" id="mno" name="memberNo" value="${member.no}" required>
 									
@@ -123,8 +126,8 @@
 										</div> 
 										<div>
 											<div class="bcategoryBox">
-												<div style="display:inline-block;">카테고리</div>
-												<select id="category" name="category"> 
+												<!-- <div style="display:inline-block;">카테고리</div> -->
+												<select id="category" name="category" class="form-control"> 
 													<option value="FOOD001">한식</option>
 													<option value="FOOD002">일식</option>
 													<option value="FOOD003">중식</option>
@@ -137,7 +140,7 @@
 											</div>
 									
 											<div class="bscoreBox">
-												<div style="display:inline-block; width:61px;"">평점</div>
+												<div style="display:inline-block; width:55px;">평점</div>
 												<div style="text-align:left; display:inline-block;">
 													<div class="starRev">
 													  <span class="starR on">1</span>
@@ -153,23 +156,23 @@
 											<div class="bzipCodeBox">
 												<div style="display:inline-block;">우편번호</div>
 												<div style="display:inline-block;">
-													<input type="text" id="zipCode" name="zipCode" style="width: 100px;" required>
-													<input type="button" id="ckZip" onclick="addrSearch();" value="검색"/>
-													<input type="text" id="address" name="address" value="${foodList.address}" />
+													<input type="text" class="form-control" id="zipCode" name="zipCode" style="width: 100px; display:inline-block;" required>
+													<input type="button" class="form-control" id="ckZip" onclick="addrSearch();" value="검색" style="width: 100px; display:inline-block;"/>
+													<input type="hidden" class="form-control" id="address" name="address" value="${foodList.address}" />
 												</div>
 											<div>
 											
 											<div class="baddress1Box">
-												<div style="display:inline-block; width:61px;">주소</div>
+												<div style="display:inline-block; width:54px;">주소</div>
 												<div style="text-align:left; display:inline-block;">
-													<input type="text" id="address1" name="address1" value="" style="width: 500px;" required>
+													<input type="text" id="address1" class="form-control" name="address1" value="" style="width: 500px;" required>
 												</div>
 											</div>
 											
 											<div class="baddress2Box">
 												<div style="display:inline-block;">상세주소</div>
 												<div style="text-align:left; display:inline-block;">
-													<input type="text" id="address2" name="address2" style="width: 500px;" required>
+													<input type="text" id="address2" class="form-control" name="address2" style="width: 500px;" required>
 												</div>
 											</div>	
 											<input type="hidden" id="address" name="address" />

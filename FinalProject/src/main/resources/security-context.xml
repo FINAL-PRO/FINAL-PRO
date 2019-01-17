@@ -60,9 +60,14 @@
 	<security:http security="none" pattern="/sale/used/delete.do" />
 	
 	<security:http security="none" pattern="/common/comment/commentUpdate.do" />
+	<security:http security="none" pattern="/job/jobBoard/insert.do" />
+	<security:http security="none" pattern="/job/jobBoard/update.do" />
+	
 	
 	<!-- 메시지 전송 -->
 	<security:http security="none" pattern="/message/messageInsert.do" />
+	<security:http security="none" pattern="/message/insert.do" />
+	
 	
 	<!-- 중복로그인 처리 -->
 	<security:http security="none" pattern="/login_duplicate.do" />
