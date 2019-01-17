@@ -26,6 +26,7 @@
 	width: 20px;
 	height: 20px;
 	vertical-align: top;
+	border-radius: 50px;
 }
 
 .fcount{
