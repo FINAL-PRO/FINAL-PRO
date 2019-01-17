@@ -35,19 +35,22 @@
 						        	<a class="resultTitle" href="${pageContext.request.contextPath}/community/free/freeView.do?bno=${result.no}">[${result.boardType}] ${result.title}</a>
 						        </c:when>
 								<c:when test = "${result.boardType eq '맛집'}">
-									<a class="resultTitle" href="#">[${result.boardType}] ${result.title}</a>
+									<a class="resultTitle" href="${pageContext.request.contextPath}/community/food/foodView.do?bno=${result.no}">[${result.boardType}] ${result.title}</a>
 								</c:when>
 								<c:when test = "${result.boardType eq '공동구매'}">
-									<a class="resultTitle" href="#">[${result.boardType}] ${result.title}</a>
+									<a class="resultTitle" href="${pageContext.request.contextPath}/sale/group/view.do?boardNo=${result.no}">[${result.boardType}] ${result.title}</a>
 								</c:when>
 								<c:when test = "${result.boardType eq '중고거래'}">
-									<a class="resultTitle" href="#">[${result.boardType}] ${result.title}</a>
+									<a class="resultTitle" href="${pageContext.request.contextPath}/sale/used/view.do?boardNo=${result.no}">[${result.boardType}] ${result.title}</a>
+								</c:when>
+								<c:when test = "${result.boardType eq '지역정보'}">
+									<a class="resultTitle" href="${pageContext.request.contextPath}/info/region/view.do?no=${result.no}">[${result.boardType}] ${result.title}</a>
 								</c:when>
 								<c:when test = "${result.boardType eq '부동산'}">
-									<a class="resultTitle" href="#">[${result.boardType}] ${result.title}</a>
+									<a class="resultTitle" href="${pageContext.request.contextPath}/info/house/view.do?no=${result.no}">[${result.boardType}] ${result.title}</a>
 								</c:when>
 								<c:when test = "${result.boardType eq '구인구직'}">
-									<a class="resultTitle" href="#">[${result.boardType}] ${result.title}</a>
+									<a class="resultTitle" href="${pageContext.request.contextPath}/job/jobBoard/jobBoardDetail.do?no=${result.no}">[${result.boardType}] ${result.title}</a>
 								</c:when>							                	
 							</c:choose>
 							<p id="resultContent">

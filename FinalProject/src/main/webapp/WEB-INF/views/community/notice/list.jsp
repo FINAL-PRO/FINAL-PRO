@@ -193,8 +193,10 @@ th, td {
 							            </c:forEach>
 							            </c:if>
 							              <c:if test="${empty nlist}"> 
-							              	<th colspan="5" style="width:auto; text-align:center;">작성된 게시물이 없습니다.</th>
-							              </c:if>
+							              	<tr style="background-color:#FFFFFF; color:gray;">
+						                		<th colspan="5" style="width:auto; text-align:center;">작성된 게시물이 없습니다.</th>						               
+						           			</tr>
+							              </c:if>							              							              
 							            </thead>
 						        	</table>
 						        	<br>
