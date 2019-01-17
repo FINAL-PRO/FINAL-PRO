@@ -8,6 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <style>
+
+.commentArea{
+	margin-top: 5px;
+}
 	
 .commentFrm{
  	padding: 15px;
@@ -18,13 +22,14 @@
 	width: 20px;
 	height: 20px;
 	vertical-align: top;
+	border-radius: 50px;
 }
 
 .Cnickname {
 	display: inline-block;
 	line-height: 20px;
 	color: #292929;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	white-space: nowrap;
 	overflow: hidden;
@@ -37,7 +42,7 @@
 	display: inline-block;
 	line-height: 20px;
 	color: #a6a6a6;
-	font-size: 12px;
+	font-size: 14px;
 }
 
 .form-control:focus {
@@ -98,6 +103,7 @@
 
 .input-group{
 	padding: 5px;
+	margin: 5px;
 }
 
 </style>
@@ -254,7 +260,7 @@
 			
 			if(event.keyCode == 13){
 				commentUpdateProc(cno);  // 실행할 이벤트
-				alert("이게머야");
+				alert("등록버튼을 눌러 등록해주세요");
 		    }
 		}
 		

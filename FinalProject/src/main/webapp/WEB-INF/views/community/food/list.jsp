@@ -145,6 +145,7 @@ p.fprofile>img.fpicture {
 	width: 20px;
 	height: 20px;
 	display: inline-block;
+	border-radius: 50px;
 }
 
 .fprofile{

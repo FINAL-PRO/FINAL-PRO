@@ -16,25 +16,14 @@
 	margin: 20px;
 }
 
-.table-div {
-	display: table;
+.btn_board_save{
+	background: rgb(171, 187, 129);
+    color: white;
 }
 
-.tr-div {
-	display: table-row;
-	text-align: center;
-}
-
-.td-div {
-	display: table-cell;
-	text-align: center;
-	vertical-align: middle;
-	padding: 5px;
-}
-
-.th-div {
-	display: table-header-group;
-	text-align: center;
+.btn_board_back{
+	background: rgb(171, 187, 129);
+    color: white;
 }
 </style>
 
@@ -52,75 +41,92 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<h1>자유게시판</h1>
+							<h1>공지사항</h1>
 						</div>
 						<div class="dc-content-box">
 							<div class="board_area">
-								<form name="boardFrm"
-									action="${pageContext.request.contextPath}/community/notice/noticeUpdateFormEnd.do?no=${board.no}"
-									method="post">
+								<form name="boardFrm" action="${pageContext.request.contextPath}/community/notice/noticeUpdateFormEnd.do?no=${board.no}" method="post">
 									<div>
-										<b>글쓰기</b> <input type="text" id="bno" name="bno"
-											value="${board.no}" readonly="readonly" />
+										<b>글쓰기</b>
+										<input type="hidden" class="form-control" id="bno" name="bno" value="${board.no}" readonly="readonly" />
 									</div>
-									<div class="table-div">
-										<br>
-										<div class="tr-div">
-											<div class="td-div">제목</div>
-											<div class="td-div">
-												<textarea name="title" rows="1" cols="105"
-													style="resize: none;">${board.title}</textarea>
-											</div>
-										</div>
-										<div class="tr-div">
-											<div class="td-div">내용</div>
-											<div class="td-div">
-												<%-- <div id="summernote">${board.content}</div> --%>
-												<%-- <div id="summernote" style="resize: none;" value="${board.content}"></div> --%>
-												<textarea name="content" id="summernote"
-													class="form-control" rows="20" cols="70" required>${board.content}</textarea>
-												<script>
-													$(document)
-															.ready(
-																	function() {
-																		$(
-																				'#summernote')
-																				.summernote(
-																						{
-																							height : 300
-																						});
-																	});
-												</script>
-											</div>
-										</div>
-										<div class="tr-div">
-											<div class="td-div"></div>
-											<div class="td-div">
-												<button class="btn_board_save" id="btn_board_edit">Save</button>
-												<button class="btn_board_back" id="btn_board_back">Back</button>
-											</div>
-										</div>
+									<div>
+										<input type="text" class="form-control" name="title" id="title" value="${board.title}" style="width: 100%;" required>
+									<div>
+									<br>
+									<div>
+										<textarea name="content" id="summernote"
+											class="form-control" rows="20" cols="70" required>${board.content}</textarea>
 									</div>
 									<script>
-										$("#btn_board_save").click(function() {
-												boardFrm.action = "${pageContext.request.contextPath}/community/notice/noticeUpdateFormEnd.do?no=${board.no}"
-												boardFrm.submit();
-											});
-
-										$("#btn_board_back").click(function() {
-												boardFrm.action = "${pageContext.request.contextPath}/community/notice/list.do"
-												boardFrm.submit();
-											});
+									
+										$('#summernote').summernote({
+											minHeight : 300,
+		                            		maxHeight : 500,
+		                            		focus : true,
+		                            		callbacks : {
+		                            			onImageUpload : function(files) {
+		                            				for (var i = files.length - 1; i >= 0; i--) {
+		                            					sendFile(files[i]);
+		                            		}}},
+		                            		toolbar: [
+		                            		    // [groupName, [list of button]]
+		                            		    ['style', ['bold', 'italic', 'underline', 'clear']],
+		                            		    ['font', ['strikethrough', 'superscript', 'subscript']],
+		                            		    ['fontsize', ['fontsize']],
+		                            		    ['color', ['color']],
+		                            		    ['para', ['ul', 'ol', 'paragraph']],
+		                            		    ['height', ['height']]
+		                            		  ]
+		                            	});
+										
+										function sendFile(file) {
+		                            		var form_data = new FormData();
+		                            		form_data.append('file', file);
+	
+		                            		$.ajax({
+		                            			url : '${pageContext.request.contextPath}/common/summernote/convertImage.do',
+		                            			data : form_data,
+		                            			type : "POST",
+		                            			cache : false,
+		                            			contentType : false,
+		                            			enctype : 'multipart/form-data',
+		                            			processData : false,
+		                            			success : function(url) {
+		                            				$('#summernote').summernote('editor.insertImage', url);
+		                            				console.log("url: "+url);
+		                            			},
+		                            			error : function() {
+		                            				console.log("이미지 업로드 실패");
+		                            			}
+		                            		});
+		                            	}
+									
 									</script>
-								</form>
+								</div>
+									<div style="text-align: center; padding:10px;">
+										<button class="btn btn_board_save btn-sm" id="btn_board_edit">Save</button>
+										<button class="btn btn_board_back btn-sm" type="button" id="btn_board_back">Back</button>
+									</div>
+								</div>
+							</div>
+							<script>
+							 	$("#btn_board_save").click(function() {
+										location.href = "${pageContext.request.contextPath}/community/notice/noticeUpdateFormEnd.do?no=${board.no}"
+									}); 
+
+								$("#btn_board_back").click(function() {
+										location.href= "${pageContext.request.contextPath}/community/notice/list.do"
+									});
+							</script>
+							</form>
 							</div>
 						</div>
+				</div>
+					<div class="section-right">
+						<c:import url="../../common/rightSection.jsp" />
 					</div>
-				</div>
-
-				<div class="section-right">
-					<c:import url="../../common/rightSection.jsp" />
-				</div>
+			</div>
 			</section>
 			</main>
 		</div>

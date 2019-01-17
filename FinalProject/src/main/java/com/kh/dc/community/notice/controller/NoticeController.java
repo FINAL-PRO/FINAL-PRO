@@ -100,7 +100,7 @@ public class NoticeController {
 	public String noticeUpdate(Board board) {
 		
 		noticeService.noticeUpdate(board);
-		System.out.println("수정완료");
+		System.out.println("수정완료: "+board);
 		
 		return "redirect:/community/notice/list.do";
 	}

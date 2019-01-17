@@ -151,6 +151,18 @@
     margin-top: 5px;
 }
 
+#btn_board_edit{
+	background: rgb(171, 187, 129);
+    color: white;
+    cursor: pointer;
+}
+
+#btn_board_delete{
+	background: rgb(171, 187, 129);
+    color: white;
+    cursor: pointer;
+}
+
 </style>
 </head>
 <body>
@@ -187,20 +199,20 @@
 										<p class="ntext">${boardList.content}</p>
 										<div style="border: solid 0.5px lightgray"></div>
 										<div class="nstatus">
-											<c:if test="${boardList.memberName eq 'admin'}">
-												<button class="btn_board_edit" id="btn_board_edit">수정</button>
-												<button class="btn_board_delete" id="btn_board_delete">삭제</button>
+											<c:if test="${member.authNo eq 2}">
+												<button class="btn btn_board_edit btn-sm" id="btn_board_edit">수정</button>
+												<button class="btn btn_board_delete btn-sm" id="btn_board_delete">삭제</button>
 											</c:if>
 											<span class="commentcount">댓글: <span style="color:rgb(244, 126, 96);">${boardList.commentCount}</span></span>
 										</div>
 
 										<script>			
 				                      		$("#btn_board_edit").click(function(){
-				                      			location.href="${pageContext.request.contextPath}/community/notice/noticeUpdateForm.do?no=${board.no}"
+				                      			location.href="${pageContext.request.contextPath}/community/notice/noticeUpdateForm.do?bno=${boardList.no}"
 				                      		});
 				                      		
 				                      		$("#btn_board_delete").click(function(){
-				                      			location.href="${pageContext.request.contextPath}/community/notice/noticeDelete.do?no=${board.no}"
+				                      			location.href="${pageContext.request.contextPath}/community/notice/noticeDelete.do?bno=${boardList.no}"
 				                      		});
 				                          	
 				                       </script>
