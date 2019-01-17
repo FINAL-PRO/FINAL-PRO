@@ -7,7 +7,7 @@
 <html>
 <head>
 
-<title>조회</title>
+<title>동커</title>
 <c:import url="../../common/header.jsp" />
 
 </head>

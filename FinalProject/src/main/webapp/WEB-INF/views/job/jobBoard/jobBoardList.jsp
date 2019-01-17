@@ -8,7 +8,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>구인구직 게시판 목록</title>
+	<title>동커</title>
 	<c:import url="../../common/header.jsp"/>
 	
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/jobBoard/jobBoardListCss.css" />

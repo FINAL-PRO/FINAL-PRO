@@ -8,7 +8,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">	
-	<title>게시글 상세페이지</title>
+	<title>동커</title>
 	<c:import url="../../common/header.jsp"/>
 
 </head>
