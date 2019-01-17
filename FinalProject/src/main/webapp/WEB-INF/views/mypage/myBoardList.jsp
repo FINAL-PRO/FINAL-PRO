@@ -86,7 +86,7 @@
 					        
 
 					        
-					        <div class="commentList" style="width: 100%; min-height: 300px; margin: auto;">
+					        <%-- <div class="commentList" style="width: 100%; min-height: 300px; margin: auto;">
 					        	<label class="mypageListTitleLabel"># 내가 쓴 댓글</label>					        	
 					        	
 					        	
@@ -151,7 +151,7 @@
 					        	<br>
 					        	<c:out value="${commentPageBar}" escapeXml="false"/>				        	
 					        	
-					        </div>
+					        </div> --%>
 						</div>
 					</div>
 				</div>
@@ -164,39 +164,7 @@
 	</div>
 	<c:import url="../common/footer.jsp"/>
 	
-	<script type="text/javascript">		
-		function goComment(bType, bno, cno){
-			
-			var bType = bType;
-			var bno = bno;
-			var bno = bno;
-			
-			switch(bType){
-			case '자유게시판' : 
-				location.href="${pageContext.request.contextPath}/community/free/freeView.do?bno="+ bno+"#commentArea"+ cno;
-				break;
-			case '맛집' : 
-				location.href="${pageContext.request.contextPath}/community/food/foodView.do?bno="+ bno+"#commentArea"+ cno;
-				break;
-			case "공동구매" : 
-				location.href="${pageContext.request.contextPath}/sale/group/view.do?boardNo="+ bno+"#commentArea"+ cno;
-				break;
-			case "중고거래" : 
-				location.href="$${pageContext.request.contextPath}/sale/used/view.do?boardNo="+ bno+"#commentArea"+ cno;
-				break;
-			case "부동산" : 
-				location.href="${pageContext.request.contextPath}/info/house/view.do?no="+ bno+"#commentArea"+ cno;
-				break;
-			case "구인구직" : 
-				location.href="${pageContext.request.contextPath}/job/jobBoard/jobBoardDetail.do?no="+ bno+"#commentArea"+ cno;
-				break;			
-			}
-			
-		}
-		
-		
 
-	</script>
 
 </body>
 </html>

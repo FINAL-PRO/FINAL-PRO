@@ -15,7 +15,9 @@
 			<div class="" id="navbarNav" style="margin: auto;">
 					<a class="mypageMenuItem" href="${pageContext.request.contextPath}/member/memberView.do?no=${member.no}">내 정보 보기 </a>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a class="mypageMenuItem" href="${pageContext.request.contextPath}/mypage/list.do?no=${member.no}">내가 쓴 글/댓글 </a>
+					<a class="mypageMenuItem" href="${pageContext.request.contextPath}/mypage/myBoardList.do?no=${member.no}">내가 쓴 글 </a>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a class="mypageMenuItem" href="${pageContext.request.contextPath}/mypage/myCommentList.do?no=${member.no}">내가 쓴 댓글 </a>
 			</div>
 		</div>	
 	</div>
