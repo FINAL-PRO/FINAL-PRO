@@ -397,7 +397,6 @@ public class MemberController {
 		System.out.println("m : " + m);
 			
 		if(bcryptPasswordEncoder.matches(password, m.getPassword())) {
-			session.invalidate();
 			return 1;
 		}
 		
@@ -405,24 +404,17 @@ public class MemberController {
 	}
 
 	@RequestMapping("/member/memberDelete.do")
-	@ResponseBody
-	public Map<String, Object> memberDelete(@RequestParam int no) {		
-		
-		Map<String, Object> hmap = new HashMap<>();
+	public String memberDelete(HttpSession session, @RequestParam int no) {				
 		
 		int result = memberService.deleteMember(no);
 		
-		String msg = "";
-		
 		if(result > 0) {
-			msg = "회원 탈퇴가 성공하였습니다.";			
+			session.invalidate();
+			return "redirect:/";
 		} else {
-			System.out.println("회원 삭제 실패!");
-		}
+			return "member/memberUpdateView";
+		}		
 		
-		hmap.put("msg", msg);
-		
-		return hmap;
 		
 	}
 	

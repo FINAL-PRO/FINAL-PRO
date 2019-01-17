@@ -33,9 +33,9 @@
 									<span style="color:rgb(248, 178, 106);">내일</span> / 
 									<span style="color:rgb(244, 126, 96);">모레</span> 날씨</p>
 								<div class="currentWeather" style="width:100%;"> 
-									<div id="loadingTodayWeather"> 
+									<div id="loadingTodayWeather" style="padding-top: 20px;"> 
 										<h3 id="currentWeatherLabel">현재 날씨를 불러오는 중입니다.</h3>
-										<img class="loadingImg" alt="" src="${pageContext.request.contextPath}/resources/images/loading1.gif" />
+										<img src="${pageContext.request.contextPath}/resources/images/loading1.gif" style="height: 150px;"/>
 									</div>														
 								</div>
 								
@@ -45,9 +45,9 @@
 								<!-- 주간 날씨 부분 -->
 								<p style="margin: 0 0 0 10px; font-size:24px; border-bottom: 2px solid lightgray; font-weight: bold;"> 우리동네 주간 날씨</p>
 								<div class="weekWeather-container" style="display: inline-block; margin-top:10px; width: 100%">	
-									<div id="loadingWeekWeather">													
+									<div id="loadingWeekWeather" style="padding-top: 20px;">													
 										<h3 id="weekWeatherLabel">주간 날씨를 불러오는 중입니다.</h3>
-										<img class="loadingImg" src="${pageContext.request.contextPath}/resources/images/loading1.gif" />
+										<img src="${pageContext.request.contextPath}/resources/images/loading1.gif" style="height: 150px;"/>
 									 </div>										
 								</div>	
 								
@@ -104,7 +104,7 @@
 			url="http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1168064000";
 		</c:if> 
 
-		// 단기 예보(3시간별 오늘, 내일, 모레)
+ 		// 단기 예보(3시간별 오늘, 내일, 모레)
 		$.ajax({
 			crossOrigin: true,
 			url : url,

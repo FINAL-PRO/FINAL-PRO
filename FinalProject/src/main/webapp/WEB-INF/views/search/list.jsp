@@ -76,13 +76,18 @@
 						</script>
 						
 						<c:if test="${empty searchResultList}" >
-							<h4 style="margin: 30px 0px; font-weight: bold;">검색 결과가 없습니다.</h4>
-							<p>
-								단어의 철자가 정확한지 확인해 보세요. <br>
-								한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 보세요. <br>
-								검색어의 단어 수를 줄이거나, 보다 일반적인 검색어로 다시 검색해 보세요. <br>
-								두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 보세요. 
-							</p>
+						<div style="margin-bottom: 10px;">
+							<img style="display: inline-block; width: 50px;" src="${pageContext.request.contextPath}/resources/images/search.png"/>
+							<h4 style="margin: 30px 10px; font-weight: bold; display: inline-block;">검색 결과가 없습니다.</h4>
+						</div>
+						
+							
+							<ul style="list-style-type: square;">
+								<li>단어의 철자가 정확한지 확인해 보세요.</li>
+								<li>한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 보세요.</li>
+								<li>검색어의 단어 수를 줄이거나, 보다 일반적인 검색어로 다시 검색해 보세요.</li>
+								<li>두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 보세요. </li>
+							</ul>
 						</c:if>
 					</div>
 				</div>

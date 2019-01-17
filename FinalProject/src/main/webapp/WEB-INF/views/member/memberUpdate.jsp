@@ -161,7 +161,7 @@
 				<!-- https://getbootstrap.com/docs/4.1/components/modal/#live-demo -->
 				<div class="modal fade" id="modalDeleteMember" tabindex="-1" role="dialog" aria-labelledby="memberDeleteModalLabel" aria-hidden="true">
 				  <div class="modal-dialog" role="document">
-				    <div class="modal-content">
+				    <div class="modal-content" style="width: 100%;">
 				      <div class="modal-header">
 				        <h5 class="modal-title" id="memberDeleteModalLabel">회원 탈퇴 확인</h5>
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -170,10 +170,11 @@
 				      </div>
 			          <!--로그인폼 -->
 			          <!-- https://getbootstrap.com/docs/4.1/components/forms/#overview -->
-			          <form action="" method="post" style="height: auto;">
+			          <form action="memberDelete.do" id="deleteMemberForm" method="post" style="height: auto;">
 				      <div class="modal-body" style="padding-bottom:0;">
 						  <label> 정말로 탈퇴하실건가요? T_T </label>
 						  <div class="row passwordDiv" style=" display:inline;">
+						  <input type="hidden" name="no" value="${member.no}">
 						  <input type="password" class="form-control" name="password" id="modalPassword" 
 						  		placeholder="비밀번호를 입력하세요." style="display: block; margin: 0 auto;" required>
 						  </div>
@@ -290,6 +291,7 @@
 				
 				console.log(password);
 				console.log(no);
+				console.log(email);
 				
 				$.ajax({
 					type: "GET",
@@ -297,15 +299,16 @@
 					data: { email: email, password : password},
 					dataType: "json",
 					success : function(data){
-						if(data > 0){
+						$('#deleteMemberForm').submit();
+						/* if(data > 0){
 							$.ajax({
 								type: "POST",
 								url : "${pageContext.request.contextPath}/member/memberDelete.do",
 								data: {no : no},
 								dataType: "json",
 								success : function(data){
-										alert(data.msg);
-										location.href= "${pageContext.request.contextPath}/";
+										$('#deleteMemberForm').submit();
+										location.href= "${pageContext.request.contextPath}/logout";
 								}, error : function(jqxhr, textStatus, errorThrown){
 					                console.log("ajax 처리 실패");
 					                //에러로그
@@ -316,9 +319,10 @@
 							});		
 						} else{
 							alert("비밀번호가 틀립니다. 다시 한번 확인해주세요.")
-						}
+						} */
 					}, error : function(jqxhr, textStatus, errorThrown){
 		                console.log("checkPassword ajax 처리 실패");
+		                alert("checkPassword ajax 처리 실패");
 		            }							
 				});			
 			});	
