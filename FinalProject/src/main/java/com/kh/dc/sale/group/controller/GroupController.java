@@ -10,12 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.dc.common.util.Utils;
 import com.kh.dc.common.vo.Board;
 import com.kh.dc.sale.group.model.service.GroupService;
 import com.kh.dc.sale.group.model.vo.Group;
 
+@SessionAttributes(value= {"member"})
 @Controller
 public class GroupController {
 
@@ -30,7 +32,7 @@ public class GroupController {
 		
 		// 1. 현재 페이지 게시글 목록 가져오기
 		ArrayList<Map<String, String>> list = 
-				new ArrayList<Map<String, String>>(groupService.selectGroupList(cPage, numPerPage));
+				new ArrayList<Map<String, String>>(groupService.selectGroupList(cPage, numPerPage, 8));
 		
 		// 2. 전체 게시글 개수 가져오기
 		int totalContents = groupService.selectGroupTotalContents();

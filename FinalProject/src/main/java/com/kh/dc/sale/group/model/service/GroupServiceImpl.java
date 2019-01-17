@@ -17,11 +17,9 @@ public class GroupServiceImpl implements GroupService {
 	GroupDao groupDao;
 	
 	@Override
-	public List<Map<String, String>> selectGroupList(int cPage, int numPerPage) {
+	public List<Map<String, String>> selectGroupList(int cPage, int numPerPage, int locationNo) {
 		
-		List list = groupDao.selectGroupList(cPage, numPerPage);
-		
-		return list;
+		return groupDao.selectGroupList(cPage, numPerPage, locationNo);
 	}
 
 	@Override
