@@ -39,7 +39,7 @@
 	color: #000000;
 	line-height: 1.4em;
 	overflow: hidden;
-	font-size: 1.4rem;
+	font-size: 16px;
 	vertical-align: middle;
 	display: inline-block;
 	font-weight: bold;
@@ -60,13 +60,14 @@
 	display: inline;
 	padding-left: 10px;
 	font-weight: bold;
+	font-size: 14px;
 }
 
 .address {
 	display: inline-block;
 	padding-left: 10px;
 	font-weight: bold;
-	font-size: 10px;
+	font-size: 14px;
 }
 
 .short_review {
@@ -208,11 +209,11 @@ p.profile>img.picture {
 								<div class="articlelist">
 									<ol class="group"><br><br>
 										<p class="totalCount">총 ${totalContents}건의 게시물이 있습니다.</p>
+										<input type="text" value="${member.no}" />
 										
 										<c:forEach items="${flist}" var="b">
 											<li class="groupin" id="${b.no}">
 											<div class="article" onclick="location.href='${pageContext.request.contextPath}/community/food/foodView.do?bno=${b.no}';">
-											
 												<div class="thumb_review">
 									            	<img id="center" class="center" src="${b.thumbnail}">
 									            

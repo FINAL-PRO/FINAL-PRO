@@ -37,6 +37,8 @@ public class FoodController {
 		
 		int numberPage = 10; // 한 페이지당 게시글 수
 		int locationNo = member.getLocationNo();
+		
+		System.out.println("locationNo: "+locationNo);
 
 		ArrayList<Map<String, String>> flist = null;
 
