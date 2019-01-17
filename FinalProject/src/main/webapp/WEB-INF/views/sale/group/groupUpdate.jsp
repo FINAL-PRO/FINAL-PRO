@@ -124,6 +124,12 @@
 <script>
 
 	$(function() {
+		var today = new Date();
+		var endDate = new Date();
+		endDate.setDate(today.getDate() + 10);
+		
+		$('#endDate').attr("min", today.toISOString().substr(0,10))
+					 .attr("max", endDate.toISOString().substr(0,10));
 		
 		$(('input[value="${group.dealType}"]')).attr("checked", true);
 	});
@@ -189,7 +195,7 @@
 	}
 
 	function cancelUpdate(){
-		location.href = "${pageContext.request.contextPath}/sale/group/groupView.do?boardNo="+${group.boardNo};
+		location.href = "${pageContext.request.contextPath}/sale/group/view.do?boardNo="+${group.boardNo};
 	}	
 	
 	$('#btnSubmit').click(function(){

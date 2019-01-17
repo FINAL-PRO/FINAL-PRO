@@ -10,7 +10,7 @@ public interface GroupService {
 	
 	List<Map<String, String>> selectGroupList(int cPage, int numPerPage, int locationNo);
 	
-	int selectGroupTotalContents();
+	int selectGroupTotalContents(int locationNo);
 	
 	Group selectOneGroup(int boardNo);
 	
