@@ -123,15 +123,15 @@ public class JobBoardController {
 		if(jobBoard != null) jobBoardService.updateViewCount(jobBoard.getNo());
 		
 		model.addAttribute("jobBoard", jobBoard);
-		model.addAttribute("bno", jobBoard.getNo());
+		model.addAttribute("bno", jobBoard.getBoardNo());
 		//model.addAttribute("bno", jobBoard.getBoardNo());
 		
 		return "job/jobBoard/jobBoardDetail";
 	}
 	
 	@RequestMapping("job/jobBoard/insertForm.do")
-	public void jobBoardInsertForm () {
-		
+	public String jobBoardInsertForm () {
+		return "job/jobBoard/jobBoardInsertForm";
 	}
 	
 	@RequestMapping(value="job/jobBoard/insert.do", method=RequestMethod.POST)

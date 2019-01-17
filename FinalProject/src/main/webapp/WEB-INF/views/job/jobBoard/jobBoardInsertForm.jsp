@@ -159,7 +159,7 @@
 <script>
 	function selectCompany() {
 		window.name = "jobBoardInsertForm";	
-		var childWindow = window.open("jobBoardComPop.do", "comPop", "width=500, height=400");
+		var childWindow = window.open("comPop.do", "comPop", "width=500, height=400");
 	}
 	$('#summernote').summernote({
 		height : 500,
