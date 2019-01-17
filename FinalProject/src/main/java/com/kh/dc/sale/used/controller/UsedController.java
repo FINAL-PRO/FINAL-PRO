@@ -35,7 +35,7 @@ public class UsedController {
 				new ArrayList<Map<String, String>>(usedService.selectUsedList(cPage, numPerPage, locationNo));
 		
 		// 2. 전체 게시글 개수 가져오기
-		int totalContents = usedService.selectUsedTotalContents();
+		int totalContents = usedService.selectUsedTotalContents(locationNo);
 		
 		// 3. 페이지 계산 후 작성할 HTML 추가
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "list.do");

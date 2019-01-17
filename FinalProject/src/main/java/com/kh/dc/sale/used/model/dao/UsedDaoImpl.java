@@ -25,9 +25,9 @@ public class UsedDaoImpl implements UsedDao {
 	}
 
 	@Override
-	public int selectUsedTotalContents() {
+	public int selectUsedTotalContents(int locationNo) {
 
-		return sqlSession.selectOne("used_mapper.selectUsedTotalContents");
+		return sqlSession.selectOne("used_mapper.selectUsedTotalContents", locationNo);
 	}
 
 	@Override

@@ -25,9 +25,9 @@ public class GroupDaoImpl implements GroupDao {
 	}
 
 	@Override
-	public int selectGroupTotalContents() {
+	public int selectGroupTotalContents(int locationNo) {
 		
-		return sqlSession.selectOne("group_mapper.selectGroupTotalContents");
+		return sqlSession.selectOne("group_mapper.selectGroupTotalContents", locationNo);
 	}
 
 	@Override

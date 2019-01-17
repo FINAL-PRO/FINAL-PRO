@@ -37,7 +37,7 @@ public class GroupController {
 				new ArrayList<Map<String, String>>(groupService.selectGroupList(cPage, numPerPage, locationNo));
 		
 		// 2. 전체 게시글 개수 가져오기
-		int totalContents = groupService.selectGroupTotalContents();
+		int totalContents = groupService.selectGroupTotalContents(locationNo);
 		
 		// 3. 페이지 계산 후 작성할 HTML 추가
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "list.do");

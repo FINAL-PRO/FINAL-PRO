@@ -122,6 +122,15 @@
 <script>
 	
 	var priceChk = false;
+	
+	$(function(){
+		var today = new Date();
+		var endDate = new Date();
+		endDate.setDate(today.getDate() + 10);
+		
+		$('#endDate').attr("min", today.toISOString().substr(0,10))
+					 .attr("max", endDate.toISOString().substr(0,10));
+	});
 
 	$('#summernote').summernote({
 		height : 500,
@@ -193,50 +202,54 @@
 			alert("물품명을 입력해 주세요.");
 		} else if ($('input[name="price"]').val() == "" ) {
 			alert("물품 가격을 입력해 주세요.");
+		} else if (priceChk != true){
+			alert("가격은 100원~100만원 사이만 가능합니다.");
 		} else if ($('input[name="maxCount"]').val() == "" ) {
 			alert("공동구매 모집 인원을 입력해 주세요.");
-		} else if ($('input[name="dealType"]').val() == "" ) {
+		} else if (maxCountChk != true){
+			alert("모집 인원은 1~20명 사이만 가능합니다.");
+		} else if ($('input[name="dealType"]:checked').val() == null ) {
 			alert("거래 방법을 선택해 주세요.");
 		} else if ($('input[name="deposit"]').val() == "" ) {
 			alert("계좌번호를 입력해 주세요.");
 		} else if ($('input[name="endDate"]').val() == "" ) {
 			alert("마감일을 입력해 주세요.");
+		} else if ($('#summernote').val() == "" ) {
+			alert("글 내용을 등록해주세요.");
 		} else {
 			$('form').submit();
 		}
 	}
-	
-	// 물품명 100바이트 넘지 않게 정규식 처리
-	$("#goodsName").on("keyup", function() {
-		var goodsName = $("#goodsName").val().trim();
-		var regPwd = /^[0-9]$/g;
 
-	});
-	
+	var priceChk = false;
 	// 가격 --> 정규식처리:100~1000000 (백원~백만원)
 	$("#price").on("keyup", function() {
 		var price = $("#price").val().trim();
-		var regPwd = /^[0-9]$/g;
+		var regPwd = /^[0-9]{1,7}$/g;
 		
+		if (!regPwd.test(price)) {
+			priceChk = false;
+		} else if (price>1000000 || price<100) {
+			priceChk = false;
+		} else {
+			priceChk = true;
+		}
 	});
 	
+	var maxCountChk = false;
 	// 모집인원 --> 정규식처리:1~20 사이 숫자만
 	$("#maxCount").on("keyup", function() {
 		var maxCount = $("#maxCount").val();
 		var regPwd =  /^[0-9]{1,2}$/g;
 		
-		if(maxCount == "") {
-			$("#maxCountMsg").text('');
-		} else if (!regPwd.test(maxCount)) {
-			$("#maxCountMsg").text('1~20 사이의 숫자를 입력해 주세요.');
+		if (!regPwd.test(maxCount)) {
+			maxCountChk = false;
 		} else if (maxCount>20 || maxCount<1) {
-			$("#maxCountMsg").text('1~20 사이의 숫자를 입력해 주세요.');
+			maxCountChk = false;
 		} else {
-			$("#maxCountMsg").text('');
+			maxCountChk = true;
 		}
 	});
-	
-	
 
 	
 </script>

@@ -23,9 +23,9 @@ public class UsedServiceImpl implements UsedService {
 	}
 
 	@Override
-	public int selectUsedTotalContents() {
+	public int selectUsedTotalContents(int locationNo) {
 
-		return usedDao.selectUsedTotalContents();
+		return usedDao.selectUsedTotalContents(locationNo);
 	}
 
 	@Override
