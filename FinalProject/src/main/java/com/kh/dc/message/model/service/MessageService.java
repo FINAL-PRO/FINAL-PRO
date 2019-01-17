@@ -1,5 +1,6 @@
 package com.kh.dc.message.model.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -23,4 +24,8 @@ public interface MessageService {
 	int checkToNick(String nickName);
 	
 	int countUnreadMSG(int memNo);
+	
+	List<Map<String, String>> sendMsg(int fromMember, int cPage, int numPerPage);
+	
+	int sendMsgTotalContents(int fromMember);
 }

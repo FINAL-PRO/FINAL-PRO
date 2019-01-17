@@ -43,3 +43,18 @@
 	.colum:hover{
 	background: lightgray;
 	}
+	.comTitle{
+		border: 2px solid gray;
+		width: 400px;
+		display: inline-block;
+    	vertical-align: baseline;
+		font-weight: bold;
+   		background: gray;
+   		font-size: 18px;
+    	height: 35px;
+    	color: #fff;
+    	margin:5px;
+    }	
+    .closeBtn{
+    	align:center; 
+    }

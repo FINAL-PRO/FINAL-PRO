@@ -70,6 +70,7 @@ public class MessageServiceImpl implements MessageService {
 		// 
 		return messageDao.deleteMessage(no);
 	}
+
 	@Override
 	public int checkToNick(String nickName) {
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
@@ -83,5 +84,17 @@ public class MessageServiceImpl implements MessageService {
 	public int countUnreadMSG(int memNo) {
 		// 
 		return messageDao.countUnreadMSG(memNo);
+	}
+
+	@Override
+	public List<Map<String, String>> sendMsg(int fromMember, int cPage, int numPerPage) {
+		// 
+		return messageDao.sendMsg(fromMember, cPage, numPerPage);
+	}
+
+	@Override
+	public int sendMsgTotalContents(int fromMember) {
+		// 
+		return messageDao.sendMsgTotalContents(fromMember);
 	}
 }
