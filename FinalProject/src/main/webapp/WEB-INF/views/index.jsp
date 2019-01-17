@@ -127,7 +127,7 @@
 											<c:if test="${!empty groupList}">
 												<c:forEach items="${groupList}" var="item">
 													<div class="main-img-div">
-														<a href="${pageContext.request.contextPath}/sale/group/groupView.do?boardNo=${item.boardNo}">
+														<a href="${pageContext.request.contextPath}/sale/group/view.do?boardNo=${item.boardNo}">
 															<span>
 																<img src="${item.goodsPicture}" width="190" />
 															</span>
@@ -171,7 +171,7 @@
 											<c:if test="${!empty usedList}">
 												<c:forEach items="${usedList}" var="item">
 													<div class="main-img-div">
-														<a href="${pageContext.request.contextPath}/sale/used/usedView.do?boardNo=${item.boardNo}">
+														<a href="${pageContext.request.contextPath}/sale/used/view.do?boardNo=${item.boardNo}">
 															<span>
 																<img src="${item.goodsPicture}" width="190" />
 															</span>
