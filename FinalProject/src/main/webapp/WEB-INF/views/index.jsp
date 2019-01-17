@@ -132,7 +132,7 @@
 																<img src="${item.goodsPicture}" width="190px" height="190px"/>
 															</span>
 															<div class="img-text">
-																<strong>${item.title}</strong><br />
+																<strong>${fn:substring(item.title,0,13)}...</strong><br />
 																<span>${item.goodsName }</span>
 															</div>
 													</a></div>
@@ -176,7 +176,7 @@
 																<img src="${item.goodsPicture}" width="190px" height="190px"/>
 															</span>
 															<div class="img-text">
-																<strong>${item.title}</strong><br />
+																<strong>${fn:substring(item.title,0,13)}...</strong><br />
 																<span>${item.goodsName }</span>
 															</div>
 													</a></div>
