@@ -30,28 +30,24 @@
 .review {
 	float: left;
 }
- 
-.article{
-	list-style: none;
-}
 
 .ftitle {
 	color: #000000;
-	line-height: 1.4em;
 	overflow: hidden;
 	font-size: 16px;
 	vertical-align: middle;
 	display: inline-block;
 	font-weight: bold;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	width: 350px;
+	width: 100%;
 }
 
 .ftitle a {
 	text-decoration: none;
 	color: rgb(85, 85, 85);
+}
+
+.ftitle p {
+	magin: 0px;
 }
 
 .fpoint {
@@ -63,14 +59,12 @@
 }
 
 .faddress {
-	display: inline-flex;
-	padding-left: 10px;
 	font-weight: bold;
 	font-size: 14px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	width: 450px;
+	width: 100%;
 }
 
 .fshort_review {
@@ -104,17 +98,18 @@
 	line-height: 20px;
 	font-size: 14px;
 	font-weight: bold;
+	margin-top: 5px;
 }
 
 .thumb_review{
 	display: inline-block;
-	height: 180px; 
+	height: 170px; 
 	width: 200px; 
 }
 
 .thumb_review .center{
-	height: 180px; 
-	width: 200px; 
+	height: 170px; 
+	width: 200px;  
 }
 
 .board_review{
@@ -122,9 +117,8 @@
 	padding-left: 30px; 
 	padding-top: 10px; 
 	padding-right: 30px; 
-	padding-bottom: 10px; 
+	padding-bottom: 20px; 
 	height: 180px; 
-	width: 80%;
 	font-size: 14px;
 }
 
@@ -135,10 +129,11 @@
 }
 
 .article{
-	height: 180px; 
+	height: 170px; 
 	display: flex;
 	background:white;
   	opacity: 1.0;
+	list-style: none;  	
 }
 
 .article:hover{
@@ -154,6 +149,7 @@ p.fprofile>img.fpicture {
 
 .fprofile{
 	display: inline-block;
+	margin-top: 10px;
 }
 
 .food_btn2{
@@ -243,8 +239,7 @@ p.fprofile>img.fpicture {
 										           	<p class="fcategoryName">${b.category}</p>
 										            <p class="fpoint">${b.point}/5</p>
 										            <p class="faddress">${b.address}</p>
-										            <br>
-										            <div class="table_review">
+										     <%--        <div class="table_review">
 										            <c:choose>
 														<c:when test="${b.imageCheck eq 0}">
 															<span class="fshort_review">${b.content}</span>
@@ -253,7 +248,7 @@ p.fprofile>img.fpicture {
 															<span class="fcontent"><p>(이미지)</p></span>
 														</c:otherwise>
 													</c:choose>
-													</div>
+													</div> --%>
 										            <div class="fcount">조회수: <span style="color:rgb(244, 126, 96);">${b.viewCount}</span></div>&nbsp;&nbsp;
 										            <div class="fcount">댓글: <span style="color:rgb(244, 126, 96);">${b.commentCount}</span></div>&nbsp;&nbsp;
 										            <div class="fcount">좋아요: <span style="color:rgb(244, 126, 96);">${b.likeCount}</span></div>

@@ -126,6 +126,7 @@ hr {
 .totalCount{
 	font-size:14px; 
 	padding-left:10px;
+	font-weight: bold;
 }
 
 .mypageListTitleLabel {
@@ -146,6 +147,10 @@ table {
 th, td {
 	border-bottom: 1px solid lightgray;
 	padding: 10px;
+}
+
+.dc-content-box{
+	color: black;
 }
 
 </style>
@@ -169,12 +174,12 @@ th, td {
 						<div class="dc-content-box">
 							<div id="container2">
 								<div class="articlelist">
-								<p class="totalCount">총 ${totalContents}건의 공지사항이 있습니다.</p>
+								<p class="totalCount">총 <span style="color: rgb(248, 178, 106);">${totalContents}</span>건의 공지사항이 있습니다.</p>
 										
 								<div class="boardList" style="width: 100%; min-height: 300px; margin: auto;">
 						            <table>					        	
-							            <thead class="listcol" style="border-color: white;  color: gray;">   						                    
-							            <tr style="color:gray;">
+							            <thead class="listcol" style="border-color: white;">   						                    
+							            <tr>
 							                <th scope="col" style="width:50px;">#</th>
 							                <th scope="col" style="width:150px;">게시판 종류</th>
 							                <th scope="col" style="width:200px;">제목</th>
@@ -183,7 +188,7 @@ th, td {
 							            </tr>    
 						        		<c:if test="${!empty nlist}" >
 							            <c:forEach items="${nlist}" var="b" varStatus="bo" >
-							            <tr style="background-color:#FFFFFF; cursor:pointer; color:gray;" onclick="location.href='${pageContext.request.contextPath}/community/notice/noticeView.do?bno=${b.no}'">
+							            <tr style="background-color:#FFFFFF; cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/community/notice/noticeView.do?bno=${b.no}'">
 							                <th scope="row"> ${fn:length(nlist)-bo.index}</th>
 							                <td>${b.boardType}</td>
 							                <td>${b.title}</td>
