@@ -22,9 +22,7 @@
 				<div class="section-center">
 					<div class="dc-content">
 						<div class="dc-content-title">
-							<div>
-								<span class="dc-list-title">공지</span>
-							</div>
+							<span class="dc-title-text">공지</span>
 						</div>
 						<div class="dc-content-box">
 							<div class="table-form-content">
