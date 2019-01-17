@@ -24,7 +24,7 @@
 <div class="section-center">
 <div class="dc-content">
 <div class="dc-content-title">
-	<h3>중고거래</h3>
+	<span class="dc-title-text">중고거래</span>
 </div>
 		
 <div class="dc-content-box">

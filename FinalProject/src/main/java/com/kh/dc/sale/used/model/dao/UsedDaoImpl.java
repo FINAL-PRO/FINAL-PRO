@@ -18,10 +18,10 @@ public class UsedDaoImpl implements UsedDao {
 	SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<Map<String, String>> selectUsedList(int cPage, int numPerPage) {
+	public List<Map<String, String>> selectUsedList(int cPage, int numPerPage, int locationNo) {
 		
 		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
-		return sqlSession.selectList("used_mapper.selectUsedList", null, rowBounds);
+		return sqlSession.selectList("used_mapper.selectUsedList", locationNo, rowBounds);
 	}
 
 	@Override

@@ -24,7 +24,7 @@
 <div class="section-center">
 <div class="dc-content">
 <div class="dc-content-title">
-	<h3>공동구매</h3>
+	<span class="dc-title-text">공동구매</span>
 </div>
 		
 <div class="dc-content-box">
@@ -120,6 +120,8 @@
 
 <!-------------------- Script -------------------->
 <script>
+	
+	var priceChk = false;
 
 	$('#summernote').summernote({
 		height : 500,
@@ -183,9 +185,7 @@
 	
 	// 폼 미입력시 입력하라는 알림창 띄움
 	function submitForm() {
-		if($('input[name="memberNo"]').val() == 0 ) {
-			alert("로그인이 필요한 기능입니다.");
-		} else if($('input[name="title"]').val() == "" ) {
+		if($('input[name="title"]').val() == "" ) {
 			alert("제목을 입력해 주세요.");
 		} else if ($('input[name="goodsPicture"]').val() == "" ) {
 			alert("물품 사진을 등록해주세요.");
@@ -205,13 +205,6 @@
 			$('form').submit();
 		}
 	}
-	
-	// 제목 100바이트 넘지 않게 정규식 처리
-	$("#title").on("keyup", function() {
-		var title = $("#maxCount").val().trim();
-		var regPwd = /^[0-9]$/g;
-
-	});
 	
 	// 물품명 100바이트 넘지 않게 정규식 처리
 	$("#goodsName").on("keyup", function() {

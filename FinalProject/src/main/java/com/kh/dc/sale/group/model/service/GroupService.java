@@ -8,7 +8,7 @@ import com.kh.dc.sale.group.model.vo.Group;
 
 public interface GroupService {
 	
-	List<Map<String, String>> selectGroupList(int cPage, int numPerPage);
+	List<Map<String, String>> selectGroupList(int cPage, int numPerPage, int locationNo);
 	
 	int selectGroupTotalContents();
 	

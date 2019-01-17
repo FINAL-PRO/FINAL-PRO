@@ -17,9 +17,9 @@ public class UsedServiceImpl implements UsedService {
 	UsedDao usedDao;
 
 	@Override
-	public List<Map<String, String>> selectUsedList(int cPage, int numPerPage) {
+	public List<Map<String, String>> selectUsedList(int cPage, int numPerPage, int locationNo) {
 		
-		return usedDao.selectUsedList(cPage, numPerPage);
+		return usedDao.selectUsedList(cPage, numPerPage, locationNo);
 	}
 
 	@Override
