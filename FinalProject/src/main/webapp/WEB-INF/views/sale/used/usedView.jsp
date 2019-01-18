@@ -162,7 +162,7 @@
 		
 		if('${used.status}' == '판매완료') {
 			alert("판매완료 처리된 글은 수정할 수 없습니다.");
-		} else if (uh != null) {
+		} else if (uh != "") {
 			alert("안전거래 진행중인 글은 수정할 수 없습니다.");
 		} else {
 			location.href = "${pageContext.request.contextPath}/sale/used/updateForm.do?boardNo="+${used.boardNo};
@@ -172,7 +172,7 @@
 	function deleteUsed() {
 		var uhStatus = '${uh.status}';
 		
-		if(uhStatus != 'USEDHIT004') {
+		if(uhStatus != "" && uhStatus != 'USEDHIT004') {
 			alert("무사히 거래가 완료되지 않은 경우 글을 삭제할 수 없습니다.");
 		} else {
 			if(confirm("삭제하시겠습니까?")) {

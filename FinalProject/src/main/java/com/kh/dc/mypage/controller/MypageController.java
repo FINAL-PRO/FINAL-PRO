@@ -65,7 +65,7 @@ public class MypageController {
 		System.out.println("totalCommentContents" + totalCommentContents);
 		
 		// 3. 페이지 계산 후 작성할 HTML 추가
-		String commentPageBar = Utils.getPageBar(totalCommentContents, cPage, numPerPage, "myContentList.do");		
+		String commentPageBar = Utils.getPageBar(totalCommentContents, cPage, numPerPage, "myCommentList.do");		
 		
 		model.addAttribute("currentPageCommentlist", currentPageCommentlist)
 		.addAttribute("totalCommentContents", totalCommentContents)

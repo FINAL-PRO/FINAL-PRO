@@ -373,3 +373,9 @@ div[class^="ad-"]:hover {
 	font-size: 35px;
 }
 
+.dc-title-text{
+	color: rgb(244, 126, 96);
+	font-size: 35px;
+	font-weight: bold;
+}
+

@@ -126,6 +126,7 @@
 	$(function(){
 		var today = new Date();
 		var endDate = new Date();
+		today.setDate(today.getDate() + 1);
 		endDate.setDate(today.getDate() + 10);
 		
 		$('#endDate').attr("min", today.toISOString().substr(0,10))
@@ -194,8 +195,8 @@
 	
 	// 폼 미입력시 입력하라는 알림창 띄움
 	function submitForm() {
-		if($('input[name="title"]').val() == "" ) {
-			alert("제목을 입력해 주세요.");
+		if($('input[name="memberNo"]').val() == 0 ) {
+			alert("로그인이 필요한 기능입니다.");
 		} else if ($('input[name="goodsPicture"]').val() == "" ) {
 			alert("물품 사진을 등록해주세요.");
 		} else if ($('input[name="goodsName"]').val() == "" ) {
@@ -217,7 +218,7 @@
 		} else if ($('#summernote').val() == "" ) {
 			alert("글 내용을 등록해주세요.");
 		} else {
-			$('form').submit();
+			$('form[name="boardForm"]').submit();
 		}
 	}
 
