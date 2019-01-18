@@ -8,7 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage/dc-mypage-list.css" />
-	<title>내가 쓴 글/댓글 List</title>	
+	<title>동커</title>
 	<c:import url="../common/header.jsp"/>
 </head>
 <body>

@@ -26,11 +26,13 @@
 			console.log(data);
 			
 			if(data == ""){
-				$("#ad-right-bottm-img").attr("src","${pageContext.request.contextPath}/resources/upload/ad/adright.gif");
-				$(".ad-right-bottm").attr("onclick", "window.open('" + "http://www.iei.or.kr/main/main.kh" + "');");
+				console.log("광고없음");
+				$("#ad-right-bottom-img").attr("src","${pageContext.request.contextPath}/resources/upload/ad/adright.gif");
+				$(".ad-right-bottom").attr("onclick", "window.open('" + "http://www.iei.or.kr/main/main.kh" + "');");
 			}else{
+				console.log("광고있음");
 				$("#ad-right-bottom-img").attr("src",data['adContentPath']);
-				$(".ad-right-bottm").attr("onclick", "window.open('" + data['landingPage'] + "');");
+				$(".ad-right-bottom").attr("onclick", "window.open('" + data['landingPage'] + "');");
 			}
 			
 		}, error : function(){
@@ -173,7 +175,7 @@
 			default : url="&city=서울&county=강남구&village=역삼1동"; village="역삼동"; break;
 		}
 
-		/* $.ajax({
+		$.ajax({
 			type: "GET",
 			url: "https://api2.sktelecom.com/weather/current/minutely?appKey=a294c267-b2de-41f1-99ee-1a4894a40fdf" + url,
 			header:{
@@ -223,7 +225,7 @@
 				$(".loadingImg").toggle();
 			}
 			
-		}); */
+		}); 
 		
 	});
 

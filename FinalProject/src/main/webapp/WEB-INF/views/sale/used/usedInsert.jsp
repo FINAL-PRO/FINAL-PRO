@@ -177,7 +177,7 @@
 		} else if ($('#summernote').val() == "" ) {
 			alert("글 내용을 등록해주세요.");
 		} else {
-			$('form').submit();
+			$('form[name="boardForm"]').submit();
 		}
 	}
 
