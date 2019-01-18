@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,23 +80,30 @@
 		</c:forEach>
 	</div>
 </div>
-<div class="row">
+<div class="row" style="margin-top: 10px;">
 	<div class="col-md-2">
 	</div>
 	<div class="col-md-10">
 		<c:if test="${uh.status eq 'USEDHIT001' and member.no eq used.memberNo}">
-			<span>구매자에게 물품을 보내셨습니까? </span>
-			<input type="button" value="물품인계" class="btn btnGroup" onclick="updateUhStatus('USEDHIT002');"/> <br />
+			<div class="status-msg"><span>구매자에게 물품을 보냈습니다. </span></div>
+			<input type="button" value="물품인계" class="btn btnGroup" onclick="updateUhStatus('USEDHIT002');"
+				style="margin-bottom: 5px;"/> <br />
 		</c:if>
 		<c:if test="${uh.status eq 'USEDHIT001'}">
-			<span>거래를 취소하시겠습니까? </span>
-			<input type="button" value="거래취소" class="btn btnGroup" onclick="updateUhStatus('USEDHIT005');" />
+			<div class="status-msg"><span>거래를 취소합니다. </span></div>
+			<input type="button" value="거래취소" class="btn btnGroup" onclick="updateUhStatus('USEDHIT005');"/> <br />
 		</c:if>
 		<c:if test="${uh.status eq 'USEDHIT002' and member.no eq uh.memberNo}">
-			<span>판매자로부터 물품을 받으셨습니까? </span>
-			<input type="button" value="인계확인" class="btn btnGroup" onclick="updateUhStatus('USEDHIT003');"/>
-			<input type="button" value="거래중지" class="btn btnGroup" onclick="updateUhStatus('USEDHIT006');"/>
+			<div class="status-msg"><span>판매자로부터 물품을 받았습니다. </span></div>
+			<input type="button" value="인계확인" class="btn btnGroup" onclick="updateUhStatus('USEDHIT003');"
+				style="margin-bottom: 5px;"/> <br />
+			<div class="status-msg"><span>판매자로부터 물품을 받지 못하여 거래를 중지합니다. </span></div>
+			<input type="button" value="거래중지" class="btn btnGroup" onclick="updateUhStatus('USEDHIT006');"/> <br />
 		</c:if>
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<div class="status-msg"><span>판매자에게 판매 금액을 지급하였습니다.</span></div>
+			<input type="button" value="거래완료" class="btn btnGroup" onclick="updateUhStatus('USEDHIT004');"/> <br />
+		</sec:authorize>
 	</div>
 </div>
 <hr />
@@ -150,16 +158,26 @@
 	}
 	
 	function updateUsed() {
+		var uh = '${uh}';
+		
 		if('${used.status}' == '판매완료') {
 			alert("판매완료 처리된 글은 수정할 수 없습니다.");
+		} else if (uh != null) {
+			alert("안전거래 진행중인 글은 수정할 수 없습니다.");
 		} else {
 			location.href = "${pageContext.request.contextPath}/sale/used/updateForm.do?boardNo="+${used.boardNo};
 		}
 	}
 	
 	function deleteUsed() {
-		if(confirm("삭제하시겠습니까?")) {
-			location.href = "${pageContext.request.contextPath}/sale/used/delete.do?boardNo="+${used.boardNo};
+		var uhStatus = '${uh.status}';
+		
+		if(uhStatus != 'USEDHIT004') {
+			alert("무사히 거래가 완료되지 않은 경우 글을 삭제할 수 없습니다.");
+		} else {
+			if(confirm("삭제하시겠습니까?")) {
+				location.href = "${pageContext.request.contextPath}/sale/used/delete.do?boardNo="+${used.boardNo};
+			}
 		}
 	}
 	
@@ -218,6 +236,7 @@
 				success : function(data) {
 					if(data == "success") {
 						alert("해당 물품을 판매완료 처리하였습니다.");
+						location.reload();
 					} else {
 						alert("오류 발생!");
 					}
@@ -234,6 +253,8 @@
 			msg = "구매자에게 물품을 보내셨습니까?";
 		} else if(st == 'USEDHIT003') {
 			msg = "판매자로부터 물품을 확실히 받으셨습니까?";
+		} else if(st == 'USEDHIT004') {
+			msg = "판매자에게 판매 금액을 지급하였습니까?";
 		} else if(st == 'USEDHIT005') {
 			msg = "거래를 취소하시겠습니까?";
 		} else if(st == 'USEDHIT006') {

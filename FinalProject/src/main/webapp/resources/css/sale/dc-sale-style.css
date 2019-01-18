@@ -105,6 +105,11 @@ th {
 	padding-top: 6px;
 }
 
+.status-msg {
+	width: 322px;
+	display: inline-block;
+}
+
 .sold-text {
 	position: absolute;
     top: 50%;

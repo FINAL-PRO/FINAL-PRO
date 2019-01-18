@@ -27,6 +27,7 @@
 	vertical-align: top;
 	float: left;
 	margin-top: 5px;
+	border-radius: 50px;
 }
 
 .nickname {
