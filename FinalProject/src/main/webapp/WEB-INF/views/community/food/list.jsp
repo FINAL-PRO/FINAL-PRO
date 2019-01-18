@@ -115,7 +115,7 @@
 .board_review{
 	display: inline-block;
 	padding-left: 30px; 
-	padding-top: 10px; 
+	padding-top: 5px; 
 	padding-right: 30px; 
 	padding-bottom: 20px; 
 	height: 180px; 
