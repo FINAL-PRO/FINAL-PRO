@@ -109,12 +109,12 @@
 
 .thumb_review .center{
 	height: 170px; 
-	width: 200px;  
+	width: 190px;  
 }
 
 .board_review{
 	display: inline-block;
-	padding-left: 30px; 
+	padding-left: 10px; 
 	padding-top: 5px; 
 	padding-right: 30px; 
 	padding-bottom: 20px; 
