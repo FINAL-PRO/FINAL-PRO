@@ -18,13 +18,10 @@ import com.kh.dc.mypage.model.service.MypageService;
 @Controller
 public class MypageController {
 	
-	/*@Autowired
-	private MemberService memberService;*/
-	
 	@Autowired
 	private MypageService mypageService;
 	
-	@RequestMapping("/mypage/list.do")
+	@RequestMapping("/mypage/myBoardList.do")
 	public String myContentList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, Member member, Model model) {
 		
 		int mNo = member.getNo();		
@@ -41,11 +38,21 @@ public class MypageController {
 		System.out.println("totalBoardContents" + totalBoardContents);
 		
 		// 3. 페이지 계산 후 작성할 HTML 추가
-		String boardPageBar = Utils.getPageBar(totalBoardContents, cPage, numPerPage, "myContentList.do");		
+		String boardPageBar = Utils.getPageBar(totalBoardContents, cPage, numPerPage, "myBoardList.do");		
 		
 		model.addAttribute("currentPageBoardlist", currentPageBoardlist)
 		.addAttribute("totalBoardContents", totalBoardContents)
+		.addAttribute("numPerPage", numPerPage)
 		.addAttribute("boardPageBar", boardPageBar);				
+		
+		return "mypage/myBoardList";
+	}
+	
+	@RequestMapping("/mypage/myCommentList.do")
+	public String myCommentList(@RequestParam(value="cPage", required=false, defaultValue="1") int cPage, Member member, Model model) {
+		
+		int mNo = member.getNo();		
+		int numPerPage = 10; // 한 페이지당 게시글 수			
 		
 		// 내가 쓴 댓글 
 		// 1. 현재 페이지 게시글 목록 가져오기
@@ -65,7 +72,7 @@ public class MypageController {
 		.addAttribute("numPerPage", numPerPage)
 		.addAttribute("commentPageBar", commentPageBar);				
 		
-		return "mypage/list";
+		return "mypage/myCommentList";
 	}
 
 }

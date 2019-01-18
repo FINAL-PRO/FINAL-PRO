@@ -42,7 +42,7 @@
 								
 
 								<div class="nickNameArea" align="center">
-									<label class="searchTitleLabel">닉네임 찾기</label>
+									<label class="searchTitleLabel">이름 찾기</label>
 									<form>
 										<input type="email" class="form-control"
 											id="email_nickNameArea" name="" placeholder="이메일을 입력하세요.">
