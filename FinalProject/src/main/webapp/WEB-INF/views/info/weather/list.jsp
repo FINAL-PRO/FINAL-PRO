@@ -11,8 +11,8 @@
 	<c:import url="../../common/header.jsp"/>	
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/info/weather/dc-info-weather.css" />
 	
-	<%-- <!-- 기상청 날씨 받아오기 위한 크로스도메인 해결 플러그인 -->
-	<script type='text/javascript' src="${pageContext.request.contextPath}/resources/js/jquery.ajax-cross-origin.min.js"></script>	 --%>
+	 <!-- 기상청 날씨 받아오기 위한 크로스도메인 해결 플러그인 -->
+	<script type='text/javascript' src="${pageContext.request.contextPath}/resources/js/jquery.ajax-cross-origin.min.js"></script>
 </head>
 <body>
 	<c:import url="../../common/menubar.jsp"/>
@@ -114,7 +114,7 @@
 			dataType: 'jsonp',
 	        type: "GET",
 	        async: "false",
-	        /* jsonp: "callback", */
+	        jsonp: "callback",
 	        success: function(data) {    	
 	        	
 	            console.log("들어왔니");  
@@ -198,9 +198,6 @@
 			}
 	    }
 	   	);		
- 		
- 		
- 		
 		
 		
 		// 주간날씨(기상청 중기예보 - 10일 예보)
@@ -210,7 +207,7 @@
 	    	crossOrigin: true,
 	        url: apiURI,
 	        dataType: 'jsonp',
-	        /* jsonp: "callback", */
+	        jsonp: "callback",
 	        type: "GET",
 	        async: "false",
 	        success: function(data) {

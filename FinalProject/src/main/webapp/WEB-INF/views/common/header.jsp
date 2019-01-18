@@ -19,6 +19,9 @@
 <!-- summernote 관련 라이브러리 -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
+<%-- 
+<!-- 기상청 날씨 받아오기 위한 크로스도메인 해결 플러그인 -->
+<script src="${pageContext.request.contextPath}/resources/js/jquery.ajax-cross-origin.min.js"></script> --%>
 
 <!-- 폰트 -->
 <link href="https://fonts.googleapis.com/css?family=Gugi|Nanum+Gothic" rel="stylesheet">
