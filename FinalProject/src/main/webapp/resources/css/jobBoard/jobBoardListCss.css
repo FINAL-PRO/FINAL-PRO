@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+	
+		.job-board {
+			border-collapse: collapse;
+			text-align: left;
+			line-height: 1.5;
+			margin: 20px 10px;
+			
+		}
+	    .columName  {
+	    
+			margin: 2px;
+	    	display: table-row;
+	    	background: #f6f6f6;
+	    	font-weight: bold;
+	    	height: 30px;
+			vertical-align: middle;
+			color: gray;
+	      }
+	    .colum {
+		    height: 30px;
+	    	display: table-row;
+	    	width: 10%;
+		    padding: 10px;
+		    vertical-align: middle;
+	    }  
+	 
+	    .cell {
+		    display: table-cell;
+		    border-bottom: 1px solid lightgray;
+		    width: auto;
+		    height: 37px;
+		    vertical-align: middle;
+		}
+		.colum:hover{
+			background: lightgray;
+		}
+		.jbEnd{
+			color: gray;
+		}
+		select.cArray, select.cArray-color {
+		   -webkit-appearance: button;
+		   -webkit-border-radius: 2px;
+		   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+		   -webkit-padding-end: 20px;
+		   -webkit-padding-start: 2px;
+		   -webkit-user-select: none;
+		   font-weight: bold;
+		   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+		   background-position: 97% center;
+		   background-repeat: no-repeat;
+		   border: 1px solid #AAA;
+		   color: #555;
+		   margin: 5px;
+		   overflow: hidden;
+		   padding: 5px 10px;
+		   text-overflow: ellipsis;
+		   white-space: nowrap;
+		   width: 100px;
+		}
+		select.cArray-color {
+		   color: #fff;
+		   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#779126, #779126 40%, #779126);
+		   background-color: #779126;
+		   -webkit-border-radius: 20px;
+		   -moz-border-radius: 20px;
+		   border-radius: 20px;
+		   padding-left: 15px;
+		}
+		.title {
+			width:150px;
+		}
+		.writeDate{
+			width:80px;
+		}
+		.nickName, , .endJobDday{
+			width:50px;
+		}
+		.salInfo{
+			width:100px; 
+		}
+		.no, .viewCount, .hide-work {
+			width:50px; 
+		}
+		.mini{
+			width:50px;
+		}
+		
+		.mypageListTitleLabel {
+	font-weight: bold;
+	font-size: 16px;
+	color: gray;
+	width: 100%;
+	padding: 5px 20px 5px 10px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: center;
+	background: #f6f6f6;
+}
+
+th, td {
+	border-bottom: 1px solid lightgray;
+	padding: 10px;
+}
+
+thead, th{
+	color : gray;
+}
+	

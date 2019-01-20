@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="admin_mapper">
+	
+	<!-- 멤버 전체 가져오기 -->
+	<select id="selectMemberList" resultType="member" parameterType="map">
+		SELECT * FROM DC_MEMBER_TB WHERE AUTHNO = #{authNo} AND CODEID = #{memberStatus}
+	</select>
+	
+	<!-- 게시물 전체 가져오기 -->
+	<select id="selectBoardList" resultType="board" parameterType="aBoard">
+		SELECT * FROM DC_BOARD_TB WHERE TYPE = #{boardType} and STATUS = #{boardStatus}
+	</select>
+	
+	<!-- 업체 전체 가져오기 -->
+	<select id="selectCompanyList" resultType="company" parameterType="String">
+		SELECT * FROM DC_COMPANY_TB WHERE STATUS = #{companyType}
+	</select>
+	
+	<!-- 업체 하나 가져오기 -->
+	<select id="selectCompanyOne" parameterType="_int" resultType="company">
+		SELECT * FROM DC_COMPANY_TB WHERE NO = #{no}
+	</select>
+	
+	<!-- 게시물 하나 가져오기 -->
+	<select id="selectBoardOne" parameterType="_int" resultType="board">
+		SELECT * FROM DC_BOARD_TB WHERE NO = #{no}
+	</select>
+	
+	<!-- 멤버 한명 가져오기 -->
+	<select id="selectMemberOne" parameterType="_int" resultType="member">
+		SELECT * FROM DC_MEMBER_TB WHERE NO = #{no}
+	</select>
+	
+	<!-- 멤버 권한 리스트 가져오기 -->
+	<select id="selectMemberAuthList" resultType="authority">
+		SELECT * FROM DC_AUTHORITY_TB
+	</select>
+	
+	<!-- 게시판 타입 가져오기 -->
+	<select id="selectBoardTypeList" resultType="code">
+		SELECT * FROM DC_CODE_TB WHERE ATT = '게시판타입' 
+	</select>
+	
+	<!-- 게시물 상태 리스트 -->
+	<select id="selectBoardStatusList" resultType="code">
+		SELECT * FROM DC_CODE_TB WHERE ATT = '게시물상태'
+	</select>
+	
+	<!-- 유저 상태 리스트 -->
+	<select id="selectMemberStatusList" resultType="code">
+		SELECT * FROM DC_CODE_TB WHERE ATT = '회원상태'
+	</select>
+	
+	<!-- 업체 타입 가져오기 -->
+	<select id="selectCompanyTypeList" resultType="code">
+		SELECT * FROM DC_CODE_TB WHERE ATT = '업체구분'
+	</select>
+	
+	<!-- 공지글 등록하기 -->
+	<insert id="insertNotice" parameterType="board">
+		INSERT INTO DC_BOARD_TB VALUES
+		(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, #{type}, 'BSTATUS004', #{memberNo}, NULL)
+	</insert>
+	
+	<!-- 게시글 상태 변경하기 -->
+	<update id="changeBoardStatus" parameterType="map">
+		UPDATE DC_BOARD_TB SET STATUS=#{status} WHERE NO = #{boardNo}
+	</update>
+	
+	<!-- 멤버 상태 변경하기 -->
+	<update id="changeMemberStatus" parameterType="map">
+		UPDATE DC_MEMBER_TB SET CODEID=#{status} WHERE NO = #{memberNo}
+	</update>
+	
+	<select id="checkAuthMember" parameterType="_int" resultType="member">
+		SELECT * FROM DC_MEMBER_TB WHERE NO = #{no}
+	</select>
+	
+</mapper>

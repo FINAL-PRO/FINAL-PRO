@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+
+	.dc-content-title{
+		background:white;
+		font-weight:bold;
+		font-size:x-large;
+		border-bottom: 1px solid lightgray;
+	}
+	.dc-content-detail{
+		margin: 20px;
+	}
+	.jb-content{
+		border:solid 1px;
+		width: 760px;
+		height: 500px;
+		border-style:dotted
+	}
+	.jb-nickDate{
+		font-weight:bold;
+	}
+	.collapse{
+		font-weight: normal;
+		
+	}
+	.float{
+		width: 760px;
+		height: 180px;
+	}
+	.inlie-t{
+		font-weight:bold;
+		margin: 10px;
+		width: 140px;
+	}
+	.inline{
+		display:inline-block;
+		width: 200px;
+	}
+	#msgIcon {
+    	width:20px;
+    }

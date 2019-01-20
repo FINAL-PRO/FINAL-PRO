@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+* {
+	list-style-type: none;
+}
+
+li {
+	float: left;
+	display: block;
+	padding: 1px;
+	margin: 0px;
+	padding: 0px;
+}
+
+ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.dc-house-thumbnail {
+	width: 200px;
+	height: 220px;
+	/* border: 1px solid gray; */
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 12px;
+	/* background-color: red; */
+}
+
+.dc-house-item-box {
+	width: 235px;
+	height: 355px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid rgb(248, 178, 106);
+}
+
+.dc-house-description {
+	width: 200px;
+	height: 100px;
+	/* border: 1px solid gray; */
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.dc-house-description strong span{
+	font-size: 16px; 
+	color: #333333;
+}
+
+.dc-house-description span{
+	font-size: 9px; 
+	color: #333333;
+}

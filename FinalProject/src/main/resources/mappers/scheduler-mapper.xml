@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scheduler_mapper">
+
+	<update id="adStatusStart">
+		UPDATE DC_AD_TB SET STATUS = 'ADSTATUS002' WHERE STARTDATE 
+		<![CDATA[ >= SYSDATE AND STATUS = 'ADSTATUS001' ]]>
+	</update>
+	
+	<update id="adStatusEnd">
+		UPDATE DC_AD_TB SET STATUS = 'ADSTATUS004' WHERE ENDDATE 
+		<![CDATA[ <= SYSDATE AND STATUS = 'ADSTATUS002' ]]>
+	</update>
+	
+	<update id="checkGroupDday">
+		<![CDATA[
+		UPDATE (SELECT * FROM DC_BOARD_GROUP_TB WHERE STATUS='GROUP001' 
+		AND TRUNC(ENDDATE-SYSDATE, 5)<0) G 
+		SET G.STATUS = 'GROUP005' 
+		]]>
+	</update>
+	
+</mapper>

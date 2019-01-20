@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!-- 비밀번호 암호화 관련 객체 -->
+	<bean id="bcryptPasswordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+	<!-- 리스트&광고 불러오기 -->
+	<security:http security="none" pattern="/**/getListData.do" />
+	<security:http security="none" pattern="/**/getAd.do" />
+	
+	<!-- 회원가입 / 비번찾기 -->	
+	<!-- <security:http security="none" pattern="/member/memberEnroll.do" /> -->
+	<security:http security="none" pattern="/member/memberEnroll.do" />
+	<security:http security="none" pattern="/member/memberUpdate.do" />
+	<security:http security="none" pattern="/member/memberDelete.do" />
+	
+	<security:http security="none" pattern="/community/free/freeInsertFormEnd.do" />
+	<security:http security="none" pattern="/info/region/insert.do" />
+	<security:http security="none" pattern="/info/house/insert.do" />
+	<security:http security="none" pattern="/info/house/update.do" />
+	<security:http security="none" pattern="/info/region/update.do" />
+	
+	<security:http security="none" pattern="/business/ad/insert.do" />
+	<security:http security="none" pattern="/business/ad/update.do" />
+	<security:http security="none" pattern="/business/partnership/insert.do" />
+	<security:http security="none" pattern="/business/partnership/update.do" />
+	
+	<security:http security="none" pattern="/admin/board/notice/insert.do" />
+	
+	
+	
+	<!-- <security:http security="none" pattern="/member/memberSearch.do" /> -->
+	<!-- <security:http security="none" pattern="/member/chkEmail.do" /> -->
+	<!-- 이거 말고 좀 더 자세히 처리해야함 -->
+	
+	<security:http security="none" pattern="/community/notice/freeUpdateForm.do" />
+	<security:http security="none" pattern="/community/notice/noticeUpdateFormEnd.do" />
+
+	<security:http security="none" pattern="/community/food/foodInsertFormEnd.do" />
+	<security:http security="none" pattern="/community/food/foodDelete.do" />
+	<security:http security="none" pattern="/community/food/foodUpdateForm.do" />
+	<security:http security="none" pattern="/community/food/foodUpdateFormEnd.do" />
+	
+	<security:http security="none" pattern="/community/free/freeDelete.do" /> 
+	<security:http security="none" pattern="/community/free/freeUpdateForm.do" />
+	<security:http security="none" pattern="/community/free/freeUpdateFormEnd.do" />
+	
+	<security:http security="none" pattern="/job/jobBoard/insertJobBoard.do" />
+	
+	<security:http security="none" pattern="/admin/board/notice/write.do" />
+	<security:http security="none" pattern="/admin/board/notice/writeView.do" />
+	
+	<security:http security="none" pattern="/sale/group/groupFormEnd.do" />
+	<security:http security="none" pattern="/sale/group/groupUpdateFormEnd.do" />
+	<security:http security="none" pattern="/sale/group/groupDelete.do" />
+	<security:http security="none" pattern="/sale/used/insert.do" />
+	<security:http security="none" pattern="/sale/used/update.do" />
+	<security:http security="none" pattern="/sale/used/delete.do" />
+	
+	<security:http security="none" pattern="/common/comment/commentUpdate.do" />
+	<security:http security="none" pattern="/job/jobBoard/insert.do" />
+	<security:http security="none" pattern="/job/jobBoard/update.do" />
+	
+	
+	<!-- 메시지 전송 -->
+	<security:http security="none" pattern="/message/messageInsert.do" />
+	<security:http security="none" pattern="/message/insert.do" />
+	
+	
+	<!-- 중복로그인 처리 -->
+	<security:http security="none" pattern="/login_duplicate.do" />
+	
+	<!-- 리소스파일 -->
+	<security:http security="none" pattern="/resources/**" />
+	
+	<security:http use-expressions="true">
+		<security:intercept-url pattern="/login/loginForm.do" access="permitAll" />
+		<security:intercept-url pattern="/index.do" access="permitAll" />
+		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/search/**" access="permitAll" />
+		<security:intercept-url pattern="/member/**" access="permitAll" />
+		<security:intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/business/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/**" access="hasRole('USER') or hasRole('ADMIN')" />
+			
+		<security:form-login
+			default-target-url="/index.do"
+			login-page="/login/loginForm.do"
+			always-use-default-target="true"/>
+
+		<!-- <security:form-login
+			default-target-url="/index.do"
+			authentication-failure-url="/login/loginForm.do?error" /> -->
+		<security:logout logout-url="/logout"
+			logout-success-url="/index.do" />
+
+		<security:access-denied-handler
+			error-page="/login/accessDenied.do" />
+			
+		<security:session-management>
+			<security:concurrency-control max-sessions="1" expired-url="/login_duplicate.do"/>
+		</security:session-management>
+		
+		<security:csrf/>
+	</security:http>
+	<!-- provider -->
+	
+<!-- <security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="user" password="password"
+					authorities="ROLE_USER" />
+				<security:user name="admin" password="admin"
+					authorities="ROLE_ADMIN" />
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>  -->
+
+	   <security:jdbc-user-service data-source-ref="dataSource"
+      id="userService"
+      users-by-username-query="SELECT EMAIL as username, password as password, AUTHNO as enabled FROM DC_MEMBER_TB WHERE EMAIL=?
+         AND CODEID != 'MSTATUS004'"
+      authorities-by-username-query="select EMAIL as username, content as authority from DC_MEMBER_TB M
+   JOIN DC_AUTHORITY_TB A ON M.AUTHNO = A.NO WHERE EMAIL=? AND CODEID != 'MSTATUS004'" />
+
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="userService">
+			<security:password-encoder ref="bcryptPasswordEncoder"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+
+</beans>

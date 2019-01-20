@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+div#enroll-container {
+	width: 600px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+div#enroll-container input, div#enroll-container select {
+	margin-bottom: 10px;
+}
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: #ffffe0;
+    opacity: 1;
+}
+
+div#enroll-container .col-md-3 {
+	text-align: right;
+	padding-right: 10px;
+}
+
+.dc-content-title>h3{
+	margin-top: 30px;
+	text-align:center; 
+	color: rgb(248, 178, 106);
+	font-weight: bold;
+}
+
+.dc-content-box{
+	/* padding-top: 10px; */
+}
+
+.btnClass {				
+	background: rgb(248, 178, 106);
+    color: white;
+    width: 48%;
+    margin: 0;
+}
+
+.btnClass:hover{
+	background: rgb(244, 126, 96);
+	color: white;
+}
+
+.row label {
+	width: 100%;
+	text-align: left;
+	font-size: 8px;
+}
+
+#modalBtn>button {
+	width: 40%;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+#modalPassword {
+	width: 80%;
+}
+
+#file {
+	display: none;
+}
+
+#profileImg {
+	border-radius: 100px;
+	border: 1px solid lightgray;
+	width: 150px;
+	height: 150px;
+	margin-bottom: 15px;
+}
+
+.memberTitleLabel{
+	color: gray;
+}
+
+.profileLabel{	
+	text-align:center; 
+	color: gray;	
+}
+
+.addressLabel{
+	color: gray;
+}
+
+#deleteProfileImg{
+	background-color:rgb(171, 187, 129);
+}
+
+#deleteProfileImg:hover{
+	background: rgb(248, 178, 106);
+}
+
+

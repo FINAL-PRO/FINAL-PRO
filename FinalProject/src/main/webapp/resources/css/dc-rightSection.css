@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+
+.loginBtnSection{
+	width: 110px;
+	background: rgb(248, 178, 106);
+    color: white;
+}
+
+.loginBtnSection:hover{
+	background: rgb(244, 126, 96);
+	color: white;
+}
+
+.dc-profile-area-bottom ul li {
+	width: 120px;
+}
+
+.weatherLabal{
+	margin-bottom:0px;
+}
+
+
+

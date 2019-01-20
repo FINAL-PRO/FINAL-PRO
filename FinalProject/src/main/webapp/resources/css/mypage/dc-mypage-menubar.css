@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.mypageMenuItem{
+	font-weight: bold;
+	color: gray;
+}
+
+.mypageMenuItem:hover{
+	color:rgb(171, 187, 129);
+	text-decoration: none;
+}

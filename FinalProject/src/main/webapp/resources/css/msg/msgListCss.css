@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+	.msgBody {
+		margin: 5%;
+	}
+	
+	.msg-table{
+		border-collapse: collapse;
+		line-height: 1.5;
+	}
+	.columName  {
+    	text-align:center; 
+    	display: inline-block;
+    	vertical-align: middle;
+    	display: table-row;
+    	margin: 2px;
+    	background: rgb(244, 126, 96);
+    	font-weight: bold;
+    	height: 40px;
+		color: #fff;
+    	
+    }
+	 
+    .row {
+    	display: table-row;
+    }        
+    .cell {
+	    display: table-cell;
+	    vertical-align: middle;
+    }
+    .mini{
+    	top: 50%;
+    	width:40px;
+    	text-align: center;
+    }    
+        
+	.colum {
+		text-align:center; 
+    	vertical-align: middle;
+		height: 30px;
+		display: table-row;
+		width: 10%;
+		padding: 10px;
+		vertical-align: top;
+	} 
+	.row:hover{
+		background: rgb(248, 178, 106);
+	}
+	.mini{
+		width:50px;
+		text-align: center;
+	}
+	.mid{
+		width:80px;
+		text-align: center;
+	}
+    #msgIcon {
+    	width:30px;
+    	text-align: center;
+    	
+    }
+    .contentValue{
+    	overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap; 
+		width: 130px;
+    }
+    
+    #sendDate, #sendDateValue{
+    	width:80px;
+    	text-align: center;
+    }
+    .nav{
+		border: 2px solid rgb(244, 126, 96);
+		width: 500px;
+		display: inline-block;
+    	vertical-align: baseline;
+	   	background: rgb(244, 126, 96);
+	   	font-size: 18px;
+    	height: 40px;
+    	margin: 2px;
+    	color: #fff;
+	}
+	.navbar{
+		width: 500px;
+	}
+	.navList{
+		color:white;
+		vertical-align: middle;
+	}

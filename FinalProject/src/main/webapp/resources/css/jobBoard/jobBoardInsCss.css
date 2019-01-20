@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+	.insTitle{
+		width:600px;
+		
+	}
+	.insLabel{
+		font-weight:bold;
+		margin: 10px;
+		width: 120px;
+	}
+	.jb-margin{
+	margin: 10px;
+	}

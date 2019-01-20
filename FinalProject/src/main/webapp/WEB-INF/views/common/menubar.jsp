@@ -1,118 +1,134 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+			<!-- default header name is X-CSRF-TOKEN -->
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 <!DOCTYPE html>
-<header>
+<style>
+	.dc-manebar-main span{
+		font-size: 17px;
+	}
+</style>
+<header>	
 	<div id="header-container">
-		<h2>menu bar</h2>
+		<div class="header_top" style="display:block;">
+			<div class="header_logo" style="display:inline-block;">				
+					<div style="margin-left: 16px;">
+					<a class="navbar-brand" href="/dc">
+						<img src="${pageContext.request.contextPath }/resources/images/logo2.PNG" alt="로고" width="160px;"/>
+					</a> 
+					</div>
+			</div>
+			<div class="header_search" style="display:inline-block; margin-left: 50px; width: 50%">
+				<form class="" id="searchSubmit" onkeyup="enterkey();" action="${pageContext.request.contextPath}/search/list.do?">
+					<input type="text" class="form-control" id="searchWord" name="searchWord" 
+						style="border: 4px solid rgb(248, 178, 106);" placeholder="검색어를 입력하세요.">
+				</form>
+			</div>
+		</div>
 	</div>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="/dc">
-			<img src="${pageContext.request.contextPath }/resources/images/test-img.png" alt="로고" width="50px" />
-		</a>
-	  	<!-- 반응형으로 width 줄어들경우, collapse버튼관련 -->
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-	  	</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-			<!-- ul.mr-auto 설정이 없으면, 좌우정렬이 안됨 -->
-			<ul class="navbar-nav mr-auto">
-		      <li class="nav-item dropdown">
-		      	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		      	커뮤니티 
-		      	</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/community/notice/list.do">공지</a>
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/community/free/list.do">자유게시판</a>
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/community/food/list.do">맛집</a>
+	
+	<div class="dc-menubar">
+		<div class="dc-manebar-main" style="width: 1080px; margin: 0 auto;">
+			<nav class="navbar navbar-expand-lg">
+				<%-- <a class="navbar-brand" href="/dc">
+					<img src="${pageContext.request.contextPath }/resources/images/test-img.png" alt="로고" width="50px" />
+				</a> --%>
+				<!-- 반응형으로 width 줄어들경우, collapse버튼관련 -->
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarNav" aria-controls="navbarNav"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<!-- ul.mr-auto 설정이 없으면, 좌우정렬이 안됨 -->
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item dropdown dc-user-menu"><a
+							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> <span>커뮤니티</span> 
+							<i class="fa fa-heart"></i>
+							</a>
+							<div class="dropdown-menu dc-user-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item"
+									href="${pageContext.request.contextPath}/community/notice/list.do"><span>공지</span></a>
+								<a class="dropdown-item"
+									href="${pageContext.request.contextPath}/community/free/list.do"><span>자유게시판</span></a>
+								<a class="dropdown-item"
+									href="${pageContext.request.contextPath}/community/food/list.do"><span>맛집</span></a>
+							</div></li>
+						<!--https://getbootstrap.com/docs/4.1/components/navbar/#supported-content-->
+						<li class="nav-item dropdown dc-user-menu"><a
+							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> <span>거래</span></a>
+							<div class="dropdown-menu dc-user-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item"
+									href="${pageContext.request.contextPath}/sale/used/list.do"><span>중고
+									거래</span></a> <a class="dropdown-item"
+									href="${pageContext.request.contextPath}/sale/group/list.do"><span>공동
+									구매</span></a>
+							</div></li>
+						<li class="nav-item dropdown dc-user-menu"><a
+							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> <span>정보</span> </a>
+							<div class="dropdown-menu dc-user-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item"
+									href="${pageContext.request.contextPath}/info/region/list.do"><span>지역정보</span></a>
+								<a class="dropdown-item"
+									href="${pageContext.request.contextPath}/info/weather/list.do"><span>날씨</span></a>
+								<a class="dropdown-item"
+									href="${pageContext.request.contextPath}/info/house/list.do"><span>부동산</span></a>
+							</div></li>
+						<li class="nav-item dropdown dc-user-menu"><a
+							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> <span>구인 / 구직 </span></a>
+							<div class="dropdown-menu dc-user-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item"
+									href="${pageContext.request.contextPath}/job/jobBoard/list.do"><span>구인구직</span></a>
+							</div></li>
+						<li class="nav-item dropdown dc-admin-menu">
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span>제휴 / 광고 </span></a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/business/partnership/list.do"><span>제휴 신청</span></a> 
+									<a class="dropdown-item" href="${pageContext.request.contextPath}/business/ad/list.do"><span>광고 신청</span></a>
+								</div>
+							</sec:authorize>
+						</li>
+						
+						<li class="nav-item dc-admin-menu">
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
+								<a class="nav-link" href="${pageContext.request.contextPath}/admin/index.do?no=${member.no}"> <span>관리자 페이지 </span></a>
+							</sec:authorize>
+						</li>
+					</ul>
+					
 				</div>
-		      
-		      </li>
-			  <!--https://getbootstrap.com/docs/4.1/components/navbar/#supported-content-->
-			  <li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				거래
-				</a>
-			    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/sale/used/list.do">중고 거래</a>
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/sale/group/list.do">공동 구매</a>
-				</div>
-			  </li>
-		      <li class="nav-item dropdown">
-		     	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		      	정보
-		      	</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/info/region/list.do">지역정보</a>
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/info/weather/list.do">날씨</a>
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/info/house/list.do">부동산</a>
-				</div>
-		      
-		      </li>
-		      <li class="nav-item dropdown">
-		      	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		      	구인 / 구직
-		      	</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/job/offer/list.do">구인</a>
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/job/hunt/list.do">구직</a>
-				</div>
-		      
-		      </li>
-		      <li class="nav-item dropdown">
-		      	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		      	제휴 / 광고
-		      	</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/business/partnership/list.do">제휴 신청</a>
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/business/ad/list.do">광고 신청</a>
-				</div>
-		      
-		      </li>
-		    </ul>
-		   
-			<!-- 로그인처리  -->
-			<c:if test="${empty member}">
-		        <!-- 로그인,회원가입 버튼 -->
-		        <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal">로그인</button>
-		        &nbsp;
-		        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='${pageContext.request.contextPath}/'">회원가입</button>
-		    </c:if>
-		    <c:if test="${!empty member}">
-		        <span><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}" title="내정보보기">${member.userName}</a> 님, 안녕하세요</span>
-		        &nbsp;
-		        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='${pageContext.request.contextPath}/'">로그아웃</button>
-		    </c:if>
-		 </div>
-	</nav>
-	<!-- Modal시작 -->
-	<!-- https://getbootstrap.com/docs/4.1/components/modal/#live-demo -->
-	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="loginModalLabel">로그인</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-          <!--로그인폼 -->
-          <!-- https://getbootstrap.com/docs/4.1/components/forms/#overview -->
-          <form action="${pageContext.request.contextPath}/" method="post">
-	      <div class="modal-body">
-			  <input type="text" class="form-control" name="userId" placeholder="아이디" required>
-			    <br />
-			    <input type="password" class="form-control" name="password" placeholder="비밀번호" required>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="submit" class="btn btn-outline-success">로그인</button>
-	        <button type="button" class="btn btn-outline-success" data-dismiss="modal">취소</button>
-	      </div>
-		</form>
-	    </div>
-	  </div>
+			</nav>
+		</div>
 	</div>
-	<!-- Modal 끝-->
+	
+	<script>
+	$(function() {
+	    $(document).ajaxSend(function(e, xhr, options) {
+	    	xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	    });
+	});
+	
+	function enterkey() {
+        if (window.event.keyCode == 13) { 
+             // 엔터키가 눌렸을 때 실행할 내용
+             $('#searchSubmit').submit();
+        }
+}
+
+
+	</script>
 </header>

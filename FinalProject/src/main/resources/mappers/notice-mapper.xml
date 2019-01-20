@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="notice_mapper">
+	
+	<select id="selectNoticeListData" resultType="board">
+		SELECT
+			B.*,
+		    CASE TYPE
+		    WHEN 'BOARD001' THEN '자유게시판'
+		    WHEN 'BOARD002' THEN '맛집'
+		    WHEN 'BOARD003' THEN '공동구매'
+		    WHEN 'BOARD004' THEN '중고거래'
+		    WHEN 'BOARD005' THEN '부동산'
+		    WHEN 'BOARD006' THEN '구인구직'
+		    WHEN 'BOARD007' THEN '지역정보'
+		    ELSE '기타' END BOARDTYPE
+		FROM DC_BOARD_TB B WHERE STATUS = 'BSTATUS004' AND ROWNUM <![CDATA[ <= 5 ORDER BY NO DESC ]]>
+	</select>
+	
+	<resultMap type="boardList" id="resultBoardList">
+		<id property="no" column="no" />
+		<result property="memberName"  column="nickName" />
+		<result property="commentCount" column="comment_count"/>
+	</resultMap>
+	
+	<select id="noticerecentSort" resultMap="resultBoardList">
+		SELECT B.*, M.NICKNAME, NVl(C.comment_count,0) comment_count, C.value boardType
+		FROM DC_BOARD_TB B
+		INNER JOIN DC_MEMBER_TB M 
+		ON B.MEMBERNO = M.NO
+		  LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB WHERE STATUS = 'BSTATUS001' GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
+        JOIN DC_CODE_TB C
+		ON (B.TYPE = C.id)
+		WHERE B.STATUS = 'BSTATUS004' AND M.LOCATIONNO = #{LOCATIONNO}
+		ORDER BY B.WRITEDATE DESC, B.NO DESC
+	</select>
+	
+	<select id="selectNoticeTotalContents" resultType="_int">
+		SELECT COUNT(*) 
+		FROM DC_BOARD_TB B
+		INNER JOIN DC_MEMBER_TB M 
+				ON B.MEMBERNO = M.NO
+		WHERE B.STATUS = 'BSTATUS004' AND M.LOCATIONNO = #{LOCATIONNO}
+	</select>
+	
+	<select id="selectOneNotice" parameterType="_int" resultMap="resultBoardList">
+		SELECT B.*, M.NICKNAME, NVl(C.comment_count,0) comment_count
+		FROM DC_BOARD_TB B
+		INNER JOIN DC_MEMBER_TB M 
+		ON B.MEMBERNO = M.NO
+		LEFT JOIN (SELECT COUNT(*) comment_count, BOARDNO FROM DC_COMMENT_TB WHERE STATUS = 'STATUS001' GROUP BY BOARDNO) C ON C.BOARDNO = B.NO
+		WHERE B.NO = #{bno}  AND B.STATUS = 'BSTATUS004'
+		ORDER BY B.WRITEDATE DESC, B.NO DESC
+	</select>
+	
+	<insert id="insertNotice" parameterType="Board">
+		INSERT INTO DC_BOARD_TB VALUES
+		(SEQ_BOARD.NEXTVAL, #{title}, SYSDATE, #{content}, 0, 'BSTATUS004', 'BSTATUS001', #{memberNo}, NULL)
+	</insert>
+	
+	<update id="updateNotice" parameterType="Board">
+		UPDATE DC_BOARD_TB SET TITLE = #{title}, CONTENT = #{content} WHERE NO = #{no}
+	</update>
+	
+	<update id="noticeDelete" parameterType="_int"> 
+		UPDATE DC_BOARD_TB SET STATUS = 'BSTATUS002'  WHERE NO = #{no} 
+	</update>
+	
+	<select id="noticeViewCount" parameterType="_int">
+		UPDATE DC_BOARD_TB SET VIEWCOUNT = VIEWCOUNT + 1 WHERE NO = #{no}
+	</select>
+	
+</mapper>

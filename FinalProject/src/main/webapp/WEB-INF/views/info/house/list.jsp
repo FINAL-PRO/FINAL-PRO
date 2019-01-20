@@ -1,109 +1,133 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+<title>동커</title>
+<c:import url="../../common/header.jsp" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/info/house/dc-info-house.css" />
+</head>
+<body>
 
-        <head>
-            <title>house list</title>
+	<c:import url="../../common/menubar.jsp" />
+	<div class="wrap_inner">
+		<main id="container">
+		<section>
+			<div class="section-left">
+				<!-- 내용없음 -->
+			</div>
 
-            <style>
-           
-            </style>
-        </head>
-        <body >
+			<div class="section-center">
+				<div class="dc-content">
+					<div class="dc-content-title">
+						<span class="dc-title-text">부동산</span>
+						<br />
+					</div>
+					<div class="dc-content-box">
+						<div class="form-inline">
+							<div style="width:50%">
+							<select id="dealType" name="dealType" class="form-control">
+								<c:forEach items="${dealList}" var="deal">
+								<option value="${deal.id}"
+								<c:if test="${dealType eq deal.id}">selected</c:if>
+									>${deal.value}</option>
+								</c:forEach>
+							</select>
+							<select id="hType" name="hType" class="form-control">
+								<c:forEach items="${roomList}" var="room">
+									<option value="${room.id}"
+										<c:if test="${hType eq room.id}">selected</c:if>
+									>${room.value}</option>
+								</c:forEach>
+							</select>
+							<select name="" id="" class="form-control">
+								<option value="">크기</option>
+							</select>
+							<select name="" id="" class="form-control">
+								<option value="">가격</option>
+							</select>
+							</div>
+							<div style="width:50%">
+								<button class="btn dc-btn dc-btn-right" onclick="insertHouse();">글쓰기</button>
+							</div>
+						</div>
+						
+						<br />
+					
+						<div style="display:block">
+							<c:if test="${!empty list}">
+								<c:forEach items="${list}" var="house" varStatus="hvs">
+									<li id="hlist" class="" style="padding-left: 10px; padding-top: 10px;">
+										<a onclick="selectHouse(${house.boardNo})" href="#">
+											<div class="dc-house-item-box">
+												<div class="dc-house-thumbnail">
+													<img src="${house.houseImg}" id="" alt="" width="200px" height="220px"/>
+												</div>
+												<div class="dc-house-description">
+													<strong class="name"> 
+														<span>${fn:substring(house.title, 0, 10)}..</span>
+													</strong>
+													<ul>
+														<li>
+															<strong>
+																<span>크기 </span> :
+																<span>${house.area } ㎡</span> <br>
+															</strong>
+															<strong>
+																<span>가격 </span> :
+																<span><fmt:formatNumber value="${house.minprice }" pattern="#,###" />원</span> <br> 
+																<%-- <span>${house.hType} &nbsp;/&nbsp; ${house.dealType}</span> --%>
+															</strong>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</a>
+									</li>
+								</c:forEach>
+							</c:if>
+							<c:if test="${empty list}">
+								<div class="dc-none-data">
+									<span class="dc-none-data-text">데이터가 없습니다.</span>
+								</div>
+							</c:if>
+						</div>
+					</div>
+				</div>
+			</div>
 
-        <!-- header -->
-        <header>
+			<div class="section-right">
+				<c:import url="../../common/rightSection.jsp" />
+			</div>
 
-        </header>
-        
-        <br><br><br>
-        
-        <!-- 게시판 list -->
-        <div class="titleArea"  style="width: 800px; margin: auto;">
-                <h2><font color="#555555">부동산게시판</font> </h2>
-                <p>게시판list</p>
-            </div>
-        <p class="imgArea"><img src=""></p>
-        </div>
-      
-        <div class="list" style="width: 800px; margin: auto;">
-            <table border="1" style="border-spacing:0; border-collapse:collapse; color: #fff; line-height:1.5; border:none;">
-        <caption>게시판 목록</caption>
-            <thead class="listcol" style="border-color: white;  color: gray;">   
-                    
-            <tr style="color:gray;">
-                <th style="width:130px;"> 번호</th>
-                <th style="width:200px;">카테고리</th>
-                <th style="width:300px;">제목</th>
-                <th style="width:150px;">작성자</th>
-                <th style="width:150px;">작성일</th>
-                <th style="width:150px;">조회</th>
-                <th style="width:150px;">추천</th>
-                <th style="width:150px;">평점</th>
-            </tr>    
-            <c:forEach items="${hlist}"  var="" varStatus="vs">
-            <tr style="background-color:#FFFFFF; color:gray;">
-                <th style="width:130px;"> ${vs.count }</th>
-                <th style="width:200px;">${dev. }</th>
-                <th style="width:300px;">제목 </th>
-                <th style="width:150px;">이름</th>
-                <th style="width:150px;">작성일</th>
-                <th style="width:150px;">조회수</th>
-                <th style="width:150px;">추천</th>
-                <th style="width:150px;">평점</th>
-               </tr>
-               </c:forEach>
-            </thead>
-        </table>
-        </div>
+		</section>
+		</main>
+	</div>
+	<c:import url="../../common/footer.jsp" />
 
-        <!-- 글쓰기 영역 -->
-        <br><br>
-        <div class="upbt" style="width: 800px; margin: auto;">
-                <a href="/글쓰기 주소" class="displaynone btn btnStrong"> 글쓰기</a>
-        </div>
-        </div>
-        
-        <!-- 게시물 검색 -->
-        <br><br><br><br>
-        <form id="boardSearchForm" name="" action="/검색" method="get" enctype="multipart/form-data" style="width: 800px; border: none; margin: auto;">
-        <input id="board_no" name="board_no" value="1" type="hidden">
-        <input id="page" name="page" value="1" type="hidden">
-        <input id="board_sort" name="board_sort" value="" type="hidden">
-        <div class="" style="width: 800px; margin: auto; margin-left: auto;">
-        <fieldset class="boardSearch" style="border: none; margin: auto;">
-        <legend>게시물 검색</legend>
-        <p>
-        <select id="search_date" name="search_date" >
-        <option value="week">일주일</option>
-        <option value="month">한달</option>
-        <option value="month3">세달</option>
-        <option value="all">전체</option>
-        </select> 
-        
-        <select id="search_key" name="search_key" >
-        <option value="subject">제목</option>
-        <option value="content">내용</option>
-        <option value="writer_name">글쓴이</option>
-        <option value="member_id">아이디</option>
-        <option value="nick_name">별명</option>
-        </select> 
-        
-        <input id="search" name="search"class="inputTypeText" type="text"> <a href="#none" onclick="" alt="찾기">검색bt</a></p>
-        </fieldset>
-        </div>
-        </form>
-
-         <!-- footer -->
-        <footer>
-
-        </footer>
-
-        </body>
-
-
-       </html>
+	<script>
+	$(function(){
+		$("#hType").on('change',function() {
+			location.href = "${pageContext.request.contextPath}/info/house/list.do?hType="
+				+ $("#hType").val() + "&dealType=" + $("#dealType").val();
+		});
+		
+		$("#dealType").on('change',function() {
+			location.href = "${pageContext.request.contextPath}/info/house/list.do?hType="
+				+ $("#hType").val() + "&dealType=" + $("#dealType").val();
+		});
+	});
+		function selectHouse(no){
+			location.href="${pageContext.request.contextPath}/info/house/view.do?no="+no;
+		}
+		
+		function insertHouse(){
+			location.href="${pageContext.request.contextPath}/info/house/insert/view.do";
+		}
+	</script>
+</body>
+</html>

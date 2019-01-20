@@ -1,0 +1,381 @@
+@CHARSET "UTF-8";
+
+body {
+	/* background-color : #f1f3f6; */
+	font-family:'Nanum Gothic', sans-serif;
+}
+
+header{
+	border-bottom:1px solid #d1d8e4;
+}
+
+div#header-container{
+	background-color : #fff;
+	padding : 20px;
+}
+
+.dc-menubar{
+	/* background-color : #03cf5d; */
+	/* background-color: #ffffe0; */
+}
+
+nav{
+	height:50px;
+}
+
+.dc-ad-box{
+	border : 1px solid #dee3eb;
+}
+
+section > *{
+	
+}
+
+.header_top{
+	width : 1080px;
+	/* height : 100px; */
+	/* border : 1px solid black; */
+	/* background-color: lightgreen; */
+	/* margin : 0 auto; */
+	margin : auto;
+}
+
+#header-container{
+	/* background-color: yellow; */
+}
+
+.wrap_inner {
+	position : relative;
+	/* width : 1450px;
+	margin : 0 auto; */	
+}
+
+div{
+	display : block;
+}
+
+main section {
+	display : block;
+	width : 1080px;
+	margin : auto;
+}
+
+section{
+	min-height: 100vh;
+}
+
+.header_search{
+	display:block;
+	margin : 30px auto;
+}
+
+.search_div{
+	display:inline-block;
+	margin: auto;
+}
+
+.serarh_text{
+	display : inline-block;
+	width : 500px;
+	height : 50px;
+	margin-top : 50px;
+	margin : auto;
+	font-size: 30px;
+	border : 2px solid green;
+}
+
+footer{
+	clear:both;
+	display:block;
+	/* background-color:rgb(248, 178, 106); */
+	border-top : 2px solid #e3e7ee;
+	padding-top : 30px;
+}
+
+.footer_bottom{
+	position : relative;
+	display : block;
+	clear : both;
+	width : 1080px;
+	height : 100px;
+	/* border : 1px solid black; */
+	/* background-color: lightgreen; */
+	margin : 0 auto;	
+}
+
+.dc-menubar{
+	background-color: ;
+	border-top : 1px solid #f1f3f6;
+	border-bottom : 1px solid #f1f3f6;
+}
+
+.dc-menubar-main{
+	display : block;
+	clear : both;
+}
+
+/* main 내용+제목 div */
+.dc-content{
+	background-color: ;
+	margin : 15px 5px;
+	/* min-height: 100vh; */
+	/* border : 1px solid #dee3eb; */
+}
+
+/* main 제목 div */
+.dc-content-title{
+	display:block;
+	padding: 8px 16px 8px 16px;
+	/* background-color: gray; */
+	min-height: 7vh;
+	/* border : 1px solid #dee3eb; */	
+}
+
+/* main 내용 div */
+.dc-content-box{
+	display:block;
+	margin:10px 0px;
+	background-color: #fff;
+	/* min-height: 30vh; */
+	/* border : 1px solid #dee3eb; */
+}
+
+.dc-border{
+	border : 1px solid #dee3eb;
+}
+
+.section-center{
+	background-color: ;
+	float:left;
+	min-height: 100vh;
+	width:75%;
+	/* padding: 8px 16px 8px 16px; */
+	
+}
+.section-left{
+	background-color: ;
+	float:left;
+	min-height: 100vh;
+	/* width:10%; */
+}
+
+.section-right{
+	background-color: ;
+	float: right;
+	min-height: 100vh;
+	width:25%;
+	margin:auto;
+}
+
+.section-right > .section-item{
+	background-color: ;
+	height : 20%;
+} 
+
+/* custom dc table style */
+.dc-table{
+	border:1px solid black;
+	width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+
+.dc-table-header{
+	font-weight: 700!important;
+}
+
+.dc-table-row{
+	display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    height : 40px;
+}
+
+.dc-table-col{
+	flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.board-title{
+	font-weight : bold;
+}
+
+tr{
+	height:5px;
+}
+
+.dropdown-menu {
+    margin: 4px auto;
+    background-color: #fff;
+    border-radius:0;
+    border-top : 1px solid transparent;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.footer-text{
+	/* font-size : 20px;
+	font-weight : bold; */
+}
+
+a{
+	color : black;
+}
+
+div[class^="ad-"]:hover {
+	cursor:pointer;
+}
+
+.dc-user-menu span{
+	/* color : white; */
+	font-weight : bold;
+}
+
+.dc-admin-menu span{
+	color : red;
+	font-weight : bold;
+}
+
+.dc-user-profile{
+	height : 190px;	
+}
+
+.dc-profile-area-top{
+	height : 70%;
+	/* border : 1px solid #dee3eb; */
+}
+
+.dc-profile-area-bottom{
+	height : 30%;
+	/* border : 1px solid #ebeef3; */
+	border-top : 1px solid #ebeef3;
+	background-color: #fff;
+}
+
+.dc-profile-area-bottom ul{
+	position: relative;
+    display: inline-block;
+    width:258px;
+    vertical-align: top;
+    margin: 0;
+    padding: 0;
+}
+
+.dc-profile-area-bottom ul li{
+	position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 49%;
+    margin: 0;
+    padding: 0;
+}
+
+.dc-con-title{
+	border-bottom: 1px solid lightgray;
+	padding: 8px 16px 8px 16px;
+	cursor: pointer;
+}
+
+.dc-con-content{
+	/* background-color: gray; */
+}
+
+.dc-tb-row{
+	margin : 10px;	
+}
+
+.dc-con-title span{
+	color: rgb(244, 126, 96);
+}
+
+.dc-con-content a span{
+	/* color : red; */
+}
+
+.main-img-list{
+	display : block;
+}
+
+.main-img-div{
+	display : inline-block;
+	width : 190px;
+	/* background:red; */
+	margin:3px;
+}
+
+#login{
+	width: 100%;
+	background: rgb(248, 178, 106);
+    color: white;
+}
+
+#login:hover{
+	background: rgb(244, 126, 96);
+	color: white;
+}
+
+#logout{
+	width: 100%;
+	background: rgb(248, 178, 106);
+    color: white;
+}
+
+#logout:hover{
+	background: rgb(244, 126, 96);
+	color: white;
+}
+
+#logo{
+	width: 220px;
+	margin-bottom: 15px;
+	cursor: pointer;
+}
+
+
+.dc-btn{
+    background: rgb(248, 178, 106);
+    color: white;
+}
+
+.dc-btn:hover{
+	background: rgb(244, 126, 96);
+	color: white;
+}
+
+.dc-btn-right{
+	float : right;
+}
+
+.dc-list-title{
+	font-size : 30px;
+	color : red;
+}
+
+.dc-none-data{
+	background-color: #f2f4f7;
+	height:150px;
+}
+
+.dc-none-data-text{
+	margin: auto; 
+	font-weight: bold;
+	font-size: 35px;
+}
+
+.dc-title-text{
+	color: rgb(244, 126, 96);
+	font-size: 35px;
+	font-weight: bold;
+}
+

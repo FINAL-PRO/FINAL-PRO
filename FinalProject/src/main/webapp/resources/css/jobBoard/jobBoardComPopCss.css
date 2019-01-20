@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+	.c-List {
+		margin: 5%;
+	}
+    .columName  {
+    	display: table-row;
+    	font-weight: bold;
+    	text-align: center;
+    	color: white;
+	    font-size: 18px;
+    	background: gray;
+	}
+    .row {
+    	display: table-row;
+    }  
+    .cell {
+      display: table-cell;
+      
+	}
+		.colum {
+		text-align: left; 
+    	vertical-align: middle;
+		height: 30px;
+		display: table-row;
+		width: 10%;
+		padding: 10px;
+		vertical-align: top;
+	} 
+	
+	#noValue{
+		width:50px;
+    	text-align:center; 
+		font-weight: bold;
+	}
+	#nameValue{
+		width:150px;
+    	text-align:center;
+	}
+	#addressValue{
+		width:200px;
+	}
+	.colum:hover{
+	background: lightgray;
+	}
+	.comTitle{
+		border: 2px solid gray;
+		width: 400px;
+		display: inline-block;
+    	vertical-align: baseline;
+		font-weight: bold;
+   		background: gray;
+   		font-size: 18px;
+    	height: 35px;
+    	color: #fff;
+    	margin:5px;
+    }	
+    .closeBtn{
+    	align:center; 
+    }

@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.resultTitle {
+	font-size: 18px;
+	color:darkgreen;
+	text-decoration: underline;
+}
+
+#resultContent {	
+	padding: 10px 0px 10px 0px;
+	margin-bottom: 0;
+	text-overflow: ellipsis;
+}
+
+#resultMemberName {
+	color:rgb(225, 91, 100);
+}
+
+#resultWriteDate {
+	color: gray;
+}
